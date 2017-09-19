@@ -1,0 +1,126 @@
+@charset "utf-8";
+/* CSS Document */
+.ds_image{
+	position: relative;
+	height: 200px;
+	width: 100%;
+}
+#ds_image{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+.ds_name{
+	color: white;
+	position: absolute;
+	margin-top: 170px;
+	margin-left: 16px;
+	font-size: 18px;
+}
+.ds_infor{
+	background-color: white;
+}
+.ds_information,.ds_address{
+	padding:0 16px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	background-color: white;
+}
+.line{
+	height: 1px;
+	width: 100%;
+	background-color: #eeeeee;
+}
+.address,.abstract{
+	margin-left: 16px;
+	font-size: 14px;
+}
+.dsintro{
+	position: absolute;
+	height:100%;
+	width: 100%;
+	left:0;
+	top:0px;
+	background-color: white;
+	z-index: 100;
+	display: none;
+}
+.dsintro_name{
+	height: 80px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 24px;
+}
+.dsintro p{
+	background-color: white;
+	padding:10px 16px;
+	text-indent: 2em;
+	line-height: 24px;
+}
+.dsintro img{
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	margin-left:-20px;
+
+}
+.ds_type{
+	margin-top:10px;
+	background-color: white;
+	
+}
+.dsp_type{
+	padding: 0 16px;
+	height: 40px;
+	line-height: 40px;
+}
+
+.dsp_list{
+	height: 80px;
+	display: flex;
+	background-color: white;
+	justify-content: space-around;
+	flex-direction: column;
+}
+.dsp_infor{
+	display:flex;
+}
+.dsp_list h2{
+	padding-left:16px;
+	font-size: 14px;
+
+}
+
+.dsp_infor span {
+	font-size: 14px;
+	color: #999;
+	padding-left: 16px;
+}
+.packageid{
+	display: none;
+}
+.price_symbol{
+	color: #67c0ee;
+	font-size: 12px;
+	padding-left: 16px;
+	padding-right: 2px;
+}
+.price,.pointzero{
+	color: #67c0ee;
+	font-size: 16px;
+}
+
+.footer{
+	height: 20px;
+
+}
+.description{
+	width: 80px;  
+    height: 20px;  
+   	overflow: hidden;
+    text-overflow: ellipsis;  
+    white-space: nowrap;  
+   
+}

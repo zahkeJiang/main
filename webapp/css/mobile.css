@@ -1,0 +1,38 @@
+@charset "utf-8";
+/* CSS Document */
+
+.mobile_pic{
+	display: flex;
+	padding-top: 40px;
+	align-items: center;/*垂直居中*/
+	justify-content: center;/*水平居中*/
+}
+.mobile{
+	display: flex;
+	margin-top:24px;
+	align-items: center;/*垂直居中*/
+	justify-content: center;/*水平居中*/
+}
+.change_mobile{
+	margin-top: 40px;
+	height: 40px;
+	justify-content: center;/*用于左右居中*/
+	align-items: center;/*用于上下居中*/
+	display: -webkit-flex;/*铺满*/
+	text-align: center;	
+	background-color: #fff;
+	color: #000;
+	margin-right: 16px;
+	margin-left: 16px;
+	-webkit-border-radius: 5px;/* Webkit浏览器的私有属性*/
+	-moz-border-radius: 5px; /* Mozilla浏览器的私有属性*/
+	border-radius:5px;/*所有角都使用半径为20px的圆角，此属性为CSS3标准属性*/
+	border: 1px solid #DEDEDE;
+}
+
+.change_mobile:active{
+	background-color: #eeeeee;
+}
+a{
+	text-decoration: none;
+}

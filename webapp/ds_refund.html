@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>取消报名</title>
+	<link href="css/main.css" rel="stylesheet" type="text/css"/>
+	<link href="css/ds_refund.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+	<div class="main">
+		<div class="container">
+			<div class="ds_information">
+				<div class="refund_hint">
+					<div class="hint_text">
+						<p>温馨提示:</p>
+						<ul>
+							<li>1.如已完成报名全部流程，将无法取消报名</li>
+							<li>2.退款会收取报名费用的0.6%的手续费</li>
+							<li>3.报名一旦取消，无法恢复</li>
+						</ul>
+					</div>
+				</div>
+				<div class="refund_information">
+					<div class="refund_reason">
+						<span>取消原因:</span>
+						<select id="rea">
+  							<option value ="报名信息有误">报名信息有误</option>
+  							<option value ="打算报名其他驾校">打算报名其他驾校</option>
+  							<option value="时间冲突，不想报名">时间冲突，不想报名</option>
+  							<option value="忘记使用优惠券，重新报名">忘记使用优惠券，重新报名</option>
+						</select>
+					</div>
+					<div class="order_price">
+						<span>订单编号:</span>
+						<p></p>
+					</div>
+
+				</div>
+			</div>
+			<div class="refund">
+				<div class="apply_refund">申请退款</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<!--<script type="text/javascript" src="js/isWeiXin.js"></script>-->
+	<script type="text/javascript" src="js/ds_refund.js"></script>
+</body>
+</html>

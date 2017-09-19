@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>信息登录</title>
+	<link href="css/main.css" rel="stylesheet" type="text/css"/>
+	<link href="css/login.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+</head>
+
+
+<body onload="getuserId()">
+	<div class="binding">用户绑定</div><!--binding结束-->
+	<form method="post" name="login">
+		<div class="information">
+			<div class="phone">
+				<img src="images/phone_pic.png" height16="16px" width="16px">
+				<input  type="tel"  maxlength="11" placeholder="请输入手机号码" name="tel" id="tel" />
+			</div>
+			<div class="line"></div>
+			<div class="code">
+				<img src="images/verification_pic.png" height16="16px" width="16px">
+				<input type="number" maxlength="4" placeholder="验证码" name="getcode" id="getcode" />
+				<input type="button" id="setcode" value="发送验证码" onclick="setCode(this)">
+			</div>
+		</div>
+
+		<div class="hint">
+			<div class="error">
+				<span id="hinttext"></span>
+			</div>
+			<div class="lose" onclick="lose()">收不到验证码?</div>
+		</div>
+		<input  type="button" value="提交" id="btn" onclick="bt()" /> 
+	</form>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<!--<script type="text/javascript" src="js/isWeiXin.js"></script>	-->
+<script type="text/javascript" src="js/login.js"></script>
+	
+</body>
+</html>

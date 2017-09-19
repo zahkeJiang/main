@@ -1,0 +1,84 @@
+@charset "utf-8";
+/* CSS Document */
+.information{
+	height: auto;
+	padding-right: 16px;
+	padding-left: 16px;
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #DEDEDE;
+	border-top: 1px solid #DEDEDE;
+	margin-top: 20px;
+}
+.oldmobile{
+	height: 48px;
+	display: -webkit-flex;
+	align-items: center;
+}
+.oldmobile span{
+	margin-left: 16px;
+	color: #999;
+	font-size: 14px;
+	font-size: 0.875rem;
+}
+
+
+.phone,.code{
+	height: 48px;
+	display: -webkit-flex;
+	align-items: center;
+}
+
+input[type="tel"],input[type="number"]{
+	height: 40px;
+	border:0px;
+	background-color: #FFFFFF;
+	flex: 1;
+	font-size: 0.875rem;
+	margin-left:16px;
+	min-width: 100px;
+}
+input[type="number"]{
+	margin-right: 10px;
+}
+input::-webkit-input-placeholder { 
+	color: #999; 
+	-webkit-transition: color.5s; 
+} 
+input:focus::-webkit-input-placeholder, input:hover::-webkit-input-placeholder { 
+	color: #c2c2c2; 
+	-webkit-transition: color.5s; 
+} 
+
+.line{
+	height: 1px;
+	background-color: #DEDEDE;
+}
+
+#setcode{
+	border:0px;
+	color: #FFFFFF;
+	height: 32px;
+	width: 80px;
+	margin-right: auto;
+	font-size: 12px;
+	font-size: 0.75rem;
+	line-height: 32px;
+	text-align: center;
+	background-color: #67c0ee;
+	-webkit-border-radius: 5px;/* Webkit浏览器的私有属性*/
+	-moz-border-radius: 5px; /* Mozilla浏览器的私有属性*/
+	border-radius:5px;/*所有角都使用半径为20px的圆角，此属性为CSS3标准属性*/
+}
+
+#btn{
+	border:0px;
+	margin-top: 20px;
+	height: 48px;
+	width: 90%;
+	margin-left:5%;  
+	background-color: #67c0ee;
+	color: #FFFFFF;
+	-webkit-border-radius: 5px;/*Webkit浏览器的私有属性*/
+	-moz-border-radius: 5px;/* Mozilla浏览器的私有属性*/
+	border-radius:5px;/*所有角都使用半径为20px的圆角，此属性为CSS3标准属性*/
+} 

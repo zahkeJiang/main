@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpygh.gzh.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.bjpygh.gzh.bean.User">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="school" jdbcType="VARCHAR" property="school" />
+    <result column="college" jdbcType="VARCHAR" property="college" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="headimageurl" jdbcType="VARCHAR" property="headimageurl" />
+    <result column="reamark" jdbcType="VARCHAR" property="reamark" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="member_points" jdbcType="INTEGER" property="memberPoints" />
+    <result column="integral" jdbcType="INTEGER" property="integral" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, real_name, phone_number, school, college, openid, nickname, sex, city, country, 
+    province, headimageurl, reamark, address, age, member_points, integral
+  </sql>
+  <select id="getUserId" parameterType="string" resultType="string">
+        select user_id from user_info where openid = #{openid}
+    </select>
+  <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_info
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bjpygh.gzh.bean.UserExample">
+    delete from user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bjpygh.gzh.bean.User">
+    insert into user_info (user_id, real_name, phone_number, 
+      school, college, openid, 
+      nickname, sex, city, 
+      country, province, headimageurl, 
+      reamark, address, age, 
+      member_points, integral)
+    values (#{userId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
+      #{school,jdbcType=VARCHAR}, #{college,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{headimageurl,jdbcType=VARCHAR}, 
+      #{reamark,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{memberPoints,jdbcType=INTEGER}, #{integral,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.User">
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="school != null">
+        school,
+      </if>
+      <if test="college != null">
+        college,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="headimageurl != null">
+        headimageurl,
+      </if>
+      <if test="reamark != null">
+        reamark,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="memberPoints != null">
+        member_points,
+      </if>
+      <if test="integral != null">
+        integral,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="college != null">
+        #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="headimageurl != null">
+        #{headimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="reamark != null">
+        #{reamark,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="memberPoints != null">
+        #{memberPoints,jdbcType=INTEGER},
+      </if>
+      <if test="integral != null">
+        #{integral,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bjpygh.gzh.bean.UserExample" resultType="java.lang.Long">
+    select count(*) from user_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user_info
+    <set>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.realName != null">
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNumber != null">
+        phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.school != null">
+        school = #{record.school,jdbcType=VARCHAR},
+      </if>
+      <if test="record.college != null">
+        college = #{record.college,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openid != null">
+        openid = #{record.openid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.country != null">
+        country = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null">
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headimageurl != null">
+        headimageurl = #{record.headimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reamark != null">
+        reamark = #{record.reamark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberPoints != null">
+        member_points = #{record.memberPoints,jdbcType=INTEGER},
+      </if>
+      <if test="record.integral != null">
+        integral = #{record.integral,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user_info
+    set user_id = #{record.userId,jdbcType=BIGINT},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      school = #{record.school,jdbcType=VARCHAR},
+      college = #{record.college,jdbcType=VARCHAR},
+      openid = #{record.openid,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      city = #{record.city,jdbcType=VARCHAR},
+      country = #{record.country,jdbcType=VARCHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      headimageurl = #{record.headimageurl,jdbcType=VARCHAR},
+      reamark = #{record.reamark,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      member_points = #{record.memberPoints,jdbcType=INTEGER},
+      integral = #{record.integral,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjpygh.gzh.bean.User">
+    update user_info
+    <set>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="college != null">
+        college = #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="headimageurl != null">
+        headimageurl = #{headimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="reamark != null">
+        reamark = #{reamark,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="memberPoints != null">
+        member_points = #{memberPoints,jdbcType=INTEGER},
+      </if>
+      <if test="integral != null">
+        integral = #{integral,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjpygh.gzh.bean.User">
+    update user_info
+    set real_name = #{realName,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      college = #{college,jdbcType=VARCHAR},
+      openid = #{openid,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      city = #{city,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      headimageurl = #{headimageurl,jdbcType=VARCHAR},
+      reamark = #{reamark,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      member_points = #{memberPoints,jdbcType=INTEGER},
+      integral = #{integral,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+    <update id="changeUserPoints" parameterType="map">
+        update user_info set member_points=#{memberpoints}, integral=#{integral} where user_id=#{userid}
+    </update>
+    <update id="bondRealName" parameterType="map">
+        update user_info set real_name=#{realname}, address=#{address}, reamark=#{reamark}
+        where user_id=#{userid}
+    </update>
+</mapper>

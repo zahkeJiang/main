@@ -1,0 +1,83 @@
+@charset "utf-8";
+/* CSS Document */
+.header_bg{
+	background-color: white;
+	height: 48px;
+}
+.header{
+	height: 48px;
+	padding: 0 16px;
+	display: flex;
+	justify-content: space-between;
+	background:url(../images/bg_line.png);
+	background-repeat:repeat-x;		/*背景图片在水平显示*/	
+	background-position-y:bottom;　　/*背景图片在纵向的最下方显示*/
+}
+.all_orders,.orders_success,.orders_finished,.orders_cencer{
+	height: 46px;
+	line-height: 46px;
+}
+.orders_bg{
+	margin:16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.bg_hint{
+	margin-top: 100px;
+	text-align: center;
+}
+.bg_hint p{
+	margin-top: 10px;
+}
+.container{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.dsorder_list{
+	margin-top: 10px;
+}
+.dsorder_titie{
+	background-color: white;
+	display: flex;
+	height: 36px;
+	align-items: center;
+	padding-right: 16px;
+	padding-left: 16px;
+}
+.refund,.result{
+	margin-left: auto;
+	color: #999;
+	font-size: 14px;
+}
+.dsoder_container{
+	display: flex;
+	align-items: center;
+	height: 80px;
+	background-color: #F5F5F5;
+	padding-right: 16px;
+	padding-left: 16px;
+}
+.dsorder_information{
+	font-size: 14px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+.dsorder_footer{
+	height: 36px;
+	text-align: right;
+	line-height: 36px;
+	background-color: white;
+	font-size: 14px;
+	color: #555;
+	padding-right: 16px;
+	padding-left: 16px;
+}
+.dsorder_pay{
+	font-size: 14px;
+	color: #555;
+}
+.order_price{
+	font-size: 18px;
+	color: black;
+}

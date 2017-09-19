@@ -1,0 +1,80 @@
+.header{
+	text-align: center;
+	height: 140px;
+	background-color: #e8e8d0;
+}
+.my_integral{
+	padding-top: 40px;
+	font-size: 20px;
+}
+.recharge{
+	margin-top: 30px;
+	height: 30px;
+	width: 20%;
+	margin-left: 40%;
+	border: 1px solid black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5px;
+}
+.container_header{
+	display: flex;
+	justify-content: space-around;
+	background-color: white;
+	height: 48px;
+	align-items: center;
+}
+.integral_record_container{
+	position: relative;
+}
+.no_record{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top:-100px;
+	margin-left: -60px;
+	text-align: center;
+}
+.no_record p{
+	margin-top:10px;
+	color: #999;
+}
+.integral_type{
+	font-size: 14px;
+	border: 1px solid black;
+	width: 60px;
+	height: 30px;
+	border-radius: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.integral_record{
+	background-color: white;
+	margin:10px 16px;
+}
+.integral_record_header{
+	height: 48px;
+	line-height: 48px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-bottom: 1px solid #efefef;
+}
+.list{
+	padding: 0 10px;
+	background-color: white;
+}
+.integral_record_list{
+	padding: 8px 0;
+	line-height: 20px;
+	border-bottom: 1px solid #efefef;
+
+}
+.integral_record_count{
+	float: right;
+}
+.integral_record_time{
+	color: #999;
+	font-size: 14px;
+}

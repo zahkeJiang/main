@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpygh.gzh.dao.DsOrderMapper">
+  <resultMap id="BaseResultMap" type="com.bjpygh.gzh.bean.DsOrder">
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="order_status" jdbcType="TINYINT" property="orderStatus" />
+    <result column="ds_type" jdbcType="VARCHAR" property="dsType" />
+    <result column="ds_name" jdbcType="VARCHAR" property="dsName" />
+    <result column="order_price" jdbcType="INTEGER" property="orderPrice" />
+    <result column="train_time" jdbcType="VARCHAR" property="trainTime" />
+    <result column="models" jdbcType="VARCHAR" property="models" />
+    <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="submit_time" jdbcType="TIMESTAMP" property="submitTime" />
+    <result column="sign_time" jdbcType="TIMESTAMP" property="signTime" />
+    <result column="get_time" jdbcType="TIMESTAMP" property="getTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="refund_time" jdbcType="TIMESTAMP" property="refundTime" />
+    <result column="imageurl" jdbcType="VARCHAR" property="imageurl" />
+    <result column="original_price" jdbcType="INTEGER" property="originalPrice" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    order_id, user_id, phone_number, order_status, ds_type, ds_name, order_price, train_time, 
+    models, order_number, address, real_name, note, pay_time, submit_time, sign_time, 
+    get_time, description, refund_time, imageurl, original_price
+  </sql>
+  <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.DsOrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ds_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ds_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ds_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bjpygh.gzh.bean.DsOrderExample">
+    delete from ds_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bjpygh.gzh.bean.DsOrder">
+    insert into ds_order (order_id, user_id, phone_number, 
+      order_status, ds_type, ds_name, 
+      order_price, train_time, models, 
+      order_number, address, real_name, 
+      note, pay_time, submit_time, 
+      sign_time, get_time, description, 
+      refund_time, imageurl, original_price
+      )
+    values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{phoneNumber,jdbcType=VARCHAR}, 
+      #{orderStatus,jdbcType=TINYINT}, #{dsType,jdbcType=VARCHAR}, #{dsName,jdbcType=VARCHAR}, 
+      #{orderPrice,jdbcType=INTEGER}, #{trainTime,jdbcType=VARCHAR}, #{models,jdbcType=VARCHAR}, 
+      #{orderNumber,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{payTime,jdbcType=TIMESTAMP}, #{submitTime,jdbcType=TIMESTAMP}, 
+      #{signTime,jdbcType=TIMESTAMP}, #{getTime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR}, 
+      #{refundTime,jdbcType=TIMESTAMP}, #{imageurl,jdbcType=VARCHAR}, #{originalPrice,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.DsOrder">
+    insert into ds_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="phoneNumber != null">
+        phone_number,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="dsType != null">
+        ds_type,
+      </if>
+      <if test="dsName != null">
+        ds_name,
+      </if>
+      <if test="orderPrice != null">
+        order_price,
+      </if>
+      <if test="trainTime != null">
+        train_time,
+      </if>
+      <if test="models != null">
+        models,
+      </if>
+      <if test="orderNumber != null">
+        order_number,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="submitTime != null">
+        submit_time,
+      </if>
+      <if test="signTime != null">
+        sign_time,
+      </if>
+      <if test="getTime != null">
+        get_time,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="refundTime != null">
+        refund_time,
+      </if>
+      <if test="imageurl != null">
+        imageurl,
+      </if>
+      <if test="originalPrice != null">
+        original_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="phoneNumber != null">
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="dsType != null">
+        #{dsType,jdbcType=VARCHAR},
+      </if>
+      <if test="dsName != null">
+        #{dsName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPrice != null">
+        #{orderPrice,jdbcType=INTEGER},
+      </if>
+      <if test="trainTime != null">
+        #{trainTime,jdbcType=VARCHAR},
+      </if>
+      <if test="models != null">
+        #{models,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitTime != null">
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signTime != null">
+        #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="getTime != null">
+        #{getTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="refundTime != null">
+        #{refundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imageurl != null">
+        #{imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bjpygh.gzh.bean.DsOrderExample" resultType="java.lang.Long">
+    select count(*) from ds_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ds_order
+    <set>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.phoneNumber != null">
+        phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderStatus != null">
+        order_status = #{record.orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.dsType != null">
+        ds_type = #{record.dsType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dsName != null">
+        ds_name = #{record.dsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderPrice != null">
+        order_price = #{record.orderPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.trainTime != null">
+        train_time = #{record.trainTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.models != null">
+        models = #{record.models,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNumber != null">
+        order_number = #{record.orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null">
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null">
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payTime != null">
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.submitTime != null">
+        submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.signTime != null">
+        sign_time = #{record.signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.getTime != null">
+        get_time = #{record.getTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refundTime != null">
+        refund_time = #{record.refundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.imageurl != null">
+        imageurl = #{record.imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalPrice != null">
+        original_price = #{record.originalPrice,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ds_order
+    set order_id = #{record.orderId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
+      order_status = #{record.orderStatus,jdbcType=TINYINT},
+      ds_type = #{record.dsType,jdbcType=VARCHAR},
+      ds_name = #{record.dsName,jdbcType=VARCHAR},
+      order_price = #{record.orderPrice,jdbcType=INTEGER},
+      train_time = #{record.trainTime,jdbcType=VARCHAR},
+      models = #{record.models,jdbcType=VARCHAR},
+      order_number = #{record.orderNumber,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR},
+      pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      sign_time = #{record.signTime,jdbcType=TIMESTAMP},
+      get_time = #{record.getTime,jdbcType=TIMESTAMP},
+      description = #{record.description,jdbcType=VARCHAR},
+      refund_time = #{record.refundTime,jdbcType=TIMESTAMP},
+      imageurl = #{record.imageurl,jdbcType=VARCHAR},
+      original_price = #{record.originalPrice,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+    <update id="changeStatus" parameterType="map">
+        update ds_order set order_status=#{orderstatus},get_time=#{gettime} where order_number=#{ordernumber}
+    </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjpygh.gzh.bean.DsOrder">
+    update ds_order
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="phoneNumber != null">
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="dsType != null">
+        ds_type = #{dsType,jdbcType=VARCHAR},
+      </if>
+      <if test="dsName != null">
+        ds_name = #{dsName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPrice != null">
+        order_price = #{orderPrice,jdbcType=INTEGER},
+      </if>
+      <if test="trainTime != null">
+        train_time = #{trainTime,jdbcType=VARCHAR},
+      </if>
+      <if test="models != null">
+        models = #{models,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNumber != null">
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitTime != null">
+        submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signTime != null">
+        sign_time = #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="getTime != null">
+        get_time = #{getTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="refundTime != null">
+        refund_time = #{refundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imageurl != null">
+        imageurl = #{imageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPrice != null">
+        original_price = #{originalPrice,jdbcType=INTEGER},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjpygh.gzh.bean.DsOrder">
+    update ds_order
+    set user_id = #{userId,jdbcType=BIGINT},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      order_status = #{orderStatus,jdbcType=TINYINT},
+      ds_type = #{dsType,jdbcType=VARCHAR},
+      ds_name = #{dsName,jdbcType=VARCHAR},
+      order_price = #{orderPrice,jdbcType=INTEGER},
+      train_time = #{trainTime,jdbcType=VARCHAR},
+      models = #{models,jdbcType=VARCHAR},
+      order_number = #{orderNumber,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      sign_time = #{signTime,jdbcType=TIMESTAMP},
+      get_time = #{getTime,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=VARCHAR},
+      refund_time = #{refundTime,jdbcType=TIMESTAMP},
+      imageurl = #{imageurl,jdbcType=VARCHAR},
+      original_price = #{originalPrice,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+    <update id="updateOrderByStatus" parameterType="dsorder">
+        update ds_order set phone_number=#{phonenumber},order_number=#{ordernumber},
+        ds_type=#{dstype},ds_name=#{dsname},order_price=#{orderprice},train_time=#{traintime},
+        models=#{models},user_id=#{userid},address=#{address},real_name=#{realname},
+        note=#{note}, description=#{description}, pay_time=#{paytime}, submit_time=#{submittime},
+        sign_time=#{signtime}, get_time=#{gettime}, refund_time=#{refundtime}, imageurl=#{imageurl},original_price=#{originalprice} where order_status=#{orderstatus}
+    </update>
+    <update id="updateOrder" parameterType="dsorder">
+        update ds_order set phone_number=#{phonenumber},order_status=#{orderstatus},
+        ds_type=#{dstype},ds_name=#{dsname},order_price=#{orderprice},train_time=#{traintime},
+        models=#{models},user_id=#{userid},address=#{address},real_name=#{realname},
+        note=#{note}, description=#{description}, pay_time=#{paytime}, submit_time=#{submittime},
+        sign_time=#{signtime}, get_time=#{gettime}, refund_time=#{refundtime}, imageurl=#{imageurl},original_price=#{originalprice} where order_number=#{ordernumber}
+    </update>
+</mapper>

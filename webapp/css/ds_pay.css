@@ -1,0 +1,88 @@
+@charset "utf-8";
+/* CSS Document */
+.header{
+	height: 80px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 24px;
+}
+.container{
+	padding:0 16px;
+}
+.pay_success{
+	display: none;
+}
+.pay_fail{
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	display: none;
+}
+.pay_information{
+	background-color: white;
+	border-radius: 5px;
+	padding: 10px 16px;
+
+}
+
+.pay_order{
+	display: flex;
+	justify-content: space-around;
+	margin-top: 20px;
+}
+
+.order{
+	display: flex;
+	align-items: center;
+
+}
+.order_type{
+	width: 72px;
+	display: flex;
+	justify-content: space-between;
+	text-align: justify;
+}
+.order_colon{
+	padding:0 5px;
+
+}
+.order_price{
+	color: red;
+	font-size: 12px;
+
+}
+.ds_price{
+	font-size: 16px;
+	margin-left: 2px;
+}
+.pay{
+	text-align: center;
+	padding:20px  16px ;
+}
+.pay p{
+	font-size: 20px;
+}
+.view_order{
+	font-size: 16px;
+	color: #67c0ee;
+	margin-bottom: 5px;
+	text-align: right;
+}
+.view_order a{
+	color: #67c0ee;
+	text-align: right;
+}
+.line{
+	background-color: #eee;
+	height: 1px;
+}
+.hint{
+	margin-top: 10px;
+	color: #555;
+}
+.hint p{
+	 font-size: 14px;
+}

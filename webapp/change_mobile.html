@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>个人中心</title>
+	<link href="css/main.css" rel="stylesheet" type="text/css"/>
+	<link href="css/change_mobile.css" rel="stylesheet" type="text/css"/>
+</head>
+
+
+<body>
+	<div class="information">
+		<div class="oldmobile">
+			原号码
+			<span id="oldmobile"></span>
+		</div>
+	</div>
+	
+	<form method="post" name="login">
+		<div class="information">
+			<div class="phone">
+				新号码
+				<input  type="tel" maxlength="11" placeholder="请输入手机号码" name="tel" id="tel" />
+			</div>
+			<div class="line"></div>
+			<div class="code">
+				验证码
+				<input type="number" maxlength="4" placeholder="请输入验证码" name="getcode" id="getcode" />
+				<input type="button" id="setcode" value="发送验证码" onclick="setCode(this)">
+			</div>
+		</div>	
+			<input  type="button" value="提交" id="btn"/> 
+	</form>
+
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<!--<script type="text/javascript" src="js/isWeiXin.js"></script>-->
+	<script type="text/javascript" src="js/change_mobile.js"></script>
+
+</body>
+</html>

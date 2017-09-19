@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>报名</title>
+	<link href="css/main.css" rel="stylesheet" type="text/css"/>
+	<link href="css/submit_orders.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+	<div class="main">
+		<div class="ds_information">
+			<div class="dstype_information">班型信息</div>
+			<h2 class="ds_type"></h2>
+			<div class="dstype_information_content"></div>
+			<div>
+				<span class="price_symbol">¥<span class="ds_price"></span></span>
+			</div>
+		</div>
+		<div class="ds_apply">
+			<div class="ds_apply_title">必填信息</div>
+			<form>
+				<div class="row">
+					<span class="row_type">
+						<span>手</span><span>机</span><span>号</span><span>码</span>
+					</span>
+					<span class="row_colon">:</span>
+					<span class="tel"></span>
+				</div>
+				<div class="row">
+					<span class="row_type">
+						<span>真</span><span>实</span><span>姓</span><span>名</span>
+					</span>
+					<span class="row_colon">:</span>
+					<input type="text" placeholder="请输入您的真实姓名" name="real_name" id="real_name">
+				</div>
+				<div class="row">
+					<span class="row_type">
+						<span>现</span><span>居</span><span>地</span><span>址</span>		
+					</span>
+					<span class="row_colon">:</span>
+					<input name="address" placeholder="请输入您的地址" rows="2"  id="address"></input>
+				</div>			
+			</form>
+		</div>
+		<div class="ds_training">
+			<div class="ds_training_mode">法培方式</div>
+			 <div class="ds_radio">
+        <div>
+            <div class="user-defined">
+                <span class="circle"></span>
+            </div>
+            <input type="radio" name="radio_training" id="internet" value="自主网上培训" >
+            <label for="internet">自主网上培训</label>
+        </div>
+        <div>
+            <input type="radio" name="radio_training" id="dsstudy" value="驾校授课" >
+            <div class="user-defined">
+                <span class="circle"></span>
+            </div>
+            <label for="dsstudy">驾校授课</label>
+        </div>
+        
+    </div>
+		</div>
+		<div class="coupons">
+			<p>优惠券</p>
+			<span></span>
+		</div>
+		<div class="hint">✿&nbsp;为避免影响您的报名进程，请务必填写真实有效信息。</div>	
+		<div class="footer">
+			<div class="last_price">
+				<span>实付款：¥
+					<span class="price"></span>
+				</span>			
+			</div>
+			<img src="images/alipay.png"/>
+			<div class="submit">支付宝支付</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<!--<script type="text/javascript" src="js/isWeiXin.js"></script>-->
+	<script type="text/javascript" src="js/submit_orders.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+.header{
+	height: 120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #e8e8d0;
+}
+.user_header{
+	text-align: center;
+}
+.member_infor{
+	height: 60px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background-color:#c2c287;
+}
+.rank,.coupons,.integral{
+	text-align: center;
+}
+.coupons_sum,.member_integral,.member_live{
+	font-size: 14px;
+	color: white;
+	margin-bottom: 2px;
+}
+.my_coupon,.my_rank,.my_integral{
+	color: black;
+}
+.exchange_title{
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #444;
+	background:url(../images/bg_line.png);
+	background-repeat:repeat-x;		/*背景图片在水平显示*/	
+	background-position-y:bottom;　　/*背景图片在纵向的最下方显示*/
+}
+
+.exchange_container{
+	height: 200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

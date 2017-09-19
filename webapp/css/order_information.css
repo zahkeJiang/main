@@ -1,0 +1,177 @@
+.header{
+	background-color: white;
+	margin-bottom: 10px;
+}
+.header span{
+	font-size: 16px;
+	color: black;
+}
+h2{
+	font-size: 14px;
+	color: #999;
+	margin-bottom: 5px;
+}
+p{
+	font-size: 12px;
+	color: #999;
+}
+.shedule{
+	height: 110px;
+}
+.progress_pic{
+	padding: 0 16px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.progress_pic_style{
+	height: 110px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.progress_bg{
+	flex: 1;
+	height: 1px;
+}
+.submit_bg{
+	flex: 1;
+	height: 1px;
+	background-color: #67c0ee;
+}
+.audit_bg{
+	height: 1px;
+	flex: 1;
+	background-color: #eee;
+}
+.finish_bg{
+	height: 1px;
+	flex: 1;
+		background-color: #eee;
+}
+.return_bg{
+	height: 1px;
+	flex: 1;
+	background-color: #eee;
+}
+
+.orderprogress{
+	padding: 0 16px;
+	padding-bottom: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.submit_order h2,.submit_order p{
+	color:#67c0ee;
+}
+.submit_order{
+	width: 100%;
+	text-align: center;
+}
+.material_audit{
+	width: 100%;
+	text-align: center;
+}
+.material_return{
+	text-align: center;
+	width: 100%;
+}
+.finish_order{
+	text-align: center;
+	width: 100%;
+}
+span{
+	font-size: 14px;
+	color: #999;
+}
+.hint_style{
+	padding: 8px 16px;
+	border-top: 1px solid #eee;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.hint{
+	flex: 1;
+	height: 32px;
+	display:flex;
+	align-items: center;
+	margin-right: 16px;
+}
+.delivery{
+	color: white;
+	text-align: center;
+	line-height: 28px;
+	border-radius: 5px;
+	background-color: #67c0ee;
+	height: 28px;
+	width: 68px;
+	display: none;
+}
+.order_style1{
+	background-color: white;
+	margin-bottom: 10px;
+	line-height:24px;
+	padding: 8px 16px;
+}
+.order_style2{
+	background-color: white;
+	margin-bottom: 10px;
+	line-height:24px;
+}
+.user_infor span{
+	font-size: 16px;
+	color: black;
+}
+.tel{
+	margin-left: 10px;
+}
+.user_address span{
+	font-size: 14px; 
+	color: #999;
+}
+.user_address{
+	line-height: 16px;
+}
+.ostyle{
+	padding: 8px 16px;
+	border-bottom: 1px solid #eee;
+}
+.costprice,.dscoupon{
+	display: flex;
+	justify-content: space-between;
+}
+.pay{
+	text-align: right;
+	padding: 8px 16px;
+}
+.ds_pay{
+	color: red;
+	font-size: 16px;
+}
+.footer{
+	border-top: 1px solid #eee;
+	/*background-color: white;*/
+	display: flex;
+	padding:10px 16px;
+	justify-content: center;
+	align-items: center;
+}
+.refund{
+	height: 40px;
+	width: 80%;
+	margin-left: 10px;
+	display: flex;
+	align-items: center;
+	background-color: #67c0ee;
+	justify-content: center;
+	color: white;
+	border-radius: 5px;	
+}
+.result{
+	text-align: center;
+}

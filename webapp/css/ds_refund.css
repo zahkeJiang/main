@@ -1,0 +1,62 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	background-color: white;
+}
+.refund_hint{
+	height: 150px;
+	margin: 16px;
+	padding: 10px;
+	background-color: #f5f5f5;
+	display: flex;
+	align-items: center;
+}
+.hint_text{
+	padding: 10px;
+}
+.hint_text p{
+	font-size: 14px;
+}
+.hint_text ul li{
+	list-style-type:none;
+	font-size: 14px;
+}
+.refund_information{
+	padding:0 16px;
+	background:url(../images/bg_line.png);
+	background-repeat:repeat-x;		/*背景图片在水平显示*/	
+	background-position-y:top;　　/*背景图片在纵向的最下方显示*/
+}
+.refund_reason,.order_price{
+	height: 48px;
+	display: flex;
+	align-items: center;
+	background:url(../images/bg_line.png);
+	background-repeat:repeat-x;		/*背景图片在水平显示*/	
+	background-position-y:bottom;　　/*背景图片在纵向的最下方显示*/
+}
+.refund_reason span,.order_price span{
+	width: 80px;
+}
+.refund_reason select{
+	margin-left: 16px;
+	border: 0;
+	flex: 1;
+	appearance:none;
+}
+.order_price p{
+	margin-left: 16px;
+}
+.refund{
+	padding: 16px;
+}
+.apply_refund{
+	width: 60%;
+	margin-left: 20%;
+	height: 40px;
+	background-color: #67c0ee;
+	border-radius: 5px;
+	color: white;
+	line-height: 40px;
+	text-align: center;
+}
