@@ -52,6 +52,7 @@ public class PayController extends BaseController{
     //支付宝驾校报名支付接口
     @RequestMapping(value = "/dspay.action", method = RequestMethod.GET)
     public void DsPay(HttpServletResponse response,DsAliPay dsAliPay) throws IOException {
+        response.setContentType("text/html;charset=" + AlipayConfig.CHARSET);
         PrintWriter out = response.getWriter();
         String subject = "驾校报名费用";
         String  body = "驾校报名费用";
@@ -201,12 +202,10 @@ public class PayController extends BaseController{
             alipay_response = client.execute(alipay_request);
             String result = alipay_response.getBody();
             JSONObject tmp = JSONObject.fromObject(result);
-            System.out.println(result);
             String data = tmp.getString("alipay_trade_refund_response");
             JSONObject obj = JSONObject.fromObject(data);
             if(obj.getString("code").equals("10000")){
                 if(obj.getString("fund_change").equals("Y")){
-
                     //改变订单状态
                     dsOrder.setOrderStatus((byte) 5);
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -214,10 +213,10 @@ public class PayController extends BaseController{
                     dsOrderService.updateOrder(dsOrder);
                     return Status.success();
                 }else{
-                    return Status.fail(-20,"处理失败");
+                    return Status.fail(-20,result);
                 }
             }else{
-                return Status.fail(-20,"处理失败");
+                return Status.fail(-20,result);
             }
 
         } catch (AlipayApiException e) {
