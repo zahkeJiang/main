@@ -373,7 +373,7 @@
     </if>
   </update>
     <update id="changeStatus" parameterType="map">
-        update ds_order set order_status=#{orderstatus},get_time=#{gettime} where order_number=#{ordernumber}
+        update ds_order set order_status=#{orderStatus},get_time=#{getTime} where order_number=#{orderNumber}
     </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.bjpygh.gzh.bean.DsOrder">
     update ds_order
@@ -466,17 +466,17 @@
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
     <update id="updateOrderByStatus" parameterType="dsorder">
-        update ds_order set phone_number=#{phonenumber},order_number=#{ordernumber},
-        ds_type=#{dstype},ds_name=#{dsname},order_price=#{orderprice},train_time=#{traintime},
-        models=#{models},user_id=#{userid},address=#{address},real_name=#{realname},
-        note=#{note}, description=#{description}, pay_time=#{paytime}, submit_time=#{submittime},
-        sign_time=#{signtime}, get_time=#{gettime}, refund_time=#{refundtime}, imageurl=#{imageurl},original_price=#{originalprice} where order_status=#{orderstatus}
+        update ds_order set phone_number=#{phoneNumber},order_number=#{orderNumber},
+        ds_type=#{dsType},ds_name=#{dsName},order_price=#{orderPrice},train_time=#{trainTime},
+        models=#{models},user_id=#{userId},address=#{address},real_name=#{realName},
+        note=#{note}, description=#{description}, pay_time=#{payTime}, submit_time=#{submitTime},
+        sign_time=#{signTime}, get_time=#{getTime}, refund_time=#{refundTime}, imageurl=#{imageurl},original_price=#{originalPrice} where order_status=#{orderStatus}
     </update>
     <update id="updateOrder" parameterType="dsorder">
-        update ds_order set phone_number=#{phonenumber},order_status=#{orderstatus},
-        ds_type=#{dstype},ds_name=#{dsname},order_price=#{orderprice},train_time=#{traintime},
-        models=#{models},user_id=#{userid},address=#{address},real_name=#{realname},
-        note=#{note}, description=#{description}, pay_time=#{paytime}, submit_time=#{submittime},
-        sign_time=#{signtime}, get_time=#{gettime}, refund_time=#{refundtime}, imageurl=#{imageurl},original_price=#{originalprice} where order_number=#{ordernumber}
+        update ds_order set phone_number=#{phoneNumber},order_status=#{orderStatus},
+        ds_type=#{dsType},ds_name=#{dsName},order_price=#{orderPrice},train_time=#{trainTime},
+        models=#{models},user_id=#{userId},address=#{address},real_name=#{realName},
+        note=#{note}, description=#{description}, pay_time=#{payTime}, submit_time=#{submitTime},
+        sign_time=#{signTime}, get_time=#{getTime}, refund_time=#{refundTime}, imageurl=#{imageurl},original_price=#{originalPrice} where order_number=#{orderNumber}
     </update>
 </mapper>

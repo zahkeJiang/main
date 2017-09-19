@@ -401,10 +401,10 @@
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
     <update id="changeUserPoints" parameterType="map">
-        update user_info set member_points=#{memberpoints}, integral=#{integral} where user_id=#{userid}
+        update user_info set member_points=#{memberPoints}, integral=#{integral} where user_id=#{userId}
     </update>
     <update id="bondRealName" parameterType="map">
-        update user_info set real_name=#{realname}, address=#{address}, reamark=#{reamark}
-        where user_id=#{userid}
+        update user_info set real_name=#{realName}, address=#{address}, reamark=#{reamark}
+        where user_id=#{userId}
     </update>
 </mapper>

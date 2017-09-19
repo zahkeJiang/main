@@ -59,7 +59,7 @@ function get_coupons(){
 //获取用户手机号
 function get_tel(){
 	$.post("personal.action",{},function(obj){
-		if (obj.status=="1") {
+		if (obj.status=="0") {
 			var user = obj.data.userInfo;
 			$(".tel").html(user.phoneNumber);
 		}
