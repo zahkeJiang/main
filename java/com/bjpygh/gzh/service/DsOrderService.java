@@ -52,4 +52,11 @@ public class DsOrderService {
     public void updateOrder(DsOrder dsOrder) {
         dsOrderMapper.updateOrder(dsOrder);
     }
+
+    public void deleteOrderByNum(String ordernumber) {
+        DsOrderExample example = new DsOrderExample();
+        DsOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderNumberEqualTo(ordernumber);
+        dsOrderMapper.deleteByExample(example);
+    }
 }

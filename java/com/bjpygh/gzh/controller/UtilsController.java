@@ -69,7 +69,7 @@ public class UtilsController extends BaseController{
         List<DsOrder> dsOrder = dsOrderService.getOrdersById(userid);
         for(DsOrder dso : dsOrder){
             if(dso!=null&&dso.getOrderStatus()!=0&&dso.getOrderStatus()!=5){
-                return Status.fail(-20,"没有查询到订单");
+                return Status.fail(-20,"已支付过订单");
             }
         }
 
