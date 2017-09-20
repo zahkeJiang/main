@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
-public class UserController extends BaseController{
+public class UserController extends BaseController {
 
     @Autowired
     UserService userService;

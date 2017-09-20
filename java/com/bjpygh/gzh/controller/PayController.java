@@ -32,7 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
-public class PayController extends BaseController{
+public class PayController extends BaseController {
 
     @Autowired
     UserService userService;

@@ -1,35 +1,18 @@
-.user_school{
+.text14{
+	color: #999;
+	padding:20px 16px 5px 16px;
+}
+.schoolList{
+	margin-bottom: 20px;
+}
+.schoolList ul li{
+	padding: 0 16px;
+	background-color: white;
 	display: flex;
-	height: 40px;
-	margin-top: 16px;
-	padding-right: 16px;
-	padding-left: 16px;
-	background: white;
 	align-items: center;
-}
-input{
-	height: 36px;
-	flex: 1;
-	line-height: 36px;
-	border: 0;
-}
-input::-ms-clear { display: none; }
-input:valid + .clear { display: inline; }
-.clear { display: none; outline: none; margin-left: auto;}
-
-.save{
-	margin-top: 40px;
+	justify-content: space-between;
 	height: 40px;
-	justify-content: center;/*用于左右居中*/
-	align-items: center;/*用于上下居中*/
-	display: -webkit-flex;/*铺满*/
-	text-align: center;	
-	background-color: #fff;
-	color: #000;
-	margin-right: 16px;
-	margin-left: 16px;
-	-webkit-border-radius: 5px;/* Webkit浏览器的私有属性*/
-	-moz-border-radius: 5px; /* Mozilla浏览器的私有属性*/
-	border-radius:5px;/*所有角都使用半径为20px的圆角，此属性为CSS3标准属性*/
-	border: 1px solid #DEDEDE;
+	margin-top: 1px;
+	line-height: 40px;
+	list-style-type:none;
 }

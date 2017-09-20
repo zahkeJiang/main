@@ -4,15 +4,20 @@ $(function(){
 	//获取用户信息
 	userload();
 	//跳转到用户昵称页面
-	$(".nickname").click(function(){
-		var nickname = $("#nickname").html();
-  		var nicknameurl="nickname.html?nickname="+nickname;   
-        window.location.assign(encodeURI(nicknameurl));   
-	});
+	// $(".nickname").click(function(){
+	// 	var nickname = $("#nickname").html();
+ //  		var nicknameurl="nickname.html?nickname="+nickname;   
+ //        window.location.assign(encodeURI(nicknameurl));   
+	// });
 	//跳转到更换手机号页面
 	$(".mobile").click(function(){
 		var oldmobile = $("#mobile").html();
-  		window.location.href="mobile.html?mobile="+oldmobile;   
+		if (oldmobile=="") {
+			window.location.href="login.html";
+		}else{
+			window.location.href="mobile.html?mobile="+oldmobile;   
+		}
+  		
 	});
 	//跳转我的订单
   	$(".orders").click(function(){
@@ -34,18 +39,18 @@ $(function(){
 		window.location.href="address.html";   
 	});
   	 //跳转到性别页面
-	$(".sex").click(function(){
-		var usersex = $("#sex").html();
-		var sex = "";
-		if (usersex=="男") {
-			sex = 1;
-		}else if (usersex == "女") {
-			sex = 0;
-		}else{
-			sex = "";
-		}
-  		window.location.href="sex.html?sex="+sex;  
-  	})
+	// $(".sex").click(function(){
+	// 	var usersex = $("#sex").html();
+	// 	var sex = "";
+	// 	if (usersex=="男") {
+	// 		sex = 1;
+	// 	}else if (usersex == "女") {
+	// 		sex = 0;
+	// 	}else{
+	// 		sex = "";
+	// 	}
+ //  		window.location.href="sex.html?sex="+sex;  
+ //  	})
 });
 
 
@@ -65,7 +70,7 @@ $.post("personal.action",{},function(obj){
 				$('#sex').html("女");
 			}
 		}else{
-			$('#sex').html("");
+			$('#sex').html("保密");
 		}
 		if (userobj.school!=null) {
 		  	$('#school').html(userobj.school);

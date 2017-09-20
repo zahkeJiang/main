@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.Map;
 
 @Controller
-public class CouponController extends BaseController{
+public class CouponController extends BaseController {
 
     @Autowired
     CouponService couponService;

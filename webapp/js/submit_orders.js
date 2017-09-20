@@ -78,9 +78,9 @@ $(function(){
 	get_tel();//获取用户手机号
 	get_coupons();//获取优惠券金额
 	//点击进入优惠券页面
-	$(".coupons").click(function(){
-		window.location.href="coupon.html";
-	});
+	// $(".coupons").click(function(){
+	// 	window.location.href="coupon.html";
+	// });
 	//提交订单支付宝支付
 	$(".submit").click(function(){
 		//获取用户姓名、联系方式、性别、地址
@@ -96,7 +96,13 @@ $(function(){
 		}else {
     		$.post("note.action",{"realname":realname,"address":address,"note":note},function(obj){
     			if (obj.status=="0") {
-        			window.location.href="determine_browser.html?userid="+userid+"&packageid="+packageid+"&select="+select;	
+    				$.post("creatOrder.action",{"packageid":packageid,"select":select},function(datas){
+    					if (datas.status==0) {
+    						var dataurl = datas.data;
+    						var  ordernumber = dataurl.ordernumber;
+    						window.location.href="confirm_orders.html?userid="+userid+"&packageid="+packageid+"&select="+select+"&ordernumber"+ordernumber;	
+    					}
+    				},"json");
         		}else{
         			alert("您已报名成功，请勿重复报名。");
         		}

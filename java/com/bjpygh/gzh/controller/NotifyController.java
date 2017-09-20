@@ -26,7 +26,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 @Controller
-public class NotifyController extends BaseController{
+public class NotifyController extends BaseController {
 
     @Autowired
     UserService userService;
