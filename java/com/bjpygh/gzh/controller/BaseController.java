@@ -27,7 +27,6 @@ public class BaseController {
     public Map<String, String> checkWxUser(HttpServletRequest request){
         HttpSession session = request.getSession();
         Map<String, String> userMap = (Map<String, String>) session.getAttribute("user");
-        System.out.println(userMap);
         Map<String, String> map = new HashMap<String, String>();
         if(userMap == null){
             userMap = new HashMap<String, String>();
