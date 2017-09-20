@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 public class DsOrderController extends BaseController {
@@ -137,6 +135,17 @@ public class DsOrderController extends BaseController {
             return Status.notInWx();
         }
         String userid = userMap.get("id");
+
+        List<DsOrder> dsos = new ArrayList<DsOrder>();
+        List<DsOrder> list = dsOrderService.getOrdersById(userid);
+        for (DsOrder dso : list){
+            if (dso.getOrderStatus() == 0){
+                dsos.add(dso);
+            }
+        }
+        if (dsos.size()>3){
+            return Status.fail(-40,"您已创建了三个未支付订单，无法创建更多订单");
+        }
         String packageid = dsAliPay.getPackageid();
         String select = dsAliPay.getSelect();
         int couponprice = 0;
@@ -190,6 +199,8 @@ public class DsOrderController extends BaseController {
         dsOrder.setPhoneNumber(user.getPhoneNumber());
         dsOrder.setTrainTime(dsPackage.getTrainTime());
         dsOrder.setImageurl(DsInfo.getDsImage());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dsOrder.setCreateTime(formatter.format(new Date()));
         dsOrderService.insertOrder(dsOrder);
 
         return Status.success().add("ordernumber",out_trade_no);
@@ -197,13 +208,13 @@ public class DsOrderController extends BaseController {
 
     //删除订单接口
     @ResponseBody
-    @RequestMapping(value = "/deleteOrder.action", method = RequestMethod.POST)
+    @RequestMapping(value = "/cancelOrder.action", method = RequestMethod.POST)
     public Status delOrder(HttpServletRequest request,String ordernumber){
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
         }
-        dsOrderService.deleteOrderByNum(ordernumber);
+        dsOrderService.updateOrderStatus(ordernumber);
         return Status.success();
     }
 }
