@@ -64,37 +64,37 @@ public class NotifyController extends BaseController {
 
             uMap.put("userid", ""+user.getUserId());
             if (total_fee.equals("500")) {
-                uMap.put("memberpoints", (user.getMemberPoints() + 5) + "");
+                uMap.put("memberPoints", (user.getMemberPoints() + 5) + "");
                 uMap.put("integral", (user.getIntegral() + 5) + "");
                 userService.changeUserPoints(uMap);
                 record.setValue("+5");
 
             } else if (total_fee.equals("1000")) {
-                uMap.put("memberpoints", (user.getMemberPoints() + 10) + "");
+                uMap.put("memberPoints", (user.getMemberPoints() + 10) + "");
                 uMap.put("integral", (user.getIntegral() + 10) + "");
                 userService.changeUserPoints(uMap);
                 record.setValue("+10");
 
             } else if (total_fee.equals("1980")) {
-                uMap.put("memberpoints", (user.getMemberPoints() + 20) + "");
+                uMap.put("memberPoints", (user.getMemberPoints() + 20) + "");
                 uMap.put("integral", (user.getIntegral() + 20) + "");
                 userService.changeUserPoints(uMap);
                 record.setValue("+20");
 
             } else if (total_fee.equals("4900")) {
-                uMap.put("memberpoints", (user.getMemberPoints() + 50) + "");
+                uMap.put("memberPoints", (user.getMemberPoints() + 50) + "");
                 uMap.put("integral", (user.getIntegral() + 50) + "");
                 userService.changeUserPoints(uMap);
                 record.setValue("+50");
 
             } else if (total_fee.equals("9750")) {
-                uMap.put("memberpoints", (user.getMemberPoints() + 100) + "");
+                uMap.put("memberPoints", (user.getMemberPoints() + 100) + "");
                 uMap.put("integral", (user.getIntegral() + 100) + "");
                 userService.changeUserPoints(uMap);
                 record.setValue("+100");
 
             } else if (total_fee.equals("19500")) {
-                uMap.put("memberpoints", (user.getMemberPoints() + 200) + "");
+                uMap.put("memberPoints", (user.getMemberPoints() + 200) + "");
                 uMap.put("integral", (user.getIntegral() + 200) + "");
                 userService.changeUserPoints(uMap);
                 record.setValue("+200");

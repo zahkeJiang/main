@@ -73,8 +73,8 @@ public class UtilsController extends BaseController {
             }
         }
 
-        map.put("userid", userid);
-        map.put("realname", realname);
+        map.put("userId", userid);
+        map.put("realName", realname);
         map.put("address", address);
         map.put("reamark", note);
 
@@ -114,8 +114,8 @@ public class UtilsController extends BaseController {
             return Status.fail(-20,"积分不足");
         }
         Map<String, String> pointMap = new HashMap<String, String>();
-        pointMap.put("userid", userid);
-        pointMap.put("memberpoints", user.getMemberPoints()-15+"");
+        pointMap.put("userId", userid);
+        pointMap.put("memberPoints", user.getMemberPoints()-15+"");
         pointMap.put("integral", user.getIntegral()+"");
         userService.changeUserPoints(pointMap);
 
@@ -130,8 +130,8 @@ public class UtilsController extends BaseController {
 
         UserCoupon userCoupon = couponService.getCoupon(userid);
         Map<String, String> statusMap = new HashMap<String, String>();
-        statusMap.put("userid",""+userCoupon.getUserId());
-        statusMap.put("couponstatus", "2");
+        statusMap.put("userId",""+userCoupon.getUserId());
+        statusMap.put("couponStatus", "2");
         couponService.updataCouponStatus(statusMap);
 
         return Status.success();
