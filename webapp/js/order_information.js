@@ -44,9 +44,9 @@ $(function(){
 				$(".cencer").click(function(){
 					var r = confirm("确定取消本订单吗？");
 					if(r == true){
-						$.post("cancelOrder.action",{"orderNumber":userorder.orderNumber},function(datas){
+						$.post("cancelOrder.action",{"ordernumber":userorder.orderNumber},function(datas){
 							if (status==0) {
-								alert("shuaxin");
+								window.location.href="order_information.html?ordernumber="+userorder.orderNumber;
 							}else{
 								// alert("系统繁忙，请稍后再试");
 							}
@@ -122,16 +122,17 @@ $(function(){
 				$(".hint").html("您已完成报名，材料正在返还的路上，请注意查收。");
 
 				$(".delivery").css({"display":"inline"});
-				//已送达接口
+				//材料已送达接口，确认，将状态值由3改为4
 				$(".delivery").click(function(){
 					$.post("changeStatus.action",{"ordernumber":userorder.orderNumber},function(obj){
-						$(".chedule_content").empty();
-						$(".chedule_content").html("交易完成");
-						$(".chedule_content").css({"height":"110px","padding":"0 16px","line-height":"110px","font-size":"20px","color":"white","background-color":"#01b468"});
-						$(".hint").empty();
-						$(".hint").html("材料已送达，欢迎您再次使用！");
-						$(".delivery").html("已送达");
-						$(".delivery").css({"background-color":"#d2e9ff","display":"inline","text-align":"center","line-height":"28px"});
+						window.location.href="order_information.html?ordernumber="+userorder.orderNumber;//刷新当前页面
+						// $(".chedule_content").empty();
+						// $(".chedule_content").html("交易完成");
+						// $(".chedule_content").css({"height":"110px","padding":"0 16px","line-height":"110px","font-size":"20px","color":"white","background-color":"#01b468"});
+						// $(".hint").empty();
+						// $(".hint").html("材料已送达，欢迎您再次使用！");
+						// $(".delivery").html("已送达");
+						// $(".delivery").css({"background-color":"#d2e9ff","display":"inline","text-align":"center","line-height":"28px"});
 					},'json');
 				});
 				$('delivery').unbind("click"); //移除点击事件
