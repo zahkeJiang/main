@@ -22,7 +22,7 @@ public class TestJob {
             for (DsOrder dso : orders){
                 Date d = formatter.parse(dso.getCreateTime());
                 if (d.getTime()>1209600000L){
-                    dsOrderService.deleteOrderByNum(dso.getOrderNumber());
+                    dsOrderService.updateOrderStatus(dso.getOrderNumber());
                 }
             }
         }catch(Exception ex){

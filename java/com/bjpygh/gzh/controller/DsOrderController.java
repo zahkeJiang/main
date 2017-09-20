@@ -208,13 +208,13 @@ public class DsOrderController extends BaseController {
 
     //删除订单接口
     @ResponseBody
-    @RequestMapping(value = "/deleteOrder.action", method = RequestMethod.POST)
+    @RequestMapping(value = "/cancelOrder.action", method = RequestMethod.POST)
     public Status delOrder(HttpServletRequest request,String ordernumber){
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
         }
-        dsOrderService.deleteOrderByNum(ordernumber);
+        dsOrderService.updateOrderStatus(ordernumber);
         return Status.success();
     }
 }

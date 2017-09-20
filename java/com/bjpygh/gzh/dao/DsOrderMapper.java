@@ -35,4 +35,6 @@ public interface DsOrderMapper {
     void updateOrderByStatus(DsOrder dsorder);
 
     void updateOrder(DsOrder dsorder);
+
+    void updateOrderStatus(Map<String, String> map);
 }

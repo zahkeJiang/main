@@ -20,12 +20,14 @@ public class DsOrderService {
 
     public void ChageOrderStatus(String ordernumber) {
         Map<String, String> map = new HashMap();
-        map.put("ordernumber",ordernumber);
-        map.put("orderstatus","4");
+        map.put("orderNumber",ordernumber);
+        map.put("orderStatus","4");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        map.put("gettime",formatter.format(new Date()));
+        map.put("getTime",formatter.format(new Date()));
         dsOrderMapper.changeStatus(map);
     }
+
+
 
     public List<DsOrder> getOrdersById(String userid) {
         DsOrderExample example = new DsOrderExample();
@@ -65,5 +67,14 @@ public class DsOrderService {
         DsOrderExample.Criteria criteria = example.createCriteria();
         criteria.andOrderStatusEqualTo("0");
         return dsOrderMapper.selectByExample(example);
+    }
+
+    public void updateOrderStatus(String ordernumber) {
+        Map<String, String> map = new HashMap();
+        map.put("orderNumber",ordernumber);
+        map.put("orderStatus","4");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        map.put("refundTime",formatter.format(new Date()));
+        dsOrderMapper.updateOrderStatus(map);
     }
 }
