@@ -83,8 +83,8 @@ public class DsOrderController extends BaseController{
         }
         String userid = userMap.get("id");
         List<DsOrder> list = dsOrderService.getOrdersById(userid);
-        //判断数据是否为空
-        if (list == null){
+        //判断数据是否有内容
+        if (!(list.size()>0)){
             return Status.fail(-20,"没有数据");
         }else{
             return Status.success().add("dsOrders",list);
@@ -101,9 +101,19 @@ public class DsOrderController extends BaseController{
             return Status.notInWx();
         }
         String userid = userMap.get("id");
+        DsOrder dsOrder;
+        List<DsOrder> dsOrders = dsOrderService.getDsOrderByNumber(ordernumber);
+        if (!(dsOrders.size()>0)){
+            return Status.fail(-20,"没有订单");
+        }else{
+            dsOrder = dsOrders.get(0);
+        }
 
-        DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
         UserCoupon userCoupon = couponService.getCoupon(userid);
+        if (userCoupon == null){
+            return Status.success().add("dsOrder",dsOrder)
+                    .add("price","");
+        }
         return Status.success().add("dsOrder",dsOrder)
                 .add("price",userCoupon.getCouponPrice());
     }

@@ -31,6 +31,7 @@
         <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
     </bean>
 
+
     <!--配置扫描器，将mybatis接口的实现加入到ioc容器中-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--扫描所有dao接口的实现，加入到IOC容器中-->
@@ -68,4 +69,28 @@
     </tx:advice>
 
     <!--Spring配置文件的核心点（数据源、与mybatis的整合，事务控制）-->
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="testTrigger"/>
+            </list>
+        </property>
+        <property name="autoStartup" value="true"/>
+    </bean>
+
+    <bean id="testTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="testJobDetail"/>
+        <property name="cronExpression" value="*/5 * * * * ?"/><!-- 每隔1秒钟触发一次 -->
+    </bean>
+
+
+    <bean id="testJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="testJob"/>
+        <property name="targetMethod" value="execute"/>
+        <property name="concurrent" value="false"/>
+        <!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+    </bean>
+
+    <bean id="testJob" class="com.bjpygh.gzh.service.quartz.TestJob"/>
 </beans>
