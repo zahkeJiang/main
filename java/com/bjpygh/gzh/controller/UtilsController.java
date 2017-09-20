@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class UtilsController extends BaseController{
+public class UtilsController extends BaseController {
 
     @Autowired
     DsOrderService dsOrderService;

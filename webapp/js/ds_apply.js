@@ -26,8 +26,22 @@ $(function(){
 	$(".ds_models").html(models);
 	$(".ds_price").html(price+".00");
     $(".description").html(description);
+    //立即报名时。判断用户是否已经绑定手机号
 	$("#submit").click(function(){
-		var myurl="submit_orders.html?dsname="+dsname+"&dstype="+dstype+"&models="+models+"&price="+price+"&packageid="+packageid+"&traintime="+traintime;                                      
-        window.location.assign(encodeURI(myurl));
+        $.post("isBond.action",{},function(datas){
+            if (datas.status=="0") {
+                var myurl="submit_orders.html?dsname="+dsname+"&dstype="+dstype+"&models="+models+"&price="+price+"&packageid="+packageid+"&traintime="+traintime;                                      
+                window.location.assign(encodeURI(myurl));
+            }else(datas.status=="-20"){
+                var r = confirm("您尚未绑定手机号，是否立即绑定？");
+                if(r == true){
+                    window.location.href="login.html";
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        },"json");
+		
 	});
 });

@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 	<title>个人中心</title>
+	<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 	<link href="css/main.css" rel="stylesheet" type="text/css"/>
 	<link href="css/user.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -12,7 +13,7 @@
 
 <body>
 <div class="main">
-	<div class="container">
+	
 		<div class="information">
 			<div class="icon">
 				头像
@@ -23,7 +24,6 @@
 				昵称
 				<div class="mobile_inf">
 					<span id="nickname"></span>
-					<span> &gt;</span>
 				</div>
 			</div>
 			<div class="line"></div>
@@ -31,7 +31,6 @@
 				性别
 				<div class="mobile_inf">
 					<span id="sex"></span>
-					<span> &gt;</span>
 				</div>
 			</div>			
 		</div><!--informationr结束-->
@@ -40,7 +39,7 @@
 				手机号
 				<div class="mobile_inf">
 					<span id="mobile"></span>
-					<span>	&gt;</span>
+					<span class="glyphicon glyphicon-menu-right"></span>
 				</div>
 			</div>
 			<div class="line"></div>
@@ -48,13 +47,13 @@
 				会员
 				<div class="member_inf">
 					<span id="integral"></span>
-					<span>	&gt;</span>
+					<span class="glyphicon glyphicon-menu-right"></span>
 				</div>
 			</div>
 			<div class="line"></div>
 			<div class="orders">
 				我的订单
-				<span id="orders">	&gt;</span>
+				<span class="glyphicon glyphicon-menu-right"></span>
 			</div>
 
 		</div><!--icon_infor结束-->
@@ -63,7 +62,7 @@
 				学校
 				<div class="school_inf">
 					<span id="school"></span>
-					<span> &gt;</span>
+					<span class="glyphicon glyphicon-menu-right"></span>
 				</div>
 			</div>
 		
@@ -71,12 +70,12 @@
 			<div class="city">
 				城市
 				<div class="school_inf">
-					<span id="city"></span>
-					<span> &gt;</span>
+					<span id="city">北京</span>
+					<span class="glyphicon glyphicon-menu-right"></span>
 				</div>
 			</div>
 		</div><!--information结束-->	
-	</div>
+	
 	<div class="footer">客服：<a href="tel:010-59822296">010-59822296</a></div>
 </div>
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>

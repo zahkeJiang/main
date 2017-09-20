@@ -13,7 +13,7 @@
 	background-repeat:repeat-x;		/*背景图片在水平显示*/	
 	background-position-y:bottom;　　/*背景图片在纵向的最下方显示*/
 }
-.all_orders,.orders_success,.orders_finished,.orders_cencer{
+.all_orders,.orders_success,.orders_finished,.orders_cencer,.orders_pay{
 	height: 46px;
 	line-height: 46px;
 }

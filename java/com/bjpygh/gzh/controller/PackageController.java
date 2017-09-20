@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class PackageController extends BaseController{
+public class PackageController extends BaseController {
 
     @Autowired
     PackageService packageService;

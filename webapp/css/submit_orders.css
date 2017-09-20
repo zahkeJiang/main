@@ -172,16 +172,17 @@ input::-webkit-input-placeholder {
 	bottom: 0;
 	position: fixed;
 	width: 100%;
+	max-width: 768px;
 	display: flex;
 	background-color: white;
 	height: 48px;
 	align-items: center;	
 }
-.footer img{
+/*.footer img{
 	width:30px;
 	height:30px;
 	margin-right:5px;
-}
+}*/
 .submit{
 	width: 30%;
 	background-color: #67c0ee;

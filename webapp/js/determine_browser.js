@@ -1,16 +1,12 @@
-var userid = "";
-var packageid = "";
-var select = "";
+var ordernumber = "";
 function ShowMessage() { 
     var thisURL = decodeURI(location.href);    
     var getval  = thisURL.split('?')[1];
-    userid = getval.split("=")[1].split("&")[0];
-    packageid = getval.split("=")[2].split("&")[0];
-    select = getval.split("=")[3].split("&")[0];
+    ordernumber = getval.split("=")[1];
     if (isWeiXin()) {
 //    	alert("我是微信浏览器");
     }else{
-        window.location.href="dspay.action?userid="+userid+"&packageid="+packageid+"&select="+select;
+        window.location.href="dspay.action?ordernumber"+ordernumber;
     }
 } 
 window.onload=ShowMessage(); 
