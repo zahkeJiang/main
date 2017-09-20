@@ -96,7 +96,7 @@ $(function(){
 		}else {
     		$.post("note.action",{"realname":realname,"address":address,"note":note},function(obj){
     			if (obj.status=="0") {
-    				$.post("creatOrder.action",{"packageid":packageid,"select":select},function(datas){
+    				$.post("createOrder.action",{"packageid":packageid,"select":select},function(datas){
     					if (datas.status==0) {
     						var dataurl = datas.data;
     						var  ordernumber = dataurl.ordernumber;

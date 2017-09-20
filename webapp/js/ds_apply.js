@@ -32,7 +32,7 @@ $(function(){
             if (datas.status=="0") {
                 var myurl="submit_orders.html?dsname="+dsname+"&dstype="+dstype+"&models="+models+"&price="+price+"&packageid="+packageid+"&traintime="+traintime;                                      
                 window.location.assign(encodeURI(myurl));
-            }else(datas.status=="-20"){
+            }else if(datas.status=="-20"){
                 var r = confirm("您尚未绑定手机号，是否立即绑定？");
                 if(r == true){
                     window.location.href="login.html";
@@ -42,6 +42,5 @@ $(function(){
                 }
             }
         },"json");
-		
 	});
 });
