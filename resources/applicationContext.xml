@@ -81,7 +81,7 @@
 
     <bean id="testTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="testJobDetail"/>
-        <property name="cronExpression" value="*/5 * * * * ?"/><!-- 每隔1秒钟触发一次 -->
+        <property name="cronExpression" value="0 */1 * * * ?"/><!-- 每隔1秒钟触发一次 -->
     </bean>
 
 

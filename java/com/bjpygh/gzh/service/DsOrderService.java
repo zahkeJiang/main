@@ -59,4 +59,11 @@ public class DsOrderService {
         criteria.andOrderNumberEqualTo(ordernumber);
         dsOrderMapper.deleteByExample(example);
     }
+
+    public List<DsOrder> getNotPay() {
+        DsOrderExample example = new DsOrderExample();
+        DsOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderStatusEqualTo("0");
+        return dsOrderMapper.selectByExample(example);
+    }
 }

@@ -29,6 +29,8 @@ public class DsOrder {
 
     private String note;
 
+    private String createTime;
+
     private String payTime;
 
     private Date submitTime;
@@ -44,6 +46,14 @@ public class DsOrder {
     private String imageurl;
 
     private Integer originalPrice;
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
 
     public Integer getOrderId() {
         return orderId;

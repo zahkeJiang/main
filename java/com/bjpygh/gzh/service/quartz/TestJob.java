@@ -1,13 +1,30 @@
 package com.bjpygh.gzh.service.quartz;
 
+import com.bjpygh.gzh.bean.DsOrder;
+import com.bjpygh.gzh.service.DsOrderService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class TestJob {
-    Date date = new Date(2419200000L);
+
+    @Autowired
+    DsOrderService dsOrderService;
+
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     public void execute(){
         try{
             //.......
-            System.out.println("----.----");
+            List<DsOrder> orders = dsOrderService.getNotPay();
+            for (DsOrder dso : orders){
+                Date d = formatter.parse(dso.getCreateTime());
+                if (d.getTime()>1209600000L){
+                    dsOrderService.deleteOrderByNum(dso.getOrderNumber());
+                }
+            }
         }catch(Exception ex){
             ex.printStackTrace();
         }
