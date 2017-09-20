@@ -98,7 +98,7 @@ function orders_pay(){
                     dsorderh_tml += "<div class='dsorder_list'  onumber='"+comment.orderNumber+"'><div class='dsorder_titie'><p class='ds_name'>"
                                 +comment.dsName+"</p>"+result+"</div><div class='dsoder_container'><img src='"
                                 +comment.imageurl+"' height='48px' width='64px'><p class='dsorder_information'>"
-                                +comment.dsType+"&nbsp;/&nbsp;"+comment.models+"&nbsp;/&nbsp;"+comment.trainTime+"</p></div><div class='dsorder_footer'><span class='dsorder_pay'>实付款：</span><span class='order_price'>¥"
+                                +comment.dsType+"&nbsp;/&nbsp;"+comment.models+"&nbsp;/&nbsp;"+comment.trainTime+"</p></div><div class='dsorder_footer'><span class='dsorder_pay'>需付款：</span><span class='order_price'>¥"
                                 +comment.orderPrice+".00</span></div></div>";
                 }
             });

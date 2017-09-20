@@ -17,15 +17,21 @@ $(function(){
 			$(".address").html(userorder.address);
 			$(".ds_training_mode").html(userorder.note);
 			$(".ds_name").html(userorder.dsName);
-			$(".ds_type").html(userorder.dstype+"&nbsp;&frasl;&nbsp;"+userorder.models+"&nbsp;&frasl;&nbsp"+userorder.trainTime);
+			$(".ds_type").html(userorder.dsType+"&nbsp;&frasl;&nbsp;"+userorder.models+"&nbsp;&frasl;&nbsp"+userorder.trainTime);
 			$(".description").html(userorder.description);
 			$(".order_number").html(userorder.orderNumber);
 			$(".order_time").html(userorder.payTime);
+			var coupons_sum = "";
+			if (obj.data.price=="") {
+				coupons_sum = 0;
+			}else{
+				coupons_sum = obj.data.price;
+			}
 			$(".ds_pay").html("¥&nbsp;"+userorder.orderPrice+".00");
-			$(".ds_price").html("¥&nbsp;"+(userorder.orderPrice+obj.data.price)+".00");
-			$(".ds_coupon").html("¥&nbsp;"+obj.data.price+".00");
+			$(".ds_price").html("¥&nbsp;"+(userorder.orderPrice+coupons_sum)+".00");
+			$(".ds_coupon").html("¥&nbsp;"+coupons_sum+".00");
 			
-			if (userorder.orderStatus=="1"||userorder.orderStatus=="2") {
+			if (userorder.orderStatus=="1"||userorder.orderStatus=="2") {//用户已支付，或者材料正在接收中
 				$(".shedule").html(orderschedule);
 				var refund = "<div class='refund'>取消订单</div>";
 				$(".footer").html(refund);
@@ -39,7 +45,7 @@ $(function(){
 					$(".submit_data").html(submit_data);
 					$(".submit_time").html(submit_time);
 
-					var audittime = userorder.submiTtime;
+					var audittime = userorder.submitTime;
 					var audit_data = audittime.split(' ')[0];
 					var audit_time = audittime.split(" ")[1];
 					$(".audit_data").html(audit_data);

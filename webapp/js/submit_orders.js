@@ -1,4 +1,4 @@
-var userid = "";
+
 var dsname = "";
 var dstype = "";
 var models = "";
@@ -16,7 +16,6 @@ function ShowMessage() {
     price = getval.split("=")[4].split('&')[0];
     packageid = getval.split("=")[5].split('&')[0];
     traintime = getval.split("=")[6];
-    getId();
 } 
 window.onload=ShowMessage(); 
 var realname="";
@@ -24,16 +23,7 @@ var address = "";
 var note = "";
 var select="";
 
-//获取用户id
-function getId(){
-	$.post("getid.action",{},function(obj){
-		if (obj.status=="0"){
-			userid = obj.data.userid;
-		}else{
-			alert(obj.msg);
-		}
-	},'json');
-}
+
 //获取优惠券金额
 function get_coupons(){
 	$.ajax({
@@ -44,7 +34,7 @@ function get_coupons(){
 			var obj = eval('(' + data + ')');
 			if (obj.status=="0") {
 				coupons_sum = obj.data.price;
-				$(".coupons span").html(coupons_sum+"元&nbsp;&gt;");
+				$(".coupons span").html(coupons_sum+"元");
 				$(".coupons span").css({"color":"red"});
 				select ="1";
 				$(".price").html((price-coupons_sum)+".00");
@@ -100,7 +90,7 @@ $(function(){
     					if (datas.status==0) {
     						var dataurl = datas.data;
     						var  ordernumber = dataurl.ordernumber;
-    						window.location.href="confirm_orders.html?userid="+userid+"&packageid="+packageid+"&select="+select+"&ordernumber"+ordernumber;	
+    						window.location.href="confirm_orders.html?packageid="+packageid+"&select="+select+"&ordernumber="+ordernumber;	
     					}
     				},"json");
         		}else{
