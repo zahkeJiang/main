@@ -11,7 +11,7 @@
 	justify-content: space-between;
 	background:url(../images/bg_line.png);
 	background-repeat:repeat-x;		/*背景图片在水平显示*/	
-	background-position-y:bottom;　　/*背景图片在纵向的最下方显示*/
+	background-position-y:bottom
 }
 .all_orders,.orders_success,.orders_finished,.orders_cencer,.orders_pay{
 	height: 46px;
@@ -45,9 +45,9 @@
 	padding-right: 16px;
 	padding-left: 16px;
 }
-.refund,.result{
+.refund,.result,.topay{
 	margin-left: auto;
-	color: #999;
+	color: red;
 	font-size: 14px;
 }
 .dsoder_container{

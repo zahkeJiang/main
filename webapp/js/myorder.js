@@ -44,7 +44,7 @@ function all_orders(){
             // $.each循环实现添加订单列表  
             $.each(dsorder_list,function(commentIndex,comment){
                 if (comment.orderStatus=="0") {//用户未支付订单
-                    var result = "<p class='result'>等待付款</p>";
+                    var result = "<p class='topay' odnumber='"+comment.orderNumber+"'>去付款</p>";
                 }else if (comment.orderStatus=="1"||comment.orderStatus=="2") {//用户已付款，审核过程
                     var result = "<p class='refund' odnumber='"+comment.orderNumber+"'>取消订单</p>";
                 }else if (comment.orderStatus=="3") {//用户报名完成
@@ -68,6 +68,12 @@ function all_orders(){
                 var ordernumber= $(this).parents().attr("onumber");  
                 window.location.href="order_information.html?ordernumber="+ordernumber;
             });
+            //未支付订单付款
+            $(".topay").click(function(){
+                var ordernumber = $(this).attr("odnumber");
+                window.location.href="determine_browser.html?ordernumber="+ordernumber;
+            });
+            //退款
             $(".refund").click(function(){
                 var ordernumber = $(this).attr("odnumber");
                 window.location.href="ds_refund.html?ordernumber="+ordernumber;
@@ -94,7 +100,7 @@ function orders_pay(){
             // $.each循环实现添加订单列表  
             $.each(dsorder_list,function(commentIndex,comment){
                 if (comment.orderStatus=="0") {
-                    var result = "<p class='result' odnumber='"+comment.orderNumber+"'>等待付款</p>";
+                    var result = "<p class='topay' odnumber='"+comment.orderNumber+"'>去付款</p>";
                     dsorderh_tml += "<div class='dsorder_list'  onumber='"+comment.orderNumber+"'><div class='dsorder_titie'><p class='ds_name'>"
                                 +comment.dsName+"</p>"+result+"</div><div class='dsoder_container'><img src='"
                                 +comment.imageurl+"' height='48px' width='64px'><p class='dsorder_information'>"
@@ -108,7 +114,12 @@ function orders_pay(){
             }
             $(".container").empty();
             $(".container").html(dsorderh_tml);
-            
+
+            //未支付订单付款
+            $(".topay").click(function(){
+                var ordernumber = $(this).attr("odnumber");
+                window.location.href="determine_browser.html?ordernumber="+ordernumber;
+            });
             // 为订单列表设置点击事件
             $(".dsoder_container").click(function(){  
                 var ordernumber = $(this).parents().attr("onumber");
