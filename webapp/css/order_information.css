@@ -175,3 +175,34 @@ span{
 .result{
 	text-align: center;
 }
+.footerBox{
+	position: fixed;
+	/*background: #efefef;*/
+	background-color: #f8f7f7;
+	width: 100%;
+	max-width: 768px;
+	bottom: 0;
+	height: 48px;
+	border-top: 1px solid #eee;
+}
+.footerBox span:nth-child(1) {
+	height: 32px;
+	width: 80px;
+	border-radius: 2px;
+	border: 1px solid red;
+	text-align: center;
+	line-height: 32px;
+	margin: 8px 16px;
+	float: right;
+
+}
+.footerBox span:nth-child(2) {
+	height: 32px;
+	width: 80px;
+	border-radius: 2px;
+	border: 1px solid black;
+	text-align: center;
+	line-height: 32px;
+	margin-top: 8px;
+	float: right
+}

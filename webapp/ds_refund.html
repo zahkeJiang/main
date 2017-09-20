@@ -17,7 +17,7 @@
 						<ul>
 							<li>1.如已完成报名全部流程，将无法取消报名</li>
 							<li>2.退款会收取报名费用的0.6%的手续费</li>
-							<li>3.报名一旦取消，无法恢复</li>
+							<li>3.订单一旦取消，无法恢复</li>
 						</ul>
 					</div>
 				</div>
@@ -25,10 +25,13 @@
 					<div class="refund_reason">
 						<span>取消原因:</span>
 						<select id="rea">
-  							<option value ="报名信息有误">报名信息有误</option>
-  							<option value ="打算报名其他驾校">打算报名其他驾校</option>
+							<option value ="" disabled selected></option>
+  							<option value ="报名信息有误">信息填写有误（地址、班型等）</option>
+  							<!-- <option value ="打算报名其他驾校">打算报名其他驾校</option> -->
   							<option value="时间冲突，不想报名">时间冲突，不想报名</option>
   							<option value="忘记使用优惠券，重新报名">忘记使用优惠券，重新报名</option>
+  							<option value="其他驾校价格更优惠">其他驾校价格更优惠</option>
+  							<option value="其他驾校价格更优惠">重复下单/误下单</option>
 						</select>
 					</div>
 					<div class="order_price">
@@ -39,7 +42,7 @@
 				</div>
 			</div>
 			<div class="refund">
-				<div class="apply_refund">申请退款</div>
+				<div class="apply_refund">提交</div>
 			</div>
 		</div>
 	</div>

@@ -91,10 +91,12 @@ $(function(){
     						var dataurl = datas.data;
     						var  ordernumber = dataurl.ordernumber;
     						window.location.href="confirm_orders.html?packageid="+packageid+"&select="+select+"&ordernumber="+ordernumber;	
+    					}else if (datas.status == "-40") {
+    						alert("您当前已存在三个未支付订单，请勿重复多次下单。")
     					}
     				},"json");
         		}else{
-        			alert("您已报名成功，请勿重复报名。");
+        			alert("每位用户仅可驾校报名成功一次，您已报名过驾校，请勿重复下单。");
         		}
     		},"json");
 		}

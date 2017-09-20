@@ -51,7 +51,7 @@ function all_orders(){
                     var result = "<p class='result'>材料正在返还</p>";
                 }else if (comment.orderStatus=="4") {//用户成功接收返还材料
                     var result = "<p class='result'>已完成</p>";
-                }else if (comment.orderStatus=="5") {//用户取消订单
+                }else if (comment.orderStatus=="5"||comment.orderStatus=="6") {//用户取消订单
                     var result = "<p class='result'>已取消</p>";
                 }
                 dsorderh_tml += "<div class='dsorder_list' onumber='"+comment.orderNumber+"'><div class='dsorder_titie'><p class='ds_name'>"
@@ -104,7 +104,7 @@ function orders_pay(){
                     dsorderh_tml += "<div class='dsorder_list'  onumber='"+comment.orderNumber+"'><div class='dsorder_titie'><p class='ds_name'>"
                                 +comment.dsName+"</p>"+result+"</div><div class='dsoder_container'><img src='"
                                 +comment.imageurl+"' height='48px' width='64px'><p class='dsorder_information'>"
-                                +comment.dsType+"&nbsp;/&nbsp;"+comment.models+"&nbsp;/&nbsp;"+comment.trainTime+"</p></div><div class='dsorder_footer'><span class='dsorder_pay'>需付款：</span><span class='order_price'>¥"
+                                +comment.dsType+"&nbsp;/&nbsp;"+comment.models+"&nbsp;/&nbsp;"+comment.trainTime+"</p></div><div class='dsorder_footer'><span class='dsorder_pay'>需付款：¥</span><span class='order_price'>"
                                 +comment.orderPrice+".00</span></div></div>";
                 }
             });
@@ -147,13 +147,19 @@ function orders_success(){
             var dsorder_list = obj.data.dsOrders;
             // $.each循环实现添加订单列表  
             $.each(dsorder_list,function(commentIndex,comment){
-                if (comment.orderStatus=="1"||comment.orderStatus=="2") {
-                    var result = "<p class='refund' odnumber='"+comment.orderNumber+"'>取消订单</p>";
+                if (comment.orderStatus=="1"||comment.orderStatus=="2"||comment.orderStatus=="3"){
+
+                    if (comment.orderStatus=="1"||comment.orderStatus=="2") {
+                        var result = "<p class='refund' odnumber='"+comment.orderNumber+"'>取消订单</p>";
+                    
+                    }else if (comment.orderStatus=="3") {
+                        var result = "<p class='result'>材料正在返还</p>";
+                    }
                     dsorderh_tml += "<div class='dsorder_list'  onumber='"+comment.orderNumber+"'><div class='dsorder_titie'><p class='ds_name'>"
                                 +comment.dsName+"</p>"+result+"</div><div class='dsoder_container'><img src='"
                                 +comment.imageurl+"' height='48px' width='64px'><p class='dsorder_information'>"
-                                +comment.dsType+"&nbsp;/&nbsp;"+comment.models+"&nbsp;/&nbsp;"+comment.trainTime+"</p></div><div class='dsorder_footer'><span class='dsorder_pay'>实付款：</span><span class='order_price'>¥"
-                                +comment.orderPrice+".00</span></div></div>";
+                                +comment.dsType+"&nbsp;/&nbsp;"+comment.models+"&nbsp;/&nbsp;"+comment.trainTime+"</p></div><div class='dsorder_footer'><span class='dsorder_pay'>实付款：¥</span><span class='order_price'>"
+                                +comment.orderPrice+".00</span></div></div>";                                 
                 }
             });
             //遍历之后判断订单列表是否依旧为空，如果是空，显示其他内容
@@ -199,7 +205,7 @@ function orders_finished(){
                     dsorderh_tml += "<div class='dsorder_list' onumber='"+comment.orderNumber+"'><div class='dsorder_titie'><p class='ds_name'>"
                                 +comment.dsName+"</p>"+result+"</div><div class='dsoder_container'><img src='"
                                 +comment.imageurl+"' height='48px' width='64px'><p class='dsorder_information'>"
-                                +comment.dsType+"&nbsp;/&nbsp;"+comment.models+"&nbsp;/&nbsp;"+comment.trainTime+"</p></div><div class='dsorder_footer'><span class='dsorder_pay'>实付款：</span><span class='order_price'>¥"
+                                +comment.dsType+"&nbsp;/&nbsp;"+comment.models+"&nbsp;/&nbsp;"+comment.trainTime+"</p></div><div class='dsorder_footer'><span class='dsorder_pay'>实付款：¥</span><span class='order_price'>"
                                 +comment.orderPrice+".00</span></div></div>";
                 }
             });
@@ -239,12 +245,12 @@ function orders_cencer(){
             var dsorder_list = obj.data.dsOrders;
             // $.each循环实现添加订单列表  
             $.each(dsorder_list,function(commentIndex,comment){
-                if (comment.orderStatus=="5") {//用户取消订单
+                if (comment.orderStatus=="5"||comment.orderStatus=="6") {//用户取消订单
                     var result = "<p class='result'>已取消</p>";
                     dsorderh_tml += "<div class='dsorder_list' onumber='"+comment.orderNumber+"'><div class='dsorder_titie'><p class='ds_name'>"
                                 +comment.dsName+"</p>"+result+"</div><div class='dsoder_container'><img src='"
                                 +comment.imageurl+"' height='48px' width='64px'><p class='dsorder_information'>"
-                                +comment.dsType+"&nbsp;/&nbsp;"+comment.models+"&nbsp;/&nbsp;"+comment.trainTime+"</p></div><div class='dsorder_footer'><span class='dsorder_pay'>实付款：</span><span class='order_price'>¥"
+                                +comment.dsType+"&nbsp;/&nbsp;"+comment.models+"&nbsp;/&nbsp;"+comment.trainTime+"</p></div><div class='dsorder_footer'><span class='dsorder_pay'>实付款：¥</span><span class='order_price'>"
                                 +comment.orderPrice+".00</span></div></div>";
                 }
             });
