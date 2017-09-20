@@ -51,97 +51,23 @@ public class PayController extends BaseController {
 
     //支付宝驾校报名支付接口
     @RequestMapping(value = "/dspay.action", method = RequestMethod.GET)
-    public void DsPay(HttpServletResponse response,DsAliPay dsAliPay) throws IOException {
+    public void DsPay(HttpServletResponse response,String ordernumber) throws IOException {
         response.setContentType("text/html;charset=" + AlipayConfig.CHARSET);
         PrintWriter out = response.getWriter();
         String subject = "驾校报名费用";
         String  body = "驾校报名费用";
         String timeout_express="2m";
         String product_code="BJPYGH_DS_SIGNUP";
-        int couponprice = 0;
 
-        String userid = dsAliPay.getUserid();
-        String packageid = dsAliPay.getPackageid();
-        String select = dsAliPay.getSelect();
-
-        if (select.equals("1")){
-            UserCoupon userCoupon = couponService.getCoupon(userid);
-            Date date = new Date(604800000L);
-
-            if(userCoupon.getCouponStatus()==1&&userCoupon!=null){
-                if((new Date()).getTime()-userCoupon.getCouponTime().getTime()<date.getTime()){
-                    couponprice = userCoupon.getCouponPrice();
-                }else if(userCoupon.getCouponStatus()==2){
-                    couponprice = userCoupon.getCouponPrice();
-                }else{
-                    couponprice = 0;
-                }
-            }else{
-                couponprice = 0;
-            }
-        }else{
-            couponprice = 0;
-        }
-
-        User user = userService.getUserById(userid);
-        DsPackage dsPackage = packageService.getPackage(packageid);
-        Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int date = c.get(Calendar.DATE);
-        int hour = c.get(Calendar.HOUR_OF_DAY);
-        int minute = c.get(Calendar.MINUTE);
-        int second = c.get(Calendar.SECOND);
-        String out_trade_no ="DSPYGH" + year + month + date + hour + minute + second + userid;
-
-        int total_amount = dsPackage.getPrice()-couponprice;
-
-        DsOrder dsOrder = new DsOrder();
-        DsInformation DsInfo = dsInfoService.getDsInfoByName(dsPackage.getDsName());
-        dsOrder.setUserId(Long.parseLong(userid));
-        dsOrder.setDsName(dsPackage.getDsName());
-        dsOrder.setDsType(dsPackage.getDsType());
-        dsOrder.setModels(dsPackage.getModels());
-        dsOrder.setDescription(dsPackage.getDescription());
-        dsOrder.setAddress(user.getAddress());
-        dsOrder.setNote(user.getReamark());
-        dsOrder.setRealName(user.getRealName());
-        dsOrder.setOrderNumber(out_trade_no);
-        dsOrder.setOrderPrice(total_amount);
-        dsOrder.setOriginalPrice(dsPackage.getPrice());
-        dsOrder.setOrderStatus((byte) 0);
-        dsOrder.setPhoneNumber(user.getPhoneNumber());
-        dsOrder.setTrainTime(dsPackage.getTrainTime());
-        dsOrder.setImageurl(DsInfo.getDsImage());
-        List<DsOrder> dso = dsOrderService.getOrdersById(userid);
-        DsOrder newOrder = null;
-        if(dso == null){
-            dsOrderService.insertOrder(dsOrder);
-        }else{
-            for(DsOrder dsor:dso){
-                if(dsor.getOrderStatus()!=0&&dsor.getOrderStatus()!=5){
-                    String s = "<!DOCTYPE html><html><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'/><title>支付失败</title><link href='css/main.css' rel='stylesheet' type='text/css'/><link href='css/submit_orders.css' rel='stylesheet' type='text/css'/></head><body style='background-color: #fff;'><div style='text-align: center; margin-top: 250px;'><img style='width: 40px;margin: 0;' src='images/alipay.png'><p>您已成功支付，请勿重复支付</p></div></body></html>";
-                    out.print(s);
-                    out.flush();
-                    out.close();
-                }else if(dsor.getOrderStatus()==0){
-                    newOrder = dsor;
-                }
-            }
-            if(newOrder!=null){
-                dsOrderService.updateOrderByStatus(dsOrder);
-            }else{
-                dsOrderService.insertOrder(dsOrder);
-            }
-        }
+        DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
 
         AlipayClient client = new DefaultAlipayClient(AlipayConfig.URL, AlipayConfig.APPID, AlipayConfig.RSA_PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY,AlipayConfig.SIGNTYPE);
         AlipayTradeWapPayRequest alipay_request=new AlipayTradeWapPayRequest();
 
         AlipayTradeWapPayModel model=new AlipayTradeWapPayModel();
-        model.setOutTradeNo(out_trade_no);
+        model.setOutTradeNo(ordernumber);
         model.setSubject(subject);
-        model.setTotalAmount(""+total_amount);
+        model.setTotalAmount(""+dsOrder.getOrderPrice());
         model.setBody(body);
         model.setTimeoutExpress(timeout_express);
         model.setProductCode(product_code);
@@ -317,4 +243,6 @@ public class PayController extends BaseController {
         }
         return sb.toString();
     }
+
+
 }
