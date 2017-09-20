@@ -72,7 +72,7 @@ public class DsOrderService {
     public void updateOrderStatus(String ordernumber) {
         Map<String, String> map = new HashMap();
         map.put("orderNumber",ordernumber);
-        map.put("orderStatus","4");
+        map.put("orderStatus","6");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         map.put("refundTime",formatter.format(new Date()));
         dsOrderMapper.updateOrderStatus(map);
