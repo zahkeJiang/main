@@ -33,11 +33,11 @@ public class DsOrder {
 
     private String payTime;
 
-    private Date submitTime;
+    private String submitTime;
 
-    private Date signTime;
+    private String signTime;
 
-    private Date getTime;
+    private String getTime;
 
     private String description;
 
@@ -167,27 +167,27 @@ public class DsOrder {
         this.payTime = payTime;
     }
 
-    public Date getSubmitTime() {
+    public String getSubmitTime() {
         return submitTime;
     }
 
-    public void setSubmitTime(Date submitTime) {
+    public void setSubmitTime(String submitTime) {
         this.submitTime = submitTime;
     }
 
-    public Date getSignTime() {
+    public String getSignTime() {
         return signTime;
     }
 
-    public void setSignTime(Date signTime) {
+    public void setSignTime(String signTime) {
         this.signTime = signTime;
     }
 
-    public Date getGetTime() {
+    public String getGetTime() {
         return getTime;
     }
 
-    public void setGetTime(Date getTime) {
+    public void setGetTime(String getTime) {
         this.getTime = getTime;
     }
 
