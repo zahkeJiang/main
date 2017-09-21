@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
-.header{
+/* .header{
 	position: relative;
 	height: 150px;
 	width: 100%;
@@ -14,7 +14,7 @@
 	color: white;
 	
 }
-/* #search{
+ #search{
 	position: fixed;
 	height: 40px;
 	width: 60%;
@@ -26,7 +26,7 @@
 	margin-top: -64px;
 	border: 1px solid #999;
 	background-color: white;
-} */
+} 
 
 .city{
 	position:absolute;
@@ -66,8 +66,35 @@
 	padding-left: 10px;
 	
 }
-
-
-
-
-
+ */
+body{
+	background-color: #54a0ff;
+}
+.header img{
+	width: 70%;
+	margin-left: 15%;
+	margin-top:40px;
+}
+.content{
+	margin-top: 40px;
+	background-color:white;
+	height: 240px;
+	width: 80%;
+	margin-left: 10%;
+	border-radius: 10px;
+	text-align: center;
+}
+.content img:nth-child(1){
+	margin: 20px 0;
+}
+.content p{
+	line-height: 40px;
+	color: white;
+	border-radius: 5px;
+	background-color: #54a0ff;
+	width: 40%;
+	height: 40px;
+	margin-left: 30%;
+	margin-top: 40px;
+	font-size: 20px;
+}
