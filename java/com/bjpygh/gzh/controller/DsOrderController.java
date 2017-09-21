@@ -143,7 +143,7 @@ public class DsOrderController extends BaseController {
                 dsos.add(dso);
             }
         }
-        if (dsos.size()>3){
+        if (dsos.size()>2){
             return Status.fail(-40,"您已创建了三个未支付订单，无法创建更多订单");
         }
         String packageid = dsAliPay.getPackageid();
