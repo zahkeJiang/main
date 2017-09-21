@@ -23,6 +23,7 @@ span{
 }
 .ds_pay{
 	margin-top: 10px;
+	margin-bottom: 58px;
 	padding: 0 16px;
 	display: flex;
 	justify-content: space-between;
