@@ -29,7 +29,7 @@ $(function(){
 });
 */
 $(function(){
-    $(".content p").click(function(){
+    $(".button").click(function(){
         var dsname = "海淀驾校";
         $.cookie("dsname",dsname);//驾校名字              
         window.location.href="ds_information.html";
