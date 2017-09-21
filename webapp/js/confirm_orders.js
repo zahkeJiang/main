@@ -1,15 +1,20 @@
 
-var packageid = "";
-var select = "";
-var ordernumber = "";
-function ShowMessage() { 
-    var thisURL = decodeURI(location.href);    
-    var getval  = thisURL.split('?')[1];
-    packageid = getval.split("=")[1].split("&")[0];
-    select = getval.split("=")[2].split("&")[0];
-    ordernumber = getval.split("=")[3];
-}
-window.onload=ShowMessage(); 
+// var packageid = "";
+// var select = "";
+// var ordernumber = "";
+// function ShowMessage() { 
+//     var thisURL = decodeURI(location.href);    
+//     var getval  = thisURL.split('?')[1];
+//     packageid = getval.split("=")[1].split("&")[0];
+//     select = getval.split("=")[2].split("&")[0];
+//     ordernumber = getval.split("=")[3];
+// }
+// window.onload=ShowMessage(); 
+
+
+var packageid = $.cookie("packageid");//班型编号id
+var select = $.cookie("select");//是否有使用优惠券
+var ordernumber = $.cookie("ordernumber");//订单号
 
 $(function(){
 	//获取订单信息
@@ -21,7 +26,7 @@ $(function(){
 			$(".address").html(userorder.address);
 			$(".ds_training_mode").html(userorder.note);
 			$(".ds_name").html(userorder.dsName);
-			$(".ds_type").html(userorder.dstype+"&nbsp;&frasl;&nbsp;"+userorder.models+"&nbsp;&frasl;&nbsp"+userorder.trainTime);
+			$(".ds_type").html(userorder.dsType+"&nbsp;&frasl;&nbsp;"+userorder.models+"&nbsp;&frasl;&nbsp"+userorder.trainTime);
 			$(".order_number").html(userorder.orderNumber);
 			var coupons_sum = "";
 			if (datas.data.price=="") {

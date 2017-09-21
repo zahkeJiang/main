@@ -1,23 +1,33 @@
 
-var dsname = "";
-var dstype = "";
-var models = "";
-var price = "";
-var packageid = "";
-var traintime = "";
-var coupons_sum = "";
+// var dsname = "";
+// var dstype = "";
+// var models = "";
+// var price = "";
+// var packageid = "";
+// var traintime = "";
+// var coupons_sum = "";//优惠券金额
 
-function ShowMessage() { 
-    var thisURL = decodeURI(location.href);    
-    var getval = thisURL.split('?')[1];
-    dsname = getval.split("=")[1].split('&')[0];
-    dstype = getval.split("=")[2].split('&')[0];
-    models = getval.split("=")[3].split('&')[0];
-    price = getval.split("=")[4].split('&')[0];
-    packageid = getval.split("=")[5].split('&')[0];
-    traintime = getval.split("=")[6];
-} 
-window.onload=ShowMessage(); 
+// function ShowMessage() { 
+//     var thisURL = decodeURI(location.href);    
+//     var getval = thisURL.split('?')[1];
+//     dsname = getval.split("=")[1].split('&')[0];
+//     dstype = getval.split("=")[2].split('&')[0];
+//     models = getval.split("=")[3].split('&')[0];
+//     price = getval.split("=")[4].split('&')[0];
+//     packageid = getval.split("=")[5].split('&')[0];
+//     traintime = getval.split("=")[6];
+// } 
+// window.onload=ShowMessage(); 
+// 
+var dsname = $.cookie("dsname");//驾校名字
+var dstype = $.cookie("dstype");//班型套餐
+var models = $.cookie("models");//班型类别，如C1，C2
+var price = $.cookie("price");//班型套餐价格
+var packageid = $.cookie("packageid");//班型编号id
+var traintime = $.cookie("traintime");//训练时间
+var coupons_sum = "";//优惠券金额
+
+
 var realname="";
 var address = "";
 var note = "";
@@ -90,9 +100,12 @@ $(function(){
     					if (datas.status==0) {
     						var dataurl = datas.data;
     						var  ordernumber = dataurl.ordernumber;
-    						window.location.href="confirm_orders.html?packageid="+packageid+"&select="+select+"&ordernumber="+ordernumber;	
+    						// window.location.href="confirm_orders.html?packageid="+packageid+"&select="+select+"&ordernumber="+ordernumber;	
+    						$.cookie("ordernumber",ordernumber);//订单号
+    						$.cookie("select",select);//是否使用优惠券
+    						window.location.href="confirm_orders.html";
     					}else if (datas.status == "-40") {
-    						alert("您当前已存在三个未支付订单，请勿重复多次下单。")
+    						alert("您当前已存在多个未支付订单，请勿重复多次下单。")
     					}
     				},"json");
         		}else{

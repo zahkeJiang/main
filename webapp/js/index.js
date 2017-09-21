@@ -1,16 +1,4 @@
-
-//var userid = "";
-//function ShowMessage() 
-//{ 
-//    var thisURL = document.URL;    
-//    var userId = thisURL.split('?')[1];  
-////    userid = userId.split("&")[0];  
-////    var openid = userId.split("&")[1];
-//    alert(userId);
-//} 
-//window.onload=ShowMessage(); 
-
-
+/*
 $(function(){
     $(".address").click(function(){
         alert("正在开拓其他城市");
@@ -39,7 +27,15 @@ $(function(){
         }
     },'json');
 });
-
+*/
+$(function(){
+    $(".content p").click(function(){
+        var dsname = "海淀驾校";
+        $.cookie("dsname",dsname);//驾校名字              
+        window.location.href="ds_information.html";
+    });
+    
+});
 
 
 

@@ -1,13 +1,13 @@
 
 
-var dsname = "";
-function ShowMessage() { 
-    var thisURL = decodeURI(location.href);    
-    var getval = thisURL.split('?')[1];
-    dsname = getval.split("=")[1];
-} 
-window.onload=ShowMessage(); 
-				
+// var dsname = "";
+// function ShowMessage() { 
+//     var thisURL = decodeURI(location.href);    
+//     var getval = thisURL.split('?')[1];
+//     dsname = getval.split("=")[1];
+// } 
+// window.onload=ShowMessage(); 
+var dsname = $.cookie("dsname");//驾校名字			
 $(function(){
 	// 打开弹窗
     $(".ds_information").click(function(){
@@ -58,8 +58,16 @@ $(function(){
                 var traintime = $(this).find(".traintime").html();  
                 var packageid = $(this).find(".packageid").html();   
                 var description = $(this).find(".description").html();
-                var myurl="ds_apply.html?dsname="+dsname+"&dstype="+dstype+"&models="+models+"&price="+price+"&packageid="+packageid+"&traintime="+traintime+"&description="+description;                                      
-                window.location.assign(encodeURI(myurl));
+                // var myurl="ds_apply.html?dsname="+dsname+"&dstype="+dstype+"&models="+models+"&price="+price+"&packageid="+packageid+"&traintime="+traintime+"&description="+description;                                      
+                // window.location.assign(encodeURI(myurl));
+                
+                $.cookie("dstype",dstype);//班型
+                $.cookie("models",models);//班型类别，如C1，C2
+                $.cookie("price",price);//班型价格
+                $.cookie("traintime",traintime);//训练时间
+                $.cookie("packageid",packageid);//班型编号id
+                $.cookie("description",description);//班型秒速
+                window.location.href="ds_apply.html";
             });
         // }
     },'json');
