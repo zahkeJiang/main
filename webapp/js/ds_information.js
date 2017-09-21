@@ -30,8 +30,8 @@ $(function(){
             var dsp_list = obj.dspList;
 
             //添加驾校图片/名称/简介/地址
-            var ds_image = "<img id='ds_image' src="+" ' "+obj.dsImage+" ' "+"><span class='ds_name'></span>";
-            $(".ds_image").html(ds_image);
+            // var ds_image = "<img id='ds_image' src="+" ' "+obj.dsImage+" ' "+"><span class='ds_name'></span>";
+            // $(".ds_image").html(ds_image);
             $(".ds_name").html(obj.dsName);
             $(".dsintro_name").html(obj.dsName);
             $(".dsintro p").html(obj.dsIntro);

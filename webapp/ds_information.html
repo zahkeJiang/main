@@ -4,15 +4,40 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 	<title>驾校详情</title>
+    <link rel="stylesheet" href="css/swiper.min.css">
 	<link href="css/main.css" rel="stylesheet" type="text/css"/>
 	<link href="css/ds_information.css" rel="stylesheet" type="text/css"/>
+   
 </head>
+
 <body>
+<!-- 轮播图 -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="./images/ds_bg1.jpg">
+                    </div>
+                    <div class="swiper-slide">
+                         <img src="./images/ds_bg2.jpg">
+                    </div>
+                    <div class="swiper-slide">
+                         <img src="./images/ds_bg3.jpg">
+                    </div>
+                    <div class="swiper-slide">
+                         <img src="./images/ds_bg4.jpg">
+                    </div>
+                    <div class="swiper-slide">
+                         <img src="./images/ds_bg5.jpg">
+                    </div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+
 	<div class="main">
 		<div class="header">
-			<div class="ds_image">
-				
-			</div>
+			<!-- <div class="ds_image"></div> -->
+	
 			<div class="ds_infor">
 				<div class="ds_information">
 					<img src="images/intro.png" height="16px">
@@ -38,7 +63,20 @@
 	</div>
 </body>
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
 <script src="js/jquery.cookie.js" type="text/javascript"></script>
 <!--<script type="text/javascript" src="js/isWeiXin.js"></script>-->
 <script type="text/javascript" src="js/ds_information.js"></script>
+ 
+ <script>
+ // 轮播图
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',//如果需要分页器，即下面的小圆点
+        paginationClickable: false,//不可点击
+        autoplay: 2000,//更换频率
+        spaceBetween: 10,//幻灯片间隔
+        loop: true,//循环
+        speed:1000, // 播放的速度
+    });
+    </script>
 </html>
