@@ -185,24 +185,24 @@ span{
 	height: 48px;
 	border-top: 1px solid #eee;
 }
-.footerBox span:nth-child(1) {
+.gopay {
 	height: 32px;
 	width: 80px;
 	border-radius: 2px;
-	border: 1px solid red;
+	border: 1px solid #67c0ee;
 	text-align: center;
 	line-height: 32px;
-	margin: 8px 16px;
+	margin: 8px 16px 8px 0;
 	float: right;
 
 }
-.footerBox span:nth-child(2) {
+.cancel {
 	height: 32px;
 	width: 80px;
 	border-radius: 2px;
-	border: 1px solid black;
+	border: 1px solid #999;
 	text-align: center;
 	line-height: 32px;
-	margin-top: 8px;
+	margin: 8px 16px 8px 0;
 	float: right
 }

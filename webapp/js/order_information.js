@@ -34,14 +34,14 @@ $(function(){
 			if (userorder.orderStatus=="0") {//用户提交订单未支付
 				$(".shedule").html(orderschedule);
 				$(".blank").css({"margin-bottom":"36px"});
-				var footerBox = "<div class='footerBox'><span class='gopay'>去支付</span><span class='cencer'>取消订单</span><div>";
+				var footerBox = "<div class='footerBox'><span class='gopay'>去支付</span><span class='cancel'>取消订单</span><div>";
 				$(".footer").html(footerBox);
 				//未支付，去付款
 				$(".gopay").click(function(){
 					window.location.href="determine_browser.html?ordernumber="+userorder.orderNumber;
 				});
 				//未支付，取消订单
-				$(".cencer").click(function(){
+				$(".cancel").click(function(){
 					var r = confirm("确定取消本订单吗？");
 					if(r == true){
 						$.post("cancelOrder.action",{"ordernumber":userorder.orderNumber},function(datas){
@@ -60,12 +60,13 @@ $(function(){
 				var submit_time = submitTime.split(" ")[1];
 				$(".submit_data").html(submit_data);
 				$(".submit_time").html(submit_time);
-				$(".hint").html("您已提交订单");
+				$(".hint").html("您已提交订单,请尽快完成支付！");
 			}else if (userorder.orderStatus=="1"||userorder.orderStatus=="2") {//用户已支付，或者材料正在接收中
 				$(".shedule").html(orderschedule);
-				var refund = "<div class='refund'>取消订单</div>";
-				$(".footer").html(refund);
-				$(".refund").click(function(){
+				$(".blank").css({"margin-bottom":"36px"});
+				var footerBox = "<div class='footerBox'><span class='cancel'>取消订单</span><div>";
+				$(".footer").html(footerBox);
+				$(".cancel").click(function(){
 					window.location.href="ds_refund.html?ordernumber="+userorder.orderNumber;
 				});
 				// 显示提交订单时间
@@ -87,7 +88,7 @@ $(function(){
 				$("#cartoon2").css({"height":"30px","width":"30px"});
 				$(".audit_bg").css({"background-color":"#67c0ee"});
 				
-			}else if (userorder.orderStatus=="3") {//用户报名完成
+			}else if (userorder.orderStatus=="3") {//用户报名交接成功时
 				$(".shedule").html(orderschedule);
 				// 显示提交订单时间
 				var submitTime = userorder.createTime;
@@ -151,7 +152,7 @@ $(function(){
 			}else if (userorder.orderStatus=="5") {
 				$(".chedule_content").empty();
 				$(".chedule_content").html("交易关闭");
-				$(".chedule_content").css({"height":"110px","padding":"0 16px","line-height":"110px","font-size":"20px","color":"white","background-color":"#01b468"});
+				$(".chedule_content").css({"height":"110px","padding":"0 16px","line-height":"110px","font-size":"20px","color":"white","background-color":"#ccc"});
 				$(".hint").empty();
 				$(".hint").html("北京漂洋过海，欢迎您再次使用！");
 				var result = "<div class='result'><p>您已报名成功；</p><p>欢迎您再次使用；</p><p>北京漂洋过海，一切因你而在！</p></div>";
@@ -159,7 +160,7 @@ $(function(){
 			}else if (userorder.orderStatus=="6") {
 				$(".chedule_content").empty();
 				$(".chedule_content").html("交易关闭");
-				$(".chedule_content").css({"height":"110px","padding":"0 16px","line-height":"110px","font-size":"20px","color":"white","background-color":"#01b468"});
+				$(".chedule_content").css({"height":"110px","padding":"0 16px","line-height":"110px","font-size":"20px","color":"white","background-color":"#ccc"});
 				$(".hint").empty();
 				$(".hint").html("北京漂洋过海，欢迎您再次使用！");
 				var result = "<div class='result'><p>感谢您的使用；</p><p>北京漂洋过海，一切因你而在！</p></div>";
