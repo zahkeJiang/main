@@ -19,7 +19,7 @@ function renovation(){
 			}else if (obj.data.price=="1000") {
 				var coupon_pic = "<img src='images/ds_coupon_10.png'>";
 			}
-			var coupon = "<div class='coupon'>"+coupon_pic+"<div class='coupon_hint_text'><h2>优惠提示:</h2><p>30天有效期，从领取日开始计时</p><p>过期可使用会员积分激活继续使用</p></div><div class='use_coupon'></div></div>"
+			var coupon = "<div class='coupon'>"+coupon_pic+"<div class='coupon_hint_text'><h2>优惠提示:</h2><p>30天有效期，从领取日开始计时。</p><p>若优惠券已过期，使用会员积分激活后即可使用。</p></div><div class='use_coupon'></div></div>"
 			$(".container").html(coupon);
 			if (obj.status == "0") {
     			$(".use_coupon").html("立即使用");
