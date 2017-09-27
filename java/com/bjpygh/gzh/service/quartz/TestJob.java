@@ -22,7 +22,7 @@ public class TestJob {
             List<DsOrder> orders = dsOrderService.getNotPay();
             for (DsOrder dso : orders){
                 Date d = formatter.parse(dso.getCreateTime());
-                if (time-d.getTime()>1209600000L){
+                if (time-d.getTime()>86400000L){
                     dsOrderService.updateOrderStatus(dso.getOrderNumber());
                 }
             }
