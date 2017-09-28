@@ -1,0 +1,93 @@
+
+p {
+    margin: 0;
+}
+/*日历年月日样式*/
+.sit-calendar-title{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 40px;
+    font-size: 18px;
+}
+/*日历样式开始*/
+
+/* 设置日历表格样式 */
+.calendar-table{
+    width: 100%;
+    border-collapse: collapse;
+    text-align:center;
+    font-size: 12px;
+    table-layout: fixed;
+    border:20px;
+
+}
+/* 表格行高 */
+.calendar-table tr{
+color: #555;
+
+/*background: green;*/
+}
+th{
+color: #999;
+height: 40px;
+
+}
+table,td,th {
+    border: 0;
+}
+/* 本月 文字颜色 */
+/*.currentMonth0 {
+    color: blue;
+    position: relative;
+    cursor: pointer;
+    position: relative;
+}*/
+/* 其他月颜色 */
+.otherMonth{
+    color: #999;
+}
+/* 当前天 颜色特殊显示 */
+.currentMonth.currentDay {
+    /*background:#4287FF;*/
+    color: red;
+}
+ .calendar-body-box td {
+    border: none;
+    text-align: center;
+    position: relative;
+    padding: 0;
+    margin:0;
+} 
+.currentMonth0 span{
+    font-size: 14px;
+}
+.currentMonth0 .fixedhours{
+    font-size: 12px;
+    color: orange;
+    font-style: normal;
+}
+
+.currentMonth0 .selectedDay{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 20px;
+    height:20px;
+    background: url('../images/choose.png') no-repeat center center;
+    background-size: 20px 20px;
+}
+.no-ticket{
+    background: #ccc;
+    /*transform: scale(0.9);*/
+    border-radius: 50%;
+}
+.currentMonth0.no-ticket p{
+    color: red;
+}
+ .fixedhours{
+    color: #222;
+    font-size: 20px;
+    text-align: center;
+}
+/*日历样式结束*/

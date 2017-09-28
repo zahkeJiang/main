@@ -1,0 +1,184 @@
+html, body {
+    /*position: relative;*/
+    /*height: 100%;*/
+    background:#54A0FF;
+    color: #999;
+}
+.villaBox{
+    border-radius: 10px;
+    padding: 0;
+    margin: 10px 16px;
+    background: white;
+}
+
+/*别墅选择*/
+.container{
+	border-top: 1px solid #eee;
+}
+.villa-information{
+	display: flex;
+	align-items: center;
+	margin: 0 10px;
+}
+.villa-information div.villa-title {
+	height: 48px;
+	width: 48px;
+	font-size: 16px;
+	color: #555;
+	text-align: center;
+	line-height: 32px;
+	margin:10px 10px 10px 0;
+}
+.villa-information div.villa-pic{
+	width: 48px;
+	height: 48px;
+	background: red;
+	border-radius: 10px;
+	margin:10px 10px 10px 0;
+}
+.villa-information div.villa-choose{
+	position: absolute;
+	/*display: none;*/
+	background: blue;
+	right: 23px;
+	height: 20px;
+	width: 20px;
+	background: url(../images/circle.png);
+	background-size: 20px;
+}
+.villa-information input[name="villa-radio"]{
+	width: 12px;
+	height: 12px;
+	padding:0;
+	margin:0;
+	margin-left: 10px;
+	filter:alpha(Opacity=0);-moz-opacity:0;opacity: 0;
+}
+.villa-information input[type="number"]{
+	padding: 0 10px;
+	width: 100%;
+	height: 32px;
+	min-width: 100px;
+	background:#eee;
+	border: 0;
+}
+.villa-information input:-ms-input-placeholder{
+    color: #999;
+    font-size: 12px;
+}
+
+.villa-information input::-webkit-input-placeholder{
+    color: #999;
+    font-size: 12px;
+}
+.villa-information div.villa-content{
+	flex: 1;
+	margin: 10px 0;
+	/*background: green;*/
+}
+.villa-information div.villa-choose-content{
+	flex: 1;
+	margin: 10px 36px 10px 0;
+	/*background: green;*/
+}
+.villa-information div.villa-choose-content p{
+	font-size: 12px;
+	height: 16px;
+	/*background: red;*/
+	line-height: 20px;
+}
+.villa-content p:first-child{
+	color: #555;
+	line-height: 18px;
+	font-size: 14px;
+}
+.villa-content p:last-child{
+	color: #999;
+	font-size: 12px;
+	line-height: 16px;
+}
+
+/*日历*/
+.date{
+	padding: 10px 20px;
+}
+/*用户信息填写*/
+.villa-user{
+	padding: 0 10px;
+	margin-bottom: 50px;
+}
+.villa-user-row{
+	height: 36px;
+	line-height: 36px;
+	display: flex;
+	align-items: center;
+
+}
+.villa-user-row p:first-child{
+	color: #555;
+	/*width: 100px;*/
+	margin-right: 10px;
+	text-align: center;
+}
+.villa-user-row p:last-child{
+	color: orange;
+	height: 36px;
+	font-size: 12px;
+	padding:0 4px;
+	line-height: 44px;
+}
+.villa-user-row input{
+	background: #eee;
+	height: 28px;
+	flex: 1;
+	padding: 0 10px;
+}
+.villa-user-row input:-ms-input-placeholder{
+    color: #999;
+    font-size: 12px;
+}
+
+.villa-user-row input::-webkit-input-placeholder{
+    color: #999;
+    font-size: 12px;
+}
+.villa-user-coupon{
+	height: 36px;
+	display: flex;
+	border-top: 1px solid #eee;
+	align-items: center;
+	justify-content: space-between;
+}
+.villa-user-coupon p:first-child{
+	color: #555;
+	/*width: 100px;*/
+	margin-right: 10px;
+	text-align: center;
+}
+.villa-user-couponNumber span{
+	font-size: 12px;
+}
+/*footer去支付*/
+.footer{
+	position: fixed;
+	bottom: 0;
+	height: 40px;
+	width: 100%;
+	display: flex
+}
+.footer p:first-child{
+	width: 70%;
+	background: white;
+	height: 40px;
+	line-height: 40px;
+	padding-left: 28px;
+}
+.footer p:last-child{
+	width: 30%;
+	height: 40px;
+	background: orange;
+	line-height: 40px;
+	text-align: center;
+	color: white;
+	font-size: 16px;
+}
