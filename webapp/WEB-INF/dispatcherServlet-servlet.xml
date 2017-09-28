@@ -27,4 +27,8 @@
     <!--能支持springnvc更高级的一些功能，JSR303校验，快捷的ajax请求...，映射动态请求-->
     <mvc:annotation-driven/>
 
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+    </bean>
+
 </beans>

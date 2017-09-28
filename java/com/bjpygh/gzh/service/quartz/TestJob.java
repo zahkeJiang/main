@@ -20,10 +20,12 @@ public class TestJob {
             //检测订单是否过期
             long time = new Date().getTime();
             List<DsOrder> orders = dsOrderService.getNotPay();
-            for (DsOrder dso : orders){
-                Date d = formatter.parse(dso.getCreateTime());
-                if (time-d.getTime()>86400000L){
-                    dsOrderService.updateOrderStatus(dso.getOrderNumber());
+            if (orders.size()>0){
+                for (DsOrder dso : orders){
+                    Date d = formatter.parse(dso.getCreateTime());
+                    if (time-d.getTime()>86400000L){
+                        dsOrderService.updateOrderStatus(dso.getOrderNumber());
+                    }
                 }
             }
         }catch(Exception ex){
