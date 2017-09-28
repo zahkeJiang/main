@@ -1,0 +1,217 @@
+html, body {
+    position: relative;
+    height: 100%;
+    background:#54A0FF;
+    color: #999;
+}
+.swiper-container {
+        width: 100%;
+        height: 200px;
+    }
+/*轮播*/
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 80%;
+    height:160px;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;   
+}
+/*轮播图大小*/
+.swiper-slide-active {
+    transform: scale(1);
+    transition: all .5s ease-out;
+}
+.swiper-slide-next,.swiper-slide-prev{
+    transform: scale(0.9);
+    -moz-transition: all .5s ease-out;
+    -webkit-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    transition: all .5s ease-out;
+} 
+.villa{
+    text-align: center;
+}
+.villaBox{
+    border-radius: 10px;
+    padding: 10px 0;
+    margin: 10px 16px;
+    background: white;
+}
+/* villa-price */
+.villa-price span:first-child{
+    font-size: 20px;
+    color: white;
+}
+.villa-price span:last-child{
+    font-size: 14px;
+    color: #eee;
+}
+/* villa-information  */
+.villa-header{
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #efefef;
+    margin: 10px 20px;
+}
+.villa-information h2{
+    color: #54A0FF;
+    margin-bottom: 10px;
+}
+.villa-information div p{
+        padding: 8px 0;
+
+}
+.villa-information p.villa-description{
+    text-align: left;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0px 20px;
+    height: 80px;
+    overflow:auto; 
+    text-indent: 2em;
+}
+.villa-information p.villa-description::-webkit-scrollbar {/*隐藏滚动条*/
+    display: none;
+}
+
+/* villaStyle */
+.villaStyle{
+    /*padding:8px 0px;*/
+}
+.villaStyle,.villaStyle ul{
+   display: flex;
+   align-items: center;
+}
+.villaStyle-title{
+    min-width: 80px;
+    height: 40px;
+    color: #777;
+    line-height: 40px;
+    border-right: 1px solid #eee;
+    border-left: 4px solid red;
+}
+.villaStyle ul{ 
+    flex: 1;
+    overflow-x:scroll;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.villaStyle ul::-webkit-scrollbar {/*隐藏滚动条*/
+    display: none;
+}
+.villaStyle ul li{ 
+    /*display: inline-block;*/
+    min-width: 56px;
+}
+.villaStyle p{
+    font-size: 14px;
+    line-height: 20px;
+    /*padding-top: 4px;*/
+}
+.villa-provide div.villaStyle-title{
+    border-left: 4px solid green;
+}
+
+/* villa-map */
+.villa-map{
+    /*height: 400px;*/
+    padding: 0;
+}
+.villa-map-title{
+    position: relative;
+}
+#villa-map-view{
+    height: 160px;
+    width: 100%;
+    border-radius: 10px 10px 0px 0px;
+    /*background-color: green;*/
+}
+.villa-map-address{
+    background-color: #54A0FF;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 36px;
+    width: 90%;
+    margin-left: 5%;
+    position: absolute;
+    margin-top:-18px;
+}
+.villa-map-address span:first-child{
+    margin-left: 10px;
+    color: white;
+    height: 20px;
+    line-height: 20px;
+    flex: 1;
+    text-align: left;
+    border-right: 1px solid #ddd;
+}
+.villa-map-address span:last-child{
+    width: 40px;
+    height: 36px;
+    background: url(../images/address2.png)no-repeat center;
+    background-size: 20px;
+}
+.villa-map-time{
+    color: #777;
+    line-height: 48px;
+    font-size: 14px;
+    margin: 24px 10px 0px 10px; 
+    height: 48px;
+    border-top: 1px solid #efefef;
+}
+.villa-map-time span:nth-child(2){
+    color: #54A0FF;
+    padding: 4px 10px;
+    background:#eee;
+}
+.villa-map-time span:nth-child(4){
+    color:orange;
+    padding: 4px 10px;
+    background:#eee;
+}
+.villa-map ul{
+    height: 24px;
+}
+.villa-map ul li{
+    /*width: 80px;*/
+    float: right;
+    font-size: 12px;
+    line-height: 20px;
+
+}
+.villa-map ul li a{
+    color: #999;
+    padding:4px 8px;
+
+}
+/* villa-additional-price */
+.villa-additional-price h2{
+    color: #777;
+    line-height: 24px;
+}
+.villa-additional-price p{
+    font-size: 14px;
+    line-height: 20px;
+}
+/*date*/
+.date{
+    margin-bottom: 50px;
+    padding: 10px 20px;
+}
+/*底部footer*/
+.footer{
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    width: 100%;
+    color: #54A0FF;
+    background: white;
+    position: fixed;
+    bottom: 0;
+}

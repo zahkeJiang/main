@@ -39,6 +39,7 @@ body{
 	width: 80px;
 }
 .refund_reason select{
+	min-width: 100px;
 	margin-left: 16px;
 	border: 0;
 	flex: 1;
