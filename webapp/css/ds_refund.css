@@ -24,16 +24,16 @@ body{
 .refund_information{
 	padding:0 16px;
 	background:url(../images/bg_line.png);
-	background-repeat:repeat-x;		/*背景图片在水平显示*/	
-	background-position-y:top;　　/*背景图片在纵向的最下方显示*/
+	background-repeat:repeat-x;		/*背景图片在水平显示*/
+	background-position-y:top;/*背景图片在纵向的最下方显示*/
 }
 .refund_reason,.order_price{
 	height: 48px;
 	display: flex;
 	align-items: center;
 	background:url(../images/bg_line.png);
-	background-repeat:repeat-x;		/*背景图片在水平显示*/	
-	background-position-y:bottom;　　/*背景图片在纵向的最下方显示*/
+	background-repeat:repeat-x;		/*背景图片在水平显示*/
+	background-position-y:bottom;/*背景图片在纵向的最下方显示*/
 }
 .refund_reason span,.order_price span{
 	width: 80px;
