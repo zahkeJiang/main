@@ -1,17 +1,16 @@
 package com.bjpygh.gzh.bean;
 
-import java.util.Date;
 
-public class VillaOrder {
-    private Integer villaId;
+public class ArmyOrder {
+    private Integer armyId;
 
     private Long userId;
 
     private String realName;
 
-    private String villaName;
+    private String armyName;
 
-    private Integer villaPrice;
+    private Integer armyPrice;
 
     private String date;
 
@@ -33,12 +32,16 @@ public class VillaOrder {
 
     private Integer orderStatus;
 
-    public Integer getVillaId() {
-        return villaId;
+    private Integer roomNumber;
+
+    private Integer noroomNumber;
+
+    public Integer getArmyId() {
+        return armyId;
     }
 
-    public void setVillaId(Integer villaId) {
-        this.villaId = villaId;
+    public void setArmyId(Integer armyId) {
+        this.armyId = armyId;
     }
 
     public Long getUserId() {
@@ -57,20 +60,20 @@ public class VillaOrder {
         this.realName = realName == null ? null : realName.trim();
     }
 
-    public String getVillaName() {
-        return villaName;
+    public String getArmyName() {
+        return armyName;
     }
 
-    public void setVillaName(String villaName) {
-        this.villaName = villaName == null ? null : villaName.trim();
+    public void setArmyName(String armyName) {
+        this.armyName = armyName == null ? null : armyName.trim();
     }
 
-    public Integer getVillaPrice() {
-        return villaPrice;
+    public Integer getArmyPrice() {
+        return armyPrice;
     }
 
-    public void setVillaPrice(Integer villaPrice) {
-        this.villaPrice = villaPrice;
+    public void setArmyPrice(Integer armyPrice) {
+        this.armyPrice = armyPrice;
     }
 
     public String getDate() {
@@ -151,5 +154,21 @@ public class VillaOrder {
 
     public void setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public Integer getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(Integer roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public Integer getNoroomNumber() {
+        return noroomNumber;
+    }
+
+    public void setNoroomNumber(Integer noroomNumber) {
+        this.noroomNumber = noroomNumber;
     }
 }

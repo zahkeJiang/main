@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class VillaOrderExample {
+public class ArmyOrderExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public VillaOrderExample() {
+    public ArmyOrderExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -105,63 +105,63 @@ public class VillaOrderExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andVillaIdIsNull() {
-            addCriterion("villa_id is null");
+        public Criteria andArmyIdIsNull() {
+            addCriterion("army_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andVillaIdIsNotNull() {
-            addCriterion("villa_id is not null");
+        public Criteria andArmyIdIsNotNull() {
+            addCriterion("army_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andVillaIdEqualTo(Integer value) {
-            addCriterion("villa_id =", value, "villaId");
+        public Criteria andArmyIdEqualTo(Integer value) {
+            addCriterion("army_id =", value, "armyId");
             return (Criteria) this;
         }
 
-        public Criteria andVillaIdNotEqualTo(Integer value) {
-            addCriterion("villa_id <>", value, "villaId");
+        public Criteria andArmyIdNotEqualTo(Integer value) {
+            addCriterion("army_id <>", value, "armyId");
             return (Criteria) this;
         }
 
-        public Criteria andVillaIdGreaterThan(Integer value) {
-            addCriterion("villa_id >", value, "villaId");
+        public Criteria andArmyIdGreaterThan(Integer value) {
+            addCriterion("army_id >", value, "armyId");
             return (Criteria) this;
         }
 
-        public Criteria andVillaIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("villa_id >=", value, "villaId");
+        public Criteria andArmyIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("army_id >=", value, "armyId");
             return (Criteria) this;
         }
 
-        public Criteria andVillaIdLessThan(Integer value) {
-            addCriterion("villa_id <", value, "villaId");
+        public Criteria andArmyIdLessThan(Integer value) {
+            addCriterion("army_id <", value, "armyId");
             return (Criteria) this;
         }
 
-        public Criteria andVillaIdLessThanOrEqualTo(Integer value) {
-            addCriterion("villa_id <=", value, "villaId");
+        public Criteria andArmyIdLessThanOrEqualTo(Integer value) {
+            addCriterion("army_id <=", value, "armyId");
             return (Criteria) this;
         }
 
-        public Criteria andVillaIdIn(List<Integer> values) {
-            addCriterion("villa_id in", values, "villaId");
+        public Criteria andArmyIdIn(List<Integer> values) {
+            addCriterion("army_id in", values, "armyId");
             return (Criteria) this;
         }
 
-        public Criteria andVillaIdNotIn(List<Integer> values) {
-            addCriterion("villa_id not in", values, "villaId");
+        public Criteria andArmyIdNotIn(List<Integer> values) {
+            addCriterion("army_id not in", values, "armyId");
             return (Criteria) this;
         }
 
-        public Criteria andVillaIdBetween(Integer value1, Integer value2) {
-            addCriterion("villa_id between", value1, value2, "villaId");
+        public Criteria andArmyIdBetween(Integer value1, Integer value2) {
+            addCriterion("army_id between", value1, value2, "armyId");
             return (Criteria) this;
         }
 
-        public Criteria andVillaIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("villa_id not between", value1, value2, "villaId");
+        public Criteria andArmyIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("army_id not between", value1, value2, "armyId");
             return (Criteria) this;
         }
 
@@ -295,133 +295,133 @@ public class VillaOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andVillaNameIsNull() {
-            addCriterion("villa_name is null");
+        public Criteria andArmyNameIsNull() {
+            addCriterion("army_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andVillaNameIsNotNull() {
-            addCriterion("villa_name is not null");
+        public Criteria andArmyNameIsNotNull() {
+            addCriterion("army_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andVillaNameEqualTo(String value) {
-            addCriterion("villa_name =", value, "villaName");
+        public Criteria andArmyNameEqualTo(String value) {
+            addCriterion("army_name =", value, "armyName");
             return (Criteria) this;
         }
 
-        public Criteria andVillaNameNotEqualTo(String value) {
-            addCriterion("villa_name <>", value, "villaName");
+        public Criteria andArmyNameNotEqualTo(String value) {
+            addCriterion("army_name <>", value, "armyName");
             return (Criteria) this;
         }
 
-        public Criteria andVillaNameGreaterThan(String value) {
-            addCriterion("villa_name >", value, "villaName");
+        public Criteria andArmyNameGreaterThan(String value) {
+            addCriterion("army_name >", value, "armyName");
             return (Criteria) this;
         }
 
-        public Criteria andVillaNameGreaterThanOrEqualTo(String value) {
-            addCriterion("villa_name >=", value, "villaName");
+        public Criteria andArmyNameGreaterThanOrEqualTo(String value) {
+            addCriterion("army_name >=", value, "armyName");
             return (Criteria) this;
         }
 
-        public Criteria andVillaNameLessThan(String value) {
-            addCriterion("villa_name <", value, "villaName");
+        public Criteria andArmyNameLessThan(String value) {
+            addCriterion("army_name <", value, "armyName");
             return (Criteria) this;
         }
 
-        public Criteria andVillaNameLessThanOrEqualTo(String value) {
-            addCriterion("villa_name <=", value, "villaName");
+        public Criteria andArmyNameLessThanOrEqualTo(String value) {
+            addCriterion("army_name <=", value, "armyName");
             return (Criteria) this;
         }
 
-        public Criteria andVillaNameLike(String value) {
-            addCriterion("villa_name like", value, "villaName");
+        public Criteria andArmyNameLike(String value) {
+            addCriterion("army_name like", value, "armyName");
             return (Criteria) this;
         }
 
-        public Criteria andVillaNameNotLike(String value) {
-            addCriterion("villa_name not like", value, "villaName");
+        public Criteria andArmyNameNotLike(String value) {
+            addCriterion("army_name not like", value, "armyName");
             return (Criteria) this;
         }
 
-        public Criteria andVillaNameIn(List<String> values) {
-            addCriterion("villa_name in", values, "villaName");
+        public Criteria andArmyNameIn(List<String> values) {
+            addCriterion("army_name in", values, "armyName");
             return (Criteria) this;
         }
 
-        public Criteria andVillaNameNotIn(List<String> values) {
-            addCriterion("villa_name not in", values, "villaName");
+        public Criteria andArmyNameNotIn(List<String> values) {
+            addCriterion("army_name not in", values, "armyName");
             return (Criteria) this;
         }
 
-        public Criteria andVillaNameBetween(String value1, String value2) {
-            addCriterion("villa_name between", value1, value2, "villaName");
+        public Criteria andArmyNameBetween(String value1, String value2) {
+            addCriterion("army_name between", value1, value2, "armyName");
             return (Criteria) this;
         }
 
-        public Criteria andVillaNameNotBetween(String value1, String value2) {
-            addCriterion("villa_name not between", value1, value2, "villaName");
+        public Criteria andArmyNameNotBetween(String value1, String value2) {
+            addCriterion("army_name not between", value1, value2, "armyName");
             return (Criteria) this;
         }
 
-        public Criteria andVillaPriceIsNull() {
-            addCriterion("villa_price is null");
+        public Criteria andArmyPriceIsNull() {
+            addCriterion("army_price is null");
             return (Criteria) this;
         }
 
-        public Criteria andVillaPriceIsNotNull() {
-            addCriterion("villa_price is not null");
+        public Criteria andArmyPriceIsNotNull() {
+            addCriterion("army_price is not null");
             return (Criteria) this;
         }
 
-        public Criteria andVillaPriceEqualTo(Integer value) {
-            addCriterion("villa_price =", value, "villaPrice");
+        public Criteria andArmyPriceEqualTo(Integer value) {
+            addCriterion("army_price =", value, "armyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andVillaPriceNotEqualTo(Integer value) {
-            addCriterion("villa_price <>", value, "villaPrice");
+        public Criteria andArmyPriceNotEqualTo(Integer value) {
+            addCriterion("army_price <>", value, "armyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andVillaPriceGreaterThan(Integer value) {
-            addCriterion("villa_price >", value, "villaPrice");
+        public Criteria andArmyPriceGreaterThan(Integer value) {
+            addCriterion("army_price >", value, "armyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andVillaPriceGreaterThanOrEqualTo(Integer value) {
-            addCriterion("villa_price >=", value, "villaPrice");
+        public Criteria andArmyPriceGreaterThanOrEqualTo(Integer value) {
+            addCriterion("army_price >=", value, "armyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andVillaPriceLessThan(Integer value) {
-            addCriterion("villa_price <", value, "villaPrice");
+        public Criteria andArmyPriceLessThan(Integer value) {
+            addCriterion("army_price <", value, "armyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andVillaPriceLessThanOrEqualTo(Integer value) {
-            addCriterion("villa_price <=", value, "villaPrice");
+        public Criteria andArmyPriceLessThanOrEqualTo(Integer value) {
+            addCriterion("army_price <=", value, "armyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andVillaPriceIn(List<Integer> values) {
-            addCriterion("villa_price in", values, "villaPrice");
+        public Criteria andArmyPriceIn(List<Integer> values) {
+            addCriterion("army_price in", values, "armyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andVillaPriceNotIn(List<Integer> values) {
-            addCriterion("villa_price not in", values, "villaPrice");
+        public Criteria andArmyPriceNotIn(List<Integer> values) {
+            addCriterion("army_price not in", values, "armyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andVillaPriceBetween(Integer value1, Integer value2) {
-            addCriterion("villa_price between", value1, value2, "villaPrice");
+        public Criteria andArmyPriceBetween(Integer value1, Integer value2) {
+            addCriterion("army_price between", value1, value2, "armyPrice");
             return (Criteria) this;
         }
 
-        public Criteria andVillaPriceNotBetween(Integer value1, Integer value2) {
-            addCriterion("villa_price not between", value1, value2, "villaPrice");
+        public Criteria andArmyPriceNotBetween(Integer value1, Integer value2) {
+            addCriterion("army_price not between", value1, value2, "armyPrice");
             return (Criteria) this;
         }
 
@@ -1052,6 +1052,126 @@ public class VillaOrderExample {
 
         public Criteria andOrderStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("order_status not between", value1, value2, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberIsNull() {
+            addCriterion("room_number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberIsNotNull() {
+            addCriterion("room_number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberEqualTo(Integer value) {
+            addCriterion("room_number =", value, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberNotEqualTo(Integer value) {
+            addCriterion("room_number <>", value, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberGreaterThan(Integer value) {
+            addCriterion("room_number >", value, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberGreaterThanOrEqualTo(Integer value) {
+            addCriterion("room_number >=", value, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberLessThan(Integer value) {
+            addCriterion("room_number <", value, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberLessThanOrEqualTo(Integer value) {
+            addCriterion("room_number <=", value, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberIn(List<Integer> values) {
+            addCriterion("room_number in", values, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberNotIn(List<Integer> values) {
+            addCriterion("room_number not in", values, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberBetween(Integer value1, Integer value2) {
+            addCriterion("room_number between", value1, value2, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoomNumberNotBetween(Integer value1, Integer value2) {
+            addCriterion("room_number not between", value1, value2, "roomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoroomNumberIsNull() {
+            addCriterion("noroom_number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoroomNumberIsNotNull() {
+            addCriterion("noroom_number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoroomNumberEqualTo(Integer value) {
+            addCriterion("noroom_number =", value, "noroomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoroomNumberNotEqualTo(Integer value) {
+            addCriterion("noroom_number <>", value, "noroomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoroomNumberGreaterThan(Integer value) {
+            addCriterion("noroom_number >", value, "noroomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoroomNumberGreaterThanOrEqualTo(Integer value) {
+            addCriterion("noroom_number >=", value, "noroomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoroomNumberLessThan(Integer value) {
+            addCriterion("noroom_number <", value, "noroomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoroomNumberLessThanOrEqualTo(Integer value) {
+            addCriterion("noroom_number <=", value, "noroomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoroomNumberIn(List<Integer> values) {
+            addCriterion("noroom_number in", values, "noroomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoroomNumberNotIn(List<Integer> values) {
+            addCriterion("noroom_number not in", values, "noroomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoroomNumberBetween(Integer value1, Integer value2) {
+            addCriterion("noroom_number between", value1, value2, "noroomNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoroomNumberNotBetween(Integer value1, Integer value2) {
+            addCriterion("noroom_number not between", value1, value2, "noroomNumber");
             return (Criteria) this;
         }
     }
