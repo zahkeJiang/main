@@ -55,7 +55,7 @@ html, body {
 .villa-header{
     display: flex;
     justify-content: space-around;
-    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid #ddd;
     margin: 10px 20px;
 }
 .villa-information h2{
@@ -92,7 +92,7 @@ html, body {
     height: 40px;
     color: #777;
     line-height: 40px;
-    border-right: 1px solid #eee;
+    border-right: 1px solid #ddd;
     border-left: 4px solid #ffc3a9;
 }
 .villaStyle ul{ 
@@ -166,7 +166,7 @@ html, body {
     font-size: 14px;
     margin-top: 24px;
     height: 40px;
-    border-top: 1px solid #efefef;
+    border-top: 1px solid #ddd;
 }
 .villa-map-time div{ 
     display: flex;
@@ -218,14 +218,14 @@ html, body {
 }
 /*date*/
 .date{
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     padding: 10px 20px;
 }
 /*底部footer*/
 .footer{
-    height: 40px;
+    height: 48px;
     text-align: center;
-    line-height: 40px;
+    line-height: 48px;
     width: 100%;
     color: #54A0FF;
     background: white;
