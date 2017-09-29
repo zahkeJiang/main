@@ -49,44 +49,37 @@ public class PayController extends BaseController {
     @Autowired
     DsOrderService dsOrderService;
 
+    @Autowired
+    VillaOrderService villaOrderService;
+
     //支付宝驾校报名支付接口
     @RequestMapping(value = "/dspay.action", method = RequestMethod.GET)
     public void DsPay(HttpServletResponse response,String ordernumber) throws IOException {
-        response.setContentType("text/html;charset=" + AlipayConfig.CHARSET);
-        PrintWriter out = response.getWriter();
+
         String subject = "驾校报名费用";
         String  body = "驾校报名费用";
-        String timeout_express="2m";
         String product_code="BJPYGH_DS_SIGNUP";
-
         DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
 
-        AlipayClient client = new DefaultAlipayClient(AlipayConfig.URL, AlipayConfig.APPID, AlipayConfig.RSA_PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY,AlipayConfig.SIGNTYPE);
-        AlipayTradeWapPayRequest alipay_request=new AlipayTradeWapPayRequest();
+        requesetAlipay(response,ordernumber,subject,body,
+                dsOrder.getOrderPrice()+"",
+                product_code,AlipayConfig.notify_url);
 
-        AlipayTradeWapPayModel model=new AlipayTradeWapPayModel();
-        model.setOutTradeNo(ordernumber);
-        model.setSubject(subject);
-        model.setTotalAmount(""+dsOrder.getOrderPrice());
-        model.setBody(body);
-        model.setTimeoutExpress(timeout_express);
-        model.setProductCode(product_code);
-        alipay_request.setBizModel(model);
-        alipay_request.setNotifyUrl(AlipayConfig.notify_url);
-        alipay_request.setReturnUrl(AlipayConfig.return_url);
+    }
 
-        String form = "";
-        try {
-            form = client.pageExecute(alipay_request).getBody();
-            out.write(form);
-            out.flush();
-            out.close();
-        } catch (AlipayApiException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            out.flush();
-            out.close();
-        }
+    //支付宝别墅预约支付接口
+    @RequestMapping(value = "/villaPay", method = RequestMethod.GET)
+    public void VillaPay(HttpServletResponse response,String ordernumber) throws IOException {
+
+        String subject = "别墅预约费用";
+        String  body = "别墅预约费用";
+        String product_code="BJPYGH_V_SIGNUP";
+        VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(ordernumber).get(0);
+
+        requesetAlipay(response,ordernumber,subject,body,
+                villaOrder.getVillaPrice()+"",
+                product_code,AlipayConfig.vnotify_url);
+
     }
 
     @ResponseBody
@@ -244,5 +237,41 @@ public class PayController extends BaseController {
         return sb.toString();
     }
 
+
+    public void requesetAlipay(HttpServletResponse response,String ordernumber,
+        String subject,String body,String price,String product_code,String notify_url) throws IOException {
+        response.setContentType("text/html;charset=" + AlipayConfig.CHARSET);
+        PrintWriter out = response.getWriter();
+
+        String timeout_express="2m";
+
+
+        AlipayClient client = new DefaultAlipayClient(AlipayConfig.URL, AlipayConfig.APPID, AlipayConfig.RSA_PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY,AlipayConfig.SIGNTYPE);
+        AlipayTradeWapPayRequest alipay_request=new AlipayTradeWapPayRequest();
+
+        AlipayTradeWapPayModel model=new AlipayTradeWapPayModel();
+        model.setOutTradeNo(ordernumber);
+        model.setSubject(subject);
+        model.setTotalAmount(price);
+        model.setBody(body);
+        model.setTimeoutExpress(timeout_express);
+        model.setProductCode(product_code);
+        alipay_request.setBizModel(model);
+        alipay_request.setNotifyUrl(notify_url);
+        alipay_request.setReturnUrl(AlipayConfig.return_url);
+
+        String form = "";
+        try {
+            form = client.pageExecute(alipay_request).getBody();
+            out.write(form);
+            out.flush();
+            out.close();
+        } catch (AlipayApiException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            out.flush();
+            out.close();
+        }
+    }
 
 }

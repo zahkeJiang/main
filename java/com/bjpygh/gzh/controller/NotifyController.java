@@ -5,10 +5,12 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.bjpygh.gzh.bean.DsOrder;
 import com.bjpygh.gzh.bean.IntegralRecord;
 import com.bjpygh.gzh.bean.User;
+import com.bjpygh.gzh.bean.VillaOrder;
 import com.bjpygh.gzh.config.AlipayConfig;
 import com.bjpygh.gzh.service.DsOrderService;
 import com.bjpygh.gzh.service.RecordService;
 import com.bjpygh.gzh.service.UserService;
+import com.bjpygh.gzh.service.VillaOrderService;
 import com.bjpygh.gzh.utils.XMLToMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +38,9 @@ public class NotifyController extends BaseController {
 
     @Autowired
     DsOrderService dsOrderService;
+
+    @Autowired
+    VillaOrderService villaOrderService;
 
     //微信支付回调接口
     @RequestMapping(value = "/notify.action", method = RequestMethod.POST)
@@ -115,10 +120,40 @@ public class NotifyController extends BaseController {
 
     }
 
-    //支付宝支付回调接口
+    //支付宝驾校支付回调接口
     @RequestMapping(value = "/notify_url", method = RequestMethod.POST)
     public void AliNotify(HttpServletRequest request, HttpServletResponse response) throws IOException, AlipayApiException {
         PrintWriter out = response.getWriter();
+
+        Map<String, String> map = getGmtRefund(request);
+        if (map.get("boolean").equals("true")){
+            out.println("success");	//请不要修改或删除
+            DsOrder dsOrder = dsOrderService.getDsOrderByNumber(map.get("out_trade_no")).get(0);
+            dsOrder.setOrderStatus((byte) 1);
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            dsOrder.setPayTime(formatter.format(new Date()));
+            dsOrderService.updateOrder(dsOrder);
+        } else{//验证失败
+            out.println("fail");
+        }
+    }
+
+    //支付宝别墅支付回调接口
+    @RequestMapping(value = "/vnotify_url", method = RequestMethod.POST)
+    public void AliVillaNotify(HttpServletRequest request, HttpServletResponse response) throws IOException, AlipayApiException {
+        PrintWriter out = response.getWriter();
+
+        Map<String, String> map = getGmtRefund(request);
+        if (map.get("boolean").equals("true")){
+            out.println("success");	//请不要修改或删除
+            villaOrderService.ChangeVillaStatusByNumber(map.get("out_trade_no"));
+        }else{//验证失败
+            out.println("fail");
+        }
+    }
+
+    public Map<String, String> getGmtRefund(HttpServletRequest request) throws IOException, AlipayApiException {
+
         //获取支付宝POST过来反馈信息
         Map<String,String> params = new HashMap<String,String>();
         Map requestParams = request.getParameterMap();
@@ -145,6 +180,8 @@ public class NotifyController extends BaseController {
         //计算得出通知验证结果
         //boolean AlipaySignature.rsaCheckV1(Map<String, String> params, String publicKey, String charset, String sign_type)
         boolean verify_result = AlipaySignature.rsaCheckV1(params, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.CHARSET, "RSA2");
+        Map<String,String> map = new HashMap<String, String>();
+        map.put("out_trade_no",out_trade_no);
         if(verify_result){//验证成功
             //////////////////////////////////////////////////////////////////////////////////////////
             //请在这里加上商户的业务逻辑程序代码
@@ -168,13 +205,12 @@ public class NotifyController extends BaseController {
                 //请务必判断请求时的total_fee、seller_id与通知时获取的total_fee、seller_id为一致的
                 //如果有做过处理，不执行商户的业务程序
                 if(request.getParameter("gmt_refund")==null){
-                    DsOrder dsOrder = dsOrderService.getDsOrderByNumber(out_trade_no).get(0);
-                    dsOrder.setOrderStatus((byte) 1);
-                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    dsOrder.setPayTime(formatter.format(new Date()));
-                    dsOrderService.updateOrder(dsOrder);
+                    map.put("boolean","true");
+                    return map;
+                }else {
+                    map.put("boolean","false");
+                    return map;
                 }
-
 
                 //注意：
                 //如果签约的是可退款协议，那么付款完成后，支付宝系统发送该交易状态通知。
@@ -182,15 +218,13 @@ public class NotifyController extends BaseController {
 
             //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
 //            out.clear();
-            out.println("success");	//请不要修改或删除
+
             //out.flush();
             //out.close();
             //////////////////////////////////////////////////////////////////////////////////////////
-        }else{//验证失败
-            out.println("fail");
-            //out.flush();
-            //out.close();
         }
+        map.put("boolean","false");
+        return map;
     }
 
 }

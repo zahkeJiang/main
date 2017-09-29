@@ -1,6 +1,7 @@
 package com.bjpygh.gzh.controller;
 
 import com.bjpygh.gzh.bean.VillaOrder;
+import com.bjpygh.gzh.bean.VillaPrice;
 import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.service.VillaOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -61,5 +65,19 @@ public class VillaOrderController extends BaseController{
             return Status.fail(-20,"没有订单");
         }
 
+    }
+
+    //创建订单接口
+    @ResponseBody
+    @RequestMapping(value = "/getVillaPrice", method = RequestMethod.POST)
+    public Status getVillaPrice(HttpServletRequest request,String date) throws ParseException {
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = sdf.parse(date);
+        List<VillaPrice> priceList = villaOrderService.getPriceList(date1);
+        return Status.success().add("priceList",priceList);
     }
 }

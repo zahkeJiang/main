@@ -2,12 +2,14 @@ package com.bjpygh.gzh.service;
 
 import com.bjpygh.gzh.bean.VillaOrder;
 import com.bjpygh.gzh.bean.VillaOrderExample;
+import com.bjpygh.gzh.bean.VillaPrice;
 import com.bjpygh.gzh.dao.UserMapper;
 import com.bjpygh.gzh.dao.VillaOrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -81,5 +83,62 @@ public class VillaOrderService {
         List<VillaOrder> villaOrders = villaOrderMapper.selectByExample(example);
 
         return villaOrders;
+    }
+
+    public List<VillaPrice> getPriceList(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        //拿到年份和月份
+        int year = date.getYear();
+        int month = date.getMonth();
+
+        //将date转换为calendar，并获取这月最后一天
+        Calendar cal=Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.MONTH, 1);
+        cal.set(Calendar.DAY_OF_MONTH,0);
+        String last = format.format(cal.getTime());
+        //生成价格列表作为返回数据
+        List<VillaPrice> villaPrices = new ArrayList<VillaPrice>();
+        for (int i=0;i<Integer.parseInt(last.split("-")[2]);i++){
+            Date newDate = new Date(year,month,i+1);
+
+            VillaPrice villaPrice = new VillaPrice();
+            villaPrice.setDate(i+1+"");
+
+            //从数据库获取本日的报名数
+            VillaOrderExample example = new VillaOrderExample();
+            VillaOrderExample.Criteria criteria = example.createCriteria();
+            String thisDate = format.format(newDate);
+            criteria.andDateLike(thisDate);
+            List<VillaOrder> villaOrders = villaOrderMapper.selectByExample(example);
+            if (villaOrders.size()>0){
+                villaPrice.setNum(villaOrders.size()+"");
+            }else{
+                //根据周几来设置价格
+                if (newDate.getDay()>1){
+                    villaPrice.setPrice("66");
+                }else {
+                    villaPrice.setPrice("100");
+                }
+            }
+            villaPrices.add(villaPrice);
+        }
+        return villaPrices;
+    }
+
+    public List<VillaOrder> getVillaOrderByNumber(String ordernumber) {
+        VillaOrderExample example = new VillaOrderExample();
+        VillaOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderNumberEqualTo(ordernumber);
+
+        return villaOrderMapper.selectByExample(example);
+    }
+
+    public void ChangeVillaStatusByNumber(String out_trade_no) {
+        VillaOrderExample example = new VillaOrderExample();
+        VillaOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderNumberEqualTo(out_trade_no);
+        criteria.andOrderStatusEqualTo(1);
+        villaOrderMapper.updateByExample(example);
     }
 }

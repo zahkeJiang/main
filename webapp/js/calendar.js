@@ -70,8 +70,9 @@ var currentDay;
             var _thisDay = new Date(_year, _month-1 , i + 1 - _firstDay.getDay());
             var _thisDayStr = getDateStr(_thisDay,0);
             _tds[i].innerHTML = "<span class='borderr' thisDayNumber='"+_thisDay.getDate()+"'>"+_thisDay.getDate()+"</span>";
-            _tds[i].setAttribute('data', _thisDayStr);
-            if(_thisDayStr.substr(0, 6) == getDateStr(_firstDay,index).substr(0, 6)) {
+            //_tds[i].setAttribute('data', _thisDayStr);
+
+            if(_thisDayStr.substr(0, 6) == getDateStr(_firstDay,index).substr(0, 6)){
                 _tds[i].className = 'currentMonth currentMonth'+index+'';
                 _tds[i].firstChild.className='borderr borderr'+index+'';
                 // 当前月
@@ -97,7 +98,6 @@ var currentDay;
             
     }
     //获取年月日的字符串形式
-    
     function getDateStr(date) {
         var _year = date.getFullYear();
         var _month = date.getMonth() + 1;    // 月从0开始计数
@@ -135,7 +135,7 @@ var currentDay;
         //             }
         //         }
         // });
-        // 我模拟一个数据 实际需要后台接口 
+        // 我模拟一个数据 实际需要后台接口
         var priceList = [
         {"date":"1","price":"100"},{"date":"2","price":"100"},{"date":"3","price":"100"},{"date":"4","price":"66"},{"date":"5","price":"66"},{"date":"6","price":"66"},{"date":"7","price":"66"},{"date":"8","price":"66"},{"date":"9","price":"100"},{"date":"10","price":"100"},
         {"date":"11","num":"1"},{"date":"12","price":"66"},{"date":"13","price":"66"},{"date":"14","price":"66"},{"date":"15","price":"66"},{"date":"16","price":"100"},{"date":"17","price":"100"},{"date":"18","price":"66"},{"date":"19","price":"66"},{"date":"20","price":"66"},
