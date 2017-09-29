@@ -5,8 +5,10 @@ p {
 /*日历年月日样式*/
 .sit-calendar-title{
     display: flex;
-    justify-content: space-around;
+    /*width: 100%;*/
+    justify-content: space-between;
     align-items: center;
+    padding: 0 20px;
     height: 40px;
     font-size: 18px;
 }
@@ -25,6 +27,7 @@ p {
 /* 表格行高 */
 .calendar-table tr{
 color: #555;
+font-family: "兰亭黑";
 
 /*background: green;*/
 }
@@ -50,7 +53,7 @@ table,td,th {
 /* 当前天 颜色特殊显示 */
 .currentMonth.currentDay {
     /*background:#4287FF;*/
-    color: red;
+    color: #555;
 }
  .calendar-body-box td {
     border: none;
@@ -78,16 +81,13 @@ table,td,th {
     background-size: 20px 20px;
 }
 .no-ticket{
-    background: #ccc;
+    background: #ddd;
     /*transform: scale(0.9);*/
     border-radius: 50%;
 }
 .currentMonth0.no-ticket p{
-    color: red;
+    color: #777;
+    margin-top: 2px;
 }
- .fixedhours{
-    color: #222;
-    font-size: 20px;
-    text-align: center;
-}
+
 /*日历样式结束*/

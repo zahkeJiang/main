@@ -3,6 +3,7 @@ html, body {
     /*height: 100%;*/
     background:#54A0FF;
     color: #999;
+    background:#B4DADA;
     font-family: "兰亭黑";
 }
 .villaBox{
@@ -12,93 +13,84 @@ html, body {
     background: #f6f1f1;
 }
 
-/*别墅选择*/
-.container{
-	border-top: 1px solid #eee;
+/*住宿选择*/
+.army-choose{
+	padding:10px;
 }
-.villa-information{
+.army-information{
 	display: flex;
 	align-items: center;
-	margin: 0 10px;
+	/*background: yellow;*/
+	padding-top: 10px;
 }
-.villa-information div.villa-title {
-	height: 48px;
-	width: 48px;
+.army-information div.army-title {
+	height: 32px;
+	width: 40px;
 	font-size: 16px;
 	color: #555;
-	text-align: center;
+	/*text-align: center;*/
 	line-height: 32px;
-	margin:10px 10px 10px 0;
+	margin:0 10px;
 }
-.villa-information div.villa-pic{
-	width: 48px;
-	height: 48px;
-	background: red;
-	border-radius: 10px;
-	margin:10px 10px 10px 0;
-}
-.villa-information div.villa-choose{
-	position: absolute;
-	/*display: none;*/
-	background: blue;
-	right: 23px;
-	height: 20px;
-	width: 20px;
-	background: url(../images/circle.png);
-	background-size: 20px;
-}
-.villa-information input[name="villa-radio"]{
-	width: 12px;
-	height: 12px;
-	padding:0;
-	margin:0;
-	margin-left: 10px;
-	filter:alpha(Opacity=0);-moz-opacity:0;opacity: 0;
-}
-.villa-information input[type="number"]{
+.army-information input[type="number"]{
 	padding: 0 10px;
 	width: 100%;
 	height: 32px;
 	min-width: 100px;
 	background:#eee;
+	flex: 1;
 	border: 0;
 }
-.villa-information input:-ms-input-placeholder{
+.army-information input:-ms-input-placeholder{
     color: #999;
     font-size: 12px;
+   	margin-left: 
 }
 
-.villa-information input::-webkit-input-placeholder{
+.army-information input::-webkit-input-placeholder{
     color: #999;
     font-size: 12px;
 }
-.villa-information div.villa-content{
-	flex: 1;
-	margin: 10px 0;
-	/*background: green;*/
-}
-.villa-information div.villa-choose-content{
-	flex: 1;
-	margin: 10px 36px 10px 0;
-	/*background: green;*/
-}
-.villa-information div.villa-choose-content p{
+.army-choose p.army-hint{
 	font-size: 12px;
-	height: 16px;
-	/*background: red;*/
+	height: 20px;
+	margin-left: 10px;
 	line-height: 20px;
 }
-.villa-content p:first-child{
+.army-choose p.army-choose-title{
+	/*font-size: 12px;*/
+	height: 32px;
+	line-height: 32px;
+	padding-left: 10px;
 	color: #555;
-	line-height: 18px;
-	font-size: 14px;
+	font-weight: bold;
+	border-bottom: 1px solid #eee;
 }
-.villa-content p:last-child{
-	color: #999;
-	font-size: 12px;
-	line-height: 16px;
+.army-choose div.army-number{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 32px;
+	line-height: 32px;
+	padding-left: 10px;
+	color: #555;
+	border-bottom: 1px solid #eee;
 }
-
+.army-choose div:last-child{
+	border:0;
+}
+.army-choose div.armyNumber{
+	display: flex;
+	align-items: center;
+	/*height: 32px;*/
+	/*background: red*/
+}
+.army-choose div.armyNumber span{
+	min-width: 20px;
+	padding: 0 2px;
+	text-align: center;
+	color: orange
+}
 /*日历*/
 .date{
 	padding: 10px 20px;
