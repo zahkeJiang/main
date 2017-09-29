@@ -3,14 +3,25 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no">
 	<title>小别墅</title>
 	<link href="css/base.css" rel="stylesheet" type="text/css"/>
 	<link href="css/villa_placeOrder.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="./css/calendar.css">
+    <script src="./iconjs/iconfont.js"></script>
 
    
 </head>
-
+<style type="text/css">
+.sit-next-month,.sit-pre-month{
+   width: 20px; height:20px;
+   vertical-align: -0.15em;
+   fill: currentColor;
+   overflow: hidden;
+   /*background: red;*/
+   color: #999;
+}
+</style>
 <body>
 <!-- 选择别墅与报名人数 -->
 <div class="villa-choose villaBox">
@@ -54,9 +65,13 @@
     <div id="demo" class="sit-two-capacity-day">
         <div class="sit-calendar">
             <div class="sit-calendar-title">
-                <div class="sit-pre-month">&lt;</div>
+                <svg class="sit-pre-month" aria-hidden="true">
+                    <use xlink:href="#icon-erjiyemianjiantou01"></use>
+                </svg>
                 <div class="sit-date"></div>
-                <div class="sit-next-month">&gt;</div>
+                <svg class="sit-next-month" aria-hidden="true">
+                    <use xlink:href="#icon-jiantou"></use>
+                </svg>
             </div>
             <div class="sit-calendar-cxt">
                 <table class="calendar-table">
@@ -83,8 +98,8 @@
     </div>
     <div class="villa-user-row">
         <p>添加备注</p>
-        <input type="text" name="备注" placeholder="请输入备注信息">
-        <p>必填</p>
+        <input type="text" name="备注">
+        <p></p>
     </div>
     <div class="villa-user-coupon">
         <p>优惠券</p>

@@ -1,7 +1,7 @@
 html, body {
     position: relative;
     height: 100%;
-    background:#54A0FF;
+    background:#B4DADA;
     color: #999;
     font-family: "兰亭黑";
 }
@@ -51,35 +51,7 @@ html, body {
     font-size: 14px;
     color: #f6f1f1;
 }
-/* villa-information  */
-.villa-header{
-    display: flex;
-    justify-content: space-around;
-    border-bottom: 1px solid #efefef;
-    margin: 10px 20px;
-}
-.villa-information h2{
-    color: #54A0FF;
-    margin-bottom: 10px;
-}
-.villa-information div p{
-        padding: 8px 0;
-
-}
-.villa-information p.villa-description{
-    text-align: left;
-    font-size: 14px;
-    line-height: 20px;
-    padding: 0px 20px;
-    height: 80px;
-    overflow:auto; 
-    text-indent: 2em;
-}
-.villa-information p.villa-description::-webkit-scrollbar {/*隐藏滚动条*/
-    display: none;
-}
-
-/* villaStyle */
+/* 设备样式villaStyle */
 .villaStyle{
     /*padding:8px 0px;*/
 }
@@ -116,7 +88,17 @@ html, body {
 .villa-provide div.villaStyle-title{
     border-left: 4px solid #c99ff1;
 }
-
+.villa-item p.villa-item-hint{
+    font-size: 14px;
+    margin:4px 10px 0 10px;
+    text-align: left;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+.villa-provide p.villa-provide-hint{
+    font-size: 12px;
+    margin-bottom:10px;
+}
 /* villa-map */
 .villa-map{
     /*height: 400px;*/
@@ -132,7 +114,7 @@ html, body {
     /*background-color: green;*/
 }
 .villa-map-address{
-    background-color: #54A0FF;
+    background-color: #B4DADA;
     font-size: 14px;
     display: flex;
     align-items: center;
@@ -179,7 +161,7 @@ html, body {
      width: 84px;
     color: #54A0FF;
     font-size: 14px;
-    margin-left:4px;
+    margin:0 2px;
     /*padding: 4px 10px;*/
     background:#eee;
 }
@@ -188,7 +170,6 @@ html, body {
     line-height: 24px;
     color:orange;
      width: 84px;
-     margin-left:4px;
     /*padding: 4px 10px;*/
     background:#eee;
 }
@@ -227,7 +208,7 @@ html, body {
     text-align: center;
     line-height: 40px;
     width: 100%;
-    color: #54A0FF;
+    color: #B4DADA;
     background: white;
     position: fixed;
     bottom: 0;

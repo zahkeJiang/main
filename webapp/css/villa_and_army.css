@@ -2,6 +2,7 @@
     html, body {
         position: relative;
         height: 100%;
+        background:#B4DADA;
     }
     .swiper-container {
 
@@ -16,7 +17,7 @@
     width: 200%;
     height: 100%;
     display: inline-block;
-    background: url(../images/B4DADA_bg.jpg);
+    /*background: url(../images/B4DADA_bg.jpg);*/
     background-size: 100% 100%;
 
     }
