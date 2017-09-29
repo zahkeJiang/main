@@ -39,6 +39,9 @@ html, body {
 	margin:10px 10px 10px 0;
 }
 .villa-information div.villa-choose{
+
+	top:50%;
+	margin-top: -10px;
 	position: absolute;
 	/*display: none;*/
 	background: blue;
