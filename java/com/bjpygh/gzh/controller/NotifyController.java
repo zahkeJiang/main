@@ -7,10 +7,7 @@ import com.bjpygh.gzh.bean.IntegralRecord;
 import com.bjpygh.gzh.bean.User;
 import com.bjpygh.gzh.bean.VillaOrder;
 import com.bjpygh.gzh.config.AlipayConfig;
-import com.bjpygh.gzh.service.DsOrderService;
-import com.bjpygh.gzh.service.RecordService;
-import com.bjpygh.gzh.service.UserService;
-import com.bjpygh.gzh.service.VillaOrderService;
+import com.bjpygh.gzh.service.*;
 import com.bjpygh.gzh.utils.XMLToMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,6 +38,9 @@ public class NotifyController extends BaseController {
 
     @Autowired
     VillaOrderService villaOrderService;
+
+    @Autowired
+    ArmyOrderService armyOrderService;
 
     //微信支付回调接口
     @RequestMapping(value = "/notify.action", method = RequestMethod.POST)
@@ -147,6 +147,20 @@ public class NotifyController extends BaseController {
         if (map.get("boolean").equals("true")){
             out.println("success");	//请不要修改或删除
             villaOrderService.ChangeVillaStatusByNumber(map.get("out_trade_no"));
+        }else{//验证失败
+            out.println("fail");
+        }
+    }
+
+    //支付宝军旅支付回调接口
+    @RequestMapping(value = "/anotify_url", method = RequestMethod.POST)
+    public void AliArmyNotify(HttpServletRequest request, HttpServletResponse response) throws IOException, AlipayApiException {
+        PrintWriter out = response.getWriter();
+
+        Map<String, String> map = getGmtRefund(request);
+        if (map.get("boolean").equals("true")){
+            out.println("success");	//请不要修改或删除
+            armyOrderService.ChangeArmyStatusByNumber(map.get("out_trade_no"));
         }else{//验证失败
             out.println("fail");
         }

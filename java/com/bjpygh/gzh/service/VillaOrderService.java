@@ -141,4 +141,8 @@ public class VillaOrderService {
         criteria.andOrderStatusEqualTo(1);
         villaOrderMapper.updateByExample(example);
     }
+
+    public void updateOrder(VillaOrder villaOrder) {
+        villaOrderMapper.updateByPrimaryKey(villaOrder);
+    }
 }

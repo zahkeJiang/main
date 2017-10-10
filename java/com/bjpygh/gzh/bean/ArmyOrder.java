@@ -36,6 +36,8 @@ public class ArmyOrder {
 
     private Integer noroomNumber;
 
+    private String imageurl;
+
     public Integer getArmyId() {
         return armyId;
     }
@@ -170,5 +172,13 @@ public class ArmyOrder {
 
     public void setNoroomNumber(Integer noroomNumber) {
         this.noroomNumber = noroomNumber;
+    }
+
+    public String getImageurl() {
+        return imageurl;
+    }
+
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl == null ? null : imageurl.trim();
     }
 }

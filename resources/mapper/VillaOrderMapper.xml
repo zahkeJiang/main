@@ -17,6 +17,7 @@
     <result column="people_number" jdbcType="INTEGER" property="peopleNumber" />
     <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
     <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="imageurl" jdbcType="VARCHAR" property="imageurl" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -78,7 +79,8 @@
   </sql>
   <sql id="Base_Column_List">
     villa_id, user_id, real_name, villa_name, villa_price, date, create_time, pay_time, 
-    refund_time, finish_time, note, original_price, people_number, order_number, order_status
+    refund_time, finish_time, note, original_price, people_number, order_number, order_status, 
+    imageurl
   </sql>
   <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.VillaOrderExample" resultMap="BaseResultMap">
     select
@@ -115,14 +117,14 @@
       villa_name, villa_price, date, 
       create_time, pay_time, refund_time, 
       finish_time, note, original_price, 
-      people_number, order_number, order_status
-      )
+      people_number, order_number, order_status, 
+      imageurl)
     values (#{villaId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, 
       #{villaName,jdbcType=VARCHAR}, #{villaPrice,jdbcType=INTEGER}, #{date,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}, #{refundTime,jdbcType=TIMESTAMP}, 
       #{finishTime,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR}, #{originalPrice,jdbcType=INTEGER}, 
-      #{peopleNumber,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{orderStatus,jdbcType=INTEGER}
-      )
+      #{peopleNumber,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{orderStatus,jdbcType=INTEGER}, 
+      #{imageurl,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.VillaOrder">
     insert into villa_order
@@ -172,6 +174,9 @@
       <if test="orderStatus != null">
         order_status,
       </if>
+      <if test="imageurl != null">
+        imageurl,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="villaId != null">
@@ -218,6 +223,9 @@
       </if>
       <if test="orderStatus != null">
         #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="imageurl != null">
+        #{imageurl,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -275,6 +283,9 @@
       <if test="record.orderStatus != null">
         order_status = #{record.orderStatus,jdbcType=INTEGER},
       </if>
+      <if test="record.imageurl != null">
+        imageurl = #{record.imageurl,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -296,7 +307,8 @@
       original_price = #{record.originalPrice,jdbcType=INTEGER},
       people_number = #{record.peopleNumber,jdbcType=INTEGER},
       order_number = #{record.orderNumber,jdbcType=VARCHAR},
-      order_status = #{record.orderStatus,jdbcType=INTEGER}
+      order_status = #{record.orderStatus,jdbcType=INTEGER},
+      imageurl = #{record.imageurl,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -346,6 +358,9 @@
       <if test="orderStatus != null">
         order_status = #{orderStatus,jdbcType=INTEGER},
       </if>
+      <if test="imageurl != null">
+        imageurl = #{imageurl,jdbcType=VARCHAR},
+      </if>
     </set>
     where villa_id = #{villaId,jdbcType=INTEGER}
   </update>
@@ -364,7 +379,8 @@
       original_price = #{originalPrice,jdbcType=INTEGER},
       people_number = #{peopleNumber,jdbcType=INTEGER},
       order_number = #{orderNumber,jdbcType=VARCHAR},
-      order_status = #{orderStatus,jdbcType=INTEGER}
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      imageurl = #{imageurl,jdbcType=VARCHAR}
     where villa_id = #{villaId,jdbcType=INTEGER}
   </update>
 </mapper>

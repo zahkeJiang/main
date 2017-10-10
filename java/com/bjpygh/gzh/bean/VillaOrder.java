@@ -1,6 +1,5 @@
 package com.bjpygh.gzh.bean;
 
-import java.util.Date;
 
 public class VillaOrder {
     private Integer villaId;
@@ -32,6 +31,8 @@ public class VillaOrder {
     private String orderNumber;
 
     private Integer orderStatus;
+
+    private String imageurl;
 
     public Integer getVillaId() {
         return villaId;
@@ -151,5 +152,13 @@ public class VillaOrder {
 
     public void setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public String getImageurl() {
+        return imageurl;
+    }
+
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl == null ? null : imageurl.trim();
     }
 }

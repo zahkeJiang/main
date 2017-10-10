@@ -15,6 +15,7 @@ import com.bjpygh.gzh.entity.DsAliPay;
 import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.service.*;
 import com.bjpygh.gzh.utils.MD5;
+import com.bjpygh.gzh.utils.ThreeDES;
 import com.github.wxpay.sdk.WXPay;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,69 @@ public class PayController extends BaseController {
     @Autowired
     VillaOrderService villaOrderService;
 
+    @Autowired
+    ArmyOrderService armyOrderService;
+
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat formatterJ = new SimpleDateFormat("yyyyMMddHHmmss");
+    ThreeDES threeDES = new ThreeDES();
+
+    @ResponseBody
+    @RequestMapping(value = "/orderList", method = RequestMethod.POST)
+    public Status getOrderList(HttpServletRequest request){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        String userid = userMap.get("id");
+        List<DsOrder> dsOrders = dsOrderService.getOrdersById(userid);
+        List<VillaOrder> villaOrders = villaOrderService.getVillaOrder(userid);
+        List<ArmyOrder> armyOrders = armyOrderService.getArmyOrder(userid);
+        List<UserOrder> orders = new ArrayList<UserOrder>();
+
+        for (DsOrder dsOrder : dsOrders){
+            UserOrder userOrder = new UserOrder();
+            userOrder.setOrderNumber(dsOrder.getOrderNumber());
+            userOrder.setOrderName(dsOrder.getDsName());
+            userOrder.setOrderTime(dsOrder.getCreateTime());
+            userOrder.setOrderDescripe(dsOrder.getDescription());
+            userOrder.setOrderImage(dsOrder.getImageurl());
+            orders.add(userOrder);
+        }
+
+        for (VillaOrder villaOrder : villaOrders){
+            UserOrder userOrder = new UserOrder();
+            userOrder.setOrderNumber(villaOrder.getOrderNumber());
+            userOrder.setOrderName(villaOrder.getVillaName());
+            userOrder.setOrderTime(villaOrder.getCreateTime());
+            userOrder.setOrderDescripe(villaOrder.getNote());
+            userOrder.setOrderImage(villaOrder.getImageurl());
+            orders.add(userOrder);
+        }
+
+        for (ArmyOrder armyOrder : armyOrders){
+            UserOrder userOrder = new UserOrder();
+            userOrder.setOrderNumber(armyOrder.getOrderNumber());
+            userOrder.setOrderName(armyOrder.getArmyName());
+            userOrder.setOrderTime(armyOrder.getCreateTime());
+            userOrder.setOrderDescripe(armyOrder.getNote());
+            userOrder.setOrderImage(armyOrder.getImageurl());
+            orders.add(userOrder);
+        }
+
+        if (orders.size()>0){
+            Collections.sort(orders,new Comparator<UserOrder>(){
+                public int compare(UserOrder arg0, UserOrder arg1) {
+                    return arg0.getOrderTime().compareTo(arg1.getOrderTime());
+                }
+            });
+            return Status.success().add("orders",orders);
+        }else{
+            return Status.fail(-20,"没有订单");
+        }
+
+    }
+
     //支付宝驾校报名支付接口
     @RequestMapping(value = "/dspay.action", method = RequestMethod.GET)
     public void DsPay(HttpServletResponse response,String ordernumber) throws IOException {
@@ -82,19 +146,54 @@ public class PayController extends BaseController {
 
     }
 
+    //支付宝军旅预约支付接口
+    @RequestMapping(value = "/armyPay", method = RequestMethod.GET)
+    public void ArmyPay(HttpServletResponse response,String ordernumber) throws IOException {
+
+        String subject = "军旅预约费用";
+        String  body = "军旅预约费用";
+        String product_code="BJPYGH_A_SIGNUP";
+        ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
+
+        requesetAlipay(response,ordernumber,subject,body,
+                armyOrder.getArmyPrice()+"",
+                product_code,AlipayConfig.anotify_url);
+
+    }
+
+    //支付宝军旅预约支付接口
+    @ResponseBody
+    @RequestMapping(value = "/JdDsPay", method = RequestMethod.POST)
+    public Status JdDsPay(HttpServletResponse response,String ordernumber) throws IOException{
+        DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
+//        threeDES.encryptDESCBC();
+        JdOrderPay jdOrderPay = new JdOrderPay();
+        jdOrderPay.setVersion("V2.0");
+        jdOrderPay.setMerchant("110406033");
+        jdOrderPay.setTradeNum(dsOrder.getOrderNumber());
+        jdOrderPay.setTradeName("驾校报名费用");
+        jdOrderPay.setTradeTime(formatterJ.format(new Date()));
+        jdOrderPay.setAmount(dsOrder.getOrderPrice()+"");
+        jdOrderPay.setOrderType("1");
+        jdOrderPay.setCurrency("CNY");
+        jdOrderPay.setCallbackUrl("http://gzpt.bjpygh.com/ds_pay.html");
+        jdOrderPay.setNotifyUrl("http://gzpt.bjpygh.com/jNotify_url");
+
+
+        String s1 = "version=V2.0&merchant=110406033&tradeNum=";
+
+        return null;
+    }
+
     @ResponseBody
     @RequestMapping(value = "/refund.action", method = RequestMethod.POST)
-    public Status getUserId(HttpServletRequest request) throws UnsupportedEncodingException {
+    public Status DsRefund(HttpServletRequest request) throws UnsupportedEncodingException {
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
         }
 
-//			String userid = userMap.get("id");
-
         String out_trade_no = new String(request.getParameter("ordernumber").getBytes("ISO-8859-1"),"UTF-8");
-
-
 
         String refund_reason=new String(request.getParameter("WIDrefund_reason").getBytes("ISO-8859-1"),"UTF-8");
 
@@ -104,47 +203,78 @@ public class PayController extends BaseController {
             return Status.fail(-30,"报名已完成");
         }
         String refund_amount=""+dsOrder.getOrderPrice();
-        /**********************/
-        AlipayClient client = new DefaultAlipayClient(AlipayConfig.URL, AlipayConfig.APPID, AlipayConfig.RSA_PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY,AlipayConfig.SIGNTYPE);
-        AlipayTradeRefundRequest alipay_request = new AlipayTradeRefundRequest();
 
-        AlipayTradeRefundModel model=new AlipayTradeRefundModel();
-        model.setOutTradeNo(out_trade_no);
-        model.setTradeNo("");
-        model.setRefundAmount(""+(float)(Math.round((Float.parseFloat(refund_amount)*0.994)*100))/100);
-        model.setRefundReason(refund_reason);
-        model.setOutRequestNo("PYGH01RF001");
-        alipay_request.setBizModel(model);
-
-        AlipayTradeRefundResponse alipay_response;
-        try {
-            alipay_response = client.execute(alipay_request);
-            String result = alipay_response.getBody();
-            JSONObject tmp = JSONObject.fromObject(result);
-            String data = tmp.getString("alipay_trade_refund_response");
-            JSONObject obj = JSONObject.fromObject(data);
-            if(obj.getString("code").equals("10000")){
-                if(obj.getString("fund_change").equals("Y")){
-                    //改变订单状态
-                    dsOrder.setOrderStatus((byte) 5);
-                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    dsOrder.setRefundTime(formatter.format(new Date()));
-                    dsOrderService.updateOrder(dsOrder);
-                    return Status.success();
-                }else{
-                    return Status.fail(-20,result);
-                }
-            }else{
-                return Status.fail(-20,result);
-            }
-
-        } catch (AlipayApiException e) {
-            return Status.fail(-20,"处理失败");
-        }finally{
+        if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
+            //改变订单状态
+            dsOrder.setOrderStatus((byte) 5);
+            dsOrder.setRefundTime(formatter.format(new Date()));
+            dsOrderService.updateOrder(dsOrder);
+            return Status.success();
+        }else{
             return Status.fail(-20,"处理失败");
         }
-
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/villaRefund", method = RequestMethod.POST)
+    public Status VillaRefund(HttpServletRequest request) throws UnsupportedEncodingException {
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+
+        String out_trade_no = new String(request.getParameter("ordernumber").getBytes("ISO-8859-1"),"UTF-8");
+
+        String refund_reason=new String(request.getParameter("WIDrefund_reason").getBytes("ISO-8859-1"),"UTF-8");
+
+        VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(out_trade_no).get(0);
+
+        if(villaOrder.getOrderStatus() == 3){
+            return Status.fail(-30,"报名已完成");
+        }
+        String refund_amount=""+villaOrder.getVillaPrice();
+
+        if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
+            //改变订单状态
+            villaOrder.setOrderStatus(5);
+            villaOrder.setRefundTime(formatter.format(new Date()));
+            villaOrderService.updateOrder(villaOrder);
+            return Status.success();
+        }else{
+            return Status.fail(-20,"处理失败");
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/armyRefund", method = RequestMethod.POST)
+    public Status ArmyRefund(HttpServletRequest request) throws UnsupportedEncodingException {
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+
+        String out_trade_no = new String(request.getParameter("ordernumber").getBytes("ISO-8859-1"),"UTF-8");
+
+        String refund_reason=new String(request.getParameter("WIDrefund_reason").getBytes("ISO-8859-1"),"UTF-8");
+
+        ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(out_trade_no).get(0);
+
+        if(armyOrder.getOrderStatus() == 3){
+            return Status.fail(-30,"报名已完成");
+        }
+        String refund_amount=""+armyOrder.getArmyPrice();
+
+        if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
+            //改变订单状态
+            armyOrder.setOrderStatus(5);
+            armyOrder.setRefundTime(formatter.format(new Date()));
+            armyOrderService.updateOrder(armyOrder);
+            return Status.success();
+        }else{
+            return Status.fail(-20,"处理失败");
+        }
+    }
+
 
     //微信会员充值接口
     @ResponseBody
@@ -237,7 +367,7 @@ public class PayController extends BaseController {
         return sb.toString();
     }
 
-
+    //支付宝支付请求方法
     public void requesetAlipay(HttpServletResponse response,String ordernumber,
         String subject,String body,String price,String product_code,String notify_url) throws IOException {
         response.setContentType("text/html;charset=" + AlipayConfig.CHARSET);
@@ -274,4 +404,41 @@ public class PayController extends BaseController {
         }
     }
 
+    //支付宝退款请求方法
+    public boolean getRefundResult(String out_trade_no,String refund_reason,String refund_amount){
+        /**********************/
+        AlipayClient client = new DefaultAlipayClient(AlipayConfig.URL, AlipayConfig.APPID, AlipayConfig.RSA_PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY,AlipayConfig.SIGNTYPE);
+        AlipayTradeRefundRequest alipay_request = new AlipayTradeRefundRequest();
+
+        AlipayTradeRefundModel model=new AlipayTradeRefundModel();
+        model.setOutTradeNo(out_trade_no);
+        model.setTradeNo("");
+        model.setRefundAmount(""+(float)(Math.round((Float.parseFloat(refund_amount)*0.994)*100))/100);
+        model.setRefundReason(refund_reason);
+        model.setOutRequestNo("PYGH01RF001");
+        alipay_request.setBizModel(model);
+
+        AlipayTradeRefundResponse alipay_response;
+        try {
+            alipay_response = client.execute(alipay_request);
+            String result = alipay_response.getBody();
+            JSONObject tmp = JSONObject.fromObject(result);
+            String data = tmp.getString("alipay_trade_refund_response");
+            JSONObject obj = JSONObject.fromObject(data);
+            if(obj.getString("code").equals("10000")){
+                if(obj.getString("fund_change").equals("Y")){
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+
+        } catch (AlipayApiException e) {
+            return false;
+        }finally{
+            return false;
+        }
+    }
 }

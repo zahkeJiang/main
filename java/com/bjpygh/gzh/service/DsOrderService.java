@@ -44,10 +44,10 @@ public class DsOrderService {
         dsOrderMapper.updateOrderByStatus(dsOrder);
     }
 
-    public List<DsOrder> getDsOrderByNumber(String out_trade_no) {
+    public List<DsOrder> getDsOrderByNumber(String orderNumber) {
         DsOrderExample example = new DsOrderExample();
         DsOrderExample.Criteria criteria = example.createCriteria();
-        criteria.andOrderNumberEqualTo(out_trade_no);
+        criteria.andOrderNumberEqualTo(orderNumber);
         return dsOrderMapper.selectByExample(example);
     }
 
