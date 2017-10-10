@@ -44,14 +44,14 @@ function get_coupons(){
 			var obj = eval('(' + data + ')');
 			if (obj.status=="0") {
 				coupons_sum = obj.data.price;
-				$(".coupons span").html(coupons_sum+"元");
+				$(".coupons span").html(coupons_sum+"元");//优惠券价格
 				$(".coupons span").css({"color":"red"});
 				select ="1";
-				$(".price").html((price-coupons_sum)+".00");
+				$(".price").html((price-coupons_sum)+".00");//需支付金额
 			}else{
 				$(".coupons span").html("无可用优惠券&nbsp;&gt;");
 				select ="0";
-				$(".price").html(price+".00");
+				$(".price").html(price+".00");//需支付金额
 			}
         }	
     });
