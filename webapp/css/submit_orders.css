@@ -1,9 +1,15 @@
-@charset "utf-8";
-/* CSS Document */
+html, body {
+    position: relative;
+    /*height: 100%;*/
+    background:#67c0ee;
+    /*color: #999;*/
+}
 
 .ds_information{
-	background-color: white;
-	padding: 0 16px ;
+	border-radius: 10px;
+	margin: 10px 16px;
+    background: #f6f1f1;
+	padding: 0 10px ;
 	height: 120px;
 	line-height: 24px;
 }
@@ -12,7 +18,7 @@
 	font-size: 14px;
 	color: #999;
 	line-height: 40px;
-	border-bottom: 1px solid #efefef;
+	border-bottom: 1px solid #ddd;
 }
 .ds_type{
 	margin-top: 4px;
@@ -62,8 +68,10 @@ span,.dstype_information_content{
 
 
 .ds_apply{
+	border-radius: 10px;
+	margin: 10px 16px;
 	margin-top: 10px;
-	background-color: white;
+    background: #f6f1f1;
 	line-height: 40px;
 }
 .ds_apply_title{
@@ -71,17 +79,17 @@ span,.dstype_information_content{
 	line-height: 40px;
 	font-size: 14px;
 	color: #999;
-	margin: 0 16px;
-	border-bottom: 1px solid #efefef;
+	margin: 0 10px;
+	border-bottom: 1px solid #ddd;
 }
 .row{
-	margin-left: 16px;
+	margin-left: 10px;
 	margin-right: 16px;
 	display: flex;
 	align-items: center;
 	font-size: 16px;
 	height: 40px;
-	border-bottom: 1px solid #efefef;
+	border-bottom: 1px solid #ddd;
 }
 .row_type{
 	width: 64px;
@@ -98,6 +106,7 @@ span,.dstype_information_content{
 	padding:0 2px;
 }
 .row input{
+	    background: #f6f1f1;
 	flex: 1;
 	min-width: 100px;
 	height: 24px;
@@ -108,6 +117,7 @@ span,.dstype_information_content{
 	display: flex;
 	align-items: center;
 	height: 36px;
+
 }
 input::-webkit-input-placeholder { 
 	color: #999; 
@@ -119,9 +129,11 @@ input::-webkit-input-placeholder {
 	color: black;
 }
 .ds_training{
-	background-color: white;
+	border-radius: 10px;
+	margin: 10px 16px;
+    background: #f6f1f1;
 	margin-top: 10px;
-	padding:0 16px;
+	padding:0 10px;
 }
 .ds_training_mode{
 	height: 40px;
@@ -129,7 +141,7 @@ input::-webkit-input-placeholder {
 	font-size: 14px;
 	color: #999;
 	align-items: center;
-	border-bottom: 1px solid #efefef;
+	border-bottom: 1px solid #ddd;
 }
 
 .ds_radio{
@@ -150,18 +162,19 @@ input::-webkit-input-placeholder {
 
 
 .coupons{
-	margin-top: 10px;
+	border-radius: 10px;
+	margin: 10px 16px;
 	display: flex;
 	align-items: center;
 	padding-left: 16px;
 	padding-right: 16px;
 	height: 48px;
-	background-color: white;
+    background: #f6f1f1;
 }
 .hint{
 	font-size: 12px;
 	margin:0 16px;
-	color: red;
+	color: white;
 	margin-bottom: 64px;
 	margin-top: 10px;
 }
@@ -174,10 +187,11 @@ input::-webkit-input-placeholder {
 	width: 100%;
 	max-width: 768px;
 	display: flex;
-	background-color: white;
+    background: #f6f1f1;
 	height: 48px;
 	align-items: center;	
 }
+
 /*.footer img{
 	width:30px;
 	height:30px;
@@ -185,7 +199,7 @@ input::-webkit-input-placeholder {
 }*/
 .submit{
 	width: 30%;
-	background-color: #67c0ee;
+	background-color:orange;
 	height: 48px;
 	line-height: 48px;
 	text-align: center;

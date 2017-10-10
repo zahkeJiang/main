@@ -42,6 +42,6 @@ $(function(){
 	},"json");
 	//支付宝支付
 	$(".submit").click(function(){
-		window.location.href="determine_browser.html?ordernumber="+ordernumber;	
+		window.location.href="payHint.html?ordernumber="+ordernumber;	
 	});
 });
