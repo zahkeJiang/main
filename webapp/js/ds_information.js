@@ -9,17 +9,6 @@
 // window.onload=ShowMessage(); 
 var dsname = $.cookie("dsname");//驾校名字			
 $(function(){
-	// 打开弹窗
-    $(".ds_information").click(function(){
-        $(".ds_type").hide();
-    	$(".dsintro").fadeIn(10);
-    })
-    
-    // 关闭弹窗
-    $(".dsintro img").click(function(){
-    	$(".dsintro").fadeOut(10);
-         $(".ds_type").show();
-    })
 
     //发送post请求，获取班型列表
     $.post("sdp.action",{"dsname":dsname},function(result){
@@ -40,13 +29,13 @@ $(function(){
 
              // $.each循环实现添加  
             $.each(dsp_list,function(commentIndex,comment){
-                dshtml += "<div class='dsp_list'><div class='line'></div><h2 class='dstype'>"
+                dshtml += "<div class='dsp_list'><h2 class='dstype'>"
                 +comment.dsType+"</h2><div class='dsp_infor'><span class='models'>"
                 +comment.models+"</span><span class='traintime'>"
                 +comment.trainTime+"</span><span class='description'>"
                 +comment.description+"</span><span class='packageid'>"
-                +comment.packageid+"</span></div><div><span  class='price_symbol'>¥</span><span class='price'>"
-                +comment.price+"</span><span class='pointzero'>.00</span></div></div>";
+                +comment.packageid+"</span></div><span class='priceDiv'><span  class='price_symbol'>¥</span><span class='price'>"
+                +comment.price+"</span><span class='pointzero'>.00</span></span><div class='line'></div></div>";
             });
             $(".container").html(dshtml);
 
@@ -71,4 +60,21 @@ $(function(){
             });
         // }
     },'json');
+
+    //驾照类型、班型、学习时间等选择
+    $(".dsp_type_div").click(function(){
+        if ($(this).siblings("p").css("display")=="none") {
+            $(this).find("span").css({"color":"white"});
+            $(this).parent().css({"border":"1px solid #ffc3a9"});
+            $(this).siblings("p").show();
+            $(this).css({"background":"#FFC3A9"});
+            $(this).find("img").attr("src","./images/top.png");
+        }else{
+            $(this).find("span").css({"color":"black"});
+            $(this).parent().css({"border":"1px solid #f6f1f1"});
+            $(this).siblings("p").hide();
+            $(this).css({"background":"#f6f1f1"});
+            $(this).find("img").attr("src","./images/bottom.png");
+        }
+    });
 });

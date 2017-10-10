@@ -1,7 +1,7 @@
 html, body {
     /*position: relative;*/
     /*height: 100%;*/
-    background:#54A0FF;
+    /*background:#54A0FF;*/
     color: #999;
     background:#B4DADA;
     font-family: "兰亭黑";
@@ -121,12 +121,15 @@ html, body {
 	font-size: 12px;
 	line-height: 44px;
 }
+.villa-user-row p.tel{margin-left: 10px}
 .villa-user-row input{
 	min-width: 100px;
 	background: #eee;
 	height: 28px;
 	flex: 1;
 	padding: 0 10px;
+	color: #999;
+	font-size: 14px;
 }
 .villa-user-row input:-ms-input-placeholder{
     color: #999;
@@ -183,4 +186,90 @@ html, body {
 	text-align: center;
 	color: white;
 	font-size: 16px;
+}
+
+/*支付选择弹窗*/
+.payBox{
+	display: none;
+	position: fixed;
+	background: white;
+	height: 40%;
+	width: 100%;
+	bottom: 0;
+	z-index: 100;
+	text-align: center;
+	color: #999;
+}
+.payBox h2{
+	margin-top: 10px;
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px solid #eee;
+}
+.payBox p{
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	top:8px;
+	left: 16px;
+	font-size: 32px;
+	color: #ccc;
+	font-weight:normal;
+
+	transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+}
+.payBox div.payMode{
+	position: relative;
+	padding: 0 16px;
+	display: flex;
+	/*justify-content: space-between;*/
+	height: 40px;
+	align-items: center;
+	border-bottom: 1px solid #eee;
+}
+.payBox div.payMode label{
+	font:14px;
+	height: 40px;
+	line-height: 40px;
+	text-align: left;
+	width: 100%;
+	/*background: yellow;*/
+}
+.payBox div.payMode input{
+	display: none;
+}
+.payBox div.payModeImg{
+	top:50%;
+	right: 16px;
+	margin-top: -10px;
+	position: absolute;
+	/*display: none;*/
+	height: 20px;
+	width: 20px;
+	background: url(../images/circle.png);
+	background-size: 20px;
+}
+.toPay{
+	width: 100%;
+	line-height: 48px;
+	color: white;
+	height: 48px;
+    background:#B4DADA;
+    position: absolute;
+    bottom: 0;
+}
+.layer{
+	background: #eee;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	z-index: 99;
+	top:0;
+	left: 0;
+	filter:alpha(Opacity=80);-moz-opacity:0.5;opacity: 0.5;
+	display: none;
 }

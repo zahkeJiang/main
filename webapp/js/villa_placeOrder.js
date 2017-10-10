@@ -75,8 +75,28 @@
     });
 
 
-        //为radio法培方式设置点击样式
+    //为radio法培方式设置点击样式
     $("input[type='radio']").click(function() {
         $(this).siblings(".villa-choose").css({"background":"url(./images/circle_choose.png)","background-size":"20px"});
         $(this).parents("div").siblings("div").find(".villa-choose").css({"background":"url(./images/circle.png)","background-size":"20px"});
     });
+        //为支付方式的radio设置点击样式
+    $(".payMode").click(function() {
+        $(this).children(".payModeImg").css({"background":"url(./images/circle_choose.png)","background-size":"20px"});
+        $(this).parents().siblings("label").find(".payModeImg").css({"background":"url(./images/circle.png)","background-size":"20px"});
+    });
+
+    //填写信息后，点击支付
+    $(".footer p:last-child").click(function(){
+        $(".layer").show();
+        $(".payBox").show();
+    });
+    //选择支付方式后点击确认
+    $(".toPay").click(function(){
+        window.location.href="payHint.html";
+    });
+    //关闭弹窗
+    $(".payBox p").click(function(){
+        $(".layer").hide();
+        $(".payBox").hide();
+    })

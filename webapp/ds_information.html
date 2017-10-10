@@ -32,6 +32,8 @@
                 </div>
                 <!-- Add Pagination -->
                 <div class="swiper-pagination swiper-pagination-white"></div>
+
+                <p>&nbsp;</p>
             </div>
 
 	<div class="main">
@@ -40,13 +42,15 @@
 	
 			<div class="ds_infor">
 				<div class="ds_information">
-					<img src="images/intro.png" height="16px">
-					<span class="abstract">简介</span>
+					<!-- <img src="images/intro.png" height="16px"> -->
+					<h2 class="abstract">简介</h2>
+					<p>打发时间发生的后将会打发时间广东当时的接口部分代表机构给对方根据地块规划东方国际规定符合公开的价格好的反馈结果发电公司个打发时间发生的后将会打发时间广东当时的接口部分代表机构给对方根据地块规划东</p>
 				</div>
 				<div class="line"></div>
 				<div class="ds_address">
-					<img src="images/address.png"  height="16px">
-					<span class="address"></span>
+					<span>地址：</span>
+					<!-- <img src="images/address.png"  height="16px"> -->
+					<span class="address">北京天安门</span>
 				</div>
 				<div class="dsintro">
 					<div class="dsintro_name"></div>
@@ -56,7 +60,39 @@
 			</div>
 		</div>
 		<div class="ds_type">
-			<p class="dsp_type">班型类别</p>
+			<div class="dsp_type">
+                <div class="dsp_type_Div">
+                    <div class="dsp_type_Div_a">
+                        <div class="dsp_type_div">
+                            <span>驾照类型</span>
+                            <img src="./images/bottom.png" height="16px">
+                        </div>
+                        <p>C1自动挡</p>
+                        <p>C2手动挡</p>
+                    </div>
+                </div>
+                <div class="dsp_type_Div">
+                    <div class="dsp_type_Div_a">
+                        <div class="dsp_type_div">
+                            <span>班型</span>
+                            <img src="./images/bottom.png" height="16px">
+                        </div>
+                        <p>定制班</p>
+                        <p>预约班</p>
+                    </div>
+                </div>
+                <div class="dsp_type_Div">
+                    <div class="dsp_type_Div_a">
+                        <div class="dsp_type_div">
+                            <span>学习时间</span>
+                            <img src="./images/bottom.png" height="16px">
+                        </div>
+                        <p>全周</p>
+                        <p>6-7</p>
+                        <p>1-5</p>
+                    </div>
+                </div>
+            </div>
 			<div class="container"></div>
 		</div>
 		<div class="footer"></div>
@@ -70,13 +106,26 @@
  
  <script>
  // 轮播图
-    var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',//如果需要分页器，即下面的小圆点
-        paginationClickable: false,//不可点击
-        autoplay: 2000,//更换频率
-        spaceBetween: 10,//幻灯片间隔
-        loop: true,//循环
-        speed:1000, // 播放的速度
+    // var swiper = new Swiper('.swiper-container', {
+    //     pagination: '.swiper-pagination',//如果需要分页器，即下面的小圆点
+    //     paginationClickable: false,//不可点击
+    //     autoplay: 2000,//更换频率
+    //     spaceBetween: 10,//幻灯片间隔
+    //     loop: true,//循环
+    //     speed:1000, // 播放的速度
+    // });
+
+     var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        // spaceBetween: 10,//幻灯片间隔
+         paginationClickable: true,
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        parallax: true,
+        // observer:true,//修改swiper自己或子元素时，自动初始化swiper
+        // observeParents:true,//修改swiper的父元素时，自动初始化swiper
+
     });
     </script>
 </html>

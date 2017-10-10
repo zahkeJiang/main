@@ -87,8 +87,8 @@
 <!-- 用户信息填写 -->
 <div class="villa-user villaBox">
     <div class="villa-user-row">
-        <p class="tel">联系方式</p>
-        <p>13161111366</p>
+        <p>联系方式</p>
+        <p class="tel">18813069623</p>
         <p></p>
     </div>
     <div class="villa-user-row">
@@ -98,7 +98,7 @@
     </div>
     <div class="villa-user-row">
         <p>添加备注</p>
-        <input type="text" name="备注">
+        <input type="text" name="备注" placeholder="请输入您的备注信息">
         <p></p>
     </div>
     <div class="villa-user-coupon">
@@ -114,6 +114,27 @@
         <p>¥1234</p>
         <p>去支付</p>
     </div>
+<!-- 支付方式弹窗 -->
+<div class="payBox">
+    <h2>选择支付方式</h2>
+    <p>+</p>
+    <label for="balance">
+        <div class="payMode" >
+            余额支付
+            <input name="villa-radio" id="balance" type="radio" value="余额支付" />
+            <div class="payModeImg"></div>
+        </div>
+    </label>
+    <label for="alipay">
+        <div class="payMode" >
+            支付宝支付
+            <input name="villa-radio" id="alipay" type="radio" value="支付宝支付" />
+            <div class="payModeImg"></div>
+        </div>
+    </label>
+    <div class="toPay">确认</div>
+</div>
+<div class="layer"></div>
 </body>
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script src="js/jquery.cookie.js" type="text/javascript"></script>
