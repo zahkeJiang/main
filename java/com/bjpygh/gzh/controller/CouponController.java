@@ -70,6 +70,7 @@ public class CouponController extends BaseController {
         if(userMap == null){
             return Status.notInWx();
         }
+
         return couponService.getCouponStatus(userMap.get("id"));
     }
 

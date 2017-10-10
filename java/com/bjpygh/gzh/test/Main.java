@@ -50,8 +50,8 @@ public class Main {
 //        }
         //-------------------------------------------------------------------------------
 
-        ThreeDES threeDES = new ThreeDES();
-        threeDES.encryptDESCBC();
+//        ThreeDES threeDES = new ThreeDES();
+//        threeDES.encryptDESCBC();
     }
 }
 //29 6 5
