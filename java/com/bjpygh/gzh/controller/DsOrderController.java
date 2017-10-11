@@ -150,9 +150,10 @@ public class DsOrderController extends BaseController {
         String select = dsAliPay.getSelect();
         int couponprice = 0;
 
+        System.out.println("select+"+select);
         if (select.equals("1")){
             UserCoupon userCoupon = couponService.getCoupon(userid);
-            Date date = new Date(604800000L);
+            Date date = new Date(2419200000L);
 
             if(userCoupon.getCouponStatus()==1&&userCoupon!=null){
                 if((new Date()).getTime()-userCoupon.getCouponTime().getTime()<date.getTime()){

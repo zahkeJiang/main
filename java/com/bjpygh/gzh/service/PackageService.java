@@ -30,12 +30,20 @@ public class PackageService {
     }
 
     //根据驾校名称匹配相应的套餐列表，为空时返回驾校信息
-    public Status getPackageList(String dsname) {
+    public Status getPackageList(DsPackage dsPackage) {
         DsPackageExample example = new DsPackageExample();
         DsPackageExample.Criteria criteria = example.createCriteria();
-        criteria.andDsNameEqualTo(dsname);
-        DsInformation dsInfo = new DsInformation();
-        dsInfo = dsInformationMapper.selectByPrimaryKey(dsname);
+        criteria.andDsNameEqualTo(dsPackage.getDsName());
+        String models = dsPackage.getModels();
+        if (models!=null&&models!="")
+            criteria.andModelsEqualTo(models);
+        String dsType = dsPackage.getDsType();
+        if (dsType!=null&&dsType!="")
+            criteria.andDsTypeEqualTo(dsType);
+        String trainTime = dsPackage.getTrainTime();
+        if (trainTime!=null&&trainTime!="")
+            criteria.andTrainTimeEqualTo(trainTime);
+        DsInformation dsInfo = dsInformationMapper.selectByPrimaryKey(dsPackage.getDsName());
         dsInfo.setDspList(dsPackageMapper.selectByExample(example));
 
         return Status.success().add("dsInfos",dsInfo);

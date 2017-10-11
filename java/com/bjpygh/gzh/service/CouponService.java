@@ -6,6 +6,9 @@ import com.bjpygh.gzh.dao.UserCouponMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Map;
 
@@ -60,4 +63,5 @@ public class CouponService {
     public void updataCouponStatus(Map<String, String> statusMap) {
         userCouponMapper.updataCouponStatus(statusMap);
     }
+
 }

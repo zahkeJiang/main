@@ -7,16 +7,23 @@ import com.bjpygh.gzh.bean.IntegralRecord;
 import com.bjpygh.gzh.bean.User;
 import com.bjpygh.gzh.bean.VillaOrder;
 import com.bjpygh.gzh.config.AlipayConfig;
+import com.bjpygh.gzh.model.AsynNotifyResponse;
 import com.bjpygh.gzh.service.*;
+import com.bjpygh.gzh.utils.PropertyUtils;
 import com.bjpygh.gzh.utils.XMLToMap;
+import com.jd.jr.pay.gate.signature.util.JdPayUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.annotation.Resource;
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,6 +33,9 @@ import java.util.Map;
 
 @Controller
 public class NotifyController extends BaseController {
+
+    @Resource
+    private HttpServletRequest request;
 
     @Autowired
     UserService userService;
@@ -164,6 +174,37 @@ public class NotifyController extends BaseController {
         }else{//验证失败
             out.println("fail");
         }
+    }
+
+    //京东驾校支付回调接口
+    @RequestMapping(value = "/jNotify_url", method = RequestMethod.POST)
+    public String execute(HttpServletRequest httpServletRequest) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader((ServletInputStream) request.getInputStream()));
+            String line = null;
+
+            while ((line = br.readLine()) != null) {
+
+                sb.append(line);
+            }
+        } catch (IOException e) {
+
+            return "fail";
+        }
+
+        String deskey = PropertyUtils.getProperty("wepay.merchant.desKey");
+        String pubKey = PropertyUtils.getProperty("wepay.jd.rsaPublicKey");
+        try {
+            AsynNotifyResponse anRes = JdPayUtil.parseResp(pubKey, deskey, sb.toString(), AsynNotifyResponse.class);
+            System.out.println("异步通知解析数据:" + anRes);
+            System.out.println("异步通知订单号：" + anRes.getTradeNum() + ",状态：" + anRes.getStatus() + "成功!!!!");
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return "fail";
+        }
+        return "ok";
     }
 
     public Map<String, String> getGmtRefund(HttpServletRequest request) throws IOException, AlipayApiException {

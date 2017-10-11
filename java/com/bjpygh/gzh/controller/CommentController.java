@@ -20,7 +20,7 @@ public class CommentController extends BaseController{
     CommentService commentService;
 
     @ResponseBody
-    @RequestMapping(value = "/putVillaComment", method = RequestMethod.POST)
+    @RequestMapping(value = "/putComment", method = RequestMethod.POST)
     public Status putComment(Comment comment,HttpServletRequest request){
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
@@ -28,20 +28,20 @@ public class CommentController extends BaseController{
         }
         String userid = userMap.get("id");
         comment.setUserId(Long.valueOf(userid));
-        commentService.putVillaComment(comment);
+        commentService.putComment(comment);
         return Status.success();
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getVillaComment", method = RequestMethod.POST)
-    public Status getVillaComment(HttpServletRequest request){
+    @RequestMapping(value = "/getComment", method = RequestMethod.POST)
+    public Status getVillaComment(HttpServletRequest request,String type){
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
         }
-        List<Comment> villaComment = commentService.getVillaComment();
-        if (villaComment.size()>0){
-            return Status.success().add("villaComment",villaComment);
+        List<Comment> comments = commentService.getComment(type);
+        if (comments.size()>0){
+            return Status.success().add("Comment",comments);
         }else{
             return Status.fail(-20,"没有评论");
         }

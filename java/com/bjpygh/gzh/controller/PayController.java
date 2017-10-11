@@ -11,12 +11,15 @@ import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.bjpygh.gzh.bean.*;
 import com.bjpygh.gzh.config.AlipayConfig;
 import com.bjpygh.gzh.config.MyConfig;
-import com.bjpygh.gzh.entity.DsAliPay;
 import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.service.*;
 import com.bjpygh.gzh.utils.MD5;
+import com.bjpygh.gzh.utils.PropertyUtils;
 import com.bjpygh.gzh.utils.ThreeDES;
 import com.github.wxpay.sdk.WXPay;
+import com.jd.jr.pay.gate.signature.util.BASE64;
+import com.jd.jr.pay.gate.signature.util.SignUtil;
+import com.jd.jr.pay.gate.signature.util.ThreeDesUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +32,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -178,11 +183,28 @@ public class PayController extends BaseController {
         jdOrderPay.setCurrency("CNY");
         jdOrderPay.setCallbackUrl("http://gzpt.bjpygh.com/ds_pay.html");
         jdOrderPay.setNotifyUrl("http://gzpt.bjpygh.com/jNotify_url");
+        jdOrderPay.setUserId(dsOrder.getUserId()+"");
 
+        String priKey = PropertyUtils.getProperty("wepay.merchant.rsaPrivateKey");
+        String desKey = PropertyUtils.getProperty("wepay.merchant.desKey");
 
-        String s1 = "version=V2.0&merchant=110406033&tradeNum=";
+        List<String> unSignedKeyList = new ArrayList<String>();
+        unSignedKeyList.add("sign");
 
-        return null;
+        jdOrderPay.setSign(SignUtil.signRemoveSelectedKeys(jdOrderPay, priKey, unSignedKeyList));
+
+        byte[] key = BASE64.decode(desKey);
+        jdOrderPay.setUserId(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getUserId()));
+        jdOrderPay.setTradeNum(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getTradeNum()));
+        jdOrderPay.setTradeName(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getTradeName()));
+        jdOrderPay.setTradeTime(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getTradeTime()));
+        jdOrderPay.setAmount(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getAmount()));
+        jdOrderPay.setOrderType(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getOrderType()));
+        jdOrderPay.setCurrency(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getCurrency()));
+        jdOrderPay.setCallbackUrl(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getCallbackUrl()));
+        jdOrderPay.setNotifyUrl(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getNotifyUrl()));
+
+        return Status.success().add("jdOrderPay",jdOrderPay);
     }
 
     @ResponseBody
@@ -441,4 +463,6 @@ public class PayController extends BaseController {
             return false;
         }
     }
+
+
 }
