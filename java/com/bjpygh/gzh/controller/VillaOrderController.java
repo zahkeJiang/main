@@ -37,7 +37,7 @@ public class VillaOrderController extends BaseController{
         return Status.success().add("orderNumber",orderNumber);
     }
 
-    //删除订单接口
+    //关闭订单接口
     @ResponseBody
     @RequestMapping(value = "/cancelVillaOrder", method = RequestMethod.POST)
     public Status cancelOrder(HttpServletRequest request,String ordernumber){
@@ -49,7 +49,7 @@ public class VillaOrderController extends BaseController{
         return Status.success();
     }
 
-    //删除订单接口
+    //获取订单接口
     @ResponseBody
     @RequestMapping(value = "/getVillaOrder", method = RequestMethod.POST)
     public Status getOrder(HttpServletRequest request){
@@ -67,7 +67,7 @@ public class VillaOrderController extends BaseController{
 
     }
 
-    //创建订单接口
+    //获取订单价格
     @ResponseBody
     @RequestMapping(value = "/getVillaPrice", method = RequestMethod.POST)
     public Status getVillaPrice(HttpServletRequest request,String date) throws ParseException {
@@ -79,5 +79,17 @@ public class VillaOrderController extends BaseController{
         Date date1 = sdf.parse(date);
         List<VillaPrice> priceList = villaOrderService.getPriceList(date1);
         return Status.success().add("priceList",priceList);
+    }
+
+    //获取已报名别墅
+    @ResponseBody
+    @RequestMapping(value = "/getVillaRes", method = RequestMethod.POST)
+    public Status getVillaPay(HttpServletRequest request,String[] date) throws ParseException {
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        Map<String, String> residue = villaOrderService.getVillaPay(date);
+        return Status.success().add("residue",residue);
     }
 }
