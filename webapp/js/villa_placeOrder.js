@@ -74,13 +74,15 @@
         }
     });
 
-
-    //为radio法培方式设置点击样式
-    $("input[type='radio']").click(function() {
-        $(this).siblings(".villa-choose").css({"background":"url(./images/circle_choose.png)","background-size":"20px"});
-        $(this).parents("div").siblings("div").find(".villa-choose").css({"background":"url(./images/circle.png)","background-size":"20px"});
+    //别墅选择自定义点击样式,选择时与未选择时。
+    $(".villa-radio").click(function() {
+        if ($(this).find("input[name='villa-radio']").is(':checked')) {//别墅被选中时
+            $(this).find(".villa-choose").css({"background":"url(./images/circle_choose.png)","background-size":"20px"});
+        }else{
+            $(this).find(".villa-choose").css({"background":"url(./images/circle.png)","background-size":"20px"});
+        }
     });
-        //为支付方式的radio设置点击样式
+        //为支付方式的radio设置自定义点击样式
     $(".payMode").click(function() {
         $(this).children(".payModeImg").css({"background":"url(./images/circle_choose.png)","background-size":"20px"});
         $(this).parents().siblings("label").find(".payModeImg").css({"background":"url(./images/circle.png)","background-size":"20px"});
@@ -88,8 +90,21 @@
 
     //填写信息后，点击支付
     $(".footer p:last-child").click(function(){
-        $(".layer").show();
-        $(".payBox").show();
+        if ($(".villa-choose-content input").val()>0) {//报名人数不为空
+            if ($("input[name='villa-radio']:checked").length>0) {
+                if ($("input[name='realName']").val()!=""&&$("input[name='realNumber']").val()!="") {//真实姓名以及身份证不为空
+                    $(".layer").show();
+                    $(".payBox").show(); 
+                }else{
+                    alert("请完善您的信息");
+                }
+            }else{
+                alert("请选择别墅");
+            }
+            
+        }else{
+            alert("您尚未填写参加人数");
+        }
     });
     //选择支付方式后点击确认
     $(".toPay").click(function(){

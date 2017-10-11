@@ -37,7 +37,7 @@ html, body {
     transition: all .5s ease-out;
 }
 .swiper-slide-next,.swiper-slide-prev{
-	opacity: 0.5;
+	/*opacity: 0.5;*/
     transform: scale(0.9);
     /*-webkit-transform:scale(0.9);-moz-transform:scale(0.9);*/
     -moz-transition: all .5s ease-out;
@@ -147,11 +147,12 @@ html, body {
 	position:relative;
 	z-index: 100;
 	border:1px solid #f6f1f1;
-	border-radius: 10px;
+	border-radius: 8px;
 	margin-top: 7px;
 	text-align: center;
 	background-color: #f6f1f1;
-	width: 88px;
+	width:88px;
+
 }
 .dsp_type_Div_a p{
 	display: none;
@@ -168,18 +169,31 @@ html, body {
 	border-radius: 0 0 10px 10px;
 }
 .dsp_type_div{
+	position: relative;
+	/*padding-right:20px;*/
 	color: #000;
 	height: 32px;
 	/*background: #FFC3A9;*/
 	text-align: center;
 	line-height: 32px;
-	border-radius:10px; 
-display: flex;
-align-items: center;
-justify-content: center;
+	border-radius:6px; 
+	display: flex;
+	align-items: center;
+}
+.dsp_type_div_1 span,.dsp_type_div_3 span{
+	margin-left: 4px;
+	color: #555;
+}
+.dsp_type_div_2{
+	justify-content: center;
+	color: #555;
 }
 .dsp_type_div img{
-	margin-left: 4px;
+	right: 4px;
+	position: absolute;
+}
+.dsp_type_div_2 img{
+	right:12px;
 }
 .dsp_type{
 	padding: 0 10px;
@@ -190,9 +204,8 @@ justify-content: center;
 }
 
 .dsp_list{
-	padding:0 10px;
+	padding:0 16px;
 	position: relative;
-	height: 48px;
 	border-radius: 10px;
 	display: flex;
 	background-color: #f6f1f1;
@@ -200,11 +213,15 @@ justify-content: center;
 	flex-direction: column;
 }
 .dstype{
+	margin-top: 8px;
 	font-weight: normal;
-	color: black;
+	color: #555;
 	font-size: 16px;
+	/*margin-left:6px;*/
 }
 .dsp_infor{
+	margin-bottom:8px;
+	/*margin-left:6px;*/
 	display:flex;
 	justify-content: space-between;
 }
@@ -217,31 +234,31 @@ justify-content: center;
 	color: #999;
 }
 .packageid{
+	width: 20%;
 	filter:alpha(Opacity=0);-moz-opacity:0;opacity: 0;
 }
 .price_symbol{
 	color: #67c0ee;
-	font-size: 16px;
+	font-size: 18px;
 	/*padding-left: 16px;*/
 	/*padding-right: 2px;*/
 }
 .priceDiv{
 	position: absolute;
-	right: 10px;
+	right: 16px;
 }
 .price,.pointzero{
 	color: #67c0ee;
-	font-size: 16px;
+	font-size: 18px;
 }
 
 .footer{
 	height: 20px;
 }
 .description{
-	width: 80px;  
     height: 20px;  
-   	overflow: hidden;
-    text-overflow: ellipsis;  
-    white-space: nowrap;  
-   
+   	overflow: hidden;/*超出隐藏*/
+    /*text-overflow: ellipsis;  省略号*/
+    white-space: nowrap;  /*单行显示*/
+  	width: 4em;
 }

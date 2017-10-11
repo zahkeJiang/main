@@ -52,12 +52,10 @@ html, body {
     color: #f6f1f1;
 }
 /* 设备样式villaStyle */
-.villaStyle{
-    /*padding:8px 0px;*/
-}
+
 .villaStyle,.villaStyle ul{
    display: flex;
-   align-items: center;
+   /*align-items: center;*/
 }
 .villaStyle-title{
     min-width: 80px;
@@ -78,40 +76,52 @@ html, body {
     display: none;
 }
 .villaStyle ul li{ 
+    height:48px;
+    position: relative;
     /*display: inline-block;*/
     min-width: 56px;
 }
-.villaStyle p{
-    font-size: 14px;
-    line-height: 20px;
-    /*padding-top: 4px;*/
-}
-.line{
-    position: relative;
-    height: 1px;
-    background: #ddd;
-    margin:8px 10px 0 10px;
-}
-.line p{
+.villa-item-li-traingle{
     position: absolute;
-    bottom: 0;
+    z-index: 100;
+    bottom: 0px;
     left: 50%;
-    margin-left: -3px;
+    margin-left: -6px;
     width: 0;
     height: 0;
     border-left:6px solid transparent;
     border-right: 6px solid transparent;
     border-bottom: 6px solid #ccc;
 }
+.villaStyle p{
+    font-size: 14px;
+    line-height: 20px;
+    height: 28px;
+    /*padding-top: 4px;*/
+}
+.line{
+    position: relative;
+    height: 1px;
+    background: #ddd;
+    /*margin:0 10px 0 0px;*/
+}
 .villa-provide div.villaStyle-title{
     border-left: 4px solid #c99ff1;
 }
 .villa-item p.villa-item-hint{
     font-size: 14px;
-    margin:0 10px 0 10px;
+    margin:8px 10px 0 10px;
+    line-height: 20px;
     text-align: left;
-    padding-top: 10px;
+/*    padding: 10px 0;*/
+    height: 80px;
+    /*background: #454;*/
+    overflow:auto; 
+    /*text-indent: 2em;*/
     /*border-top: 1px solid #ddd;*/
+}
+.villa-item p.villa-item-hint::-webkit-scrollbar {/*隐藏滚动条*/
+    display: none;
 }
 .villa-provide p.villa-provide-hint{
     font-size: 12px;
@@ -226,8 +236,8 @@ html, body {
     text-align: center;
     line-height: 48px;
     width: 100%;
-    color: #B4DADA;
-    background: white;
+    color: #67c0ee;
+    background: #f6f1f1;
     position: fixed;
     bottom: 0;
 }

@@ -11,7 +11,7 @@ var dsname = $.cookie("dsname");//驾校名字
 $(function(){
 
     //发送post请求，获取班型列表
-    $.post("sdp.action",{"dsname":dsname},function(result){
+    $.post("sdp.action",{"dsName":dsname},function(result){
         $(".container").empty();
         // if (obj.status=="1") {
             var dshtml = "";
@@ -70,7 +70,7 @@ $(function(){
             $(this).css({"background":"#FFC3A9"});
             $(this).find("img").attr("src","./images/top.png");
         }else{
-            $(this).find("span").css({"color":"black"});
+            $(this).find("span").css({"color":"#555"});
             $(this).parent().css({"border":"1px solid #f6f1f1"});
             $(this).siblings("p").hide();
             $(this).css({"background":"#f6f1f1"});
