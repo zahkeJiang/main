@@ -77,13 +77,10 @@
 
 //选择人数，帐篷，室内，等
 $(".army-information input").blur(function(){
-  if ($(this).val()>99) {
-    $(this).val(99);
-    $(".armyNumberTotal").html(99);
-  }else if ($(this).val()<1){
+  if ($(this).val()<1){
     $(this).val(0);
     $(".armyNumberTotal").html(0);
-  }else if (1<=$(this).val()<=99) {
+  }else if ($(this).val()>=1) {
     $(".armyNumberTotal").html($(this).val());
   }else{
     $(this).val(0);
@@ -91,12 +88,12 @@ $(".army-information input").blur(function(){
   }
 });
     //为军旅报名人数添加加减功能
-    $(".armyNumber img:first-child").click(function(){
+    $(".armyNumber img:last-child").click(function(){
         var armyNumber = $(this).siblings("span").html();
         armyNumber++;
         $(this).siblings("span").html(armyNumber);
     })
-    $(".armyNumber img:last-child").click(function(){
+    $(".armyNumber img:first-child").click(function(){
         var armyNumber = $(this).siblings("span").html();
         if (armyNumber<1) {
             armyNumber=0;
@@ -117,11 +114,11 @@ $(".army-information input").blur(function(){
     //填写信息后，点击支付
     $(".footer p:last-child").click(function(){
         if ($(".army-information input").val()>0) {//报名人数不为空
-            if ($("input[name='realName']").val()!="") {//真实姓名不为空
+            if ($("input[name='realName']").val()!=""&&$("input[name='realNumber']").val()!="") {//真实姓名，身份证号不为空
                 $(".layer").show();
                 $(".payBox").show(); 
             }else{
-                alert("您输入您的真实姓名");
+                alert("请您完善信息");
             }
         }else{
             alert("您尚未填写报名人数");

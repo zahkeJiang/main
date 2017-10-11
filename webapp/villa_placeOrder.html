@@ -29,36 +29,42 @@
         <div class="villa-title">人数</div>
         <div class="villa-choose-content">
             <input type="number" name="报名人数" placeholder="请输入参加的人数">
-            <p>温馨提示：说明多少人可以选几栋别墅</p>
+            <p>温馨提示：别墅可容纳20-30人</p>
         </div>
     </div>
-    <div class="villa-information container">
-        <div class="villa-pic"></div>
-        <div class="villa-content">
-            <p>xxxx别墅</p>
-            <label for="a"><p class="villaText">别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信</p></label>
+    <label for="a">
+        <div class="villa-information container villa-radio">
+            <div class="villa-pic"></div>
+            <div class="villa-content">
+                <p>xxxx别墅</p>
+                <p class="villaText">别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信</p>
+            </div>
+            <input name="villa-radio" type="checkbox" id="a" value="别墅一" />
+            <div class="villa-choose"></div>
         </div>
-        <input name="villa-radio" type="radio" id="a" value="别墅一"/>
-        <div class="villa-choose"></div>
-    </div>
-    <div class="villa-information container">
-        <div class="villa-pic"></div>
-        <div class="villa-content">
-            <p>xxxx别墅</p>
-            <label for="b"><p class="villaText">别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信</p></label>
+    </label>
+    <label for="b">
+        <div class="villa-information container villa-radio">
+            <div class="villa-pic"></div>
+            <div class="villa-content">
+                <p>xxxx别墅</p>
+                <p class="villaText">别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信</p>
+            </div>
+            <input name="villa-radio" id="b" type="checkbox" value="别墅二" /> 
+            <div class="villa-choose"></div>
         </div>
-        <input name="villa-radio" id="b" type="radio" value="别墅一" /> 
-        <div class="villa-choose"></div>
-    </div>
-    <div class="villa-information container">
-        <div class="villa-pic"></div>
-        <div class="villa-content">
-            <p>xxxx别墅</p>
-            <label for="c"><p class="villaText">别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信</p></label>
+    </label>
+    <label for="c">
+        <div class="villa-information container villa-radio">
+            <div class="villa-pic"></div>
+            <div class="villa-content">
+                <p>xxxx别墅</p>
+                <p class="villaText">别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信</p>
+            </div>
+            <input name="villa-radio" id="c" type="checkbox" value="别墅三" />
+            <div class="villa-choose"></div>
         </div>
-        <input name="villa-radio" id="c" type="radio" value="别墅一" />
-        <div class="villa-choose"></div>
-    </div>
+    </label>
 </div>
 <!-- 日期 -->
 <div class="date villaBox">
@@ -93,7 +99,12 @@
     </div>
     <div class="villa-user-row">
         <p>真实姓名</p>
-        <input type="text" name="姓名" placeholder="请输入您的真实姓名">
+        <input type="text" name="realName" placeholder="请输入您的真实姓名">
+        <p>必填</p>
+    </div>
+    <div class="villa-user-row">
+        <p>身份证号</p>
+        <input type="text" name="realNumber" placeholder="请输入您的身份证号">
         <p>必填</p>
     </div>
     <div class="villa-user-row">
@@ -118,16 +129,18 @@
 <div class="payBox">
     <h2>选择支付方式</h2>
     <p>+</p>
-    <label for="balance">
+    <label for="JD">
         <div class="payMode" >
-            余额支付
-            <input name="villa-radio" id="balance" type="radio" value="余额支付" />
+            <img src="./images/JD.png" height="16px" width="16px">
+            &nbsp;京东支付
+            <input name="villa-radio" id="JD" type="radio" value="京东支付" />
             <div class="payModeImg"></div>
         </div>
     </label>
     <label for="alipay">
         <div class="payMode" >
-            支付宝支付
+            <img src="./images/payHint_alipay.png" height="16px" width="16px">
+            &nbsp;支付宝支付
             <input name="villa-radio" id="alipay" type="radio" value="支付宝支付" />
             <div class="payModeImg"></div>
         </div>

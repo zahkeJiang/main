@@ -191,16 +191,20 @@ html, body {
 /*支付选择弹窗*/
 .payBox{
 	display: none;
+	border-radius: 10px;
 	position: fixed;
 	background: white;
-	height: 40%;
-	width: 100%;
-	bottom: 0;
+	top: 50%;
+	margin-top: -130px;
+	height: 260px;
+	width: 80%;
+	margin-left: 10%;
 	z-index: 100;
 	text-align: center;
 	color: #999;
 }
 .payBox h2{
+	color: #555;
 	margin-top: 10px;
 	height: 40px;
 	line-height: 40px;
@@ -210,7 +214,7 @@ html, body {
 	position: absolute;
 	height: 20px;
 	width: 20px;
-	top:8px;
+	top:4px;
 	left: 16px;
 	font-size: 32px;
 	color: #ccc;
@@ -228,11 +232,12 @@ html, body {
 	display: flex;
 	/*justify-content: space-between;*/
 	height: 40px;
+	font-size: 14px;
 	align-items: center;
 	border-bottom: 1px solid #eee;
 }
 .payBox div.payMode label{
-	font:14px;
+	font-size: 14px;
 	height: 40px;
 	line-height: 40px;
 	text-align: left;
@@ -254,13 +259,15 @@ html, body {
 	background-size: 20px;
 }
 .toPay{
-	width: 100%;
-	line-height: 48px;
-	color: white;
-	height: 48px;
-    background:#B4DADA;
+	border-radius: 10px;
+	width: 60%;
+	margin-left: 20%;
+	line-height: 40px;
+	color: #f6f1f1;
+	height: 40px;
+    background:#54A0FF;
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
 }
 .layer{
 	background: #eee;

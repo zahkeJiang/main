@@ -104,9 +104,10 @@ span{
 
 
 .footer{
-	background-color: white;
-	box-shadow: 0 -20px 40px white;  
-	height: 60px;
+	border-top: 1px solid #eee;
+	background-color: #f6f1f1;
+	/*box-shadow: 0 -20px 40px white;  */
+	/*height: 60px;*/
 	/*background-color: gray;*/
 	width: 100%;
 	max-width: 768px;
@@ -115,12 +116,12 @@ span{
 }
 #submit{
 	-webkit-appearance: none; 
-	width: 80%;
-	margin-left:10%;
-	height: 40px;
-	border-radius: 5px;
+	width: 100%;
+	/*margin-left:10%;*/
+	height: 48px;
+	/*border-radius: 5px;*/
 	border: 0;
-	background-color:#67c0ee;
-	color:#fff;
+	background-color:#f6f1f1;
+	color:#67c0ee;
 }
 

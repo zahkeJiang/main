@@ -299,6 +299,9 @@
     // });
 
     $("#villa-item-li li").click(function(){
+        $(this).append("<p class='villa-item-li-traingle'></p>");
+        $(this).siblings("li").find(".villa-item-li-traingle").remove();
+
         var a =$(this).find("p").attr("text");
         // alert(a)
         $(".villa-item-hint").html(a);
