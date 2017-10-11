@@ -165,4 +165,24 @@ public class VillaOrderService {
 
         return map;
     }
+
+    public boolean checkOrder(VillaOrder villaOrder) {
+        String[] name = villaOrder.getVillaName().split(",");
+        String[] date = villaOrder.getDate().split(",");
+        for (String d : date){
+            List<VillaOrder> villaOrders = villaOrderMapper.getVillaOrderByDate(d);
+            for (int i=0;i<villaOrders.size();i++){
+                String[] payedName = villaOrders.get(i).getVillaName().split(",");
+                for (String p : payedName){
+                    for (String n : name){
+                        if (n.equals(p)){
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
 }
