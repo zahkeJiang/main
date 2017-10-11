@@ -191,9 +191,11 @@ html, body {
 .dsp_type_div img{
 	right: 4px;
 	position: absolute;
+	top: 50%;
+	margin-top: -8px;
 }
 .dsp_type_div_2 img{
-	right:12px;
+	right:4px;
 }
 .dsp_type{
 	padding: 0 10px;
@@ -245,13 +247,15 @@ html, body {
 }
 .priceDiv{
 	position: absolute;
+	top: 50%;
+	margin-top: -12px;
 	right: 16px;
 }
 .price,.pointzero{
 	color: #67c0ee;
 	font-size: 18px;
+	right: 20px;
 }
-
 .footer{
 	height: 20px;
 }
