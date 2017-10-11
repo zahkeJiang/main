@@ -15,9 +15,11 @@ body,html{
 .assess-header-icon{
 	height: 56px;
 	width: 56px;
-	background: red;
 	border-radius: 50%;
 	margin:12px 10px 12px 0;
+}
+.assess-header-icon img{
+	border-radius: 50%;
 }
 .assess-header-content{
 	height: 20px;
