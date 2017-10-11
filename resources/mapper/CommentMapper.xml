@@ -10,6 +10,7 @@
     <result column="picture" jdbcType="VARCHAR" property="picture" />
     <result column="star" jdbcType="INTEGER" property="star" />
     <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    comment_id, user_id, nickname, headimageurl, content, picture, star, type
+    comment_id, user_id, nickname, headimageurl, content, picture, star, type, comment_time
   </sql>
   <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.CommentExample" resultMap="BaseResultMap">
     select
@@ -105,10 +106,12 @@
   <insert id="insert" parameterType="com.bjpygh.gzh.bean.Comment">
     insert into comment (comment_id, user_id, nickname, 
       headimageurl, content, picture, 
-      star, type)
+      star, type, comment_time
+      )
     values (#{commentId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR}, 
       #{headimageurl,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
-      #{star,jdbcType=INTEGER}, #{type,jdbcType=INTEGER})
+      #{star,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{commentTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.Comment">
     insert into comment
@@ -137,6 +140,9 @@
       <if test="type != null">
         type,
       </if>
+      <if test="commentTime != null">
+        comment_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="commentId != null">
@@ -162,6 +168,9 @@
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
+      </if>
+      <if test="commentTime != null">
+        #{commentTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -198,6 +207,9 @@
       <if test="record.type != null">
         type = #{record.type,jdbcType=INTEGER},
       </if>
+      <if test="record.commentTime != null">
+        comment_time = #{record.commentTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,7 +224,8 @@
       content = #{record.content,jdbcType=VARCHAR},
       picture = #{record.picture,jdbcType=VARCHAR},
       star = #{record.star,jdbcType=INTEGER},
-      type = #{record.type,jdbcType=INTEGER}
+      type = #{record.type,jdbcType=INTEGER},
+      comment_time = #{record.commentTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,6 +254,9 @@
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
       </if>
+      <if test="commentTime != null">
+        comment_time = #{commentTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
@@ -252,7 +268,8 @@
       content = #{content,jdbcType=VARCHAR},
       picture = #{picture,jdbcType=VARCHAR},
       star = #{star,jdbcType=INTEGER},
-      type = #{type,jdbcType=INTEGER}
+      type = #{type,jdbcType=INTEGER},
+      comment_time = #{commentTime,jdbcType=TIMESTAMP}
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
 </mapper>

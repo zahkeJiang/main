@@ -1,5 +1,7 @@
 package com.bjpygh.gzh.bean;
 
+import java.util.Date;
+
 public class Comment {
     private Integer commentId;
 
@@ -16,6 +18,8 @@ public class Comment {
     private Integer star;
 
     private Integer type;
+
+    private String commentTime;
 
     public Integer getCommentId() {
         return commentId;
@@ -79,5 +83,13 @@ public class Comment {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getCommentTime() {
+        return commentTime;
+    }
+
+    public void setCommentTime(String commentTime) {
+        this.commentTime = commentTime;
     }
 }

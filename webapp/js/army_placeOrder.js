@@ -75,12 +75,21 @@
         }
     });
 
-    // var armyNumber = $(".army-choose input").val();
-    // if (armyNumber==""||armyNumber==null) {
-    //     $(".number").html(0);
-    // }else {
-    //     $(".aaa div").html(1);
-    // }
+//选择人数，帐篷，室内，等
+$(".army-information input").blur(function(){
+  if ($(this).val()>99) {
+    $(this).val(99);
+    $(".armyNumberTotal").html(99);
+  }else if ($(this).val()<1){
+    $(this).val(0);
+    $(".armyNumberTotal").html(0);
+  }else if (1<=$(this).val()<=99) {
+    $(".armyNumberTotal").html($(this).val());
+  }else{
+    $(this).val(0);
+    $(".armyNumberTotal").html(0);
+  }
+});
     //为军旅报名人数添加加减功能
     $(".armyNumber img:first-child").click(function(){
         var armyNumber = $(this).siblings("span").html();
@@ -107,8 +116,17 @@
 
     //填写信息后，点击支付
     $(".footer p:last-child").click(function(){
-        $(".layer").show();
-        $(".payBox").show();
+        if ($(".army-information input").val()>0) {//报名人数不为空
+            if ($("input[name='realName']").val()!="") {//真实姓名不为空
+                $(".layer").show();
+                $(".payBox").show(); 
+            }else{
+                alert("您输入您的真实姓名");
+            }
+        }else{
+            alert("您尚未填写报名人数");
+        }
+        
     });
     //选择支付方式后点击确认
     $(".toPay").click(function(){
@@ -118,4 +136,6 @@
     $(".payBox p").click(function(){
         $(".layer").hide();
         $(".payBox").hide();
-    })
+    });
+
+

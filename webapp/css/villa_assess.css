@@ -20,10 +20,8 @@ body,html{
 	margin:12px 10px 12px 0;
 }
 .assess-header-content{
-	font-size: 0;
-	height: 30px;
+	height: 20px;
 	flex: 1;
-	background: gray;
 	/*float: right;*/
 }
 .assess-header-content > div{
@@ -31,15 +29,15 @@ body,html{
 	border: 0;
 }
 .assess-header-star{
-	height: 30px;
+	height: 20px;
 	width: 80px;
-	background: green;
+	line-height: 20px;
 }
 .assess-header-time{
+	line-height: 20px;
 	float: right;
-	height: 30px;
-	width: 40px;
-	background: yellow;
+	height: 20px;
+	color: red
 }
 .assess-header-text{
 	height: 50px;
@@ -52,6 +50,5 @@ body,html{
 }
 .assess-pic{
 	border-top: 1px solid #eee;
-	height: 40px;
-	width: 100%;
+	padding-top: 10px;
 }

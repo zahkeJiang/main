@@ -136,34 +136,35 @@ var currentDay;
         //         }
         // });
         // 我模拟一个数据 实际需要后台接口
-        var priceList = [
-        {"date":"1","price":"100"},{"date":"2","price":"100"},{"date":"3","price":"100"},{"date":"4","price":"66"},{"date":"5","price":"66"},{"date":"6","price":"66"},{"date":"7","price":"66"},{"date":"8","price":"66"},{"date":"9","price":"100"},{"date":"10","price":"100"},
-        {"date":"11","num":"1"},{"date":"12","price":"66"},{"date":"13","price":"66"},{"date":"14","price":"66"},{"date":"15","price":"66"},{"date":"16","price":"100"},{"date":"17","price":"100"},{"date":"18","price":"66"},{"date":"19","price":"66"},{"date":"20","price":"66"},
-        {"date":"21","price":"66"},{"date":"22","num":"0"},{"date":"23","price":"100"},{"date":"24","price":"100"},{"date":"25","price":"66"},{"date":"26","price":"66"},{"date":"27","price":"66"},{"date":"28","num":"1"},{"date":"29","price":"66"},{"date":"30","num":"0"},{"date":"31","price":"80"}
-        ]
+        // var priceList = [
+        // {"date":"1","price":"100"},{"date":"2","price":"100"},{"date":"3","price":"100"},{"date":"4","price":"66"},{"date":"5","price":"66"},{"date":"6","price":"66"},{"date":"7","price":"66"},{"date":"8","price":"66"},{"date":"9","price":"100"},{"date":"10","price":"100"},
+        // {"date":"11","num":"1"},{"date":"12","price":"66"},{"date":"13","price":"66"},{"date":"14","price":"66"},{"date":"15","price":"66"},{"date":"16","price":"100"},{"date":"17","price":"100"},{"date":"18","price":"66"},{"date":"19","price":"66"},{"date":"20","price":"66"},
+        // {"date":"21","price":"66"},{"date":"22","num":"0"},{"date":"23","price":"100"},{"date":"24","price":"100"},{"date":"25","price":"66"},{"date":"26","price":"66"},{"date":"27","price":"66"},{"date":"28","num":"1"},{"date":"29","price":"66"},{"date":"30","num":"0"},{"date":"31","price":"80"}
+        // ]
         var priceNextList = [
         {"date":"1","num":"0"},{"date":"2","num":"1"},{"date":"3","price":"66"},{"date":"4","price":"66"},{"date":"5","price":"66"},{"date":"6","price":"100"},{"date":"7","price":"100"},{"date":"8","price":"100"},{"date":"9","price":"66"},{"date":"10","price":"66"},
         {"date":"11","num":"1"},{"date":"12","price":"66"},{"date":"13","price":"100"},{"date":"14","price":"100"},{"date":"15","price":"100"},{"date":"16","price":"66"},{"date":"17","price":"66"},{"date":"18","price":"66"},{"date":"19","price":"66"},{"date":"20","num":"2"},
         {"date":"21","num":"0"},{"date":"22","num":"0"},{"date":"23","price":"66"},{"date":"24","price":"66"},{"date":"25","price":"66"},{"date":"26","price":"66"},{"date":"27","price":"100"},{"date":"28","num":"1"},{"date":"29","price":"100"},{"date":"30","num":"0"},{"date":"31","price":"66"}
         ]
-if (currentMonth==9) {
-    for (var i = currentDay; i < priceList.length; i++) {
-        //这个判断主要根据后台返回数据，返回数据不是这个格式 做其他判断
-         if(priceList[i].price&&priceList[i].price!=null&&!priceList[i].num){
-            //有很多票，显示价格
-            $(".currentMonth0").eq(priceList[i].date-1).append("<p class='fixedhours'>¥"+priceList[i].price+"</p>");
-         }else if(priceList[i].num&&priceList[i].num!=null&&priceList[i].num!=0&&!priceList[i].price){
-            //没有票或者票很少 不显示价格显示灰色
-            // $(".currentMonth0").eq(priceList[i].date-1).addClass("small-ticket");
-            $(".currentMonth0").eq(priceList[i].date-1).append("<p class='fixedhours'>余"+priceList[i].num+"</p>");
-         }else if(priceList[i].num&&priceList[i].num==0&&!priceList[i].price){
-            //没有票或者票很少 不显示价格显示灰色
-            $(".currentMonth0").eq(priceList[i].date-1).addClass("no-ticket");
-            $(".currentMonth0").eq(priceList[i].date-1).append("<p class='fixedhours'>满</p>");
-         }
-    }
-}else if (currentMonth==10) {
-for (var i = 0; i < priceNextList.length; i++) {
+// if (currentMonth==9) {
+//     for (var i = currentDay; i < priceList.length; i++) {
+//         //这个判断主要根据后台返回数据，返回数据不是这个格式 做其他判断
+//          if(priceList[i].price&&priceList[i].price!=null&&!priceList[i].num){
+//             //有很多票，显示价格
+//             $(".currentMonth0").eq(priceList[i].date-1).append("<p class='fixedhours'>¥"+priceList[i].price+"</p>");
+//          }else if(priceList[i].num&&priceList[i].num!=null&&priceList[i].num!=0&&!priceList[i].price){
+//             //没有票或者票很少 不显示价格显示灰色
+//             // $(".currentMonth0").eq(priceList[i].date-1).addClass("small-ticket");
+//             $(".currentMonth0").eq(priceList[i].date-1).append("<p class='fixedhours'>余"+priceList[i].num+"</p>");
+//          }else if(priceList[i].num&&priceList[i].num==0&&!priceList[i].price){
+//             //没有票或者票很少 不显示价格显示灰色
+//             $(".currentMonth0").eq(priceList[i].date-1).addClass("no-ticket");
+//             $(".currentMonth0").eq(priceList[i].date-1).append("<p class='fixedhours'>满</p>");
+//          }
+//     }
+// }else
+ if (currentMonth==10) {
+    for (var i = currentDay; i < priceNextList.length; i++) {
         //这个判断主要根据后台返回数据，返回数据不是这个格式 做其他判断
          if(priceNextList[i].price&&priceNextList[i].price!=null&&!priceNextList[i].num){
             //有很多票，显示价格

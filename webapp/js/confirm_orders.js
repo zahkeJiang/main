@@ -34,10 +34,9 @@ $(function(){
 			}else{
 				coupons_sum = datas.data.price;
 			}
-			$(".price").html("&nbsp;"+userorder.orderPrice+".00");
-			$(".ds_price").html("¥&nbsp;"+(userorder.orderPrice+coupons_sum)+".00");
-			
-			$(".ds_coupon").html("¥&nbsp;"+coupons_sum+".00");
+			$(".price").html("&nbsp;"+userorder.orderPrice+".00");//需支付金额
+			$(".ds_price").html("¥&nbsp;"+userorder.originalPrice+".00");//套餐原价
+			$(".ds_coupon").html("¥&nbsp;"+coupons_sum+".00");//优惠券价格
 		}
 	},"json");
 	//支付宝支付

@@ -67,50 +67,53 @@
         <div class="villa-item villaBox">
             <div class="villaStyle">
                 <div class="villaStyle-title">娱乐项目</div>
-                <ul>
+                <ul id="villa-item-li">
                     <li>
                         <svg class="villa-item-icon" aria-hidden="true">
                             <use xlink:href="#icon-youxiyouxiji"></use>
                         </svg>
-                        <p>x-box</p>
+                        <p text="我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box">x-box</p>
                     </li>
                     <li>
                         <svg class="villa-item-icon" aria-hidden="true">
                             <use xlink:href="#icon-zhuoyou-fenlei"></use>
                         </svg>
-                        <p>桌游</p>
+                        <p text="我是桌游我是桌游我是桌游我是桌游我是桌游我是桌游我是桌游我是桌游我是桌游我是桌游我是桌游我是桌游">桌游</p>
                      </li>
                     <li>
                         <svg class="villa-item-icon" aria-hidden="true">
                             <use xlink:href="#icon-pingpangqiu"></use>
                         </svg>
-                        <p>乒乓球</p>
+                        <p text="我是乒乓球我是乒乓球我是乒乓球我是乒乓球我是乒乓球我是乒乓球我是乒乓球我是乒乓球我是乒乓球我是乒乓球我是乒乓球">乒乓球</p>
                     </li>
                     <li>
                         <svg class="villa-item-icon" aria-hidden="true">
                             <use xlink:href="#icon-yumaoqiu"></use>
                         </svg>
-                        <p>羽毛球</p>
+                        <p text="我是羽毛球我是羽毛球我是羽毛球我是羽毛球我是羽毛球我是羽毛球我是羽毛球我是羽毛球我是羽毛球我是羽毛球我是羽毛球">羽毛球</p>
                     </li>
                     <li>
                         <svg class="villa-item-icon" aria-hidden="true">
                             <use xlink:href="#icon-huatong"></use>
                         </svg>
-                        <p>KTV</p>
+                         <p text="我是KTV我是KTV我是KTV我是KTV我是KTV我是KTV我是KTV我是KTV我是KTV我是KTV我是KTV我是KTV我是KTV我是KTV">KTV</p>
                     </li>
                     <li>
                         <svg class="villa-item-icon" aria-hidden="true">
                             <use xlink:href="#icon-zhuoqiushixin"></use>
                         </svg>
-                        <p>桌球</p>
+                        <p text="我是桌球我是桌球我是桌球我是桌球我是桌球我是桌球我是桌球我是桌球我是桌球我是桌球我是桌球我是桌球我是桌球我是桌球我是桌球我是桌球我是桌球我是桌球">桌球</p>
                     </li>
                     <li>
                         <svg class="villa-item-icon" aria-hidden="true">
                             <use xlink:href="#icon-changshuzuqiuchaojiliansaigai"></use>
                         </svg>
-                        <p>桌上足球</p>
+                        <p text="我是桌上足球我是桌上足球我是桌上足球我是桌上足球我是桌上足球我是桌上足球我是桌上足球我是桌上足球我是桌上足球">桌上足球</p>
                     </li>
                 </ul>
+            </div>
+            <div class="line">
+                <p></p>
             </div>
             <p class="villa-item-hint">说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明</p>
         </div>
@@ -295,5 +298,10 @@
         
     // });
 
+    $("#villa-item-li li").click(function(){
+        var a =$(this).find("p").attr("text");
+        // alert(a)
+        $(".villa-item-hint").html(a);
+    });
 </script>
 </html>

@@ -1,6 +1,7 @@
 package com.bjpygh.gzh.bean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CommentExample {
@@ -621,6 +622,66 @@ public class CommentExample {
 
         public Criteria andTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("type not between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentTimeIsNull() {
+            addCriterion("comment_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentTimeIsNotNull() {
+            addCriterion("comment_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentTimeEqualTo(Date value) {
+            addCriterion("comment_time =", value, "commentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentTimeNotEqualTo(Date value) {
+            addCriterion("comment_time <>", value, "commentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentTimeGreaterThan(Date value) {
+            addCriterion("comment_time >", value, "commentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("comment_time >=", value, "commentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentTimeLessThan(Date value) {
+            addCriterion("comment_time <", value, "commentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentTimeLessThanOrEqualTo(Date value) {
+            addCriterion("comment_time <=", value, "commentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentTimeIn(List<Date> values) {
+            addCriterion("comment_time in", values, "commentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentTimeNotIn(List<Date> values) {
+            addCriterion("comment_time not in", values, "commentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentTimeBetween(Date value1, Date value2) {
+            addCriterion("comment_time between", value1, value2, "commentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCommentTimeNotBetween(Date value1, Date value2) {
+            addCriterion("comment_time not between", value1, value2, "commentTime");
             return (Criteria) this;
         }
     }

@@ -1,6 +1,7 @@
 package com.bjpygh.gzh.controller;
 
 import com.bjpygh.gzh.bean.DsInformation;
+import com.bjpygh.gzh.bean.DsPackage;
 import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.service.DsInfoService;
 import com.bjpygh.gzh.service.PackageService;
@@ -37,12 +38,12 @@ public class PackageController extends BaseController {
     //获取驾校套餐列表接口，为空时返回驾校信息
     @ResponseBody
     @RequestMapping(value = "/sdp.action", method = RequestMethod.POST)
-    public Status getPackage(HttpServletRequest request,String dsname){
+    public Status getPackage(HttpServletRequest request,DsPackage dsPackage){
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
         }
-        return packageService.getPackageList(dsname);
+        return packageService.getPackageList(dsPackage);
     }
 
     //获取驾校列表
