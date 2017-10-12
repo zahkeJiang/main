@@ -152,6 +152,7 @@ public class PayController extends BaseController {
     }
 
     //别墅订单提交校验接口
+    @ResponseBody
     @RequestMapping(value = "/villaCheck", method = RequestMethod.POST)
     public Status VillaCheck(String ordernumber) throws IOException {
 
@@ -201,7 +202,7 @@ public class PayController extends BaseController {
 
         String priKey = PropertyUtils.getProperty("wepay.merchant.rsaPrivateKey");
         String desKey = PropertyUtils.getProperty("wepay.merchant.desKey");
-
+        
         List<String> unSignedKeyList = new ArrayList<String>();
         unSignedKeyList.add("sign");
 
