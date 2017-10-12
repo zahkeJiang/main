@@ -202,7 +202,7 @@ public class PayController extends BaseController {
 
         String priKey = PropertyUtils.getProperty("wepay.merchant.rsaPrivateKey");
         String desKey = PropertyUtils.getProperty("wepay.merchant.desKey");
-        
+        System.out.println("priKey="+priKey+"   desKey="+desKey);
         List<String> unSignedKeyList = new ArrayList<String>();
         unSignedKeyList.add("sign");
 
