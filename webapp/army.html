@@ -115,7 +115,7 @@
             <div class="line">
                 <p></p>
             </div>
-            <p class="villa-item-hint">说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明</p>
+            <p class="villa-item-hint">我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box我是x-box</p>
         </div>
         <div class="villa-provide villaBox">
             <p class="villa-provide-hint">帐篷不另收费，室内要额外收取20/人/晚的费用</p>
@@ -181,7 +181,7 @@
             <ul>
                 <li><a href="villa_roomCode.html">退房须知</a></li>
                 <li><a href="villa_roomCode.html">房屋守则</a>|</li>
-                <li><a href="villa_assess.html">评价</a>|</li>
+                <li id="assess"><a>评价</a>|</li>
             </ul>
         </div>
         <div class="villa-additional-price villaBox">
@@ -214,7 +214,7 @@
     </div>
 </div>
 <!-- 底部footer -->
-    <a href="army_placeOrder.html"><div class="footer">去预定</div></a>
+    <!-- <a href="army_placeOrder.html"><div class="footer">去预定</div></a> -->
 </body>
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
@@ -222,7 +222,7 @@
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2&ak=您的密钥"></script>
 <!--<script type="text/javascript" src="js/isWeiXin.js"></script>-->
 <script src="./js/calendar.js"></script>
- 
+<script src="./js/army.js"></script>
   <script>
   //幻灯片播放
     var swiper = new Swiper('.swiper-container', {
@@ -297,14 +297,6 @@
     //     // alert($(this).children(".borderr").html());
         
     // });
-
-    $("#villa-item-li li").click(function(){
-        $(this).append("<p class='villa-item-li-traingle'></p>");
-        $(this).siblings("li").find(".villa-item-li-traingle").remove();
-
-        var a =$(this).find("p").attr("text");
-        // alert(a)
-        $(".villa-item-hint").html(a);
-    });
+   
 </script>
 </html>

@@ -128,7 +128,7 @@ html, body {
 	height: 28px;
 	flex: 1;
 	padding: 0 10px;
-	color: #999;
+	color: #555;
 	font-size: 14px;
 }
 .villa-user-row input:-ms-input-placeholder{
@@ -172,8 +172,9 @@ html, body {
 }
 .footer p:first-child{
 	width: 70%;
-	background: white;
-	height: 48px;
+	background: #f6f1f1;
+	height: 47px;
+	border-top: 1px solid #eee;
 	line-height: 48px;
 	padding-left: 28px;
 	font-size: 18px;
@@ -263,7 +264,7 @@ html, body {
 	width: 60%;
 	margin-left: 20%;
 	line-height: 40px;
-	color: #f6f1f1;
+	color: white;
 	height: 40px;
     background:#54A0FF;
     position: absolute;
