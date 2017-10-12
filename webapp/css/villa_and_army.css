@@ -81,12 +81,12 @@
 
 .swiper-slide-active {
     transform: scale(1);
-    transition: all 1s ease-out;
+    transition: all 0.5s ease-out;
 }
 .swiper-slide-next,.swiper-slide-prev{
     transform: scale(0.9);
-    -moz-transition: all 1s ease-out;
-    -webkit-transition: all 1s ease-out;
-    -o-transition: all 1s ease-out;
-    transition: all 1s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -webkit-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out;
 } 

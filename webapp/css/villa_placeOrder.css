@@ -140,7 +140,7 @@ html, body {
 	height: 28px;
 	flex: 1;
 	padding: 0 10px;
-	color: #999;
+	color: #555;
 	font-size: 14px;
 }
 .villa-user-row input:-ms-input-placeholder{
@@ -185,7 +185,8 @@ html, body {
 .footer p:first-child{
 	width: 70%;
 	background: #f6f1f1;
-	height: 48px;
+	height: 47px;
+	border-top: 1px solid #eee;
 	line-height: 48px;
 	padding-left: 28px;
 	font-size: 18px;

@@ -1,5 +1,12 @@
+var type = "";
+function ShowMessage() { 
+	var thisURL = document.URL;     
+	var getval = thisURL.split('?')[1];
+	type = getval.split("=")[1];
+} 
+window.onload=ShowMessage(); 
 $(function(){
-	$.post("getComment",{"type":3},function(datas){//请求参数 ：type(1为别墅评论 2为驾校 3为军旅)
+	$.post("getComment",{"type":type},function(datas){//请求参数 ：type(1为别墅评论 2为驾校 3为军旅)
 		if (datas.status==0) {
 			var villa_assess_list = datas.data.Comment;
 			var html = "";

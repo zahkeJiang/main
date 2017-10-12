@@ -232,7 +232,8 @@ html, body {
 }
 /*底部footer*/
 .footer{
-    height: 48px;
+    border-top: 1px solid #eee;
+    height: 47px;
     text-align: center;
     line-height: 48px;
     width: 100%;
