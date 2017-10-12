@@ -96,6 +96,9 @@
       order by ${orderByClause}
     </if>
   </select>
+    <select id="getVillaOrderByDate" parameterType="string" resultMap="BaseResultMap">
+        SELECT * FROM villa_order WHERE date LIKE '%' #{thisDate} '%' AND order_status != 6 AND order_status != 0
+    </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

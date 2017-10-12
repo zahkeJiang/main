@@ -151,6 +151,20 @@ public class PayController extends BaseController {
 
     }
 
+    //别墅订单提交校验接口
+    @RequestMapping(value = "/villaCheck", method = RequestMethod.POST)
+    public Status VillaCheck(String ordernumber) throws IOException {
+
+        VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(ordernumber).get(0);
+        if (villaOrderService.checkOrder(villaOrder)){
+            return Status.success();
+        }else{
+            return Status.fail(-20,"您的套餐中别墅或日期已被预约");
+        }
+
+    }
+
+
     //支付宝军旅预约支付接口
     @RequestMapping(value = "/armyPay", method = RequestMethod.GET)
     public void ArmyPay(HttpServletResponse response,String ordernumber) throws IOException {

@@ -8,11 +8,9 @@ import com.bjpygh.gzh.dao.VillaOrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class VillaOrderService {
@@ -106,13 +104,14 @@ public class VillaOrderService {
             villaPrice.setDate(i+1+"");
 
             //从数据库获取本日的报名数
-            VillaOrderExample example = new VillaOrderExample();
-            VillaOrderExample.Criteria criteria = example.createCriteria();
             String thisDate = format.format(newDate);
-            criteria.andDateLike(thisDate);
-            List<VillaOrder> villaOrders = villaOrderMapper.selectByExample(example);
+            List<VillaOrder> villaOrders = villaOrderMapper.getVillaOrderByDate(thisDate);
             if (villaOrders.size()>0){
-                villaPrice.setNum(villaOrders.size()+"");
+                int num = 0;
+                for (VillaOrder o : villaOrders){
+                    num = o.getVillaName().split(",").length+num;
+                }
+                villaPrice.setNum(3-num+"");
             }else{
                 //根据周几来设置价格
                 if (newDate.getDay()>1){
@@ -144,5 +143,46 @@ public class VillaOrderService {
 
     public void updateOrder(VillaOrder villaOrder) {
         villaOrderMapper.updateByPrimaryKey(villaOrder);
+    }
+
+    public Map<String, String> getVillaPay(String[] date) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Map<String, String> map = new HashMap<String, String>();
+        for (int i=0;i<date.length;i++){
+//            Date date1 = sdf.parse(date[i]);
+
+            List<VillaOrder> villaOrders = villaOrderMapper.getVillaOrderByDate(date[i]);
+            String name = "";
+            for (VillaOrder order : villaOrders){
+                if (name!=""){
+                    name= name + ","+order.getVillaName();
+                }else {
+                    name= order.getVillaName();
+                }
+            }
+            map.put(date[i],name);
+        }
+
+        return map;
+    }
+
+    public boolean checkOrder(VillaOrder villaOrder) {
+        String[] name = villaOrder.getVillaName().split(",");
+        String[] date = villaOrder.getDate().split(",");
+        for (String d : date){
+            List<VillaOrder> villaOrders = villaOrderMapper.getVillaOrderByDate(d);
+            for (int i=0;i<villaOrders.size();i++){
+                String[] payedName = villaOrders.get(i).getVillaName().split(",");
+                for (String p : payedName){
+                    for (String n : name){
+                        if (n.equals(p)){
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 }

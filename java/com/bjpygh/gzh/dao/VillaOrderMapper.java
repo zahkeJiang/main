@@ -27,4 +27,6 @@ public interface VillaOrderMapper {
     int updateByPrimaryKeySelective(VillaOrder record);
 
     int updateByPrimaryKey(VillaOrder record);
+
+    List<VillaOrder> getVillaOrderByDate(String thisDate);
 }
