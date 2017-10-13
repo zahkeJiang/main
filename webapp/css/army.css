@@ -76,10 +76,13 @@ html, body {
     display: none;
 }
 .villaStyle ul li{ 
-    height:48px;
+    height:40px;
     position: relative;
     /*display: inline-block;*/
     min-width: 56px;
+}
+.villaStyle ul#villa-item-li li{
+    height: 48px;
 }
 .villa-item-li-traingle{
     position: absolute;
@@ -186,20 +189,21 @@ html, body {
 .ontime p:nth-child(2){
     height: 24px;
     line-height: 24px;
-     width: 84px;
+     /*width: 84px;*/
     color: #54A0FF;
     font-size: 14px;
-    margin:0 2px;
-    /*padding: 4px 10px;*/
-    background:#eee;
+         margin-left:4px;
+    padding: 0 10px;
+    background:#dfdfdf;
 }
 .outtime p:nth-child(2){
     height: 24px;
     line-height: 24px;
     color:orange;
-     width: 84px;
-    /*padding: 4px 10px;*/
-    background:#eee;
+         margin-left:4px;
+     /*width: 84px;*/
+    padding: 0 10px;
+    background:#dfdfdf;
 }
 .villa-map ul{
     height: 24px;

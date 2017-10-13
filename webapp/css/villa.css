@@ -179,21 +179,21 @@ html, body {
 .ontime p:nth-child(2){
     height: 24px;
     line-height: 24px;
-     width: 84px;
+     /*width: 60px;*/
     color: #54A0FF;
     font-size: 14px;
     margin-left:4px;
-    /*padding: 4px 10px;*/
-    background:#eee;
+    padding: 0 10px;
+    background:#dfdfdf;
 }
 .outtime p:nth-child(2){
     height: 24px;
     line-height: 24px;
     color:orange;
-     width: 84px;
+     /*width: 60px;*/
      margin-left:4px;
-    /*padding: 4px 10px;*/
-    background:#eee;
+    padding: 0 10px;
+    background:#dfdfdf;
 }
 .villa-map ul{
     height: 24px;
