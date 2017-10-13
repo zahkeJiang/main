@@ -21,7 +21,7 @@ public class PropertyUtils {
 	}
 
 	public static String getProperty(String key) {
-		if (key!=null&&key!="") {
+		if (key==null||key=="") {
 			return null;
 		}
 		return config_map.get(key);
@@ -33,6 +33,7 @@ public class PropertyUtils {
 		try {
 			p.load(is);
 			if (config.equals(name)) {
+
 				for (Map.Entry<Object,Object> e : p.entrySet()) {
 					config_map.put((String) e.getKey(), (String) e.getValue());
 				}
