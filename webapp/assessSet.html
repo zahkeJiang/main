@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>评论</title>
+	<link href="css/base.css" rel="stylesheet" type="text/css"/>
+	<link href="css/assessSet.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+	<div class="assessBox">
+		<div class="assessBox-row">
+			<span class="title">娱乐</span>
+			<ul>
+				<li><img src="./images/starOFF.png" height="16px"></li>
+				<li><img src="./images/starOFF.png" height="16px"></li>
+				<li><img src="./images/starOFF.png" height="16px"></li>
+				<li><img src="./images/starOFF.png" height="16px"></li>
+				<li><img src="./images/starOFF.png" height="16px"></li>
+			</ul>
+			<span class="satisfaction satisfaction01"></span>
+		</div>
+		<div class="assessBox-row">
+			<span class="title">配套</span>
+			<ul>
+				<li><img src="./images/starOFF.png" height="16px"></li>
+				<li><img src="./images/starOFF.png" height="16px"></li>
+				<li><img src="./images/starOFF.png" height="16px"></li>
+				<li><img src="./images/starOFF.png" height="16px"></li>
+				<li><img src="./images/starOFF.png" height="16px"></li>
+			</ul>
+			<span class="satisfaction satisfaction02"></span>
+		</div>
+		<div class="assessBox-row">
+			<span class="title">住宿</span>
+			<ul>
+				<li><img src="./images/starOFF.png" height="16px"></li>
+				<li><img src="./images/starOFF.png" height="16px"></li>
+				<li><img src="./images/starOFF.png" height="16px"></li>
+				<li><img src="./images/starOFF.png" height="16px"></li>
+				<li><img src="./images/starOFF.png" height="16px"></li>
+			</ul>
+			<span class="satisfaction satisfaction03"></span>
+		</div>
+		<div class="assessBox-input">
+			<textarea type="text" name="assess" placeholder="说点什么" rows="3" onscroll="this.rows++" ></textarea>
+		</div>
+		<!--    照片添加    -->
+        <div class="assessBox-picture"></div>
+		<div class="assessBox-add-picture">
+			<div>
+				<img src="./images/camera.png" height="16px">
+				<p>添加照片</p>
+			</div>
+			 <input type="file" name="file" id="file" value="" accept="image/*"  multiple="multiple"  onchange="imgChange('assessBox-picture')" />
+		</div>
+		<div class="submit">提交</div>
+		<div class="assessBox-user">
+			<div class="circle"></div>
+			<span class="niming">匿名</span>
+			<span class="niming_hint">你写的评价会以匿名的形式展出</span>
+		</div>
+
+	</div>
+	<div class="hint">请对服务进行评价</div>
+</body>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script src="js/jquery.cookie.js" type="text/javascript"></script>
+<!--<script type="text/javascript" src="js/isWeiXin.js"></script>-->
+<script type="text/javascript" src="js/assessSet.js"></script>
+<script type="text/javascript">
+    
+        function imgChange(obj) {
+            //获取点击的文本框
+            var file = document.getElementById("file");
+            //存放图片的父级元素
+            var imgContainer = document.getElementsByClassName(obj)[0];
+            //获取的图片文件
+            var fileList = file.files;
+            //文本框的父级元素
+            var imgArr = [];
+            //遍历获取到得图片文件
+            for (var i = 0; i < fileList.length; i++) {
+                var imgUrl = window.URL.createObjectURL(file.files[i]);
+                imgArr.push(imgUrl);
+                var img = document.createElement("img");
+                img.setAttribute("src", imgArr[i]);
+
+                var imgAdd = document.createElement("div");
+                imgAdd.setAttribute("class", "assessBox-picture-img");
+
+                var deleteButton = document.createElement("span");
+                deleteButton.setAttribute("class", "delete");
+
+                imgAdd.appendChild(img);
+                imgAdd.appendChild(deleteButton);
+                imgContainer.appendChild(imgAdd);
+            };
+            imgRemove();
+        };
+
+        function imgRemove() {
+            $(".delete").click(function(){
+                $(this).parent().remove();
+            })
+            
+        };
+
+    </script>
+</html>
