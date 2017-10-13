@@ -14,14 +14,17 @@
 		<context:exclude-filter type="annotation"  
             expression="org.springframework.stereotype.Controller" />  
 	</context:component-scan>
+
     <!--==========================数据源事务控制，xxx======================-->
-    <context:property-placeholder location="classpath:dbconfig.properties"/>
+    <context:property-placeholder location="classpath:conf.properties,classpath:dbconfig.properties"/>
+    <!--<context:property-placeholder location="classpath:dbconfig.properties"/>-->
     <bean id="pooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
         <property name="driverClass" value="${jdbc.driverClass}"></property>
         <property name="user" value="${jdbc.user}"></property>
         <property name="password" value="${jdbc.password}"></property>
     </bean>
+
 
     <!--=========================配置和mybatis的整合=====================-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

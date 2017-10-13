@@ -189,11 +189,11 @@ public class PayController extends BaseController {
 //        threeDES.encryptDESCBC();
         JdOrderPay jdOrderPay = new JdOrderPay();
         jdOrderPay.setVersion("V2.0");
-        jdOrderPay.setMerchant("110406033");
+        jdOrderPay.setMerchant("110406033002");
         jdOrderPay.setTradeNum(dsOrder.getOrderNumber());
         jdOrderPay.setTradeName("驾校报名费用");
         jdOrderPay.setTradeTime(formatterJ.format(new Date()));
-        jdOrderPay.setAmount(dsOrder.getOrderPrice()+"");
+        jdOrderPay.setAmount(dsOrder.getOrderPrice()+"00");
         jdOrderPay.setOrderType("1");
         jdOrderPay.setCurrency("CNY");
         jdOrderPay.setCallbackUrl("http://gzpt.bjpygh.com/ds_pay.html");
