@@ -99,7 +99,8 @@ html, body {
 .villaStyle p{
     font-size: 14px;
     line-height: 20px;
-    height: 28px;
+    height: 20px;
+    /*color: red;*/
     /*padding-top: 4px;*/
 }
 .line{
@@ -241,7 +242,7 @@ html, body {
     text-align: center;
     line-height: 48px;
     width: 100%;
-    color: #67c0ee;
+    color: #4ea0ff;
     background: #f6f1f1;
     position: fixed;
     bottom: 0;

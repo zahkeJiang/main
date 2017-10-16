@@ -1,7 +1,7 @@
 html, body {
     position: relative;
 /*    height: 100%;*/
-    background:#54A0FF;
+    background:#B4DADA;
     color: #999;
     font-family: "兰亭黑";
 }
@@ -59,7 +59,7 @@ html, body {
     margin: 10px 20px;
 }
 .villa-information h2{
-    color: #54A0FF;
+    color: #4ea0ff;
     margin-bottom: 10px;
 }
 .villa-information div p{
@@ -135,7 +135,7 @@ html, body {
     /*background-color: green;*/
 }
 .villa-map-address{
-    background-color: #54A0FF;
+    background-color: #B4DADA;
     font-size: 14px;
     display: flex;
     align-items: center;
@@ -180,7 +180,7 @@ html, body {
     height: 24px;
     line-height: 24px;
      /*width: 60px;*/
-    color: #54A0FF;
+    color: #4ea0ff;
     font-size: 14px;
     margin-left:4px;
     padding: 0 10px;
@@ -215,9 +215,10 @@ html, body {
     color: #777;
     line-height: 24px;
 }
-.villa-additional-price p{
+.villa-additional-price a{
     font-size: 14px;
     line-height: 20px;
+    color: #999;
 }
 /*date*/
 .date{
@@ -231,7 +232,7 @@ html, body {
     text-align: center;
     line-height: 48px;
     width: 100%;
-    color: #54A0FF;
+    color: #4ea0ff;
     background: #f6f1f1;
     position: fixed;
     bottom: 0;

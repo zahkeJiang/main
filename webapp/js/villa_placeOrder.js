@@ -1,10 +1,11 @@
+$(function(){
 
      //日历渲染--------------------------------------------------------
     renderHtml(0);
     // 表格中显示日期
     showCalendarData(0,0);
     //展示价格
-    setPrice(0);
+    setPrice(getYandM(0).dataPara+"");
 
 //    日历结束
 //    点击上一月
@@ -14,14 +15,14 @@
         // 第二个参数 0为本月 上一个月1，下一个月-1
         ++monthNum;
         showCalendarData(0,monthNum);
-        setPrice(getYandM(monthNum).dataPara);
+        setPrice(getYandM(monthNum).dataPara+"");
     });
 //    点击下一月
     $('.sit-next-month').on('click',function(e){
         e.preventDefault();
         --monthNum;
         showCalendarData(0,monthNum);
-        setPrice(getYandM(monthNum).dataPara);
+        setPrice(getYandM(monthNum).dataPara+"");
     });
 // 获取当前时间
     var myDate = new Date(); 
@@ -88,30 +89,79 @@
         $(this).parents().siblings("label").find(".payModeImg").css({"background":"url(./images/circle.png)","background-size":"20px"});
     });
 
+var realName="";
+var peopleNumber ="";
+var realNumber = "";
+var villaNames = [];//用于存储别墅的数组
+var villaName="";
+var re = /^[1-9]+[0-9]*]*$/; //正整数
+var date = "2017-11-11";
+var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;//身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X 
     //填写信息后，点击支付
     $(".footer p:last-child").click(function(){
-        if ($(".villa-choose-content input").val()>0) {//报名人数不为空
-            if ($("input[name='villa-radio']:checked").length>0) {
-                if ($("input[name='realName']").val()!=""&&$("input[name='realNumber']").val()!="") {//真实姓名以及身份证不为空
-                    $(".layer").show();
-                    $(".payBox").show(); 
+        realName = $("input[name='realName']").val();//获取姓名
+        peopleNumber = $(".villa-choose-content input").val();//获取报名人数
+
+        villaNames=[];
+        $("input[name='villa-radio']:checkbox").each(function () {//便利所有checkbox，
+            if ($(this).is(":checked")) {
+                villaNames.push($(this).attr("value"));
+            }
+        });
+        villaName = JSON.stringify(villaNames);//将对象转化为json字符串
+
+        realNumber = $("input[name='realNumber']").val();//获取身份证号码
+
+        if (re.test(peopleNumber) && peopleNumber>0) {//报名人数不为空并且是正整数
+            if ($("input[name='villa-radio']:checked").length>0) {//别墅选择的个数大于0
+                if (realName!="") {//真实姓名不为空
+                    if (reg.test(realNumber)) {
+                        $.cookie("realNumber",realNumber);//身份证号码
+                        $.cookie("realName",realName);//真实姓名
+                        $.cookie("date",date);//选择日期
+                        $.cookie("peopleNumber",peopleNumber);//选择人数
+                        $.cookie("villaName",villaName);//别墅名称
+                        console.log(realName+"/"+date+"/"+peopleNumber+"/"+villaName+"/"+realNumber)
+                        $(".layer").show();
+                        $(".payBox").show(); 
+                    }else{
+                        alert("身份证格式不对");
+                    }
+                    
                 }else{
-                    alert("请完善您的信息");
+                    alert("输入您的真实姓名");
                 }
             }else{
                 alert("请选择别墅");
             }
             
         }else{
-            alert("您尚未填写参加人数");
+            alert("请填写正确的报名人数");
         }
     });
+
+
     //选择支付方式后点击确认
     $(".toPay").click(function(){
-        window.location.href="payHint.html";
+        var payMode = $("input[name='payMode-radio']:checked").val();
+        console.log(payMode);
+        if (payMode=="JD") {//京东支付
+            
+        }else if (payMode=="aliPay") {//支付宝支付
+            $.post("createVillaOrder",{"villaName":villaName,"date":date,"peopleNumber":peopleNumber,"realName":realName},function(datas){
+                if (datas.status==0) {
+                    var orderNumber = datas.data.orderNumber;
+                    console.log(orderNumber);
+                    // window.location.href="payHint.html?orderNumber="+orderNumber;
+                }
+            },"json");
+        }      
     });
+    
     //关闭弹窗
     $(".payBox p").click(function(){
         $(".layer").hide();
         $(".payBox").hide();
-    })
+    });
+
+});

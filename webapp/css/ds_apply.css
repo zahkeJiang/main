@@ -1,7 +1,7 @@
 html, body {
     position: relative;
     /*height: 100%;*/
-    background:#67c0ee;
+    background:#a6d4ff;
     color: #999;
 }
 .instroduction{
@@ -122,6 +122,6 @@ span{
 	/*border-radius: 5px;*/
 	border: 0;
 	background-color:#f6f1f1;
-	color:#67c0ee;
+	color:#4ea0ff;
 }
 

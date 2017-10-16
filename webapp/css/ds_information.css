@@ -2,7 +2,7 @@
 html, body {
     position: relative;
     /*height: 100%;*/
-    background:#67c0ee;
+    background:#a6d4ff;
     color: #999;
     /*font-family: "兰亭黑";*/
 }
@@ -96,7 +96,7 @@ html, body {
 	background-color: #ddd;
 }
 .abstract{
-	color: #67c0ee;
+	color: #4ea0ff;
 	font-weight: normal;
 	height: 40px;
 	line-height: 40px;
@@ -240,7 +240,7 @@ html, body {
 	filter:alpha(Opacity=0);-moz-opacity:0;opacity: 0;
 }
 .price_symbol{
-	color: #67c0ee;
+	color: #4ea0ff;
 	font-size: 18px;
 	/*padding-left: 16px;*/
 	/*padding-right: 2px;*/
@@ -252,7 +252,7 @@ html, body {
 	right: 16px;
 }
 .price,.pointzero{
-	color: #67c0ee;
+	color: #4ea0ff;
 	font-size: 18px;
 	right: 20px;
 }

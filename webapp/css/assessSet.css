@@ -1,5 +1,5 @@
 body{
-	background: #54A0FF;
+	background: #4ea0ff;
     position: relative;
     color: #999;
     font-family: "微软雅黑"
@@ -135,8 +135,8 @@ body{
 	border-radius: 20px;
 	text-align: center;
 	line-height: 38px;
-	border:1px solid #54A0FF;
-	color: #54a0ff;
+	border:1px solid #4ea0ff;
+	color: #4ea0ff;
 	margin-top: 20px;
 }
 .assessBox-user{
@@ -153,7 +153,7 @@ body{
 .assessBox-user span.niming{
 	font-size: 12px;
 	margin-left: 32px;
-	color: #54a0ff;
+	color: #4ea0ff;
 }
 .assessBox-user div.circle{
 	position: absolute;
@@ -163,7 +163,7 @@ body{
 	top: 50%;
 	margin-top: -9px;
 	left: 4px;
-	border:1px solid #54A0FF;
+	border:1px solid #4ea0ff;
 }
 .assessBox-user div.circle-choose{
 	/*display: none;*/
@@ -174,7 +174,7 @@ body{
 	top: 50%;
 	margin-top: -8px;
 	left: 1px;
-	background: #54a0ff;
+	background: #4ea0ff;
 }
 .hint{
 	display: none;
