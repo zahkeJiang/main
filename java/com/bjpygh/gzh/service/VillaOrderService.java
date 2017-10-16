@@ -31,7 +31,7 @@ public class VillaOrderService {
         for (String date : dates){
             String[] ds = date.split("-");
             Date d = new Date(Integer.parseInt(ds[0]),Integer.parseInt(ds[1]),Integer.parseInt(ds[2]));
-            if (d.getDay()>1){
+            if (d.getDay()>0&&d.getDay()<5){
                 villaPrice +=66;
             }else {
                 villaPrice +=100;
@@ -39,7 +39,7 @@ public class VillaOrderService {
         }
         villaPrice *= villaNum;
         villaPrice *= villaOrder.getPeopleNumber();
-        villaOrder.setVillaPrice(villaPrice);
+        villaOrder.setVillaPrice(villaPrice/2);
 
         //创建时间
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -114,7 +114,7 @@ public class VillaOrderService {
                 villaPrice.setNum(3-num+"");
             }else{
                 //根据周几来设置价格
-                if (newDate.getDay()>0||newDate.getDay()<5){
+                if (newDate.getDay()>0&&newDate.getDay()<5){
                     villaPrice.setPrice("66");
                 }else {
                     villaPrice.setPrice("100");

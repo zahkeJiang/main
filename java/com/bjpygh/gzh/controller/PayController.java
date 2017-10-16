@@ -86,7 +86,7 @@ public class PayController extends BaseController {
             userOrder.setOrderNumber(dsOrder.getOrderNumber());
             userOrder.setOrderName(dsOrder.getDsName());
             userOrder.setOrderTime(dsOrder.getCreateTime());
-            userOrder.setOrderDescripe(dsOrder.getDsType()+"/"+dsOrder.getModels()+""+dsOrder.getTrainTime());
+            userOrder.setOrderDescripe(dsOrder.getDsType()+" / "+dsOrder.getModels()+" / "+dsOrder.getTrainTime());
             userOrder.setOrderImage(dsOrder.getImageurl());
             userOrder.setOrderStatus(dsOrder.getOrderStatus());
             userOrder.setOrderPrice(dsOrder.getOrderPrice());
@@ -175,41 +175,28 @@ public class PayController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/JdDsPay", method = RequestMethod.POST)
     public Status JdDsPay(HttpServletResponse response,String ordernumber) throws IOException{
-        DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
-//        threeDES.encryptDESCBC();
-        JdOrderPay jdOrderPay = new JdOrderPay();
-        jdOrderPay.setVersion("V2.0");
-        jdOrderPay.setMerchant("110406033002");
-        jdOrderPay.setTradeNum(dsOrder.getOrderNumber());
-        jdOrderPay.setTradeName("驾校报名费用");
-        jdOrderPay.setTradeTime(formatterJ.format(new Date()));
-        jdOrderPay.setAmount(dsOrder.getOrderPrice()+"00");
-        jdOrderPay.setOrderType("1");
-        jdOrderPay.setCurrency("CNY");
-        jdOrderPay.setCallbackUrl("http://120.24.184.86/gzh/ds_pay.html");
-        jdOrderPay.setNotifyUrl("http://120.24.184.86/gzh/jNotify_url");//http://gzpt.bjpygh.com/jNotify_url
-        jdOrderPay.setUserId(dsOrder.getUserId()+"");
-
-        String priKey = PropertyUtils.getProperty("wepay.merchant.rsaPrivateKey");
-        String desKey = PropertyUtils.getProperty("wepay.merchant.desKey");
-        System.out.println("priKey="+priKey+"   desKey="+desKey);
-        List<String> unSignedKeyList = new ArrayList<String>();
-        unSignedKeyList.add("sign");
-
-        jdOrderPay.setSign(SignUtil.signRemoveSelectedKeys(jdOrderPay, priKey, unSignedKeyList));
-
-        byte[] key = BASE64.decode(desKey);
-        jdOrderPay.setUserId(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getUserId()));
-        jdOrderPay.setTradeNum(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getTradeNum()));
-        jdOrderPay.setTradeName(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getTradeName()));
-        jdOrderPay.setTradeTime(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getTradeTime()));
-        jdOrderPay.setAmount(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getAmount()));
-        jdOrderPay.setOrderType(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getOrderType()));
-        jdOrderPay.setCurrency(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getCurrency()));
-        jdOrderPay.setCallbackUrl(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getCallbackUrl()));
-        jdOrderPay.setNotifyUrl(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getNotifyUrl()));
-
-        return Status.success().add("jdOrderPay",jdOrderPay);
+        String o = ordernumber.substring(0, 1);
+        if (o.equals("A")){
+            ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
+            String tradeNum = armyOrder.getOrderNumber();
+            String amount = armyOrder.getArmyPrice()+"00";
+            String userid =armyOrder.getUserId()+"";
+            return JdPayReq(tradeNum,amount,userid);
+        }else if (o.equals("D")){
+            DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
+            String tradeNum = dsOrder.getOrderNumber();
+            String amount = dsOrder.getOrderPrice()+"00";
+            String userid =dsOrder.getUserId()+"";
+            return JdPayReq(tradeNum,amount,userid);
+        }else if (o.equals("V")){
+            VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(ordernumber).get(0);
+            String tradeNum = villaOrder.getOrderNumber();
+            String amount = villaOrder.getVillaPrice()+"00";
+            String userid =villaOrder.getUserId()+"";
+            return JdPayReq(tradeNum,amount,userid);
+        }else {
+            return Status.fail(-20,"处理失败");
+        }
     }
 
     @ResponseBody
@@ -254,7 +241,7 @@ public class PayController extends BaseController {
                 System.out.println("tradeXml:" + tradeXml);
                 String refundUrl = PropertyUtils.getProperty("wepay.server.refund.url");
 
-//                String resultJsonData = getJdRefundInfo(refundUrl, tradeXml);
+//              String resultJsonData = getJdRefundInfo(refundUrl, tradeXml);
                 String resultJsonData = HttpsClientUtil.sendRequest(refundUrl, tradeXml, "application/xml");
 
                 System.out.println("resultJsonData:" + resultJsonData);
@@ -539,5 +526,41 @@ public class PayController extends BaseController {
             e.printStackTrace();
         }
         return s;
+    }
+
+    public Status JdPayReq(String tradeNum,String amount,String userid){
+        JdOrderPay jdOrderPay = new JdOrderPay();
+        jdOrderPay.setVersion("V2.0");
+        jdOrderPay.setMerchant("110406033002");
+        jdOrderPay.setTradeNum(tradeNum);
+        jdOrderPay.setTradeName("驾校报名费用");
+        jdOrderPay.setTradeTime(formatterJ.format(new Date()));
+        jdOrderPay.setAmount(amount);
+        jdOrderPay.setOrderType("1");
+        jdOrderPay.setCurrency("CNY");
+        jdOrderPay.setCallbackUrl("http://120.24.184.86/gzh/ds_pay.html");
+        jdOrderPay.setNotifyUrl("http://120.24.184.86/gzh/jNotify_url");//http://gzpt.bjpygh.com/jNotify_url
+        jdOrderPay.setUserId(userid);
+
+        String priKey = PropertyUtils.getProperty("wepay.merchant.rsaPrivateKey");
+        String desKey = PropertyUtils.getProperty("wepay.merchant.desKey");
+        System.out.println("priKey="+priKey+"   desKey="+desKey);
+        List<String> unSignedKeyList = new ArrayList<String>();
+        unSignedKeyList.add("sign");
+
+        jdOrderPay.setSign(SignUtil.signRemoveSelectedKeys(jdOrderPay, priKey, unSignedKeyList));
+
+        byte[] key = BASE64.decode(desKey);
+        jdOrderPay.setUserId(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getUserId()));
+        jdOrderPay.setTradeNum(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getTradeNum()));
+        jdOrderPay.setTradeName(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getTradeName()));
+        jdOrderPay.setTradeTime(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getTradeTime()));
+        jdOrderPay.setAmount(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getAmount()));
+        jdOrderPay.setOrderType(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getOrderType()));
+        jdOrderPay.setCurrency(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getCurrency()));
+        jdOrderPay.setCallbackUrl(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getCallbackUrl()));
+        jdOrderPay.setNotifyUrl(ThreeDesUtil.encrypt2HexStr(key, jdOrderPay.getNotifyUrl()));
+
+        return Status.success().add("jdOrderPay",jdOrderPay);
     }
 }
