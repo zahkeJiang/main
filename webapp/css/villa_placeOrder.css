@@ -1,7 +1,7 @@
 html, body {
     /*position: relative;*/
     /*height: 100%;*/
-    background:#54A0FF;
+    background:#B4DADA;
     color: #999;
     font-family: "兰亭黑";
 }
@@ -277,7 +277,7 @@ html, body {
 	line-height: 40px;
 	color: white;
 	height: 40px;
-    background:#54A0FF;
+    background:#4ea0ff;
     position: absolute;
     bottom: 10px;
 }

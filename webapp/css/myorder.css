@@ -1,7 +1,10 @@
 @charset "utf-8";
 /* CSS Document */
+body{
+	background: #4ea0ff;
+}
 .header_bg{
-	background-color: white;
+	background-color: #f6f1f1;
 	height: 48px;
 }
 .header{
@@ -9,9 +12,6 @@
 	padding: 0 16px;
 	display: flex;
 	justify-content: space-between;
-	background:url(../images/bg_line.png);
-	background-repeat:repeat-x;		/*背景图片在水平显示*/	
-	background-position-y:bottom
 }
 .all_orders,.orders_success,.orders_finished,.orders_cencer,.orders_pay{
 	height: 46px;
@@ -31,47 +31,42 @@
 	margin-top: 10px;
 }
 .container{
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin:10px;
 }
 .dsorder_list{
-	margin-top: 10px;
+	background: #f6f1f1;
+	margin: 10px 0;
+	border-radius: 10px;
+	padding: 0 16px;
 }
 .dsorder_titie{
-	background-color: white;
 	display: flex;
 	height: 36px;
 	align-items: center;
-	padding-right: 16px;
-	padding-left: 16px;
+	border-bottom: 1px dashed #ddd;
 }
 .refund,.result,.topay{
 	margin-left: auto;
-	color: red;
+	color: orange;
 	font-size: 14px;
 }
 .dsoder_container{
 	display: flex;
 	align-items: center;
 	height: 80px;
-	background-color: #F5F5F5;
-	padding-right: 16px;
-	padding-left: 16px;
+	border-bottom: 1px dashed #ddd;
 }
 .dsorder_information{
+	color: #999;
 	font-size: 14px;
-	margin-left: 20px;
-	margin-right: 20px;
+	margin-left:30px;
 }
 .dsorder_footer{
 	height: 36px;
 	text-align: right;
 	line-height: 36px;
-	background-color: white;
 	font-size: 14px;
 	color: #555;
-	padding-right: 16px;
-	padding-left: 16px;
 }
 .dsorder_pay{
 	font-size: 14px;
@@ -79,5 +74,5 @@
 }
 .order_price{
 	font-size: 18px;
-	color: black;
+	color: orange;
 }

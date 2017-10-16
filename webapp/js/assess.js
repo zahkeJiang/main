@@ -9,7 +9,7 @@ window.onload=ShowMessage();
 $(function(){
 	// type(1为别墅评论 2为驾校 3为军旅)
 	if (type==1) {
-		$("body").css({"background":"#54A0FF"});
+		$("body").css({"background":"#B4DADA"});
 	}else if (type==3) {
 		$("body").css({"background":"#B4DADA"});
 	}

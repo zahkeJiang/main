@@ -47,14 +47,14 @@
 		</div>
 		<!--    照片添加    -->
         <div class="assessBox-picture"></div>
-		<div class="assessBox-add-picture">
-			<div>
-				<img src="./images/camera.png" height="16px">
-				<p>添加照片</p>
-			</div>
-			 <input type="file" name="file" id="file" value="" accept="image/*"  multiple="multiple"  onchange="imgChange('assessBox-picture')" />
-		</div>
-		<div class="submit">提交</div>
+
+<form action="/comment_picture" method="post" enctype="multipart/form-data" id="picture_form">
+
+            <input type="file" name="file" id="file" value="" accept="image/*"  multiple="multiple"  onchange="imgChange()" />
+            <input type="submit" name="submit">
+
+</form>
+
 		<div class="assessBox-user">
 			<div class="circle"></div>
 			<span class="niming">匿名</span>
@@ -67,6 +67,6 @@
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script src="js/jquery.cookie.js" type="text/javascript"></script>
 <!--<script type="text/javascript" src="js/isWeiXin.js"></script>-->
-<script type="text/javascript" src="js/assessSet.js"></script>
+<script type="text/javascript" src="js/aaaaaaa.js"></script>
 
 </html>

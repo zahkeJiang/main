@@ -35,7 +35,7 @@ body{
 	justify-content: space-around;
 }
 .amount_type{
-	border: 1px solid #67c0ee;
+	border: 1px solid #4ea0ff;
 	margin:5px;
 	width: 100%;
 	text-align: center;
@@ -60,6 +60,6 @@ body{
 	margin-bottom: 16px;
 }
 a,.footer span{
-	color: #67c0ee;
+	color: #4ea0ff;
 	font-size: 14px;
 }

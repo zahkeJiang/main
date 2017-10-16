@@ -64,7 +64,7 @@ input:focus::-webkit-input-placeholder, input:hover::-webkit-input-placeholder {
 	font-size: 0.75rem;
 	line-height: 32px;
 	text-align: center;
-	background-color: #67c0ee;
+	background-color: #4ea0ff;
 	-webkit-border-radius: 5px;/* Webkit浏览器的私有属性*/
 	-moz-border-radius: 5px; /* Mozilla浏览器的私有属性*/
 	border-radius:5px;/*所有角都使用半径为20px的圆角，此属性为CSS3标准属性*/
@@ -76,7 +76,7 @@ input:focus::-webkit-input-placeholder, input:hover::-webkit-input-placeholder {
 	height: 48px;
 	width: 90%;
 	margin-left:5%;  
-	background-color: #67c0ee;
+	background-color: #4ea0ff;
 	color: #FFFFFF;
 	-webkit-border-radius: 5px;/*Webkit浏览器的私有属性*/
 	-moz-border-radius: 5px;/* Mozilla浏览器的私有属性*/

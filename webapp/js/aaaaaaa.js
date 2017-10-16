@@ -44,44 +44,97 @@ $(".submit").click(function(){
 		$(".hint").show();
 		setTimeout(function(){$(".hint").hide(1000);},1000);//显示1,秒后进行隐藏
 	}else{
-		alert("tijiao");
+		$.post("comment_picture",{},function(){
+
+		},"json");
 	}
 	
 });
+
+
+
+	// $("#picture_form").click(function(){
+
+	// 	//创建新的input图片文件框
+	// 	var form = document.getElementById ("picture_form");
+	// 	var input1 = document.createElement('input');
+ //    	input1.setAttribute('type', 'file');
+ //    	input1.setAttribute('name', 'images[1]');
+ //    	input1.setAttribute('multiple', 'multiple');
+ //    	input1.setAttribute('onchange', 'imgChange("assessBox-picture")');
+ //    	input1.setAttribute('accept', 'image/*');
+ //    	input1.setAttribute('value', 'image/*');
+ //    	form.appendChild(input1);
+	// })
 })
 //添加照片
-function imgChange(obj) {
+var a=1;
+var imgfile =[];
+function imgChange() {
     //获取点击的文本框
     var file = document.getElementById("file");
     //存放图片的父级元素
-    var imgContainer = document.getElementsByClassName(obj)[0];
+    var imgContainer = document.getElementsByClassName('assessBox-picture')[0];
     //获取的图片文件
     var fileList = file.files;
     //文本框的父级元素
     var imgArr = [];
     //遍历获取到得图片文件
     for (var i = 0; i < fileList.length; i++) {
+
         var imgUrl = window.URL.createObjectURL(file.files[i]);
         imgArr.push(imgUrl);
+
+        imgfile.push(file.files[i]);
+
+        //图片
         var img = document.createElement("img");
         img.setAttribute("src", imgArr[i]);
-
-        var imgAdd = document.createElement("div");
-        imgAdd.setAttribute("class", "assessBox-picture-img");
-
+		//图片上方删除按钮
         var deleteButton = document.createElement("span");
         deleteButton.setAttribute("class", "delete");
 
+        //创建用于存放图片的div
+        var imgAdd = document.createElement("div");
+        imgAdd.setAttribute("class", "assessBox-picture-img");
+
+        //添加图片、删除，并加载到父div
         imgAdd.appendChild(img);
         imgAdd.appendChild(deleteButton);
         imgContainer.appendChild(imgAdd);
     };
+
+     // console.log(imgArr);
+    console.log("第"+a+"次添加"+(a)+"张");
+    // console.log(fileList);
+    console.log(imgfile);
+    a++;
+    // console.log(Arrays.asList(imgfile));
+    // alert(stooges)
+	// file.files = imgfile;
+  //   	j++
+  //   	//创建新的input图片文件框
+		// var form = document.getElementById ("picture_form");
+		// var input1 = document.createElement('input');
+  //   	input1.setAttribute('type', 'file');
+  //   	input1.setAttribute('name', 'images['+j+']');
+  //   	input1.setAttribute('multiple', 'multiple');
+  //   	input1.setAttribute('onchange', 'imgChange("assessBox-picture")');
+  //   	input1.setAttribute('accept', 'image/*');
+  //   	input1.setAttribute('value', 'image/*');
+  //   	form.appendChild(input1);
+  //   	$("input[name='images["+j+"]']").siblings("input[type='file']").css({"opacity":"0.1"})
+
+
     imgRemove();
 };
 //删除照片 
 function imgRemove() {
     $(".delete").click(function(){
+    	var ind = $(this).parent(".assessBox-picture-img").index(".assessBox-picture-img")+1;//获取当前点击的span下标
+        // alert(ind)//弹出第几个
         $(this).parent().remove();
+        console.log(ind)
     })
             
 };

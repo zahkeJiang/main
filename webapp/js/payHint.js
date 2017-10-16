@@ -6,7 +6,7 @@ function ShowMessage() {
     if (isWeiXin()) {
    	// alert("我是微信浏览器");
     }else{
-        window.location.href="dspay.action?ordernumber="+ordernumber;
+        window.location.href="aliPay.action?ordernumber="+ordernumber;
     }
 } 
 window.onload=ShowMessage(); 
