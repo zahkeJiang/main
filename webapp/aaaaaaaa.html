@@ -47,14 +47,16 @@
 		</div>
 		<!--    照片添加    -->
         <div class="assessBox-picture"></div>
-
-<form action="/comment_picture" method="post" enctype="multipart/form-data" id="picture_form">
-
-            <input type="file" name="file" id="file" value="" accept="image/*"  multiple="multiple"  onchange="imgChange()" />
-            <input type="submit" name="submit">
-
-</form>
-
+		<div class="assessBox-add-picture">
+			<div>
+				<img src="./images/camera.png" height="16px">
+				<p>添加照片</p>
+			</div>
+			<form action="/comment_picture" method="post" enctype="multipart/form-data" id="picture_form">
+       			<input type="file" name="images" id="file" value="" accept="image/*"  multiple="multiple"  onchange="imgChange()" />
+			</form>
+		</div>
+		<div class="submit">提交</div>
 		<div class="assessBox-user">
 			<div class="circle"></div>
 			<span class="niming">匿名</span>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>-->
 <html>
 <head>
@@ -31,75 +32,71 @@
 </html>
 <!-- 
 <!DOCTYPE HTML>
+=======
+<!DOCTYPE html>
+>>>>>>> 39150b569b646a2c9a91cb00328b278f81d4b092
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title> 上传多张图片</title>
-    <style type="text/css">
-        .img-div{
-            border: 1px solid #ddd;
-            border-radius: 100%;
-            float: left;
-            line-height: 1;
-            margin-left: 5px;
-            overflow: hidden;
-        }
-
-    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <title>邻里</title>
 </head>
 <body>
+<form action="/comment_picture" method="post" enctype="multipart/form-data">
+    <fieldset>
+        <p>
+            <input id="image" type="file" multiple="multiple" name="images" onchange="onchange1()"/>
+            <input id="image1" type="file" name="images"/>
+            <!--<input type="file" name="images"/>-->
+        </p>
+        <p id="buttons">
+            <input id="reset" type="reset" tabindex="4">
+            <input id="submit" type="submit" tabindex="5"
+                   value="Add Product">
+        </p>
+        <input class="sub" type="button" >
+    </fieldset>
+</form>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script src="js/jquery.cookie.js" type="text/javascript"></script>
+<script>
+    var list = [];
+    var files="";
+    function onchange1() {
 
-<script type="text/javascript">
-    //选择图片，马上预览
-    function xmTanUploadImg(obj) {
+         files = document.getElementById("image").files;
+        var files1 = document.getElementById("image1").files;
 
-        var fl=obj.files.length;
-        for(var i=0;i<fl;i++){
-            var file=obj.files[i];
-            var reader = new FileReader();
+        for (var i=0;i<files.length;i++){
+            list.push(files[i])
 
-            //读取文件过程方法
-
-            reader.onloadstart = function (e) {
-                console.log("开始读取....");
-            }
-            reader.onprogress = function (e) {
-                console.log("正在读取中....");
-            }
-            reader.onabort = function (e) {
-                console.log("中断读取....");
-            }
-            reader.onerror = function (e) {
-                console.log("读取异常....");
-            }
-            reader.onload = function (e) {
-                console.log("成功读取....");
-
-                var imgstr='<img style="width:100px;height:100px;" src="'+e.target.result+'"/>';
-                var oimgbox=document.getElementById("imgboxid");
-                var ndiv=document.createElement("div");
-
-                ndiv.innerHTML=imgstr;
-                ndiv.className="img-div";
-                oimgbox.appendChild(ndiv);
-
-            }
-
-            reader.readAsDataURL(file);
-//alert(1);
         }
 
+//        alert(list);
+        document.getElementById("image1").files = files[0];
+
     }
+    $(function () {
+        $(".sub").click(function () {
+            console.log(list);
+            console.log(files);
+            $.post("comment_picture",{images:list},function (datas) {
+
+            });
+        });
+    });
+
+
 </script>
-<form id="form"  enctype="multipart/form-data">
-    <input type="file" id="xdaTanFileImg"  multiple="multiple"  name="fileAttach" onchange="xmTanUploadImg(this)"/>
-    <div class="img-box" id="imgboxid">
+</body>
 
-    </div>
-
+<<<<<<< HEAD
     <div id="xmTanDiv"></div><br/>
     <div id="errordiv"   style="margin-top:15px;width:100%;text-align:center;">
         <input id="bt" type="button" onclick="test(this)" value="提交" />
     </div>
 </form>
 </body> 
+=======
+</html>
+>>>>>>> 39150b569b646a2c9a91cb00328b278f81d4b092

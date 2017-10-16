@@ -204,7 +204,7 @@
         </div>
         <div class="villa-additional-price villaBox">
             <h2>额外费用</h2>
-            <p>说明</p>
+            <a href="villa_expalain.html">说明</a>
         </div>
     </div>
 <!-- 日期 -->
@@ -272,49 +272,6 @@
         }
     }, "北京市");
 
-     //日历渲染--------------------------------------------------------
-    renderHtml(0);
-    // 表格中显示日期
-    showCalendarData(0,0);
-    //展示价格
-    setPrice(0);
-
-//    日历结束
-//    点击上一月
-    var monthNum = 0;
-    $('.sit-pre-month').on('click',function(e){
-        e.preventDefault();
-        // 第二个参数 0为本月 上一个月1，下一个月-1
-        ++monthNum;
-        showCalendarData(0,monthNum);
-        setPrice(getYandM(monthNum).dataPara);
-    });
-//    点击下一月
-    $('.sit-next-month').on('click',function(e){
-        e.preventDefault();
-        --monthNum;
-        showCalendarData(0,monthNum);
-        setPrice(getYandM(monthNum).dataPara);
-    });
-
-    //点击每天的操作，要是有其他操作可在此处写事件，只有展示功能的日历 ，注释此段代码 点击不需要事件
-    // var num = ".currentMonth"+monthNum;
-    // $(num).on('click',function(e){
-    //     console.log($(this));
-    //     //选择完日期后 点击按钮去支付 ，可以将需要的参数传进去
-    //     //如果有限制条件 直接return 不添加标签并且支付也不不能点击传参
-    //     if($(this).hasClass('no-ticket')){ //没票时不能点击 具体需求具体实现
-    //         return;
-    //     }
-    //     if ($(this).children(".selectedDay").length > 0 ) {
-    //         $(this).children(".selectedDay").remove();
-    //     }else{
-    //         $(this).append("<i class='selectedDay'></i>");
-    //     }
-    //     //获取当前点击对应的日期
-    //     // alert($(this).children(".borderr").html());
-        
-    // });
 
 </script>
 </html>

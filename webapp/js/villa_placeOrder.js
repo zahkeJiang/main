@@ -15,7 +15,7 @@ $(function(){
         // 第二个参数 0为本月 上一个月1，下一个月-1
         ++monthNum;
         showCalendarData(0,monthNum);
-        // setPrice(getYandM(monthNum).dataPara+"");
+        setPrice(getYandM(monthNum).dataPara+"");
     });
 //    点击下一月
     $('.sit-next-month').on('click',function(e){
@@ -102,10 +102,9 @@ var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;//身份证号码为15位或者18位，1
         realName = $("input[name='realName']").val();//获取姓名
         peopleNumber = $(".villa-choose-content input").val();//获取报名人数
 
-        
+        villaNames=[];
         $("input[name='villa-radio']:checkbox").each(function () {//便利所有checkbox，
             if ($(this).is(":checked")) {
-
                 villaNames.push($(this).attr("value"));
             }
         });
@@ -152,8 +151,8 @@ var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;//身份证号码为15位或者18位，1
             $.post("createVillaOrder",{"villaName":villaName,"date":date,"peopleNumber":peopleNumber,"realName":realName},function(datas){
                 if (datas.status==0) {
                     var orderNumber = datas.data.orderNumber;
-                    // console.log(orderNumber);
-                    window.location.href="payHint.html?orderNumber="+orderNumber;
+                    console.log(orderNumber);
+                    // window.location.href="payHint.html?orderNumber="+orderNumber;
                 }
             },"json");
         }      

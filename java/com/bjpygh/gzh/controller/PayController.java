@@ -12,12 +12,17 @@ import com.bjpygh.gzh.bean.*;
 import com.bjpygh.gzh.config.AlipayConfig;
 import com.bjpygh.gzh.config.MyConfig;
 import com.bjpygh.gzh.entity.Status;
+import com.bjpygh.gzh.model.HttpsClientUtil;
+import com.bjpygh.gzh.model.RefundResponse;
+import com.bjpygh.gzh.model.TradeRefundReqDto;
 import com.bjpygh.gzh.service.*;
 import com.bjpygh.gzh.utils.MD5;
 import com.bjpygh.gzh.utils.PropertyUtils;
 import com.bjpygh.gzh.utils.ThreeDES;
+import com.bjpygh.gzh.utils.XMLToMap;
 import com.github.wxpay.sdk.WXPay;
 import com.jd.jr.pay.gate.signature.util.BASE64;
+import com.jd.jr.pay.gate.signature.util.JdPayUtil;
 import com.jd.jr.pay.gate.signature.util.SignUtil;
 import com.jd.jr.pay.gate.signature.util.ThreeDesUtil;
 import net.sf.json.JSONObject;
@@ -29,11 +34,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -83,8 +86,10 @@ public class PayController extends BaseController {
             userOrder.setOrderNumber(dsOrder.getOrderNumber());
             userOrder.setOrderName(dsOrder.getDsName());
             userOrder.setOrderTime(dsOrder.getCreateTime());
-            userOrder.setOrderDescripe(dsOrder.getDescription());
+            userOrder.setOrderDescripe(dsOrder.getDsType()+"/"+dsOrder.getModels()+""+dsOrder.getTrainTime());
             userOrder.setOrderImage(dsOrder.getImageurl());
+            userOrder.setOrderStatus(dsOrder.getOrderStatus());
+            userOrder.setOrderPrice(dsOrder.getOrderPrice());
             orders.add(userOrder);
         }
 
@@ -95,6 +100,8 @@ public class PayController extends BaseController {
             userOrder.setOrderTime(villaOrder.getCreateTime());
             userOrder.setOrderDescripe(villaOrder.getNote());
             userOrder.setOrderImage(villaOrder.getImageurl());
+            userOrder.setOrderStatus(villaOrder.getOrderStatus());
+            userOrder.setOrderPrice(villaOrder.getVillaPrice());
             orders.add(userOrder);
         }
 
@@ -105,6 +112,8 @@ public class PayController extends BaseController {
             userOrder.setOrderTime(armyOrder.getCreateTime());
             userOrder.setOrderDescripe(armyOrder.getNote());
             userOrder.setOrderImage(armyOrder.getImageurl());
+            userOrder.setOrderStatus(armyOrder.getOrderStatus());
+            userOrder.setOrderPrice(armyOrder.getArmyPrice());
             orders.add(userOrder);
         }
 
@@ -122,32 +131,29 @@ public class PayController extends BaseController {
     }
 
     //支付宝驾校报名支付接口
-    @RequestMapping(value = "/dspay.action", method = RequestMethod.GET)
+    @RequestMapping(value = "/aliPay", method = RequestMethod.GET)
     public void DsPay(HttpServletResponse response,String ordernumber) throws IOException {
 
-        String subject = "驾校报名费用";
-        String  body = "驾校报名费用";
-        String product_code="BJPYGH_DS_SIGNUP";
-        DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
+        String o = ordernumber.substring(0, 1);
+        if (o.equals("A")) {
+            ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
 
-        requesetAlipay(response,ordernumber,subject,body,
-                dsOrder.getOrderPrice()+"",
-                product_code,AlipayConfig.notify_url);
+            requesetAlipay(response,ordernumber, "军旅预约费用", "军旅预约费用",
+                    armyOrder.getArmyPrice()+"",
+                    "BJPYGH_A_SIGNUP",AlipayConfig.anotify_url);
+        }else if (o.equals("D")){
+            DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
 
-    }
+            requesetAlipay(response,ordernumber,"驾校报名费用","驾校报名费用",
+                    dsOrder.getOrderPrice()+"",
+                    "BJPYGH_DS_SIGNUP",AlipayConfig.notify_url);
+        }else if (o.equals("V")){
+            VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(ordernumber).get(0);
 
-    //支付宝别墅预约支付接口
-    @RequestMapping(value = "/villaPay", method = RequestMethod.GET)
-    public void VillaPay(HttpServletResponse response,String ordernumber) throws IOException {
-
-        String subject = "别墅预约费用";
-        String  body = "别墅预约费用";
-        String product_code="BJPYGH_V_SIGNUP";
-        VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(ordernumber).get(0);
-
-        requesetAlipay(response,ordernumber,subject,body,
-                villaOrder.getVillaPrice()+"",
-                product_code,AlipayConfig.vnotify_url);
+            requesetAlipay(response,ordernumber,"别墅预约费用","别墅预约费用",
+                    villaOrder.getVillaPrice()+"",
+                    "BJPYGH_V_SIGNUP",AlipayConfig.vnotify_url);
+        }
 
     }
 
@@ -165,23 +171,7 @@ public class PayController extends BaseController {
 
     }
 
-
-    //支付宝军旅预约支付接口
-    @RequestMapping(value = "/armyPay", method = RequestMethod.GET)
-    public void ArmyPay(HttpServletResponse response,String ordernumber) throws IOException {
-
-        String subject = "军旅预约费用";
-        String  body = "军旅预约费用";
-        String product_code="BJPYGH_A_SIGNUP";
-        ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
-
-        requesetAlipay(response,ordernumber,subject,body,
-                armyOrder.getArmyPrice()+"",
-                product_code,AlipayConfig.anotify_url);
-
-    }
-
-    //支付宝军旅预约支付接口
+    //预约支付接口
     @ResponseBody
     @RequestMapping(value = "/JdDsPay", method = RequestMethod.POST)
     public Status JdDsPay(HttpServletResponse response,String ordernumber) throws IOException{
@@ -196,8 +186,8 @@ public class PayController extends BaseController {
         jdOrderPay.setAmount(dsOrder.getOrderPrice()+"00");
         jdOrderPay.setOrderType("1");
         jdOrderPay.setCurrency("CNY");
-        jdOrderPay.setCallbackUrl("http://gzpt.bjpygh.com/ds_pay.html");
-        jdOrderPay.setNotifyUrl("http://gzpt.bjpygh.com/jNotify_url");
+        jdOrderPay.setCallbackUrl("http://120.24.184.86/gzh/ds_pay.html");
+        jdOrderPay.setNotifyUrl("http://120.24.184.86/gzh/jNotify_url");//http://gzpt.bjpygh.com/jNotify_url
         jdOrderPay.setUserId(dsOrder.getUserId()+"");
 
         String priKey = PropertyUtils.getProperty("wepay.merchant.rsaPrivateKey");
@@ -239,7 +229,7 @@ public class PayController extends BaseController {
         if(dsOrder.getOrderStatus() == 3){
             return Status.fail(-30,"报名已完成");
         }
-        String refund_amount=""+dsOrder.getOrderPrice();
+        String refund_amount=""+(float)(Math.round((Float.parseFloat(""+dsOrder.getOrderPrice())*0.994)*100))/100;
 
         if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
             //改变订单状态
@@ -248,7 +238,45 @@ public class PayController extends BaseController {
             dsOrderService.updateOrder(dsOrder);
             return Status.success();
         }else{
-            return Status.fail(-20,"处理失败");
+            String deskey = PropertyUtils.getProperty("wepay.merchant.desKey");
+            String priKey = PropertyUtils.getProperty("wepay.merchant.rsaPrivateKey");
+            String pubKey = PropertyUtils.getProperty("wepay.jd.rsaPublicKey");
+
+            TradeRefundReqDto tradeRefundReqDto = new TradeRefundReqDto();
+            tradeRefundReqDto.setAmount((int) (Float.parseFloat(refund_amount)*100));
+            tradeRefundReqDto.setVersion("V2.0");
+            tradeRefundReqDto.setMerchant("110406033002");
+            tradeRefundReqDto.setTradeNum(new Date().getTime()+"");
+            tradeRefundReqDto.setoTradeNum(out_trade_no);
+            tradeRefundReqDto.setCurrency("CNY");
+            try {
+                String tradeXml = JdPayUtil.genReqXml(tradeRefundReqDto, priKey, deskey);
+                System.out.println("tradeXml:" + tradeXml);
+                String refundUrl = PropertyUtils.getProperty("wepay.server.refund.url");
+
+//                String resultJsonData = getJdRefundInfo(refundUrl, tradeXml);
+                String resultJsonData = HttpsClientUtil.sendRequest(refundUrl, tradeXml, "application/xml");
+
+                System.out.println("resultJsonData:" + resultJsonData);
+
+                XMLToMap x= new XMLToMap();
+                Map<String, String> map = x.getXML(resultJsonData);
+                System.out.println("refundResponse:" + map);
+
+                String status = map.get("code");
+                if (status.equals("000000")){
+                    dsOrder.setOrderStatus((byte) 5);
+                    dsOrder.setRefundTime(formatter.format(new Date()));
+                    dsOrderService.updateOrder(dsOrder);
+                    return Status.fail(0,"退款成功");
+                }else {
+                    return Status.fail(-20,"处理失败");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return Status.fail(-20,"异常失败");
+            }
         }
     }
 
@@ -450,7 +478,7 @@ public class PayController extends BaseController {
         AlipayTradeRefundModel model=new AlipayTradeRefundModel();
         model.setOutTradeNo(out_trade_no);
         model.setTradeNo("");
-        model.setRefundAmount(""+(float)(Math.round((Float.parseFloat(refund_amount)*0.994)*100))/100);
+        model.setRefundAmount(refund_amount);
         model.setRefundReason(refund_reason);
         model.setOutRequestNo("PYGH01RF001");
         alipay_request.setBizModel(model);
@@ -479,5 +507,37 @@ public class PayController extends BaseController {
         }
     }
 
+    //post请求方式访问数据
+    private String getJdRefundInfo(String url,String content){
+        URL httpUrl;
+        String s = null;
+        try {
+            httpUrl = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) httpUrl.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setConnectTimeout(3000);
+            conn.setReadTimeout(5000);
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setRequestProperty("Connection", "Keep-Alive");
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows; U; Windows NT 6.1; zh-CN; rv:1.9.2.6)");
+            conn.setRequestProperty("contentType","application/xml");
 
+            // 获取URLConnection对象对应的输出流
+            OutputStream out = conn.getOutputStream();
+            // 发送请求参数
+            out.write(content.getBytes());
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuffer sb = new StringBuffer();
+            String str;
+            while((str = reader.readLine())!=null){
+                sb.append(str);
+            }
+            s = sb.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
 }

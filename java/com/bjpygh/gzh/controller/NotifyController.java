@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletInputStream;
@@ -34,8 +35,6 @@ import java.util.Map;
 @Controller
 public class NotifyController extends BaseController {
 
-    @Resource
-    private HttpServletRequest request;
 
     @Autowired
     UserService userService;
@@ -177,11 +176,13 @@ public class NotifyController extends BaseController {
     }
 
     //京东驾校支付回调接口
-    @RequestMapping(value = "/jNotify_url", method = RequestMethod.POST)
-    public String execute(HttpServletRequest httpServletRequest) {
+    @ResponseBody
+    @RequestMapping(value = "/jNotify_url")
+    public String execute(HttpServletRequest request) {
         StringBuilder sb = new StringBuilder();
+        System.out.println("JdNotifyStart--------");
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader((ServletInputStream) request.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader( request.getInputStream()));
             String line = null;
 
             while ((line = br.readLine()) != null) {
@@ -189,10 +190,10 @@ public class NotifyController extends BaseController {
                 sb.append(line);
             }
         } catch (IOException e) {
-
+            System.out.println(e);
             return "fail";
         }
-
+        System.out.println("xml"+sb.toString());
         String deskey = PropertyUtils.getProperty("wepay.merchant.desKey");
         String pubKey = PropertyUtils.getProperty("wepay.jd.rsaPublicKey");
         try {
@@ -200,6 +201,9 @@ public class NotifyController extends BaseController {
             System.out.println("异步通知解析数据:" + anRes);
             System.out.println("异步通知订单号：" + anRes.getTradeNum() + ",状态：" + anRes.getStatus() + "成功!!!!");
 
+            if (anRes.getStatus().equals("1")){
+
+            }
         } catch (Exception e) {
             System.out.println(e);
             return "fail";

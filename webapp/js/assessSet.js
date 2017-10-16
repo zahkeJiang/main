@@ -1,7 +1,10 @@
 var liNuber="";
-var satisfaction01=";"
-var satisfaction02=";"
-var satisfaction03=";"
+var satisfaction01="";
+var satisfaction02="";
+var satisfaction03="";
+var imgData=[];
+var picture = "";
+var pictureData="";
 $(function(){
 
 
@@ -20,15 +23,15 @@ $(".assessBox-row li").click(function(){
 	//获取当前点击属于第n个li元素
 	liNuber = $(this).index()+1;
 	if(liNuber==1){
-		$(this).parent().siblings(".satisfaction").html("非常差");
+		$(this).parent().siblings(".satisfaction").html("<span star='1'>非常差</span>");
 	}else if(liNuber == 2){
-		$(this).parent().siblings(".satisfaction").html("差");
+		$(this).parent().siblings(".satisfaction").html("<span  star='2'>差</span>");
 	}else if(liNuber == 3){
-		$(this).parent().siblings(".satisfaction").html("一般");
+		$(this).parent().siblings(".satisfaction").html("<span  star='3'>一般</span>");
 	}else if(liNuber == 4){
-		$(this).parent().siblings(".satisfaction").html("好");
+		$(this).parent().siblings(".satisfaction").html("<span  star='4'>好</span>");
 	}else if(liNuber == 5){
-		$(this).parent().siblings(".satisfaction").html("非常好");
+		$(this).parent().siblings(".satisfaction").html("<span  star='5'>非常好</span>");
 	}
 	//循环将第一个到第liNumber个的li元素进行样式更改
 	for (var i = 1; i <= liNuber; i++) {
@@ -44,17 +47,33 @@ $(".submit").click(function(){
 		$(".hint").show();
 		setTimeout(function(){$(".hint").hide(1000);},1000);//显示1,秒后进行隐藏
 	}else{
-		alert("tijiao");
+		var content = $("textarea[name='assess']").val();
+		var star = $(".satisfaction01 span").attr("star");
+		pictureData  = JSON.stringify(imgData);//将对象转化为json字符串
+		picture = JSON.parse(pictureData);//这样就是把字符串解析 其实就是把外面的中括号去掉；
+		var str=imgData.join(",");
+		console.log(imgData);
+		console.log(pictureData);
+		console.log(picture);
+		console.log(str);
+		$.post("putComment",{"content":content,"star":star,"picture":str,"type":1},function(datas){
+			if (datas.status==0) {
+				alert("上传成功");
+			}else{
+				alert("上传失败");
+			}
+		},"json");
 	}
 	
 });
+
 })
 //添加照片
-function imgChange(obj) {
+function imgChange() {
     //获取点击的文本框
     var file = document.getElementById("file");
     //存放图片的父级元素
-    var imgContainer = document.getElementsByClassName(obj)[0];
+    var imgContainer = document.getElementsByClassName('assessBox-picture')[0];
     //获取的图片文件
     var fileList = file.files;
     //文本框的父级元素
@@ -63,25 +82,58 @@ function imgChange(obj) {
     for (var i = 0; i < fileList.length; i++) {
         var imgUrl = window.URL.createObjectURL(file.files[i]);
         imgArr.push(imgUrl);
+
+        //图片
         var img = document.createElement("img");
         img.setAttribute("src", imgArr[i]);
-
-        var imgAdd = document.createElement("div");
-        imgAdd.setAttribute("class", "assessBox-picture-img");
-
+		    //图片上方删除按钮
         var deleteButton = document.createElement("span");
         deleteButton.setAttribute("class", "delete");
 
+        //创建用于存放图片的div
+        var imgAdd = document.createElement("div");
+        imgAdd.setAttribute("class", "assessBox-picture-img");
+
+        //添加图片、删除，并加载到父div
         imgAdd.appendChild(img);
         imgAdd.appendChild(deleteButton);
         imgContainer.appendChild(imgAdd);
     };
+
+    if (fileList.length>0) {
+      console.log("fileList"+fileList);
+      var form = new FormData(document.getElementById("picture_form"));
+      console.log("form"+form);
+      $.ajax({
+        url:"comment_picture",
+        type:"post",
+        data:form,
+        cache: false,
+        processData: false,
+        contentType: false,
+        success:function(datas){
+            console.log(datas.data.picture);
+            var imgUrl = datas.data.picture;
+            // var imgdata = imgUrl;.join(',');
+            for (var i = 0; i<imgUrl.length; i++) {
+              imgData.push(imgUrl[i]);
+            }
+            console.log("imgData"+imgData);
+        }
+      });   
+    }
+
     imgRemove();
 };
 //删除照片 
 function imgRemove() {
-    $(".delete").click(function(){
-        $(this).parent().remove();
-    })
-            
-};
+  // 目前有bug，添加两次图片后，删除第一个添加的图片，会多删一张；
+  $(".delete").click(function(){
+    var imgNumber = $(this).parent(".assessBox-picture-img").index(".assessBox-picture-img")+1;//获取当前是第几个图片
+    // console.log("imgNumber="+imgNumber);
+    imgData.splice(imgNumber-1,1);//删除照片数组的第imgNumber个，第一个为第0个
+    console.log("imgData="+imgData);
+    $(this).parent().remove();
+  });
+}
+    

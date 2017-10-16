@@ -9,6 +9,7 @@
 </head>
 <body>
     <input type="button" onclick="autosubmit()" value="提交">
+    <input type="button" onclick="refund()" value="退款">
 
     <form action="https://h5pay.jd.com/jdpay/saveOrder" method="post" id="batchForm">
         <input type="hidden" name="version" id="version" ><br />
@@ -27,7 +28,7 @@
 
     <script>
         function autosubmit(){
-            $.post("/JdDsPay",{"ordernumber":"DSPYGH20178212216292"},function (data) {
+            $.post("JdDsPay",{"ordernumber":"DSPYGH20178212216296"},function (data) {
                 if(data.status == 0){
                     var jdOrderPay = data.data.jdOrderPay;
                     $("#version").val(jdOrderPay.version);
@@ -44,6 +45,11 @@
                     $("#orderType").val(jdOrderPay.orderType);
                     document.getElementById("batchForm").submit();
                 }
+            },'json');
+        }
+        function refund() {
+            $.post("refund.action",{"ordernumber":"DSPYGH20178212216296","WIDrefund_reason":"11qq"},function (data) {
+
             },'json');
         }
     </script>

@@ -215,9 +215,10 @@ html, body {
     color: #777;
     line-height: 24px;
 }
-.villa-additional-price p{
+.villa-additional-price a{
     font-size: 14px;
     line-height: 20px;
+    color: #999;
 }
 /*date*/
 .date{
