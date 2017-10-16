@@ -86,7 +86,7 @@ public class PayController extends BaseController {
             userOrder.setOrderNumber(dsOrder.getOrderNumber());
             userOrder.setOrderName(dsOrder.getDsName());
             userOrder.setOrderTime(dsOrder.getCreateTime());
-            userOrder.setOrderDescripe(dsOrder.getDescription());
+            userOrder.setOrderDescripe(dsOrder.getDsType()+"/"+dsOrder.getModels()+""+dsOrder.getTrainTime());
             userOrder.setOrderImage(dsOrder.getImageurl());
             userOrder.setOrderStatus(dsOrder.getOrderStatus());
             userOrder.setOrderPrice(dsOrder.getOrderPrice());

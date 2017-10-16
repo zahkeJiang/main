@@ -28,13 +28,13 @@ public class RefundResponse extends JdPayBaseResponse {
 
 	private String note;
 
-	private List<pay> payList;
+	private List<PayTradeVo> payList;
 
-    public List<pay> getPayList() {
+    public List<PayTradeVo> getPayList() {
         return payList;
     }
 
-    public void setPayList(List<pay> payList) {
+    public void setPayList(List<PayTradeVo> payList) {
         this.payList = payList;
     }
 
