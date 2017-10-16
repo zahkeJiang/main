@@ -29,7 +29,7 @@ public class TestJob {
                 }
             }
         }catch(Exception ex){
-            ex.printStackTrace();
+//            ex.printStackTrace();
         }
     }
 }

@@ -30,9 +30,10 @@ public class ImageController {
 	@ResponseBody
     @RequestMapping(value = "/comment_picture",method = RequestMethod.POST)
     public Status saveImage(HttpServletRequest servletRequest,
-                          @ModelAttribute DsImage dsImage, Model model) {
+                          @ModelAttribute DsImage images ) {
 
-            List<MultipartFile> files = dsImage.getImages();
+	    System.out.println(images);
+            List<MultipartFile> files = images.getImages();
             System.out.println(files);
             List<String> fileNames = new ArrayList<String>();
 
@@ -56,7 +57,7 @@ public class ImageController {
             }
 
             // save product here
-            model.addAttribute("image", dsImage);
+//            model.addAttribute("image", dsImage);
             /**
              * 这儿的图片地址上线需要改IP为120.24.184.86
              */

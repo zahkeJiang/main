@@ -12,6 +12,26 @@ public class UserOrder {
 
     private String orderDescripe;
 
+    private int orderStatus;
+
+    private int orderPrice;
+
+    public int getOrderPrice() {
+        return orderPrice;
+    }
+
+    public void setOrderPrice(Integer orderPrice) {
+        this.orderPrice = orderPrice;
+    }
+
+    public int getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(int orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
     public String getOrderNumber() {
         return orderNumber;
     }

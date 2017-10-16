@@ -114,7 +114,7 @@ public class VillaOrderService {
                 villaPrice.setNum(3-num+"");
             }else{
                 //根据周几来设置价格
-                if (newDate.getDay()>1){
+                if (newDate.getDay()>0||newDate.getDay()<5){
                     villaPrice.setPrice("66");
                 }else {
                     villaPrice.setPrice("100");
