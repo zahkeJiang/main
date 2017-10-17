@@ -154,6 +154,8 @@ span{
 	font-size: 16px;
 }
 .footer{
+	position: relative;
+	background: red;
 	border-top: 1px solid #eee;
 	/*background-color: white;*/
 	display: flex;

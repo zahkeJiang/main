@@ -38,7 +38,7 @@ $(function(){
 				$(".footer").html(footerBox);
 				//未支付，去付款
 				$(".gopay").click(function(){
-					window.location.href="determine_browser.html?ordernumber="+userorder.orderNumber;
+					window.location.href="payHint.html?ordernumber="+userorder.orderNumber;
 				});
 				//未支付，取消订单
 				$(".cancel").click(function(){
