@@ -37,6 +37,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -201,131 +202,155 @@ public class PayController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/refund.action", method = RequestMethod.POST)
-    public Status DsRefund(HttpServletRequest request) throws UnsupportedEncodingException {
+    public Status DsRefund(HttpServletRequest request) throws UnsupportedEncodingException, ParseException {
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
         }
-
         String out_trade_no = new String(request.getParameter("ordernumber").getBytes("ISO-8859-1"),"UTF-8");
-
         String refund_reason=new String(request.getParameter("WIDrefund_reason").getBytes("ISO-8859-1"),"UTF-8");
+        String o = out_trade_no.substring(0, 1);
 
-        DsOrder dsOrder = dsOrderService.getDsOrderByNumber(out_trade_no).get(0);
+        if (o.equals("V")){
+            VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(out_trade_no).get(0);
+            String refund_amount=""+villaOrder.getVillaPrice()*0.4;
+            if(villaOrder.getOrderStatus() == 4){
+                return Status.fail(-30,"报名已完成");
+            }
+            long time = new Date().getTime();
+            Date d = formatter.parse(villaOrder.getDate().split(",")[0]);
+            if (time-d.getTime()>432000000L){
+                return Status.fail(-40,"已过退款时间");
+            }
+            if (villaOrder.getPayType()==0){
+                if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
+                    //改变订单状态
+                    villaOrder.setOrderStatus(5);
+                    villaOrder.setRefundTime(formatter.format(new Date()));
+                    villaOrderService.updateOrder(villaOrder);
+                    return Status.success();
+                }else{
+                    return Status.fail(-20,"处理失败");
+                }
+            }else if (villaOrder.getPayType()==3){
+                if (getJdRefundResult(out_trade_no,refund_amount)){
+                    //改变订单状态
+                    villaOrder.setOrderStatus(5);
+                    villaOrder.setRefundTime(formatter.format(new Date()));
+                    villaOrderService.updateOrder(villaOrder);
+                    return Status.success();
+                }else{
+                    return Status.fail(-20,"处理失败");
+                }
+            }else {
+                return Status.fail(-30,"未知的错误发生了");
+            }
 
-        if(dsOrder.getOrderStatus() == 3){
-            return Status.fail(-30,"报名已完成");
-        }
-        String refund_amount=""+(float)(Math.round((Float.parseFloat(""+dsOrder.getOrderPrice())*0.994)*100))/100;
-
-        if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
-            //改变订单状态
-            dsOrder.setOrderStatus((byte) 5);
-            dsOrder.setRefundTime(formatter.format(new Date()));
-            dsOrderService.updateOrder(dsOrder);
-            return Status.success();
-        }else{
-            String deskey = PropertyUtils.getProperty("wepay.merchant.desKey");
-            String priKey = PropertyUtils.getProperty("wepay.merchant.rsaPrivateKey");
-            String pubKey = PropertyUtils.getProperty("wepay.jd.rsaPublicKey");
-
-            TradeRefundReqDto tradeRefundReqDto = new TradeRefundReqDto();
-            tradeRefundReqDto.setAmount((int) (Float.parseFloat(refund_amount)*100));
-            tradeRefundReqDto.setVersion("V2.0");
-            tradeRefundReqDto.setMerchant("110406033002");
-            tradeRefundReqDto.setTradeNum(new Date().getTime()+"");
-            tradeRefundReqDto.setoTradeNum(out_trade_no);
-            tradeRefundReqDto.setCurrency("CNY");
-            try {
-                String tradeXml = JdPayUtil.genReqXml(tradeRefundReqDto, priKey, deskey);
-                System.out.println("tradeXml:" + tradeXml);
-                String refundUrl = PropertyUtils.getProperty("wepay.server.refund.url");
-
-//              String resultJsonData = getJdRefundInfo(refundUrl, tradeXml);
-                String resultJsonData = HttpsClientUtil.sendRequest(refundUrl, tradeXml, "application/xml");
-
-                System.out.println("resultJsonData:" + resultJsonData);
-
-                XMLToMap x= new XMLToMap();
-                Map<String, String> map = x.getXML(resultJsonData);
-                System.out.println("refundResponse:" + map);
-
-                String status = map.get("code");
-                if (status.equals("000000")){
+        }else if (o.equals("D")){
+            DsOrder dsOrder = dsOrderService.getDsOrderByNumber(out_trade_no).get(0);
+            String refund_amount=""+(float)(Math.round((Float.parseFloat(""+dsOrder.getOrderPrice())*0.994)*100))/100;
+            if(dsOrder.getOrderStatus() == 3){
+                return Status.fail(-30,"报名已完成");
+            }
+            //判断订单由什么支付方式支付
+            if (dsOrder.getPayType()==0){
+                if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
+                    //改变订单状态
                     dsOrder.setOrderStatus((byte) 5);
                     dsOrder.setRefundTime(formatter.format(new Date()));
                     dsOrderService.updateOrder(dsOrder);
-                    return Status.fail(0,"退款成功");
-                }else {
+                    return Status.success();
+                }else{
                     return Status.fail(-20,"处理失败");
                 }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return Status.fail(-20,"异常失败");
+            }else if (dsOrder.getPayType()==3){
+                if (getJdRefundResult(out_trade_no,refund_amount)){
+                    //改变订单状态
+                    dsOrder.setOrderStatus((byte) 5);
+                    dsOrder.setRefundTime(formatter.format(new Date()));
+                    dsOrderService.updateOrder(dsOrder);
+                    return Status.success();
+                }else{
+                    return Status.fail(-20,"处理失败");
+                }
+            }else{
+                return Status.fail(-30,"未知的错误发生了");
             }
+        }else if (o.equals("A")){
+            ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(out_trade_no).get(0);
+            if(armyOrder.getOrderStatus() == 3){
+                return Status.fail(-30,"报名已完成");
+            }
+            String refund_amount=""+armyOrder.getArmyPrice();
+            if (armyOrder.getPayType()==0){
+                if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
+                    //改变订单状态
+                    armyOrder.setOrderStatus(5);
+                    armyOrder.setRefundTime(formatter.format(new Date()));
+                    armyOrderService.updateOrder(armyOrder);
+                    return Status.success();
+                }else{
+                    return Status.fail(-20,"处理失败");
+                }
+            }else if (armyOrder.getPayType()==3){
+                if (getJdRefundResult(out_trade_no,refund_amount)){
+                    //改变订单状态
+                    armyOrder.setOrderStatus(5);
+                    armyOrder.setRefundTime(formatter.format(new Date()));
+                    armyOrderService.updateOrder(armyOrder);
+                    return Status.success();
+                }else{
+                    return Status.fail(-20,"处理失败");
+                }
+            }else{
+                return Status.fail(-30,"未知的错误发生了");
+            }
+
+        }else {
+            return Status.fail(-50,"订单号错误");
         }
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/villaRefund", method = RequestMethod.POST)
-    public Status VillaRefund(HttpServletRequest request) throws UnsupportedEncodingException {
-        Map<String, String> userMap = checkWxUser(request);
-        if(userMap == null){
-            return Status.notInWx();
-        }
-        String out_trade_no = new String(request.getParameter("ordernumber").getBytes("ISO-8859-1"),"UTF-8");
+    //京东退款请求及结果获取
+    private boolean getJdRefundResult(String out_trade_no, String refund_amount) {
+        String deskey = PropertyUtils.getProperty("wepay.merchant.desKey");
+        String priKey = PropertyUtils.getProperty("wepay.merchant.rsaPrivateKey");
+        String pubKey = PropertyUtils.getProperty("wepay.jd.rsaPublicKey");
 
-        String refund_reason=new String(request.getParameter("WIDrefund_reason").getBytes("ISO-8859-1"),"UTF-8");
+        TradeRefundReqDto tradeRefundReqDto = new TradeRefundReqDto();
+        tradeRefundReqDto.setAmount((int) (Float.parseFloat(refund_amount)*100));
+        tradeRefundReqDto.setVersion("V2.0");
+        tradeRefundReqDto.setMerchant("110406033002");
+        tradeRefundReqDto.setTradeNum(new Date().getTime()+"");
+        tradeRefundReqDto.setoTradeNum(out_trade_no);
+        tradeRefundReqDto.setCurrency("CNY");
+        try {
+            String tradeXml = JdPayUtil.genReqXml(tradeRefundReqDto, priKey, deskey);
+            System.out.println("tradeXml:" + tradeXml);
+            String refundUrl = PropertyUtils.getProperty("wepay.server.refund.url");
 
-        VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(out_trade_no).get(0);
+//              String resultJsonData = getJdRefundInfo(refundUrl, tradeXml);
+            String resultJsonData = HttpsClientUtil.sendRequest(refundUrl, tradeXml, "application/xml");
 
-        if(villaOrder.getOrderStatus() == 4){
-            return Status.fail(-30,"报名已完成");
-        }
-        String refund_amount=""+villaOrder.getVillaPrice()*0.4;
+            System.out.println("resultJsonData:" + resultJsonData);
 
-        if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
-            //改变订单状态
-            villaOrder.setOrderStatus(5);
-            villaOrder.setRefundTime(formatter.format(new Date()));
-            villaOrderService.updateOrder(villaOrder);
-            return Status.success();
-        }else{
-            return Status.fail(-20,"处理失败");
-        }
-    }
+            XMLToMap x= new XMLToMap();
+            Map<String, String> map = x.getXML(resultJsonData);
+            System.out.println("refundResponse:" + map);
 
-    @ResponseBody
-    @RequestMapping(value = "/armyRefund", method = RequestMethod.POST)
-    public Status ArmyRefund(HttpServletRequest request) throws UnsupportedEncodingException {
-        Map<String, String> userMap = checkWxUser(request);
-        if(userMap == null){
-            return Status.notInWx();
-        }
+            String status = map.get("code");
+            if (status.equals("000000")){
 
-        String out_trade_no = new String(request.getParameter("ordernumber").getBytes("ISO-8859-1"),"UTF-8");
+                return true;
+            }else {
+                return false;
+            }
 
-        String refund_reason=new String(request.getParameter("WIDrefund_reason").getBytes("ISO-8859-1"),"UTF-8");
-
-        ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(out_trade_no).get(0);
-
-        if(armyOrder.getOrderStatus() == 3){
-            return Status.fail(-30,"报名已完成");
-        }
-        String refund_amount=""+armyOrder.getArmyPrice();
-
-        if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
-            //改变订单状态
-            armyOrder.setOrderStatus(5);
-            armyOrder.setRefundTime(formatter.format(new Date()));
-            armyOrderService.updateOrder(armyOrder);
-            return Status.success();
-        }else{
-            return Status.fail(-20,"处理失败");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
-
 
     //微信会员充值接口
     @ResponseBody

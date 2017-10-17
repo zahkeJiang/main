@@ -1124,6 +1124,66 @@ public class VillaOrderExample {
             addCriterion("imageurl not between", value1, value2, "imageurl");
             return (Criteria) this;
         }
+
+        public Criteria andPayTypeIsNull() {
+            addCriterion("pay_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeIsNotNull() {
+            addCriterion("pay_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeEqualTo(Byte value) {
+            addCriterion("pay_type =", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeNotEqualTo(Byte value) {
+            addCriterion("pay_type <>", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeGreaterThan(Byte value) {
+            addCriterion("pay_type >", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeGreaterThanOrEqualTo(Byte value) {
+            addCriterion("pay_type >=", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeLessThan(Byte value) {
+            addCriterion("pay_type <", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeLessThanOrEqualTo(Byte value) {
+            addCriterion("pay_type <=", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeIn(List<Byte> values) {
+            addCriterion("pay_type in", values, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeNotIn(List<Byte> values) {
+            addCriterion("pay_type not in", values, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeBetween(Byte value1, Byte value2) {
+            addCriterion("pay_type between", value1, value2, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeNotBetween(Byte value1, Byte value2) {
+            addCriterion("pay_type not between", value1, value2, "payType");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

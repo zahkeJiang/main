@@ -24,6 +24,7 @@
     <result column="refund_time" jdbcType="TIMESTAMP" property="refundTime" />
     <result column="imageurl" jdbcType="VARCHAR" property="imageurl" />
     <result column="original_price" jdbcType="INTEGER" property="originalPrice" />
+    <result column="pay_type" jdbcType="TINYINT" property="payType" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -85,8 +86,8 @@
   </sql>
   <sql id="Base_Column_List">
     order_id, user_id, phone_number, order_status, ds_type, ds_name, order_price, train_time, 
-    models, order_number, address, real_name, note, create_time, pay_time, submit_time, sign_time,
-    get_time, description, refund_time, imageurl, original_price
+    models, order_number, address, real_name, note, create_time, pay_time, submit_time, 
+    sign_time, get_time, description, refund_time, imageurl, original_price, pay_type
   </sql>
   <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.DsOrderExample" resultMap="BaseResultMap">
     select
@@ -123,18 +124,18 @@
       order_status, ds_type, ds_name, 
       order_price, train_time, models, 
       order_number, address, real_name, 
-      note, create_time, pay_time, submit_time,
-      sign_time, get_time, description, 
-      refund_time, imageurl, original_price
-      )
+      note, create_time, pay_time, 
+      submit_time, sign_time, get_time, 
+      description, refund_time, imageurl, 
+      original_price, pay_type)
     values (#{orderId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{phoneNumber,jdbcType=VARCHAR}, 
       #{orderStatus,jdbcType=TINYINT}, #{dsType,jdbcType=VARCHAR}, #{dsName,jdbcType=VARCHAR}, 
       #{orderPrice,jdbcType=INTEGER}, #{trainTime,jdbcType=VARCHAR}, #{models,jdbcType=VARCHAR}, 
       #{orderNumber,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
-      #{note,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}, #{submitTime,jdbcType=TIMESTAMP},
-      #{signTime,jdbcType=TIMESTAMP}, #{getTime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR}, 
-      #{refundTime,jdbcType=TIMESTAMP}, #{imageurl,jdbcType=VARCHAR}, #{originalPrice,jdbcType=INTEGER}
-      )
+      #{note,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}, 
+      #{submitTime,jdbcType=TIMESTAMP}, #{signTime,jdbcType=TIMESTAMP}, #{getTime,jdbcType=TIMESTAMP}, 
+      #{description,jdbcType=VARCHAR}, #{refundTime,jdbcType=TIMESTAMP}, #{imageurl,jdbcType=VARCHAR}, 
+      #{originalPrice,jdbcType=INTEGER}, #{payType,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.DsOrder">
     insert into ds_order
@@ -205,6 +206,9 @@
       <if test="originalPrice != null">
         original_price,
       </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
@@ -273,6 +277,9 @@
       <if test="originalPrice != null">
         #{originalPrice,jdbcType=INTEGER},
       </if>
+      <if test="payType != null">
+        #{payType,jdbcType=TINYINT},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.bjpygh.gzh.bean.DsOrderExample" resultType="java.lang.Long">
@@ -323,8 +330,8 @@
       <if test="record.note != null">
         note = #{record.note,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.payTime != null">
         pay_time = #{record.payTime,jdbcType=TIMESTAMP},
@@ -350,6 +357,9 @@
       <if test="record.originalPrice != null">
         original_price = #{record.originalPrice,jdbcType=INTEGER},
       </if>
+      <if test="record.payType != null">
+        pay_type = #{record.payType,jdbcType=TINYINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -370,7 +380,7 @@
       address = #{record.address,jdbcType=VARCHAR},
       real_name = #{record.realName,jdbcType=VARCHAR},
       note = #{record.note,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       pay_time = #{record.payTime,jdbcType=TIMESTAMP},
       submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
       sign_time = #{record.signTime,jdbcType=TIMESTAMP},
@@ -378,7 +388,8 @@
       description = #{record.description,jdbcType=VARCHAR},
       refund_time = #{record.refundTime,jdbcType=TIMESTAMP},
       imageurl = #{record.imageurl,jdbcType=VARCHAR},
-      original_price = #{record.originalPrice,jdbcType=INTEGER}
+      original_price = #{record.originalPrice,jdbcType=INTEGER},
+      pay_type = #{record.payType,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -428,11 +439,11 @@
       <if test="note != null">
         note = #{note,jdbcType=VARCHAR},
       </if>
-      <if test="payTime != null">
-        pay_time = #{payTime,jdbcType=TIMESTAMP},
-      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
       </if>
       <if test="submitTime != null">
         submit_time = #{submitTime,jdbcType=TIMESTAMP},
@@ -454,6 +465,9 @@
       </if>
       <if test="originalPrice != null">
         original_price = #{originalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=TINYINT},
       </if>
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
@@ -480,7 +494,8 @@
       description = #{description,jdbcType=VARCHAR},
       refund_time = #{refundTime,jdbcType=TIMESTAMP},
       imageurl = #{imageurl,jdbcType=VARCHAR},
-      original_price = #{originalPrice,jdbcType=INTEGER}
+      original_price = #{originalPrice,jdbcType=INTEGER},
+      pay_type = #{payType,jdbcType=TINYINT}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
     <update id="updateOrderByStatus" parameterType="dsorder">
@@ -497,4 +512,5 @@
         note=#{note}, description=#{description}, create_time=#{createTime}, pay_time=#{payTime}, submit_time=#{submitTime},
         sign_time=#{signTime}, get_time=#{getTime}, refund_time=#{refundTime}, imageurl=#{imageurl},original_price=#{originalPrice} where order_number=#{orderNumber}
     </update>
+
 </mapper>

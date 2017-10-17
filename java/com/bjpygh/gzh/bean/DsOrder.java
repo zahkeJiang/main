@@ -47,13 +47,7 @@ public class DsOrder {
 
     private Integer originalPrice;
 
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
+    private Byte payType;
 
     public Integer getOrderId() {
         return orderId;
@@ -159,6 +153,14 @@ public class DsOrder {
         this.note = note == null ? null : note.trim();
     }
 
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
     public String getPayTime() {
         return payTime;
     }
@@ -221,5 +223,13 @@ public class DsOrder {
 
     public void setOriginalPrice(Integer originalPrice) {
         this.originalPrice = originalPrice;
+    }
+
+    public Byte getPayType() {
+        return payType;
+    }
+
+    public void setPayType(Byte payType) {
+        this.payType = payType;
     }
 }

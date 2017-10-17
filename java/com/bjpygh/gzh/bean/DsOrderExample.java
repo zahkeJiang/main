@@ -975,6 +975,66 @@ public class DsOrderExample {
             return (Criteria) this;
         }
 
+        public Criteria andCreateTimeIsNull() {
+            addCriterion("create_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNotNull() {
+            addCriterion("create_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterion("create_time =", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotEqualTo(Date value) {
+            addCriterion("create_time <>", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThan(Date value) {
+            addCriterion("create_time >", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_time >=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThan(Date value) {
+            addCriterion("create_time <", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("create_time <=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIn(List<Date> values) {
+            addCriterion("create_time in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotIn(List<Date> values) {
+            addCriterion("create_time not in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+            addCriterion("create_time between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("create_time not between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
         public Criteria andPayTimeIsNull() {
             addCriterion("pay_time is null");
             return (Criteria) this;
@@ -1165,7 +1225,7 @@ public class DsOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andGetTimeEqualTo(String value) {
+        public Criteria andGetTimeEqualTo(Date value) {
             addCriterion("get_time =", value, "getTime");
             return (Criteria) this;
         }
@@ -1472,6 +1532,66 @@ public class DsOrderExample {
 
         public Criteria andOriginalPriceNotBetween(Integer value1, Integer value2) {
             addCriterion("original_price not between", value1, value2, "originalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeIsNull() {
+            addCriterion("pay_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeIsNotNull() {
+            addCriterion("pay_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeEqualTo(Byte value) {
+            addCriterion("pay_type =", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeNotEqualTo(Byte value) {
+            addCriterion("pay_type <>", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeGreaterThan(Byte value) {
+            addCriterion("pay_type >", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeGreaterThanOrEqualTo(Byte value) {
+            addCriterion("pay_type >=", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeLessThan(Byte value) {
+            addCriterion("pay_type <", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeLessThanOrEqualTo(Byte value) {
+            addCriterion("pay_type <=", value, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeIn(List<Byte> values) {
+            addCriterion("pay_type in", values, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeNotIn(List<Byte> values) {
+            addCriterion("pay_type not in", values, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeBetween(Byte value1, Byte value2) {
+            addCriterion("pay_type between", value1, value2, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayTypeNotBetween(Byte value1, Byte value2) {
+            addCriterion("pay_type not between", value1, value2, "payType");
             return (Criteria) this;
         }
     }
