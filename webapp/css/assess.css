@@ -51,5 +51,23 @@ body,html{
 }
 .assess-pic{
 	border-top: 1px solid #eee;
-	padding-top: 10px;
+	
+}
+.assess-pic img{
+	margin-top: 10px;
+	margin-right: 10px;
+}
+/*没有订单时的显示*/
+.assess_bg{
+	margin:16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.bg_hint{
+	margin-top: 100px;
+	text-align: center;
+}
+.bg_hint p{
+	margin-top: 10px;
 }

@@ -6,6 +6,17 @@ var imgData=[];
 var picture1 = "";
 var picture2="";
 var anonymous = 0;//不匿名
+
+var type = "";
+var ordernumber = "";
+function ShowMessage() { 
+    var thisURL = document.URL;     
+    var getval = thisURL.split('?')[1];
+    type = getval.split("=")[1].split("&")[0];
+    ordernumber = getval.split("=")[2];
+} 
+window.onload=ShowMessage();
+
 $(function(){
 
 
@@ -66,11 +77,11 @@ $(".submit").click(function(){
 		// console.log(picture1);
 		// console.log(picture2);
 		console.log(picture);
-		$.post("putComment",{"anonymous":anonymous,"content":content,"enterStar":enterStar,"stayStar":stayStar,"supportStar":supportStar,"picture":picture,"type":1},function(datas){
+		$.post("putComment",{"anonymous":anonymous,"content":content,"enterStar":enterStar,"stayStar":stayStar,"supportStar":supportStar,"picture":picture,"type":type,"ordernumber":ordernumber},function(datas){
 			if (datas.status==0) {
-				alert("上传成功");
+				window.location.href="assessFinish.html";
 			}else{
-				alert("上传失败");
+				alert("上传失败,请稍后再试。");
 			}
 		},"json");
 	}

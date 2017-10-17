@@ -45,9 +45,11 @@ function all_orders(){
                     var result = "<p class='refund' odnumber='"+comment.orderNumber+"'>取消订单</p>";
                 }else if (comment.orderStatus=="3") {//用户报名完成
                     var result = "<p class='result'>材料正在返还</p>";
-                }else if (comment.orderStatus=="4") {//用户成功接收返还材料
+                }else if (comment.orderStatus=="4"||comment.orderStatus=="7") {//用户成功接收返还材料
                     var result = "<p class='result'>已完成</p>";
-                    order_assess = "<span class='order_assess'>评价</span>|";
+                    if (comment.orderStatus=="4") {
+                        order_assess = "<span class='order_assess' odnumber='"+comment.orderNumber+"'>评价</span>|";
+                   }
                 }else if (comment.orderStatus=="5"||comment.orderStatus=="6") {//用户取消订单
                     var result = "<p class='result'>已取消</p>";
                 }
@@ -75,9 +77,17 @@ function all_orders(){
                 var ordernumber = $(this).attr("odnumber");
                 window.location.href="ds_refund.html?ordernumber="+ordernumber;
             });
-            //评价
+            //评价,获取当前订单号，进行判断是属于哪个类型
             $(".order_assess").click(function(){
-                window.location.href="assessSet.html";
+                var ordernumber = $(this).attr("odnumber");
+                var typeLetter = ordernumber.substr(0,1);//提取订单号收个字母，D驾校，V别墅，A军旅
+                var type="";// type(1为别墅评论 2为驾校 3为军旅)
+                if (typeLetter=="V") {
+                    type=1;
+                }else if (typeLetter=="A") {
+                    type=3;
+                }
+                window.location.href="assessSet.html?type="+type+"&ordernumber="+ordernumber;
             });
         }else{
             $(".container").empty();

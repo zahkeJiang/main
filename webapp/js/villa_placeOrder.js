@@ -152,7 +152,9 @@ var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;//身份证号码为15位或者18位，1
                 if (datas.status==0) {
                     var orderNumber = datas.data.orderNumber;
                     console.log(orderNumber);
-                    // window.location.href="payHint.html?orderNumber="+orderNumber;
+                    $(".layer").hide();
+                    $(".payBox").hide();
+                    window.location.href="payHint.html?orderNumber="+orderNumber;
                 }
             },"json");
         }      

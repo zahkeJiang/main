@@ -5,7 +5,7 @@ function ShowMessage() {
 	type = getval.split("=")[1];
 } 
 window.onload=ShowMessage(); 
-
+var html = "";
 $(function(){
 	// type(1为别墅评论 2为驾校 3为军旅)
 	if (type==1) {
@@ -17,8 +17,7 @@ $(function(){
 	$.post("getComment",{"type":type},function(datas){//请求参数 ：type(1为别墅评论 2为驾校 3为军旅)
 		if (datas.status==0) {
 			var villa_assess_list = datas.data.Comment;
-			var html = "";
-			var pictureUrl="";
+			html = "";
 			var commentTime = "";
 			var star = "";
 			$.each(villa_assess_list,function(commentIndex,comment){
@@ -26,24 +25,37 @@ $(function(){
 				var enterStar = comment.enterStar;//娱乐星星
 				var stayStar = comment.stayStar;//住宿星星
 				var supportStar = comment.supportStar;//设备星星
-				star = Math.round((enterStar+stayStar+supportStar)/3);//星星四舍五入取整
-				console(star);
-				if (comment.star == 1) {
+				var finishStar = Math.round((enterStar+stayStar+supportStar)/3);//星星四舍五入取整
+				console.log(finishStar);
+				if (finishStar == 1) {
 					star = '<img src="./images/star1.png" height="16px">';
-				}else if (comment.star == 2) {
+				}else if (finishStar == 2) {
 					star = '<img src="./images/star2.png" height="16px">';
-				}else if (comment.star == 3) {
+				}else if (finishStar == 3) {
 					star = '<img src="./images/star3.png" height="16px">';
-				}else if (comment.star == 4) {
+				}else if (finishStar == 4) {
 					star = '<img src="./images/star4.png" height="16px">';
-				}else if (comment.star == 5) {
+				}else if (finishStar == 5) {
+					star = '<img src="./images/star5.png" height="16px">';
+				}else{
 					star = '<img src="./images/star5.png" height="16px">';
 				}
 				//获取时间年月日
 				commentTime = comment.commentTime.split(' ')[0];
 				//获取用户上传的几张照片
-				// pictureUrl = comment.picture;
-				pictureUrl = '<div class="assess-pic"><img src="./images/alipay.png" height="56px"><img src="./images/alipay.png"  height="56px"><img src="./images/circle.png"  height="56px"></div>';
+				console.log(comment.picture);
+				if (comment.picture==""||comment.picture==null) {
+					pictureUrl="";
+				}else{
+					var picture = comment.picture.split(","); 
+					var pictureUrl="";
+					var pictureList = "";
+					for (var i = 0;i<picture.length; i++) {
+						pictureList +='<img src="/CommentImg/'+picture[i]+'" height="56px" width="56px">';
+					}
+					pictureUrl = '<div class="assess-pic">'+pictureList+'</div>';
+				}
+				
 				//将用户数据循环添加
 				html+='<div class="assessBox"><div class="assess-header"><div class="assess-header-icon"><img src="'
 					+comment.headimageurl+'" height="56px"></div><div class="assess-header-content"><div class="assess-header-star">'
@@ -54,7 +66,8 @@ $(function(){
 			});
 			$(".main").html(html);
 		}else if (datas.status=="-20") {
-			$(".main").html("当前没有想过评价");
+			html  = "<div class='assess_bg'><div class='bg_hint'><img src='images/no_content.png' height='100px'><p>当前没有相关评论</p></div></div>";
+			$(".main").html(html);
 		}
 	},"json");
 });
