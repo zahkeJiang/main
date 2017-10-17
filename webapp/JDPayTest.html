@@ -28,7 +28,7 @@
 
     <script>
         function autosubmit(){
-            $.post("JdDsPay",{"ordernumber":"DSPYGH20178212216296"},function (data) {
+            $.post("JdDsPay",{"ordernumber":"DSPYGH20178212216297"},function (data) {
                 if(data.status == 0){
                     var jdOrderPay = data.data.jdOrderPay;
                     $("#version").val(jdOrderPay.version);
@@ -48,7 +48,7 @@
             },'json');
         }
         function refund() {
-            $.post("refund.action",{"ordernumber":"DSPYGH20178212216296","WIDrefund_reason":"11qq"},function (data) {
+            $.post("refund.action",{"ordernumber":"DSPYGH20178212216297","WIDrefund_reason":"11qq"},function (data) {
 
             },'json');
         }

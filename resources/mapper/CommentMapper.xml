@@ -8,9 +8,11 @@
     <result column="headimageurl" jdbcType="VARCHAR" property="headimageurl" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="picture" jdbcType="VARCHAR" property="picture" />
-    <result column="star" jdbcType="INTEGER" property="star" />
+    <result column="enter_star" jdbcType="INTEGER" property="enterStar" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
+    <result column="stay_star" jdbcType="INTEGER" property="stayStar" />
+    <result column="support_star" jdbcType="INTEGER" property="supportStar" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    comment_id, user_id, nickname, headimageurl, content, picture, star, type, comment_time
+    comment_id, user_id, nickname, headimageurl, content, picture, enter_star, type, 
+    comment_time, stay_star, support_star
   </sql>
   <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.CommentExample" resultMap="BaseResultMap">
     select
@@ -106,12 +109,12 @@
   <insert id="insert" parameterType="com.bjpygh.gzh.bean.Comment">
     insert into comment (comment_id, user_id, nickname, 
       headimageurl, content, picture, 
-      star, type, comment_time
-      )
+      enter_star, type, comment_time, 
+      stay_star, support_star)
     values (#{commentId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR}, 
       #{headimageurl,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
-      #{star,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{commentTime,jdbcType=TIMESTAMP}
-      )
+      #{enterStar,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{commentTime,jdbcType=TIMESTAMP}, 
+      #{stayStar,jdbcType=INTEGER}, #{supportStar,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.Comment">
     insert into comment
@@ -134,14 +137,20 @@
       <if test="picture != null">
         picture,
       </if>
-      <if test="star != null">
-        star,
+      <if test="enterStar != null">
+        enter_star,
       </if>
       <if test="type != null">
         type,
       </if>
       <if test="commentTime != null">
         comment_time,
+      </if>
+      <if test="stayStar != null">
+        stay_star,
+      </if>
+      <if test="supportStar != null">
+        support_star,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -163,14 +172,20 @@
       <if test="picture != null">
         #{picture,jdbcType=VARCHAR},
       </if>
-      <if test="star != null">
-        #{star,jdbcType=INTEGER},
+      <if test="enterStar != null">
+        #{enterStar,jdbcType=INTEGER},
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
       <if test="commentTime != null">
         #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stayStar != null">
+        #{stayStar,jdbcType=INTEGER},
+      </if>
+      <if test="supportStar != null">
+        #{supportStar,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -201,14 +216,20 @@
       <if test="record.picture != null">
         picture = #{record.picture,jdbcType=VARCHAR},
       </if>
-      <if test="record.star != null">
-        star = #{record.star,jdbcType=INTEGER},
+      <if test="record.enterStar != null">
+        enter_star = #{record.enterStar,jdbcType=INTEGER},
       </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=INTEGER},
       </if>
       <if test="record.commentTime != null">
         comment_time = #{record.commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.stayStar != null">
+        stay_star = #{record.stayStar,jdbcType=INTEGER},
+      </if>
+      <if test="record.supportStar != null">
+        support_star = #{record.supportStar,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -223,9 +244,11 @@
       headimageurl = #{record.headimageurl,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=VARCHAR},
       picture = #{record.picture,jdbcType=VARCHAR},
-      star = #{record.star,jdbcType=INTEGER},
+      enter_star = #{record.enterStar,jdbcType=INTEGER},
       type = #{record.type,jdbcType=INTEGER},
-      comment_time = #{record.commentTime,jdbcType=TIMESTAMP}
+      comment_time = #{record.commentTime,jdbcType=TIMESTAMP},
+      stay_star = #{record.stayStar,jdbcType=INTEGER},
+      support_star = #{record.supportStar,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -248,14 +271,20 @@
       <if test="picture != null">
         picture = #{picture,jdbcType=VARCHAR},
       </if>
-      <if test="star != null">
-        star = #{star,jdbcType=INTEGER},
+      <if test="enterStar != null">
+        enter_star = #{enterStar,jdbcType=INTEGER},
       </if>
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
       </if>
       <if test="commentTime != null">
         comment_time = #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stayStar != null">
+        stay_star = #{stayStar,jdbcType=INTEGER},
+      </if>
+      <if test="supportStar != null">
+        support_star = #{supportStar,jdbcType=INTEGER},
       </if>
     </set>
     where comment_id = #{commentId,jdbcType=INTEGER}
@@ -267,9 +296,11 @@
       headimageurl = #{headimageurl,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
       picture = #{picture,jdbcType=VARCHAR},
-      star = #{star,jdbcType=INTEGER},
+      enter_star = #{enterStar,jdbcType=INTEGER},
       type = #{type,jdbcType=INTEGER},
-      comment_time = #{commentTime,jdbcType=TIMESTAMP}
+      comment_time = #{commentTime,jdbcType=TIMESTAMP},
+      stay_star = #{stayStar,jdbcType=INTEGER},
+      support_star = #{supportStar,jdbcType=INTEGER}
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
 </mapper>

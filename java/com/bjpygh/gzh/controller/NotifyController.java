@@ -180,7 +180,6 @@ public class NotifyController extends BaseController {
     @RequestMapping(value = "/jNotify_url")
     public String execute(HttpServletRequest request) {
         StringBuilder sb = new StringBuilder();
-        System.out.println("JdNotifyStart--------");
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader( request.getInputStream()));
             String line = null;
@@ -198,11 +197,13 @@ public class NotifyController extends BaseController {
         String pubKey = PropertyUtils.getProperty("wepay.jd.rsaPublicKey");
         try {
             AsynNotifyResponse anRes = JdPayUtil.parseResp(pubKey, deskey, sb.toString(), AsynNotifyResponse.class);
-            System.out.println("异步通知解析数据:" + anRes);
-            System.out.println("异步通知订单号：" + anRes.getTradeNum() + ",状态：" + anRes.getStatus() + "成功!!!!");
 
             if (anRes.getStatus().equals("1")){
-
+                DsOrder dsOrder = dsOrderService.getDsOrderByNumber(anRes.getTradeNum()).get(0);
+                dsOrder.setOrderStatus((byte) 1);
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                dsOrder.setPayTime(formatter.format(new Date()));
+                dsOrderService.updateOrder(dsOrder);
             }
         } catch (Exception e) {
             System.out.println(e);

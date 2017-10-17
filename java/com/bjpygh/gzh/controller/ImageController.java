@@ -33,35 +33,35 @@ public class ImageController {
                           @ModelAttribute DsImage images ) {
 
 	    System.out.println(images);
-            List<MultipartFile> files = images.getImages();
-            System.out.println(files);
-            List<String> fileNames = new ArrayList<String>();
+        List<MultipartFile> files = images.getImages();
+        System.out.println(files);
+        List<String> fileNames = new ArrayList<String>();
 
-            if (null != files && files.size() > 0) {
-                for (MultipartFile multipartFile : files) {
+        if (null != files && files.size() > 0) {
+            for (MultipartFile multipartFile : files) {
 
-                    String fileName = multipartFile.getOriginalFilename();
-                    fileNames.add(fileName);
-                    File image = new File(servletRequest.getServletContext().getRealPath("/CommentImg"));
-                    if(!image.exists()){
-                        image.mkdirs();
-                    }
-                    File imageFile = new File(servletRequest.getServletContext()
-                            .getRealPath("/CommentImg"), fileName);
-                    try {
-                        multipartFile.transferTo(imageFile);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                String fileName = multipartFile.getOriginalFilename();
+                fileNames.add(fileName);
+                File image = new File(servletRequest.getServletContext().getRealPath("/CommentImg"));
+                if(!image.exists()){
+                    image.mkdirs();
+                }
+                File imageFile = new File(servletRequest.getServletContext()
+                        .getRealPath("/CommentImg"), fileName);
+                try {
+                    multipartFile.transferTo(imageFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
+        }
 
-            // save product here
-//            model.addAttribute("image", dsImage);
-            /**
-             * 这儿的图片地址上线需要改IP为120.24.184.86
-             */
-//            out.print("http://120.24.184.86:8080/glxt/dsimage/"+fileNames);
+        // save product here
+//        model.addAttribute("image", dsImage);
+        /**
+         * 这儿的图片地址上线需要改IP为120.24.184.86
+         */
+//      out.print("http://120.24.184.86:8080/glxt/dsimage/"+fileNames);
 
         return Status.success().add("picture",fileNames);
     }

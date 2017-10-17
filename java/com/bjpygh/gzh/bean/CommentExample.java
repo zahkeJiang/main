@@ -505,63 +505,63 @@ public class CommentExample {
             return (Criteria) this;
         }
 
-        public Criteria andStarIsNull() {
-            addCriterion("star is null");
+        public Criteria andEnterStarIsNull() {
+            addCriterion("enter_star is null");
             return (Criteria) this;
         }
 
-        public Criteria andStarIsNotNull() {
-            addCriterion("star is not null");
+        public Criteria andEnterStarIsNotNull() {
+            addCriterion("enter_star is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStarEqualTo(Integer value) {
-            addCriterion("star =", value, "star");
+        public Criteria andEnterStarEqualTo(Integer value) {
+            addCriterion("enter_star =", value, "enterStar");
             return (Criteria) this;
         }
 
-        public Criteria andStarNotEqualTo(Integer value) {
-            addCriterion("star <>", value, "star");
+        public Criteria andEnterStarNotEqualTo(Integer value) {
+            addCriterion("enter_star <>", value, "enterStar");
             return (Criteria) this;
         }
 
-        public Criteria andStarGreaterThan(Integer value) {
-            addCriterion("star >", value, "star");
+        public Criteria andEnterStarGreaterThan(Integer value) {
+            addCriterion("enter_star >", value, "enterStar");
             return (Criteria) this;
         }
 
-        public Criteria andStarGreaterThanOrEqualTo(Integer value) {
-            addCriterion("star >=", value, "star");
+        public Criteria andEnterStarGreaterThanOrEqualTo(Integer value) {
+            addCriterion("enter_star >=", value, "enterStar");
             return (Criteria) this;
         }
 
-        public Criteria andStarLessThan(Integer value) {
-            addCriterion("star <", value, "star");
+        public Criteria andEnterStarLessThan(Integer value) {
+            addCriterion("enter_star <", value, "enterStar");
             return (Criteria) this;
         }
 
-        public Criteria andStarLessThanOrEqualTo(Integer value) {
-            addCriterion("star <=", value, "star");
+        public Criteria andEnterStarLessThanOrEqualTo(Integer value) {
+            addCriterion("enter_star <=", value, "enterStar");
             return (Criteria) this;
         }
 
-        public Criteria andStarIn(List<Integer> values) {
-            addCriterion("star in", values, "star");
+        public Criteria andEnterStarIn(List<Integer> values) {
+            addCriterion("enter_star in", values, "enterStar");
             return (Criteria) this;
         }
 
-        public Criteria andStarNotIn(List<Integer> values) {
-            addCriterion("star not in", values, "star");
+        public Criteria andEnterStarNotIn(List<Integer> values) {
+            addCriterion("enter_star not in", values, "enterStar");
             return (Criteria) this;
         }
 
-        public Criteria andStarBetween(Integer value1, Integer value2) {
-            addCriterion("star between", value1, value2, "star");
+        public Criteria andEnterStarBetween(Integer value1, Integer value2) {
+            addCriterion("enter_star between", value1, value2, "enterStar");
             return (Criteria) this;
         }
 
-        public Criteria andStarNotBetween(Integer value1, Integer value2) {
-            addCriterion("star not between", value1, value2, "star");
+        public Criteria andEnterStarNotBetween(Integer value1, Integer value2) {
+            addCriterion("enter_star not between", value1, value2, "enterStar");
             return (Criteria) this;
         }
 
@@ -682,6 +682,126 @@ public class CommentExample {
 
         public Criteria andCommentTimeNotBetween(Date value1, Date value2) {
             addCriterion("comment_time not between", value1, value2, "commentTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayStarIsNull() {
+            addCriterion("stay_star is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayStarIsNotNull() {
+            addCriterion("stay_star is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayStarEqualTo(Integer value) {
+            addCriterion("stay_star =", value, "stayStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayStarNotEqualTo(Integer value) {
+            addCriterion("stay_star <>", value, "stayStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayStarGreaterThan(Integer value) {
+            addCriterion("stay_star >", value, "stayStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayStarGreaterThanOrEqualTo(Integer value) {
+            addCriterion("stay_star >=", value, "stayStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayStarLessThan(Integer value) {
+            addCriterion("stay_star <", value, "stayStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayStarLessThanOrEqualTo(Integer value) {
+            addCriterion("stay_star <=", value, "stayStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayStarIn(List<Integer> values) {
+            addCriterion("stay_star in", values, "stayStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayStarNotIn(List<Integer> values) {
+            addCriterion("stay_star not in", values, "stayStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayStarBetween(Integer value1, Integer value2) {
+            addCriterion("stay_star between", value1, value2, "stayStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andStayStarNotBetween(Integer value1, Integer value2) {
+            addCriterion("stay_star not between", value1, value2, "stayStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportStarIsNull() {
+            addCriterion("support_star is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportStarIsNotNull() {
+            addCriterion("support_star is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportStarEqualTo(Integer value) {
+            addCriterion("support_star =", value, "supportStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportStarNotEqualTo(Integer value) {
+            addCriterion("support_star <>", value, "supportStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportStarGreaterThan(Integer value) {
+            addCriterion("support_star >", value, "supportStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportStarGreaterThanOrEqualTo(Integer value) {
+            addCriterion("support_star >=", value, "supportStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportStarLessThan(Integer value) {
+            addCriterion("support_star <", value, "supportStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportStarLessThanOrEqualTo(Integer value) {
+            addCriterion("support_star <=", value, "supportStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportStarIn(List<Integer> values) {
+            addCriterion("support_star in", values, "supportStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportStarNotIn(List<Integer> values) {
+            addCriterion("support_star not in", values, "supportStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportStarBetween(Integer value1, Integer value2) {
+            addCriterion("support_star between", value1, value2, "supportStar");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportStarNotBetween(Integer value1, Integer value2) {
+            addCriterion("support_star not between", value1, value2, "supportStar");
             return (Criteria) this;
         }
     }

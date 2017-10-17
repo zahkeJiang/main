@@ -22,29 +22,10 @@ public class RefundResponse extends JdPayBaseResponse {
 
 	private String tradeTime;
 
-	private String tradeType;
-
 	private String status;
 
 	private String note;
 
-	private List<PayTradeVo> payList;
-
-    public List<PayTradeVo> getPayList() {
-        return payList;
-    }
-
-    public void setPayList(List<PayTradeVo> payList) {
-        this.payList = payList;
-    }
-
-    public String getTradeType() {
-        return tradeType;
-    }
-
-    public void setTradeType(String tradeType) {
-        this.tradeType = tradeType;
-    }
 
     /**
 	 * @return the note
