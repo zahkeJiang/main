@@ -28,7 +28,7 @@
 
     <script>
         function autosubmit(){
-            $.post("JdDsPay",{"ordernumber":"DSPYGH20178212216297"},function (data) {
+            $.post("JDPay",{"ordernumber":"DSPYGH20178212216297"},function (data) {
                 if(data.status == 0){
                     var jdOrderPay = data.data.jdOrderPay;
                     $("#version").val(jdOrderPay.version);

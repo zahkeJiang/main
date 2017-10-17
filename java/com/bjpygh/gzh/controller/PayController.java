@@ -174,7 +174,7 @@ public class PayController extends BaseController {
 
     //预约支付接口
     @ResponseBody
-    @RequestMapping(value = "/JdDsPay", method = RequestMethod.POST)
+    @RequestMapping(value = "/JDPay", method = RequestMethod.POST)
     public Status JdDsPay(HttpServletResponse response,String ordernumber) throws IOException{
         String o = ordernumber.substring(0, 1);
         if (o.equals("A")){
