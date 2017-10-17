@@ -3,17 +3,20 @@ var satisfaction01="";
 var satisfaction02="";
 var satisfaction03="";
 var imgData=[];
-var picture = "";
-var pictureData="";
+var picture1 = "";
+var picture2="";
+var anonymous = 0;//不匿名
 $(function(){
 
 
-//匿名与否
+//匿名与否,0不匿名，1是匿名
 $(".circle").click(function(){
 	if ($(".circle-choose").length > 0) {
+        anonymous = 1;
 		$(".circle-choose").remove();
 	}else{
 		$(this).append('<div class="circle-choose"></div>');
+         anonymous = 0;
 	}
 });
 //评价星星
@@ -47,16 +50,23 @@ $(".submit").click(function(){
 		$(".hint").show();
 		setTimeout(function(){$(".hint").hide(1000);},1000);//显示1,秒后进行隐藏
 	}else{
-		var content = $("textarea[name='assess']").val();
-		var star = $(".satisfaction01 span").attr("star");
-		pictureData  = JSON.stringify(imgData);//将对象转化为json字符串
-		picture = JSON.parse(pictureData);//这样就是把字符串解析 其实就是把外面的中括号去掉；
-		var str=imgData.join(",");
+		var content = $("textarea[name='assess']").val();//评论内容
+        if (content=="") {
+            content="用户未输入内容，变提交了";
+        }
+        $("")
+		var enterStar = $(".satisfaction01 span").attr("star");//娱乐满意度
+        var supportStar = $(".satisfaction02 span").attr("star");//配套满意度
+        var stayStar = $(".satisfaction03 span").attr("star");//住宿满意度
+
+		// picture1  = JSON.stringify(imgData);//将对象转化为json字符串
+		// picture2 = JSON.parse(picture1);//这样就是把字符串解析 其实就是把外面的中括号去掉；
+		var picture=imgData.join(",");
 		console.log(imgData);
-		console.log(pictureData);
+		// console.log(picture1);
+		// console.log(picture2);
 		console.log(picture);
-		console.log(str);
-		$.post("putComment",{"content":content,"star":star,"picture":str,"type":1},function(datas){
+		$.post("putComment",{"anonymous":anonymous,"content":content,"enterStar":enterStar,"stayStar":stayStar,"supportStar":supportStar,"picture":picture,"type":1},function(datas){
 			if (datas.status==0) {
 				alert("上传成功");
 			}else{

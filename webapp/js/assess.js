@@ -23,6 +23,11 @@ $(function(){
 			var star = "";
 			$.each(villa_assess_list,function(commentIndex,comment){
 				//获取星星
+				var enterStar = comment.enterStar;//娱乐星星
+				var stayStar = comment.stayStar;//住宿星星
+				var supportStar = comment.supportStar;//设备星星
+				star = Math.round((enterStar+stayStar+supportStar)/3);//星星四舍五入取整
+				console(star);
 				if (comment.star == 1) {
 					star = '<img src="./images/star1.png" height="16px">';
 				}else if (comment.star == 2) {

@@ -98,7 +98,6 @@ $(function(){
     			if (datas.status=="0") {//代表用户目前没有驾校的完成订单
     				$(".layer").show();
             		$(".payBox").show(); 
-    				toPay();
         		}else if (datas.status == "-20"){
         			alert("每位用户仅能一次报名学车，为避免重复报名，请勿下单。");
         		}
@@ -107,7 +106,6 @@ $(function(){
 	});
 
 //选择支付方式后点击确认
-function toPay(){
     $(".toPay").click(function(){
         var payMode = $("input[name='payMode-radio']:checked").val();
         console.log(payMode);
@@ -120,7 +118,7 @@ function toPay(){
                     console.log(ordernumber);
                     $(".layer").hide();
             		$(".payBox").hide(); 
-    				// window.location.href="payHint.html?ordernumber="+ordernumber;
+    				window.location.href="payHint.html?ordernumber="+ordernumber;
     			}else if (datas.status == "-40") {
     				alert("您当前已存在多个未支付订单，请勿重复多次下单。")
     			}
@@ -128,7 +126,7 @@ function toPay(){
 
         }      
     });
-}
+
 //为支付方式的radio设置自定义点击样式
     $(".payMode").click(function() {
         $(this).children(".payModeImg").css({"background":"url(./images/circle_choose.png)","background-size":"20px"});
