@@ -1,5 +1,6 @@
 package com.bjpygh.gzh.bean;
 
+import java.util.Date;
 
 public class ArmyOrder {
     private Integer armyId;
@@ -37,6 +38,8 @@ public class ArmyOrder {
     private Integer noroomNumber;
 
     private String imageurl;
+
+    private Byte payType;
 
     public Integer getArmyId() {
         return armyId;
@@ -180,5 +183,13 @@ public class ArmyOrder {
 
     public void setImageurl(String imageurl) {
         this.imageurl = imageurl == null ? null : imageurl.trim();
+    }
+
+    public Byte getPayType() {
+        return payType;
+    }
+
+    public void setPayType(Byte payType) {
+        this.payType = payType;
     }
 }
