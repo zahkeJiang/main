@@ -44,14 +44,14 @@ function get_coupons(){
 			var obj = eval('(' + data + ')');
 			if (obj.status=="0") {
 				coupons_sum = obj.data.price;
-				$(".coupons span").html(coupons_sum+"元");//优惠券价格
-				$(".coupons span").css({"color":"red"});
+				$(".coupons span").html("¥"+coupons_sum);//优惠券价格
+				$(".coupons span").css({"color":"orange"});
 				select ="1";
-				$(".price").html((price-coupons_sum)+".00");//需支付金额
+				$(".price").html("¥"+(price-coupons_sum)+".00");//需支付金额
 			}else{
 				$(".coupons span").html("无可用优惠券&nbsp;&gt;");
 				select ="0";
-				$(".price").html(price+".00");//需支付金额
+				$(".price").html("¥"+price+".00");//需支付金额
 			}
         }	
     });
@@ -94,24 +94,49 @@ $(function(){
 		}else if (note == null) {
 			alert("请选择您的法培方式");
 		}else {
-    		$.post("note.action",{"realname":realname,"address":address,"note":note},function(obj){
-    			if (obj.status=="0") {
-    				$.post("createOrder.action",{"packageid":packageid,"select":select},function(datas){
-    					if (datas.status==0) {
-    						var dataurl = datas.data;
-    						var  ordernumber = dataurl.ordernumber;
-    						// window.location.href="confirm_orders.html?packageid="+packageid+"&select="+select+"&ordernumber="+ordernumber;	
-    						$.cookie("ordernumber",ordernumber);//订单号
-    						$.cookie("select",select);//是否使用优惠券
-    						window.location.href="confirm_orders.html";
-    					}else if (datas.status == "-40") {
-    						alert("您当前已存在多个未支付订单，请勿重复多次下单。")
-    					}
-    				},"json");
-        		}else{
-        			alert("每位用户仅可驾校报名成功一次，您已报名过驾校，请勿重复下单。");
+    		$.post("note.action",{"realname":realname,"address":address,"note":note},function(datas){//保存用户信息
+    			if (datas.status=="0") {//代表用户目前没有驾校的完成订单
+    				$(".layer").show();
+            		$(".payBox").show(); 
+    				toPay();
+        		}else if (datas.status == "-20"){
+        			alert("每位用户仅能一次报名学车，为避免重复报名，请勿下单。");
         		}
     		},"json");
 		}
 	});
+
+//选择支付方式后点击确认
+function toPay(){
+    $(".toPay").click(function(){
+        var payMode = $("input[name='payMode-radio']:checked").val();
+        console.log(payMode);
+        if (payMode=="JD") {//京东支付
+            
+        }else if (payMode=="aliPay") {//支付宝支付
+            $.post("createOrder.action",{"packageid":packageid,"select":select},function(datas){//创建驾校报名订单
+    			if (datas.status==0) {
+    				var ordernumber = datas.data.ordernumber;
+                    console.log(ordernumber);
+                    $(".layer").hide();
+            		$(".payBox").hide(); 
+    				// window.location.href="payHint.html?ordernumber="+ordernumber;
+    			}else if (datas.status == "-40") {
+    				alert("您当前已存在多个未支付订单，请勿重复多次下单。")
+    			}
+    		},"json");
+
+        }      
+    });
+}
+//为支付方式的radio设置自定义点击样式
+    $(".payMode").click(function() {
+        $(this).children(".payModeImg").css({"background":"url(./images/circle_choose.png)","background-size":"20px"});
+        $(this).parents().siblings("label").find(".payModeImg").css({"background":"url(./images/circle.png)","background-size":"20px"});
+    });
+//关闭弹窗
+    $(".payBox p").click(function(){
+        $(".layer").hide();
+        $(".payBox").hide();
+    });
 });

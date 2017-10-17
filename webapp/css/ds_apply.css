@@ -73,15 +73,12 @@ span{
 .ds_cost{
 	display:flex;
 }
-.yuan{
-	color: red;
-}
 .price h2{
 	font-weight: normal;
 }
 
 .ds_price{
-	color: red;
+	color: orange;
 	margin-left:16px;
 }
 .service{
