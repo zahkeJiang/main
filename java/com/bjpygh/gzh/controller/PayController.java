@@ -274,17 +274,16 @@ public class PayController extends BaseController {
         if(userMap == null){
             return Status.notInWx();
         }
-
         String out_trade_no = new String(request.getParameter("ordernumber").getBytes("ISO-8859-1"),"UTF-8");
 
         String refund_reason=new String(request.getParameter("WIDrefund_reason").getBytes("ISO-8859-1"),"UTF-8");
 
         VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(out_trade_no).get(0);
 
-        if(villaOrder.getOrderStatus() == 3){
+        if(villaOrder.getOrderStatus() == 4){
             return Status.fail(-30,"报名已完成");
         }
-        String refund_amount=""+villaOrder.getVillaPrice();
+        String refund_amount=""+villaOrder.getVillaPrice()*0.4;
 
         if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
             //改变订单状态
@@ -528,6 +527,7 @@ public class PayController extends BaseController {
         return s;
     }
 
+    //京东支付请求方法
     public Status JdPayReq(String tradeNum,String amount,String userid){
         JdOrderPay jdOrderPay = new JdOrderPay();
         jdOrderPay.setVersion("V2.0");

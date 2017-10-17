@@ -15,11 +15,15 @@ public class Comment {
 
     private String picture;
 
-    private Integer star;
+    private Integer enterStar;
 
     private Integer type;
 
     private String commentTime;
+
+    private Integer stayStar;
+
+    private Integer supportStar;
 
     public Integer getCommentId() {
         return commentId;
@@ -69,12 +73,12 @@ public class Comment {
         this.picture = picture == null ? null : picture.trim();
     }
 
-    public Integer getStar() {
-        return star;
+    public Integer getEnterStar() {
+        return enterStar;
     }
 
-    public void setStar(Integer star) {
-        this.star = star;
+    public void setEnterStar(Integer enterStar) {
+        this.enterStar = enterStar;
     }
 
     public Integer getType() {
@@ -91,5 +95,21 @@ public class Comment {
 
     public void setCommentTime(String commentTime) {
         this.commentTime = commentTime;
+    }
+
+    public Integer getStayStar() {
+        return stayStar;
+    }
+
+    public void setStayStar(Integer stayStar) {
+        this.stayStar = stayStar;
+    }
+
+    public Integer getSupportStar() {
+        return supportStar;
+    }
+
+    public void setSupportStar(Integer supportStar) {
+        this.supportStar = supportStar;
     }
 }
