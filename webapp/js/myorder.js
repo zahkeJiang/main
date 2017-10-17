@@ -86,6 +86,8 @@ function all_orders(){
                     type=1;
                 }else if (typeLetter=="A") {
                     type=3;
+                }else if (typeLetter=="D") {
+                    type=2;
                 }
                 window.location.href="assessSet.html?type="+type+"&ordernumber="+ordernumber;
             });
@@ -193,9 +195,11 @@ function orders_finished(){
             var dsorder_list = datas.data.orders;
             // $.each循环实现添加订单列表  
             $.each(dsorder_list,function(commentIndex,comment){
-                if (comment.orderStatus=="4") {//用户订单完成以及材料返还成功
+                if (comment.orderStatus=="4"||comment.orderStatus=="7") {//用户订单完成以及材料返还成功
+                    if (comment.orderStatus=="4") {
+                        var order_assess = "<span class='order_assess' odnumber='"+comment.orderNumber+"'>评价</span>|";
+                    }
                     var result = "<p class='result'>已完成</p>";
-                    var  order_assess = "<span class='order_assess'>评价</span>|";
                     dsorderh_tml += "<div class='dsorder_list' onumber='"+comment.orderNumber+"'><div class='dsorder_titie'><p class='ds_name'>"
                                 +comment.orderName+"</p>"+result+"</div><div class='dsoder_container'><img src='"
                                 +comment.orderImage+"' height='48px' width='64px'><p class='dsorder_information'>"
@@ -214,6 +218,21 @@ function orders_finished(){
             $(".dsoder_container").click(function(){  
                 var ordernumber = $(this).parents().attr("onumber");
                 window.location.href="order_information.html?ordernumber="+ordernumber;
+            });
+
+            //评价,获取当前订单号，进行判断是属于哪个类型
+            $(".order_assess").click(function(){
+                var ordernumber = $(this).attr("odnumber");
+                var typeLetter = ordernumber.substr(0,1);//提取订单号收个字母，D驾校，V别墅，A军旅
+                var type="";// type(1为别墅评论 2为驾校 3为军旅)
+                if (typeLetter=="V") {
+                    type=1;
+                }else if (typeLetter=="A") {
+                    type=3;
+                }else if (typeLetter=="D") {
+                    type=2;
+                }
+                window.location.href="assessSet.html?type="+type+"&ordernumber="+ordernumber;
             });
         }else{
             $(".container").empty();

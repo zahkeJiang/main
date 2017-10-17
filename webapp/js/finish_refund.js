@@ -15,7 +15,7 @@ $(function(){
 		var refund_success = "<img src='images/refund_success.png' height='80px' width='80px'><p>退款成功</p>"
 		$(".refund_infor").html(refund_success);
 	}else{
-		var refund_fail = "<img src='images/refund_fail.png' height='80px' width='80px><p>退款失败</p>"
+		var refund_fail = "<img src='images/refund_fail.png' height='80px' width='80px'><p>退款失败</p>"
 		$(".refund_infor").html(refund_fail);
 	}
 });
