@@ -1,8 +1,14 @@
 package com.bjpygh.gzh.controller;
 
+import com.bjpygh.gzh.bean.ArmyOrder;
 import com.bjpygh.gzh.bean.Comment;
+import com.bjpygh.gzh.bean.DsOrder;
+import com.bjpygh.gzh.bean.VillaOrder;
 import com.bjpygh.gzh.entity.Status;
+import com.bjpygh.gzh.service.ArmyOrderService;
 import com.bjpygh.gzh.service.CommentService;
+import com.bjpygh.gzh.service.DsOrderService;
+import com.bjpygh.gzh.service.VillaOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +25,18 @@ public class CommentController extends BaseController{
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    DsOrderService dsOrderService;
+
+    @Autowired
+    VillaOrderService villaOrderService;
+
+    @Autowired
+    ArmyOrderService armyOrderService;
+
     @ResponseBody
     @RequestMapping(value = "/putComment", method = RequestMethod.POST)
-    public Status putComment(Comment comment,HttpServletRequest request){
+    public Status putComment(Comment comment,String ordernumber,HttpServletRequest request){
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
@@ -29,7 +44,24 @@ public class CommentController extends BaseController{
         String userid = userMap.get("id");
         comment.setUserId(Long.valueOf(userid));
         commentService.putComment(comment);
+        updateOrderStatus(comment.getType(),ordernumber);
         return Status.success();
+    }
+
+    private void updateOrderStatus(Integer type, String ordernumber) {
+        if (type==1){
+            VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(ordernumber).get(0);
+            villaOrder.setOrderStatus(7);
+            villaOrderService.updateOrder(villaOrder);
+        }else if (type==2){
+            DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
+            dsOrder.setOrderStatus((byte) 7);
+            dsOrderService.updateOrder(dsOrder);
+        }else if (type==3){
+            ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
+            armyOrder.setOrderStatus(7);
+            armyOrderService.updateOrder(armyOrder);
+        }
     }
 
     @ResponseBody
