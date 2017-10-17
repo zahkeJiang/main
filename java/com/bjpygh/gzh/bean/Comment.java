@@ -1,6 +1,5 @@
 package com.bjpygh.gzh.bean;
 
-import java.util.Date;
 
 public class Comment {
     private Integer commentId;
@@ -24,6 +23,8 @@ public class Comment {
     private Integer stayStar;
 
     private Integer supportStar;
+
+    private Boolean anonymous;
 
     public Integer getCommentId() {
         return commentId;
@@ -111,5 +112,13 @@ public class Comment {
 
     public void setSupportStar(Integer supportStar) {
         this.supportStar = supportStar;
+    }
+
+    public Boolean getAnonymous() {
+        return anonymous;
+    }
+
+    public void setAnonymous(Boolean anonymous) {
+        this.anonymous = anonymous;
     }
 }
