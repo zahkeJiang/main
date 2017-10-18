@@ -3,6 +3,7 @@ package com.bjpygh.gzh.dao;
 import com.bjpygh.gzh.bean.ArmyOrder;
 import com.bjpygh.gzh.bean.ArmyOrderExample;
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 public interface ArmyOrderMapper {
@@ -27,4 +28,6 @@ public interface ArmyOrderMapper {
     int updateByPrimaryKeySelective(ArmyOrder record);
 
     int updateByPrimaryKey(ArmyOrder record);
+
+    void updateOrderStatus(Map<String, String> map);
 }

@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ArmyOrderService {
@@ -64,11 +62,10 @@ public class ArmyOrderService {
     }
 
     public void updateOrderStatus(String ordernumber) {
-        ArmyOrderExample example = new ArmyOrderExample();
-        ArmyOrderExample.Criteria criteria = example.createCriteria();
-        criteria.andOrderNumberEqualTo(ordernumber);
-        criteria.andOrderStatusEqualTo(0);
-        armyOrderMapper.updateByExample(example);
+        Map<String, String> map = new HashMap();
+        map.put("orderNumber",ordernumber);
+        map.put("orderStatus","6");
+        armyOrderMapper.updateOrderStatus(map);
     }
 
     public List<ArmyOrder> getArmyOrder(String userid) {
