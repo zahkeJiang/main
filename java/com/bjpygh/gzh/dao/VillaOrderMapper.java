@@ -3,6 +3,7 @@ package com.bjpygh.gzh.dao;
 import com.bjpygh.gzh.bean.VillaOrder;
 import com.bjpygh.gzh.bean.VillaOrderExample;
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 public interface VillaOrderMapper {
@@ -20,7 +21,7 @@ public interface VillaOrderMapper {
 
     VillaOrder selectByPrimaryKey(Integer villaId);
 
-    int updateByExampleSelective(@Param("record") VillaOrder record, @Param("example") VillaOrderExample example);
+    int updateByExampleSelective(@Param("example") VillaOrderExample example);
 
     int updateByExample(@Param("example") VillaOrderExample example);
 
@@ -29,4 +30,6 @@ public interface VillaOrderMapper {
     int updateByPrimaryKey(VillaOrder record);
 
     List<VillaOrder> getVillaOrderByDate(String thisDate);
+
+    void updateOrderStatus(Map<String, String> map);
 }

@@ -73,11 +73,10 @@ public class VillaOrderService {
     }
 
     public void updateOrderStatus(String ordernumber) {
-        VillaOrderExample example = new VillaOrderExample();
-        VillaOrderExample.Criteria criteria = example.createCriteria();
-        criteria.andOrderNumberEqualTo(ordernumber);
-        criteria.andOrderStatusEqualTo(6);
-        villaOrderMapper.updateByExample(example);
+        Map<String, String> map = new HashMap();
+        map.put("orderNumber",ordernumber);
+        map.put("orderStatus","6");
+        villaOrderMapper.updateOrderStatus(map);
     }
 
     public List<VillaOrder> getVillaOrder(String userid) {

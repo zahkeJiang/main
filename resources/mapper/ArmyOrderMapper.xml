@@ -348,6 +348,9 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+    <update id="updateOrderStatus" parameterType="map">
+        update army_order set order_status=#{orderStatus},refund_time=#{refundTime} where order_number=#{orderNumber}
+    </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.bjpygh.gzh.bean.ArmyOrder">
     update army_order
     <set>
