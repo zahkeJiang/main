@@ -8,6 +8,12 @@ body,html{
 	background: #fff;
 
 }
+.username{
+	padding-bottom:10px;
+	color: #999;
+	margin-bottom: 8px;
+	border-bottom:1px solid #ddd;
+}
 .assess-header{
 	display: flex;
 }

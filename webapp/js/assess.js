@@ -20,6 +20,8 @@ $(function(){
 			html = "";
 			var commentTime = "";
 			var star = "";
+			var anonymous = "";
+			var nickname = "";
 			$.each(villa_assess_list,function(commentIndex,comment){
 				//获取星星
 				var enterStar = comment.enterStar;//娱乐星星
@@ -40,6 +42,12 @@ $(function(){
 				}else{
 					star = '<img src="./images/star5.png" height="16px">';
 				}
+				//匿名与否,0,flase不匿名，1,true是匿名
+				anonymous = comment.anonymous;
+				nickname = comment.nickname;
+				if (anonymous==true) {
+					nickname=nickname.substring(0,1)+"**"+nickname.charAt(nickname.length - 1);
+				}
 				//获取时间年月日
 				commentTime = comment.commentTime.split(' ')[0];
 				//获取用户上传的几张照片
@@ -57,7 +65,8 @@ $(function(){
 				}
 				
 				//将用户数据循环添加
-				html+='<div class="assessBox"><div class="assess-header"><div class="assess-header-icon"><img src="'
+				html+='<div class="assessBox"><div class="username">'
+					+nickname+'</div><div class="assess-header"><div class="assess-header-icon"><img src="'
 					+comment.headimageurl+'" height="56px"></div><div class="assess-header-content"><div class="assess-header-star">'
 					+star+'</div><div class="assess-header-time">'
 					+commentTime+'</div><p class="assess-header-text">'

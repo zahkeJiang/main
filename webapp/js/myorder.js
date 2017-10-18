@@ -65,13 +65,9 @@ function all_orders(){
             // 为订单列表设置点击事件
             $(".dsoder_container").click(function(){
                 var ordernumber= $(this).parents().attr("onumber");  
-                window.location.href="order_information.html?ordernumber="+ordernumber;
+                window.location.href="orderInformation.html?ordernumber="+ordernumber;
             });
-            //未支付订单付款
-            // $(".topay").click(function(){
-            //     var ordernumber = $(this).attr("odnumber");
-            //     window.location.href="determine_browser.html?ordernumber="+ordernumber;
-            // });
+
             //退款
             $(".refund").click(function(){
                 var ordernumber = $(this).attr("odnumber");
@@ -131,7 +127,7 @@ function orders_pay(){
             // 为订单列表设置点击事件
             $(".dsoder_container").click(function(){  
                 var ordernumber = $(this).parents().attr("onumber");
-                window.location.href="order_information.html?ordernumber="+ordernumber;
+                window.location.href="orderInformation.html?ordernumber="+ordernumber;
             });
         }else{
             $(".container").empty();
@@ -174,7 +170,7 @@ function orders_success(){
             // 为订单列表设置点击事件
             $(".dsoder_container").click(function(){  
                 var ordernumber = $(this).parents().attr("onumber");
-                window.location.href="order_information.html?ordernumber="+ordernumber;
+                window.location.href="orderInformation.html?ordernumber="+ordernumber;
             });
             $(".refund").click(function(){
                 var ordernumber = $(this).attr("odnumber");
@@ -195,9 +191,10 @@ function orders_finished(){
             var dsorder_list = datas.data.orders;
             // $.each循环实现添加订单列表  
             $.each(dsorder_list,function(commentIndex,comment){
+                var order_assess= "";
                 if (comment.orderStatus=="4"||comment.orderStatus=="7") {//用户订单完成以及材料返还成功
                     if (comment.orderStatus=="4") {
-                        var order_assess = "<span class='order_assess' odnumber='"+comment.orderNumber+"'>评价</span>|";
+                        order_assess = "<span class='order_assess' odnumber='"+comment.orderNumber+"'>评价</span>|";
                     }
                     var result = "<p class='result'>已完成</p>";
                     dsorderh_tml += "<div class='dsorder_list' onumber='"+comment.orderNumber+"'><div class='dsorder_titie'><p class='ds_name'>"
@@ -217,7 +214,7 @@ function orders_finished(){
             // 为订单列表设置点击事件
             $(".dsoder_container").click(function(){  
                 var ordernumber = $(this).parents().attr("onumber");
-                window.location.href="order_information.html?ordernumber="+ordernumber;
+                window.location.href="orderInformation.html?ordernumber="+ordernumber;
             });
 
             //评价,获取当前订单号，进行判断是属于哪个类型
@@ -271,7 +268,7 @@ function orders_cencer(){
             // 为订单列表设置点击事件
             $(".dsoder_container").click(function(){  
                 var ordernumber = $(this).parents().attr("onumber");
-                window.location.href="order_information.html?ordernumber="+ordernumber;
+                window.location.href="orderInformation.html?ordernumber="+ordernumber;
             });
         }else{
             $(".container").empty();

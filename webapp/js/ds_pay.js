@@ -10,7 +10,7 @@ $(function(){
             $(".ds_price").html(ds_price+".00");
             $(".pay_success").show();
             $(".view_order").click(function(){
-                window.location.href="order_information.html?ordernumber="+order_number;
+                window.location.href="orderInformation.html?ordernumber="+order_number;
             });
         }else if (obj.status=="-30") {
             $(".pay_fail").show();
