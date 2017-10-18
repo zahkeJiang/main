@@ -17,6 +17,8 @@ public class ArmyOrderService {
     @Autowired
     ArmyOrderMapper armyOrderMapper;
 
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     public String createArmyOrder(ArmyOrder armyOrder) {
         /**
          * 计算订单价格
@@ -89,6 +91,8 @@ public class ArmyOrderService {
         ArmyOrderExample.Criteria criteria = example.createCriteria();
         criteria.andOrderNumberEqualTo(out_trade_no);
         criteria.andOrderStatusEqualTo(1);
+        criteria.andPayTimeEqualTo(formatter.format(new Date()));
+        criteria.andPayTypeEqualTo((byte) 0);
         armyOrderMapper.selectByExample(example);
     }
 

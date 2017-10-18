@@ -90,32 +90,6 @@ public class DsOrderController extends BaseController {
     }
 
 
-    //查询订单进度接口
-    @ResponseBody
-    @RequestMapping(value = "/schedule.action", method = RequestMethod.POST)
-    public Status schedule(HttpServletRequest request,String ordernumber){
-        Map<String, String> userMap = checkWxUser(request);
-        if(userMap == null){
-            return Status.notInWx();
-        }
-        String userid = userMap.get("id");
-        DsOrder dsOrder;
-        List<DsOrder> dsOrders = dsOrderService.getDsOrderByNumber(ordernumber);
-        if (!(dsOrders.size()>0)){
-            return Status.fail(-20,"没有订单");
-        }else{
-            dsOrder = dsOrders.get(0);
-        }
-
-        UserCoupon userCoupon = couponService.getCoupon(userid);
-        if (userCoupon == null){
-            return Status.success().add("dsOrder",dsOrder)
-                    .add("price","");
-        }
-        return Status.success().add("dsOrder",dsOrder)
-                .add("price",userCoupon.getCouponPrice());
-    }
-
     //进度页面
     @RequestMapping(value = "/selectOrder.action", method = RequestMethod.GET)
     public String toDsInfoList(HttpServletRequest request){

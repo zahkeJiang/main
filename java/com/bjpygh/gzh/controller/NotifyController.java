@@ -2,11 +2,9 @@ package com.bjpygh.gzh.controller;
 
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
-import com.bjpygh.gzh.bean.DsOrder;
-import com.bjpygh.gzh.bean.IntegralRecord;
-import com.bjpygh.gzh.bean.User;
-import com.bjpygh.gzh.bean.VillaOrder;
+import com.bjpygh.gzh.bean.*;
 import com.bjpygh.gzh.config.AlipayConfig;
+import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.model.AsynNotifyResponse;
 import com.bjpygh.gzh.service.*;
 import com.bjpygh.gzh.utils.PropertyUtils;
@@ -27,10 +25,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class NotifyController extends BaseController {
@@ -46,10 +41,15 @@ public class NotifyController extends BaseController {
     DsOrderService dsOrderService;
 
     @Autowired
+    CouponService couponService;
+
+    @Autowired
     VillaOrderService villaOrderService;
 
     @Autowired
     ArmyOrderService armyOrderService;
+
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     //微信支付回调接口
     @RequestMapping(value = "/notify.action", method = RequestMethod.POST)
@@ -136,12 +136,15 @@ public class NotifyController extends BaseController {
 
         Map<String, String> map = getGmtRefund(request);
         if (map.get("boolean").equals("true")){
+
+//            DsOrder dsOrder = dsOrderService.getDsOrderByNumber(map.get("out_trade_no")).get(0);
+//            dsOrder.setOrderStatus((byte) 1);
+//            dsOrder.setPayType((byte) 0);
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            dsOrder.setPayTime(formatter.format(new Date()));
+            System.out.println("dsOrderService.changeDsOrderByOrderNumber(map.get(\"out_trade_no\"))");
+            dsOrderService.changeDsOrderByOrderNumber(map.get("out_trade_no"));
             out.println("success");	//请不要修改或删除
-            DsOrder dsOrder = dsOrderService.getDsOrderByNumber(map.get("out_trade_no")).get(0);
-            dsOrder.setOrderStatus((byte) 1);
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            dsOrder.setPayTime(formatter.format(new Date()));
-            dsOrderService.updateOrder(dsOrder);
         } else{//验证失败
             out.println("fail");
         }
@@ -199,17 +202,103 @@ public class NotifyController extends BaseController {
             AsynNotifyResponse anRes = JdPayUtil.parseResp(pubKey, deskey, sb.toString(), AsynNotifyResponse.class);
 
             if (anRes.getStatus().equals("1")){
-                DsOrder dsOrder = dsOrderService.getDsOrderByNumber(anRes.getTradeNum()).get(0);
-                dsOrder.setOrderStatus((byte) 1);
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                dsOrder.setPayTime(formatter.format(new Date()));
-                dsOrderService.updateOrder(dsOrder);
+                String ordernumber = anRes.getTradeNum();
+                String o = ordernumber.substring(0, 1);
+                if (o.equals("V")){
+                    VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(ordernumber).get(0);
+                    villaOrder.setOrderStatus(1);
+                    villaOrder.setPayType((byte) 3);
+                    villaOrder.setPayTime(formatter.format(new Date()));
+                    villaOrderService.updateOrder(villaOrder);
+                }else if (o.equals("D")){
+                    DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
+                    dsOrder.setOrderStatus((byte) 1);
+                    dsOrder.setPayType((byte) 3);
+                    dsOrder.setPayTime(formatter.format(new Date()));
+                    dsOrderService.updateOrder(dsOrder);
+                }else if (o.equals("A")){
+                    ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
+                    armyOrder.setOrderStatus(1);
+                    armyOrder.setPayType((byte) 3);
+                    armyOrder.setPayTime(formatter.format(new Date()));
+                    armyOrderService.updateOrder(armyOrder);
+                }
+
             }
         } catch (Exception e) {
             System.out.println(e);
             return "fail";
         }
         return "ok";
+    }
+
+    //查询订单进度接口
+    @ResponseBody
+    @RequestMapping(value = "/schedule.action", method = RequestMethod.POST)
+    public Status schedule(HttpServletRequest request, String ordernumber){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        String userid = userMap.get("id");
+
+        String o = ordernumber.substring(0,1);
+        if (o.equals("V")){
+            User user = userService.getUserById(userid);
+            VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(ordernumber).get(0);
+            UserOrder order = new UserOrder();
+            order.setOrderPrice(villaOrder.getVillaPrice());
+            order.setOrderStatus(villaOrder.getOrderStatus());
+            order.setOrderImage(villaOrder.getImageurl());
+            order.setOrderDescripe(villaOrder.getNote());
+            order.setOrderTime(villaOrder.getCreateTime());
+            order.setOrderName(villaOrder.getVillaName().split(",")[0]);
+            order.setOrderNumber(villaOrder.getOrderNumber());
+            order.setPhoneNumber(user.getPhoneNumber());
+            order.setRealName(villaOrder.getRealName());
+            order.setOriginalPrice(villaOrder.getOriginalPrice());
+            return Status.success().add("order",order);
+        }else if (o.equals("D")){
+            DsOrder dsOrder;
+            List<DsOrder> dsOrders = dsOrderService.getDsOrderByNumber(ordernumber);
+            if (!(dsOrders.size()>0)){
+                return Status.fail(-20,"没有订单");
+            }else{
+                dsOrder = dsOrders.get(0);
+            }
+            UserOrder order = new UserOrder();
+            order.setOrderPrice(dsOrder.getOrderPrice());
+            order.setOrderStatus(dsOrder.getOrderStatus());
+            order.setOrderImage(dsOrder.getImageurl());
+            order.setOrderDescripe(dsOrder.getDsType()+" / "+dsOrder.getModels()+" / "+dsOrder.getTrainTime());
+            order.setOrderTime(dsOrder.getCreateTime());
+            order.setOrderName(dsOrder.getDsName());
+            order.setOrderNumber(dsOrder.getOrderNumber());
+            order.setPhoneNumber(dsOrder.getPhoneNumber());
+            order.setRealName(dsOrder.getRealName());
+            order.setOriginalPrice(dsOrder.getOriginalPrice());
+            order.setDescription(dsOrder.getDescription());
+            order.setDsNote(dsOrder.getNote());
+            return Status.success().add("order",order);
+        }else if (o.equals("A")){
+            ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
+            User user = userService.getUserById(userid);
+            UserOrder order = new UserOrder();
+            order.setOrderPrice(armyOrder.getArmyPrice());
+            order.setOrderStatus(armyOrder.getOrderStatus());
+            order.setOrderImage(armyOrder.getImageurl());
+            order.setOrderDescripe(armyOrder.getNote());
+            order.setOrderTime(armyOrder.getCreateTime());
+            order.setOrderName(armyOrder.getArmyName());
+            order.setOrderNumber(armyOrder.getOrderNumber());
+            order.setPhoneNumber(user.getPhoneNumber());
+            order.setRealName(armyOrder.getRealName());
+            order.setOriginalPrice(armyOrder.getOriginalPrice());
+            return Status.success().add("armyOrder",order);
+        }else {
+            return Status.fail(-20,"处理失败");
+        }
+
     }
 
     public Map<String, String> getGmtRefund(HttpServletRequest request) throws IOException, AlipayApiException {
@@ -265,6 +354,7 @@ public class NotifyController extends BaseController {
                 //请务必判断请求时的total_fee、seller_id与通知时获取的total_fee、seller_id为一致的
                 //如果有做过处理，不执行商户的业务程序
                 if(request.getParameter("gmt_refund")==null){
+
                     map.put("boolean","true");
                     return map;
                 }else {

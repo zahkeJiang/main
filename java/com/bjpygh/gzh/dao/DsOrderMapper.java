@@ -24,7 +24,7 @@ public interface DsOrderMapper {
 
     int updateByExampleSelective(@Param("record") DsOrder record, @Param("example") DsOrderExample example);
 
-    int updateByExample(@Param("record") DsOrder record, @Param("example") DsOrderExample example);
+    int updateByExample(@Param("example") DsOrderExample example);
 
     int updateByPrimaryKeySelective(DsOrder record);
 

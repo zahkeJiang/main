@@ -565,7 +565,7 @@ public class VillaOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andPayTimeEqualTo(Date value) {
+        public Criteria andPayTimeEqualTo(String value) {
             addCriterion("pay_time =", value, "payTime");
             return (Criteria) this;
         }

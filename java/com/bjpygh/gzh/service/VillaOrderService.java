@@ -21,6 +21,8 @@ public class VillaOrderService {
     @Autowired
     UserMapper userMapper;
 
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     public String createVillaOrder(VillaOrder villaOrder) {
         /**
          * 计算订单价格
@@ -38,7 +40,10 @@ public class VillaOrderService {
             }
         }
         villaPrice *= villaNum;
-        villaPrice *= villaOrder.getPeopleNumber();
+        if (villaOrder.getPeopleNumber()>25)
+            villaPrice *= villaOrder.getPeopleNumber();
+        else
+            villaPrice *= 25;
         villaOrder.setVillaPrice(villaPrice/2);
 
         //创建时间
@@ -61,6 +66,7 @@ public class VillaOrderService {
         villaOrder.setOrderNumber(orderNumber);
         //设置状态
         villaOrder.setOrderStatus(0);
+        villaOrder.setNote("豪华别墅套餐");
         
         villaOrderMapper.insertSelective(villaOrder);
         return orderNumber;
@@ -138,6 +144,8 @@ public class VillaOrderService {
         VillaOrderExample.Criteria criteria = example.createCriteria();
         criteria.andOrderNumberEqualTo(out_trade_no);
         criteria.andOrderStatusEqualTo(1);
+        criteria.andPayTimeEqualTo(formatter.format(new Date()));
+        criteria.andPayTypeEqualTo((byte) 0);
         villaOrderMapper.updateByExample(example);
     }
 
@@ -184,5 +192,12 @@ public class VillaOrderService {
         }
 
         return true;
+    }
+
+    public List<VillaOrder> getPay() {
+        VillaOrderExample example = new VillaOrderExample();
+        VillaOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderStatusEqualTo(1);
+        return villaOrderMapper.selectByExample(example);
     }
 }

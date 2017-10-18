@@ -16,6 +16,57 @@ public class UserOrder {
 
     private int orderPrice;
 
+    private String realName;
+
+    private Integer originalPrice;
+
+    private String description;
+
+    private String phoneNumber;
+
+    private String dsNote; //法培方式
+
+    public String getDsNote() {
+        return dsNote;
+    }
+
+    public void setDsNote(String dsNote) {
+        this.dsNote = dsNote;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public Integer getOriginalPrice() {
+        return originalPrice;
+    }
+
+    public void setOriginalPrice(Integer originalPrice) {
+        this.originalPrice = originalPrice;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+
     public int getOrderPrice() {
         return orderPrice;
     }

@@ -13,7 +13,6 @@ import com.bjpygh.gzh.config.AlipayConfig;
 import com.bjpygh.gzh.config.MyConfig;
 import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.model.HttpsClientUtil;
-import com.bjpygh.gzh.model.RefundResponse;
 import com.bjpygh.gzh.model.TradeRefundReqDto;
 import com.bjpygh.gzh.service.*;
 import com.bjpygh.gzh.utils.MD5;
@@ -256,9 +255,8 @@ public class PayController extends BaseController {
             if (dsOrder.getPayType()==0){
                 if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
                     //改变订单状态
-                    dsOrder.setOrderStatus((byte) 5);
-                    dsOrder.setRefundTime(formatter.format(new Date()));
-                    dsOrderService.updateOrder(dsOrder);
+                    System.out.println("dsOrderService.refundOrder(out_trade_no)");
+                    dsOrderService.refundOrder(out_trade_no);
                     return Status.success();
                 }else{
                     return Status.fail(-20,"处理失败");
@@ -446,7 +444,7 @@ public class PayController extends BaseController {
     //支付宝支付请求方法
     public void requesetAlipay(HttpServletResponse response,String ordernumber,
         String subject,String body,String price,String product_code,String notify_url) throws IOException {
-        response.setContentType("text/html;charset=" + AlipayConfig.CHARSET);
+        response.setContentType("text/html;charset=utf-8" + AlipayConfig.CHARSET);
         PrintWriter out = response.getWriter();
 
         String timeout_express="2m";
@@ -512,8 +510,6 @@ public class PayController extends BaseController {
             }
 
         } catch (AlipayApiException e) {
-            return false;
-        }finally{
             return false;
         }
     }

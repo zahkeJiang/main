@@ -18,6 +18,8 @@ public class DsOrderService {
     @Autowired
     DsOrderMapper dsOrderMapper;
 
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     public void ChageOrderStatus(String ordernumber) {
         Map<String, String> map = new HashMap();
         map.put("orderNumber",ordernumber);
@@ -52,7 +54,7 @@ public class DsOrderService {
     }
 
     public void updateOrder(DsOrder dsOrder) {
-        dsOrderMapper.updateOrder(dsOrder);
+        dsOrderMapper.updateByPrimaryKey(dsOrder);
     }
 
     public void deleteOrderByNum(String ordernumber) {
@@ -73,6 +75,25 @@ public class DsOrderService {
         Map<String, String> map = new HashMap();
         map.put("orderNumber",ordernumber);
         map.put("orderStatus","6");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        map.put("refundTime",formatter.format(new Date()));
+        dsOrderMapper.updateOrderStatus(map);
+    }
+
+    public void changeDsOrderByOrderNumber(String out_trade_no) {
+        DsOrderExample example = new DsOrderExample();
+        DsOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderNumberEqualTo(out_trade_no);
+        criteria.andOrderStatusEqualTo(String.valueOf(1));
+        criteria.andPayTimeEqualTo(formatter.format(new Date()));
+        criteria.andPayTypeEqualTo((byte) 0);
+        dsOrderMapper.updateByExample(example);
+    }
+
+    public void refundOrder(String out_trade_no) {
+        Map<String, String> map = new HashMap();
+        map.put("orderNumber",out_trade_no);
+        map.put("orderStatus","5");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         map.put("refundTime",formatter.format(new Date()));
         dsOrderMapper.updateOrderStatus(map);
