@@ -200,6 +200,21 @@ html, body {
 	color: white;
 	font-size: 16px;
 }
+.footer div{
+	font-size: 14px;
+	background: #f6f1f1;
+	border-top: 1px solid #eee;
+	width: 80px;
+	display: flex;
+	align-items: center;
+	height: 47px;
+}
+.footer div img{
+	margin-left: 4px;
+}
+.footer div span{
+	padding: 8px 0;
+}
 /*支付选择弹窗*/
 .payBox{
 	display: none;

@@ -49,6 +49,9 @@ function all_orders(){
                     var result = "<p class='result'>已完成</p>";
                     if (comment.orderStatus=="4") {
                         order_assess = "<span class='order_assess' odnumber='"+comment.orderNumber+"'>评价</span>|";
+
+                   }else{
+                        order_assess = "<span class='order_assess_finish'>已评价</span>|";
                    }
                 }else if (comment.orderStatus=="5"||comment.orderStatus=="6") {//用户取消订单
                     var result = "<p class='result'>已取消</p>";
@@ -195,6 +198,8 @@ function orders_finished(){
                 if (comment.orderStatus=="4"||comment.orderStatus=="7") {//用户订单完成以及材料返还成功
                     if (comment.orderStatus=="4") {
                         order_assess = "<span class='order_assess' odnumber='"+comment.orderNumber+"'>评价</span>|";
+                    }else{
+                        order_assess = "<span class='order_assess_finish'>已评价</span>|";
                     }
                     var result = "<p class='result'>已完成</p>";
                     dsorderh_tml += "<div class='dsorder_list' onumber='"+comment.orderNumber+"'><div class='dsorder_titie'><p class='ds_name'>"

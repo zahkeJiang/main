@@ -7,11 +7,84 @@
 //     dsname = getval.split("=")[1];
 // } 
 // window.onload=ShowMessage(); 
-var dsname = $.cookie("dsname");//驾校名字			
+var dsname = $.cookie("dsname");//驾校名字	
+var models = "";
+var dsType="";
+var trainTime = "";		
 $(function(){
+    getDs();
+    //点击屏幕，如果元素不是dsp_type_div，则执行navStyle();
+    $(document).click(function(){
+        navStyle();
+    });
+    $(".dsp_type_div").click(function(event){
+        event.stopPropagation();
+    });
 
+    //驾照类型、班型、学习时间等选择
+    $(".dsp_type_div").click(function(){
+        $(this).parents("div").siblings(".dsp_type_Div").find("img").attr("src","./images/bottom.png");
+        $(this).parents("div").siblings(".dsp_type_Div").find("span").css({"color":"#555"})
+        $(this).parents("div").siblings(".dsp_type_Div").find("div").css({"background":"#f6f1f1"});
+        $(this).parents("div").siblings(".dsp_type_Div").find(".dsp_type_Div_a").css({"border":"1px solid #f6f1f1"});
+        $(this).parents("div").siblings(".dsp_type_Div").find("p").hide();
+            // $(this).find("span").css({"color":"#555"});
+            // $(this).find("div").css({"background":"#f6f1f1"});
+            // $(this).css({"border":"1px solid #f6f1f1"});
+            // $(this).find("img").attr("src","./images/bottom.png");
+        // navStyle();
+        if ($(this).siblings("p").css("display")=="none") {
+        // 当前点击的菜单样式改变
+            $(this).find("span").css({"color":"white"});
+            $(this).parent().css({"border":"1px solid #ffc3a9"});
+            $(this).siblings("p").show();
+            $(this).css({"background":"#FFC3A9"});
+            $(this).find("img").attr("src","./images/top.png");
+        }else{
+            $(this).find("span").css({"color":"#555"});
+            $(this).parent().css({"border":"1px solid #f6f1f1"});
+            $(this).siblings("p").hide();
+            $(this).css({"background":"#f6f1f1"});
+            $(this).find("img").attr("src","./images/bottom.png");
+        }
+    });
+
+    $(".dsp_type_Div_models p").click(function(){
+        $(this).siblings(".dsp_type_div").find("span").html($(this).attr("text"));
+        $(this).siblings(".dsp_type_div").find("span").css({"font-size":"14px","color":"#555"});
+        models = $(this).attr("text");
+        console.log(models);
+        getDs();
+
+    });
+    $(".dsp_type_Div_dsType p").click(function(){
+        $(this).siblings(".dsp_type_div").find("span").html($(this).attr("text"));
+        $(this).siblings(".dsp_type_div").find("span").css({"font-size":"14px","color":"#555"});
+        dsType = $(this).attr("text");
+        console.log(dsType);
+        getDs();
+    });
+    $(".dsp_type_Div_trainTime p").click(function(){
+        $(this).siblings(".dsp_type_div").find("span").html($(this).attr("text"));
+        $(this).siblings(".dsp_type_div").find("span").css({"font-size":"14px","color":"#555"});
+        $(this).siblings(".dsp_type_div_3").css({"justify-content":"center"});
+        trainTime = $(this).attr("text");
+        console.log(trainTime);
+        getDs();
+    });
+});
+
+//隐藏菜单栏样式
+function navStyle(){
+    $(".dsp_type_Div_a").find("p").hide();
+    $(".dsp_type_Div_a").find("span").css({"color":"#555"});
+    $(".dsp_type_Div_a").find("div").css({"background":"#f6f1f1"});
+    $(".dsp_type_Div_a").css({"border":"1px solid #f6f1f1"});
+    $(".dsp_type_Div_a").find("img").attr("src","./images/bottom.png");
+}
+function getDs(){
     //发送post请求，获取班型列表
-    $.post("sdp.action",{"dsName":dsname},function(result){
+    $.post("sdp.action",{"dsName":dsname,"models":models,"dsType":dsType,"trainTime":trainTime},function(result){
         $(".container").empty();
         // if (obj.status=="1") {
             var dshtml = "";
@@ -60,21 +133,4 @@ $(function(){
             });
         // }
     },'json');
-
-    //驾照类型、班型、学习时间等选择
-    $(".dsp_type_div").click(function(){
-        if ($(this).siblings("p").css("display")=="none") {
-            $(this).find("span").css({"color":"white"});
-            $(this).parent().css({"border":"1px solid #ffc3a9"});
-            $(this).siblings("p").show();
-            $(this).css({"background":"#FFC3A9"});
-            $(this).find("img").attr("src","./images/top.png");
-        }else{
-            $(this).find("span").css({"color":"#555"});
-            $(this).parent().css({"border":"1px solid #f6f1f1"});
-            $(this).siblings("p").hide();
-            $(this).css({"background":"#f6f1f1"});
-            $(this).find("img").attr("src","./images/bottom.png");
-        }
-    });
-});
+}

@@ -237,3 +237,50 @@ html, body {
     position: fixed;
     bottom: 0;
 }
+/*显示评价*/
+.assessBox-title{
+    display: flex;
+}
+.assessBox{
+     text-align: left;
+    padding:10px;
+}
+.assessBox p.assessBox-nickname{
+    margin-left: 10px;
+    color: #555;
+}
+.assessBox p.assessBox-time{
+    margin-left: 10px;
+    font-size: 14px;
+    margin-top: 4px;
+    text-align: left;
+}
+.assessBox-assessbox{
+    padding: 10px 0;
+}
+.assessBox-assess-view{
+        display: none;
+    width: 100%;
+    font-size: 16px;
+    color: orange;
+    line-height: 20px;
+    text-align: right;
+}
+.assessBox p.assessBox-assess{
+    line-height: 20px;
+    font-size: 14px;
+    overflow: hidden; /*自动隐藏文字*/
+    text-overflow: ellipsis;
+    display:-webkit-box; 
+    -webkit-box-orient:vertical; 
+    /*-webkit-line-clamp:3;  */
+}
+.assessBox span.assessBox-view{
+
+    color: orange;
+    font-size: 18px;
+}
+.assessBox img#star{
+    float: right;
+
+}
