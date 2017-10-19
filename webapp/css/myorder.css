@@ -17,6 +17,10 @@ body{
 	height: 46px;
 	line-height: 46px;
 }
+.all_orders{
+	border-bottom: 2px solid orange;
+	color: orange;
+}
 .orders_bg{
 	margin:16px;
 	display: flex;
@@ -78,7 +82,7 @@ body{
 	color: orange;
 
 }
-.order_assess{
+.order_assess,.order_assess_finish{
 	padding: 4px 10px;
 	font-size: 14px;
 }
