@@ -110,6 +110,7 @@ function imgChange() {
 		    //图片上方删除按钮
         var deleteButton = document.createElement("span");
         deleteButton.setAttribute("class", "delete");
+        // deleteButton.setAttribute("onclick", "imgRemove()");
 
         //创建用于存放图片的div
         var imgAdd = document.createElement("div");
@@ -148,10 +149,11 @@ function imgChange() {
 };
 //删除照片 
 function imgRemove() {
+    $(".delete").unbind("click");
   // 目前有bug，添加两次图片后，删除第一个添加的图片，会多删一张；
   $(".delete").click(function(){
     var imgNumber = $(this).parent(".assessBox-picture-img").index(".assessBox-picture-img")+1;//获取当前是第几个图片
-    // console.log("imgNumber="+imgNumber);
+    console.log("imgNumber="+imgNumber);
     imgData.splice(imgNumber-1,1);//删除照片数组的第imgNumber个，第一个为第0个
     console.log("imgData="+imgData);
     $(this).parent().remove();
