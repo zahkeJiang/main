@@ -4,7 +4,7 @@ $(function(){
     // 表格中显示日期
     showCalendarData(0,0);
     //展示价格
-    setPrice(0);
+    setPrice(getYandM(0).dataPara);
 
 //    日历结束
 //    点击上一月
@@ -96,8 +96,10 @@ $(function(){
         console.log(date);
         $.post("getVillaRes",{"date":date},function(datas){
             if (datas.status==0) {
-                var residue = datas.data.residue;
-                alert(residue);
+                var selected = datas.data.selected;
+                if (selected!="") {
+                    alert("所选日期中，"+selected+"已被预定");
+                }
             }
         },"json");
 
@@ -167,8 +169,10 @@ $(function(){
         console.log(date);
         $.post("getVillaRes",{"date":date},function(datas){
             if (datas.status==0) {
-                var residue = datas.data.residue;
-                alert(residue);
+                var selected = datas.data.selected;
+                if (selected!="") {
+                    alert("所选日期中，"+selected+"已被预定");
+                }
             }
         },"json");
     });
@@ -187,19 +191,20 @@ $(function(){
         $(this).parents().siblings("label").find(".payModeImg").css({"background":"url(./images/circle.png)","background-size":"20px"});
     });
 
+
+var realName="";
+var peopleNumber ="";
+var realNumber = "";
+var villaNames = [];//用于存储别墅的数组
+var villaName="";
+var re = /^[1-9]+[0-9]*]*$/; //正整数
+var date = "";
+var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;//身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X 
+
     //填写信息后，点击支付
     $(".footer2-toPay").click(function(){
         var clength = $(".currentMonth0").length;
         var selectDate = []; //用于选中日期的数组
-        var realName="";
-        var peopleNumber ="";
-        var realNumber = "";
-        var villaNames = [];//用于存储别墅的数组
-        var villaName="";
-        var re = /^[1-9]+[0-9]*]*$/; //正整数
-        var date = "";
-        var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;//身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X 
-
         //如果有选中的，将其添加到数组
         for(var i = 0 ;i < clength; i ++){
             if($(".currentMonth0").eq(i).children(".selectedDay").length > 0){//当月存在被选中日期
@@ -270,7 +275,14 @@ $(function(){
                     console.log(orderNumber);
                     $(".layer").hide();
                     $(".payBox").hide();
-                    window.location.href="payHint.html?orderNumber="+orderNumber;
+                    //是别墅，需要先判断当前选择的别墅是否已经被预定
+                    $.post("villaCheck",{"ordernumber":orderNumber},function(datas){
+                        if (datas.status==0) {
+                            window.location.href="payHint.html?ordernumber="+orderNumber;
+                        }else{
+                            alert(dats.msg);//您的套餐中别墅或日期已被预约
+                        }
+                    },"json");
                 }
             },"json");
         }      
