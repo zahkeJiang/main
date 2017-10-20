@@ -55,6 +55,7 @@ table,td,th {
     /*background:#4287FF;*/
     color: #555;
 }
+
  .calendar-body-box td {
     border: none;
     text-align: center;
@@ -84,6 +85,10 @@ table,td,th {
 .no-ticket{
     background: #ddd;
     /*transform: scale(0.9);*/
+    border-radius: 50%;
+}
+.beforeDay{
+    background: #ddd;
     border-radius: 50%;
 }
 .currentMonth0.no-ticket p{

@@ -69,9 +69,8 @@ var currentDay;
         for(var i = 0; i < _tds.length; i++) {
             var _thisDay = new Date(_year, _month-1 , i + 1 - _firstDay.getDay());
             var _thisDayStr = getDateStr(_thisDay,0);
-            _tds[i].innerHTML = "<span class='borderr' thisDayNumber='"+_thisDay.getDate()+"'>"+_thisDay.getDate()+"</span>";
+            _tds[i].innerHTML = "<span class='borderr' thisDayNumber='"+_year+"-"+_month+"-"+_thisDay.getDate()+"'>"+_thisDay.getDate()+"</span>";
             //_tds[i].setAttribute('data', _thisDayStr);
-
             if(_thisDayStr.substr(0, 6) == getDateStr(_firstDay,index).substr(0, 6)){
                 _tds[i].className = 'currentMonth currentMonth'+index+'';
                 _tds[i].firstChild.className='borderr borderr'+index+'';
@@ -89,8 +88,17 @@ var currentDay;
                 _currentMonth =  _currentMonth;
              }
             var _currentDay = dateObj.getDate().getDate();
+            
+            //当天之前变灰
+            if(_thisDay.getTime()<(dateObj.getDate().getTime()-24*60*60*1000)){
+                _tds[i].innerHTML = "<span class='borderr' thisDayNumber='"+_year+"-"+_month+"-"+_thisDay.getDate()+"'>"+_thisDay.getDate()+"</span>";
+                $(_tds[i]).addClass('beforeDay');
+            }else{
+                _tds[i].innerHTML = "<span class='borderr' thisDayNumber='"+_year+"-"+_month+"-"+_thisDay.getDate()+"'>"+_thisDay.getDate()+"</span>";
+                $(_tds[i]).addClass('canSelectDay');
+            }
             if(_thisDayStr.substr(0, 4) == _currentYear && _thisDayStr.substr(4, 2) == _currentMonth && _thisDayStr.substr(6, 2) == _currentDay ){
-                _tds[i].innerHTML="<span class='borderr' thisDayNumber='"+_thisDay.getDate()+"'>今天</span>";
+                _tds[i].innerHTML="<span class='borderr' thisDayNumber='"+_year+"-"+_month+"-"+_thisDay.getDate()+"'>今天</span>";
                 $(_tds[i]).addClass('currentDay');
             }
 
@@ -155,7 +163,7 @@ var currentDay;
                 }
             }
         },"json");
-        // 我模拟一个数据 实际需要后台接口
+        //我模拟一个数据 实际需要后台接口
         // var priceList = [
         // {"date":"1","price":"100"},{"date":"2","price":"100"},{"date":"3","price":"100"},{"date":"4","price":"66"},{"date":"5","price":"66"},{"date":"6","price":"66"},{"date":"7","price":"66"},{"date":"8","price":"66"},{"date":"9","price":"100"},{"date":"10","price":"100"},
         // {"date":"11","num":"1"},{"date":"12","price":"66"},{"date":"13","price":"66"},{"date":"14","price":"66"},{"date":"15","price":"66"},{"date":"16","price":"100"},{"date":"17","price":"100"},{"date":"18","price":"66"},{"date":"19","price":"66"},{"date":"20","price":"66"},
@@ -166,39 +174,22 @@ var currentDay;
         // {"date":"11","num":"1"},{"date":"12","price":"66"},{"date":"13","price":"100"},{"date":"14","price":"100"},{"date":"15","price":"100"},{"date":"16","price":"66"},{"date":"17","price":"66"},{"date":"18","price":"66"},{"date":"19","price":"66"},{"date":"20","num":"2"},
         // {"date":"21","num":"0"},{"date":"22","num":"0"},{"date":"23","price":"66"},{"date":"24","price":"66"},{"date":"25","price":"66"},{"date":"26","price":"66"},{"date":"27","price":"100"},{"date":"28","num":"1"},{"date":"29","price":"100"},{"date":"30","num":"0"},{"date":"31","price":"66"}
         // ]
-// if (currentMonth==9) {
-//     for (var i = currentDay; i < priceList.length; i++) {
-//         //这个判断主要根据后台返回数据，返回数据不是这个格式 做其他判断
-//          if(priceList[i].price&&priceList[i].price!=null&&!priceList[i].num){
-//             //有很多票，显示价格
-//             $(".currentMonth0").eq(priceList[i].date-1).append("<p class='fixedhours'>¥"+priceList[i].price+"</p>");
-//          }else if(priceList[i].num&&priceList[i].num!=null&&priceList[i].num!=0&&!priceList[i].price){
-//             //没有票或者票很少 不显示价格显示灰色
-//             // $(".currentMonth0").eq(priceList[i].date-1).addClass("small-ticket");
-//             $(".currentMonth0").eq(priceList[i].date-1).append("<p class='fixedhours'>余"+priceList[i].num+"</p>");
-//          }else if(priceList[i].num&&priceList[i].num==0&&!priceList[i].price){
-//             //没有票或者票很少 不显示价格显示灰色
-//             $(".currentMonth0").eq(priceList[i].date-1).addClass("no-ticket");
-//             $(".currentMonth0").eq(priceList[i].date-1).append("<p class='fixedhours'>满</p>");
-//          }
-//     }
-// }else
-//  if (currentMonth==10) {
-//     for (var i = currentDay; i < priceNextList.length; i++) {
-//         //这个判断主要根据后台返回数据，返回数据不是这个格式 做其他判断
-//          if(priceNextList[i].price&&priceNextList[i].price!=null&&!priceNextList[i].num){
-//             //有很多票，显示价格
-//             $(".currentMonth0").eq(priceNextList[i].date-1).append("<p class='fixedhours'>¥"+priceNextList[i].price+"</p>");
-//          }else if(priceNextList[i].num&&priceNextList[i].num!=null&&priceNextList[i].num!=0&&!priceNextList[i].price){
-//             //没有票或者票很少 不显示价格显示灰色
-//             // $(".currentMonth0").eq(priceNextList[i].date-1).addClass("small-ticket");
-//             $(".currentMonth0").eq(priceNextList[i].date-1).append("<p class='fixedhours'>余"+priceNextList[i].num+"</p>");
-//          }else if(priceNextList[i].num&&priceNextList[i].num==0&&!priceNextList[i].price){
-//             //没有票或者票很少 不显示价格显示灰色
-//             $(".currentMonth0").eq(priceNextList[i].date-1).addClass("no-ticket");
-//             $(".currentMonth0").eq(priceNextList[i].date-1).append("<p class='fixedhours'>满</p>");
-//          }
-//     }
-// }
+
+    // for (var i = 0; i < priceList.length; i++) {
+    //     //这个判断主要根据后台返回数据，返回数据不是这个格式 做其他判断
+    //      if(priceList[i].price&&priceList[i].price!=null&&!priceList[i].num){
+    //         //有很多票，显示价格
+    //         $(".currentMonth0").eq(priceList[i].date-1).append("<p class='fixedhours'>¥"+priceList[i].price+"</p>");
+    //      }else if(priceList[i].num&&priceList[i].num!=null&&priceList[i].num!=0&&!priceList[i].price){
+    //         //没有票或者票很少 不显示价格显示灰色
+    //         // $(".currentMonth0").eq(priceList[i].date-1).addClass("small-ticket");
+    //         $(".currentMonth0").eq(priceList[i].date-1).append("<p class='fixedhours'>余"+priceList[i].num+"</p>");
+    //      }else if(priceList[i].num&&priceList[i].num==0&&!priceList[i].price){
+    //         //没有票或者票很少 不显示价格显示灰色
+    //         $(".currentMonth0").eq(priceList[i].date-1).addClass("no-ticket");
+    //         $(".currentMonth0").eq(priceList[i].date-1).append("<p class='fixedhours'>满</p>");
+    //      }
+    // }
+
     };
 

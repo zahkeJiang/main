@@ -321,7 +321,22 @@ $(function(){
 
 				//未支付，去付款
 				$(".toPay").click(function(){
-					window.location.href="payHint.html?ordernumber="+ordernumber;
+					//拿到订单编号，进行判断属于那种类型，再加载不同
+					var typeLetter = ordernumber.substr(0,1);//提取订单号收个字母，D驾校，V别墅，A军旅
+    				var cancelUrl="";// type(1为别墅评论 2为驾校 3为军旅)
+        			if (typeLetter=="V") {
+            			//是别墅，需要先判断当前选择的别墅是否已经被预定
+            			$.post("villaCheck",{"ordernumber":ordernumber},function(datas){
+            				if (datas.status==0) {
+            					window.location.href="payHint.html?ordernumber="+ordernumber;
+            				}else{
+            					alert(dats.msg);//您的套餐中别墅或日期已被预约
+            				}
+            			},"json");
+        			}else{
+           			 	
+        			}
+					
 				});
 				//未支付，取消订单
 				$(".cancel").click(function(){

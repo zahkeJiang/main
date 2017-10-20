@@ -1,5 +1,42 @@
 $(function(){
-	     //日历渲染--------------------------------------------------------
+
+    $.post("getGoodComment",{"type":1},function(datas){
+        if (datas.status==0) {
+            var assessUrl = datas.data.comment;
+            //获取星星
+            var enterStar = assessUrl.enterStar;//娱乐星星
+            var stayStar = assessUrl.stayStar;//住宿星星
+            var supportStar = assessUrl.supportStar;//设备星星
+            var finishStar = Math.round((enterStar+stayStar+supportStar)/3);//星星四舍五入取整
+            console.log(finishStar);
+            if (finishStar == 1) {
+                star = '<img src="./images/star1.png" height="16px">';
+            }else if (finishStar == 2) {
+                star = '<img src="./images/star2.png" height="16px">';
+            }else if (finishStar == 3) {
+                star = '<img src="./images/star3.png" height="16px">';
+            }else if (finishStar == 4) {
+                star = '<img src="./images/star4.png" height="16px">';
+            }else if (finishStar == 5) {
+                star = '<img src="./images/star5.png" height="16px">';
+            }else{
+                star = '<img src="./images/star5.png" height="16px">';
+            }
+            //匿名与否,0,flase不匿名，1,true是匿名
+            anonymous = assessUrl.anonymous;
+            nickname = assessUrl.nickname;
+            if (anonymous==true) {
+                nickname=nickname.substring(0,1)+"**"+nickname.charAt(nickname.length - 1);
+            }
+            //获取时间年月日
+            commentTime = assessUrl.commentTime.split(' ')[0];
+            $(".assessBox-nickname").html(nickname);
+            $(".assessBox-time").html(commentTime);
+            $(".assessBox-assess").html(assessUrl.content);
+            $("#star").attr("src",assessUrl.headimageurl);
+        }
+    },"json");
+	//日历渲染--------------------------------------------------------
     renderHtml(0);
     // 表格中显示日期
     showCalendarData(0,0);
@@ -34,24 +71,5 @@ $(function(){
         // type(1为别墅评论 2为驾校 3为军旅)
         window.location.href="assess.html?type=1"; 
     })
-     var a ="";
-    var rowNum=Math.round($(".assessBox-assess").height()/parseFloat($(".assessBox-assess").css('line-height')));
-    console.log(rowNum);
-    if (rowNum>3) {
-        a=1;
-        $(".assessBox-assess").css({"-webkit-line-clamp":"3"});
-        $(".assessBox-assess-view").show();
-        console.log();
-        $(".assessBox-assess-view").click(function(){
-            if (a==1) {
-                $(".assessBox-assess").css({"-webkit-line-clamp":"1000"});
-                $(this).html("收起");
-                a=0;
-            }else{
-                $(".assessBox-assess").css({"-webkit-line-clamp":"3"});
-                $(this).html("阅读更多");
-                a=1;
-            }
-        });
-    }
+    
 });

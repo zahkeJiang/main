@@ -182,7 +182,7 @@ html, body {
 	width: 100%;
 	display: flex;
 }
-.footer p:first-child{
+.footer1{
 	width: 70%;
 	background: #f6f1f1;
 	height: 47px;
@@ -190,8 +190,10 @@ html, body {
 	line-height: 48px;
 	padding-left: 28px;
 	font-size: 18px;
+	display: flex;
+	align-items: center;
 }
-.footer p:last-child{
+.footer2-toPay{
 	width: 30%;
 	height: 48px;
 	background: orange;
@@ -200,7 +202,25 @@ html, body {
 	color: white;
 	font-size: 16px;
 }
-.footer div{
+.footer1 div{
+	height: 32px;
+	margin:0 10px;
+	color: #999;
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+}
+.footer1 div span{
+	height: 32px;
+	line-height: 32px;
+	/*color: #999;*/
+	font-size: 14px;
+}
+.footer1 div img{
+	margin-left:4px;
+}
+/*.footer div{
+	margin: 0;
 	font-size: 14px;
 	background: #f6f1f1;
 	border-top: 1px solid #eee;
@@ -208,13 +228,11 @@ html, body {
 	display: flex;
 	align-items: center;
 	height: 47px;
-}
-.footer div img{
+}*/
+/*.footer div img{
 	margin-left: 4px;
-}
-.footer div span{
-	padding: 8px 0;
-}
+}*/
+
 /*支付选择弹窗*/
 .payBox{
 	display: none;

@@ -255,28 +255,18 @@ html, body {
     margin-top: 4px;
     text-align: left;
 }
-.assessBox-assessbox{
-    padding: 10px 0;
-}
-.assessBox-assess-view{
-        display: none;
-    width: 100%;
-    font-size: 16px;
-    color: orange;
-    line-height: 20px;
-    text-align: right;
-}
+
 .assessBox p.assessBox-assess{
+    margin:10px 0;
     line-height: 20px;
     font-size: 14px;
-    overflow: hidden; /*自动隐藏文字*/
-    text-overflow: ellipsis;
-    display:-webkit-box; 
-    -webkit-box-orient:vertical; 
-    /*-webkit-line-clamp:3;  */
+    max-height: 60px;
+    overflow:auto; 
+}
+.assessBox p.assessBox-assess::-webkit-scrollbar {/*隐藏滚动条*/
+    display: none;
 }
 .assessBox span.assessBox-view{
-
     color: orange;
     font-size: 18px;
 }
