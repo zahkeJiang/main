@@ -96,9 +96,11 @@ public class PayController extends BaseController {
         for (VillaOrder villaOrder : villaOrders){
             UserOrder userOrder = new UserOrder();
             userOrder.setOrderNumber(villaOrder.getOrderNumber());
-            userOrder.setOrderName(villaOrder.getVillaName());
+            userOrder.setOrderName("漂洋过海别墅");
             userOrder.setOrderTime(villaOrder.getCreateTime());
-            userOrder.setOrderDescripe(villaOrder.getNote());
+            userOrder.setOrderDescripe(villaOrder.getVillaName().split(",").length+"栋 / "+
+                    villaOrder.getPeopleNumber()+"人 / "+
+                    +villaOrder.getDate().split(",").length+"晚");
             userOrder.setOrderImage(villaOrder.getImageurl());
             userOrder.setOrderStatus(villaOrder.getOrderStatus());
             userOrder.setOrderPrice(villaOrder.getVillaPrice());
@@ -119,7 +121,7 @@ public class PayController extends BaseController {
 
         if (orders.size()>0){
             Collections.sort(orders,new Comparator<UserOrder>(){
-                public int compare(UserOrder arg0, UserOrder arg1) {
+                public int compare(UserOrder arg1, UserOrder arg0) {
                     return arg0.getOrderTime().compareTo(arg1.getOrderTime());
                 }
             });

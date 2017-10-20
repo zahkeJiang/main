@@ -118,7 +118,7 @@ public class DsOrderController extends BaseController {
             }
         }
         if (dsos.size()>2){
-            return Status.fail(-40,"您已创建了三个未支付订单，无法创建更多订单");
+            return Status.fail(-40,"您已创建三个订单，无法创建更多订单");
         }
         String packageid = dsAliPay.getPackageid();
         String select = dsAliPay.getSelect();
@@ -181,7 +181,7 @@ public class DsOrderController extends BaseController {
         return Status.success().add("ordernumber",out_trade_no);
     }
 
-    //删除订单接口
+    //关闭订单接口
     @ResponseBody
     @RequestMapping(value = "/cancelOrder.action", method = RequestMethod.POST)
     public Status delOrder(HttpServletRequest request,String ordernumber){

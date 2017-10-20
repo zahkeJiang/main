@@ -1,9 +1,6 @@
 package com.bjpygh.gzh.controller;
 
-import com.bjpygh.gzh.bean.ArmyOrder;
-import com.bjpygh.gzh.bean.Comment;
-import com.bjpygh.gzh.bean.DsOrder;
-import com.bjpygh.gzh.bean.VillaOrder;
+import com.bjpygh.gzh.bean.*;
 import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.service.ArmyOrderService;
 import com.bjpygh.gzh.service.CommentService;
@@ -16,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -66,13 +65,18 @@ public class CommentController extends BaseController{
 
     @ResponseBody
     @RequestMapping(value = "/getComment", method = RequestMethod.POST)
-    public Status getVillaComment(HttpServletRequest request,String type){
+    public Status getComment(HttpServletRequest request,String type){
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
         }
         List<Comment> comments = commentService.getComment(type);
         if (comments.size()>0){
+            Collections.sort(comments,new Comparator<Comment>(){
+                public int compare(Comment arg1, Comment arg0) {
+                    return arg0.getCommentTime().compareTo(arg1.getCommentTime());
+                }
+            });
             return Status.success().add("Comment",comments);
         }else{
             return Status.fail(-20,"没有评论");
@@ -80,4 +84,14 @@ public class CommentController extends BaseController{
 
     }
 
+
+    @ResponseBody
+    @RequestMapping(value = "/getGoodComment", method = RequestMethod.POST)
+    public Status getGoodComment(HttpServletRequest request,String type){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        return commentService.getGoodComment(type);
+    }
 }
