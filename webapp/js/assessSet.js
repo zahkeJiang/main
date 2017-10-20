@@ -23,11 +23,13 @@ $(function(){
 //匿名与否,0不匿名，1是匿名
 $(".circle").click(function(){
 	if ($(".circle-choose").length > 0) {
-        anonymous = 1;
+        anonymous = 0;
 		$(".circle-choose").remove();
+        console.log(anonymous);
 	}else{
 		$(this).append('<div class="circle-choose"></div>');
-         anonymous = 0;
+        anonymous = 1;
+        console.log(anonymous);
 	}
 });
 //评价星星
