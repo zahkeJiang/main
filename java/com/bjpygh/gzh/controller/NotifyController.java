@@ -250,9 +250,11 @@ public class NotifyController extends BaseController {
             order.setOrderPrice(villaOrder.getVillaPrice());
             order.setOrderStatus(villaOrder.getOrderStatus());
             order.setOrderImage(villaOrder.getImageurl());
-            order.setOrderDescripe(villaOrder.getNote());
+            order.setOrderDescripe(villaOrder.getVillaName().split(",").length+"栋 / "+
+                    villaOrder.getPeopleNumber()+"人 / "+
+                    +villaOrder.getDate().split(",").length+"晚");
             order.setOrderTime(villaOrder.getCreateTime());
-            order.setOrderName(villaOrder.getVillaName().split(",")[0]);
+            order.setOrderName("漂洋过海别墅");
             order.setOrderNumber(villaOrder.getOrderNumber());
             order.setPhoneNumber(user.getPhoneNumber());
             order.setRealName(villaOrder.getRealName());
@@ -278,7 +280,7 @@ public class NotifyController extends BaseController {
             order.setRealName(dsOrder.getRealName());
             order.setOriginalPrice(dsOrder.getOriginalPrice());
             order.setDescription(dsOrder.getDescription());
-            order.setDsNote(dsOrder.getNote());
+            order.setDsNote("法培方式: "+dsOrder.getNote());
             return Status.success().add("order",order);
         }else if (o.equals("A")){
             ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);

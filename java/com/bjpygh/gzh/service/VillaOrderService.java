@@ -27,30 +27,37 @@ public class VillaOrderService {
         /**
          * 计算订单价格
          */
-        int villaPrice = 0;
+        int sum=0;
         int villaNum = villaOrder.getVillaName().split(",").length;
         String[] dates = villaOrder.getDate().split(",");
         for (String date : dates){
+            int villaPrice;
             String[] ds = date.split("-");
             Date d = new Date(Integer.parseInt(ds[0]),Integer.parseInt(ds[1]),Integer.parseInt(ds[2]));
             if (d.getDay()>0&&d.getDay()<5){
-                villaPrice +=66;
+                villaPrice = 66;
+                if (villaOrder.getPeopleNumber()>28*villaNum)
+                    villaPrice *= villaOrder.getPeopleNumber();
+                else
+                    villaPrice = 1888*villaNum;
+                sum += villaPrice;
             }else {
-                villaPrice +=100;
+                villaPrice = 100;
+                if (villaOrder.getPeopleNumber()>28*villaNum)
+                    villaPrice *= villaOrder.getPeopleNumber();
+                else
+                    villaPrice = 2888*villaNum;
+                sum += villaPrice;
             }
         }
-        villaPrice *= villaNum;
-        if (villaOrder.getPeopleNumber()>25)
-            villaPrice *= villaOrder.getPeopleNumber();
-        else
-            villaPrice *= 25;
-        villaOrder.setVillaPrice(villaPrice/2);
+
+        villaOrder.setVillaPrice(sum/2);
 
         //创建时间
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         villaOrder.setCreateTime(formatter.format(new Date()));
 
-        villaOrder.setOriginalPrice(villaPrice);
+        villaOrder.setOriginalPrice(sum);
         /**
         * 生成订单
         */
