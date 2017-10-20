@@ -65,7 +65,7 @@ public class CommentController extends BaseController{
 
     @ResponseBody
     @RequestMapping(value = "/getComment", method = RequestMethod.POST)
-    public Status getVillaComment(HttpServletRequest request,String type){
+    public Status getComment(HttpServletRequest request,String type){
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
@@ -84,4 +84,14 @@ public class CommentController extends BaseController{
 
     }
 
+
+    @ResponseBody
+    @RequestMapping(value = "/getGoodComment", method = RequestMethod.POST)
+    public Status getGoodComment(HttpServletRequest request,String type){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        return commentService.getGoodComment(type);
+    }
 }

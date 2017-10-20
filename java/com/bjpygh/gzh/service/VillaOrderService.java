@@ -152,12 +152,8 @@ public class VillaOrderService {
         villaOrderMapper.updateByPrimaryKey(villaOrder);
     }
 
-    public Map<String, String> getVillaPay(String[] date) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Map<String, String> map = new HashMap<String, String>();
+    public String getVillaPay(String[] date) throws ParseException {
         for (int i=0;i<date.length;i++){
-//            Date date1 = sdf.parse(date[i]);
-
             List<VillaOrder> villaOrders = villaOrderMapper.getVillaOrderByDate(date[i]);
             String name = "";
             for (VillaOrder order : villaOrders){
@@ -167,10 +163,9 @@ public class VillaOrderService {
                     name= order.getVillaName();
                 }
             }
-            map.put(date[i],name);
+           return name;
         }
-
-        return map;
+        return "";
     }
 
     public boolean checkOrder(VillaOrder villaOrder) {

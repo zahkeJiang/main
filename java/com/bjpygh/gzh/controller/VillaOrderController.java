@@ -89,7 +89,7 @@ public class VillaOrderController extends BaseController{
         if(userMap == null){
             return Status.notInWx();
         }
-        Map<String, String> residue = villaOrderService.getVillaPay(date);
-        return Status.success().add("residue",residue);
+        String selected = villaOrderService.getVillaPay(date);
+        return Status.success().add("selected",selected);
     }
 }
