@@ -10,21 +10,21 @@ $(function(){
             var finishStar = Math.round((enterStar+stayStar+supportStar)/3);//星星四舍五入取整
             console.log(finishStar);
             if (finishStar == 1) {
-                star = '<img src="./images/star1.png" height="16px">';
+                $("#star").attr("src","./images/star1.png");
             }else if (finishStar == 2) {
-                star = '<img src="./images/star2.png" height="16px">';
+                $("#star").attr("src","./images/star2.png");
             }else if (finishStar == 3) {
-                star = '<img src="./images/star3.png" height="16px">';
+                $("#star").attr("src","./images/star3.png");
             }else if (finishStar == 4) {
-                star = '<img src="./images/star4.png" height="16px">';
+                $("#star").attr("src","./images/star4.png");
             }else if (finishStar == 5) {
-                star = '<img src="./images/star5.png" height="16px">';
+                $("#star").attr("src","./images/star5.png");
             }else{
-                star = '<img src="./images/star5.png" height="16px">';
+                $("#star").attr("src","./images/star5.png");
             }
             //匿名与否,0,flase不匿名，1,true是匿名
-            anonymous = assessUrl.anonymous;
-            nickname = assessUrl.nickname;
+            var anonymous = assessUrl.anonymous;
+            var nickname = assessUrl.nickname;
             if (anonymous==true) {
                 nickname=nickname.substring(0,1)+"**"+nickname.charAt(nickname.length - 1);
             }
@@ -33,7 +33,7 @@ $(function(){
             $(".assessBox-nickname").html(nickname);
             $(".assessBox-time").html(commentTime);
             $(".assessBox-assess").html(assessUrl.content);
-            $("#star").attr("src",assessUrl.headimageurl);
+            $("#icon").attr("src",assessUrl.headimageurl);
         }
     },"json");
 	//日历渲染--------------------------------------------------------
@@ -41,7 +41,7 @@ $(function(){
     // 表格中显示日期
     showCalendarData(0,0);
     //展示价格
-    setPrice(getYandM(0).dataPara+"");
+    setPrice(getYandM(0).dataPara);
 
 //    日历结束
 //    点击上一月

@@ -4,7 +4,7 @@ $(function(){
     // 表格中显示日期
     showCalendarData(0,0);
     //展示价格
-    setPrice(0);
+    setPrice(getYandM(0).dataPara);
 
 //    日历结束
 //    点击上一月
@@ -96,8 +96,24 @@ $(function(){
         console.log(date);
         $.post("getVillaRes",{"date":date},function(datas){
             if (datas.status==0) {
-                var residue = datas.data.residue;
-                alert(residue);
+                var selected = datas.data.selected;
+                if (selected!="") {
+                    alert("所选日期中，"+selected+"已被预定");
+                }else{
+                    var dateHundred=0;
+                    var dateSix=0;
+                    
+                    for(var x=0;x<selectDate.length;x++){
+                        var myDate = new Date(selectDate[x]);
+                        if(myDate.getDay()==0 || myDate.getDay()==5 || myDate.getDay()==6){
+                            dateHundred++;
+                        }else{
+                            dateSix++;  
+                        }
+                        
+                    }
+                    console.log("100元"+dateHundred+"天,66元"+dateSix+"天");
+                }
             }
         },"json");
 
@@ -167,8 +183,22 @@ $(function(){
         console.log(date);
         $.post("getVillaRes",{"date":date},function(datas){
             if (datas.status==0) {
-                var residue = datas.data.residue;
-                alert(residue);
+                var selected = datas.data.selected;
+                if (selected!="") {
+                    alert("所选日期中，"+selected+"已被预定");
+                }else{
+                    var dateHundred=0;
+                    var dateSix=0;
+                    for(var x=0;x<selectDate.length;x++){
+                        var myDate = new Date(selectDate[x]);//将字符串转为对象
+                        if(myDate.getDay()==0 || myDate.getDay()==5 || myDate.getDay()==6){
+                            dateHundred++;
+                        }else{
+                            dateSix++;  
+                        }
+                    }
+                    console.log("100元"+dateHundred+"天,66元"+dateSix+"天");
+                }
             }
         },"json");
     });
@@ -187,19 +217,25 @@ $(function(){
         $(this).parents().siblings("label").find(".payModeImg").css({"background":"url(./images/circle.png)","background-size":"20px"});
     });
 
+
+
+//计算价格
+    // var lenght = $("input[name='villa-radio']:checked").length;//用户选择别墅个数
+    // var personNumber = $(".villa-choose-content input").val();//报名人数
+
+var realName="";
+var peopleNumber ="";
+var realNumber = "";
+var villaNames = [];//用于存储别墅的数组
+var villaName="";
+var re = /^[1-9]+[0-9]*]*$/; //正整数
+var date = "";
+var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;//身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X 
+
     //填写信息后，点击支付
     $(".footer2-toPay").click(function(){
         var clength = $(".currentMonth0").length;
         var selectDate = []; //用于选中日期的数组
-        var realName="";
-        var peopleNumber ="";
-        var realNumber = "";
-        var villaNames = [];//用于存储别墅的数组
-        var villaName="";
-        var re = /^[1-9]+[0-9]*]*$/; //正整数
-        var date = "";
-        var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;//身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X 
-
         //如果有选中的，将其添加到数组
         for(var i = 0 ;i < clength; i ++){
             if($(".currentMonth0").eq(i).children(".selectedDay").length > 0){//当月存在被选中日期
@@ -262,6 +298,39 @@ $(function(){
         var payMode = $("input[name='payMode-radio']:checked").val();
         console.log(payMode);
         if (payMode=="JD") {//京东支付
+            $.post("createVillaOrder",{"villaName":villaName,"date":date,"peopleNumber":peopleNumber,"realName":realName},function(datas){
+                if (datas.status==0) {
+                    var orderNumber = datas.data.orderNumber;
+                    console.log(orderNumber);
+                    $(".layer").hide();
+                    $(".payBox").hide();
+                    //是别墅，需要先判断当前选择的别墅是否已经被预定
+                    $.post("villaCheck",{"ordernumber":orderNumber},function(datas){
+                        if (datas.status==0) {
+                            $.post("JDPay",{"ordernumber":orderNumber},function (data) {
+                                if(data.status == 0){
+                                    var jdOrderPay = data.data.jdOrderPay;
+                                    $("#version").val(jdOrderPay.version);
+                                    $("#merchant").val(jdOrderPay.merchant);
+                                    $("#sign").val(jdOrderPay.sign);
+                                    $("#tradeNum").val(jdOrderPay.tradeNum);
+                                    $("#tradeName").val(jdOrderPay.tradeName);
+                                    $("#tradeTime").val(jdOrderPay.tradeTime);
+                                    $("#amount").val(jdOrderPay.amount);
+                                    $("#currency").val(jdOrderPay.currency);
+                                    $("#callbackUrl").val(jdOrderPay.callbackUrl);
+                                    $("#notifyUrl").val(jdOrderPay.notifyUrl);
+                                    $("#userId").val(jdOrderPay.userId);
+                                    $("#orderType").val(jdOrderPay.orderType);
+                                    document.getElementById("batchForm").submit();
+                                }
+                            },'json');
+                        }else{
+                            alert(dats.msg);//您的套餐中别墅或日期已被预约
+                        }
+                    },"json");
+                }
+            },"json");
             
         }else if (payMode=="aliPay") {//支付宝支付
             $.post("createVillaOrder",{"villaName":villaName,"date":date,"peopleNumber":peopleNumber,"realName":realName},function(datas){
@@ -270,7 +339,14 @@ $(function(){
                     console.log(orderNumber);
                     $(".layer").hide();
                     $(".payBox").hide();
-                    window.location.href="payHint.html?orderNumber="+orderNumber;
+                    //是别墅，需要先判断当前选择的别墅是否已经被预定
+                    $.post("villaCheck",{"ordernumber":orderNumber},function(datas){
+                        if (datas.status==0) {
+                            window.location.href="payHint.html?ordernumber="+orderNumber;
+                        }else{
+                            alert(dats.msg);//您的套餐中别墅或日期已被预约
+                        }
+                    },"json");
                 }
             },"json");
         }      
