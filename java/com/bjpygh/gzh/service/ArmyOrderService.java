@@ -26,7 +26,7 @@ public class ArmyOrderService {
         for (String date : dates){
             String[] ds = date.split("-");
             Date d = new Date(Integer.parseInt(ds[0]),Integer.parseInt(ds[1]),Integer.parseInt(ds[2]));
-            if (d.getDay()>1){
+            if (d.getDay()>0&&d.getDay()<5){
                 armyPrice +=66;
             }else {
                 armyPrice +=100;
