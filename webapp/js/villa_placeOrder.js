@@ -1,3 +1,16 @@
+var hundredDate = 0;//初始化100天数
+var sixtysixDate = 0;//初始化66天数
+var joinNumber = 0;//报名人数
+
+var realName="";
+var peopleNumber ="";
+var realNumber = "";
+var villaNames = [];//用于存储别墅的数组
+var villaName="";
+var re = /^[1-9]+[0-9]*]*$/; //正整数
+var date = "";
+var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;//身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X 
+
 $(function(){
      //日历渲染--------------------------------------------------------
     renderHtml(0);
@@ -100,8 +113,8 @@ $(function(){
                 if (selected!="") {
                     alert("所选日期中，"+selected+"已被预定");
                 }else{
-                    var dateHundred=0;
-                    var dateSix=0;
+                    var dateHundred=0;//一百天数
+                    var dateSix=0;//66天数
                     
                     for(var x=0;x<selectDate.length;x++){
                         var myDate = new Date(selectDate[x]);
@@ -112,10 +125,52 @@ $(function(){
                         }
                         
                     }
-                    console.log("100元"+dateHundred+"天,66元"+dateSix+"天");
+                    hundredDate = dateHundred;
+                    sixtysixDate = dateSix;
+                    console.log("100元"+hundredDate+"天,66元"+sixtysixDate+"天");
+
+                    //更改选择的日期时，将对总价进行调整
+                    var moneysix=0;
+                    var moneyhundred=0;
+                    var villacheck=$("input[name='villa-radio']:checked").length;//用户选择别墅个数
+                    var peopleNumber = $(".villa-choose-content input").val();//获取报名人数
+                    
+                    if (re.test(peopleNumber) && peopleNumber>0 && villacheck>0 && $(".currentMonth0").children(".selectedDay").length > 0){
+                        $(".detailBox-secure").html("¥"+peopleNumber*2);
+                        if (sixtysixDate>0) {//66的天数大于0
+                            if (peopleNumber*66>1688*villacheck) {
+                                moneysix = 66*peopleNumber*sixtysixDate*villacheck;//66x人数x天数x别墅栋数
+                                $(".detailBox li.li66").html("<div><span></sp<span>别墅(66元)</span><span class='detailBox-66'>"+"¥"+moneysix+"</span></div><span class='detailBox-66-hint'>(66元x"+peopleNumber+"人x"+sixtysixDate+"天)</span>")
+                            }else{
+                                moneysix = 1688*sixtysixDate*villacheck;//66x人数x天数x别墅栋数
+                                $(".detailBox li.li66").html("<div><span></sp<span>别墅(66元)</span><span class='detailBox-66'>"+"¥"+moneysix+"</span></div><span class='detailBox-66-hint'>(1688元x"+villacheck+"栋x"+sixtysixDate+"天)</span>")
+                            }
+                        }else{
+                            $(".detailBox li.li66").empty();
+                        }
+                        if (hundredDate>0) {//100的天数大于0
+                            if (peopleNumber*100>2888*villacheck) {
+                                moneyhundred = 100*peopleNumber*hundredDate*villacheck;//66x人数x天数x别墅栋数
+                                $(".detailBox li.li100").html("<div><span></sp<span>别墅(100元)</span><span class='detailBox-100'>"+"¥"+moneyhundred+"</span></div><span class='detailBox-100-hint'>(100元x"+peopleNumber+"人x"+hundredDate+"天)</span>")
+                            }else{
+                                moneyhundred = 2888*hundredDate*villacheck;//66x人数x天数x别墅栋数
+                                $(".detailBox li.li100").html("<div><span></sp<span>别墅(100元)</span><span class='detailBox-100'>"+"¥"+moneyhundred+"</span></div><span class='detailBox-100-hint'>(2888元x"+villacheck+"栋x"+hundredDate+"天)</span>")
+                            }
+                        }else{
+                            $(".detailBox li.li100").empty();
+                        }
+                        $("#footer-price").html("¥"+(moneysix+moneyhundred+peopleNumber*2));
+                    }else{
+                        $("#footer-price").html("¥0");
+                        $(".detailBox li.li100").empty();
+                        $(".detailBox li.li66").empty();
+                        $(".detailBox-secure").html("¥0");
+                    }
                 }
             }
         },"json");
+
+
 
     });
     
@@ -187,8 +242,8 @@ $(function(){
                 if (selected!="") {
                     alert("所选日期中，"+selected+"已被预定");
                 }else{
-                    var dateHundred=0;
-                    var dateSix=0;
+                    var dateHundred=0;//一百的天数
+                    var dateSix=0;//66天数
                     for(var x=0;x<selectDate.length;x++){
                         var myDate = new Date(selectDate[x]);//将字符串转为对象
                         if(myDate.getDay()==0 || myDate.getDay()==5 || myDate.getDay()==6){
@@ -197,10 +252,51 @@ $(function(){
                             dateSix++;  
                         }
                     }
-                    console.log("100元"+dateHundred+"天,66元"+dateSix+"天");
+                    hundredDate = dateHundred;
+                    sixtysixDate = dateSix;
+                    console.log("100元"+hundredDate+"天,66元"+sixtysixDate+"天");
+
+                    //更改选择的日期时，将对总价进行调整
+                    var moneysix=0;
+                    var moneyhundred=0;
+                    var villacheck=$("input[name='villa-radio']:checked").length;//用户选择别墅个数
+                    var peopleNumber = $(".villa-choose-content input").val();//获取报名人数
+                    
+                    if (re.test(peopleNumber) && peopleNumber>0 && villacheck>0 && $(".currentMonth0").children(".selectedDay").length > 0){
+                        $(".detailBox-secure").html("¥"+peopleNumber*2);
+                        if (sixtysixDate>0) {//66的天数大于0
+                            if (peopleNumber*66>1688*villacheck) {
+                                moneysix = 66*peopleNumber*sixtysixDate*villacheck;//66x人数x天数x别墅栋数
+                                $(".detailBox li.li66").html("<div><span></sp<span>别墅(66元)</span><span class='detailBox-66'>"+"¥"+moneysix+"</span></div><span class='detailBox-66-hint'>(66元x"+peopleNumber+"人x"+sixtysixDate+"天)</span>")
+                            }else{
+                                moneysix = 1688*sixtysixDate*villacheck;//66x人数x天数x别墅栋数
+                                $(".detailBox li.li66").html("<div><span></sp<span>别墅(66元)</span><span class='detailBox-66'>"+"¥"+moneysix+"</span></div><span class='detailBox-66-hint'>(1688元x"+villacheck+"栋x"+sixtysixDate+"天)</span>")
+                            }
+                        }else{
+                            $(".detailBox li.li66").empty();
+                        }
+                        if (hundredDate>0) {//100的天数大于0
+                            if (peopleNumber*100>2888*villacheck) {
+                                moneyhundred = 100*peopleNumber*hundredDate*villacheck;//66x人数x天数x别墅栋数
+                                $(".detailBox li.li100").html("<div><span></sp<span>别墅(100元)</span><span class='detailBox-100'>"+"¥"+moneyhundred+"</span></div><span class='detailBox-100-hint'>(100元x"+peopleNumber+"人x"+hundredDate+"天)</span>")
+                            }else{
+                                moneyhundred = 2888*hundredDate*villacheck;//66x人数x天数x别墅栋数
+                                $(".detailBox li.li100").html("<div><span></sp<span>别墅(100元)</span><span class='detailBox-100'>"+"¥"+moneyhundred+"</span></div><span class='detailBox-100-hint'>(2888元x"+villacheck+"栋x"+hundredDate+"天)</span>")
+                            }
+                        }else{
+                            $(".detailBox li.li100").empty();
+                        }
+                        $("#footer-price").html("¥"+(moneysix+moneyhundred+peopleNumber*2));
+                    }else{
+                        $("#footer-price").html("¥0");
+                        $(".detailBox li.li100").empty();
+                        $(".detailBox li.li66").empty();
+                        $(".detailBox-secure").html("¥0");
+                    }
                 }
             }
         },"json");
+
     });
     
     //别墅选择自定义点击样式,选择时与未选择时。
@@ -210,27 +306,124 @@ $(function(){
         }else{
             $(this).find(".villa-choose").css({"background":"url(./images/circle.png)","background-size":"20px"});
         }
+        //更改别墅时，将对总价进行调整
+        
+                    var moneysix=0;
+                    var moneyhundred=0;
+                    var villacheck=$("input[name='villa-radio']:checked").length;//用户选择别墅个数
+                    var peopleNumber = $(".villa-choose-content input").val();//获取报名人数
+                    console.log("选择了"+villacheck+"栋别墅");
+                    if (re.test(peopleNumber) && peopleNumber>0 && villacheck>0 && $(".currentMonth0").children(".selectedDay").length > 0){
+                        $(".detailBox-secure").html("¥"+peopleNumber*2);
+                        if (sixtysixDate>0) {//66的天数大于0
+                            if (peopleNumber*66>1688*villacheck) {
+                                moneysix = 66*peopleNumber*sixtysixDate*villacheck;//66x人数x天数x别墅栋数
+                                $(".detailBox li.li66").html("<div><span></sp<span>别墅(66元)</span><span class='detailBox-66'>"+"¥"+moneysix+"</span></div><span class='detailBox-66-hint'>(66元x"+peopleNumber+"人x"+sixtysixDate+"天)</span>")
+                            }else{
+                                moneysix = 1688*sixtysixDate*villacheck;//66x人数x天数x别墅栋数
+                                $(".detailBox li.li66").html("<div><span></sp<span>别墅(66元)</span><span class='detailBox-66'>"+"¥"+moneysix+"</span></div><span class='detailBox-66-hint'>(1688元x"+villacheck+"栋x"+sixtysixDate+"天)</span>")
+                            }
+                        }else{
+                            $(".detailBox li.li66").empty();
+                        }
+                        if (hundredDate>0) {//100的天数大于0
+                            if (peopleNumber*100>2888*villacheck) {
+                                moneyhundred = 100*peopleNumber*hundredDate*villacheck;//66x人数x天数x别墅栋数
+                                $(".detailBox li.li100").html("<div><span></sp<span>别墅(100元)</span><span class='detailBox-100'>"+"¥"+moneyhundred+"</span></div><span class='detailBox-100-hint'>(100元x"+peopleNumber+"人x"+hundredDate+"天)</span>")
+                            }else{
+                                moneyhundred = 2888*hundredDate*villacheck;//66x人数x天数x别墅栋数
+                                $(".detailBox li.li100").html("<div><span></sp<span>别墅(100元)</span><span class='detailBox-100'>"+"¥"+moneyhundred+"</span></div><span class='detailBox-100-hint'>(2888元x"+villacheck+"栋x"+hundredDate+"天)</span>")
+                            }
+                        }else{
+                            $(".detailBox li.li100").empty();
+                        }
+                        $("#footer-price").html("¥"+(moneysix+moneyhundred+peopleNumber*2));
+                    }else{
+                        $("#footer-price").html("¥0");
+                        $(".detailBox li.li100").empty();
+                        $(".detailBox li.li66").empty();
+                        $(".detailBox-secure").html("¥0");
+                    }
     });
-        //为支付方式的radio设置自定义点击样式
+    //为支付方式的radio设置自定义点击样式
     $(".payMode").click(function() {
         $(this).children(".payModeImg").css({"background":"url(./images/circle_choose.png)","background-size":"20px"});
         $(this).parents().siblings("label").find(".payModeImg").css({"background":"url(./images/circle.png)","background-size":"20px"});
     });
 
+    //时时监听报名人数变动，别墅选择变动
+    $(".villa-choose-content input").bind('input porpertychange',function(){
+        //更改报名人数时，保险人数会变动
+        $(".villaNumberChoose p.villaNumber").html($(this).val());
+        //更改报名人数时，将对总价进行调整
+                    var moneysix=0;
+                    var moneyhundred=0;
+                    var villacheck=$("input[name='villa-radio']:checked").length;//用户选择别墅个数
+                    var peopleNumber = $(".villa-choose-content input").val();//获取报名人数
+                    
+                    if (re.test(peopleNumber) && peopleNumber>0 && villacheck>0 && $(".currentMonth0").children(".selectedDay").length > 0){
+                        $(".detailBox-secure").html("¥"+peopleNumber*2);
+                        if (sixtysixDate>0) {//66的天数大于0
+                            if (peopleNumber*66>1688*villacheck) {
+                                moneysix = 66*peopleNumber*sixtysixDate*villacheck;//66x人数x天数x别墅栋数
+                                $(".detailBox li.li66").html("<div><span></sp<span>别墅(66元)</span><span class='detailBox-66'>"+"¥"+moneysix+"</span></div><span class='detailBox-66-hint'>(66元x"+peopleNumber+"人x"+sixtysixDate+"天)</span>")
+                            }else{
+                                moneysix = 1688*sixtysixDate*villacheck;//66x人数x天数x别墅栋数
+                                $(".detailBox li.li66").html("<div><span></sp<span>别墅(66元)</span><span class='detailBox-66'>"+"¥"+moneysix+"</span></div><span class='detailBox-66-hint'>(1688元x"+villacheck+"栋x"+sixtysixDate+"天)</span>")
+                            }
+                        }else{
+                            $(".detailBox li.li66").empty();
+                        }
+                        if (hundredDate>0) {//100的天数大于0
+                            if (peopleNumber*100>2888*villacheck) {
+                                moneyhundred = 100*peopleNumber*hundredDate*villacheck;//66x人数x天数x别墅栋数
+                                $(".detailBox li.li100").html("<div><span></sp<span>别墅(100元)</span><span class='detailBox-100'>"+"¥"+moneyhundred+"</span></div><span class='detailBox-100-hint'>(100元x"+peopleNumber+"人x"+hundredDate+"天)</span>")
+                            }else{
+                                moneyhundred = 2888*hundredDate*villacheck;//66x人数x天数x别墅栋数
+                                $(".detailBox li.li100").html("<div><span></sp<span>别墅(100元)</span><span class='detailBox-100'>"+"¥"+moneyhundred+"</span></div><span class='detailBox-100-hint'>(2888元x"+villacheck+"栋x"+hundredDate+"天)</span>")
+                            }
+                        }else{
+                            $(".detailBox li.li100").empty();
+                        }
+                        $("#footer-price").html("¥"+(moneysix+moneyhundred+peopleNumber*2));
+                    }else{
+                        $("#footer-price").html("¥0");
+                        $(".detailBox li.li100").empty();
+                        $(".detailBox li.li66").empty();
+                        $(".detailBox-secure").html("¥0");
+                    }
+    });
 
+    //更改保险人数
+    $(".villaNumberChoose img:last-child").click(function(){
+        var secureNumber = $(this).siblings("p").html();
+        secureNumber++;
+        $(this).siblings("p").html(secureNumber);
+    });
+    $(".villaNumberChoose img:first-child").click(function(){
+        var secureNumber = $(this).siblings("p").html();
+        if (secureNumber<1) {
+            secureNumber=0;
+        }else{
+            secureNumber--;
+        }
+        $(this).siblings("p").html(secureNumber);
+    });
+    
+    //明细
+    $(".footer-detail").click(function(){
+        
 
-//计算价格
-    // var lenght = $("input[name='villa-radio']:checked").length;//用户选择别墅个数
-    // var personNumber = $(".villa-choose-content input").val();//报名人数
+        if ($(".detailBox").css("display")=="none") {
+            $(".detailBox").show();
+            $(this).find("img").attr("src","./images/top.png");
+        }else{
+            $(".detailBox").hide();
+            $(this).find("img").attr("src","./images/bottom.png");
+        }
+        
+    });
 
-var realName="";
-var peopleNumber ="";
-var realNumber = "";
-var villaNames = [];//用于存储别墅的数组
-var villaName="";
-var re = /^[1-9]+[0-9]*]*$/; //正整数
-var date = "";
-var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;//身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X 
 
     //填写信息后，点击支付
     $(".footer2-toPay").click(function(){

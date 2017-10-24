@@ -11,7 +11,34 @@ html, body {
     margin: 10px 16px;
     background: #f6f1f1;
 }
-
+/*保险*/
+/*.villa-secure-title{
+	color: #555;
+	font-weight: bold;
+	border-bottom: 1px solid #ddd;
+	margin:0 10px;
+	height: 32px;
+	line-height: 32px;
+	padding:0 10px;
+}*/
+.villa-secure-content{
+	color: #555;
+	padding: 0 20px;
+	/*height: 32px;*/
+	margin-bottom:10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.villaNumberChoose{
+	display: flex;
+}
+.villaNumber{
+	min-width: 20px;
+	padding: 0 2px;
+	text-align: center;
+	color: orange;
+}
 /*别墅选择*/
 .container{
 	border-top: 1px solid #ddd;
@@ -328,4 +355,33 @@ html, body {
 /*京东支付表单*/
 #batchForm{
 	display: none;
+}
+/*明细*/
+.detailBox{
+	border-top: 1px solid #eee;
+	padding: 10px 20px;
+	background: #f6f1f1;
+	position: fixed;
+	bottom: 48px;
+	width: 100%;
+	display: none;
+}
+.detailBox li{
+	display: flex;
+	font-size: 14px;
+}
+.detailBox div{
+	height: 20px;
+	display: flex;
+	justify-content: space-between;
+	width: 60%;
+	align-items: center;
+}
+.detailBox-100-hint,.detailBox-66-hint,.detailBox-secure-hint{
+	line-height: 20px;
+	font-size: 12px;
+	margin-left: 4px;
+}
+.footer-detail-row{
+
 }
