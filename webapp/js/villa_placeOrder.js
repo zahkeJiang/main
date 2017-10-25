@@ -358,10 +358,10 @@ $(function(){
     //选择支付方式后点击确认
     $(".toPay").click(function(){
         var payMode = $("input[name='payMode-radio']:checked").val();
-        var reserve = $(".roomCode").find("img").length;//是否全额,0预约定金，1全款
+        var reserve = $("input[name='Reserve1Radio']:checked").val();//是否全额,0预约定金，1全款
         console.log(payMode);
         if (payMode=="JD") {//京东支付
-            $.post("createVillaOrder",{"villaName":villaName,"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"fullAmount",reserve},function(datas){
+            $.post("createVillaOrder",{"villaName":villaName,"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"fullAmount":reserve},function(datas){
                 if (datas.status==0) {
                     var orderNumber = datas.data.orderNumber;
                     console.log(orderNumber);
@@ -396,7 +396,7 @@ $(function(){
             },"json");
             
         }else if (payMode=="aliPay") {//支付宝支付
-            $.post("createVillaOrder",{"villaName":villaName,"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber},function(datas){
+            $.post("createVillaOrder",{"villaName":villaName,"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"fullAmount":reserve},function(datas){
                 if (datas.status==0) {
                     var orderNumber = datas.data.orderNumber;
                     console.log(orderNumber);
@@ -427,7 +427,7 @@ function  getPrice(){
                     var moneyhundred=0;
                     var villacheck=$("input[name='villa-radio']:checked").length;//用户选择别墅个数
                     var peopleNumber = $(".villa-choose-content input").val();//获取报名人数
-                    var reserve = $("input[name='Reserve1Radio']:checked").val();//付款类型，全额，或预约定金
+                    var reserve = $("input[name='Reserve1Radio']:checked").val();//付款类型，1全额，或0预约定金
 
                     // var secureNumber = $(".secureNumber").val();//购买保险人数
                     // if (re.test(secureNumber) && secureNumber) {
