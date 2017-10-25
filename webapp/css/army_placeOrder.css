@@ -17,6 +17,22 @@ html, body {
 .army-choose{
 	padding:10px;
 }
+.army-secure{
+	display: flex;
+	align-items: center;
+	/*background: yellow;*/
+	padding-top: 10px;
+}
+.army-information div.army-secure-title {
+	height: 32px;
+	width: 40px;
+	font-size: 16px;
+	color: #555;
+	/*text-align: center;*/
+	line-height: 32px;
+	margin:0 10px;
+}
+
 .army-information{
 	display: flex;
 	align-items: center;
@@ -167,9 +183,9 @@ html, body {
 	bottom: 0;
 	height: 48px;
 	width: 100%;
-	display: flex
+	display: flex;
 }
-.footer p:first-child{
+.footer1{
 	width: 70%;
 	background: #f6f1f1;
 	height: 47px;
@@ -177,8 +193,10 @@ html, body {
 	line-height: 48px;
 	padding-left: 28px;
 	font-size: 18px;
+	display: flex;
+	align-items: center;
 }
-.footer p:last-child{
+.footer2-toPay{
 	width: 30%;
 	height: 48px;
 	background: orange;
@@ -187,6 +205,36 @@ html, body {
 	color: white;
 	font-size: 16px;
 }
+.footer1 div{
+	height: 32px;
+	margin:0 10px;
+	color: #999;
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+}
+.footer1 div span{
+	height: 32px;
+	line-height: 32px;
+	/*color: #999;*/
+	font-size: 14px;
+}
+.footer1 div img{
+	margin-left:4px;
+}
+/*.footer div{
+	margin: 0;
+	font-size: 14px;
+	background: #f6f1f1;
+	border-top: 1px solid #eee;
+	width: 80px;
+	display: flex;
+	align-items: center;
+	height: 47px;
+}*/
+/*.footer div img{
+	margin-left: 4px;
+}*/
 
 /*支付选择弹窗*/
 .payBox{
@@ -271,7 +319,7 @@ html, body {
 }
 .layer{
 	background: #eee;
-	position: absolute;
+	position: fixed;
 	height: 100%;
 	width: 100%;
 	z-index: 99;
@@ -279,4 +327,31 @@ html, body {
 	left: 0;
 	filter:alpha(Opacity=80);-moz-opacity:0.5;opacity: 0.5;
 	display: none;
+}
+/*明细*/
+.detailBox{
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #ddd;
+	padding: 10px 20px;
+	background: #f6f1f1;
+	position: fixed;
+	bottom: 48px;
+	width: 100%;
+	display: none;
+}
+.detailBox li{
+	display: flex;
+	font-size: 14px;
+}
+.detailBox div{
+	height: 20px;
+	display: flex;
+	justify-content: space-between;
+	width: 50%;
+	align-items: center;
+}
+.detailBox-indoor-hint,.detailBox-tend-hint,.detailBox-liVilla-hint,.detailBox-secure-hint{
+	line-height: 20px;
+	font-size: 12px;
+	margin-left: 10px;
 }

@@ -1,10 +1,20 @@
 
-     //日历渲染--------------------------------------------------------
+var realName="";//真实姓名
+var peopleNumber ="";//报名人数
+var realNumber = "";//身份证号码
+var secureNumber = "";//保险
+var villaNames = [];//用于存储别墅的数组
+var re = /^[1-9]+[0-9]*]*$/; //正整数
+var date = "";
+var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;//身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X 
+
+$(function(){
+ //日历渲染--------------------------------------------------------
     renderHtml(0);
     // 表格中显示日期
     showCalendarData(0,0);
     //展示价格
-    setPrice(0);
+    setPrice(getYandM(0).dataPara);
 
 //    日历结束
 //    点击上一月
@@ -16,6 +26,7 @@
         showCalendarData(0,monthNum);
         setPrice(getYandM(monthNum).dataPara);
     });
+
 //    点击下一月
     $('.sit-next-month').on('click',function(e){
         e.preventDefault();
@@ -28,82 +39,310 @@
     var myDate = new Date(); 
     var todyMonth = myDate.getMonth()+1;
     var todyDate = myDate.getDate();
+     var flag = false;
      //点击每天的操作，要是有其他操作可在此处写事件，只有展示功能的日历 ，注释此段代码 点击不需要事件
     $('.currentMonth0').on('click',function(e){
         console.log($(this));
         var thisDayNumber = $(this).children(".borderr").attr("thisDayNumber");//获点击所对应的当天日期
-        if (monthNum==0) {
-            //当今天的号码小于点击的号码时
-            if(todyDate<thisDayNumber){
-                //选择完日期后 点击按钮去支付 ，可以将需要的参数传进去
-                //如果有限制条件 直接return 不添加标签并且支付也不不能点击传参
-                if($(this).hasClass('no-ticket')){ //余票不能点击 具体需求具体实现
-                    return;
-                }
-                if ($(this).children(".selectedDay").length > 0 ) {
-                    $(this).children(".selectedDay").remove();
-                }else{
-                    $(this).append("<i class='selectedDay'></i>");
-                }
-            }
-            
-        }else if(monthNum<0){
-             console.log($(this));
-            //选择完日期后 点击按钮去支付 ，可以将需要的参数传进去
-            //如果有限制条件 直接return 不添加标签并且支付也不不能点击传参
-            if($(this).hasClass('no-ticket')){ //余票不能点击 具体需求具体实现
-                return;
-            }
-            if ($(this).children(".selectedDay").length > 0 ) {
-                $(this).children(".selectedDay").remove();
-            }else{
-                $(this).append("<i class='selectedDay'></i>");
-            }
-        } 
-    });
-    $('.otherMonth').on('click',function(e){
-        console.log($(this));
         //选择完日期后 点击按钮去支付 ，可以将需要的参数传进去
         //如果有限制条件 直接return 不添加标签并且支付也不不能点击传参
+
         if($(this).hasClass('no-ticket')){ //余票不能点击 具体需求具体实现
             return;
         }
+        if($(this).hasClass('beforeDay')){ //今天之前的日期不能点击
+            return;
+        }
+
+        var clength = $(".currentMonth0").length;
+        //点击第三次重新选中
+        if(flag){
+            for(var k = 0 ;k < clength; k ++){
+                $(".currentMonth0").eq(k).children(".selectedDay").remove();
+            }
+        }
         if ($(this).children(".selectedDay").length > 0 ) {
                 $(this).children(".selectedDay").remove();
-            }else{
+        }else{
                 $(this).append("<i class='selectedDay'></i>");
         }
+
+        var indexArr = []; //保存下标
+        var startIndex = -1;
+        var endIndex = -1;
+        for(var i = 0 ;i < clength; i ++){
+            //如果有选中的
+            if($(".currentMonth0").eq(i).children(".selectedDay").length > 0){
+                // console.log($(".currentMonth0").eq(i));
+                indexArr.push(i);
+                startIndex = indexArr[0];
+                endIndex = indexArr[indexArr.length-1];
+                if(indexArr.length>=2){  //选中两个日期，第三次重新赋值
+                    flag = true;
+                    break;
+                }else{
+                    flag = false;
+                }
+            }
+        }
+        //两个日期之间的日期全部选中
+        for(var j = 0 ;j < clength; j ++){
+            $(".currentMonth0").eq(j).children(".selectedDay").remove();
+            if(j>=startIndex&&j<=endIndex){
+                if(!$(".currentMonth0").eq(j).hasClass('no-ticket'))
+                $(".currentMonth0").eq(j).append("<i class='selectedDay'></i>");
+            }
+        }
+
+        //如果有选中的，将其添加到数组
+        var selectDate = [];
+        for(var i = 0 ;i < clength; i ++){
+            if($(".currentMonth0").eq(i).children(".selectedDay").length > 0){//当月存在被选中日期
+                //将选择的天循环添加到selectDate
+                selectDate.push($(".currentMonth0").eq(i).children(".selectedDay").siblings(".borderr").attr("thisdaynumber"));
+            }  
+        }        
+        var date = selectDate.join();//数组中的所有元素放入一个字符串
+        console.log(date);
+
+        //当报名日期改动时，修改金额
+       getPrice();  
+    
+
+
+
+    });
+    
+    $('.otherMonth').on('click',function(e){
+         console.log($(this));
+        //选择完日期后 点击按钮去支付 ，可以将需要的参数传进去
+        //如果有限制条件 直接return 不添加标签并且支付也不不能点击传参
+
+        if($(this).hasClass('no-ticket')){ //余票不能点击 具体需求具体实现
+            return;
+        }
+        if($(this).hasClass('beforeDay')){ //今天之前的日期不能点击
+            return;
+        }
+
+        var clength = $(".currentMonth0").length;
+        //点击第三次重新选中
+        if(flag){
+            for(var k = 0 ;k < clength; k ++){
+                $(".currentMonth0").eq(k).children(".selectedDay").remove();
+            }
+        }
+        if ($(this).children(".selectedDay").length > 0 ) {
+                $(this).children(".selectedDay").remove();
+        }else{
+                $(this).append("<i class='selectedDay'></i>");
+        }
+
+        var indexArr = []; //保存下标
+        var startIndex = -1;
+        var endIndex = -1;
+        for(var i = 0 ;i < clength; i ++){
+            //如果有选中的
+            if($(".currentMonth0").eq(i).children(".selectedDay").length > 0){
+                // console.log($(".currentMonth0").eq(i));
+                indexArr.push(i);
+                startIndex = indexArr[0];
+                endIndex = indexArr[indexArr.length-1];
+                if(indexArr.length>=2){  //选中两个日期，第三次重新赋值
+                    flag = true;
+                    break;
+                }else{
+                    flag = false;
+                }
+            }
+        }
+        //两个日期之间的日期全部选中
+        for(var j = 0 ;j < clength; j ++){
+            $(".currentMonth0").eq(j).children(".selectedDay").remove();
+            if(j>=startIndex&&j<=endIndex){
+                if(!$(".currentMonth0").eq(j).hasClass('no-ticket'))
+                $(".currentMonth0").eq(j).append("<i class='selectedDay'></i>");
+            }
+        }
+
+         //如果有选中的，将其添加到数组，并发送post请求给后台
+        var selectDate = [];
+        for(var i = 0 ;i < clength; i ++){
+            if($(".currentMonth0").eq(i).children(".selectedDay").length > 0){//当月存在被选中日期
+                //将选择的天循环添加到selectDate
+                selectDate.push($(".currentMonth0").eq(i).children(".selectedDay").siblings(".borderr").attr("thisdaynumber"));
+            }  
+        }        
+        var date = selectDate.join();//数组中的所有元素放入一个字符串
+        console.log(date);
+
+        //当报名日期改动时，修改金额
+        getPrice();  
+
     });
 
-//选择人数，帐篷，室内，等
-$(".army-information input").blur(function(){
-  if ($(this).val()<1){
-    $(this).val(0);
-    $(".armyNumberTotal").html(0);
-  }else if ($(this).val()>=1) {
-    $(".armyNumberTotal").html($(this).val());
-  }else{
-    $(this).val(0);
-    $(".armyNumberTotal").html(0);
-  }
-});
-    //为军旅报名人数添加加减功能
-    $(".armyNumber img:last-child").click(function(){
-        var armyNumber = $(this).siblings("span").html();
-        armyNumber++;
-        $(this).siblings("span").html(armyNumber);
-    })
-    $(".armyNumber img:first-child").click(function(){
-        var armyNumber = $(this).siblings("span").html();
-        if (armyNumber<1) {
-            armyNumber=0;
+
+
+//选择人数，帐篷，室内，等 ,时时监听变动
+//当报名人数改动时，修改金额
+    $("#army-peoplenumber").bind('input porpertychange',function(){
+        var indoor = $(".indoor").html();//室内人使用
+        var tend = $(".tend").html();//帐篷人使用
+        $(".tend").html(0);
+        $(".indoor").html(0);
+        var peopleNumber = $("#army-peoplenumber").val();//报名人数
+        if (re.test(peopleNumber) && peopleNumber>0) {
+            $(".nosleep").html(peopleNumber);
+
+
         }else{
-            armyNumber--
+            $(".nosleep").html(0);
         }
-        $(this).siblings("span").html(armyNumber);
-    })
+        
+        //当报名人数改动时，修改金额
+        getPrice();
+    });
+
+//当保险人数改动时，修改金额
+    $("#army-securenumber").bind('input porpertychange',function(){
+        
+        //当报名人数改动时，修改金额
+       getPrice();
+    });
 
 
+    //为帐篷、室内、不住宿人数添加加减功能
+    //更改帐篷人数
+    $(".armyNumber-tend img:last-child").click(function(){
+        var peopleNumber = $("#army-peoplenumber").val();//报名人数
+        var nosleep = $(".nosleep").html();//不住宿人数
+        var indoor = $(".indoor").html();//室内人数
+        var armyNumber = $(this).siblings("span").html();//当前点击对应的人数,帐篷人数
+        if (re.test(peopleNumber) && peopleNumber) {
+
+
+            // console.log(armyNumber+","+indoor+","+peopleNumber);
+
+            armyNumber++;
+            if (armyNumber>=(peopleNumber-indoor)) {
+                armyNumber=peopleNumber-indoor;
+            }
+            nosleep--;
+            if (nosleep<1) {
+                nosleep=0;
+            }
+        
+            $(this).siblings("span").html(armyNumber);
+            $(".nosleep").html(nosleep);
+
+        }else{
+            alert("请输入报名人数");
+        }
+
+        //当报名人数改动时，修改金额
+        getPrice();
+        
+    });
+    $(".armyNumber-tend img:first-child").click(function(){
+        var peopleNumber = $("#army-peoplenumber").val();//报名人数
+        var indoor = $(".indoor").html();//室内人数
+        var armyNumber = $(this).siblings("span").html();
+        var nosleep = $(".nosleep").html();//不住宿人数
+        if (re.test(peopleNumber) && peopleNumber) {
+            
+
+            armyNumber--;
+            if (armyNumber<1) {
+            armyNumber=0;
+            }
+            nosleep++;
+            if (nosleep>=(peopleNumber-indoor)) {
+                nosleep=peopleNumber-indoor;
+            }
+        
+        
+            $(this).siblings("span").html(armyNumber);
+            $(".nosleep").html(nosleep);
+        
+        }else{
+            alert("请输入报名人数");
+        }
+         getPrice();
+        
+    });
+    //更改室内人数
+    $(".armyNumber-indoor img:last-child").click(function(){
+        var peopleNumber = $("#army-peoplenumber").val();//报名人数
+        var nosleep = $(".nosleep").html();//不住宿人数
+        var tend = $(".tend").html();//室内人数
+        var armyNumber = $(this).siblings("span").html();//当前点击对应的人数,帐篷人数
+        if (re.test(peopleNumber) && peopleNumber) {
+
+
+            // console.log(armyNumber+","+tend+","+peopleNumber);
+
+            armyNumber++;
+            if (armyNumber>=(peopleNumber-tend)) {
+                armyNumber=peopleNumber-tend;
+            }
+            nosleep--;;
+            if (nosleep<1) {
+                nosleep=0;
+            }
+        
+            $(this).siblings("span").html(armyNumber);
+            $(".nosleep").html(nosleep);
+
+        }else{
+            alert("请输入报名人数");
+        }
+
+        getPrice();
+        
+    });
+    $(".armyNumber-indoor img:first-child").click(function(){
+        var peopleNumber = $("#army-peoplenumber").val();//报名人数
+        var tend = $(".tend").html();//帐篷人数
+        var armyNumber = $(this).siblings("span").html();
+        var nosleep = $(".nosleep").html();//不住宿人数
+        if (re.test(peopleNumber) && peopleNumber) {
+            
+
+            armyNumber--;
+            if (armyNumber<1) {
+            armyNumber=0;
+            }
+            nosleep++;
+            if (nosleep>=(peopleNumber-tend)) {
+                nosleep=peopleNumber-tend;
+            }
+        
+        
+            $(this).siblings("span").html(armyNumber);
+            $(".nosleep").html(nosleep);
+        
+        }else{
+            alert("请输入报名人数");
+        }
+
+        
+         getPrice();   
+    });
+
+
+
+
+    //明细
+    $(".footer-detail").click(function(){
+        if ($(".detailBox").css("display")=="none") {
+            $(".detailBox").show();
+            $(this).find("img").attr("src","./images/top.png");
+        }else{
+            $(".detailBox").hide();
+            $(this).find("img").attr("src","./images/bottom.png");
+        }
+        
+    });
 
      //为支付方式的radio设置点击样式
     $(".payMode").click(function() {
@@ -111,24 +350,119 @@ $(".army-information input").blur(function(){
         $(this).parents().siblings("label").find(".payModeImg").css({"background":"url(./images/circle.png)","background-size":"20px"});
     });
 
+
     //填写信息后，点击支付
-    $(".footer p:last-child").click(function(){
-        if ($(".army-information input").val()>0) {//报名人数不为空
-            if ($("input[name='realName']").val()!=""&&$("input[name='realNumber']").val()!="") {//真实姓名，身份证号不为空
-                $(".layer").show();
-                $(".payBox").show(); 
-            }else{
-                alert("请您完善信息");
-            }
-        }else{
-            alert("您尚未填写报名人数");
+    $(".footer2-toPay").click(function(){
+        var clength = $(".currentMonth0").length;
+        var selectDate = []; //用于选中日期的数组
+        //如果有选中的，将其添加到数组
+        for(var i = 0 ;i < clength; i ++){
+            if($(".currentMonth0").eq(i).children(".selectedDay").length > 0){//当月存在被选中日期
+                //将选择的天循环添加到selectDate
+                selectDate.push($(".currentMonth0").eq(i).children(".selectedDay").siblings(".borderr").attr("thisdaynumber"));
+            }  
         }
+        // console.log(JSON.stringify(selectDate));//将对象转化为json字符串
+        // console.log(selectDate.join());//数组中的所有元素放入一个字符串
         
+        date = selectDate.join();//数组中的所有元素放入一个字符串
+        realName = $("input[name='realName']").val();//获取姓名
+        peopleNumber = $("#army-peoplenumber").val();//获取报名人数
+        secureNumber = $("#army-securenumber").val();//保险人数
+        realNumber = $("input[name='realNumber']").val();//获取身份证号码
+
+        if (re.test(secureNumber) && secureNumber>0) {
+            //不处理
+        }else{
+            secureNumber = 0;
+        }
+        if (re.test(peopleNumber) && peopleNumber>0) {//报名人数不为空并且是正整数
+
+                if ($(".currentMonth0").children(".selectedDay").length > 0) {//当月存在被选中日期
+                    if (realName!="") {//真实姓名不为空
+                        if (reg.test(realNumber)) {
+                            
+                            console.log("姓名"+realName+"/报名日期"+date+"/人数"+peopleNumber+"/身份证"+realNumber+"/保险"+secureNumber);
+                            $(".layer").show();
+                            $(".payBox").show(); 
+                        }else{
+                            alert("身份证格式不对");
+                        } 
+                    }else{
+                        alert("输入您的真实姓名");
+                    }
+                }else{
+                    alert("请选择报名日期");
+                }
+                
+            
+            
+        }else{
+            alert("请填写正确的报名人数");
+        }
     });
+
+
     //选择支付方式后点击确认
     $(".toPay").click(function(){
-        window.location.href="payHint.html";
+        var payMode = $("input[name='villa-radio']:checked").val();//支付方式
+        var tend = $(".tend").html();//帐篷人数
+        var indoor = $(".indoor").html();//室内人数
+        var nosleep = $(".nosleep").html();//不住宿人数
+        if (payMode=="JD") {//京东支付
+            $.post("createVillaOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"secureNumber":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor},function(datas){
+                if (datas.status==0) {
+                    var orderNumber = datas.data.orderNumber;
+                    console.log(orderNumber);
+                    $(".layer").hide();
+                    $(".payBox").hide();
+                    //是别墅，需要先判断当前选择的别墅是否已经被预定
+                    $.post("villaCheck",{"ordernumber":orderNumber},function(datas){
+                        if (datas.status==0) {
+                            $.post("JDPay",{"ordernumber":orderNumber},function (data) {
+                                if(data.status == 0){
+                                    var jdOrderPay = data.data.jdOrderPay;
+                                    $("#version").val(jdOrderPay.version);
+                                    $("#merchant").val(jdOrderPay.merchant);
+                                    $("#sign").val(jdOrderPay.sign);
+                                    $("#tradeNum").val(jdOrderPay.tradeNum);
+                                    $("#tradeName").val(jdOrderPay.tradeName);
+                                    $("#tradeTime").val(jdOrderPay.tradeTime);
+                                    $("#amount").val(jdOrderPay.amount);
+                                    $("#currency").val(jdOrderPay.currency);
+                                    $("#callbackUrl").val(jdOrderPay.callbackUrl);
+                                    $("#notifyUrl").val(jdOrderPay.notifyUrl);
+                                    $("#userId").val(jdOrderPay.userId);
+                                    $("#orderType").val(jdOrderPay.orderType);
+                                    document.getElementById("batchForm").submit();
+                                }
+                            },'json');
+                        }else{
+                            alert(dats.msg);//您的套餐中别墅或日期已被预约
+                        }
+                    },"json");
+                }
+            },"json");
+        }else if (payMode=="aliPay") {//支付宝支付
+            $.post("createVillaOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"secureNumber":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor},function(datas){
+                if (datas.status==0) {
+                    var orderNumber = datas.data.orderNumber;
+                    console.log(orderNumber);
+                    $(".layer").hide();
+                    $(".payBox").hide();
+                    //是别墅，需要先判断当前选择的别墅是否已经被预定
+                    $.post("villaCheck",{"ordernumber":orderNumber},function(datas){
+                        if (datas.status==0) {
+                            // window.location.href="payHint.html?ordernumber="+orderNumber;
+                        }else{
+                            alert(dats.msg);//您的套餐中别墅或日期已被预约
+                        }
+                    },"json");
+                }
+            },"json");
+        }      
     });
+
         //关闭弹窗
     $(".payBox p").click(function(){
         $(".layer").hide();
@@ -136,3 +470,32 @@ $(".army-information input").blur(function(){
     });
 
 
+    
+});
+
+//计算价格
+function getPrice(){
+        var peopleNumber = $("#army-peoplenumber").val();//报名人数
+        var secureNumber = $("#army-securenumber").val();//保险人数
+        if (re.test(secureNumber) && secureNumber>0) {
+
+        }else{
+            secureNumber=0;
+        }
+        var tendNumber = $(".tend").html();//帐篷人数
+        var indoorNumber = $(".indoor").html();//室内人数
+        var selectDay = $(".currentMonth0").children(".selectedDay").length;//报名天数
+        if (re.test(peopleNumber) && peopleNumber>0 &&selectDay>0) {
+            $(".detailBox-liVilla").html("¥"+100*peopleNumber*selectDay);$(".detailBox-liVilla-hint").html("(100元x"+peopleNumber+"人x"+selectDay+"晚)")//军旅基础费用
+            $(".detailBox-tend").html("¥"+20*tendNumber*selectDay);$(".detailBox-tend-hint").html("(20元x"+tendNumber+"人x"+selectDay+"晚)")//帐篷费用
+            $(".detailBox-indoor").html("¥"+40*indoorNumber*selectDay);$(".detailBox-indoor-hint").html("(40元x"+indoorNumber+"人x"+selectDay+"晚)")//室内费用
+            $(".detailBox-secure").html("¥"+15*secureNumber);$(".detailBox-secure-hint").html("(15元x"+secureNumber+"人)")//室内费用
+            $("#footer-price").html("¥"+(100*peopleNumber*selectDay+20*tendNumber*selectDay+40*indoorNumber*selectDay+15*secureNumber));
+        }else{
+            $("#footer-price").html("¥0");
+            $(".detailBox-liVilla").html("¥0");$(".detailBox-liVilla-hint").empty();
+            $(".detailBox-tend").html("¥0");$(".detailBox-tend-hint").empty()
+            $(".detailBox-indoor").html("¥0");$(".detailBox-indoor-hint").empty();
+            $(".detailBox-secure").html("¥0");$(".detailBox-secure-hint").empty();
+        } 
+}
