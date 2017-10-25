@@ -1,0 +1,173 @@
+body{
+	background: #4ea0ff;
+	color: #999;
+}
+/*订单进度*/
+.contentBox{
+	border-radius: 10px;
+	background: #f6f1f1;
+	margin: 10px 16px;
+}
+.shedule-tiele{
+	color: #555;
+	height: 40px;
+	padding:0 10px;
+	line-height: 40px;
+}
+.chedule-content{
+	padding: 10px;
+	height: 60px;
+	/*height: 60px;*/
+	display: flex;
+	align-items: center;
+	font-size: 20px;
+}
+/*.chedule-content>div{
+	flex: 1;
+	text-align: center;
+}
+.progress_pic_style{
+	height: 40px;
+	display: flex;
+	align-items: center;
+}
+.progress_pic_style i{
+	height: 1px;
+	background: #ccc;
+	width: 100%;
+}
+.chedule-content i.None{
+	background: #f6f1f1;
+}
+.chedule-content h2{
+	font-size: 14px;
+	height: 20px;
+	line-height: 20px;
+	font-weight: bold;
+}
+.chedule-content p{
+	font-size: 14px;
+	line-height: 20px;
+}*/
+.shedule-hint{
+	padding:0 10px;
+	height: 40px;
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.shedule-hint-delivery{
+	font-size: 12px;
+	width: 68px;
+	text-align: center;
+	display: none;
+	height: 32px;
+	line-height: 32px;
+	color: #fff;
+	background: #4ea0ff;
+	border-radius: 8px;
+}
+/*用户信息*/
+.user{
+	padding: 10px;
+}
+.user p{
+	font-size: 14px;
+	margin-top: 8px;
+}
+/*订单框*/
+.order-name{
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px solid #ddd;
+	padding:0 10px;
+}
+.order-container{
+	padding: 10px;
+	display: flex;
+}
+/*.order-container img{
+	min-width: 64px;
+}*/
+.order-container div{
+	margin-left: 10px;
+}
+.order-container div p.order-description{
+	font-size: 14px;
+}
+.order-container div p.order-mode{
+	margin-top:8px;
+	font-size: 14px;
+}
+/*订单编号*/
+.ordernumber{
+	padding: 10px;
+	line-height: 40px;
+	font-size: 14px;
+}
+.ordernumber p.order-time{
+	margin-top: 8px;
+}
+/*金额*/
+.price{
+	/*margin-bottom:58px;*/
+	position: relative;
+}
+.price-row{
+	display: flex;
+	justify-content: space-between;
+	margin:0 10px;
+	font-size: 14px;
+}
+.price-row1{
+	padding-top:10px;
+	padding-bottom:8px;
+}
+.price-row{
+	padding-bottom:10px;
+}
+.pay{
+	text-align: right;
+	margin:0 10px;
+	height: 40px;
+	line-height: 40px;
+	border-top: 1px solid #ddd;
+}
+/*footer*/
+.footer{
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	height: 48px;
+	background: #f6f1f1;
+	display: none;
+}
+.footer div{
+	display: none;
+	float: right;
+	text-align: center;
+	width: 80px;
+	height: 32px;
+	line-height: 32px;
+	margin: 6px 16px 6px 0;
+	border-radius: 2px;
+	border:1px solid #999;
+}
+.footer div.toPay{
+	border:1px solid #4ea0ff;
+}
+.footer div.assess{
+	border:1px solid #4ea0ff;
+}
+/*.footerhint{
+	display: none;
+	margin-bottom: 10px;
+	color: white;
+	font-size: 14px;
+	text-align: center;
+}
+.footerhint p{
+	font-size: 14px;
+	line-height: 20px;
+}*/
