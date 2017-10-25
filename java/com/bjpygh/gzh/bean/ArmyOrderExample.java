@@ -1385,53 +1385,113 @@ public class ArmyOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceEqualTo(Byte value) {
+        public Criteria andInsuranceEqualTo(Integer value) {
             addCriterion("insurance =", value, "insurance");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceNotEqualTo(Byte value) {
+        public Criteria andInsuranceNotEqualTo(Integer value) {
             addCriterion("insurance <>", value, "insurance");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceGreaterThan(Byte value) {
+        public Criteria andInsuranceGreaterThan(Integer value) {
             addCriterion("insurance >", value, "insurance");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceGreaterThanOrEqualTo(Byte value) {
+        public Criteria andInsuranceGreaterThanOrEqualTo(Integer value) {
             addCriterion("insurance >=", value, "insurance");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceLessThan(Byte value) {
+        public Criteria andInsuranceLessThan(Integer value) {
             addCriterion("insurance <", value, "insurance");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceLessThanOrEqualTo(Byte value) {
+        public Criteria andInsuranceLessThanOrEqualTo(Integer value) {
             addCriterion("insurance <=", value, "insurance");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceIn(List<Byte> values) {
+        public Criteria andInsuranceIn(List<Integer> values) {
             addCriterion("insurance in", values, "insurance");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceNotIn(List<Byte> values) {
+        public Criteria andInsuranceNotIn(List<Integer> values) {
             addCriterion("insurance not in", values, "insurance");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceBetween(Byte value1, Byte value2) {
+        public Criteria andInsuranceBetween(Integer value1, Integer value2) {
             addCriterion("insurance between", value1, value2, "insurance");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceNotBetween(Byte value1, Byte value2) {
+        public Criteria andInsuranceNotBetween(Integer value1, Integer value2) {
             addCriterion("insurance not between", value1, value2, "insurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullAmountIsNull() {
+            addCriterion("full_amount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullAmountIsNotNull() {
+            addCriterion("full_amount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullAmountEqualTo(Byte value) {
+            addCriterion("full_amount =", value, "fullAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullAmountNotEqualTo(Byte value) {
+            addCriterion("full_amount <>", value, "fullAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullAmountGreaterThan(Byte value) {
+            addCriterion("full_amount >", value, "fullAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullAmountGreaterThanOrEqualTo(Byte value) {
+            addCriterion("full_amount >=", value, "fullAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullAmountLessThan(Byte value) {
+            addCriterion("full_amount <", value, "fullAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullAmountLessThanOrEqualTo(Byte value) {
+            addCriterion("full_amount <=", value, "fullAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullAmountIn(List<Byte> values) {
+            addCriterion("full_amount in", values, "fullAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullAmountNotIn(List<Byte> values) {
+            addCriterion("full_amount not in", values, "fullAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullAmountBetween(Byte value1, Byte value2) {
+            addCriterion("full_amount between", value1, value2, "fullAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andFullAmountNotBetween(Byte value1, Byte value2) {
+            addCriterion("full_amount not between", value1, value2, "fullAmount");
             return (Criteria) this;
         }
     }

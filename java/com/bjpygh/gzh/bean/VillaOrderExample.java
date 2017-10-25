@@ -1255,63 +1255,63 @@ public class VillaOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceIsNull() {
-            addCriterion("insurance is null");
+        public Criteria andFullAmountIsNull() {
+            addCriterion("full_amount is null");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceIsNotNull() {
-            addCriterion("insurance is not null");
+        public Criteria andFullAmountIsNotNull() {
+            addCriterion("full_amount is not null");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceEqualTo(Byte value) {
-            addCriterion("insurance =", value, "insurance");
+        public Criteria andFullAmountEqualTo(Byte value) {
+            addCriterion("full_amount =", value, "fullAmount");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceNotEqualTo(Byte value) {
-            addCriterion("insurance <>", value, "insurance");
+        public Criteria andFullAmountNotEqualTo(Byte value) {
+            addCriterion("full_amount <>", value, "fullAmount");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceGreaterThan(Byte value) {
-            addCriterion("insurance >", value, "insurance");
+        public Criteria andFullAmountGreaterThan(Byte value) {
+            addCriterion("full_amount >", value, "fullAmount");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceGreaterThanOrEqualTo(Byte value) {
-            addCriterion("insurance >=", value, "insurance");
+        public Criteria andFullAmountGreaterThanOrEqualTo(Byte value) {
+            addCriterion("full_amount >=", value, "fullAmount");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceLessThan(Byte value) {
-            addCriterion("insurance <", value, "insurance");
+        public Criteria andFullAmountLessThan(Byte value) {
+            addCriterion("full_amount <", value, "fullAmount");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceLessThanOrEqualTo(Byte value) {
-            addCriterion("insurance <=", value, "insurance");
+        public Criteria andFullAmountLessThanOrEqualTo(Byte value) {
+            addCriterion("full_amount <=", value, "fullAmount");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceIn(List<Byte> values) {
-            addCriterion("insurance in", values, "insurance");
+        public Criteria andFullAmountIn(List<Byte> values) {
+            addCriterion("full_amount in", values, "fullAmount");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceNotIn(List<Byte> values) {
-            addCriterion("insurance not in", values, "insurance");
+        public Criteria andFullAmountNotIn(List<Byte> values) {
+            addCriterion("full_amount not in", values, "fullAmount");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceBetween(Byte value1, Byte value2) {
-            addCriterion("insurance between", value1, value2, "insurance");
+        public Criteria andFullAmountBetween(Byte value1, Byte value2) {
+            addCriterion("full_amount between", value1, value2, "fullAmount");
             return (Criteria) this;
         }
 
-        public Criteria andInsuranceNotBetween(Byte value1, Byte value2) {
-            addCriterion("insurance not between", value1, value2, "insurance");
+        public Criteria andFullAmountNotBetween(Byte value1, Byte value2) {
+            addCriterion("full_amount not between", value1, value2, "fullAmount");
             return (Criteria) this;
         }
     }

@@ -20,7 +20,7 @@
     <result column="imageurl" jdbcType="VARCHAR" property="imageurl" />
     <result column="pay_type" jdbcType="TINYINT" property="payType" />
     <result column="id_number" jdbcType="VARCHAR" property="idNumber" />
-    <result column="insurance" jdbcType="TINYINT" property="insurance" />
+    <result column="full_amount" jdbcType="TINYINT" property="fullAmount" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -83,7 +83,7 @@
   <sql id="Base_Column_List">
     villa_id, user_id, real_name, villa_name, villa_price, date, create_time, pay_time, 
     refund_time, finish_time, note, original_price, people_number, order_number, order_status, 
-    imageurl, pay_type, id_number, insurance
+    imageurl, pay_type, id_number, full_amount
   </sql>
   <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.VillaOrderExample" resultMap="BaseResultMap">
     select
@@ -109,6 +109,9 @@
     delete from villa_order
     where villa_id = #{villaId,jdbcType=INTEGER}
   </delete>
+    <select id="getVillaOrderByDate" parameterType="string" resultMap="BaseResultMap">
+        SELECT * FROM villa_order WHERE date LIKE '%' #{thisDate} '%' AND order_status != 6 AND order_status != 0
+    </select>
   <delete id="deleteByExample" parameterType="com.bjpygh.gzh.bean.VillaOrderExample">
     delete from villa_order
     <if test="_parameter != null">
@@ -122,14 +125,14 @@
       finish_time, note, original_price, 
       people_number, order_number, order_status, 
       imageurl, pay_type, id_number, 
-      insurance)
+      full_amount)
     values (#{villaId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, 
       #{villaName,jdbcType=VARCHAR}, #{villaPrice,jdbcType=INTEGER}, #{date,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}, #{refundTime,jdbcType=TIMESTAMP}, 
       #{finishTime,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR}, #{originalPrice,jdbcType=INTEGER}, 
       #{peopleNumber,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{orderStatus,jdbcType=INTEGER}, 
       #{imageurl,jdbcType=VARCHAR}, #{payType,jdbcType=TINYINT}, #{idNumber,jdbcType=VARCHAR}, 
-      #{insurance,jdbcType=TINYINT})
+      #{fullAmount,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.VillaOrder">
     insert into villa_order
@@ -188,8 +191,8 @@
       <if test="idNumber != null">
         id_number,
       </if>
-      <if test="insurance != null">
-        insurance,
+      <if test="fullAmount != null">
+        full_amount,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -247,14 +250,11 @@
       <if test="idNumber != null">
         #{idNumber,jdbcType=VARCHAR},
       </if>
-      <if test="insurance != null">
-        #{insurance,jdbcType=TINYINT},
+      <if test="fullAmount != null">
+        #{fullAmount,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
-    <select id="getVillaOrderByDate" parameterType="string" resultMap="BaseResultMap">
-        SELECT * FROM villa_order WHERE date LIKE '%' #{thisDate} '%' AND order_status != 6 AND order_status != 0
-    </select>
   <select id="countByExample" parameterType="com.bjpygh.gzh.bean.VillaOrderExample" resultType="java.lang.Long">
     select count(*) from villa_order
     <if test="_parameter != null">
@@ -318,8 +318,8 @@
       <if test="record.idNumber != null">
         id_number = #{record.idNumber,jdbcType=VARCHAR},
       </if>
-      <if test="record.insurance != null">
-        insurance = #{record.insurance,jdbcType=TINYINT},
+      <if test="record.fullAmount != null">
+        full_amount = #{record.fullAmount,jdbcType=TINYINT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -346,7 +346,7 @@
       imageurl = #{record.imageurl,jdbcType=VARCHAR},
       pay_type = #{record.payType,jdbcType=TINYINT},
       id_number = #{record.idNumber,jdbcType=VARCHAR},
-      insurance = #{record.insurance,jdbcType=TINYINT}
+      full_amount = #{record.fullAmount,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -408,8 +408,8 @@
       <if test="idNumber != null">
         id_number = #{idNumber,jdbcType=VARCHAR},
       </if>
-      <if test="insurance != null">
-        insurance = #{insurance,jdbcType=TINYINT},
+      <if test="fullAmount != null">
+        full_amount = #{fullAmount,jdbcType=TINYINT},
       </if>
     </set>
     where villa_id = #{villaId,jdbcType=INTEGER}
@@ -433,7 +433,7 @@
       imageurl = #{imageurl,jdbcType=VARCHAR},
       pay_type = #{payType,jdbcType=TINYINT},
       id_number = #{idNumber,jdbcType=VARCHAR},
-      insurance = #{insurance,jdbcType=TINYINT}
+      full_amount = #{fullAmount,jdbcType=TINYINT}
     where villa_id = #{villaId,jdbcType=INTEGER}
   </update>
 

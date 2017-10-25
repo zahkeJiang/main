@@ -42,10 +42,15 @@ public class ArmyOrderService {
                 sum += armyPrice;
             }
         }
-        if (armyOrder.getInsurance()==1){
-            sum += 15*armyPrice;
+        int insurance = 0;
+        if (armyOrder.getInsurance()>0){
+            insurance= 15*armyOrder.getPeopleNumber()*dates.length;
         }
-        armyOrder.setArmyPrice(sum);
+
+        if (armyOrder.getFullAmount()==1)
+            armyOrder.setArmyPrice(sum+insurance);
+        else
+        armyOrder.setArmyPrice(sum/2+insurance);
 
         //创建时间
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
