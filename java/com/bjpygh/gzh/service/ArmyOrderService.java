@@ -31,26 +31,20 @@ public class ArmyOrderService {
             Date d = formatter1.parse(date);
 //            String[] ds = date.split("-");
 //            Date d = new Date(Integer.parseInt(ds[0]),Integer.parseInt(ds[1]),Integer.parseInt(ds[2]));
-            if (d.getDay()>0&&d.getDay()<5){
-                armyPrice = 66;
-                armyPrice *= armyOrder.getPeopleNumber();
-
-                sum += armyPrice;
-            }else {
-                armyPrice =100;
-                armyPrice *= armyOrder.getPeopleNumber();
-                sum += armyPrice;
-            }
+            int roomNumber = armyOrder.getRoomNumber();
+            int noRoomNumber = armyOrder.getNoroomNumber();
+            armyPrice = roomNumber*140+noRoomNumber*100+(armyOrder.getPeopleNumber()-roomNumber-noRoomNumber)*120;
+            sum += armyPrice;
         }
         int insurance = 0;
         if (armyOrder.getInsurance()>0){
-            insurance= 15*armyOrder.getPeopleNumber()*dates.length;
+            insurance= 15*armyOrder.getInsurance()*dates.length;
         }
 
         if (armyOrder.getFullAmount()==1)
             armyOrder.setArmyPrice(sum+insurance);
         else
-        armyOrder.setArmyPrice(sum/2+insurance);
+            armyOrder.setArmyPrice(sum/2+insurance);
 
         //创建时间
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -70,6 +64,7 @@ public class ArmyOrderService {
         String orderNumber ="APYGH" + year + month + date + hour + minute + second + armyOrder.getUserId();
 
         armyOrder.setOrderNumber(orderNumber);
+        armyOrder.setArmyName("漂洋过海军旅");
         //设置状态
         armyOrder.setOrderStatus(0);
 
@@ -133,13 +128,7 @@ public class ArmyOrderService {
 
             VillaPrice villaPrice = new VillaPrice();
             villaPrice.setDate(i+1+"");
-
-                //根据周几来设置价格
-                if (newDate.getDay()>0&&newDate.getDay()<5){
-                    villaPrice.setPrice("66");
-                }else {
-                    villaPrice.setPrice("100");
-                }
+            villaPrice.setPrice("100");
             villaPrices.add(villaPrice);
         }
         return villaPrices;
