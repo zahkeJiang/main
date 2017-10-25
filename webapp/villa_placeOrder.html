@@ -33,11 +33,11 @@
         </div>
     </div>
 <!--     <p class="villa-secure-title">保险</p> -->
-    <div class="villa-secure-content">
+<!--     <div class="villa-secure-content">
         <span>保险</span>
         <input type="number" name="保险人数" placeholder="请输入购买保险的人数" class="secureNumber">
         
-    </div>
+    </div> -->
 
         <div class="villa-information container villa-radioBox">
             <div class="villa-pic"></div>
@@ -99,6 +99,19 @@
         </div>
     </div>
 </div>
+<!-- 退订政策 -->
+<div class="villa-refund villaBox">
+    <h3>常规取消</h3>
+    <ul>
+        <li>若申请取消日期-入住日期 12：00≥5个自然日，退还40%定金</li>
+        <li>若申请取消日期-入住日期 12：00＜5个自然日，不退还定金</li>
+        <li>入住后不支持取消订单</li>
+    </ul>
+    <h3>特殊情况</h3>
+    <ul>
+        <li>入住当天如遇天气恶劣等不可抗因素影响正常入住，可选择与工作人员沟通，推迟入住时间</li>
+    </ul>
+</div>
 <!-- 用户信息填写 -->
 <div class="villa-user villaBox">
     <div class="villa-user-row">
@@ -129,22 +142,50 @@
         </div>
     </div>
 </div>
+
+<!-- 定金支付与全额支付 -->
+<div class="Reserve villaBox">
+    <p>付款类型</p>
+    <div class="ReserveBox">
+        <label for="half">
+            <div class="Reserve-row">
+                <div class="Reserve1"><img src="./images/circle_choose.png" height="16px" width="16px"></div>
+                <span>预约定金</span>
+                <input type="radio" name="Reserve1Radio" id="half" value="0" checked="checked">
+        
+            </div>
+        </label>
+        <label for="sum">
+            <div class="Reserve-row">
+                <div class="Reserve1"></div>
+                <span>全额支付</span>
+                <input type="radio" name="Reserve1Radio" id="sum" value="1">
+        
+            </div>
+        </label>
+    </div>
+</div>
+<!-- 阅读房屋守则 -->
+<div class="roomCodeBox">
+    <div class="roomCode"></div><img src=""><span>我已阅读并遵守漂洋过海<a href="villa_roomCode.html"><span class="roomCodeUrl">《房屋守则》</span></a></span>
+</div>
 <!-- 明细 -->
     <div class="detailBox">
+        <p class="reserve1-mode">付款类型：预约定金</p>
         <ul>
             <li class="li66">
                 
             </li>
             <li class="li100">
-                
+                <div><span>别墅</span><span class='detailBox-66'>¥0</span></div><span class='detailBox-66-hint'>(1688元x0栋x0天)</span>
             </li>
-            <li class="liSecure">
+            <!-- <li class="liSecure">
                 <div>
                     <span>保险</span>
                     <span class="detailBox-secure">¥0</span>
                 </div>
                 <span class="detailBox-secure-hint">(15元/人)</span>
-            </li>
+            </li> -->
         </ul>
             
     </div>

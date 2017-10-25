@@ -113,7 +113,7 @@ html, body {
 /*用户信息填写*/
 .villa-user{
 	padding: 0 10px;
-	margin-bottom: 58px;
+	/*margin-bottom: 58px;*/
 }
 .villa-user-row{
 	height: 36px;
@@ -339,6 +339,12 @@ html, body {
 	width: 100%;
 	display: none;
 }
+.detailBox p.reserve1-mode{
+	font-size: 14px;
+	line-height: 20px;
+	margin-bottom: 8px;
+	
+}
 .detailBox li{
 	display: flex;
 	font-size: 14px;
@@ -354,4 +360,60 @@ html, body {
 	line-height: 20px;
 	font-size: 12px;
 	margin-left: 10px;
+}
+/*付款类型*/
+.Reserve{
+	padding: 10px;
+}
+.ReserveBox{
+	height: 40px;
+	align-items: center;
+	display: flex;
+	justify-content: space-around;
+}
+.Reserve p{
+	color: #555;
+	font-size: 16px;
+}
+.Reserve-row{
+	margin-top: 8px;
+	height: 40px;
+	display: flex;
+	font-size: 14px;
+	align-items: center;
+}
+.Reserve1{
+	margin-left: 2em;
+	height: 16px;
+	width: 16px;
+	background: url(../images/circle.png);
+	background-size: 100% 100%;
+	margin-right: 10px;
+}
+input[name='Reserve1Radio']{
+	display: none;
+}
+/*villa_roomCode*/
+.roomCodeBox{
+	margin-bottom: 58px;
+	color: #555;
+	display: flex;
+	height: 20px;
+	align-items: center;
+	padding: 0 16px;
+}
+.roomCode{
+	background: url(../images/circle.png);
+	background-size: 100% 100%;
+	border-radius: 50%;
+	height: 16px;
+	width: 16px;
+	margin-right: 4px;
+}
+.roomCodeUrl{
+	color: #4ec0ff
+}
+/*京东支付*/
+#batchForm{
+	display: none;
 }

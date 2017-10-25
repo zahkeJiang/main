@@ -210,6 +210,21 @@ $(function(){
        getPrice();
     });
 
+//全额支付与预约定金
+    $(".Reserve-row").click(function(){
+        $(this).children(".Reserve1").html("<img src='./images/circle_choose.png' height='16px' width='16px'>");
+        $(this).parents().siblings("label").find(".Reserve1").empty();
+        getPrice();
+    });
+
+    //是否阅读北京漂洋过海房屋守则
+    $(".roomCode").click(function(){
+        if ($(this).find("img").length==0) {
+            $(".roomCode").html("<img src='./images/circle_choose.png' height='16px' width='16px'>");
+        }else{
+            $(".roomCode").empty();
+        }
+    });
 
     //为帐篷、室内、不住宿人数添加加减功能
     //更改帐篷人数
@@ -381,10 +396,14 @@ $(function(){
                 if ($(".currentMonth0").children(".selectedDay").length > 0) {//当月存在被选中日期
                     if (realName!="") {//真实姓名不为空
                         if (reg.test(realNumber)) {
+                            if ($(".roomCode").find("img").length==1) {
+                               console.log("姓名"+realName+"/报名日期"+date+"/人数"+peopleNumber+"/身份证"+realNumber+"/保险"+secureNumber);
+                                $(".layer").show();
+                                $(".payBox").show(); 
+                            }else{
+                                alert("请遵守北京漂洋过海《参战守则》");
+                            }
                             
-                            console.log("姓名"+realName+"/报名日期"+date+"/人数"+peopleNumber+"/身份证"+realNumber+"/保险"+secureNumber);
-                            $(".layer").show();
-                            $(".payBox").show(); 
                         }else{
                             alert("身份证格式不对");
                         } 
@@ -409,16 +428,17 @@ $(function(){
         var tend = $(".tend").html();//帐篷人数
         var indoor = $(".indoor").html();//室内人数
         var nosleep = $(".nosleep").html();//不住宿人数
+        var reserve = $("input[name='Reserve1Radio']:checked").val();//付款类型，1全额，或0预约定金
         if (payMode=="JD") {//京东支付
-            $.post("createVillaOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"secureNumber":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor},function(datas){
+            $.post("createArmyOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"insurance":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor,"fullAmount":reserve},function(datas){
                 if (datas.status==0) {
                     var orderNumber = datas.data.orderNumber;
                     console.log(orderNumber);
                     $(".layer").hide();
                     $(".payBox").hide();
-                    //是别墅，需要先判断当前选择的别墅是否已经被预定
-                    $.post("villaCheck",{"ordernumber":orderNumber},function(datas){
-                        if (datas.status==0) {
+                    
+                    
+                        //京东支付请求
                             $.post("JDPay",{"ordernumber":orderNumber},function (data) {
                                 if(data.status == 0){
                                     var jdOrderPay = data.data.jdOrderPay;
@@ -437,27 +457,21 @@ $(function(){
                                     document.getElementById("batchForm").submit();
                                 }
                             },'json');
-                        }else{
-                            alert(dats.msg);//您的套餐中别墅或日期已被预约
-                        }
-                    },"json");
+                        
+                        
+                    
                 }
             },"json");
         }else if (payMode=="aliPay") {//支付宝支付
-            $.post("createVillaOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"secureNumber":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor},function(datas){
+            $.post("createArmyOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"insurance":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor,"fullAmount":reserve},function(datas){
                 if (datas.status==0) {
                     var orderNumber = datas.data.orderNumber;
                     console.log(orderNumber);
                     $(".layer").hide();
                     $(".payBox").hide();
-                    //是别墅，需要先判断当前选择的别墅是否已经被预定
-                    $.post("villaCheck",{"ordernumber":orderNumber},function(datas){
-                        if (datas.status==0) {
-                            // window.location.href="payHint.html?ordernumber="+orderNumber;
-                        }else{
-                            alert(dats.msg);//您的套餐中别墅或日期已被预约
-                        }
-                    },"json");
+                    
+                    window.location.href="payHint.html?ordernumber="+orderNumber;
+                        
                 }
             },"json");
         }      
@@ -477,6 +491,7 @@ $(function(){
 function getPrice(){
         var peopleNumber = $("#army-peoplenumber").val();//报名人数
         var secureNumber = $("#army-securenumber").val();//保险人数
+        var reserve = $("input[name='Reserve1Radio']:checked").val();//付款类型，1全额，或0预约定金
         if (re.test(secureNumber) && secureNumber>0) {
 
         }else{
@@ -490,7 +505,14 @@ function getPrice(){
             $(".detailBox-tend").html("¥"+20*tendNumber*selectDay);$(".detailBox-tend-hint").html("(20元x"+tendNumber+"人x"+selectDay+"晚)")//帐篷费用
             $(".detailBox-indoor").html("¥"+40*indoorNumber*selectDay);$(".detailBox-indoor-hint").html("(40元x"+indoorNumber+"人x"+selectDay+"晚)")//室内费用
             $(".detailBox-secure").html("¥"+15*secureNumber);$(".detailBox-secure-hint").html("(15元x"+secureNumber+"人)")//室内费用
-            $("#footer-price").html("¥"+(100*peopleNumber*selectDay+20*tendNumber*selectDay+40*indoorNumber*selectDay+15*secureNumber));
+            
+            if (reserve==0) {
+                $(".reserve1-mode").html("付款类型：预约定金");
+                $("#footer-price").html("¥"+(Math.ceil((100*peopleNumber*selectDay+20*tendNumber*selectDay+40*indoorNumber*selectDay)/2)+15*secureNumber));
+            }else{
+                $(".reserve1-mode").html("付款类型：全额支付");
+                $("#footer-price").html("¥"+(100*peopleNumber*selectDay+20*tendNumber*selectDay+40*indoorNumber*selectDay+15*secureNumber));
+            }
         }else{
             $("#footer-price").html("¥0");
             $(".detailBox-liVilla").html("¥0");$(".detailBox-liVilla-hint").empty();

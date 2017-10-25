@@ -254,10 +254,10 @@ $(function(){
         //更改报名人数时，将对总价进行调整
                     getPrice();
     });
-    $(".villa-secure-content input").bind('input porpertychange',function(){
-        //更改购买保险人数时，将对总价进行调整
-                    getPrice();
-    });
+    // $(".villa-secure-content input").bind('input porpertychange',function(){
+    //     //更改购买保险人数时，将对总价进行调整
+    //                 getPrice();
+    // });
 
     
     //明细
@@ -273,6 +273,22 @@ $(function(){
     });
 
 
+    //全额支付与预约定金
+    $(".Reserve-row").click(function(){
+        $(this).children(".Reserve1").html("<img src='./images/circle_choose.png' height='16px' width='16px'>");
+        $(this).parents().siblings("label").find(".Reserve1").empty();
+        getPrice();
+    });
+
+    //是否阅读北京漂洋过海房屋守则
+    $(".roomCode").click(function(){
+        if ($(this).find("img").length==0) {
+            $(".roomCode").html("<img src='./images/circle_choose.png' height='16px' width='16px'>");
+        }else{
+            $(".roomCode").empty();
+        }
+    });
+    
     //填写信息后，点击支付
     $(".footer2-toPay").click(function(){
         var clength = $(".currentMonth0").length;
@@ -306,14 +322,19 @@ $(function(){
                 if ($(".currentMonth0").children(".selectedDay").length > 0) {//当月存在被选中日期
                     if (realName!="") {//真实姓名不为空
                         if (reg.test(realNumber)) {
-                            $.cookie("realNumber",realNumber);//身份证号码
-                            $.cookie("realName",realName);//真实姓名
-                            $.cookie("date",date);//选择日期
-                            $.cookie("peopleNumber",peopleNumber);//选择人数
-                            $.cookie("villaName",villaName);//别墅名称
-                            console.log(realName+"/"+date+"/"+peopleNumber+"/"+villaName+"/"+realNumber)
-                            $(".layer").show();
-                            $(".payBox").show(); 
+                            if ($(".roomCode").find("img").length==1) {
+                                $.cookie("realNumber",realNumber);//身份证号码
+                                $.cookie("realName",realName);//真实姓名
+                                $.cookie("date",date);//选择日期
+                                $.cookie("peopleNumber",peopleNumber);//选择人数
+                                $.cookie("villaName",villaName);//别墅名称
+                                console.log(realName+"/"+date+"/"+peopleNumber+"/"+villaName+"/"+realNumber)
+                                $(".layer").show();
+                                $(".payBox").show(); 
+                            }else{
+                                alert("请遵守北京漂洋过海《房屋守则》");
+                            }
+                            
                         }else{
                             alert("身份证格式不对");
                         } 
@@ -337,9 +358,10 @@ $(function(){
     //选择支付方式后点击确认
     $(".toPay").click(function(){
         var payMode = $("input[name='payMode-radio']:checked").val();
+        var reserve = $("input[name='Reserve1Radio']:checked").val();//是否全额,0预约定金，1全款
         console.log(payMode);
         if (payMode=="JD") {//京东支付
-            $.post("createVillaOrder",{"villaName":villaName,"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber},function(datas){
+            $.post("createVillaOrder",{"villaName":villaName,"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"fullAmount":reserve},function(datas){
                 if (datas.status==0) {
                     var orderNumber = datas.data.orderNumber;
                     console.log(orderNumber);
@@ -374,7 +396,7 @@ $(function(){
             },"json");
             
         }else if (payMode=="aliPay") {//支付宝支付
-            $.post("createVillaOrder",{"villaName":villaName,"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber},function(datas){
+            $.post("createVillaOrder",{"villaName":villaName,"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"fullAmount":reserve},function(datas){
                 if (datas.status==0) {
                     var orderNumber = datas.data.orderNumber;
                     console.log(orderNumber);
@@ -405,38 +427,47 @@ function  getPrice(){
                     var moneyhundred=0;
                     var villacheck=$("input[name='villa-radio']:checked").length;//用户选择别墅个数
                     var peopleNumber = $(".villa-choose-content input").val();//获取报名人数
-                    var secureNumber = $(".secureNumber").val();//购买保险人数
-                    if (re.test(secureNumber) && secureNumber) {
-                        //不作处理
-                    }else{
-                        secureNumber=0;
-                    }
+                    var reserve = $("input[name='Reserve1Radio']:checked").val();//付款类型，1全额，或0预约定金
+
+                    // var secureNumber = $(".secureNumber").val();//购买保险人数
+                    // if (re.test(secureNumber) && secureNumber) {
+                    //     //不作处理
+                    // }else{
+                    //     secureNumber=0;
+                    // }
                     if (re.test(peopleNumber) && peopleNumber>0 && villacheck>0 && $(".currentMonth0").children(".selectedDay").length > 0){
-                        $(".detailBox-secure").html("¥"+secureNumber*15);
+                        // $(".detailBox-secure").html("¥"+secureNumber*15);
                         if (sixtysixDate>0) {//66的天数大于0
                             if (peopleNumber*66>1688*villacheck) {
                                 moneysix = 66*peopleNumber*sixtysixDate*villacheck;//66x人数x天数x别墅栋数
-                                $(".detailBox li.li66").html("<div><span></sp<span>别墅(66元)</span><span class='detailBox-66'>"+"¥"+moneysix+"</span></div><span class='detailBox-66-hint'>(66元x"+peopleNumber+"人x"+sixtysixDate+"天)</span>")
+                                $(".detailBox li.li66").html("<div><span>别墅(66元)</span><span class='detailBox-66'>"+"¥"+moneysix+"</span></div><span class='detailBox-66-hint'>(66元x"+peopleNumber+"人x"+sixtysixDate+"晚)</span>")
                             }else{
                                 moneysix = 1688*sixtysixDate*villacheck;//66x人数x天数x别墅栋数
-                                $(".detailBox li.li66").html("<div><span></sp<span>别墅(66元)</span><span class='detailBox-66'>"+"¥"+moneysix+"</span></div><span class='detailBox-66-hint'>(1688元x"+villacheck+"栋x"+sixtysixDate+"天)</span>")
+                                $(".detailBox li.li66").html("<div><span>别墅(66元)</span><span class='detailBox-66'>"+"¥"+moneysix+"</span></div><span class='detailBox-66-hint'>(1688元x"+villacheck+"栋x"+sixtysixDate+"晚)</span>")
                             }
                         }else{
-                            $(".detailBox li.li66").empty();
+                            $(".detailBox li.li66").html("<div><span>别墅(66元)</span><span class='detailBox-66'>¥0</span></div><span class='detailBox-66-hint'>(66元x0人x0晚)</span>")
                         }
                         if (hundredDate>0) {//100的天数大于0
                             if (peopleNumber*100>2888*villacheck) {
                                 moneyhundred = 100*peopleNumber*hundredDate*villacheck;//66x人数x天数x别墅栋数
-                                $(".detailBox li.li100").html("<div><span></sp<span>别墅(100元)</span><span class='detailBox-100'>"+"¥"+moneyhundred+"</span></div><span class='detailBox-100-hint'>(100元x"+peopleNumber+"人x"+hundredDate+"天)</span>")
+                                $(".detailBox li.li100").html("<div><span>别墅(100元)</span><span class='detailBox-100'>"+"¥"+moneyhundred+"</span></div><span class='detailBox-100-hint'>(100元x"+peopleNumber+"人x"+hundredDate+"晚)</span>")
                             }else{
                                 moneyhundred = 2888*hundredDate*villacheck;//66x人数x天数x别墅栋数
-                                $(".detailBox li.li100").html("<div><span></sp<span>别墅(100元)</span><span class='detailBox-100'>"+"¥"+moneyhundred+"</span></div><span class='detailBox-100-hint'>(2888元x"+villacheck+"栋x"+hundredDate+"天)</span>")
+                                $(".detailBox li.li100").html("<div><span>别墅(100元)</span><span class='detailBox-100'>"+"¥"+moneyhundred+"</span></div><span class='detailBox-100-hint'>(2888元x"+villacheck+"栋x"+hundredDate+"晚)</span>")
                             }
                         }else{
-                            $(".detailBox li.li100").empty();
+                            $(".detailBox li.li100").html("<div><span>别墅(100元)</span><span class='detailBox-100'>¥0</span></div><span class='detailBox-100-hint'>(100元x0人x0晚)</span>")
                         }
-                        console.log(moneysix+","+moneyhundred+","+secureNumber*15);
-                        $("#footer-price").html("¥"+(moneysix+moneyhundred+secureNumber*15));
+
+                        if (reserve==0) {
+                            $(".reserve1-mode").html("付款类型：预约定金");
+                            $("#footer-price").html("¥"+Math.ceil((moneysix+moneyhundred)/2));
+                        }else{
+                            $(".reserve1-mode").html("付款类型：全额支付");
+                            $("#footer-price").html("¥"+(moneysix+moneyhundred));
+                        }
+                        
                     }else{
                         $("#footer-price").html("¥0");
                         $(".detailBox li.li100").empty();
