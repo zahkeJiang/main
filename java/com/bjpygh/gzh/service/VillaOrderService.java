@@ -39,25 +39,28 @@ public class VillaOrderService {
             System.out.println(d);
             if (d.getDay()>0&&d.getDay()<5){
                 villaPrice = 66;
-                if (villaOrder.getPeopleNumber()*66>1888)
+                if (villaOrder.getPeopleNumber()*66>1688){
                     villaPrice *= villaOrder.getPeopleNumber();
-                else
-                    villaPrice = 1888*villaNum;
+                } else{
+                    villaPrice = 1688*villaNum;
+                }
                 sum += villaPrice;
             }else {
                 villaPrice = 100;
-                if (villaOrder.getPeopleNumber()*100>2888)
+                if (villaOrder.getPeopleNumber()*100>2888){
                     villaPrice *= villaOrder.getPeopleNumber();
-                else
+                } else{
                     villaPrice = 2888*villaNum;
+                }
                 sum += villaPrice;
             }
         }
 
-        if (villaOrder.getFullAmount()==1)
+        if (villaOrder.getFullAmount()==1){
             villaOrder.setVillaPrice(sum);
-        else
+        } else{
             villaOrder.setVillaPrice(sum/2);
+        }
 
         //创建时间
         villaOrder.setCreateTime(formatter.format(new Date()));

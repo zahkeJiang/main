@@ -214,15 +214,28 @@ public class PayController extends BaseController {
 
         if (o.equals("V")){
             VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(out_trade_no).get(0);
-            String refund_amount=""+villaOrder.getVillaPrice()*0.4;
-            if(villaOrder.getOrderStatus() == 4){
-                return Status.fail(-30,"报名已完成");
+            if(villaOrder.getOrderStatus() == 4||villaOrder.getOrderStatus()==7){
+                return Status.fail(-30,"订单已完成");
             }
+            String refund_amount;
             long time = new Date().getTime();
             Date d = formatter.parse(villaOrder.getDate().split(",")[0]);
+            //判断是否再五个自然日之内
             if (time-d.getTime()>432000000L){
-                return Status.fail(-40,"已过退款时间");
+                //判断是否为全额付款
+                if (villaOrder.getFullAmount()==1){
+                    refund_amount =  ""+villaOrder.getOriginalPrice()/2;
+                }else {
+                    return Status.fail(-40,"已过退款时间");
+                }
+            }else {
+                if (villaOrder.getFullAmount()==1){
+                    refund_amount = ""+(int)(villaOrder.getOriginalPrice()*0.7);
+                }else {
+                    refund_amount = ""+(int)(villaOrder.getOriginalPrice()*0.2);
+                }
             }
+
             if (villaOrder.getPayType()==0){
                 if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
                     //改变订单状态
@@ -250,7 +263,7 @@ public class PayController extends BaseController {
         }else if (o.equals("D")){
             DsOrder dsOrder = dsOrderService.getDsOrderByNumber(out_trade_no).get(0);
             String refund_amount=""+(float)(Math.round((Float.parseFloat(""+dsOrder.getOrderPrice())*0.994)*100))/100;
-            if(dsOrder.getOrderStatus() == 3){
+            if(dsOrder.getOrderStatus() == 3||dsOrder.getOrderStatus() == 4||dsOrder.getOrderStatus() == 7){
                 return Status.fail(-30,"报名已完成");
             }
             //判断订单由什么支付方式支付
