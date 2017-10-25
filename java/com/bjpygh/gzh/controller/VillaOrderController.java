@@ -26,7 +26,7 @@ public class VillaOrderController extends BaseController{
     //创建订单接口
     @ResponseBody
     @RequestMapping(value = "/createVillaOrder", method = RequestMethod.POST)
-    public Status createOrder(HttpServletRequest request, VillaOrder villaOrder){
+    public Status createOrder(HttpServletRequest request, VillaOrder villaOrder) throws ParseException {
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();

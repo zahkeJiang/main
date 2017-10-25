@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class ArmyOrderController extends BaseController {
     //创建军旅订单接口
     @ResponseBody
     @RequestMapping(value = "/createArmyOrder", method = RequestMethod.POST)
-    public Status createArmyOrder(HttpServletRequest request, ArmyOrder armyOrder){
+    public Status createArmyOrder(HttpServletRequest request, ArmyOrder armyOrder) throws ParseException {
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();

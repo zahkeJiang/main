@@ -6,6 +6,7 @@ import com.bjpygh.gzh.dao.ArmyOrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -16,24 +17,32 @@ public class ArmyOrderService {
     ArmyOrderMapper armyOrderMapper;
 
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
 
-    public String createArmyOrder(ArmyOrder armyOrder) {
+    public String createArmyOrder(ArmyOrder armyOrder) throws ParseException {
         /**
          * 计算订单价格
          */
+        int sum=0;
         int armyPrice = 0;
         String[] dates = armyOrder.getDate().split(",");
         for (String date : dates){
-            String[] ds = date.split("-");
-            Date d = new Date(Integer.parseInt(ds[0]),Integer.parseInt(ds[1]),Integer.parseInt(ds[2]));
+            Date d = formatter1.parse(date);
+//            String[] ds = date.split("-");
+//            Date d = new Date(Integer.parseInt(ds[0]),Integer.parseInt(ds[1]),Integer.parseInt(ds[2]));
             if (d.getDay()>0&&d.getDay()<5){
-                armyPrice +=66;
+                armyPrice = 66;
+                armyPrice *= armyOrder.getPeopleNumber();
+
+                sum += armyPrice;
             }else {
-                armyPrice +=100;
+                armyPrice =100;
+                armyPrice *= armyOrder.getPeopleNumber();
+                sum += armyPrice;
             }
         }
         armyPrice *= armyOrder.getPeopleNumber();
-        armyOrder.setArmyPrice(armyPrice);
+        armyOrder.setArmyPrice(sum);
 
         //创建时间
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -41,7 +50,7 @@ public class ArmyOrderService {
 
         armyOrder.setOriginalPrice(armyPrice);
         /**
-         * 生成订单
+         * 生成订单号
          */
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
