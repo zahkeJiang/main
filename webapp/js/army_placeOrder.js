@@ -410,15 +410,15 @@ $(function(){
         var indoor = $(".indoor").html();//室内人数
         var nosleep = $(".nosleep").html();//不住宿人数
         if (payMode=="JD") {//京东支付
-            $.post("createVillaOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"secureNumber":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor},function(datas){
+            $.post("createArmyOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"insurance":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor},function(datas){
                 if (datas.status==0) {
                     var orderNumber = datas.data.orderNumber;
                     console.log(orderNumber);
                     $(".layer").hide();
                     $(".payBox").hide();
-                    //是别墅，需要先判断当前选择的别墅是否已经被预定
-                    $.post("villaCheck",{"ordernumber":orderNumber},function(datas){
-                        if (datas.status==0) {
+                    
+                    
+                        //京东支付请求
                             $.post("JDPay",{"ordernumber":orderNumber},function (data) {
                                 if(data.status == 0){
                                     var jdOrderPay = data.data.jdOrderPay;
@@ -437,27 +437,21 @@ $(function(){
                                     document.getElementById("batchForm").submit();
                                 }
                             },'json');
-                        }else{
-                            alert(dats.msg);//您的套餐中别墅或日期已被预约
-                        }
-                    },"json");
+                        
+                        
+                    
                 }
             },"json");
         }else if (payMode=="aliPay") {//支付宝支付
-            $.post("createVillaOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"secureNumber":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor},function(datas){
+            $.post("createArmyOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"insurance":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor},function(datas){
                 if (datas.status==0) {
                     var orderNumber = datas.data.orderNumber;
                     console.log(orderNumber);
                     $(".layer").hide();
                     $(".payBox").hide();
-                    //是别墅，需要先判断当前选择的别墅是否已经被预定
-                    $.post("villaCheck",{"ordernumber":orderNumber},function(datas){
-                        if (datas.status==0) {
-                            // window.location.href="payHint.html?ordernumber="+orderNumber;
-                        }else{
-                            alert(dats.msg);//您的套餐中别墅或日期已被预约
-                        }
-                    },"json");
+                    
+                    // window.location.href="payHint.html?ordernumber="+orderNumber;
+                        
                 }
             },"json");
         }      
