@@ -29,7 +29,7 @@ public interface VillaOrderMapper {
 
     int updateByPrimaryKey(VillaOrder record);
 
-    List<VillaOrder> getVillaOrderByDate(String thisDate);
-
     void updateOrderStatus(Map<String, String> map);
+
+    List<VillaOrder> getVillaOrderByDate(String thisDate);
 }

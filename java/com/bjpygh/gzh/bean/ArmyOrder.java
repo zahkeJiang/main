@@ -43,7 +43,9 @@ public class ArmyOrder {
 
     private String idNumber;
 
-    private Byte insurance;
+    private Integer insurance;
+
+    private Byte fullAmount;
 
     public Integer getArmyId() {
         return armyId;
@@ -205,11 +207,19 @@ public class ArmyOrder {
         this.idNumber = idNumber == null ? null : idNumber.trim();
     }
 
-    public Byte getInsurance() {
+    public Integer getInsurance() {
         return insurance;
     }
 
-    public void setInsurance(Byte insurance) {
+    public void setInsurance(Integer insurance) {
         this.insurance = insurance;
+    }
+
+    public Byte getFullAmount() {
+        return fullAmount;
+    }
+
+    public void setFullAmount(Byte fullAmount) {
+        this.fullAmount = fullAmount;
     }
 }

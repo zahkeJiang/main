@@ -39,7 +39,7 @@ public class VillaOrder {
 
     private String idNumber;
 
-    private Byte insurance;
+    private Byte fullAmount;
 
     public Integer getVillaId() {
         return villaId;
@@ -185,11 +185,11 @@ public class VillaOrder {
         this.idNumber = idNumber == null ? null : idNumber.trim();
     }
 
-    public Byte getInsurance() {
-        return insurance;
+    public Byte getFullAmount() {
+        return fullAmount;
     }
 
-    public void setInsurance(Byte insurance) {
-        this.insurance = insurance;
+    public void setFullAmount(Byte fullAmount) {
+        this.fullAmount = fullAmount;
     }
 }
