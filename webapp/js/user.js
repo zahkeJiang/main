@@ -10,30 +10,30 @@ $(function(){
  //        window.location.assign(encodeURI(nicknameurl));   
 	// });
 	//跳转到更换手机号页面
-	$(".mobile").click(function(){
-		var oldmobile = $("#mobile").html();
-		if (oldmobile=="") {
-			window.location.href="login.html";
-		}else{
-			window.location.href="mobile.html?mobile="+oldmobile;   
-		}
+	// $(".mobile").click(function(){
+	// 	var oldmobile = $("#mobile").html();
+	// 	if (oldmobile=="") {
+	// 		window.location.href="login.html";
+	// 	}else{
+	// 		window.location.href="mobile.html?mobile="+oldmobile;   
+	// 	}
   		
-	});
+	// });
 	//跳转我的订单
   	$(".orders").click(function(){
     	window.location.href="myorder.html";
   	});
   //跳转到会员页面
-	$(".member").click(function(){
-  		window.location.href="member.html";  
-  	})
+	// $(".member").click(function(){
+ //  		window.location.href="member.html";  
+ //  	})
   	//跳转到更换学校页面
 	$(".school").click(function(){
 		var school = $("#school").html();
 		var schoolurl="school.html?school="+school;   
         window.location.assign(encodeURI(schoolurl));
 	});
-	  	//跳转到更换学校页面
+	  	//跳转到更换城市页面
 	$(".city").click(function(){
 		var city = $("#city").html();
 		window.location.href="address.html";   

@@ -413,3 +413,7 @@ input[name='Reserve1Radio']{
 .roomCodeUrl{
 	color: #4ec0ff
 }
+/*京东支付*/
+#batchForm{
+	display: none;
+}

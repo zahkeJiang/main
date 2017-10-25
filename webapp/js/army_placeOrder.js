@@ -470,7 +470,7 @@ $(function(){
                     $(".layer").hide();
                     $(".payBox").hide();
                     
-                    // window.location.href="payHint.html?ordernumber="+orderNumber;
+                    window.location.href="payHint.html?ordernumber="+orderNumber;
                         
                 }
             },"json");
