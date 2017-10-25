@@ -37,6 +37,10 @@ public class VillaOrder {
 
     private Byte payType;
 
+    private String idNumber;
+
+    private Byte insurance;
+
     public Integer getVillaId() {
         return villaId;
     }
@@ -171,5 +175,21 @@ public class VillaOrder {
 
     public void setPayType(Byte payType) {
         this.payType = payType;
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber == null ? null : idNumber.trim();
+    }
+
+    public Byte getInsurance() {
+        return insurance;
+    }
+
+    public void setInsurance(Byte insurance) {
+        this.insurance = insurance;
     }
 }

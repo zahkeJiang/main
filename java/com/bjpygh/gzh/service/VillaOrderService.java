@@ -54,6 +54,9 @@ public class VillaOrderService {
             }
         }
 
+        if (villaOrder.getInsurance()==1){
+            sum += 15*villaOrder.getPeopleNumber()*dates.length;
+        }
         villaOrder.setVillaPrice(sum/2);
 
         //创建时间

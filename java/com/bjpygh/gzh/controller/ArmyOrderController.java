@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +24,8 @@ public class ArmyOrderController extends BaseController {
 
     @Autowired
     ArmyOrderService armyOrderService;
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     //创建军旅订单接口
     @ResponseBody
@@ -65,6 +69,19 @@ public class ArmyOrderController extends BaseController {
             return Status.fail(-20,"没有订单");
         }
 
+    }
+
+    //获取订单价格
+    @ResponseBody
+    @RequestMapping(value = "/getArmyPrice", method = RequestMethod.POST)
+    public Status getArmyPrice(HttpServletRequest request,String date) throws ParseException {
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        Date date1 = sdf.parse(date);
+        List<VillaPrice> priceList = armyOrderService.getPriceList(date1);
+        return Status.success().add("priceList",priceList);
     }
 
 }

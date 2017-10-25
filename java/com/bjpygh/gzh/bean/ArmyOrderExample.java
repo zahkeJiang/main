@@ -1304,6 +1304,136 @@ public class ArmyOrderExample {
             addCriterion("pay_type not between", value1, value2, "payType");
             return (Criteria) this;
         }
+
+        public Criteria andIdNumberIsNull() {
+            addCriterion("id_number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNumberIsNotNull() {
+            addCriterion("id_number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNumberEqualTo(String value) {
+            addCriterion("id_number =", value, "idNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNumberNotEqualTo(String value) {
+            addCriterion("id_number <>", value, "idNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNumberGreaterThan(String value) {
+            addCriterion("id_number >", value, "idNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNumberGreaterThanOrEqualTo(String value) {
+            addCriterion("id_number >=", value, "idNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNumberLessThan(String value) {
+            addCriterion("id_number <", value, "idNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNumberLessThanOrEqualTo(String value) {
+            addCriterion("id_number <=", value, "idNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNumberLike(String value) {
+            addCriterion("id_number like", value, "idNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNumberNotLike(String value) {
+            addCriterion("id_number not like", value, "idNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNumberIn(List<String> values) {
+            addCriterion("id_number in", values, "idNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNumberNotIn(List<String> values) {
+            addCriterion("id_number not in", values, "idNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNumberBetween(String value1, String value2) {
+            addCriterion("id_number between", value1, value2, "idNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdNumberNotBetween(String value1, String value2) {
+            addCriterion("id_number not between", value1, value2, "idNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andInsuranceIsNull() {
+            addCriterion("insurance is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInsuranceIsNotNull() {
+            addCriterion("insurance is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInsuranceEqualTo(Byte value) {
+            addCriterion("insurance =", value, "insurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andInsuranceNotEqualTo(Byte value) {
+            addCriterion("insurance <>", value, "insurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andInsuranceGreaterThan(Byte value) {
+            addCriterion("insurance >", value, "insurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andInsuranceGreaterThanOrEqualTo(Byte value) {
+            addCriterion("insurance >=", value, "insurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andInsuranceLessThan(Byte value) {
+            addCriterion("insurance <", value, "insurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andInsuranceLessThanOrEqualTo(Byte value) {
+            addCriterion("insurance <=", value, "insurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andInsuranceIn(List<Byte> values) {
+            addCriterion("insurance in", values, "insurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andInsuranceNotIn(List<Byte> values) {
+            addCriterion("insurance not in", values, "insurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andInsuranceBetween(Byte value1, Byte value2) {
+            addCriterion("insurance between", value1, value2, "insurance");
+            return (Criteria) this;
+        }
+
+        public Criteria andInsuranceNotBetween(Byte value1, Byte value2) {
+            addCriterion("insurance not between", value1, value2, "insurance");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

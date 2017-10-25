@@ -21,7 +21,7 @@ public interface VillaOrderMapper {
 
     VillaOrder selectByPrimaryKey(Integer villaId);
 
-    int updateByExampleSelective(@Param("example") VillaOrderExample example);
+    int updateByExampleSelective(@Param("record") VillaOrder record, @Param("example") VillaOrderExample example);
 
     int updateByExample(@Param("example") VillaOrderExample example);
 
