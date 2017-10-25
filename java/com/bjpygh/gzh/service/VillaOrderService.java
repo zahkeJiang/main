@@ -22,8 +22,9 @@ public class VillaOrderService {
     UserMapper userMapper;
 
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
 
-    public String createVillaOrder(VillaOrder villaOrder) {
+    public String createVillaOrder(VillaOrder villaOrder) throws ParseException {
         /**
          * 计算订单价格
          */
@@ -32,8 +33,10 @@ public class VillaOrderService {
         String[] dates = villaOrder.getDate().split(",");
         for (String date : dates){
             int villaPrice;
-            String[] ds = date.split("-");
-            Date d = new Date(Integer.parseInt(ds[0]),Integer.parseInt(ds[1]),Integer.parseInt(ds[2]));
+            Date d = formatter1.parse(date);
+//            String[] ds = date.split("-");
+//            Date d = new Date(Integer.parseInt(ds[0]),Integer.parseInt(ds[1])-1,Integer.parseInt(ds[2]));
+            System.out.println(d);
             if (d.getDay()>0&&d.getDay()<5){
                 villaPrice = 66;
                 if (villaOrder.getPeopleNumber()>28*villaNum)
@@ -51,10 +54,12 @@ public class VillaOrderService {
             }
         }
 
+        if (villaOrder.getInsurance()==1){
+            sum += 15*villaOrder.getPeopleNumber()*dates.length;
+        }
         villaOrder.setVillaPrice(sum/2);
 
         //创建时间
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         villaOrder.setCreateTime(formatter.format(new Date()));
 
         villaOrder.setOriginalPrice(sum);

@@ -21,6 +21,8 @@
     <result column="noroom_number" jdbcType="INTEGER" property="noroomNumber" />
     <result column="imageurl" jdbcType="VARCHAR" property="imageurl" />
     <result column="pay_type" jdbcType="TINYINT" property="payType" />
+    <result column="id_number" jdbcType="VARCHAR" property="idNumber" />
+    <result column="insurance" jdbcType="TINYINT" property="insurance" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -83,7 +85,7 @@
   <sql id="Base_Column_List">
     army_id, user_id, real_name, army_name, army_price, date, create_time, pay_time, 
     refund_time, finish_time, note, original_price, people_number, order_number, order_status, 
-    room_number, noroom_number, imageurl, pay_type
+    room_number, noroom_number, imageurl, pay_type, id_number, insurance
   </sql>
   <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.ArmyOrderExample" resultMap="BaseResultMap">
     select
@@ -122,14 +124,16 @@
       finish_time, note, original_price, 
       people_number, order_number, order_status, 
       room_number, noroom_number, imageurl, 
-      pay_type)
+      pay_type, id_number, insurance
+      )
     values (#{armyId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, 
       #{armyName,jdbcType=VARCHAR}, #{armyPrice,jdbcType=INTEGER}, #{date,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}, #{refundTime,jdbcType=TIMESTAMP}, 
       #{finishTime,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR}, #{originalPrice,jdbcType=INTEGER}, 
       #{peopleNumber,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{orderStatus,jdbcType=INTEGER}, 
       #{roomNumber,jdbcType=INTEGER}, #{noroomNumber,jdbcType=INTEGER}, #{imageurl,jdbcType=VARCHAR}, 
-      #{payType,jdbcType=TINYINT})
+      #{payType,jdbcType=TINYINT}, #{idNumber,jdbcType=VARCHAR}, #{insurance,jdbcType=TINYINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.ArmyOrder">
     insert into army_order
@@ -191,6 +195,12 @@
       <if test="payType != null">
         pay_type,
       </if>
+      <if test="idNumber != null">
+        id_number,
+      </if>
+      <if test="insurance != null">
+        insurance,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="armyId != null">
@@ -249,6 +259,12 @@
       </if>
       <if test="payType != null">
         #{payType,jdbcType=TINYINT},
+      </if>
+      <if test="idNumber != null">
+        #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="insurance != null">
+        #{insurance,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -318,6 +334,12 @@
       <if test="record.payType != null">
         pay_type = #{record.payType,jdbcType=TINYINT},
       </if>
+      <if test="record.idNumber != null">
+        id_number = #{record.idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insurance != null">
+        insurance = #{record.insurance,jdbcType=TINYINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -343,7 +365,9 @@
       room_number = #{record.roomNumber,jdbcType=INTEGER},
       noroom_number = #{record.noroomNumber,jdbcType=INTEGER},
       imageurl = #{record.imageurl,jdbcType=VARCHAR},
-      pay_type = #{record.payType,jdbcType=TINYINT}
+      pay_type = #{record.payType,jdbcType=TINYINT},
+      id_number = #{record.idNumber,jdbcType=VARCHAR},
+      insurance = #{record.insurance,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -408,6 +432,12 @@
       <if test="payType != null">
         pay_type = #{payType,jdbcType=TINYINT},
       </if>
+      <if test="idNumber != null">
+        id_number = #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="insurance != null">
+        insurance = #{insurance,jdbcType=TINYINT},
+      </if>
     </set>
     where army_id = #{armyId,jdbcType=INTEGER}
   </update>
@@ -430,7 +460,9 @@
       room_number = #{roomNumber,jdbcType=INTEGER},
       noroom_number = #{noroomNumber,jdbcType=INTEGER},
       imageurl = #{imageurl,jdbcType=VARCHAR},
-      pay_type = #{payType,jdbcType=TINYINT}
+      pay_type = #{payType,jdbcType=TINYINT},
+      id_number = #{idNumber,jdbcType=VARCHAR},
+      insurance = #{insurance,jdbcType=TINYINT}
     where army_id = #{armyId,jdbcType=INTEGER}
   </update>
 </mapper>

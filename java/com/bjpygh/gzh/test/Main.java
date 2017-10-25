@@ -50,8 +50,9 @@ public class Main {
 //------------------------------------------------------------------------------
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            Date date1 = sdf.parse("2017-09-01");
+            Date date1 = sdf.parse("2017-10-29");
 
+            System.out.println(date1.getDay());
         } catch (ParseException e) {
             e.printStackTrace();
         }

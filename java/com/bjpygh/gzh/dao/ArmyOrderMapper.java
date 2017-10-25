@@ -23,7 +23,7 @@ public interface ArmyOrderMapper {
 
     int updateByExampleSelective(@Param("record") ArmyOrder record, @Param("example") ArmyOrderExample example);
 
-    int updateByExample(@Param("example") ArmyOrderExample example);
+    int updateByExample(@Param("record") ArmyOrder record, @Param("example") ArmyOrderExample example);
 
     int updateByPrimaryKeySelective(ArmyOrder record);
 

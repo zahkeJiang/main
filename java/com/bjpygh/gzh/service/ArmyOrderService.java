@@ -2,10 +2,12 @@ package com.bjpygh.gzh.service;
 
 import com.bjpygh.gzh.bean.ArmyOrder;
 import com.bjpygh.gzh.bean.ArmyOrderExample;
+import com.bjpygh.gzh.bean.VillaPrice;
 import com.bjpygh.gzh.dao.ArmyOrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -16,24 +18,34 @@ public class ArmyOrderService {
     ArmyOrderMapper armyOrderMapper;
 
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
 
-    public String createArmyOrder(ArmyOrder armyOrder) {
+    public String createArmyOrder(ArmyOrder armyOrder) throws ParseException {
         /**
          * 计算订单价格
          */
+        int sum=0;
         int armyPrice = 0;
         String[] dates = armyOrder.getDate().split(",");
         for (String date : dates){
-            String[] ds = date.split("-");
-            Date d = new Date(Integer.parseInt(ds[0]),Integer.parseInt(ds[1]),Integer.parseInt(ds[2]));
-            if (d.getDay()>1){
-                armyPrice +=66;
+            Date d = formatter1.parse(date);
+//            String[] ds = date.split("-");
+//            Date d = new Date(Integer.parseInt(ds[0]),Integer.parseInt(ds[1]),Integer.parseInt(ds[2]));
+            if (d.getDay()>0&&d.getDay()<5){
+                armyPrice = 66;
+                armyPrice *= armyOrder.getPeopleNumber();
+
+                sum += armyPrice;
             }else {
-                armyPrice +=100;
+                armyPrice =100;
+                armyPrice *= armyOrder.getPeopleNumber();
+                sum += armyPrice;
             }
         }
-        armyPrice *= armyOrder.getPeopleNumber();
-        armyOrder.setArmyPrice(armyPrice);
+        if (armyOrder.getInsurance()==1){
+            sum += 15*armyPrice;
+        }
+        armyOrder.setArmyPrice(sum);
 
         //创建时间
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -41,7 +53,7 @@ public class ArmyOrderService {
 
         armyOrder.setOriginalPrice(armyPrice);
         /**
-         * 生成订单
+         * 生成订单号
          */
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
@@ -95,5 +107,36 @@ public class ArmyOrderService {
 
     public void updateOrder(ArmyOrder armyOrder) {
         armyOrderMapper.updateByPrimaryKey(armyOrder);
+    }
+
+    public List<VillaPrice> getPriceList(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        //拿到年份和月份
+        int year = date.getYear();
+        int month = date.getMonth();
+
+        //将date转换为calendar，并获取这月最后一天
+        Calendar cal=Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.MONTH, 1);
+        cal.set(Calendar.DAY_OF_MONTH,0);
+        String last = format.format(cal.getTime());
+        //生成价格列表作为返回数据
+        List<VillaPrice> villaPrices = new ArrayList<VillaPrice>();
+        for (int i=0;i<Integer.parseInt(last.split("-")[2]);i++){
+            Date newDate = new Date(year,month,i+1);
+
+            VillaPrice villaPrice = new VillaPrice();
+            villaPrice.setDate(i+1+"");
+
+                //根据周几来设置价格
+                if (newDate.getDay()>0&&newDate.getDay()<5){
+                    villaPrice.setPrice("66");
+                }else {
+                    villaPrice.setPrice("100");
+                }
+            villaPrices.add(villaPrice);
+        }
+        return villaPrices;
     }
 }
