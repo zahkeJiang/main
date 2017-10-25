@@ -25,24 +25,28 @@
 <div class="army-choose villaBox">
     <div class="army-information">
         <div class="army-title">人数</div>
-        <input type="number" name="报名人数" placeholder="请输入参加的人数">
+        <input type="number" name="报名人数" placeholder="请输入参加的人数" id="army-peoplenumber">
     </div>
     <p class="army-hint">温馨提示：说明</p>
+    <div class="army-information">
+        <div class="army-title">保险</div>
+        <input type="number" name="保险人数" placeholder="请输入购买保险人数" id="army-securenumber">
+    </div>
     <p class="army-choose-title">帐篷</p>
     <div class="army-number">
         <span>人数</span>
-        <div class="armyNumber">
+        <div class="armyNumber armyNumber-tend">
             <img src="./images/reduce.png" height="16px" width="16px">
-            <span class="number armyNumberTotal">0</span>
+            <span class="tend">0</span>
             <img src="./images/add.png" height="16px" width="16px">
         </div>
     </div>
     <p class="army-choose-title">室内</p>
     <div class="army-number">
         <span>人数</span>
-        <div class="armyNumber">
+        <div class="armyNumber armyNumber-indoor">
             <img src="./images/reduce.png" height="16px" width="16px">
-            <span>0</span>
+            <span class="indoor">0</span>
             <img src="./images/add.png" height="16px" width="16px">
         </div>
     </div>
@@ -50,11 +54,12 @@
     <div class="army-number">
         <span>人数</span>
         <div class="armyNumber">
-            <img src="./images/reduce.png" height="16px" width="16px">
-            <span>0</span>
-            <img src="./images/add.png" height="16px" width="16px">
+            <!-- <img src="./images/reduce.png" height="16px" width="16px"> -->
+            <span class="nosleep">0</span>
+            <!-- <img src="./images/add.png" height="16px" width="16px"> -->
         </div>
     </div> 
+    
 </div>
 <!-- 日期 -->
 <div class="date villaBox">
@@ -110,10 +115,51 @@
         </div>
     </div>
 </div>
+<!-- 明细 -->
+    <div class="detailBox">
+        <ul>
+            <li class="liVilla">
+                <div>
+                    <span>军旅</span>
+                    <span class="detailBox-liVilla">¥0</span>
+                </div>
+                <span class="detailBox-liVilla-hint"></span>
+            </li>
+            <li class="liVilla">
+                <div>
+                    <span>帐篷</span>
+                    <span class="detailBox-tend">¥0</span>
+                </div>
+                <span class="detailBox-tend-hint"></span>
+            </li>
+            <li class="liVilla">
+                <div>
+                    <span>室内</span>
+                    <span class="detailBox-indoor">¥0</span>
+                </div>
+                <span class="detailBox-indoor-hint"></span>
+            </li>
+            <li class="liSecure">
+                <div>
+                    <span>保险</span>
+                    <span class="detailBox-secure">¥0</span>
+                </div>
+                <span class="detailBox-secure-hint"></span>
+            </li>
+        </ul>
+            
+    </div>
 <!-- 底部footer -->
     <div class="footer">
-        <p>¥1234</p>
-        <p>支付</p>
+        <div class="footer1">
+            <span id="footer-price">¥0</span>
+            <div class="footer-detail">
+                <span>明细</span>
+                <img src="./images/bottom.png" height="14px">
+            </div>
+
+        </div>
+        <div class="footer2-toPay">去支付</div>
     </div>
 <!-- 支付方式弹窗 -->
 <div class="payBox">
@@ -123,7 +169,7 @@
         <div class="payMode" >
             <img src="./images/JD.png" height="16px" width="16px">
             &nbsp;京东支付
-            <input name="villa-radio" id="JD" type="radio" value="京东支付" />
+            <input name="villa-radio" id="JD" type="radio" value="JD" />
             <div class="payModeImg"></div>
         </div>
     </label>
@@ -131,7 +177,7 @@
         <div class="payMode" >
             <img src="./images/payHint_alipay.png" height="16px" width="16px">
             &nbsp;支付宝支付
-            <input name="villa-radio" id="alipay" type="radio" value="支付宝支付" />
+            <input name="villa-radio" id="alipay" type="radio" value="aliPay" />
             <div class="payModeImg"></div>
         </div>
     </label>

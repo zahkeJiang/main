@@ -35,25 +35,24 @@
 <!--     <p class="villa-secure-title">保险</p> -->
     <div class="villa-secure-content">
         <span>保险</span>
-        <div class="villaNumberChoose">
-            <img src="./images/reduce.png" height="16px" width="16px">
-            <p class="villaNumber">0</p>
-            <img src="./images/add.png" height="16px" width="16px">
-        </div>
+        <input type="number" name="保险人数" placeholder="请输入购买保险的人数" class="secureNumber">
+        
     </div>
-    <label for="a">
-        <div class="villa-information container villa-radio">
+
+        <div class="villa-information container villa-radioBox">
             <div class="villa-pic"></div>
             <div class="villa-content">
                 <p>xxxx别墅</p>
                 <p class="villaText">别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信息别墅信</p>
             </div>
             <input name="villa-radio" type="checkbox" id="a" value="别墅一" />
-            <div class="villa-choose"></div>
+            <div class="villa-choose">
+                <!-- <img src="./images/circle_choose.png" height="20px" width="20px"> -->
+            </div>
         </div>
-    </label>
-    <label for="b">
-        <div class="villa-information container villa-radio">
+
+
+        <div class="villa-information container villa-radioBox">
             <div class="villa-pic"></div>
             <div class="villa-content">
                 <p>xxxx别墅</p>
@@ -62,9 +61,9 @@
             <input name="villa-radio" id="b" type="checkbox" value="别墅二" /> 
             <div class="villa-choose"></div>
         </div>
-    </label>
-    <label for="c">
-        <div class="villa-information container villa-radio">
+
+
+        <div class="villa-information container villa-radioBox">
             <div class="villa-pic"></div>
             <div class="villa-content">
                 <p>xxxx别墅</p>
@@ -73,7 +72,7 @@
             <input name="villa-radio" id="c" type="checkbox" value="别墅三" />
             <div class="villa-choose"></div>
         </div>
-    </label>
+
 </div>
 
 <!-- 日期 -->
@@ -142,19 +141,17 @@
             <li class="liSecure">
                 <div>
                     <span>保险</span>
-                    <span class="detailBox-secure">100</span>
+                    <span class="detailBox-secure">¥0</span>
                 </div>
-                <span class="detailBox-secure-hint">(2元/人)</span>
+                <span class="detailBox-secure-hint">(15元/人)</span>
             </li>
         </ul>
             
-        
-        
     </div>
 <!-- 底部footer -->
     <div class="footer">
         <div class="footer1">
-            <span id="footer-price">¥0.00</span>
+            <span id="footer-price">¥0</span>
             <div class="footer-detail">
                 <span>明细</span>
                 <img src="./images/bottom.png" height="14px">

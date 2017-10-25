@@ -169,11 +169,7 @@ var currentDay;
         // {"date":"11","num":"1"},{"date":"12","price":"66"},{"date":"13","price":"66"},{"date":"14","price":"66"},{"date":"15","price":"66"},{"date":"16","price":"100"},{"date":"17","price":"100"},{"date":"18","price":"66"},{"date":"19","price":"66"},{"date":"20","price":"66"},
         // {"date":"21","price":"66"},{"date":"22","num":"0"},{"date":"23","price":"100"},{"date":"24","price":"100"},{"date":"25","price":"66"},{"date":"26","price":"66"},{"date":"27","price":"66"},{"date":"28","num":"1"},{"date":"29","price":"66"},{"date":"30","num":"0"},{"date":"31","price":"80"}
         // ]
-        // var priceNextList = [
-        // {"date":"1","num":"0"},{"date":"2","num":"1"},{"date":"3","price":"66"},{"date":"4","price":"66"},{"date":"5","price":"66"},{"date":"6","price":"100"},{"date":"7","price":"100"},{"date":"8","price":"100"},{"date":"9","price":"66"},{"date":"10","price":"66"},
-        // {"date":"11","num":"1"},{"date":"12","price":"66"},{"date":"13","price":"100"},{"date":"14","price":"100"},{"date":"15","price":"100"},{"date":"16","price":"66"},{"date":"17","price":"66"},{"date":"18","price":"66"},{"date":"19","price":"66"},{"date":"20","num":"2"},
-        // {"date":"21","num":"0"},{"date":"22","num":"0"},{"date":"23","price":"66"},{"date":"24","price":"66"},{"date":"25","price":"66"},{"date":"26","price":"66"},{"date":"27","price":"100"},{"date":"28","num":"1"},{"date":"29","price":"100"},{"date":"30","num":"0"},{"date":"31","price":"66"}
-        // ]
+
 
     // for (var i = 0; i < priceList.length; i++) {
     //     //这个判断主要根据后台返回数据，返回数据不是这个格式 做其他判断
