@@ -221,7 +221,7 @@ public class PayController extends BaseController {
             long time = new Date().getTime();
             Date d = formatter.parse(villaOrder.getDate().split(",")[0]);
             //判断是否再五个自然日之内
-            if (time-d.getTime()>432000000L){
+            if (d.getTime()-time<432000000L){
                 //判断是否为全额付款
                 if (villaOrder.getFullAmount()==1){
                     refund_amount =  ""+villaOrder.getOriginalPrice()/2;
@@ -291,10 +291,27 @@ public class PayController extends BaseController {
             }
         }else if (o.equals("A")){
             ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(out_trade_no).get(0);
-            if(armyOrder.getOrderStatus() == 3){
-                return Status.fail(-30,"报名已完成");
+            if(armyOrder.getOrderStatus() == 4||armyOrder.getOrderStatus() == 7){
+                return Status.fail(-30,"订单已完成");
             }
-            String refund_amount=""+armyOrder.getArmyPrice();
+            String refund_amount;
+            long time = new Date().getTime();
+            Date d = formatter.parse(armyOrder.getDate().split(",")[0]);
+            //判断是否再三个自然日之内
+            if (d.getTime()-time<259200000L){
+                if (armyOrder.getFullAmount()==1){
+                    refund_amount = ""+(int)(armyOrder.getOriginalPrice()*0.85);
+                } else {
+                    refund_amount = ""+(int)(armyOrder.getOriginalPrice()*0.35);
+                }
+            }else {
+                if (armyOrder.getFullAmount()==1){
+                    refund_amount = ""+armyOrder.getArmyPrice();
+                } else {
+                    refund_amount = ""+armyOrder.getArmyPrice();
+                }
+            }
+
             if (armyOrder.getPayType()==0){
                 if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
                     //改变订单状态
