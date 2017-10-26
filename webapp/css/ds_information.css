@@ -13,6 +13,7 @@ html, body {
     /*height: 300px;*/
 }
 .swiper-slide {
+	padding: 2px;
     background-position: center;
     background-size: cover;
     width: 80%;
@@ -206,13 +207,17 @@ html, body {
 }
 
 .dsp_list{
-	padding:0 16px;
+	margin:0 16px;
 	position: relative;
-	border-radius: 10px;
+	/*border-radius: 10px;*/
 	display: flex;
 	background-color: #f6f1f1;
 	justify-content: space-around;
 	flex-direction: column;
+	border-bottom: 1px solid #ddd;
+}
+.container div:last-child{
+	border-bottom: 0;
 }
 .dstype{
 	margin-top: 8px;
@@ -249,7 +254,7 @@ html, body {
 	position: absolute;
 	top: 50%;
 	margin-top: -12px;
-	right: 16px;
+	right:0;
 }
 .price,.pointzero{
 	color: #4ea0ff;

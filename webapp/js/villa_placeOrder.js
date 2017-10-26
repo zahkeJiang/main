@@ -280,10 +280,10 @@ $(function(){
         //付款类型，1全额，或0预约定金
         if ($("input[name='Reserve1Radio']:checked").val()==0) {
             $(".reserve1-mode").html("付款类型：预约定金");
-                $("#footer-price").html("¥"+Math.ceil((moneysix+moneyhundred)/2));
+
         }else{
             $(".reserve1-mode").html("付款类型：全额支付");
-            $("#footer-price").html("¥"+(moneysix+moneyhundred));
+
         }
         getPrice();
     });
