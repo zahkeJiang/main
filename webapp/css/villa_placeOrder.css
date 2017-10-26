@@ -397,7 +397,7 @@ html, body {
 	height: 20px;
 	display: flex;
 	justify-content: space-between;
-	width: 50%;
+	width: 60%;
 	align-items: center;
 }
 .detailBox-100-hint,.detailBox-66-hint,.detailBox-secure-hint{
