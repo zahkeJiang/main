@@ -98,8 +98,8 @@ public class PayController extends BaseController {
             userOrder.setOrderNumber(villaOrder.getOrderNumber());
             userOrder.setOrderName("漂洋过海别墅");
             userOrder.setOrderTime(villaOrder.getCreateTime());
-            userOrder.setOrderDescripe(villaOrder.getVillaName().split(",").length+"栋 / "+
-                    villaOrder.getPeopleNumber()+"人 / "+
+            userOrder.setOrderDescripe("别墅:"+villaOrder.getVillaName().split(",")[0]+" / "+
+                    "入住人数:"+villaOrder.getPeopleNumber()+"人 / "+"入驻天数:"
                     +villaOrder.getDate().split(",").length+"晚");
             userOrder.setOrderImage(villaOrder.getImageurl());
             userOrder.setOrderStatus(villaOrder.getOrderStatus());
@@ -476,7 +476,7 @@ public class PayController extends BaseController {
     //支付宝支付请求方法
     public void requesetAlipay(HttpServletResponse response,String ordernumber,
         String subject,String body,String price,String product_code,String notify_url) throws IOException {
-        response.setContentType("text/html;charset=utf-8" + AlipayConfig.CHARSET);
+        response.setContentType("text/html;charset=" + AlipayConfig.CHARSET);
         PrintWriter out = response.getWriter();
 
         String timeout_express="2m";

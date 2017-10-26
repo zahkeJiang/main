@@ -250,8 +250,8 @@ public class NotifyController extends BaseController {
             order.setOrderPrice(villaOrder.getVillaPrice());
             order.setOrderStatus(villaOrder.getOrderStatus());
             order.setOrderImage(villaOrder.getImageurl());
-            order.setOrderDescripe(villaOrder.getVillaName().split(",").length+"栋 / "+
-                    villaOrder.getPeopleNumber()+"人 / "+
+            order.setOrderDescripe("别墅:"+villaOrder.getVillaName().split(",")[0]+" / "+
+                    "入住人数:"+villaOrder.getPeopleNumber()+"人 / "+"入驻天数:"
                     +villaOrder.getDate().split(",").length+"晚");
             order.setOrderTime(villaOrder.getCreateTime());
             order.setOrderName("漂洋过海别墅");
