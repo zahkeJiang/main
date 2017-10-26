@@ -98,7 +98,12 @@ public class PayController extends BaseController {
             userOrder.setOrderNumber(villaOrder.getOrderNumber());
             userOrder.setOrderName("漂洋过海别墅");
             userOrder.setOrderTime(villaOrder.getCreateTime());
-            userOrder.setOrderDescripe("别墅:"+villaOrder.getVillaName().split(",")[0]+" / "+
+            String[] vs = villaOrder.getVillaName().split(",");
+            String vn = "";
+            for (int i=0;i<vs.length;i++){
+                vn += vs[i];
+            }
+            userOrder.setOrderDescripe("别墅:"+vn+" / "+
                     "入住人数:"+villaOrder.getPeopleNumber()+"人 / "+"入驻天数:"
                     +villaOrder.getDate().split(",").length+"晚");
             userOrder.setOrderImage(villaOrder.getImageurl());
