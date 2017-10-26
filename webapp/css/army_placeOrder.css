@@ -384,8 +384,8 @@ html, body {
 }
 .Reserve1{
 	margin-left: 2em;
-	height: 16px;
-	width: 16px;
+	height: 18px;
+	width: 18px;
 	background: url(../images/circle.png);
 	background-size: 100% 100%;
 	margin-right: 10px;
@@ -400,7 +400,8 @@ input[name='Reserve1Radio']{
 	display: flex;
 	height: 20px;
 	align-items: center;
-	padding: 0 16px;
+	padding: 10px;
+	font-size: 14px;
 }
 .roomCode{
 	background: url(../images/circle.png);
@@ -411,7 +412,7 @@ input[name='Reserve1Radio']{
 	margin-right: 4px;
 }
 .roomCodeUrl{
-	color: #4ec0ff
+	color: #4ea0ff;
 }
 /*京东支付*/
 #batchForm{

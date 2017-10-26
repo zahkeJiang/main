@@ -212,8 +212,16 @@ $(function(){
 
 //全额支付与预约定金
     $(".Reserve-row").click(function(){
-        $(this).children(".Reserve1").html("<img src='./images/circle_choose.png' height='16px' width='16px'>");
+        $(this).children(".Reserve1").html("<img src='./images/circle_choose.png' height='18px' width='18px'>");
         $(this).parents().siblings("label").find(".Reserve1").empty();
+        //付款类型，1全额，或0预约定金
+        if ($("input[name='Reserve1Radio']:checked").val()==0) {
+            $(".reserve1-mode").html("付款类型：预约定金");
+                $("#footer-price").html("¥"+Math.ceil((moneysix+moneyhundred)/2));
+        }else{
+            $(".reserve1-mode").html("付款类型：全额支付");
+            $("#footer-price").html("¥"+(moneysix+moneyhundred));
+        }
         getPrice();
     });
 
@@ -351,7 +359,7 @@ $(function(){
     $(".footer-detail").click(function(){
         if ($(".detailBox").css("display")=="none") {
             $(".detailBox").show();
-            $(this).find("img").attr("src","./images/top.png");
+            $(this).find("img").attr("src","./images/up.png");
         }else{
             $(".detailBox").hide();
             $(this).find("img").attr("src","./images/bottom.png");

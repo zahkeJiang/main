@@ -45,7 +45,7 @@ html, body {
 /* villa-price */
 .villa-price span:first-child{
     font-size: 18px;
-    color: white;
+    color: orange;
 }
 .villa-price span:last-child{
     font-size: 14px;
@@ -272,5 +272,8 @@ html, body {
 }
 .assessBox img#star{
     float: right;
-
+}
+#icon{
+    border-radius: 50%;
+    border:0;
 }
