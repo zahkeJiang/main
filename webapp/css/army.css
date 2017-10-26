@@ -7,20 +7,28 @@ html, body {
 }
 .swiper-container {
         width: 100%;
-        height: 200px;
+        /*height: 200px;*/
     }
 /*轮播*/
 .swiper-slide {
+    padding: 2px;
     background-position: center;
     background-size: cover;
     width: 80%;
-    height:160px;
+    /*height:160px;*/
     margin-top: 10px;
+    margin-bottom: 30px;
     background: #fff;
     border-radius: 10px;
     display: flex;
     align-items: center;   
 }
+.swiper-slide img{
+    width: 100%;
+    /*height: 100%;*/
+    border-radius: 10px;
+}
+
 /*轮播图大小*/
 .swiper-slide-active {
     transform: scale(1);
