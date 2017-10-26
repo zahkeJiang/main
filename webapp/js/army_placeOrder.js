@@ -14,7 +14,7 @@ $(function(){
     // 表格中显示日期
     showCalendarData(0,0);
     //展示价格
-    setPrice(getYandM(0).dataPara);
+    setArmyPrice(getYandM(0).dataPara);
 
 //    日历结束
 //    点击上一月
@@ -24,7 +24,7 @@ $(function(){
         // 第二个参数 0为本月 上一个月1，下一个月-1
         ++monthNum;
         showCalendarData(0,monthNum);
-        setPrice(getYandM(monthNum).dataPara);
+        setArmyPrice(getYandM(monthNum).dataPara);
     });
 
 //    点击下一月
@@ -32,7 +32,7 @@ $(function(){
         e.preventDefault();
         --monthNum;
         showCalendarData(0,monthNum);
-        setPrice(getYandM(monthNum).dataPara);
+        setArmyPrice(getYandM(monthNum).dataPara);
     });
 
     // 获取当前时间
