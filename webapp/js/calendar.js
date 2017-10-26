@@ -129,6 +129,7 @@ var currentDay;
         return {dataPara:dataPara,_fmonth:_fmonth};
     }
     
+    //别墅的日历获取价格
     function setPrice(dataPar){
         // 后台返回一个json数据
         //后台返回的数据是某个月对应的日期和价格，前端传参（某月）
@@ -187,5 +188,28 @@ var currentDay;
     //      }
     // }
 
+    };
+
+//军旅的日历获取价格
+    function setArmyPrice(dataPar){
+        $.post("getArmyPrice",{"date":dataPar},function(datas){
+            console.log(datas);
+            var priceList = datas.data.priceList;
+            for (var i = 0; i < priceList.length; i++) {
+            //这个判断主要根据后台返回数据，返回数据不是这个格式 做其他判断
+                if(priceList[i].price&&priceList[i].price!=null&&!priceList[i].num){
+                    //有很多票，显示价格
+                    $(".currentMonth0").eq(priceList[i].date-1).append("<p class='fixedhours'>¥"+priceList[i].price+"</p>");
+                }else if(priceList[i].num&&priceList[i].num!=null&&priceList[i].num!=0&&!priceList[i].price){
+                    //没有票或者票很少 不显示价格显示灰色
+                    // $(".currentMonth0").eq(priceList[i].date-1).addClass("small-ticket");
+                    $(".currentMonth0").eq(priceList[i].date-1).append("<p class='fixedhours'>余"+priceList[i].num+"</p>");
+                }else if(priceList[i].num&&priceList[i].num==0&&!priceList[i].price){
+                    //没有票或者票很少 不显示价格显示灰色
+                    $(".currentMonth0").eq(priceList[i].date-1).addClass("no-ticket");
+                    $(".currentMonth0").eq(priceList[i].date-1).append("<p class='fixedhours'>满</p>");
+                }
+            }
+        },"json");
     };
 
