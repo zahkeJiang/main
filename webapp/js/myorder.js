@@ -60,7 +60,7 @@ function all_orders(){
                                 +comment.orderName+"</p>"+result+"</div><div class='dsoder_container' ><img src='"
                                 +comment.orderImage+"' height='48px' width='64px'><p class='dsorder_information'>"
                                 +comment.orderDescripe+"</p></div><div class='dsorder_footer'>"+order_assess+"<span class='dsorder_pay'>实付款：</span><span class='order_price'>¥"
-                                +comment.orderPrice+".00</span></div></div>";
+                                +comment.orderPrice+"</span></div></div>";
             });
             $(".container").empty();
             $(".container").html(dsorderh_tml);
@@ -112,7 +112,7 @@ function orders_pay(){
                                 +comment.orderName+"</p>"+result+"</div><div class='dsoder_container'><img src='"
                                 +comment.orderImage+"' height='48px' width='64px'><p class='dsorder_information'>"
                                 +comment.orderDescripe+"</p></div><div class='dsorder_footer'><span class='dsorder_pay'>需付款：</span><span class='order_price'>¥"
-                                +comment.orderPrice+".00</span></div></div>";
+                                +comment.orderPrice+"</span></div></div>";
                 }
             });
             //遍历之后判断订单列表是否依旧为空，如果是空，显示其他内容
@@ -160,7 +160,7 @@ function orders_success(){
                                 +comment.orderName+"</p>"+result+"</div><div class='dsoder_container'><img src='"
                                 +comment.orderImage+"' height='48px' width='64px'><p class='dsorder_information'>"
                                 +comment.orderDescripe+"</p></div><div class='dsorder_footer'><span class='dsorder_pay'>实付款：</span><span class='order_price'>¥"
-                                +comment.orderPrice+".00</span></div></div>";                                 
+                                +comment.orderPrice+"</span></div></div>";                                 
                 }
             });
             //遍历之后判断订单列表是否依旧为空，如果是空，显示其他内容
@@ -206,7 +206,7 @@ function orders_finished(){
                                 +comment.orderName+"</p>"+result+"</div><div class='dsoder_container'><img src='"
                                 +comment.orderImage+"' height='48px' width='64px'><p class='dsorder_information'>"
                                 +comment.orderDescripe+"</p></div><div class='dsorder_footer'>"+order_assess+"<span class='dsorder_pay'>实付款：</span><span class='order_price'>¥"
-                                +comment.orderPrice+".00</span></div></div>";
+                                +comment.orderPrice+"</span></div></div>";
                 }
             });
             //遍历之后判断订单列表是否依旧为空，如果是空，显示其他内容
@@ -259,7 +259,7 @@ function orders_cencer(){
                                 +comment.orderName+"</p>"+result+"</div><div class='dsoder_container'><img src='"
                                 +comment.orderImage+"' height='48px' width='64px'><p class='dsorder_information'>"
                                 +comment.orderDescripe+"</p></div><div class='dsorder_footer'><span class='dsorder_pay'>实付款：</span><span class='order_price'>¥"
-                                +comment.orderPrice+".00</span></div></div>";
+                                +comment.orderPrice+"</span></div></div>";
                 }
             });
             //遍历之后判断订单列表是否依旧为空，如果是空，显示其他内容

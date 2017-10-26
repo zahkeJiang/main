@@ -19,9 +19,9 @@ $(function(){
 			$(".order-mode").html(userorder.dsNote);//特有描述
 			$(".order-number").html("订单编号：&nbsp;"+userorder.orderNumber);//订单号码
 			$(".order-time").html("下单时间：&nbsp;"+userorder.orderTime);//创建订单时间
-			$(".order-price").html("¥"+userorder.originalPrice+".00");//套餐原价
-			$(".price-pay").html("¥"+userorder.orderPrice+".00");//实际付款
-			$(".price-coupon").html("¥"+(userorder.originalPrice-userorder.orderPrice)+".00");//优惠价格
+			$(".order-price").html("¥"+userorder.originalPrice);//套餐原价
+			$(".price-pay").html("¥"+userorder.orderPrice);//实际付款
+			$(".price-coupon").html("¥"+(userorder.originalPrice-userorder.orderPrice));//优惠价格
 			// 订单状态值，0用户未支付；1已付款；2驾校特有，未上交材料；3驾校特有，驾校已报名，正在返还材料；4交易完成，未评价；5未付款取消订单；6已付款取消订单；7交易完成，已评价
 			if (userorder.orderStatus=="0") {//用户提交订单未支付
 				$(".chedule-content").html("未付款");

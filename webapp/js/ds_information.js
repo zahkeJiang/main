@@ -50,7 +50,12 @@ $(function(){
     });
 
     $(".dsp_type_Div_models p").click(function(){
-        $(this).siblings(".dsp_type_div").find("span").html($(this).attr("text"));
+        if ($(this).attr("text")=="") {
+            $(this).siblings(".dsp_type_div").find("span").html("驾考类型");
+        }else{
+            $(this).siblings(".dsp_type_div").find("span").html($(this).attr("text"));
+        }
+        
         $(this).siblings(".dsp_type_div").find("span").css({"font-size":"14px","color":"#555"});
         models = $(this).attr("text");
         console.log(models);
@@ -58,14 +63,23 @@ $(function(){
 
     });
     $(".dsp_type_Div_dsType p").click(function(){
-        $(this).siblings(".dsp_type_div").find("span").html($(this).attr("text"));
+        if ($(this).attr("text")=="") {
+            $(this).siblings(".dsp_type_div").find("span").html("班型");
+        }else{
+            $(this).siblings(".dsp_type_div").find("span").html($(this).attr("text"));
+        }
+
         $(this).siblings(".dsp_type_div").find("span").css({"font-size":"14px","color":"#555"});
         dsType = $(this).attr("text");
         console.log(dsType);
         getDs();
     });
     $(".dsp_type_Div_trainTime p").click(function(){
-        $(this).siblings(".dsp_type_div").find("span").html($(this).attr("text"));
+        if ($(this).attr("text")=="") {
+            $(this).siblings(".dsp_type_div").find("span").html("学习时间");
+        }else{
+            $(this).siblings(".dsp_type_div").find("span").html($(this).attr("text"));
+        }
         $(this).siblings(".dsp_type_div").find("span").css({"font-size":"14px","color":"#555"});
         $(this).siblings(".dsp_type_div_3").css({"justify-content":"center"});
         trainTime = $(this).attr("text");
@@ -108,7 +122,7 @@ function getDs(){
                 +comment.trainTime+"</span><span class='description'>"
                 +comment.description+"</span><span class='packageid'>"
                 +comment.packageid+"</span></div><span class='priceDiv'><span  class='price_symbol'>¥</span><span class='price'>"
-                +comment.price+"</span><span class='pointzero'>.00</span></span><div class='line'></div></div>";
+                +comment.price+"</span><span class='pointzero'></span></span><div class='line'></div></div>";
             });
             $(".container").html(dshtml);
 
