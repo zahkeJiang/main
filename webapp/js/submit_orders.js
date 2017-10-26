@@ -47,11 +47,11 @@ function get_coupons(){
 				$(".coupons span").html("¥"+coupons_sum);//优惠券价格
 				$(".coupons span").css({"color":"orange"});
 				select ="1";
-				$(".price").html("¥"+(price-coupons_sum)+".00");//需支付金额
+				$(".price").html("¥"+(price-coupons_sum));//需支付金额
 			}else{
 				$(".coupons span").html("无可用优惠券&nbsp;&gt;");
 				select ="0";
-				$(".price").html("¥"+price+".00");//需支付金额
+				$(".price").html("¥"+price);//需支付金额
 			}
         }	
     });
@@ -73,7 +73,7 @@ $(function(){
 	});
 	$(".ds_type").html(dstype);
 	$(".dstype_information_content").html(dsname+"&nbsp;&frasl;&nbsp;"+models+"&nbsp;&frasl;&nbsp;"+traintime);
-	$(".ds_price").html(price+".00");
+	$(".ds_price").html(price);
 
 	get_tel();//获取用户手机号
 	get_coupons();//获取优惠券金额
@@ -110,6 +110,25 @@ $(function(){
         var payMode = $("input[name='payMode-radio']:checked").val();
         console.log(payMode);
         if (payMode=="JD") {//京东支付
+        	//京东支付请求
+                            $.post("JDPay",{"ordernumber":orderNumber},function (data) {
+                                if(data.status == 0){
+                                    var jdOrderPay = data.data.jdOrderPay;
+                                    $("#version").val(jdOrderPay.version);
+                                    $("#merchant").val(jdOrderPay.merchant);
+                                    $("#sign").val(jdOrderPay.sign);
+                                    $("#tradeNum").val(jdOrderPay.tradeNum);
+                                    $("#tradeName").val(jdOrderPay.tradeName);
+                                    $("#tradeTime").val(jdOrderPay.tradeTime);
+                                    $("#amount").val(jdOrderPay.amount);
+                                    $("#currency").val(jdOrderPay.currency);
+                                    $("#callbackUrl").val(jdOrderPay.callbackUrl);
+                                    $("#notifyUrl").val(jdOrderPay.notifyUrl);
+                                    $("#userId").val(jdOrderPay.userId);
+                                    $("#orderType").val(jdOrderPay.orderType);
+                                    document.getElementById("batchForm").submit();
+                                }
+                            },'json');
             
         }else if (payMode=="aliPay") {//支付宝支付
             $.post("createOrder.action",{"packageid":packageid,"select":select},function(datas){//创建驾校报名订单

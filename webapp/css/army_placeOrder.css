@@ -106,6 +106,9 @@ html, body {
 	text-align: center;
 	color: orange
 }
+.nosleep{
+	margin-right: 16px;
+}
 /*日历*/
 .date{
 	padding: 10px 20px;
@@ -353,7 +356,7 @@ html, body {
 	height: 20px;
 	display: flex;
 	justify-content: space-between;
-	width: 50%;
+	width: 60%;
 	align-items: center;
 }
 .detailBox-indoor-hint,.detailBox-tend-hint,.detailBox-liVilla-hint,.detailBox-secure-hint{

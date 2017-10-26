@@ -31,7 +31,7 @@ var description = $.cookie("description");//套餐描述
 $(function(){
 	$(".ds_type").html(dstype);
 	$(".ds_name").html(dsname+"&nbsp;/&nbsp;"+models);
-	$(".ds_price").html("¥"+price+".00");
+	$(".ds_price").html("¥"+price);
     $(".description").html(description);
     //立即报名时。判断用户是否已经绑定手机号
 	$("#submit").click(function(){
