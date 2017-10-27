@@ -7,25 +7,27 @@ html, body {
 }
 .swiper-container {
         width: 100%;
-        height: 200px;
     }
 /*轮播*/
 .swiper-slide {
+    padding: 2px;
     background-position: center;
     background-size: cover;
     width: 80%;
-    height:160px;
+    /*height:160px;*/
     margin-top: 10px;
-    background: #fff;
+    margin-bottom: 30px;
+    background: #f6f1f1;
     border-radius: 10px;
     display: flex;
     align-items: center;   
 }
-/*轮播图大小*/
-.swiper-slide-active {
-    transform: scale(1);
-    transition: all .5s ease-out;
+.swiper-slide img{
+    width: 100%;
+    /*height: 100%;*/
+    border-radius: 10px;
 }
+
 .swiper-slide-next,.swiper-slide-prev{
     transform: scale(0.9);
     -moz-transition: all .5s ease-out;
@@ -69,7 +71,7 @@ html, body {
         /*color: red;*/
         font-weight: bold;
 }
-.villa-information p.villa-description{
+.villa-information div.villa-description{
     text-align: left;
     font-size: 14px;
     line-height: 20px;
@@ -78,10 +80,16 @@ html, body {
     overflow:auto; 
     text-indent: 2em;
 }
-.villa-information p.villa-description::-webkit-scrollbar {/*隐藏滚动条*/
+.villa-information div.villa-description::-webkit-scrollbar {/*隐藏滚动条*/
     display: none;
 }
-
+.villa-information p.villa-description-2{
+     text-align: left;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0;
+    text-indent: 2em;
+}
 /* villaStyle */
 .villaStyle{
     /*padding:8px 0px;*/

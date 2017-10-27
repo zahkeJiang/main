@@ -15,8 +15,18 @@ $(function(){
 			$(".user-tel").html("联系方式：&nbsp;"+userorder.phoneNumber);//手机号码
 			$(".order-name").html(userorder.orderName);//订单名称
 			$("#order-image").attr("src",userorder.orderImage);//订单图片
-			$(".order-description").html(userorder.orderDescripe);//订单描述
-			$(".order-mode").html(userorder.dsNote);//特有描述
+			// $(".order-description").html(userorder.orderDescripe);//订单描述
+			var miaosu  = userorder.orderDescripe.split('/');
+			
+
+			var mioasuxinxi="";
+			for(var j=0;j<miaosu.length;j++){
+				mioasuxinxi+= miaosu[j]+"<br />"
+			}
+			console.log(mioasuxixi);
+			$(".order-description").html(mioasuxixi);//订单描述
+
+			
 			$(".order-number").html("订单编号：&nbsp;"+userorder.orderNumber);//订单号码
 			$(".order-time").html("下单时间：&nbsp;"+userorder.orderTime);//创建订单时间
 			$(".order-price").html("¥"+userorder.originalPrice);//套餐原价
@@ -41,13 +51,15 @@ $(function(){
             			//是别墅，需要先判断当前选择的别墅是否已经被预定
             			$.post("villaCheck",{"ordernumber":ordernumber},function(datas){
             				if (datas.status==0) {
-            					window.location.href="payHint.html?ordernumber="+ordernumber;
+            					$(".layer").show();
+                        		$(".payBox").show(); 
             				}else{
             					alert(dats.msg);//您的套餐中别墅或日期已被预约
             				}
             			},"json");
         			}else{
-           			 	window.location.href="payHint.html?ordernumber="+ordernumber;
+           			 	$(".layer").show();
+                        $(".payBox").show(); 
         			}
 					
 				});
@@ -78,7 +90,7 @@ $(function(){
 			}else if (userorder.orderStatus=="1"||userorder.orderStatus=="2") {//1代表用户已付款,驾校特有状态值2，代表材料尚未拿过来
 				$(".chedule-content").html("已付款");
 				$(".chedule-content").css({"color":"white","background":"green"});
-				$(".shedule-hint-text").html("订单已支付，请准备好所需材料，24小时之内将会有工作人员与您联系上门提取，请保持电话畅通。");
+				$(".shedule-hint-text").html("订单已支付，小漂为您服务。");
 				$(".footer").show();
 				$(".cancel").show();
 				$(".price").css({"margin-bottom":"58px"});
@@ -130,5 +142,48 @@ $(function(){
 			}
    		}
    	},"json");
+
+
+	// 为支付订单，点击去支付弹窗操作
+	//为支付方式的radio设置自定义点击样式
+    $(".payMode").click(function() {
+        $(this).children(".payModeImg").css({"background":"url(./images/circle_choose.png)","background-size":"20px"});
+        $(this).parents().siblings("label").find(".payModeImg").css({"background":"url(./images/circle.png)","background-size":"20px"});
+    });
+
+    //选择支付方式后点击确认
+    $(".surePay").click(function(){
+        var payMode = $("input[name='payMode-radio']:checked").val();
+        console.log(payMode);
+        if (payMode=="JD") {//京东支付
+            		$.post("JDPay",{"ordernumber":ordernumber},function (data) {
+                        if(data.status == 0){
+                            var jdOrderPay = data.data.jdOrderPay;
+                            $("#version").val(jdOrderPay.version);
+                            $("#merchant").val(jdOrderPay.merchant);
+                            $("#sign").val(jdOrderPay.sign);
+                            $("#tradeNum").val(jdOrderPay.tradeNum);
+                            $("#tradeName").val(jdOrderPay.tradeName);
+                            $("#tradeTime").val(jdOrderPay.tradeTime);
+                            $("#amount").val(jdOrderPay.amount);
+                            $("#currency").val(jdOrderPay.currency);
+                            $("#callbackUrl").val(jdOrderPay.callbackUrl);
+                            $("#notifyUrl").val(jdOrderPay.notifyUrl);
+                            $("#userId").val(jdOrderPay.userId);
+                            $("#orderType").val(jdOrderPay.orderType);
+                            document.getElementById("batchForm").submit();
+                        }
+                    },'json');
+            
+        }else if (payMode=="aliPay") {//支付宝支付
+            window.location.href="payHint.html?ordernumber="+ordernumber;
+        }      
+    });
+    
+    //关闭弹窗
+    $(".payBox p").click(function(){
+        $(".layer").hide();
+        $(".payBox").hide();
+    });
 
 });
