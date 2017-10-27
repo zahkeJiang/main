@@ -259,7 +259,7 @@ public class NotifyController extends BaseController {
                     "入住人数:"+villaOrder.getPeopleNumber()+"人 / "+"入驻天数:"
                     +villaOrder.getDate().split(",").length+"晚");
             order.setOrderTime(villaOrder.getCreateTime());
-            order.setOrderName("漂洋过海别墅");
+            order.setOrderName("漂洋过海小别墅");
             order.setOrderNumber(villaOrder.getOrderNumber());
             order.setPhoneNumber(user.getPhoneNumber());
             order.setRealName(villaOrder.getRealName());
@@ -277,7 +277,10 @@ public class NotifyController extends BaseController {
             order.setOrderPrice(dsOrder.getOrderPrice());
             order.setOrderStatus(dsOrder.getOrderStatus());
             order.setOrderImage(dsOrder.getImageurl());
-            order.setOrderDescripe(dsOrder.getDsType()+" / "+dsOrder.getModels()+" / "+dsOrder.getTrainTime());
+            order.setOrderDescripe("班型: "+dsOrder.getDsType()+" / "
+                    +"驾照类型: "+dsOrder.getModels()+" / "
+                    +"学习时间: "+dsOrder.getTrainTime()+" / "
+                    +"法培方式: "+dsOrder.getNote());
             order.setOrderTime(dsOrder.getCreateTime());
             order.setOrderName(dsOrder.getDsName());
             order.setOrderNumber(dsOrder.getOrderNumber());
@@ -301,7 +304,7 @@ public class NotifyController extends BaseController {
             order.setPhoneNumber(user.getPhoneNumber());
             order.setRealName(armyOrder.getRealName());
             order.setOriginalPrice(armyOrder.getOriginalPrice());
-            return Status.success().add("armyOrder",order);
+            return Status.success().add("order",order);
         }else {
             return Status.fail(-20,"处理失败");
         }

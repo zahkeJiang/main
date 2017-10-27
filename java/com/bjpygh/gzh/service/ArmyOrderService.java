@@ -64,7 +64,7 @@ public class ArmyOrderService {
         String orderNumber ="APYGH" + year + month + date + hour + minute + second + armyOrder.getUserId();
 
         armyOrder.setOrderNumber(orderNumber);
-        armyOrder.setArmyName("漂洋过海军旅");
+        armyOrder.setArmyName("作战之日");
         //设置状态
         armyOrder.setOrderStatus(0);
 

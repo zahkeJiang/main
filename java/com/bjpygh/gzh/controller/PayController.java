@@ -86,7 +86,10 @@ public class PayController extends BaseController {
             userOrder.setOrderNumber(dsOrder.getOrderNumber());
             userOrder.setOrderName(dsOrder.getDsName());
             userOrder.setOrderTime(dsOrder.getCreateTime());
-            userOrder.setOrderDescripe(dsOrder.getDsType()+" / "+dsOrder.getModels()+" / "+dsOrder.getTrainTime());
+            userOrder.setOrderDescripe("班型: "+dsOrder.getDsType()+" / "
+                    +"驾照类型: "+dsOrder.getModels()+" / "
+                    +"学习时间: "+dsOrder.getTrainTime()+" / "
+                    +"法培方式: "+dsOrder.getNote());
             userOrder.setOrderImage(dsOrder.getImageurl());
             userOrder.setOrderStatus(dsOrder.getOrderStatus());
             userOrder.setOrderPrice(dsOrder.getOrderPrice());
@@ -96,14 +99,14 @@ public class PayController extends BaseController {
         for (VillaOrder villaOrder : villaOrders){
             UserOrder userOrder = new UserOrder();
             userOrder.setOrderNumber(villaOrder.getOrderNumber());
-            userOrder.setOrderName("漂洋过海别墅");
+            userOrder.setOrderName("漂洋过海小别墅");
             userOrder.setOrderTime(villaOrder.getCreateTime());
             String[] vs = villaOrder.getVillaName().split(",");
             String vn = "";
             for (int i=0;i<vs.length;i++){
-                vn += vs[i];
+                vn += vs[i]+" ";
             }
-            userOrder.setOrderDescripe("别墅:"+vn+" / "+
+            userOrder.setOrderDescripe("别墅: "+vn+" / "+
                     "入住人数:"+villaOrder.getPeopleNumber()+"人 / "+"入驻天数:"
                     +villaOrder.getDate().split(",").length+"晚");
             userOrder.setOrderImage(villaOrder.getImageurl());
