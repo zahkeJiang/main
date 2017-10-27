@@ -23,8 +23,8 @@ $(function(){
 			for(var j=0;j<miaosu.length;j++){
 				mioasuxinxi+= miaosu[j]+"<br />"
 			}
-			console.log(mioasuxixi);
-			$(".order-description").html(mioasuxixi);//订单描述
+			console.log(mioasuxinxi);
+			$(".order-description").html(mioasuxinxi);//订单描述
 
 			
 			$(".order-number").html("订单编号：&nbsp;"+userorder.orderNumber);//订单号码
