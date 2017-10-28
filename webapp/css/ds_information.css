@@ -13,7 +13,7 @@ html, body {
     /*height: 300px;*/
 }
 .swiper-slide {
-	padding: 2px;
+	padding: 4px;
     background-position: center;
     background-size: cover;
     width: 80%;
@@ -227,7 +227,9 @@ html, body {
 	/*margin-left:6px;*/
 }
 .dsp_infor{
+	/*background: red;*/
 	margin-bottom:8px;
+	width: 70%;
 	/*margin-left:6px;*/
 	display:flex;
 	justify-content: space-between;
@@ -242,7 +244,8 @@ html, body {
 }
 .packageid{
 	width: 20%;
-	filter:alpha(Opacity=0);-moz-opacity:0;opacity: 0;
+	/*filter:alpha(Opacity=0);-moz-opacity:0;opacity: 0;*/
+	display: none;
 }
 .price_symbol{
 	color: #4ea0ff;

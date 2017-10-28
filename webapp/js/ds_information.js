@@ -122,7 +122,7 @@ function getDs(){
                 +comment.trainTime+"</span><span class='description'>"
                 +comment.description+"</span><span class='packageid'>"
                 +comment.packageid+"</span></div><span class='priceDiv'><span  class='price_symbol'>¥</span><span class='price'>"
-                +comment.price+"</span><span class='pointzero'></span></span><div class='line'></div></div>";
+                +comment.price+"</span><span class='pointzero'></span></span></div>";
             });
             $(".container").html(dshtml);
 
