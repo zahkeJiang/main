@@ -47,18 +47,29 @@
 					<p>打发时间发生的后将会打发时间广东当时的接口部分代表机构给对方根据地块规划东方国际规定符合公开的价格好的反馈结果发电公司个打发时间发生的后将会打发时间广东当时的接口部分代表机构给对方根据地块规划东</p>
 				</div>
 				<div class="line"></div>
-				<div class="ds_address">
+				<!-- <div class="ds_address">
 					<span>地址：</span>
-					<!-- <img src="images/address.png"  height="16px"> -->
+					
 					<span class="address">北京天安门</span>
 				</div>
 				<div class="dsintro">
 					<div class="dsintro_name"></div>
 					<p></p>
 					<img src="images/ds_close.png" height='40px' width="40px">
-				</div>				
+				</div>			 -->	
+                <div class="villa-map villaBox">
+                    <div class="villa-map-title">
+                        <div id="villa-map-view"></div>
+                        <div class="villa-map-address">
+                            <span>北京市天安门</span>
+                            <span></span>
+                        </div>
+                    </div>
+            
+                </div>
 			</div>
 		</div>
+        
 		<div class="ds_type">
 			<div class="dsp_type">
                 <div class="dsp_type_Div">
@@ -111,6 +122,7 @@
 <script src="js/jquery.cookie.js" type="text/javascript"></script>
 <!--<script type="text/javascript" src="js/isWeiXin.js"></script>-->
 <script type="text/javascript" src="js/ds_information.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2&ak=您的密钥"></script>
  
  <script>
  // 轮播图
@@ -136,4 +148,41 @@
 
     });
     </script>
+
+
+
+  <script>
+  //幻灯片播放
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        // spaceBetween: 10,//幻灯片间隔
+         paginationClickable: true,
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        parallax: true,
+
+    });
+
+    // 地图显示
+    var a ="北京市天安门";
+    // 百度地图API功能
+    var map = new BMap.Map("villa-map-view");
+    var point = new BMap.Point(116.331398,39.897445);
+    map.centerAndZoom(point,10);
+    // 创建地址解析器实例
+    var myGeo = new BMap.Geocoder();
+    // 将地址解析结果显示在地图上,并调整地图视野
+    myGeo.getPoint(a, function(point){
+        if (point) {
+            map.centerAndZoom(point, 12);
+            map.addOverlay(new BMap.Marker(point));
+        }else{
+            alert("您选择地址没有解析到结果!");
+        }
+    }, "北京市");
+
+    
+   
+</script>
 </html>

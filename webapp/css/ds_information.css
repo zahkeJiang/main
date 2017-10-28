@@ -13,7 +13,7 @@ html, body {
     /*height: 300px;*/
 }
 .swiper-slide {
-	padding: 4px;
+	padding: 2px;
     background-position: center;
     background-size: cover;
     width: 80%;
@@ -273,4 +273,48 @@ html, body {
     /*text-overflow: ellipsis;  省略号*/
     white-space: nowrap;  /*单行显示*/
   	width: 4em;
+}
+
+
+/*地图*/
+/* villa-map */
+.villa-map{
+    /*height: 400px;*/
+    padding:10px 0 30px 0;
+}
+.villa-map-title{
+    position: relative;
+}
+#villa-map-view{
+    height: 160px;
+    width: 100%;
+    border-radius: 10px 10px 0px 0px;
+    /*background-color: green;*/
+}
+.villa-map-address{
+    background-color: #a6d4ff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 36px;
+    width: 90%;
+    margin-left: 5%;
+    position: absolute;
+    margin-top:-18px;
+}
+.villa-map-address span:first-child{
+    margin-left: 10px;
+    color: white;
+    height: 20px;
+    line-height: 20px;
+    flex: 1;
+    text-align: left;
+    border-right: 1px solid #ddd;
+}
+.villa-map-address span:last-child{
+    width: 40px;
+    height: 36px;
+    background: url(../images/address2.png)no-repeat center;
+    background-size: 20px;
 }
