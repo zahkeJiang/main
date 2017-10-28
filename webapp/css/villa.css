@@ -10,7 +10,7 @@ html, body {
     }
 /*轮播*/
 .swiper-slide {
-    padding: 2px;
+    padding: 4px;
     background-position: center;
     background-size: cover;
     width: 80%;
