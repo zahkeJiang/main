@@ -28,8 +28,11 @@
    overflow: hidden;
    color: #54A0FF;
 }
+
+
 .villa-provide-icon{
-   width: 20px; height:20px;
+   width: 20px; 
+   height:20px;
    vertical-align: -0.15em;
    fill: currentColor;
    overflow: hidden;
@@ -43,6 +46,7 @@
    /*background: red;*/
    color: #999;
 }
+
 </style>
 <body>
 <!-- 轮播图 -->
@@ -66,7 +70,7 @@
 <!-- 别墅信息 -->
     <div class="villa">
         <div class="villa-price">
-            <span>100元</span>
+            <span>120元</span>
             <span>起</span>
         </div>
         <div class="villa-item villaBox">
@@ -75,7 +79,7 @@
                 <ul id="villa-item-li">
                     <li>
                         <svg class="villa-item-icon" aria-hidden="true">
-                            <use xlink:href="#icon-pingdi"></use>
+                            <use xlink:href="#icon-pingdi1"></use>
                         </svg>
                         <p text="占地4万平米，由桥、地堡、哨塔、丘陵、迷宫等战区组成，可攻可守，是竞技比赛的专业战场。栈桥作为标志性建筑，同时也是著名战役七七事变中卢沟桥的缩影。再加上迷宫、地堡等特色战区，可玩性大大提升。" advice="建议战斗时长：XX分钟" joinNumber="参战人数：50人">平地掩体战</p>
                     </li>
@@ -87,7 +91,7 @@
                      </li>
                     <li>
                         <svg class="villa-item-icon" aria-hidden="true">
-                            <use xlink:href="#icon-zhanzheng"></use>
+                            <use xlink:href="#icon-shineizhanzheng"></use>
                         </svg>
                         <p text="“四行仓库”，国内唯一一个占地5000平米、上下3层的大型室内作战基地。依照上海“四行仓库”所建设，以真人游戏模拟方式重现当年800勇士奋勇抵抗日军的激烈场面。配合声光音响，最大化还原身临其境的感觉，是绝对不可错过的完美动感特区。" advice="建议战斗时长：XX分钟" joinNumber="参战人数：50人">室内作战</p>
                     </li>
@@ -106,13 +110,13 @@
                     </li>
                     <li>
                         <svg class="villa-item-icon" aria-hidden="true">
-                            <use xlink:href="#icon-icon06"></use>
+                            <use xlink:href="#icon-chengshi"></use>
                         </svg>
                         <p text="放眼一望，有没有一种迷你村落的感觉。每个独立的作战小屋，是埋伏、扫描、射击的绝佳场所，在帮自己掩护的同时也可以悄悄观察敌情。" advice="建议战斗时长：XX分钟" joinNumber="参战人数：50人">城市巷</p>
                     </li>
                     <li>
                         <svg class="villa-item-icon" aria-hidden="true">
-                            <use xlink:href="#icon-duanqiao"></use>
+                            <use xlink:href="#icon-duanqiao1"></use>
                         </svg>
                         <p text="“断桥一小步，人生一大步”。此项目是一个以个人挑战为主，高空心理冲击的项目，整个过程需要独立完成。两块宽30公分的木板，顶端间隔1.2－1.8米，木板距地面高9米，参加的学员须自一块木板跃起跨到另一木板上并返回。" advice="建议战斗时长：XX分钟" joinNumber="参战人数：50人">高空断桥</p>
                     </li>
@@ -186,14 +190,14 @@
                 </div>
             </div>
             <ul>
-                <li><a href="villa_roomCode.html">退订须知</a></li>
-                <li><a href="villa_roomCode.html">参战守则</a>|</li>
+                <li><a href="army_knowRefund.html">退订须知</a></li>
+                <li><a href="army_knowCode.html">参战守则</a>|</li>
                 <!-- <li id="assess"><a>评价</a>|</li> -->
             </ul>
         </div>
         <div class="villa-additional-price villaBox">
             <h2>额外费用</h2>
-            <p>说明</p>
+            <a href="army_expalain.html">说明</a>
         </div>
         <!-- 显示评论 -->
         <div class="assessBox villaBox">
@@ -217,7 +221,7 @@
         <div class="sit-calendar">
             <div class="sit-calendar-title">
                 <svg class="sit-pre-month" aria-hidden="true">
-                    <use xlink:href="#icon-erjiyemianjiantou01"></use>
+                    <use xlink:href="#icon-jiantou1"></use>
                 </svg>
                 <div class="sit-date"></div>
                 <svg class="sit-next-month" aria-hidden="true">
@@ -250,7 +254,7 @@
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         // spaceBetween: 10,//幻灯片间隔
-         paginationClickable: true,
+        paginationClickable: true,
         grabCursor: true,
         centeredSlides: true,
         slidesPerView: 'auto',
@@ -279,4 +283,9 @@
     
    
 </script>
+<!-- <script type="text/javascript">
+$(".swiper-slide-active").css({"transform":"scale(1)"});
+$(".swiper-slide-next").css({"transform":"scale(0.9)"});
+$(".swiper-slide-prev").css({"transform":"scale(0.9)"});
+</script> -->
 </html>

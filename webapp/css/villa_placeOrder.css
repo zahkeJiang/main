@@ -3,7 +3,7 @@ html, body {
     /*height: 100%;*/
     background:#B4DADA;
     color: #999;
-    font-family: "兰亭黑";
+    font-family: "微软雅黑";
 }
 .villaBox{
     border-radius: 10px;
@@ -73,9 +73,24 @@ html, body {
 .villa-information div.villa-pic{
 	width: 48px;
 	height: 48px;
-	background: red;
 	border-radius: 10px;
 	margin:10px 10px 10px 0;
+}
+.villa-information div.villa-pic img{
+	border-radius: 10px;
+	width: 48px;
+}
+.villa-information div.villa-pic1{
+	background:url(../images/armyImages/one.jpg)no-repeat center;
+	background-size: 100% 100%;
+}
+.villa-information div.villa-pic2{
+	background:url(../images/armyImages/two.jpg)no-repeat center;
+	background-size: 100% 100%;
+}
+.villa-information div.villa-pic3{
+	background:url(../images/armyImages/three.jpg)no-repeat center;
+	background-size: 100% 100%;
 }
 .villa-information div.villa-choose{
 

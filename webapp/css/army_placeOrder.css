@@ -33,7 +33,30 @@ html, body {
 	line-height: 32px;
 	margin:0 10px;
 }
+.army-barbecue{
 
+	display: flex;
+	align-items: center;
+}
+.army-barbecue div.army-barbecue-title{
+	height: 32px;
+	width: 40px;
+	font-size: 16px;
+	color: #555;
+	/*text-align: center;*/
+	line-height: 32px;
+	margin:0 10px;
+}
+.army-barbecue div.army-barbecue-choose{
+	height: 18px;
+	width: 18px;
+	background:url(../images/circle.png);
+	background-size: 100%;
+}
+.army-barbecue div.army-barbecue-choose img{
+	height: 18px;
+	width: 18px;
+}
 .army-information{
 	display: flex;
 	align-items: center;
@@ -360,7 +383,7 @@ html, body {
 	width: 60%;
 	align-items: center;
 }
-.detailBox-indoor-hint,.detailBox-tend-hint,.detailBox-liVilla-hint,.detailBox-secure-hint{
+.detailBox-indoor-hint,.detailBox-tend-hint,.detailBox-liVilla-hint,.detailBox-secure-hint,.detailBox-barbecue-hint{
 	line-height: 20px;
 	font-size: 12px;
 	margin-left: 10px;
@@ -421,4 +444,29 @@ input[name='Reserve1Radio']{
 /*京东支付*/
 #batchForm{
 	display: none;
+}
+
+
+/*退款政策*/
+.villa-refund{
+    padding: 10px;
+}
+
+
+.villa-refund h3{
+    font-size: 16px;
+    color: #555;
+    line-height: 20px;
+}
+
+.villa-refund li{
+    font-size: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    margin:0 2em;
+    line-height: 18px;
+
+}
+.villa-refund li:last-child{
+    border-bottom: 0;
 }
