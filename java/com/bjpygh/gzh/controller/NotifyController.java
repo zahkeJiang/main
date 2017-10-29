@@ -297,7 +297,8 @@ public class NotifyController extends BaseController {
             order.setOrderPrice(armyOrder.getArmyPrice());
             order.setOrderStatus(armyOrder.getOrderStatus());
             order.setOrderImage(armyOrder.getImageurl());
-            order.setOrderDescripe(armyOrder.getNote());
+            order.setOrderDescripe("参与人数: "+armyOrder.getPeopleNumber()+"人 / "
+                    +"参与天数: "+armyOrder.getDate().split(",").length+"晚");
             order.setOrderTime(armyOrder.getCreateTime());
             order.setOrderName(armyOrder.getArmyName());
             order.setOrderNumber(armyOrder.getOrderNumber());

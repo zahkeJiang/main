@@ -38,13 +38,17 @@ public class ArmyOrderService {
         }
         int insurance = 0;
         if (armyOrder.getInsurance()>0){
-            insurance= 15*armyOrder.getInsurance()*dates.length;
+            insurance = 15*armyOrder.getInsurance()*dates.length;
+        }
+        int barbecue = 0;
+        if (armyOrder.getBarbecue()==1){
+            barbecue = 10*armyOrder.getPeopleNumber();
         }
 
         if (armyOrder.getFullAmount()==1)
-            armyOrder.setArmyPrice(sum+insurance);
+            armyOrder.setArmyPrice(sum+insurance+barbecue);
         else
-            armyOrder.setArmyPrice(sum/2+insurance);
+            armyOrder.setArmyPrice(sum/2+insurance+barbecue);
 
         //创建时间
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

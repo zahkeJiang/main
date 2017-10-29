@@ -34,6 +34,7 @@ public class TestJob {
                 }
             }
 
+            //检测订单是否已完成
             List<VillaOrder> pay = villaOrderService.getPay();
             for (VillaOrder v : pay){
                 Date d2 = formatter.parse(v.getDate().split(",")[0]);
@@ -42,6 +43,18 @@ public class TestJob {
                     villaOrderService.updateOrder(v);
                 }
             }
+
+            //检测已收到材料订单
+            List<DsOrder> dsFinish = dsOrderService.getFinish();
+            if (dsFinish.size()>0){
+                for (DsOrder ds : dsFinish){
+                    Date d = formatter.parse(ds.getGetTime());
+                    if (time-d.getTime()>604800000L){
+                        dsOrderService.updateOrderStatusFinish(ds.getOrderNumber());
+                    }
+                }
+            }
+
         }catch(Exception ex){
 //            ex.printStackTrace();
         }

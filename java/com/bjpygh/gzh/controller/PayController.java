@@ -86,10 +86,9 @@ public class PayController extends BaseController {
             userOrder.setOrderNumber(dsOrder.getOrderNumber());
             userOrder.setOrderName(dsOrder.getDsName());
             userOrder.setOrderTime(dsOrder.getCreateTime());
-            userOrder.setOrderDescripe("班型: "+dsOrder.getDsType()+" / "
-                    +"驾照类型: "+dsOrder.getModels()+" / "
-                    +"学习时间: "+dsOrder.getTrainTime()+" / "
-                    +"法培方式: "+dsOrder.getNote());
+            userOrder.setOrderDescripe(dsOrder.getDsType()+" / "
+                    +dsOrder.getModels()+" / "
+                    +dsOrder.getTrainTime());
             userOrder.setOrderImage(dsOrder.getImageurl());
             userOrder.setOrderStatus(dsOrder.getOrderStatus());
             userOrder.setOrderPrice(dsOrder.getOrderPrice());
@@ -116,7 +115,8 @@ public class PayController extends BaseController {
             userOrder.setOrderNumber(armyOrder.getOrderNumber());
             userOrder.setOrderName(armyOrder.getArmyName());
             userOrder.setOrderTime(armyOrder.getCreateTime());
-            userOrder.setOrderDescripe(armyOrder.getNote());
+            userOrder.setOrderDescripe(armyOrder.getPeopleNumber()+"人 / "
+                    +armyOrder.getDate().split(",").length+"晚");
             userOrder.setOrderImage(armyOrder.getImageurl());
             userOrder.setOrderStatus(armyOrder.getOrderStatus());
             userOrder.setOrderPrice(armyOrder.getArmyPrice());

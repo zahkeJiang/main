@@ -47,6 +47,8 @@ public class ArmyOrder {
 
     private Byte fullAmount;
 
+    private Byte barbecue;
+
     public Integer getArmyId() {
         return armyId;
     }
@@ -221,5 +223,13 @@ public class ArmyOrder {
 
     public void setFullAmount(Byte fullAmount) {
         this.fullAmount = fullAmount;
+    }
+
+    public Byte getBarbecue() {
+        return barbecue;
+    }
+
+    public void setBarbecue(Byte barbecue) {
+        this.barbecue = barbecue;
     }
 }

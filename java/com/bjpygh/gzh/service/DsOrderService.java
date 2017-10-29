@@ -98,4 +98,20 @@ public class DsOrderService {
         map.put("refundTime",formatter.format(new Date()));
         dsOrderMapper.updateOrderStatus(map);
     }
+
+    public List<DsOrder> getFinish() {
+        DsOrderExample example = new DsOrderExample();
+        DsOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderStatusEqualTo("3");
+        return dsOrderMapper.selectByExample(example);
+    }
+
+    public void updateOrderStatusFinish(String ordernumber) {
+        Map<String, String> map = new HashMap();
+        map.put("orderNumber",ordernumber);
+        map.put("orderStatus","4");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        map.put("refundTime",formatter.format(new Date()));
+        dsOrderMapper.updateOrderStatus(map);
+    }
 }
