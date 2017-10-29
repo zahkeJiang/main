@@ -75,11 +75,17 @@ html, body {
 	text-align: center;
 }
 .ds_information p{
+	overflow-x:scroll;
 	margin:0 20px;
+	/*padding: 4px 0;*/
+	height: 80px;
 	line-height: 20px;
 	font-size: 14px;
 	text-align: left;
 	margin-bottom: 10px;
+}
+.ds_information p::-webkit-scrollbar {/*隐藏滚动条*/
+    display: none;
 }
 .ds_address{
 	font-size: 14px;

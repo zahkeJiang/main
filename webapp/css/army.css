@@ -3,7 +3,7 @@ html, body {
     /*height: 100%;*/
     background:#B4DADA;
     color: #999;
-    font-family: "兰亭黑";
+    font-family: "微软雅黑";
 }
 .swiper-container {
         width: 100%;
@@ -208,7 +208,7 @@ html, body {
 .ontime p:nth-child(2){
     height: 24px;
     line-height: 24px;
-     /*width: 84px;*/
+     width: 84px;
     color: #54A0FF;
     font-size: 14px;
          margin-left:4px;
@@ -220,8 +220,8 @@ html, body {
     line-height: 24px;
     color:orange;
          margin-left:4px;
-     /*width: 84px;*/
-    padding: 0 10px;
+     width: 84px;
+    /*padding: 0 10px;*/
     background:#dfdfdf;
 }
 .villa-map ul{

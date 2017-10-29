@@ -3,7 +3,7 @@ html, body {
 /*    height: 100%;*/
     background:#B4DADA;
     color: #999;
-    font-family: "兰亭黑";
+    font-family: "微软雅黑";
 }
 .swiper-container {
         width: 100%;
@@ -187,20 +187,20 @@ html, body {
 .ontime p:nth-child(2){
     height: 24px;
     line-height: 24px;
-     /*width: 60px;*/
+     width: 84px;
     color: #4ea0ff;
     font-size: 14px;
     margin-left:4px;
-    padding: 0 10px;
+    /*padding: 0 10px;*/
     background:#dfdfdf;
 }
 .outtime p:nth-child(2){
     height: 24px;
     line-height: 24px;
     color:orange;
-     /*width: 60px;*/
+     width: 84px;
      margin-left:4px;
-    padding: 0 10px;
+    /*padding: 0 10px;*/
     background:#dfdfdf;
 }
 .villa-map ul{
