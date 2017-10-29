@@ -27,7 +27,14 @@ html, body {
     /*height: 100%;*/
     border-radius: 10px;
 }
+.swiper-container-android .swiper-slide-next,.swiper-container-android .swiper-slide-prev{
+    transform: scale(0.9,0.9);
 
+    -moz-transition: all .5s ease-out;
+    -webkit-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    transition: all .5s ease-out;
+} 
 .swiper-slide-next,.swiper-slide-prev{
     transform: scale(0.9);
     -moz-transition: all .5s ease-out;

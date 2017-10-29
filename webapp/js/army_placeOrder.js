@@ -108,9 +108,6 @@ $(function(){
         //当报名日期改动时，修改金额
        getPrice();  
     
-
-
-
     });
     
     $('.otherMonth').on('click',function(e){
@@ -210,6 +207,15 @@ $(function(){
        getPrice();
     });
 
+    //是否选择
+    $(".army-barbecue-choose").click(function(){
+        if ($(this).find("img").length==0) {
+            $(this).html("<img src='./images/circle_choose.png'>");
+        }else{
+            $(this).empty();
+        }
+        getPrice();//计算总价
+    });
 //全额支付与预约定金
     $(".Reserve-row").click(function(){
         $(this).children(".Reserve1").html("<img src='./images/circle_choose.png' height='18px' width='18px'>");
@@ -437,8 +443,13 @@ $(function(){
         var indoor = $(".indoor").html();//室内人数
         var nosleep = $(".nosleep").html();//不住宿人数
         var reserve = $("input[name='Reserve1Radio']:checked").val();//付款类型，1全额，或0预约定金
+        if ($(".army-barbecue-choose").find("img").length==0) {
+            var barbecueChoose = 0;//没有选中烧烤
+        }else{
+            var barbecueChoose = 1;//选中烧烤
+        }
         if (payMode=="JD") {//京东支付
-            $.post("createArmyOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"insurance":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor,"fullAmount":reserve},function(datas){
+            $.post("createArmyOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"insurance":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor,"fullAmount":reserve,"barbecue":barbecueChoose},function(datas){
                 if (datas.status==0) {
                     var orderNumber = datas.data.orderNumber;
                     console.log(orderNumber);
@@ -471,7 +482,7 @@ $(function(){
                 }
             },"json");
         }else if (payMode=="aliPay") {//支付宝支付
-            $.post("createArmyOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"insurance":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor,"fullAmount":reserve},function(datas){
+            $.post("createArmyOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"insurance":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor,"fullAmount":reserve,"barbecue":barbecueChoose},function(datas){
                 if (datas.status==0) {
                     var orderNumber = datas.data.orderNumber;
                     console.log(orderNumber);
@@ -505,25 +516,32 @@ function getPrice(){
         }else{
             secureNumber=0;
         }
+        if ($(".army-barbecue-choose").find("img").length==0) {
+            var barbecueChoose = 0;//没有选中烧烤
+        }else{
+            var barbecueChoose = 1;//选中烧烤
+        }
         var tendNumber = $(".tend").html();//帐篷人数
         var indoorNumber = $(".indoor").html();//室内人数
         var selectDay = $(".currentMonth0").children(".selectedDay").length;//报名天数
         if (re.test(peopleNumber) && peopleNumber>0 &&selectDay>0) {
-            $(".detailBox-liVilla").html("¥"+100*peopleNumber*selectDay);$(".detailBox-liVilla-hint").html("(100元x"+peopleNumber+"人x"+selectDay+"晚)")//军旅基础费用
+            $(".detailBox-liVilla").html("¥"+120*peopleNumber*selectDay);$(".detailBox-liVilla-hint").html("(120元x"+peopleNumber+"人x"+selectDay+"晚)")//军旅基础费用
+            $(".detailBox-barbecue").html("¥"+10*barbecueChoose*peopleNumber*selectDay);$(".detailBox-barbecue-hint").html("(10元x"+barbecueChoose*peopleNumber+"人x"+selectDay+"晚)")//烧烤费用
             $(".detailBox-tend").html("¥"+20*tendNumber*selectDay);$(".detailBox-tend-hint").html("(20元x"+tendNumber+"人x"+selectDay+"晚)")//帐篷费用
             $(".detailBox-indoor").html("¥"+40*indoorNumber*selectDay);$(".detailBox-indoor-hint").html("(40元x"+indoorNumber+"人x"+selectDay+"晚)")//室内费用
             $(".detailBox-secure").html("¥"+15*secureNumber);$(".detailBox-secure-hint").html("(15元x"+secureNumber+"人)")//室内费用
             
             if (reserve==0) {
                 $(".reserve1-mode").html("付款类型：预约定金");
-                $("#footer-price").html("¥"+(Math.ceil((100*peopleNumber*selectDay+20*tendNumber*selectDay+40*indoorNumber*selectDay)/2)+15*secureNumber));
+                $("#footer-price").html("¥"+(Math.ceil((120*peopleNumber*selectDay+10*barbecueChoose*peopleNumber*selectDay+20*tendNumber*selectDay+40*indoorNumber*selectDay)/2)+15*secureNumber));
             }else{
                 $(".reserve1-mode").html("付款类型：全额支付");
-                $("#footer-price").html("¥"+(100*peopleNumber*selectDay+20*tendNumber*selectDay+40*indoorNumber*selectDay+15*secureNumber));
+                $("#footer-price").html("¥"+(120*peopleNumber*selectDay+10*barbecueChoose*peopleNumber*selectDay+20*tendNumber*selectDay+40*indoorNumber*selectDay+15*secureNumber));
             }
         }else{
             $("#footer-price").html("¥0");
             $(".detailBox-liVilla").html("¥0");$(".detailBox-liVilla-hint").empty();
+            $(".detailBox-barbecue").html("¥0");$(".detailBox-barbecue-hint").empty();
             $(".detailBox-tend").html("¥0");$(".detailBox-tend-hint").empty()
             $(".detailBox-indoor").html("¥0");$(".detailBox-indoor-hint").empty();
             $(".detailBox-secure").html("¥0");$(".detailBox-secure-hint").empty();
