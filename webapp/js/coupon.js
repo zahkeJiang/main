@@ -10,12 +10,12 @@ $(function(){
 function renovation(){
 	$.post("queryCoupon.action",{},function(obj){
         $(".container").html("");
-		if (obj.status=="-40") {
+		if (obj.status=="-40") {//没有优惠券
 			var coupon_hint = "<div class='coupons_hint_box'><div class='coupon_hint'><div class='nohint'><p class='nohint_no'>没有券</p><p class='nohint_look'>去优惠活动里进行看看吧</p><a href='lottery.html'>去看看</a></div></div></div>"
 			$(".container").html(coupon_hint);
 		}else{
 			
-			if (obj.status == "0") {
+			if (obj.status == "0") {//未过期，正常
                 //没过期显示正常图片
                 if (obj.data.price=="200") {
                     var coupon_pic = "<img src='images/ds_coupon_02.png'>";
@@ -35,18 +35,18 @@ function renovation(){
     			$(".use_coupon").click(function(){
     				window.location.href="index.html";
     			});
-    		}else if (obj.status == "-20") {
+    		}else if (obj.status == "-20") {//过期
                 //过期显示不同图片
                 if (obj.data.price=="200") {
-                    var coupon_pic = "<img src='images/ds_coupon_02.png'>";
+                    var coupon_pic = "<img src='images/ds_coupon_02off.png'>";
                 }else if (obj.data.price=="300") {
-                    var coupon_pic = "<img src='images/ds_coupon_03.png'>";
+                    var coupon_pic = "<img src='images/ds_coupon_03off.png'>";
                 }else if (obj.data.price=="500") {
-                    var coupon_pic = "<img src='images/ds_coupon_05.png'>";
+                    var coupon_pic = "<img src='images/ds_coupon_05off.png'>";
                 }else if (obj.data.price=="600") {
-                 var coupon_pic = "<img src='images/ds_coupon_06.png'>";
+                 var coupon_pic = "<img src='images/ds_coupon_06off.png'>";
                 }else if (obj.data.price=="1000") {
-                    var coupon_pic = "<img src='images/ds_coupon_10.png'>";
+                    var coupon_pic = "<img src='images/ds_coupon_10off.png'>";
                 }
                 var coupon = "<div class='coupon'><div class='couponBox'>"+coupon_pic+"</div><div class='coupon_hint_text'><h2>优惠提示:</h2><p>30天有效期，从领取日开始计时。</p><p>若优惠券已过期，使用会员积分激活后即可使用。</p></div><div class='use_coupon'></div></div>"
                 $(".container").html(coupon);
@@ -54,20 +54,20 @@ function renovation(){
 
     			$(".use_coupon").html("已过期，立即激活");
     			$(".use_coupon").click(function(){
-    				var confirmtext = confirm("即将扣除您的会员积分(15积分)，是否确认激活？"); 
-					if(confirmtext==true){
-						$.post("activation.action",{},function(obj){
-							if (obj.status == "0") {
-								alert("激活成功");
-								renovation();
-							}else{
-								alert("激活失败,可前往“你-会员”中查看您的会员积分。");
-							}
-						},"json");
-					}
-    				
+                    alert("暂不可激活");
+    	// 			var confirmtext = confirm("即将扣除您的会员积分(15积分)，是否确认激活？"); 
+					// if(confirmtext==true){
+					// 	$.post("activation.action",{},function(obj){
+					// 		if (obj.status == "0") {
+					// 			alert("激活成功");
+					// 			window.location.href="coupon.html";
+					// 		}else{
+					// 			alert("激活失败,可前往“你-会员”中查看您的会员积分。");
+					// 		}
+					// 	},"json");
+					// }
 				});	
-    		}else if (obj.status == "-30") {
+    		}else if (obj.status == "-30") {//已使用优惠券
                 //已使用显示不同图片
                 if (obj.data.price=="200") {
                     var coupon_pic = "<img src='images/ds_coupon_price_bg.png.png'>";
