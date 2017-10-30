@@ -142,6 +142,7 @@ html, body {
 }
 .villa-map-title{
     position: relative;
+        border-radius: 10px 10px 0px 0px;
 }
 #villa-map-view{
     height: 160px;
@@ -237,7 +238,7 @@ html, body {
 }
 /*date*/
 .date{
-    margin-bottom: 58px;
+    margin-bottom: 20px;
     padding: 10px 20px;
 }
 /*底部footer*/
@@ -293,7 +294,22 @@ html, body {
     border:0;
 }
 
+<<<<<<< HEAD
 /*去高德地图logo的样式*/
 .amap-logo,.amap-copyright{
     display: none!important;
+=======
+/*底部电话*/
+
+.footerTel{
+    margin-bottom: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+}
+.footerTel a{
+    color: white;
+>>>>>>> f42f7c39f336ba757cb789698c2be6c0f13ffc00
 }
