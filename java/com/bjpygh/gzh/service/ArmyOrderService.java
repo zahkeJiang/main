@@ -33,7 +33,7 @@ public class ArmyOrderService {
 //            Date d = new Date(Integer.parseInt(ds[0]),Integer.parseInt(ds[1]),Integer.parseInt(ds[2]));
             int roomNumber = armyOrder.getRoomNumber();
             int noRoomNumber = armyOrder.getNoroomNumber();
-            armyPrice = roomNumber*140+noRoomNumber*100+(armyOrder.getPeopleNumber()-roomNumber-noRoomNumber)*120;
+            armyPrice = roomNumber*160+noRoomNumber*120+(armyOrder.getPeopleNumber()-roomNumber-noRoomNumber)*140;
             sum += armyPrice;
         }
         int insurance = 0;
@@ -132,7 +132,7 @@ public class ArmyOrderService {
 
             VillaPrice villaPrice = new VillaPrice();
             villaPrice.setDate(i+1+"");
-            villaPrice.setPrice("100");
+            villaPrice.setPrice("120");
             villaPrices.add(villaPrice);
         }
         return villaPrices;
