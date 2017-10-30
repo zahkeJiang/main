@@ -102,6 +102,7 @@ html, body {
     height: 48px;
     min-width: 80px;
 }
+
 .villa-item-li-traingle{
     position: absolute;
     z-index: 100;
@@ -165,6 +166,7 @@ html, body {
 }
 .villa-map-title{
     position: relative;
+    border-radius: 10px 10px 0px 0px;
 }
 #villa-map-view{
     height: 160px;
@@ -264,7 +266,7 @@ html, body {
 }
 /*date*/
 .date{
-    margin-bottom: 58px;
+    margin-bottom: 20px;
     padding: 10px 20px;
 }
 /*底部footer*/
@@ -318,4 +320,17 @@ html, body {
 #icon{
     border-radius: 50%;
     border:0;
+}
+/*底部电话*/
+
+.footerTel{
+    margin-bottom: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+}
+.footerTel a{
+    color: white;
 }
