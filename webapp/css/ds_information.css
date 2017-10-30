@@ -327,3 +327,8 @@ html, body {
     background: url(../images/address2.png)no-repeat center;
     background-size: 20px;
 }
+
+/*去高德地图logo的样式*/
+.amap-logo,.amap-copyright{
+    display: none!important;
+}
