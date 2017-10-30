@@ -283,7 +283,7 @@
               bubble:true
           })
 
-          var address = "昌平区真顺村";
+          var address = "北京市海淀区香山北正黄旗18号";
           geocoder.getLocation(address,function(status,result){
               if(status=='complete'&&result.geocodes.length){
                   marker.setPosition(result.geocodes[0].location);
