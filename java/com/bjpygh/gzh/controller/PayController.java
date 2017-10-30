@@ -86,7 +86,9 @@ public class PayController extends BaseController {
             userOrder.setOrderNumber(dsOrder.getOrderNumber());
             userOrder.setOrderName(dsOrder.getDsName());
             userOrder.setOrderTime(dsOrder.getCreateTime());
-            userOrder.setOrderDescripe(dsOrder.getDsType()+" / "+dsOrder.getModels()+" / "+dsOrder.getTrainTime());
+            userOrder.setOrderDescripe(dsOrder.getDsType()+" / "
+                    +dsOrder.getModels()+" / "
+                    +dsOrder.getTrainTime());
             userOrder.setOrderImage(dsOrder.getImageurl());
             userOrder.setOrderStatus(dsOrder.getOrderStatus());
             userOrder.setOrderPrice(dsOrder.getOrderPrice());
@@ -96,10 +98,11 @@ public class PayController extends BaseController {
         for (VillaOrder villaOrder : villaOrders){
             UserOrder userOrder = new UserOrder();
             userOrder.setOrderNumber(villaOrder.getOrderNumber());
-            userOrder.setOrderName("漂洋过海别墅");
+            userOrder.setOrderName("漂洋过海小别墅");
             userOrder.setOrderTime(villaOrder.getCreateTime());
-            userOrder.setOrderDescripe(villaOrder.getVillaName().split(",").length+"栋 / "+
-                    villaOrder.getPeopleNumber()+"人 / "+
+            String[] vs = villaOrder.getVillaName().split(",");
+
+            userOrder.setOrderDescripe(vs.length+"栋 / "+villaOrder.getPeopleNumber()+"人 / "
                     +villaOrder.getDate().split(",").length+"晚");
             userOrder.setOrderImage(villaOrder.getImageurl());
             userOrder.setOrderStatus(villaOrder.getOrderStatus());
@@ -112,7 +115,8 @@ public class PayController extends BaseController {
             userOrder.setOrderNumber(armyOrder.getOrderNumber());
             userOrder.setOrderName(armyOrder.getArmyName());
             userOrder.setOrderTime(armyOrder.getCreateTime());
-            userOrder.setOrderDescripe(armyOrder.getNote());
+            userOrder.setOrderDescripe(armyOrder.getPeopleNumber()+"人 / "
+                    +armyOrder.getDate().split(",").length+"晚");
             userOrder.setOrderImage(armyOrder.getImageurl());
             userOrder.setOrderStatus(armyOrder.getOrderStatus());
             userOrder.setOrderPrice(armyOrder.getArmyPrice());
@@ -221,7 +225,7 @@ public class PayController extends BaseController {
             long time = new Date().getTime();
             Date d = formatter.parse(villaOrder.getDate().split(",")[0]);
             //判断是否再五个自然日之内
-            if (time-d.getTime()>432000000L){
+            if (d.getTime()-time<432000000L){
                 //判断是否为全额付款
                 if (villaOrder.getFullAmount()==1){
                     refund_amount =  ""+villaOrder.getOriginalPrice()/2;
@@ -291,10 +295,27 @@ public class PayController extends BaseController {
             }
         }else if (o.equals("A")){
             ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(out_trade_no).get(0);
-            if(armyOrder.getOrderStatus() == 3){
-                return Status.fail(-30,"报名已完成");
+            if(armyOrder.getOrderStatus() == 4||armyOrder.getOrderStatus() == 7){
+                return Status.fail(-30,"订单已完成");
             }
-            String refund_amount=""+armyOrder.getArmyPrice();
+            String refund_amount;
+            long time = new Date().getTime();
+            Date d = formatter.parse(armyOrder.getDate().split(",")[0]);
+            //判断是否再三个自然日之内
+            if (d.getTime()-time<259200000L){
+                if (armyOrder.getFullAmount()==1){
+                    refund_amount = ""+(int)(armyOrder.getOriginalPrice()*0.85);
+                } else {
+                    refund_amount = ""+(int)(armyOrder.getOriginalPrice()*0.35);
+                }
+            }else {
+                if (armyOrder.getFullAmount()==1){
+                    refund_amount = ""+armyOrder.getArmyPrice();
+                } else {
+                    refund_amount = ""+armyOrder.getArmyPrice();
+                }
+            }
+
             if (armyOrder.getPayType()==0){
                 if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
                     //改变订单状态
@@ -459,7 +480,7 @@ public class PayController extends BaseController {
     //支付宝支付请求方法
     public void requesetAlipay(HttpServletResponse response,String ordernumber,
         String subject,String body,String price,String product_code,String notify_url) throws IOException {
-        response.setContentType("text/html;charset=utf-8" + AlipayConfig.CHARSET);
+        response.setContentType("text/html;charset=" + AlipayConfig.CHARSET);
         PrintWriter out = response.getWriter();
 
         String timeout_express="2m";

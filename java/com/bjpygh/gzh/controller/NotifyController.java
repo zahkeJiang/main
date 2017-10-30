@@ -250,11 +250,16 @@ public class NotifyController extends BaseController {
             order.setOrderPrice(villaOrder.getVillaPrice());
             order.setOrderStatus(villaOrder.getOrderStatus());
             order.setOrderImage(villaOrder.getImageurl());
-            order.setOrderDescripe(villaOrder.getVillaName().split(",").length+"栋 / "+
-                    villaOrder.getPeopleNumber()+"人 / "+
+            String[] vs = villaOrder.getVillaName().split(",");
+            String vn = "";
+            for (int i=0;i<vs.length;i++){
+                vn += vs[i];
+            }
+            order.setOrderDescripe("别墅: "+vn+" / "+
+                    "入住人数: "+villaOrder.getPeopleNumber()+"人 / "+"入驻天数: "
                     +villaOrder.getDate().split(",").length+"晚");
             order.setOrderTime(villaOrder.getCreateTime());
-            order.setOrderName("漂洋过海别墅");
+            order.setOrderName("漂洋过海小别墅");
             order.setOrderNumber(villaOrder.getOrderNumber());
             order.setPhoneNumber(user.getPhoneNumber());
             order.setRealName(villaOrder.getRealName());
@@ -272,7 +277,10 @@ public class NotifyController extends BaseController {
             order.setOrderPrice(dsOrder.getOrderPrice());
             order.setOrderStatus(dsOrder.getOrderStatus());
             order.setOrderImage(dsOrder.getImageurl());
-            order.setOrderDescripe(dsOrder.getDsType()+" / "+dsOrder.getModels()+" / "+dsOrder.getTrainTime());
+            order.setOrderDescripe("班型: "+dsOrder.getDsType()+" / "
+                    +"驾照类型: "+dsOrder.getModels()+" / "
+                    +"学习时间: "+dsOrder.getTrainTime()+" / "
+                    +"法培方式: "+dsOrder.getNote());
             order.setOrderTime(dsOrder.getCreateTime());
             order.setOrderName(dsOrder.getDsName());
             order.setOrderNumber(dsOrder.getOrderNumber());
@@ -289,14 +297,15 @@ public class NotifyController extends BaseController {
             order.setOrderPrice(armyOrder.getArmyPrice());
             order.setOrderStatus(armyOrder.getOrderStatus());
             order.setOrderImage(armyOrder.getImageurl());
-            order.setOrderDescripe(armyOrder.getNote());
+            order.setOrderDescripe("参与人数: "+armyOrder.getPeopleNumber()+"人 / "
+                    +"参与天数: "+armyOrder.getDate().split(",").length+"晚");
             order.setOrderTime(armyOrder.getCreateTime());
             order.setOrderName(armyOrder.getArmyName());
             order.setOrderNumber(armyOrder.getOrderNumber());
             order.setPhoneNumber(user.getPhoneNumber());
             order.setRealName(armyOrder.getRealName());
             order.setOriginalPrice(armyOrder.getOriginalPrice());
-            return Status.success().add("armyOrder",order);
+            return Status.success().add("order",order);
         }else {
             return Status.fail(-20,"处理失败");
         }

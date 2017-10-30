@@ -1494,6 +1494,66 @@ public class ArmyOrderExample {
             addCriterion("full_amount not between", value1, value2, "fullAmount");
             return (Criteria) this;
         }
+
+        public Criteria andBarbecueIsNull() {
+            addCriterion("barbecue is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBarbecueIsNotNull() {
+            addCriterion("barbecue is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBarbecueEqualTo(Byte value) {
+            addCriterion("barbecue =", value, "barbecue");
+            return (Criteria) this;
+        }
+
+        public Criteria andBarbecueNotEqualTo(Byte value) {
+            addCriterion("barbecue <>", value, "barbecue");
+            return (Criteria) this;
+        }
+
+        public Criteria andBarbecueGreaterThan(Byte value) {
+            addCriterion("barbecue >", value, "barbecue");
+            return (Criteria) this;
+        }
+
+        public Criteria andBarbecueGreaterThanOrEqualTo(Byte value) {
+            addCriterion("barbecue >=", value, "barbecue");
+            return (Criteria) this;
+        }
+
+        public Criteria andBarbecueLessThan(Byte value) {
+            addCriterion("barbecue <", value, "barbecue");
+            return (Criteria) this;
+        }
+
+        public Criteria andBarbecueLessThanOrEqualTo(Byte value) {
+            addCriterion("barbecue <=", value, "barbecue");
+            return (Criteria) this;
+        }
+
+        public Criteria andBarbecueIn(List<Byte> values) {
+            addCriterion("barbecue in", values, "barbecue");
+            return (Criteria) this;
+        }
+
+        public Criteria andBarbecueNotIn(List<Byte> values) {
+            addCriterion("barbecue not in", values, "barbecue");
+            return (Criteria) this;
+        }
+
+        public Criteria andBarbecueBetween(Byte value1, Byte value2) {
+            addCriterion("barbecue between", value1, value2, "barbecue");
+            return (Criteria) this;
+        }
+
+        public Criteria andBarbecueNotBetween(Byte value1, Byte value2) {
+            addCriterion("barbecue not between", value1, value2, "barbecue");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

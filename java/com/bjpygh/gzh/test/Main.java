@@ -48,16 +48,17 @@ public class Main {
 //            System.out.println(u.getOrderNumber());
 //        }
 //------------------------------------------------------------------------------
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        try {
-//            Date date1 = sdf.parse("2017-10-29");
-//
-//            System.out.println(date1.getDay());
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-        int a = 1887;
-        System.out.println(""+(a/2));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date1 = sdf.parse("2017-10-22");
+            Date date2 = sdf.parse("2017-10-29");
+
+            System.out.println(date2.getTime()-date1.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+//        int a = 1887;
+//        System.out.println(""+(a/2));
         //-------------------------------------------------------------------------------
 
 //        ThreeDES threeDES = new ThreeDES();
