@@ -254,6 +254,8 @@ $(function(){
         //更改报名人数时，将对总价进行调整
                     getPrice();
     });
+
+    //军旅不设立保险，所有注掉
     // $(".villa-secure-content input").bind('input porpertychange',function(){
     //     //更改购买保险人数时，将对总价进行调整
     //                 getPrice();

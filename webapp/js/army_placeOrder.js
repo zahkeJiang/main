@@ -178,6 +178,15 @@ $(function(){
 
     });
 
+//保单说明的弹窗   
+    $(".secureHint").click(function(){
+        $(".layer").show();
+        $(".secureHintPopup").show(); 
+    });
+    $(".secureHintPopupDiv img").click(function(){
+        $(".layer").hide();
+        $(".secureHintPopup").hide(); 
+    });
 
 
 //选择人数，帐篷，室内，等 ,时时监听变动
@@ -207,15 +216,13 @@ $(function(){
        getPrice();
     });
 
-    //是否选择
-    $(".army-barbecue-choose").click(function(){
-        if ($(this).find("img").length==0) {
-            $(this).html("<img src='./images/circle_choose.png'>");
-        }else{
-            $(this).empty();
-        }
-        getPrice();//计算总价
+    //是否选择烧烤
+        $(".barbecue-row").click(function(){
+        $(this).children(".barbecue1").html("<img src='./images/circle_choose.png' height='18px' width='18px'>");
+        $(this).parents().siblings("label").find(".barbecue1").empty();
+        getPrice();
     });
+
 //全额支付与预约定金
     $(".Reserve-row").click(function(){
         $(this).children(".Reserve1").html("<img src='./images/circle_choose.png' height='18px' width='18px'>");
@@ -443,10 +450,10 @@ $(function(){
         var indoor = $(".indoor").html();//室内人数
         var nosleep = $(".nosleep").html();//不住宿人数
         var reserve = $("input[name='Reserve1Radio']:checked").val();//付款类型，1全额，或0预约定金
-        if ($(".army-barbecue-choose").find("img").length==0) {
-            var barbecueChoose = 0;//没有选中烧烤
-        }else{
+        if ($("input[name='barbecueRadio']:checked").val()==1) {
             var barbecueChoose = 1;//选中烧烤
+        }else{
+            var barbecueChoose = 0;//没有选中烧烤
         }
         if (payMode=="JD") {//京东支付
             $.post("createArmyOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"insurance":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor,"fullAmount":reserve,"barbecue":barbecueChoose},function(datas){
@@ -516,10 +523,10 @@ function getPrice(){
         }else{
             secureNumber=0;
         }
-        if ($(".army-barbecue-choose").find("img").length==0) {
-            var barbecueChoose = 0;//没有选中烧烤
-        }else{
+        if ($("input[name='barbecueRadio']:checked").val()==1) {
             var barbecueChoose = 1;//选中烧烤
+        }else{
+            var barbecueChoose = 0;//没有选中烧烤
         }
         var tendNumber = $(".tend").html();//帐篷人数
         var indoorNumber = $(".indoor").html();//室内人数

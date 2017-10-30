@@ -13,7 +13,12 @@ html, body {
     background: #f6f1f1;
 }
 
-
+.secureHint{
+	text-align: right;
+	margin-top: 10px;
+	color: #4ea0ff;
+	font-size: 14px;
+}
 /*住宿选择*/
 .army-choose{
 	padding:10px;
@@ -46,17 +51,38 @@ html, body {
 	/*text-align: center;*/
 	line-height: 32px;
 	margin:0 10px;
+
 }
-.army-barbecue div.army-barbecue-choose{
+/*是否烧烤*/
+.barbecueBox{
+	height: 32px;
+	margin-top: 10px;	
+	display: flex;
+	align-items: center;
+	flex: 1;
+	justify-content: space-around;
+}
+.barbecue-row{
+	display: flex;
+	align-items: center;
+}
+.barbecue1{
 	height: 18px;
 	width: 18px;
-	background:url(../images/circle.png);
-	background-size: 100%;
+	margin-right: 4px;
+	background: url(../images/circle.png);
+	background-size: 100% 100%;
 }
-.army-barbecue div.army-barbecue-choose img{
+.barbecue1 img{
 	height: 18px;
 	width: 18px;
 }
+input[name='barbecueRadio']{
+	display: none;
+}
+/*结束是否烧烤*/
+
+
 .army-information{
 	display: flex;
 	align-items: center;
@@ -469,4 +495,37 @@ input[name='Reserve1Radio']{
 }
 .villa-refund li:last-child{
     border-bottom: 0;
+}
+
+
+/*保单说明的弹窗*/
+.secureHintPopup{
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left:0;
+	position: fixed;
+	float: center;
+	display: none;
+	text-align: center;
+	z-index: 101;
+}
+
+.secureHintPopupDiv{
+	position: relative;
+	width: 80%;
+	margin-left: 10%;
+	margin-top: 60px;
+	height: 100%;
+	background: url(../images/secure.png)no-repeat top center;
+	background-size: 100%;
+
+}
+.secureHintPopupDiv img{
+	height: 20px ;
+	width:20px;
+	position: absolute;
+	margin-top:2%;
+	margin-right: 2%;
+	right: 0;
 }
