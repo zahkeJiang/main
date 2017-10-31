@@ -264,7 +264,7 @@ public class NotifyController extends BaseController {
             order.setPhoneNumber(user.getPhoneNumber());
             order.setRealName(villaOrder.getRealName());
             order.setOriginalPrice(villaOrder.getOriginalPrice());
-            return Status.success().add("order",order);
+            return Status.success().add("order",order).add("price","0");
         }else if (o.equals("D")){
             DsOrder dsOrder;
             List<DsOrder> dsOrders = dsOrderService.getDsOrderByNumber(ordernumber);
@@ -289,7 +289,7 @@ public class NotifyController extends BaseController {
             order.setOriginalPrice(dsOrder.getOriginalPrice());
             order.setDescription(dsOrder.getDescription());
             order.setDsNote("法培方式: "+dsOrder.getNote());
-            return Status.success().add("order",order);
+            return Status.success().add("order",order).add("price",order.getOriginalPrice()-order.getOrderPrice());
         }else if (o.equals("A")){
             ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
             User user = userService.getUserById(userid);
@@ -305,7 +305,7 @@ public class NotifyController extends BaseController {
             order.setPhoneNumber(user.getPhoneNumber());
             order.setRealName(armyOrder.getRealName());
             order.setOriginalPrice(armyOrder.getOriginalPrice());
-            return Status.success().add("order",order);
+            return Status.success().add("order",order).add("price","0");
         }else {
             return Status.fail(-20,"处理失败");
         }

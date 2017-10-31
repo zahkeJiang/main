@@ -50,16 +50,22 @@ public class CommentController extends BaseController{
     private void updateOrderStatus(Integer type, String ordernumber) {
         if (type==1){
             VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(ordernumber).get(0);
-            villaOrder.setOrderStatus(7);
-            villaOrderService.updateOrder(villaOrder);
+            if (villaOrder.getOrderStatus()!=7){
+                villaOrder.setOrderStatus(7);
+                villaOrderService.updateOrder(villaOrder);
+            }
         }else if (type==2){
             DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
-            dsOrder.setOrderStatus((byte) 7);
-            dsOrderService.updateOrder(dsOrder);
+            if (dsOrder.getOrderStatus()!=7){
+                dsOrder.setOrderStatus((byte) 7);
+                dsOrderService.updateOrder(dsOrder);
+            }
         }else if (type==3){
             ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
-            armyOrder.setOrderStatus(7);
-            armyOrderService.updateOrder(armyOrder);
+            if (armyOrder.getOrderStatus()!=7){
+                armyOrder.setOrderStatus(7);
+                armyOrderService.updateOrder(armyOrder);
+            }
         }
     }
 
