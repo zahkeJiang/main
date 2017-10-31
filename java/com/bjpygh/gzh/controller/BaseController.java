@@ -30,7 +30,7 @@ public class BaseController {
         Map<String, String> map = new HashMap<String, String>();
         if(userMap == null){
             userMap = new HashMap<String, String>();
-            /*map = getMap(request);
+            map = getMap(request);
             String openid =map.get("openid");
             String access_token = map.get("access_token");
             String userId = userService.getUserIdByOpenid(openid);
@@ -39,12 +39,12 @@ public class BaseController {
                 User user = getUser(getUserInfo(openid, access_token));
                 userService.InsertUserFromWx(user);
                 userId = userService.getUserIdByOpenid(openid);
-            }*/
-            //将用户信息放入缓存中
-//            userMap.put("id",userId);
-//            userMap.put("openid", openid);
-            userMap.put("id","1");
-            userMap.put("openid","o9C-m0gWfR9WOs8DIDElxSUfDIUU");
+            }
+//            将用户信息放入缓存中
+            userMap.put("id",userId);
+            userMap.put("openid", openid);
+//            userMap.put("id","1");
+//            userMap.put("openid","o9C-m0gWfR9WOs8DIDElxSUfDIUU");
             session.setAttribute("user", userMap );
         }
 

@@ -92,4 +92,14 @@ public class VillaOrderController extends BaseController{
         String selected = villaOrderService.getVillaPay(date);
         return Status.success().add("selected",selected);
     }
+
+    @RequestMapping(value = "/tuanjian.action", method = RequestMethod.GET)
+    public String toPersonal(HttpServletRequest request){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return "error";
+        }
+        return "villa_and_army";
+    }
+
 }

@@ -328,11 +328,10 @@ html, body {
     background-size: 20px;
 }
 
-<<<<<<< HEAD
 /*去高德地图logo的样式*/
-.amap-logo,.amap-copyright{
-    display: none!important;
-=======
+.amap-logo,.amap-copyright {
+    display: none !important;
+}
 /*底部电话*/
 
 .footerTel{
@@ -345,5 +344,4 @@ html, body {
 }
 .footerTel a{
     color: white;
->>>>>>> f42f7c39f336ba757cb789698c2be6c0f13ffc00
 }
