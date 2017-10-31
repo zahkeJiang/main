@@ -273,9 +273,7 @@ html, body {
 	font-size: 18px;
 	right: 20px;
 }
-.footer{
-	height: 20px;
-}
+
 .description{
     height: 20px;  
    	overflow: hidden;/*超出隐藏*/
