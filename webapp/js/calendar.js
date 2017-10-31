@@ -51,7 +51,7 @@ var currentDay;
         var _oldyear = dateObj.getDate().getFullYear();
         var _oldmonth = dateObj.getDate().getMonth() - newMonth;
         var _oldday = dateObj.getDate().getDate();
-        var newdate  =  new Date(_oldyear,_oldmonth,_oldday);
+        var newdate  =  new Date(_oldyear,_oldmonth,1);
         var _year = newdate.getFullYear();
         var _month = newdate.getMonth()+1;
         currentMonth = _month;

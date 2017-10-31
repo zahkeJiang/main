@@ -59,7 +59,7 @@ $(function(){
 					var pictureUrl="";
 					var pictureList = "";
 					for (var i = 0;i<picture.length; i++) {
-						pictureList +='<img src="/gzh/CommentImg/'+picture[i]+'" height="56px" width="56px">';
+						pictureList +='<img src="/CommentImg/'+picture[i]+'" height="56px" width="56px">';
 					}
 					pictureUrl = '<div class="assess-pic">'+pictureList+'</div>';
 				}

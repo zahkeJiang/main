@@ -12,6 +12,15 @@ var date = "";
 var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;//身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X 
 
 $(function(){
+    //获取用户手机号码
+    $.post("personal.action",{},function(datas){
+        if (datas.status==0) {
+            var userobj = obj.data.userInfo;
+            $('.villa-user p.tel').html(userobj.phoneNumber);
+        }
+    },"json");
+
+
      //日历渲染--------------------------------------------------------
     renderHtml(0);
     // 表格中显示日期
@@ -112,6 +121,7 @@ $(function(){
                 var selected = datas.data.selected;
                 if (selected!="") {
                     alert("所选日期中，"+selected+"已被预定");
+                    getPrice();
                 }else{
                     var dateHundred=0;//一百天数
                     var dateSix=0;//66天数
@@ -205,7 +215,8 @@ $(function(){
             if (datas.status==0) {
                 var selected = datas.data.selected;
                 if (selected!="") {
-                    alert("所选日期中，"+selected+"已被预定");
+                    alert('所选日期中，"'+selected+'"已被预定');
+                    getPrice();
                 }else{
                     var dateHundred=0;//一百的天数
                     var dateSix=0;//66天数

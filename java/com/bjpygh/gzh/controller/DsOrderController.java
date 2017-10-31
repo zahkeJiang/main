@@ -192,4 +192,13 @@ public class DsOrderController extends BaseController {
         dsOrderService.updateOrderStatus(ordernumber);
         return Status.success();
     }
+
+    @RequestMapping(value = "/schedule.action", method = RequestMethod.GET)
+    public String toOrder(HttpServletRequest request){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return "error";
+        }
+        return "myorder";
+    }
 }

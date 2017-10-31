@@ -321,6 +321,10 @@ html, body {
     border-radius: 50%;
     border:0;
 }
+/*去高德地图logo的样式*/
+.amap-logo,.amap-copyright {
+            display: none !important;
+        }
 /*底部电话*/
 
 .footerTel{

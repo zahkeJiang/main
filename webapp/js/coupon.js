@@ -1,13 +1,21 @@
 $(function(){
-    renovation();
-    $(".header div").click(function(){
+    unused();
+    //获取可用优惠券
+    $(".header div.unused").click(function(){
         $(this).css({"border-bottom":"2px solid orange","color":"orange"});
         $(this).siblings("div").css({"border-bottom":"2px solid #f6f1f1","color":"black"});
-        renovation();
+        unused();
+    });
+    //获取已用优惠券
+    $(".header div.used").click(function(){
+        $(this).css({"border-bottom":"2px solid orange","color":"orange"});
+        $(this).siblings("div").css({"border-bottom":"2px solid #f6f1f1","color":"black"});
+        used();
     });
 });
 
-function renovation(){
+//获取可用优惠券
+function unused(){
 	$.post("queryCoupon.action",{},function(obj){
         $(".container").html("");
 		if (obj.status=="-40") {//没有优惠券
@@ -67,8 +75,22 @@ function renovation(){
 					// 	},"json");
 					// }
 				});	
-    		}else if (obj.status == "-30") {//已使用优惠券
-                //已使用显示不同图片
+    		}
+		}
+    },'json');	
+
+}
+
+//获取已用优惠券
+function used(){
+    $.post("queryCoupon.action",{},function(obj){
+        $(".container").html("");
+        if (obj.status=="-40") {//没有优惠券
+            var coupon_hint = "<div class='coupons_hint_box'><div class='coupon_hint'><div class='nohint'><p class='nohint_no'>没有券</p><p class='nohint_look'>去优惠活动里进行看看吧</p><a href='lottery.html'>去看看</a></div></div></div>"
+            $(".container").html(coupon_hint);
+        }else{
+            if (obj.status == "-30") {//已使用优惠券
+                //已使用的图片显示
                 if (obj.data.price=="200") {
                     var coupon_pic = "<img src='images/ds_coupon_price_bg.png.png'>";
                 }else if (obj.data.price=="300") {
@@ -82,10 +104,10 @@ function renovation(){
                 }
                 var coupon = "<div class='coupon'><div class='couponBox'>"+coupon_pic+"</div><div class='coupon_hint_text'><h2>优惠提示:</h2><p>30天有效期，从领取日开始计时。</p><p>若优惠券已过期，使用会员积分激活后即可使用。</p></div><div class='use_coupon'></div></div>"
                 $(".container").html(coupon);
-    			$(".use_coupon").html("已使用");
-    		}
-		}
-    },'json');	
+                $(".use_coupon").html("已使用");
+            }
+        }
+    },'json');  
 
 }
 

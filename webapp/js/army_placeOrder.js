@@ -9,6 +9,16 @@ var date = "";
 var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;//身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X 
 
 $(function(){
+
+    //获取用户手机号码
+    $.post("personal.action",{},function(datas){
+        if (datas.status==0) {
+            var userobj = obj.data.userInfo;
+            $('.villa-user p.tel').html(userobj.phoneNumber);
+        }
+    },"json");
+
+    
  //日历渲染--------------------------------------------------------
     renderHtml(0);
     // 表格中显示日期
@@ -533,10 +543,10 @@ function getPrice(){
         var selectDay = $(".currentMonth0").children(".selectedDay").length;//报名天数
         if (re.test(peopleNumber) && peopleNumber>0 &&selectDay>0) {
             $(".liVilla").html("<div><span>军旅</span><span class='detailBox-liVilla'>¥"+120*peopleNumber*selectDay+"</span></div><span class='detailBox-liVilla-hint'>(120元x"+peopleNumber+"人x"+selectDay+"晚)</span>");//军旅基础费用
-            $(".libarbecue").html("<div><span>军旅</span><span class='detailBox-liVilla'>¥"+10*barbecueChoose*peopleNumber*selectDay+"</span></div><span class='detailBox-liVilla-hint'>(10元x"+barbecueChoose*peopleNumber+"人x"+selectDay+"晚)</span>")//烧烤费用
-            $(".lilitend").html("<div><span>军旅</span><span class='detailBox-liVilla'>¥"+20*tendNumber*selectDay+"</span></div><span class='detailBox-liVilla-hint'>(20元x"+tendNumber+"人x"+selectDay+"晚)</span>")//帐篷费用
-            $(".liindoor").html("<div><span>军旅</span><span class='detailBox-liVilla'>¥"+40*indoorNumber*selectDay+"</span></div><span class='detailBox-liVilla-hint'>(40元x"+indoorNumber+"人x"+selectDay+"晚)</span>")//室内费用
-            $(".liSecure").html("<div><span>军旅</span><span class='detailBox-liVilla'>¥"+15*secureNumber+"</span></div><span class='detailBox-liVilla-hint'>(15元x"+secureNumber+"晚)</span>")//室内费用
+            $(".libarbecue").html("<div><span>烧烤</span><span class='detailBox-liVilla'>¥"+10*barbecueChoose*peopleNumber*selectDay+"</span></div><span class='detailBox-liVilla-hint'>(10元x"+barbecueChoose*peopleNumber+"人x"+selectDay+"晚)</span>")//烧烤费用
+            $(".lilitend").html("<div><span>帐篷</span><span class='detailBox-liVilla'>¥"+20*tendNumber*selectDay+"</span></div><span class='detailBox-liVilla-hint'>(20元x"+tendNumber+"人x"+selectDay+"晚)</span>")//帐篷费用
+            $(".liindoor").html("<div><span>室内</span><span class='detailBox-liVilla'>¥"+40*indoorNumber*selectDay+"</span></div><span class='detailBox-liVilla-hint'>(40元x"+indoorNumber+"人x"+selectDay+"晚)</span>")//室内费用
+            $(".liSecure").html("<div><span>保险</span><span class='detailBox-liVilla'>¥"+15*secureNumber+"</span></div><span class='detailBox-liVilla-hint'>(15元x"+secureNumber+"晚)</span>")//室内费用
             
             if (reserve==0) {
                 $(".reserve1-mode").html("付款类型：预约定金");

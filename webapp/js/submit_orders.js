@@ -110,40 +110,50 @@ $(function(){
         var payMode = $("input[name='payMode-radio']:checked").val();
         console.log(payMode);
         if (payMode=="JD") {//京东支付
-        	//京东支付请求
-                            $.post("JDPay",{"ordernumber":orderNumber},function (data) {
-                                if(data.status == 0){
-                                    var jdOrderPay = data.data.jdOrderPay;
-                                    $("#version").val(jdOrderPay.version);
-                                    $("#merchant").val(jdOrderPay.merchant);
-                                    $("#sign").val(jdOrderPay.sign);
-                                    $("#tradeNum").val(jdOrderPay.tradeNum);
-                                    $("#tradeName").val(jdOrderPay.tradeName);
-                                    $("#tradeTime").val(jdOrderPay.tradeTime);
-                                    $("#amount").val(jdOrderPay.amount);
-                                    $("#currency").val(jdOrderPay.currency);
-                                    $("#callbackUrl").val(jdOrderPay.callbackUrl);
-                                    $("#notifyUrl").val(jdOrderPay.notifyUrl);
-                                    $("#userId").val(jdOrderPay.userId);
-                                    $("#orderType").val(jdOrderPay.orderType);
-                                    document.getElementById("batchForm").submit();
-                                }
-                            },'json');
-            
-        }else if (payMode=="aliPay") {//支付宝支付
             $.post("createOrder.action",{"packageid":packageid,"select":select},function(datas){//创建驾校报名订单
-    			if (datas.status==0) {
-    				var ordernumber = datas.data.ordernumber;
+                if (datas.status==0) {
+                    var ordernumber = datas.data.ordernumber;
                     console.log(ordernumber);
                     $(".layer").hide();
-            		$(".payBox").hide(); 
-    				window.location.href="payHint.html?ordernumber="+ordernumber;
-    			}else if (datas.status == "-40") {
-    				alert("您当前已存在多个未支付订单，请勿重复多次下单。")
-    			}
-    		},"json");
-
-        }      
+                    $(".payBox").hide(); 
+                    //京东支付请求
+                    $.post("JDPay",{"ordernumber":ordernumber},function (data) {
+                        if(data.status == 0){
+                            var jdOrderPay = data.data.jdOrderPay;
+                            $("#version").val(jdOrderPay.version);
+                            $("#merchant").val(jdOrderPay.merchant);
+                            $("#sign").val(jdOrderPay.sign);
+                            $("#tradeNum").val(jdOrderPay.tradeNum);
+                            $("#tradeName").val(jdOrderPay.tradeName);
+                            $("#tradeTime").val(jdOrderPay.tradeTime);
+                            $("#amount").val(jdOrderPay.amount);
+                            $("#currency").val(jdOrderPay.currency);
+                            $("#callbackUrl").val(jdOrderPay.callbackUrl);
+                            $("#notifyUrl").val(jdOrderPay.notifyUrl);
+                            $("#userId").val(jdOrderPay.userId);
+                            $("#orderType").val(jdOrderPay.orderType);
+                            document.getElementById("batchForm").submit();
+                        }
+                    },'json');
+                }else if (datas.status == "-40") {
+                    alert("您当前已存在多个未支付订单，请勿重复多次下单。")
+                }
+            },"json");   
+        }else if (payMode=="aliPay") {//支付宝支付
+            $.post("createOrder.action",{"packageid":packageid,"select":select},function(datas){//创建驾校报名订单
+                if (datas.status==0) {
+                    var ordernumber = datas.data.ordernumber;
+                    console.log(ordernumber);
+                    $(".layer").hide();
+                    $(".payBox").hide(); 
+                    window.location.href="payHint.html?ordernumber="+ordernumber;
+                      
+                }else if (datas.status == "-40") {
+                    alert("您当前已存在多个未支付订单，请勿重复多次下单。")
+                } 
+           
+            },"json");   
+        }   
     });
 
 //为支付方式的radio设置自定义点击样式
