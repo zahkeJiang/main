@@ -187,19 +187,19 @@ public class PayController extends BaseController {
             String tradeNum = armyOrder.getOrderNumber();
             String amount = armyOrder.getArmyPrice()+"00";
             String userid =armyOrder.getUserId()+"";
-            return JdPayReq(tradeNum,amount,userid);
+            return JdPayReq(tradeNum,amount,userid,"作战之日参战费用");
         }else if (o.equals("D")){
             DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
             String tradeNum = dsOrder.getOrderNumber();
             String amount = dsOrder.getOrderPrice()+"00";
             String userid =dsOrder.getUserId()+"";
-            return JdPayReq(tradeNum,amount,userid);
+            return JdPayReq(tradeNum,amount,userid,"驾校报名费用");
         }else if (o.equals("V")){
             VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(ordernumber).get(0);
             String tradeNum = villaOrder.getOrderNumber();
             String amount = villaOrder.getVillaPrice()+"00";
             String userid =villaOrder.getUserId()+"";
-            return JdPayReq(tradeNum,amount,userid);
+            return JdPayReq(tradeNum,amount,userid,"别墅入住费用");
         }else {
             return Status.fail(-20,"处理失败");
         }
@@ -585,12 +585,12 @@ public class PayController extends BaseController {
     }
 
     //京东支付请求方法
-    public Status JdPayReq(String tradeNum,String amount,String userid){
+    public Status JdPayReq(String tradeNum,String amount,String userid,String tradeName){
         JdOrderPay jdOrderPay = new JdOrderPay();
         jdOrderPay.setVersion("V2.0");
         jdOrderPay.setMerchant("110406033002");
         jdOrderPay.setTradeNum(tradeNum);
-        jdOrderPay.setTradeName("驾校报名费用");
+        jdOrderPay.setTradeName(tradeName);
         jdOrderPay.setTradeTime(formatterJ.format(new Date()));
         jdOrderPay.setAmount(amount);
         jdOrderPay.setOrderType("1");
