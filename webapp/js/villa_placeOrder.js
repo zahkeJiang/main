@@ -15,7 +15,7 @@ $(function(){
     //获取用户手机号码
     $.post("personal.action",{},function(datas){
         if (datas.status==0) {
-            var userobj = obj.data.userInfo;
+            var userobj = datas.data.userInfo;
             $('.villa-user p.tel').html(userobj.phoneNumber);
         }
     },"json");
@@ -106,46 +106,7 @@ $(function(){
             }
         }
 
-        //如果有选中的，将其添加到数组,并发送post请求给后台
-        var selectDate = [];
-        for(var i = 0 ;i < clength; i ++){
-            if($(".currentMonth0").eq(i).children(".selectedDay").length > 0){//当月存在被选中日期
-                //将选择的天循环添加到selectDate
-                selectDate.push($(".currentMonth0").eq(i).children(".selectedDay").siblings(".borderr").attr("thisdaynumber"));
-            }  
-        }        
-        var date = selectDate.join();//数组中的所有元素放入一个字符串
-        console.log(date);
-        $.post("getVillaRes",{"date":date},function(datas){
-            if (datas.status==0) {
-                var selected = datas.data.selected;
-                if (selected!="") {
-                    alert("所选日期中，"+selected+"已被预定");
-                    getPrice();
-                }else{
-                    var dateHundred=0;//一百天数
-                    var dateSix=0;//66天数
-                    
-                    for(var x=0;x<selectDate.length;x++){
-                        var myDate = new Date(selectDate[x]);
-                        if(myDate.getDay()==0 || myDate.getDay()==5 || myDate.getDay()==6){
-                            dateHundred++;
-                        }else{
-                            dateSix++;  
-                        }
-                        
-                    }
-                    hundredDate = dateHundred;
-                    sixtysixDate = dateSix;
-                    console.log("100元"+hundredDate+"天,66元"+sixtysixDate+"天");
-
-                    //更改选择的日期时，将对总价进行调整
-                    getPrice();
-                }
-            }
-        },"json");
-
-
+        villaDateCheck();//获取用户选择日期，请求后台，判断所选别墅是否被预定，并显示明细
 
     });
     
@@ -201,42 +162,7 @@ $(function(){
             }
         }
 
-         //如果有选中的，将其添加到数组，并发送post请求给后台
-        var selectDate = [];
-        for(var i = 0 ;i < clength; i ++){
-            if($(".currentMonth0").eq(i).children(".selectedDay").length > 0){//当月存在被选中日期
-                //将选择的天循环添加到selectDate
-                selectDate.push($(".currentMonth0").eq(i).children(".selectedDay").siblings(".borderr").attr("thisdaynumber"));
-            }  
-        }        
-        var date = selectDate.join();//数组中的所有元素放入一个字符串
-        console.log(date);
-        $.post("getVillaRes",{"date":date},function(datas){
-            if (datas.status==0) {
-                var selected = datas.data.selected;
-                if (selected!="") {
-                    alert('所选日期中，"'+selected+'"已被预定');
-                    getPrice();
-                }else{
-                    var dateHundred=0;//一百的天数
-                    var dateSix=0;//66天数
-                    for(var x=0;x<selectDate.length;x++){
-                        var myDate = new Date(selectDate[x]);//将字符串转为对象
-                        if(myDate.getDay()==0 || myDate.getDay()==5 || myDate.getDay()==6){
-                            dateHundred++;
-                        }else{
-                            dateSix++;  
-                        }
-                    }
-                    hundredDate = dateHundred;
-                    sixtysixDate = dateSix;
-                    console.log("100元"+hundredDate+"天,66元"+sixtysixDate+"天");
-
-                    //更改选择的日期时，将对总价进行调整
-                   getPrice();
-                }
-            }
-        },"json");
+        villaDateCheck();//获取用户选择日期，请求后台，判断所选别墅是否被预定，并显示明细
 
     });
 
@@ -443,6 +369,17 @@ $(function(){
     });
 
 });
+
+//移除别墅的选中状态和日期的选中状态
+function removeCheck(){
+    //移除别墅选中状态
+    $("input[name='villa-radio']").removeAttr("checked");
+    $(".villa-radioBox").find(".villa-choose").empty();
+    //移除选中的日期
+    $(".currentMonth0").children(".selectedDay").remove();
+}
+
+//获取日历价格
 function  getPrice(){
                     var moneysix=0;
                     var moneyhundred=0;
@@ -495,4 +432,98 @@ function  getPrice(){
                         $(".detailBox li.li66").empty();
                         $(".detailBox-secure").html("¥0");
                     }
+}
+
+//获取用户选择日期，请求后台，判断所选别墅是否被预定，并显示明细
+function villaDateCheck(){
+     var currentMonth0clength = $(".currentMonth0").length;
+     //如果有选中的，将其添加到数组,并发送post请求给后台
+        var selectDate = [];
+        for(var i = 0 ;i < currentMonth0clength; i ++){
+            if($(".currentMonth0").eq(i).children(".selectedDay").length > 0){//当月存在被选中日期
+                //将选择的天循环添加到selectDate
+                selectDate.push($(".currentMonth0").eq(i).children(".selectedDay").siblings(".borderr").attr("thisdaynumber"));
+            }  
+        }        
+        var date = selectDate.join();//数组中的所有元素放入一个字符串
+        console.log(date);
+        $.post("getVillaRes",{"date":date},function(datas){
+            if (datas.status==0) {
+                var villaCheckName_xiangtong=[];//所选别墅和已经被预定别墅的相同别墅名称字符串
+                //获取选中的别墅
+                var villaCheckNames=[];
+                
+                $("input[name='villa-radio']:checkbox").each(function () {//便利所有checkbox，
+                    if ($(this).is(":checked")) {
+                        villaCheckNames.push($(this).attr("value"));
+                    }
+                });
+                
+                //获取已经被预定的别墅，如果不为空，便利出相同的别墅名称
+                var selected = datas.data.selected;
+                if (selected!="") {//存在相同的别墅
+                    var selectedVillaCheckNames = selected.split(",");//已经被预定的别墅数组
+
+                    for (var i = 0; i < selectedVillaCheckNames.length; i++) {
+                        
+                        for (var j = 0; j < villaCheckNames.length; j++) {
+                            
+                            if (selectedVillaCheckNames[i]==villaCheckNames[j]) {
+                                villaCheckName_xiangtong.push(selectedVillaCheckNames[i]);
+                            }
+                            
+                        }
+                    }
+                    console.log(villaCheckName_xiangtong.join());
+                    var villaCheckName_xiangtongzifuchuang = villaCheckName_xiangtong.join();
+
+                    if (villaCheckName_xiangtongzifuchuang!="") {
+                        alert('所选日期中，"'+villaCheckName_xiangtong+'"已被预定,请重新选择');
+                        //移除别墅选中状态
+                        $("input[name='villa-radio']").removeAttr("checked");
+                        $(".villa-radioBox").find(".villa-choose").empty();
+                        //移除选中的日期
+                        $(".currentMonth0").children(".selectedDay").remove();
+                    }else{//不存在相同的别墅
+                        var dateHundred=0;//一百天数
+                        var dateSix=0;//66天数
+                    
+                        for(var x=0;x<selectDate.length;x++){
+                            var myDate = new Date(selectDate[x]);
+                            if(myDate.getDay()==0 || myDate.getDay()==5 || myDate.getDay()==6){
+                                dateHundred++;
+                            }else{
+                                dateSix++;  
+                            }
+                        
+                        }
+                        hundredDate = dateHundred;
+                        sixtysixDate = dateSix;
+                        console.log("100元"+hundredDate+"天,66元"+sixtysixDate+"天");
+
+                        //更改选择的日期时，将对总价进行调整
+                        getPrice();
+                    }
+                }else{//用户选中日期中没有别墅被预定
+                    var dateHundred=0;//一百天数
+                    var dateSix=0;//66天数
+                    
+                    for(var x=0;x<selectDate.length;x++){
+                        var myDate = new Date(selectDate[x]);
+                        if(myDate.getDay()==0 || myDate.getDay()==5 || myDate.getDay()==6){
+                            dateHundred++;
+                        }else{
+                            dateSix++;  
+                        }
+                        
+                    }
+                    hundredDate = dateHundred;
+                    sixtysixDate = dateSix;
+                    console.log("100元"+hundredDate+"天,66元"+sixtysixDate+"天");
+
+                    //更改选择的日期时，将对总价进行调整
+                    getPrice();
+                }
+            }
+        },"json");
 }
