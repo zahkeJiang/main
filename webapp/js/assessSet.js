@@ -81,7 +81,7 @@ $(".submit").click(function(){
 		console.log(picture);
 		$.post("putComment",{"anonymous":anonymous,"content":content,"enterStar":enterStar,"stayStar":stayStar,"supportStar":supportStar,"picture":picture,"type":type,"ordernumber":ordernumber},function(datas){
 			if (datas.status==0) {
-				window.location.href="assessFinish.html";
+				window.location.href="assessFinish.html?type="+type;
 			}else{
 				alert("上传失败,请稍后再试。");
 			}
