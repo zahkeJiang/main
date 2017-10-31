@@ -65,7 +65,7 @@ $(".submit").click(function(){
 	}else{
 		var content = $("textarea[name='assess']").val();//评论内容
         if (content=="") {
-            content="用户未输入内容，变提交了";
+            content="用户没有输入评价内容";
         }
         $("")
 		var enterStar = $(".satisfaction01 span").attr("star");//娱乐满意度

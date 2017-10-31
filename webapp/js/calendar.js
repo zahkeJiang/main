@@ -119,7 +119,7 @@ var currentDay;
         var _oldfyear = dateObj.getDate().getFullYear();
         var _oldfmonth = dateObj.getDate().getMonth() - num;
         var _oldfday = dateObj.getDate().getDate();
-        var newfdate  =  new Date(_oldfyear,_oldfmonth,_oldfday);
+        var newfdate  =  new Date(_oldfyear,_oldfmonth,1);
         var _fyear = newfdate.getFullYear();
         var _fmonth = newfdate.getMonth()+1;
         var _fdate = newfdate.getDate();

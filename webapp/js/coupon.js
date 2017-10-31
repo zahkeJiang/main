@@ -85,8 +85,8 @@ function unused(){
 function used(){
     $.post("queryCoupon.action",{},function(obj){
         $(".container").html("");
-        if (obj.status=="-40") {//没有优惠券
-            var coupon_hint = "<div class='coupons_hint_box'><div class='coupon_hint'><div class='nohint'><p class='nohint_no'>没有券</p><p class='nohint_look'>去优惠活动里进行看看吧</p><a href='lottery.html'>去看看</a></div></div></div>"
+        if (obj.status==0||obj.status=="-20" ||obj.status=="-40") {//没有优惠券
+            var coupon_hint = "<div class='coupons_hint_box'><div class='coupon_hint'><div class='nohint'><p class='nohint_no'>没有券</p></div></div></div>"
             $(".container").html(coupon_hint);
         }else{
             if (obj.status == "-30") {//已使用优惠券
