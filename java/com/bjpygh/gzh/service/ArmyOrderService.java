@@ -137,4 +137,11 @@ public class ArmyOrderService {
         }
         return villaPrices;
     }
+
+    public List<ArmyOrder> getOrdersById(String userid) {
+        ArmyOrderExample example = new ArmyOrderExample();
+        ArmyOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(Long.parseLong(userid));
+        return armyOrderMapper.selectByExample(example);
+    }
 }

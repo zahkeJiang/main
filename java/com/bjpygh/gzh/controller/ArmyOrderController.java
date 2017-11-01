@@ -1,6 +1,7 @@
 package com.bjpygh.gzh.controller;
 
 import com.bjpygh.gzh.bean.ArmyOrder;
+import com.bjpygh.gzh.bean.DsOrder;
 import com.bjpygh.gzh.bean.VillaOrder;
 import com.bjpygh.gzh.bean.VillaPrice;
 import com.bjpygh.gzh.dao.ArmyOrderMapper;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +38,18 @@ public class ArmyOrderController extends BaseController {
             return Status.notInWx();
         }
         String userid = userMap.get("id");
+
+        List<ArmyOrder> dsos = new ArrayList<ArmyOrder>();
+        List<ArmyOrder> list = armyOrderService.getOrdersById(userid);
+        for (ArmyOrder dso : list){
+            if (dso.getOrderStatus() == 0){
+                dsos.add(dso);
+            }
+        }
+        if (dsos.size()>2){
+            return Status.fail(-40,"您已创建三个订单，无法创建更多订单");
+        }
+
         armyOrder.setUserId(Long.valueOf(userid));
         String orderNumber = armyOrderService.createArmyOrder(armyOrder);
         return Status.success().add("orderNumber",orderNumber);

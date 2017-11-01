@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,18 @@ public class VillaOrderController extends BaseController{
             return Status.notInWx();
         }
         String userid = userMap.get("id");
+
+        List<VillaOrder> dsos = new ArrayList<VillaOrder>();
+        List<VillaOrder> list = villaOrderService.getOrdersById(userid);
+        for (VillaOrder dso : list){
+            if (dso.getOrderStatus() == 0){
+                dsos.add(dso);
+            }
+        }
+        if (dsos.size()>2){
+            return Status.fail(-40,"您已创建三个订单，无法创建更多订单");
+        }
+
         villaOrder.setUserId(Long.valueOf(userid));
         String orderNumber = villaOrderService.createVillaOrder(villaOrder);
         return Status.success().add("orderNumber",orderNumber);

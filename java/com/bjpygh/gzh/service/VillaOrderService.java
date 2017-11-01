@@ -83,12 +83,12 @@ public class VillaOrderService {
         String s = villaOrder.getVillaName().split(",")[0];
         if (s.equals("别墅一")) {
             villaOrder.setImageurl("http://120.24.184.86/glxt/dsimage/villa_1.jpg");
-        }
-        if (s.equals("别墅二")) {
+        }else if (s.equals("别墅二")) {
             villaOrder.setImageurl("http://120.24.184.86/glxt/dsimage/villa_2.jpg");
-        }
-        if (s.equals("别墅三")) {
+        }else if (s.equals("别墅三")) {
             villaOrder.setImageurl("http://120.24.184.86/glxt/dsimage/villa_3.jpg");
+        }else {
+            villaOrder.setImageurl("http://120.24.184.86/glxt/dsimage/villa_1.jpg");
         }
         //设置状态
         villaOrder.setOrderStatus(0);
@@ -219,5 +219,12 @@ public class VillaOrderService {
         VillaOrderExample.Criteria criteria = example.createCriteria();
         criteria.andOrderStatusEqualTo(1);
         return villaOrderMapper.selectByExample(example);
+    }
+
+    public List<VillaOrder> getOrdersById(String userid) {
+            VillaOrderExample example = new VillaOrderExample();
+            VillaOrderExample.Criteria criteria = example.createCriteria();
+            criteria.andUserIdEqualTo(Long.parseLong(userid));
+            return villaOrderMapper.selectByExample(example);
     }
 }

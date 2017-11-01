@@ -65,6 +65,7 @@ public class PayController extends BaseController {
     ArmyOrderService armyOrderService;
 
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat formatterJ = new SimpleDateFormat("yyyyMMddHHmmss");
     ThreeDES threeDES = new ThreeDES();
 
@@ -207,7 +208,7 @@ public class PayController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/refund.action", method = RequestMethod.POST)
-    public Status DsRefund(HttpServletRequest request) throws UnsupportedEncodingException, ParseException {
+    public Status DsRefund(HttpServletRequest request) throws ParseException, UnsupportedEncodingException {
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
@@ -215,7 +216,6 @@ public class PayController extends BaseController {
         String out_trade_no = new String(request.getParameter("ordernumber").getBytes("ISO-8859-1"),"UTF-8");
         String refund_reason=new String(request.getParameter("WIDrefund_reason").getBytes("ISO-8859-1"),"UTF-8");
         String o = out_trade_no.substring(0, 1);
-
         if (o.equals("V")){
             VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(out_trade_no).get(0);
             if(villaOrder.getOrderStatus() == 4||villaOrder.getOrderStatus()==7){
@@ -223,22 +223,23 @@ public class PayController extends BaseController {
             }
             String refund_amount;
             long time = new Date().getTime();
-            Date d = formatter.parse(villaOrder.getDate().split(",")[0]);
+            Date d = formatter1.parse(villaOrder.getDate().split(",")[0]);
             //判断是否再五个自然日之内
             if (d.getTime()-time<432000000L){
                 //判断是否为全额付款
                 if (villaOrder.getFullAmount()==1){
-                    refund_amount =  ""+villaOrder.getOriginalPrice()/2;
+                    refund_amount =  ""+villaOrder.getOriginalPrice()*0.5;
                 }else {
                     return Status.fail(-40,"已过退款时间");
                 }
             }else {
                 if (villaOrder.getFullAmount()==1){
-                    refund_amount = ""+(int)(villaOrder.getOriginalPrice()*0.7);
+                    refund_amount = ""+villaOrder.getOriginalPrice()*0.7;
                 }else {
-                    refund_amount = ""+(int)(villaOrder.getOriginalPrice()*0.2);
+                    refund_amount = ""+villaOrder.getOriginalPrice()*0.2;
                 }
             }
+            System.out.println("refund_amount="+refund_amount);
 
             if (villaOrder.getPayType()==0){
                 if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
@@ -300,13 +301,13 @@ public class PayController extends BaseController {
             }
             String refund_amount;
             long time = new Date().getTime();
-            Date d = formatter.parse(armyOrder.getDate().split(",")[0]);
+            Date d = formatter1.parse(armyOrder.getDate().split(",")[0]);
             //判断是否再三个自然日之内
             if (d.getTime()-time<259200000L){
                 if (armyOrder.getFullAmount()==1){
-                    refund_amount = ""+(int)(armyOrder.getOriginalPrice()*0.85);
+                    refund_amount = ""+armyOrder.getOriginalPrice()*0.85;
                 } else {
-                    refund_amount = ""+(int)(armyOrder.getOriginalPrice()*0.35);
+                    refund_amount = ""+armyOrder.getOriginalPrice()*0.35;
                 }
             }else {
                 if (armyOrder.getFullAmount()==1){
@@ -531,6 +532,7 @@ public class PayController extends BaseController {
         AlipayTradeRefundResponse alipay_response;
         try {
             alipay_response = client.execute(alipay_request);
+            System.out.println("alipay_response="+alipay_response);
             String result = alipay_response.getBody();
             JSONObject tmp = JSONObject.fromObject(result);
             String data = tmp.getString("alipay_trade_refund_response");
@@ -595,8 +597,8 @@ public class PayController extends BaseController {
         jdOrderPay.setAmount(amount);
         jdOrderPay.setOrderType("1");
         jdOrderPay.setCurrency("CNY");
-        jdOrderPay.setCallbackUrl("http://120.24.184.86/gzh/ds_pay.html");
-        jdOrderPay.setNotifyUrl("http://120.24.184.86/gzh/jNotify_url");//http://gzpt.bjpygh.com/jNotify_url
+        jdOrderPay.setCallbackUrl("http://gzpt.bjpygh.com/ds_pay.html");
+        jdOrderPay.setNotifyUrl("http://gzpt.bjpygh.com/jNotify_url");//http://gzpt.bjpygh.com/jNotify_url
         jdOrderPay.setUserId(userid);
 
         String priKey = PropertyUtils.getProperty("wepay.merchant.rsaPrivateKey");
