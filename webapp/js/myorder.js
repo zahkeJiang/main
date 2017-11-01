@@ -41,12 +41,16 @@ function all_orders(){
                 var order_assess = "";
                 if (comment.orderStatus=="0") {//用户未支付订单
                     var result = "<p class='topay' odnumber='"+comment.orderNumber+"'>待付款</p>";
+                    var yinggaipay = "应付款：";
                 }else if (comment.orderStatus=="1"||comment.orderStatus=="2") {//用户已付款，审核过程
                     var result = "<p class='refund' odnumber='"+comment.orderNumber+"'>取消订单</p>";
+                    var yinggaipay = "实付款：";
                 }else if (comment.orderStatus=="3") {//用户报名完成
                     var result = "<p class='result'>材料正在返还</p>";
+                    var yinggaipay = "实付款：";
                 }else if (comment.orderStatus=="4"||comment.orderStatus=="7") {//用户成功接收返还材料
                     var result = "<p class='result'>已完成</p>";
+                    var yinggaipay = "实付款：";
                     if (comment.orderStatus=="4") {
                         order_assess = "<span class='order_assess' odnumber='"+comment.orderNumber+"'>评价</span>|";
 
@@ -55,11 +59,13 @@ function all_orders(){
                    }
                 }else if (comment.orderStatus=="5"||comment.orderStatus=="6") {//用户取消订单
                     var result = "<p class='result'>已取消</p>";
+                    var yinggaipay = "实付款：";
                 }
                 dsorderh_tml += "<div class='dsorder_list' onumber='"+comment.orderNumber+"'><div class='dsorder_titie'><p class='ds_name'>"
                                 +comment.orderName+"</p>"+result+"</div><div class='dsoder_container' ><img src='"
                                 +comment.orderImage+"' height='48px' width='64px'><p class='dsorder_information'>"
-                                +comment.orderDescripe+"</p></div><div class='dsorder_footer'>"+order_assess+"<span class='dsorder_pay'>实付款：</span><span class='order_price'>¥"
+                                +comment.orderDescripe+"</p></div><div class='dsorder_footer'>"
+                                +order_assess+"<span class='dsorder_pay'>"+yinggaipay+"</span><span class='order_price'>¥"
                                 +comment.orderPrice+"</span></div></div>";
             });
             $(".container").empty();
@@ -111,7 +117,7 @@ function orders_pay(){
                     dsorderh_tml += "<div class='dsorder_list'  onumber='"+comment.orderNumber+"'><div class='dsorder_titie'><p class='ds_name'>"
                                 +comment.orderName+"</p>"+result+"</div><div class='dsoder_container'><img src='"
                                 +comment.orderImage+"' height='48px' width='64px'><p class='dsorder_information'>"
-                                +comment.orderDescripe+"</p></div><div class='dsorder_footer'><span class='dsorder_pay'>需付款：</span><span class='order_price'>¥"
+                                +comment.orderDescripe+"</p></div><div class='dsorder_footer'><span class='dsorder_pay'>应付款：</span><span class='order_price'>¥"
                                 +comment.orderPrice+"</span></div></div>";
                 }
             });

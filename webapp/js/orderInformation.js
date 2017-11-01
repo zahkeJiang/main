@@ -31,7 +31,7 @@ $(function(){
 			$(".order-time").html("下单时间：&nbsp;"+userorder.orderTime);//创建订单时间
 			$(".order-price").html("¥"+userorder.originalPrice);//套餐原价
 			$(".price-pay").html("¥"+userorder.orderPrice);//实际付款
-			$(".price-coupon").html("¥"+(userorder.originalPrice-userorder.orderPrice));//优惠价格
+			$(".price-coupon").html("¥"+(datas.data.price));//优惠价格
 			// 订单状态值，0用户未支付；1已付款；2驾校特有，未上交材料；3驾校特有，驾校已报名，正在返还材料；4交易完成，未评价；5未付款取消订单；6已付款取消订单；7交易完成，已评价
 			if (userorder.orderStatus=="0") {//用户提交订单未支付
 				$(".chedule-content").html("未付款");
@@ -41,6 +41,7 @@ $(function(){
 				$(".toPay").show();
 				$(".cancel").show();
 				$(".price").css({"margin-bottom":"58px"});
+				$(".pay_text").html("应付款");
 
 				//未支付，去付款
 				$(".toPay").click(function(){

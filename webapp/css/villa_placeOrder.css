@@ -71,7 +71,7 @@ html, body {
 	margin:10px 10px 10px 0;
 }
 .villa-information div.villa-pic{
-	width: 48px;
+	width: 64px;
 	height: 48px;
 	border-radius: 10px;
 	margin:10px 10px 10px 0;
@@ -99,7 +99,7 @@ html, body {
 	position: absolute;
 	/*display: none;*/
 	
-	right: 10px;
+	right: 0px;
 	height: 20px;
 	width: 20px;
 	background: url(../images/circle.png);
@@ -115,7 +115,7 @@ html, body {
 	padding:0;
 	margin:0;
 	margin-left: 10px;
-	/*filter:alpha(Opacity=0);-moz-opacity:0;opacity: 0;*/
+	filter:alpha(Opacity=0);-moz-opacity:0;opacity: 0;
 }
 .villa-information input[type="number"]{
 	padding: 0 10px;

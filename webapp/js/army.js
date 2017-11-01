@@ -64,7 +64,7 @@ $(function(){
 
 
 	//娱乐项目
-	$("#villa-item-li li:first-child").append("<p class='villa-item-li-traingle'></p>");
+	// $("#villa-item-li li:first-child").append("<p class='villa-item-li-traingle'></p>");
     // $(".villa-item-hint").html($("#villa-item-li li:first-child").find("p").attr("text"));
     $("#villa-item-li li").click(function(){
         $(this).append("<p class='villa-item-li-traingle'></p>");
