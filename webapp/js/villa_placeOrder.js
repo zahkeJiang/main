@@ -339,6 +339,8 @@ $(function(){
                             alert(datas.msg);//您的套餐中别墅或日期已被预约
                         }
                     },"json");
+                }else{
+                    alert("您当前存在多个订单，请勿重复下单。")
                 }
             },"json");
             
@@ -357,6 +359,8 @@ $(function(){
                             alert(datas.msg);//您的套餐中别墅或日期已被预约
                         }
                     },"json");
+                }else{
+                    alert("您当前存在多个订单，请勿重复下单。")
                 }
             },"json");
         }      

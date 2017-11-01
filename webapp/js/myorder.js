@@ -43,7 +43,7 @@ function all_orders(){
                     var result = "<p class='topay' odnumber='"+comment.orderNumber+"'>待付款</p>";
                     var yinggaipay = "应付款：";
                 }else if (comment.orderStatus=="1"||comment.orderStatus=="2") {//用户已付款，审核过程
-                    var result = "<p class='refund' odnumber='"+comment.orderNumber+"'>取消订单</p>";
+                    var result = "<p class='refund' odnumber='"+comment.orderNumber+"'>已付款</p>";
                     var yinggaipay = "实付款：";
                 }else if (comment.orderStatus=="3") {//用户报名完成
                     var result = "<p class='result'>材料正在返还</p>";
@@ -157,7 +157,7 @@ function orders_success(){
             $.each(dsorder_list,function(commentIndex,comment){
                 if (comment.orderStatus=="1"||comment.orderStatus=="2"||comment.orderStatus=="3"){
                     if (comment.orderStatus=="1"||comment.orderStatus=="2") {
-                        var result = "<p class='refund' odnumber='"+comment.orderNumber+"'>取消订单</p>";
+                        var result = "<p class='refund' odnumber='"+comment.orderNumber+"'>已付款</p>";
                     
                     }else if (comment.orderStatus=="3") {
                         var result = "<p class='result'>材料正在返还</p>";
