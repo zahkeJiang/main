@@ -110,7 +110,7 @@
     where villa_id = #{villaId,jdbcType=INTEGER}
   </delete>
     <select id="getVillaOrderByDate" parameterType="string" resultMap="BaseResultMap">
-        SELECT * FROM villa_order WHERE date LIKE '%' #{thisDate} '%' AND order_status != 6 AND order_status != 0
+        SELECT * FROM villa_order WHERE date LIKE '%' #{thisDate} '%' AND order_status != 6 AND order_status != 0 AND order_status != 5
     </select>
   <delete id="deleteByExample" parameterType="com.bjpygh.gzh.bean.VillaOrderExample">
     delete from villa_order
