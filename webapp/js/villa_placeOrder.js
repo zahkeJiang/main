@@ -336,7 +336,7 @@ $(function(){
                                 }
                             },'json');
                         }else{
-                            alert(dats.msg);//您的套餐中别墅或日期已被预约
+                            alert(datas.msg);//您的套餐中别墅或日期已被预约
                         }
                     },"json");
                 }
@@ -354,7 +354,7 @@ $(function(){
                         if (datas.status==0) {
                             window.location.href="payHint.html?ordernumber="+orderNumber;
                         }else{
-                            alert(dats.msg);//您的套餐中别墅或日期已被预约
+                            alert(datas.msg);//您的套餐中别墅或日期已被预约
                         }
                     },"json");
                 }

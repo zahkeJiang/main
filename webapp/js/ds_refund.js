@@ -13,8 +13,7 @@ $(function(){
 	$(".apply_refund").click(function(){
 		var refund_reason = $("#rea option:selected").val();
 		if(refund_reason!=""){
-			$.post("refund.action",{"WIDrefund_reason":refund_reason,"ordernumber":ordernumber},
-				function(obj){
+			$.post("refund.action",{"WIDrefund_reason":refund_reason,"ordernumber":ordernumber},function(obj){
 				if(obj.status == "0"){
 					window.location.href="finish_refund.html?refund_status=1";
 				}else{

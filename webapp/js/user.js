@@ -60,7 +60,18 @@ $.post("personal.action",{},function(obj){
 	if (obj.status=="0") {
 		var userobj = obj.data.userInfo;
 		// document.getElementById('icon').src=obj.headimageurl;
-		$("#icon").attr('src',userobj.headimageurl);
+		// $("#icon").attr('src',userobj.headimageurl);
+		if (userobj.headimageurl!=null||userobj.headimageurl!="") {
+			$("#icon").attr('src',userobj.headimageurl);
+		}else{
+			if(userobj.sex=="1"){
+				$("#icon").attr('src',"./images/pay_bg_hint.png");
+			}else if(userobj.sex=="2"){
+				$("#icon").attr('src',"./images/refund_success.png");
+			}else{
+				$("#icon").attr('src',"./images/QRcode.jpg");
+			}	
+		}
 		$('#nickname').html(userobj.nickname);
 		$('#mobile').html(userobj.phoneNumber);
 		if (userobj.sex!=null) {
