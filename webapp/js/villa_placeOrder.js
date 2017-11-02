@@ -31,7 +31,7 @@ $(function(){
 //    日历结束
 //    点击上一月
     var monthNum = 0;
-    $('.sit-pre-month').on('click',function(e){
+    $('.sit-pre-month').click(function(e){
         e.preventDefault();
         // 第二个参数 0为本月 上一个月1，下一个月-1
         ++monthNum;
@@ -40,7 +40,7 @@ $(function(){
     });
 
 //    点击下一月
-    $('.sit-next-month').on('click',function(e){
+    $('.sit-next-month').click(function(e){
         e.preventDefault();
         --monthNum;
         showCalendarData(0,monthNum);
@@ -53,7 +53,7 @@ $(function(){
     var todyDate = myDate.getDate();
      var flag = false;
      //点击每天的操作，要是有其他操作可在此处写事件，只有展示功能的日历 ，注释此段代码 点击不需要事件
-    $('.currentMonth0').on('click',function(e){
+    $('.currentMonth0').click(function(e){
         console.log($(this));
         var thisDayNumber = $(this).children(".borderr").attr("thisDayNumber");//获点击所对应的当天日期
         //选择完日期后 点击按钮去支付 ，可以将需要的参数传进去
@@ -110,7 +110,7 @@ $(function(){
 
     });
     
-    $('.otherMonth').on('click',function(e){
+    $('.otherMonth').click(function(e){
          console.log($(this));
         //选择完日期后 点击按钮去支付 ，可以将需要的参数传进去
         //如果有限制条件 直接return 不添加标签并且支付也不不能点击传参
