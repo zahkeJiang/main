@@ -212,6 +212,7 @@ html, body {
     border-top: 1px solid #ddd;
 }
 .villa-map-time div{ 
+    /*font-size: 12px;*/
     display: flex;
     height: 24px;
     align-items: center;
@@ -219,19 +220,20 @@ html, body {
 .ontime p:nth-child(2){
     height: 24px;
     line-height: 24px;
-     width: 84px;
+     width: 88px;
     color: #54A0FF;
-    font-size: 14px;
+    font-size: 12px;
          margin-left:4px;
  /*   padding: 0 10px;*/
     background:#dfdfdf;
 }
 .outtime p:nth-child(2){
+    font-size: 12px;
     height: 24px;
     line-height: 24px;
     color:orange;
          margin-left:4px;
-     width: 84px;
+     width: 88px;
     /*padding: 0 10px;*/
     background:#dfdfdf;
 }

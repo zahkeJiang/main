@@ -98,7 +98,7 @@ $(function(){
 
 				//已支付，取消订单，此时是退款
 				$(".cancel").click(function(){
-					window.location.href="ds_refund.html?ordernumber="+ordernumber;
+					window.location.href="refund.html?ordernumber="+ordernumber;
 				});
 			}else if (userorder.orderStatus=="3") {//驾校特有状态值，用户报名成功
 				$(".chedule-content").html("已报名");

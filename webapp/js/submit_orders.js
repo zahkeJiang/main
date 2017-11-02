@@ -136,7 +136,7 @@ $(function(){
                         }
                     },'json');
                 }else if (datas.status == "-40") {
-                    alert("您当前已存在多个未支付订单，请勿重复多次下单。")
+                    alert("您当前存在多个未支付订单，请勿重复下单。")
                 }
             },"json");   
         }else if (payMode=="aliPay") {//支付宝支付
@@ -149,7 +149,7 @@ $(function(){
                     window.location.href="payHint.html?ordernumber="+ordernumber;
                       
                 }else if (datas.status == "-40") {
-                    alert("您当前已存在多个未支付订单，请勿重复多次下单。")
+                    alert("您当前存在多个未支付订单，请勿重复下单。")
                 } 
            
             },"json");   

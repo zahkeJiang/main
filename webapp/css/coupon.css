@@ -33,16 +33,138 @@ html, body {
   padding:0 10px;
   padding-top: 10px;
   background: #f6f1f1;
+  position: relative;
 }
 .couponBox img{
   margin-bottom: 6px;
   width:100%;
 }
+  .couponBox p.date,.couponBox p.date_ovedue{
+    background: #ffe9e1;
+    color: #999;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 15%;
+    padding:0.5% 2%;
+    left: 8%;
+    font-size:12px;
+  }
+@media only screen and (min-width: 320px){
+  .couponBox p.date{
+    background: #ffe9e1;
+    color: #999;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 15%;
+    padding:0.5% 2%;
+    left: 8%;
+    font-size:0.625rem;
+  }
+  .couponBox p.date_ovedue{
+    background: #efefef;
+    color: #999;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 15%;
+    padding:0.5% 2%;
+    left: 8%;
+    font-size:0.625rem;
+  }
 
- 
+}  
+@media only screen and (min-width: 360px){
+  .couponBox p.date{
+    background: #ffe9e1;
+    color: #999;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 15%;
+    padding:0.5% 2%;
+    left: 6%;
+    font-size:12px;
+  }
+  .couponBox p.date_ovedue{
+    background: #efefef;
+    color: #999;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 15%;
+    padding:0.5% 2%;
+    left: 8%;
+    font-size:12px;
+  }
+}  
+@media only screen and (min-width: 480px){
+  .couponBox p.date{
+    background: #ffe9e1;
+    color: #999;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 15%;
+    padding:0.5% 2%;
+    left: 6%;
+    font-size:14px;
+  }
+  .couponBox p.date_ovedue{
+    background: #efefef;
+    color: #999;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 15%;
+    padding:0.5% 2%;
+    left: 8%;
+    font-size:14px;
+  }
+
+} 
+@media only screen and (min-width: 600px){
+  .couponBox p.date{
+    background: #ffe9e1;
+    color: #999;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 15%;
+    padding:0.5% 2%;
+    left: 8%;
+    font-size:16px;
+  }
+  .couponBox p.date_ovedue{
+    background: #efefef;
+    color: #999;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 15%;
+    padding:0.5% 2%;
+    left: 8%;
+    font-size:16px
+  }
+
+} 
+@media only screen and (min-width: 720px){
+  .couponBox p.date{
+    background: #ffe9e1;
+    color: #999;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 15%;
+    padding:0.5% 2%;
+    left: 8%;
+    font-size:18px;
+  }
+  .couponBox p.date_ovedue{
+    background: #efefef;
+    color: #999;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 15%;
+    padding:0.5% 2%;
+    left: 8%;
+    font-size:18pxs
+  }
+
+} 
 
 .coupon_hint_text{
-
 margin:20px 10px;
 }
 .coupon_hint_text h2{

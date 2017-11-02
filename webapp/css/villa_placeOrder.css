@@ -70,27 +70,14 @@ html, body {
 	line-height: 32px;
 	margin:10px 10px 10px 0;
 }
-.villa-information div.villa-pic{
+.villa-information a.villa-pic{
 	width: 64px;
 	height: 48px;
 	border-radius: 10px;
 	margin:10px 10px 10px 0;
 }
-.villa-information div.villa-pic img{
-	border-radius: 10px;
-	width: 48px;
-}
-.villa-information div.villa-pic1{
-	background:url(../images/armyImages/one.jpg)no-repeat center;
-	background-size: 100% 100%;
-}
-.villa-information div.villa-pic2{
-	background:url(../images/armyImages/two.jpg)no-repeat center;
-	background-size: 100% 100%;
-}
-.villa-information div.villa-pic3{
-	background:url(../images/armyImages/three.jpg)no-repeat center;
-	background-size: 100% 100%;
+.villa-information a.villa-pic img{
+border-radius: 10px;
 }
 .villa-information div.villa-choose{
 

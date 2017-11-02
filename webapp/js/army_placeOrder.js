@@ -496,6 +496,8 @@ $(function(){
                         
                         
                     
+                }else{
+                    alert("您当前存在多个未支付订单，请勿重复下单。")
                 }
             },"json");
         }else if (payMode=="aliPay") {//支付宝支付
@@ -508,6 +510,8 @@ $(function(){
                     
                     window.location.href="payHint.html?ordernumber="+orderNumber;
                         
+                }else{
+                    alert("您当前存在多个未支付订单，请勿重复下单。")
                 }
             },"json");
         }      
