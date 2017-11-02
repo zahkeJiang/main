@@ -450,6 +450,7 @@ function villaDateCheck(){
             }  
         }        
         var date = selectDate.join();//数组中的所有元素放入一个字符串
+        alert(date);
         console.log(date);
         $.post("getVillaRes",{"date":date},function(datas){
             if (datas.status==0) {

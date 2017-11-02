@@ -609,7 +609,7 @@ public class PayController extends BaseController {
         jdOrderPay.setAmount(amount);
         jdOrderPay.setOrderType("1");
         jdOrderPay.setCurrency("CNY");
-        jdOrderPay.setCallbackUrl("http://gzpt.bjpygh.com/pay_result.html"+"?ordernumber="+tradeNum);
+        jdOrderPay.setCallbackUrl("http://gzpt.bjpygh.com/payResult.html"+"?ordernumber="+tradeNum);
         jdOrderPay.setNotifyUrl("http://gzpt.bjpygh.com/jNotify_url");//http://gzpt.bjpygh.com/jNotify_url
         jdOrderPay.setUserId(userid);
 
