@@ -340,7 +340,7 @@ $(function(){
                         }
                     },"json");
                 }else{
-                    alert("您当前存在多个订单，请勿重复下单。")
+                    alert("您当前存在多个未支付订单，请勿重复下单。")
                 }
             },"json");
             
@@ -360,7 +360,7 @@ $(function(){
                         }
                     },"json");
                 }else{
-                    alert("您当前存在多个订单，请勿重复下单。")
+                    alert("您当前存在多个未支付订单，请勿重复下单。")
                 }
             },"json");
         }      
@@ -484,8 +484,10 @@ function villaDateCheck(){
                     if (villaCheckName_xiangtongzifuchuang!="") {
                         alert('所选日期中，"'+villaCheckName_xiangtong+'"已被预定,请重新选择');
                         //移除别墅选中状态
-                        $("input[name='villa-radio']").removeAttr("checked");
-                        $(".villa-radioBox").find(".villa-choose").empty();
+                        // $("input[name='villa-radio']").removeAttr("checked");
+                        // $(".villa-radioBox").find(".villa-choose").empty();
+
+
                         //移除选中的日期
                         $(".currentMonth0").children(".selectedDay").remove();
                     }else{//不存在相同的别墅

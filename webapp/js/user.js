@@ -64,11 +64,11 @@ $.post("personal.action",{},function(obj){
 		if (userobj.headimageurl!=null||userobj.headimageurl!="") {
 			$("#icon").attr('src',userobj.headimageurl);
 		}else{
-			if(userobj.sex=="1"){
+			if(userobj.sex=="1"){//男
 				$("#icon").attr('src',"./images/pay_bg_hint.png");
-			}else if(userobj.sex=="2"){
+			}else if(userobj.sex=="2"){//女
 				$("#icon").attr('src',"./images/refund_success.png");
-			}else{
+			}else{//不确定
 				$("#icon").attr('src',"./images/QRcode.jpg");
 			}	
 		}

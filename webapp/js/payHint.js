@@ -22,6 +22,6 @@ function isWeiXin(){
 
 $(function(){
 	$(".pay_finish_text").click(function(){
-		window.location.href="ds_pay.html";
+		window.location.href="payResult.html?ordernumber="+ordernumber;
 	});
 });

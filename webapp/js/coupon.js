@@ -9,9 +9,7 @@ $(function(){
     //获取已用优惠券
     $(".header div.used").click(function(){
         $(this).css({"border-bottom":"2px solid orange","color":"orange"});
-        $(this).siblings("div").css({"border-bottom":"2px solid #f6f1f1","color":"black"});
-        used();
-    });
+        $(this).siblings("div").css({"border-bottom":"2px solid #f6f1f1","color":"
 });
 
 //获取可用优惠券
