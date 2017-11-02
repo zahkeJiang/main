@@ -92,7 +92,7 @@ public class VillaOrderService {
         }
         //设置状态
         villaOrder.setOrderStatus(0);
-        villaOrder.setNote("豪华别墅套餐");
+        villaOrder.setNote("漂洋过海小别墅");
         
         villaOrderMapper.insertSelective(villaOrder);
         return orderNumber;
@@ -179,19 +179,28 @@ public class VillaOrderService {
     }
 
     public String getVillaPay(String[] date) throws ParseException {
+//        System.out.println(date[0]+","+date[1]);
+        String name = "";
         for (int i=0;i<date.length;i++){
             List<VillaOrder> villaOrders = villaOrderMapper.getVillaOrderByDate(date[i]);
-            String name = "";
             for (VillaOrder order : villaOrders){
                 if (name!=""){
-                    name= name + ","+order.getVillaName();
+                    String[] ns = name.split(",");
+                    String[] vns = order.getVillaName().split(",");
+                    for (String n : ns){
+                        for (String vn : vns){
+                            if (!n.equals(vn)){
+                                name= name + ","+vns;
+                            }
+                        }
+                    }
+
                 }else {
                     name= order.getVillaName();
                 }
             }
-           return name;
         }
-        return "";
+        return name;
     }
 
     public boolean checkOrder(VillaOrder villaOrder) {

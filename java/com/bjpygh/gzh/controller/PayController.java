@@ -99,7 +99,7 @@ public class PayController extends BaseController {
         for (VillaOrder villaOrder : villaOrders){
             UserOrder userOrder = new UserOrder();
             userOrder.setOrderNumber(villaOrder.getOrderNumber());
-            userOrder.setOrderName("漂洋过海小别墅");
+            userOrder.setOrderName(villaOrder.getNote());
             userOrder.setOrderTime(villaOrder.getCreateTime());
             String[] vs = villaOrder.getVillaName().split(",");
 
@@ -218,6 +218,10 @@ public class PayController extends BaseController {
         String o = out_trade_no.substring(0, 1);
         if (o.equals("V")){
             VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(out_trade_no).get(0);
+            //判断是否已经完成退款
+            if (villaOrder.getOrderStatus() == 5){
+                return Status.success();
+            }
             if(villaOrder.getOrderStatus() == 4||villaOrder.getOrderStatus()==7){
                 return Status.fail(-30,"订单已完成");
             }
@@ -267,6 +271,10 @@ public class PayController extends BaseController {
 
         }else if (o.equals("D")){
             DsOrder dsOrder = dsOrderService.getDsOrderByNumber(out_trade_no).get(0);
+            //判断是否已经完成退款
+            if (dsOrder.getOrderStatus() == 5){
+                return Status.success();
+            }
             String refund_amount=""+(float)(Math.round((Float.parseFloat(""+dsOrder.getOrderPrice())*0.994)*100))/100;
             if(dsOrder.getOrderStatus() == 3||dsOrder.getOrderStatus() == 4||dsOrder.getOrderStatus() == 7){
                 return Status.fail(-30,"报名已完成");
@@ -296,6 +304,10 @@ public class PayController extends BaseController {
             }
         }else if (o.equals("A")){
             ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(out_trade_no).get(0);
+            //判断是否已经完成退款
+            if (armyOrder.getOrderStatus() == 5){
+                return Status.success();
+            }
             if(armyOrder.getOrderStatus() == 4||armyOrder.getOrderStatus() == 7){
                 return Status.fail(-30,"订单已完成");
             }
@@ -597,7 +609,7 @@ public class PayController extends BaseController {
         jdOrderPay.setAmount(amount);
         jdOrderPay.setOrderType("1");
         jdOrderPay.setCurrency("CNY");
-        jdOrderPay.setCallbackUrl("http://gzpt.bjpygh.com/ds_pay.html");
+        jdOrderPay.setCallbackUrl("http://gzpt.bjpygh.com/pay_result.html"+"?ordernumber="+tradeNum);
         jdOrderPay.setNotifyUrl("http://gzpt.bjpygh.com/jNotify_url");//http://gzpt.bjpygh.com/jNotify_url
         jdOrderPay.setUserId(userid);
 

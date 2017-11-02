@@ -221,7 +221,7 @@ public class NotifyController extends BaseController {
         try {
             AsynNotifyResponse anRes = JdPayUtil.parseResp(pubKey, deskey, sb.toString(), AsynNotifyResponse.class);
 
-            if (anRes.getStatus().equals("1")){
+            if (anRes.getStatus().equals("2")){
                 String ordernumber = anRes.getTradeNum();
                 String o = ordernumber.substring(0, 1);
                 if (o.equals("V")){
@@ -332,6 +332,45 @@ public class NotifyController extends BaseController {
 
     }
 
+    //查询订单接口及所属驾校
+    @ResponseBody
+    @RequestMapping(value = "/queryOrder.action", method = RequestMethod.POST)
+    public Status QueryOrder(HttpServletRequest request,String ordernumber){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        String userid = userMap.get("id");
+
+        String o = ordernumber.substring(0,1);
+        if (o.equals("A")){
+            ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
+            if (armyOrder.getOrderStatus() == 1){
+                return Status.success().add("price",armyOrder.getArmyPrice())
+                        .add("out_trade_no",armyOrder.getOrderNumber());
+            }else {
+                return Status.fail(-30,"没有已支付订单");
+            }
+        }else if (o.equals("D")){
+            DsOrder dso = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
+            if (dso.getOrderStatus() == 1){
+                return Status.success().add("price",dso.getOrderPrice())
+                        .add("out_trade_no",dso.getOrderNumber());
+            }else {
+                return Status.fail(-30,"没有已支付订单");
+            }
+        }else if (o.equals("V")){
+            VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(ordernumber).get(0);
+            if (villaOrder.getOrderStatus() == 1){
+                return Status.success().add("price",villaOrder.getVillaPrice())
+                        .add("out_trade_no",villaOrder.getOrderNumber());
+            }else {
+                return Status.fail(-30,"没有已支付订单");
+            }
+        }else {
+            return Status.fail(-30,"没有已支付订单");
+        }
+    }
 
     public Map<String, String> getGmtRefund(HttpServletRequest request) throws IOException, AlipayApiException {
 
