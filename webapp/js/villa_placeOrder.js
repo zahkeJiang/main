@@ -491,6 +491,8 @@ function villaDateCheck(){
 
                         //移除选中的日期
                         $(".currentMonth0").children(".selectedDay").remove();
+                        //更改选择的日期时，将对总价进行调整
+                        getPrice();
                     }else{//不存在相同的别墅
                         var dateHundred=0;//一百天数
                         var dateSix=0;//66天数

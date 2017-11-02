@@ -69,7 +69,7 @@ var currentDay;
         for(var i = 0; i < _tds.length; i++) {
             var _thisDay = new Date(_year, _month-1 , i + 1 - _firstDay.getDay());
             var _thisDayStr = getDateStr(_thisDay,0);
-            _tds[i].innerHTML = "<span class='borderr' thisDayNumber='"+_year+"-"+_month+"-"+_thisDay.getDate()+"'>"+_thisDay.getDate()+"</span>";
+            _tds[i].innerHTML = "<span class='borderr' thisDayNumber='"+getYealMonthDate(_thisDay)+"'>"+_thisDay.getDate()+"</span>";
             //_tds[i].setAttribute('data', _thisDayStr);
             if(_thisDayStr.substr(0, 6) == getDateStr(_firstDay,index).substr(0, 6)){
                 _tds[i].className = 'currentMonth currentMonth'+index+'';
@@ -91,14 +91,14 @@ var currentDay;
             
             //当天之前变灰
             if(_thisDay.getTime()<(dateObj.getDate().getTime()-24*60*60*1000)){
-                _tds[i].innerHTML = "<span class='borderr' thisDayNumber='"+_year+"-"+_month+"-"+_thisDay.getDate()+"'>"+_thisDay.getDate()+"</span>";
+                _tds[i].innerHTML = "<span class='borderr' thisDayNumber='"+getYealMonthDate(_thisDay)+"'>"+_thisDay.getDate()+"</span>";
                 $(_tds[i]).addClass('beforeDay');
             }else{
-                _tds[i].innerHTML = "<span class='borderr' thisDayNumber='"+_year+"-"+_month+"-"+_thisDay.getDate()+"'>"+_thisDay.getDate()+"</span>";
+                _tds[i].innerHTML = "<span class='borderr' thisDayNumber='"+getYealMonthDate(_thisDay)+"'>"+_thisDay.getDate()+"</span>";
                 $(_tds[i]).addClass('canSelectDay');
             }
             if(_thisDayStr.substr(0, 4) == _currentYear && _thisDayStr.substr(4, 2) == _currentMonth && _thisDayStr.substr(6, 2) == _currentDay ){
-                _tds[i].innerHTML="<span class='borderr' thisDayNumber='"+_year+"-"+_month+"-"+_thisDay.getDate()+"'>今天</span>";
+                _tds[i].innerHTML="<span class='borderr' thisDayNumber='"+getYealMonthDate(_thisDay)+"'>今天</span>";
                 $(_tds[i]).addClass('currentDay');
             }
 
@@ -114,6 +114,17 @@ var currentDay;
         _d = (_d > 9) ? ("" + _d) : ("0" + _d);
         return _year + _month + _d;
     }
+
+        //获取年月日带‘-’形式
+    function getYealMonthDate(date) {
+        var _year = date.getFullYear();
+        var _month = date.getMonth() + 1;    // 月从0开始计数
+        var _d = date.getDate();
+        _month = (_month > 9) ? ("" + _month) : ("0" + _month);
+        _d = (_d > 9) ? ("" + _d) : ("0" + _d);
+        return _year +"-"+ _month +"-"+ _d;
+    }
+
     //获取年月日
     function getYandM(num) {
         var _oldfyear = dateObj.getDate().getFullYear();
