@@ -9,7 +9,7 @@ window.onload=ShowMessage();
 
 $(function(){
     //发送请求判断支付完成与否
-    $.post("queryOrder.action",{"orderNumber":orderNumber},function(obj){
+    $.post("queryOrder.action",{"ordernumber":orderNumber},function(obj){
         if(obj.status=="0"){
             var order_number = obj.out_trade_no;
             var ds_price = obj.price;
