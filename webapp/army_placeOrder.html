@@ -21,7 +21,6 @@
 }
 </style>
 <body>
-<!-- 选择别墅与报名人数 -->
 <div class="army-choose villaBox">
     <div class="army-information">
         <div class="army-title">人数</div>
@@ -33,11 +32,15 @@
         <input type="number" name="保险人数" placeholder="请输入购买保险人数" id="army-securenumber">
     </div>
     <p class="secureHint">保单说明</p>
+</div>
+<!-- 选择别墅与报名人数 -->
+<div class="army-choose villaBox">
+    
 <!--     <div class="army-barbecue">
         <div class="army-barbecue-title">烧烤</div>
         <div class="army-barbecue-choose"></div>
     </div> -->
-    <!-- 定金支付与全额支付 -->
+    <!-- 烧烤 -->
 <div class="army-barbecue">
     <div class="army-barbecue-title">烧烤</div>
     <div class="barbecueBox">
@@ -88,8 +91,35 @@
             <!-- <img src="./images/add.png" height="16px" width="16px"> -->
         </div>
     </div> 
-    
 </div>
+<div class="army-choose villaBox">
+<!-- 军旅选择时间段 -->
+<div class="army-time">
+    <div class="army-time-title">参战时刻</div>
+    <div class="army-timeBox">
+        <label for="am">
+            <div class="army-time-row">
+                <div class="army-time1"></div>
+                <span>8:00-11:30</span>
+                <input type="radio" name="timeRadio" id="am" value="0">
+        
+            </div>
+        </label>
+        <label for="pm">
+            <div class="army-time-row">
+                <div class="army-time1"></div>
+                <span>13:30-17:00</span>
+                <input type="radio" name="timeRadio" id="pm" value="1">
+        
+            </div>
+        </label>
+        
+    </div>
+    <p class="army-hint">温馨提示：如果用户选择了帐篷或者室内，只要有帐篷或者室内有人选，就只能选择13:30-17:00去玩</p>
+</div>
+</div>
+
+
 <!-- 日期 -->
 <div class="date villaBox">
     <div id="demo" class="sit-two-capacity-day">
@@ -179,10 +209,11 @@
             </div>
         </label>
     </div>
+    <p class="army-Reserve-hint">温馨提示：选择预约定金，线上支付订单金额50%，线下到场支付尾款</p>
 </div>
 <!-- 阅读参战守则 -->
 <div class="roomCodeBox villaBox">
-    <div class="roomCode"></div><img src=""><span>我已阅读并遵守漂洋过海<a href="army_knowCode.html"><span class="roomCodeUrl">《参战守则》</span></a></span>
+    <div class="roomCode"></div><img src=""><span>我已认真阅读并遵守漂洋过海<a href="army_knowCode.html"><span class="roomCodeUrl">《参战守则》</span></a></span>
 </div>
 <!-- 明细 -->
     <div class="detailBox">

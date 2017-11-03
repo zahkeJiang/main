@@ -39,7 +39,7 @@ html, body {
 	margin:0 10px;
 }
 .army-barbecue{
-
+	margin-top: 8px;
 	display: flex;
 	align-items: center;
 }
@@ -56,7 +56,6 @@ html, body {
 /*是否烧烤*/
 .barbecueBox{
 	height: 32px;
-	margin-top: 10px;	
 	display: flex;
 	align-items: center;
 	flex: 1;
@@ -82,6 +81,51 @@ input[name='barbecueRadio']{
 }
 /*结束是否烧烤*/
 
+/*军旅时间段*/
+/*.army-time{
+	margin-top: 8px;
+	display: flex;
+	align-items: center;
+}*/
+.army-time div.army-time-title{
+	height: 32px;
+	font-size: 16px;
+	color: #555;
+	/*text-align: center;*/
+	line-height: 32px;
+	margin:0 10px;
+
+}
+.army-timeBox{
+	height: 32px;
+	display: flex;
+	align-items: center;
+	flex: 1;
+	justify-content: space-around;
+}
+.army-time-row{
+	display: flex;
+	font-size: 14px;
+	align-items: center;
+}
+.army-time1{
+	height: 18px;
+	width: 18px;
+	margin-right: 4px;
+	background: url(../images/circle.png);
+	background-size: 100% 100%;
+}
+.army-time1 img{
+	height: 18px;
+	width: 18px;
+}
+input[name='timeRadio']{
+	display: none;
+}
+.army-time p.army-hint{
+	border-top: 1px solid #ddd;
+}
+/*军旅时间段结束*/
 
 .army-information{
 	display: flex;
@@ -118,7 +162,6 @@ input[name='barbecueRadio']{
 }
 .army-choose p.army-hint{
 	font-size: 12px;
-	height: 20px;
 	margin-left: 10px;
 	line-height: 20px;
 }
@@ -445,6 +488,12 @@ input[name='barbecueRadio']{
 }
 input[name='Reserve1Radio']{
 	display: none;
+}
+.Reserve p.army-Reserve-hint{
+		border-top: 1px solid #ddd;
+	color: #999;
+	font-size: 12px;
+	line-height: 20px;
 }
 /*villa_roomCode*/
 .roomCodeBox{

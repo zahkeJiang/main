@@ -233,6 +233,13 @@ $(function(){
         getPrice();
     });
 
+    //军旅选择时间段
+        $(".army-time-row").click(function(){
+        $(this).children(".army-time1").html("<img src='./images/circle_choose.png' height='18px' width='18px'>");
+        $(this).parents().siblings("label").find(".army-time1").empty();
+        getPrice();
+    });
+
 //全额支付与预约定金
     $(".Reserve-row").click(function(){
         $(this).children(".Reserve1").html("<img src='./images/circle_choose.png' height='18px' width='18px'>");
@@ -424,25 +431,30 @@ $(function(){
         }
         if (re.test(peopleNumber) && peopleNumber>0) {//报名人数不为空并且是正整数
 
-                if ($(".currentMonth0").children(".selectedDay").length > 0) {//当月存在被选中日期
-                    if (realName!="") {//真实姓名不为空
-                        if (reg.test(realNumber)) {
-                            if ($(".roomCode").find("img").length==1) {
-                               console.log("姓名"+realName+"/报名日期"+date+"/人数"+peopleNumber+"/身份证"+realNumber+"/保险"+secureNumber);
-                                $(".layer").show();
-                                $(".payBox").show(); 
-                            }else{
-                                alert("请遵守北京漂洋过海《参战守则》");
-                            }
+                if ($("input[name='timeRadio']:checked").val()==0||$("input[name='timeRadio']:checked").val()==1) {
+                    if ($(".currentMonth0").children(".selectedDay").length > 0) {//当月存在被选中日期
+                        if (realName!="") {//真实姓名不为空
+                            if (reg.test(realNumber)) {
+                                if ($(".roomCode").find("img").length==1) {
+                                    console.log("姓名"+realName+"/报名日期"+date+"/人数"+peopleNumber+"/身份证"+realNumber+"/保险"+secureNumber+"/参战时刻"+$("input[name='Reserve1Radio']:checked").val());
+                                    $(".layer").show();
+                                    $(".payBox").show(); 
+                                }else{
+                                    alert("请遵守北京漂洋过海《参战守则》");
+                                }
                             
-                        }else{
+                            }else{
                             alert("身份证格式不对");
-                        } 
+                            } 
+                        }else{
+                            alert("输入您的真实姓名");
+                        }
                     }else{
-                        alert("输入您的真实姓名");
+                        alert("请选择报名日期");
                     }
                 }else{
-                    alert("请选择报名日期");
+                    
+                    alert("您尚未选择参战时刻");
                 }
                 
             
@@ -460,13 +472,14 @@ $(function(){
         var indoor = $(".indoor").html();//室内人数
         var nosleep = $(".nosleep").html();//不住宿人数
         var reserve = $("input[name='Reserve1Radio']:checked").val();//付款类型，1全额，或0预约定金
+        var armyTime = $("input[name='timeRadio']:checked").val();//付款类型，1下午，或0上午
         if ($("input[name='barbecueRadio']:checked").val()==1) {
             var barbecueChoose = 1;//选中烧烤
         }else{
             var barbecueChoose = 0;//没有选中烧烤
         }
         if (payMode=="JD") {//京东支付
-            $.post("createArmyOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"insurance":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor,"fullAmount":reserve,"barbecue":barbecueChoose},function(datas){
+            $.post("createArmyOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"insurance":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor,"fullAmount":reserve,"barbecue":barbecueChoose,"period":armyTime},function(datas){
                 if (datas.status==0) {
                     var orderNumber = datas.data.orderNumber;
                     console.log(orderNumber);
@@ -501,7 +514,7 @@ $(function(){
                 }
             },"json");
         }else if (payMode=="aliPay") {//支付宝支付
-            $.post("createArmyOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"insurance":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor,"fullAmount":reserve,"barbecue":barbecueChoose},function(datas){
+            $.post("createArmyOrder",{"date":date,"peopleNumber":peopleNumber,"realName":realName,"idNumber":realNumber,"insurance":secureNumber,"noroomNumber":nosleep,"roomNumber":indoor,"fullAmount":reserve,"barbecue":barbecueChoose,"period":armyTime},function(datas){
                 if (datas.status==0) {
                     var orderNumber = datas.data.orderNumber;
                     console.log(orderNumber);
@@ -545,7 +558,7 @@ function getPrice(){
         var tendNumber = $(".tend").html();//帐篷人数
         var indoorNumber = $(".indoor").html();//室内人数
         var selectDay = $(".currentMonth0").children(".selectedDay").length;//报名天数
-        if (re.test(peopleNumber) && peopleNumber>0 &&selectDay>0) {
+        if (re.test(peopleNumber) && peopleNumber>0 &&selectDay>0&&$("input[name='timeRadio']:checked").val()!=null) {
             $(".liVilla").html("<div><span>军旅</span><span class='detailBox-liVilla'>¥"+120*peopleNumber*selectDay+"</span></div><span class='detailBox-liVilla-hint'>(120元x"+peopleNumber+"人x"+selectDay+"晚)</span>");//军旅基础费用
             $(".libarbecue").html("<div><span>烧烤</span><span class='detailBox-liVilla'>¥"+10*barbecueChoose*peopleNumber*selectDay+"</span></div><span class='detailBox-liVilla-hint'>(10元x"+barbecueChoose*peopleNumber+"人x"+selectDay+"晚)</span>")//烧烤费用
             $(".lilitend").html("<div><span>帐篷</span><span class='detailBox-liVilla'>¥"+20*tendNumber*selectDay+"</span></div><span class='detailBox-liVilla-hint'>(20元x"+tendNumber+"人x"+selectDay+"晚)</span>")//帐篷费用
