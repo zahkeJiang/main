@@ -49,6 +49,8 @@ public class ArmyOrder {
 
     private Byte barbecue;
 
+    private Byte period;
+
     public Integer getArmyId() {
         return armyId;
     }
@@ -231,5 +233,13 @@ public class ArmyOrder {
 
     public void setBarbecue(Byte barbecue) {
         this.barbecue = barbecue;
+    }
+
+    public Byte getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(Byte period) {
+        this.period = period;
     }
 }
