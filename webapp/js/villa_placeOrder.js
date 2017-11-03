@@ -12,6 +12,7 @@ var re = /^[1-9]+[0-9]*]*$/; //正整数
 var date = "";
 var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/;//身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X 
 
+
 $(function(){
     //获取用户手机号码
     $.post("personal.action",{},function(datas){
@@ -169,6 +170,18 @@ $(function(){
 
     //别墅选择自定义点击样式,选择时与未选择时。
     $(".villa-radioBox").click(function() {
+        //检验当前别墅与与预定别墅是否冲突
+        if (villaDateCheck_beiyuding.length>0){
+            for (var i=0;i<villaDateCheck_beiyuding.length;i++){
+                if ($(this).children("input").val() == villaDateCheck_beiyuding[i]){
+                    alert('所选日期中"'+$(this).children("input").val()+'"已被预订，请重新选择');
+                    //移除选中的日期
+                    $(this).find(".villa-choose").empty();
+                    $(this).find("input[name='villa-radio']").removeAttr("checked");
+                    return;
+                }
+            }
+        }
         if ($(this).find(".villa-choose img").length==0) {
        
             $(this).find(".villa-choose").html('<img src="./images/circle_choose.png" height="20px" width="20px">');
@@ -466,7 +479,7 @@ function villaDateCheck(){
                 });
                 
                 //获取已经被预定的别墅，如果不为空，便利出相同的别墅名称
-                var selected = datas.data.selected;
+                selected = datas.data.selected;
                 if (selected!="") {//存在相同的别墅
                     var selectedVillaCheckNames = selected.split(",");//已经被预定的别墅数组
                     villaDateCheck_beiyuding = selectedVillaCheckNames;//将已被预定的别墅名数组保存下来，如果用户先选择日期后选择别墅，能用到

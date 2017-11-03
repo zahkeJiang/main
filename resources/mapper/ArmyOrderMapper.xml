@@ -25,6 +25,7 @@
     <result column="insurance" jdbcType="INTEGER" property="insurance" />
     <result column="full_amount" jdbcType="TINYINT" property="fullAmount" />
     <result column="barbecue" jdbcType="TINYINT" property="barbecue" />
+    <result column="period" jdbcType="TINYINT" property="period" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -88,7 +89,7 @@
     army_id, user_id, real_name, army_name, army_price, date, create_time, pay_time, 
     refund_time, finish_time, note, original_price, people_number, order_number, order_status, 
     room_number, noroom_number, imageurl, pay_type, id_number, insurance, full_amount, 
-    barbecue
+    barbecue, period
   </sql>
   <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.ArmyOrderExample" resultMap="BaseResultMap">
     select
@@ -128,7 +129,8 @@
       people_number, order_number, order_status, 
       room_number, noroom_number, imageurl, 
       pay_type, id_number, insurance, 
-      full_amount, barbecue)
+      full_amount, barbecue, period
+      )
     values (#{armyId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, 
       #{armyName,jdbcType=VARCHAR}, #{armyPrice,jdbcType=INTEGER}, #{date,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}, #{refundTime,jdbcType=TIMESTAMP}, 
@@ -136,7 +138,8 @@
       #{peopleNumber,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{orderStatus,jdbcType=INTEGER}, 
       #{roomNumber,jdbcType=INTEGER}, #{noroomNumber,jdbcType=INTEGER}, #{imageurl,jdbcType=VARCHAR}, 
       #{payType,jdbcType=TINYINT}, #{idNumber,jdbcType=VARCHAR}, #{insurance,jdbcType=INTEGER}, 
-      #{fullAmount,jdbcType=TINYINT}, #{barbecue,jdbcType=TINYINT})
+      #{fullAmount,jdbcType=TINYINT}, #{barbecue,jdbcType=TINYINT}, #{period,jdbcType=TINYINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.ArmyOrder">
     insert into army_order
@@ -210,6 +213,9 @@
       <if test="barbecue != null">
         barbecue,
       </if>
+      <if test="period != null">
+        period,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="armyId != null">
@@ -280,6 +286,9 @@
       </if>
       <if test="barbecue != null">
         #{barbecue,jdbcType=TINYINT},
+      </if>
+      <if test="period != null">
+        #{period,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -361,6 +370,9 @@
       <if test="record.barbecue != null">
         barbecue = #{record.barbecue,jdbcType=TINYINT},
       </if>
+      <if test="record.period != null">
+        period = #{record.period,jdbcType=TINYINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -390,7 +402,8 @@
       id_number = #{record.idNumber,jdbcType=VARCHAR},
       insurance = #{record.insurance,jdbcType=INTEGER},
       full_amount = #{record.fullAmount,jdbcType=TINYINT},
-      barbecue = #{record.barbecue,jdbcType=TINYINT}
+      barbecue = #{record.barbecue,jdbcType=TINYINT},
+      period = #{record.period,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -467,6 +480,9 @@
       <if test="barbecue != null">
         barbecue = #{barbecue,jdbcType=TINYINT},
       </if>
+      <if test="period != null">
+        period = #{period,jdbcType=TINYINT},
+      </if>
     </set>
     where army_id = #{armyId,jdbcType=INTEGER}
   </update>
@@ -493,7 +509,8 @@
       id_number = #{idNumber,jdbcType=VARCHAR},
       insurance = #{insurance,jdbcType=INTEGER},
       full_amount = #{fullAmount,jdbcType=TINYINT},
-      barbecue = #{barbecue,jdbcType=TINYINT}
+      barbecue = #{barbecue,jdbcType=TINYINT},
+      period = #{period,jdbcType=TINYINT}
     where army_id = #{armyId,jdbcType=INTEGER}
   </update>
 </mapper>
