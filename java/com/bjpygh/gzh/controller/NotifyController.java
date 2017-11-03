@@ -279,7 +279,7 @@ public class NotifyController extends BaseController {
                     "入住人数: "+villaOrder.getPeopleNumber()+"人 / "+"入驻天数: "
                     +villaOrder.getDate().split(",").length+"晚");
             order.setOrderTime(villaOrder.getCreateTime());
-            order.setOrderName("漂洋过海小别墅");
+            order.setOrderName(villaOrder.getNote());
             order.setOrderNumber(villaOrder.getOrderNumber());
             order.setPhoneNumber(user.getPhoneNumber());
             order.setRealName(villaOrder.getRealName());
@@ -308,7 +308,7 @@ public class NotifyController extends BaseController {
             order.setRealName(dsOrder.getRealName());
             order.setOriginalPrice(dsOrder.getOriginalPrice());
             order.setDescription(dsOrder.getDescription());
-            order.setDsNote("法培方式: "+dsOrder.getNote());
+            order.setDsNote("法培方式"+dsOrder.getNote());
             return Status.success().add("order",order).add("price",order.getOriginalPrice()-order.getOrderPrice());
         }else if (o.equals("A")){
             ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);

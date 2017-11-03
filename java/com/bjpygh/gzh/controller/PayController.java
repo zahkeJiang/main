@@ -11,6 +11,7 @@ import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.bjpygh.gzh.bean.*;
 import com.bjpygh.gzh.config.AlipayConfig;
 import com.bjpygh.gzh.config.MyConfig;
+import com.bjpygh.gzh.entity.Refund;
 import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.model.HttpsClientUtil;
 import com.bjpygh.gzh.model.TradeRefundReqDto;
@@ -200,7 +201,7 @@ public class PayController extends BaseController {
             String tradeNum = villaOrder.getOrderNumber();
             String amount = villaOrder.getVillaPrice()+"00";
             String userid =villaOrder.getUserId()+"";
-            return JdPayReq(tradeNum,amount,userid,"别墅入住费用");
+            return JdPayReq(tradeNum,amount,userid,"别墅入驻费用");
         }else {
             return Status.fail(-20,"处理失败");
         }
@@ -208,13 +209,15 @@ public class PayController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/refund.action", method = RequestMethod.POST)
-    public Status DsRefund(HttpServletRequest request) throws ParseException, UnsupportedEncodingException {
+    public Status DsRefund(HttpServletRequest request, Refund refund) {
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
         }
-        String out_trade_no = new String(request.getParameter("ordernumber").getBytes("ISO-8859-1"),"UTF-8");
-        String refund_reason=new String(request.getParameter("WIDrefund_reason").getBytes("ISO-8859-1"),"UTF-8");
+//        String out_trade_no = new String(request.getParameter("ordernumber").getBytes("ISO-8859-1"),"UTF-8");
+//        String refund_reason=new String(request.getParameter("WIDrefund_reason").getBytes("ISO-8859-1"),"UTF-8");
+        String out_trade_no = refund.getOrdernumber();
+        String refund_reason = refund.getWIDrefund_reason();
         String o = out_trade_no.substring(0, 1);
         if (o.equals("V")){
             VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(out_trade_no).get(0);
@@ -227,7 +230,12 @@ public class PayController extends BaseController {
             }
             String refund_amount;
             long time = new Date().getTime();
-            Date d = formatter1.parse(villaOrder.getDate().split(",")[0]);
+            Date d = null;
+            try {
+                d = formatter1.parse(villaOrder.getDate().split(",")[0]);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             //判断是否再五个自然日之内
             if (d.getTime()-time<432000000L){
                 //判断是否为全额付款
@@ -313,7 +321,12 @@ public class PayController extends BaseController {
             }
             String refund_amount;
             long time = new Date().getTime();
-            Date d = formatter1.parse(armyOrder.getDate().split(",")[0]);
+            Date d = null;
+            try {
+                d = formatter1.parse(armyOrder.getDate().split(",")[0]);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             //判断是否再三个自然日之内
             if (d.getTime()-time<259200000L){
                 if (armyOrder.getFullAmount()==1){
@@ -548,6 +561,7 @@ public class PayController extends BaseController {
             String result = alipay_response.getBody();
             JSONObject tmp = JSONObject.fromObject(result);
             String data = tmp.getString("alipay_trade_refund_response");
+            System.out.println(data);
             JSONObject obj = JSONObject.fromObject(data);
             if(obj.getString("code").equals("10000")){
                 if(obj.getString("fund_change").equals("Y")){
