@@ -209,12 +209,12 @@ margin:20px 10px;
   }
   .purl{
     margin-top: 20px;
+    
   }
   .nohint a{
-   
-    color: white;
+   background: #fff;
+    color: #4ea0ff;
     padding: 4px 30px;
-    border: 1px solid white;
     border-radius: 4px;
      margin-top: 20px;
   }  

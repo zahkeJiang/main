@@ -221,7 +221,7 @@ html, body {
     height: 24px;
     line-height: 24px;
      width: 88px;
-    color: #54A0FF;
+    color: #999;
     font-size: 12px;
          margin-left:4px;
  /*   padding: 0 10px;*/
@@ -231,11 +231,17 @@ html, body {
     font-size: 12px;
     height: 24px;
     line-height: 24px;
-    color:orange;
+    color: #999;
          margin-left:4px;
      width: 88px;
     /*padding: 0 10px;*/
     background:#dfdfdf;
+}
+.ontime p span.ontime1,.outtime p span.outtime1{
+    color: #54A0FF;
+}
+.ontime p span.ontime2,.outtime p span.outtime2{
+    color: orange;
 }
 .villa-map ul{
     height: 24px;
