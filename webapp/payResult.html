@@ -6,10 +6,30 @@
 	<title>订单支付</title>
 	<link  rel="stylesheet" type="text/css" href="css/main.css"/>
 	<link rel="stylesheet" type="text/css" href="css/payResult.css"/>
+	<script src="./iconjs/iconfont.js"></script>
 </head>
+<style type="text/css">
+/*应用图标更改其样式*/
+.payImage{
+	width: 100%;
+	height:80px;
+   vertical-align: -0.15em;
+   fill: currentColor;
+   overflow: hidden;
+   color: #4ea0ff;
+}
+.payImageFail{
+	width: 100%;
+	height:56px;
+   vertical-align: -0.15em;
+   fill: currentColor;
+   overflow: hidden;
+   color: #4ea0ff;
+}
+</style>
 <body>
 	<div class="main">
-		<!-- <div class="pay_success">
+		<div class="pay_success">
 			<div class="header">订单支付结果</div>
 			<div class="container">
 				<div class="success">
@@ -33,14 +53,16 @@
 							</div>
 						</div>
 						<div class="pay">
-							<img src="images/refund_success.png" height="80px">
+							<svg class="payImage" aria-hidden="true">
+                            	<use xlink:href="#icon-chenggong"></use>
+                        	</svg>
 							<p>支付成功</p>
 						</div>
-						<div class="view_order">查看订单	&raquo;</div>
+						<div class="view_order"><p>查看订单</p></div>
 						<div class="line"></div>
 						<div class="hint">
-							<p>您的订单已经提交成功。</p>
-							<p>24小时之内将会有工作人员与您联系，请保持电话畅通。</p>
+							<p>您的订单已支付成功。</p>
+							<p>感谢使用北京漂洋过海，小漂欢迎您再次使用。</p>
 						</div>
 					</div>
 				</div>
@@ -52,19 +74,22 @@
 				<div class="fail">
 					<div class="pay_information">
 						<div class="pay">
-							<img src="images/refund_fail.png" height="80px">
+							<svg class="payImageFail" aria-hidden="true">
+                            	<use xlink:href="#icon-fail"></use>
+                        	</svg>
 							<p>未支付</p>
 						</div>
+						<div class="view_order"><p>查看订单</p></div>
 						<div class="line"></div>
 						<div class="hint">
-							<p>您的订单提交失败。</p>
-							<p>请确保支付宝扣款成功，如仍有问题，请联系工作人员。</p>
-							<p>客服电话：010-59822296</p>
+							<p>您的订单付款失败。</p>
+							<p>请确保扣款成功，如仍有问题，请联系小漂。</p>
+							<p>小漂电话：010-59822296</p>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div> -->
+		</div>
 	</div>
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script src="js/jquery.cookie.js" type="text/javascript"></script>

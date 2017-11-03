@@ -1,11 +1,14 @@
-@charset "utf-8";
-/* CSS Document */
+body{
+	background: #4ea0ff;
+	color: #555;
+}
 .header{
 	height: 80px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 24px;
+	color: white;
 }
 .container{
 	padding:0 16px;
@@ -22,8 +25,8 @@
 	display: none;
 }
 .pay_information{
-	background-color: white;
-	border-radius: 5px;
+	background-color: #f6f1f1;
+	border-radius: 10px;
 	padding: 10px 16px;
 
 }
@@ -66,14 +69,22 @@
 	font-size: 20px;
 }
 .view_order{
-	font-size: 16px;
-	color: #4ea0ff;
+
+	height:28px;
 	margin-bottom: 5px;
 	text-align: right;
 }
-.view_order a{
-	color: #4ea0ff;
-	text-align: right;
+.view_order p{
+	float: right;
+width: 80px;
+color: #4ea0ff;
+height: 28px;
+line-height: 28px;
+text-align: center;
+	border-radius: 5px;
+	border:1px solid #4ea0ff;
+	/*background: #4ea0ff;*/
+	font-size: 16px;
 }
 .line{
 	background-color: #eee;

@@ -550,7 +550,7 @@ function getPrice(){
             $(".libarbecue").html("<div><span>烧烤</span><span class='detailBox-liVilla'>¥"+10*barbecueChoose*peopleNumber*selectDay+"</span></div><span class='detailBox-liVilla-hint'>(10元x"+barbecueChoose*peopleNumber+"人x"+selectDay+"晚)</span>")//烧烤费用
             $(".lilitend").html("<div><span>帐篷</span><span class='detailBox-liVilla'>¥"+20*tendNumber*selectDay+"</span></div><span class='detailBox-liVilla-hint'>(20元x"+tendNumber+"人x"+selectDay+"晚)</span>")//帐篷费用
             $(".liindoor").html("<div><span>室内</span><span class='detailBox-liVilla'>¥"+40*indoorNumber*selectDay+"</span></div><span class='detailBox-liVilla-hint'>(40元x"+indoorNumber+"人x"+selectDay+"晚)</span>")//室内费用
-            $(".liSecure").html("<div><span>保险</span><span class='detailBox-liVilla'>¥"+15*secureNumber+"</span></div><span class='detailBox-liVilla-hint'>(15元x"+secureNumber+"晚)</span>")//室内费用
+            $(".liSecure").html("<div><span>保险</span><span class='detailBox-liVilla'>¥"+15*secureNumber+"</span></div><span class='detailBox-liVilla-hint'>(15元x"+secureNumber+"人)</span>")//室内费用
             
             if (reserve==0) {
                 $(".reserve1-mode").html("付款类型：预约定金");

@@ -1,4 +1,6 @@
-@charset "utf-8";
+body{
+	background: #4ea0ff;
+}
 
 .binding{
 	height: 48px;
@@ -7,20 +9,19 @@
 	align-items: center;/*用于上下居中*/
 	display: -webkit-flex;
 	margin-top: 20px;
-	background-color: #FFFFFF;
+	background-color: #f6f1f1;
 }
 .information{
 	height: auto;
-	background-color: #FFFFFF;
+	background-color: #f6f1f1;
 	margin-top: 20px;
+	padding: 0 10px;
 }
 .phone,.code{
 	height: 48px;
 	display: flex;
 	align-items: center;
-	padding-left: 16px;
-	padding-right: 16px;
-	background-color: #FFFFFF;
+	background-color: #f6f1f1;
 }
 img{
 	margin-right:10px;
@@ -28,7 +29,7 @@ img{
 input[type="tel"],input[type="number"]{
 	height: 40px;
 	border:0px;
-	background-color: #FFFFFF;
+	background-color: #f6f1f1;
 	flex: 1;
 }
 input[type="number"]{
@@ -47,19 +48,19 @@ input:focus::-webkit-input-placeholder, input:hover::-webkit-input-placeholder {
 input[type="button"]{
 	height: 40px;
 	border:0px;
-	background-color: #FFFFFF;
+	background-color: #f6f1f1;
 
 }
 .line{
 	height: 1px;
-	background-color: #eeeeee;
+	background-color: #ddd;
 	margin-left: 16px;
 	margin-right: 16px;
 
 }
 
 #setcode{
-	color: #FFFFFF;
+	color: #f6f1f1;
 	height: 32px;
 	width: 100px;
 	font-size: 12px;
@@ -75,28 +76,28 @@ input[type="button"]{
 	height: 48px;
 	display: flex;
 	align-items: center;
-	margin-left: 16px;
-	margin-right: 16px;
+	margin-left: 26px;
+	margin-right: 26px;
 }
 #hinttext{
-	color: red;
+	color: white;
 	font-size: 14px;
 }
 .lose{
 	margin-left: auto;
 	font-size: 14px;
 	font-size: 0.875rem;
-	color: red;
+	color: white;
 }
 
 
 #btn{
-	margin:0 20px;
+	margin: 20px;
 	height: 48px;
-	width: 90%;
-	margin-left:5%;  
-	background-color: #4ea0ff;
-	color: #FFFFFF;
+	width: 80%;
+	margin-left:10%;  
+	background-color: #f6f1f1;
+	color: #4ea0ff;
 	-webkit-border-radius: 5px;/*Webkit浏览器的私有属性*/
 	-moz-border-radius: 5px;/* Mozilla浏览器的私有属性*/
 	border-radius:5px;/*所有角都使用半径为20px的圆角，此属性为CSS3标准属性*/
@@ -104,3 +105,8 @@ input[type="button"]{
 
 
 
+.divBox{
+	border-radius: 10px;
+	background: #f6f1f1;
+	margin:20px 16px 0 16px;
+}

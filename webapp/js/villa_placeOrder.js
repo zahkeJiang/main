@@ -1,6 +1,7 @@
 var hundredDate = 0;//初始化100天数
 var sixtysixDate = 0;//初始化66天数
 // var joinNumber = 0;//报名人数
+var villaDateCheck_beiyuding=[];//用户先选择日期后选择别墅。点击别墅时，获取当前用户选择的日期中，有别墅被预定了，将给用户提示
 
 var realName="";
 var peopleNumber ="";
@@ -467,7 +468,7 @@ function villaDateCheck(){
                 var selected = datas.data.selected;
                 if (selected!="") {//存在相同的别墅
                     var selectedVillaCheckNames = selected.split(",");//已经被预定的别墅数组
-
+                    villaDateCheck_beiyuding = selectedVillaCheckNames;//将已被预定的别墅名数组保存下来，如果用户先选择日期后选择别墅，能用到
                     for (var i = 0; i < selectedVillaCheckNames.length; i++) {
                         
                         for (var j = 0; j < villaCheckNames.length; j++) {
@@ -490,6 +491,7 @@ function villaDateCheck(){
 
                         //移除选中的日期
                         $(".currentMonth0").children(".selectedDay").remove();
+                        villaDateCheck_beiyuding=[];//将已被预定的别墅名数组清空
                         //更改选择的日期时，将对总价进行调整
                         getPrice();
                     }else{//不存在相同的别墅
