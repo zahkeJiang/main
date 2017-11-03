@@ -170,6 +170,7 @@ $(function(){
     //别墅选择自定义点击样式,选择时与未选择时。
     $(".villa-radioBox").click(function() {
         if ($(this).find(".villa-choose img").length==0) {
+       
             $(this).find(".villa-choose").html('<img src="./images/circle_choose.png" height="20px" width="20px">');
             $(this).find("input[name='villa-radio']").attr("checked","true");
         }else{
