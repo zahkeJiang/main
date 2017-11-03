@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
@@ -17,6 +18,9 @@ public class CouponService {
 
     @Autowired
     UserCouponMapper userCouponMapper;
+
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy.MM.dd");
 
     public boolean getUserCoupon(String userid) {
         UserCoupon userCoupon = userCouponMapper.selectByPrimaryKey(Long.parseLong(userid));
@@ -36,17 +40,24 @@ public class CouponService {
         try{
             UserCoupon userCoupon = userCouponMapper.selectByPrimaryKey(Long.parseLong(userid));
             if(userCoupon!=null&&userCoupon.getCouponStatus()==1){
+                Date d = new Date(userCoupon.getCouponTime().getTime()+2419200000L);
                 if((new Date()).getTime()-userCoupon.getCouponTime().getTime()<date.getTime()){
-                    return Status.success().add("price",userCoupon.getCouponPrice());
+                    return Status.success().add("price",userCoupon.getCouponPrice())
+                            .add("date",formatter1.format(userCoupon.getCouponTime())+"-"+formatter1.format(d));
                 }else{
                     return Status.fail(-20,"优惠券已过期")
-                            .add("price",userCoupon.getCouponPrice());
+                            .add("price",userCoupon.getCouponPrice())
+                            .add("date",formatter1.format(userCoupon.getCouponTime())+"-"+formatter1.format(d));
                 }
             }else if(userCoupon.getCouponStatus()==2){
-                return Status.success().add("price",userCoupon.getCouponPrice());
+                Date d = new Date(userCoupon.getCouponTime().getTime()+2419200000L);
+                return Status.success().add("price",userCoupon.getCouponPrice())
+                        .add("date",formatter1.format(userCoupon.getCouponTime())+"-"+formatter1.format(d));
             }else if(userCoupon.getCouponStatus()==3){
+                Date d = new Date(userCoupon.getCouponTime().getTime()+2419200000L);
                 return Status.fail(-30,"优惠券已使用")
-                        .add("price",userCoupon.getCouponPrice());
+                        .add("price",userCoupon.getCouponPrice())
+                        .add("date",formatter1.format(userCoupon.getCouponTime())+"-"+formatter1.format(d));
             }else{
                 return Status.fail(-40,"无优惠券");
             }

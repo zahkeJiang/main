@@ -142,12 +142,18 @@ public class NotifyController extends BaseController {
 //            dsOrder.setPayType((byte) 0);
 //            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //            dsOrder.setPayTime(formatter.format(new Date()));
-            System.out.println("dsOrderService.changeDsOrderByOrderNumber(map.get(\"out_trade_no\"))");
-            dsOrderService.changeDsOrderByOrderNumber(map.get("out_trade_no"));
+            DsOrder dsOrder = dsOrderService.getDsOrderByNumber(map.get("ordernumber")).get(0);
+            dsOrder.setOrderStatus((byte) 1);
+            dsOrder.setPayType((byte) 0);
+            dsOrder.setPayTime(formatter.format(new Date()));
+            dsOrderService.updateOrder(dsOrder);
             out.println("success");	//请不要修改或删除
         } else{//验证失败
             out.println("fail");
         }
+
+        out.flush();
+        out.close();
     }
 
     //支付宝别墅支付回调接口
@@ -156,12 +162,19 @@ public class NotifyController extends BaseController {
         PrintWriter out = response.getWriter();
 
         Map<String, String> map = getGmtRefund(request);
+        System.out.println("boolean+"+map.get("boolean"));
         if (map.get("boolean").equals("true")){
             out.println("success");	//请不要修改或删除
-            villaOrderService.ChangeVillaStatusByNumber(map.get("out_trade_no"));
+            VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(map.get("ordernumber")).get(0);
+            villaOrder.setOrderStatus(1);
+            villaOrder.setPayType((byte) 0);
+            villaOrder.setPayTime(formatter.format(new Date()));
+            villaOrderService.updateOrder(villaOrder);
         }else{//验证失败
             out.println("fail");
         }
+        out.flush();
+        out.close();
     }
 
     //支付宝军旅支付回调接口
@@ -172,10 +185,17 @@ public class NotifyController extends BaseController {
         Map<String, String> map = getGmtRefund(request);
         if (map.get("boolean").equals("true")){
             out.println("success");	//请不要修改或删除
-            armyOrderService.ChangeArmyStatusByNumber(map.get("out_trade_no"));
+            ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(map.get("ordernumber")).get(0);
+            armyOrder.setOrderStatus(1);
+            armyOrder.setPayType((byte) 0);
+            armyOrder.setPayTime(formatter.format(new Date()));
+            armyOrderService.updateOrder(armyOrder);
         }else{//验证失败
             out.println("fail");
         }
+
+        out.flush();
+        out.close();
     }
 
     //京东驾校支付回调接口
@@ -201,7 +221,7 @@ public class NotifyController extends BaseController {
         try {
             AsynNotifyResponse anRes = JdPayUtil.parseResp(pubKey, deskey, sb.toString(), AsynNotifyResponse.class);
 
-            if (anRes.getStatus().equals("1")){
+            if (anRes.getStatus().equals("2")){
                 String ordernumber = anRes.getTradeNum();
                 String o = ordernumber.substring(0, 1);
                 if (o.equals("V")){
@@ -253,13 +273,13 @@ public class NotifyController extends BaseController {
             String[] vs = villaOrder.getVillaName().split(",");
             String vn = "";
             for (int i=0;i<vs.length;i++){
-                vn += vs[i];
+                vn += vs[i]+" ";
             }
             order.setOrderDescripe("别墅: "+vn+" / "+
                     "入住人数: "+villaOrder.getPeopleNumber()+"人 / "+"入驻天数: "
                     +villaOrder.getDate().split(",").length+"晚");
             order.setOrderTime(villaOrder.getCreateTime());
-            order.setOrderName("漂洋过海小别墅");
+            order.setOrderName(villaOrder.getNote());
             order.setOrderNumber(villaOrder.getOrderNumber());
             order.setPhoneNumber(user.getPhoneNumber());
             order.setRealName(villaOrder.getRealName());
@@ -288,7 +308,7 @@ public class NotifyController extends BaseController {
             order.setRealName(dsOrder.getRealName());
             order.setOriginalPrice(dsOrder.getOriginalPrice());
             order.setDescription(dsOrder.getDescription());
-            order.setDsNote("法培方式: "+dsOrder.getNote());
+            order.setDsNote("法培方式"+dsOrder.getNote());
             return Status.success().add("order",order).add("price",order.getOriginalPrice()-order.getOrderPrice());
         }else if (o.equals("A")){
             ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
@@ -312,6 +332,45 @@ public class NotifyController extends BaseController {
 
     }
 
+    //查询订单接口及所属驾校
+    @ResponseBody
+    @RequestMapping(value = "/queryOrder.action", method = RequestMethod.POST)
+    public Status QueryOrder(HttpServletRequest request,String ordernumber){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        String userid = userMap.get("id");
+
+        String o = ordernumber.substring(0,1);
+        if (o.equals("A")){
+            ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
+            if (armyOrder.getOrderStatus() == 1){
+                return Status.success().add("price",armyOrder.getArmyPrice())
+                        .add("out_trade_no",armyOrder.getOrderNumber());
+            }else {
+                return Status.fail(-30,"没有已支付订单");
+            }
+        }else if (o.equals("D")){
+            DsOrder dso = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
+            if (dso.getOrderStatus() == 1){
+                return Status.success().add("price",dso.getOrderPrice())
+                        .add("out_trade_no",dso.getOrderNumber());
+            }else {
+                return Status.fail(-30,"没有已支付订单");
+            }
+        }else if (o.equals("V")){
+            VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(ordernumber).get(0);
+            if (villaOrder.getOrderStatus() == 1){
+                return Status.success().add("price",villaOrder.getVillaPrice())
+                        .add("out_trade_no",villaOrder.getOrderNumber());
+            }else {
+                return Status.fail(-30,"没有已支付订单");
+            }
+        }else {
+            return Status.fail(-30,"没有已支付订单");
+        }
+    }
 
     public Map<String, String> getGmtRefund(HttpServletRequest request) throws IOException, AlipayApiException {
 
@@ -330,6 +389,7 @@ public class NotifyController extends BaseController {
             //valueStr = new String(valueStr.getBytes("ISO-8859-1"), "gbk");
             params.put(name, valueStr);
         }
+        System.out.print("params="+params.toString());
         //获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表(以下仅供参考)//
         //商户订单号
         String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
@@ -368,6 +428,7 @@ public class NotifyController extends BaseController {
                 if(request.getParameter("gmt_refund")==null){
 
                     map.put("boolean","true");
+                    map.put("ordernumber",out_trade_no);
                     return map;
                 }else {
                     map.put("boolean","false");

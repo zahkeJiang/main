@@ -13,7 +13,7 @@ import java.util.Date;
 
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 //        Date date = new Date(2017,8,29);
 //        System.out.println(date.getDay());
 //-----------------------------------------------------------------
@@ -48,21 +48,24 @@ public class Main {
 //            System.out.println(u.getOrderNumber());
 //        }
 //------------------------------------------------------------------------------
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date1 = sdf.parse("2017-10-22");
-            Date date2 = sdf.parse("2017-10-29");
-
-            System.out.println(date2.getTime()-date1.getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            Date date1 = sdf.parse("2017-10-22");
+//            Date date2 = sdf.parse("2017-10-29");
+//
+//            System.out.println(date2.getTime()-date1.getTime());
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
 //        int a = 1887;
 //        System.out.println(""+(a/2));
         //-------------------------------------------------------------------------------
 
 //        ThreeDES threeDES = new ThreeDES();
 //        threeDES.encryptDESCBC();
+
+
+        System.out.println(1*0.5);
     }
 }
 //29 6 5

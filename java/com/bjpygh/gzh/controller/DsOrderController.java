@@ -44,32 +44,6 @@ public class DsOrderController extends BaseController {
         return Status.success();
     }
 
-    //查询订单接口及所属驾校
-    @ResponseBody
-    @RequestMapping(value = "/queryOrder.action", method = RequestMethod.POST)
-    public Status QueryOrder(HttpServletRequest request){
-        Map<String, String> userMap = checkWxUser(request);
-        if(userMap == null){
-            return Status.notInWx();
-        }
-        String userid = userMap.get("id");
-        List<DsOrder> dsOrder = dsOrderService.getOrdersById(userid);
-        //判断数据是否为空
-        if (dsOrder == null){
-            return Status.fail(-20,"数据为空");
-        }else{
-            for (DsOrder dso:dsOrder){
-                if(dso.getOrderStatus()==1){
-                    DsInformation DsInfo = dsInfoService.getDsInfoByName(dso.getDsName());
-                    return Status.success().add("imageurl",DsInfo.getDsImage())
-                            .add("price",dso.getOrderPrice())
-                            .add("out_trade_no",dso.getOrderNumber());
-                }
-            }
-            return Status.fail(-30,"没有已支付订单");
-        }
-    }
-
 
     //查询订单接口
     @ResponseBody

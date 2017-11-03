@@ -11,6 +11,7 @@ import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.bjpygh.gzh.bean.*;
 import com.bjpygh.gzh.config.AlipayConfig;
 import com.bjpygh.gzh.config.MyConfig;
+import com.bjpygh.gzh.entity.Refund;
 import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.model.HttpsClientUtil;
 import com.bjpygh.gzh.model.TradeRefundReqDto;
@@ -65,6 +66,7 @@ public class PayController extends BaseController {
     ArmyOrderService armyOrderService;
 
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat formatterJ = new SimpleDateFormat("yyyyMMddHHmmss");
     ThreeDES threeDES = new ThreeDES();
 
@@ -98,7 +100,7 @@ public class PayController extends BaseController {
         for (VillaOrder villaOrder : villaOrders){
             UserOrder userOrder = new UserOrder();
             userOrder.setOrderNumber(villaOrder.getOrderNumber());
-            userOrder.setOrderName("漂洋过海小别墅");
+            userOrder.setOrderName(villaOrder.getNote());
             userOrder.setOrderTime(villaOrder.getCreateTime());
             String[] vs = villaOrder.getVillaName().split(",");
 
@@ -187,19 +189,19 @@ public class PayController extends BaseController {
             String tradeNum = armyOrder.getOrderNumber();
             String amount = armyOrder.getArmyPrice()+"00";
             String userid =armyOrder.getUserId()+"";
-            return JdPayReq(tradeNum,amount,userid);
+            return JdPayReq(tradeNum,amount,userid,"作战之日参战费用");
         }else if (o.equals("D")){
             DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
             String tradeNum = dsOrder.getOrderNumber();
             String amount = dsOrder.getOrderPrice()+"00";
             String userid =dsOrder.getUserId()+"";
-            return JdPayReq(tradeNum,amount,userid);
+            return JdPayReq(tradeNum,amount,userid,"驾校报名费用");
         }else if (o.equals("V")){
             VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(ordernumber).get(0);
             String tradeNum = villaOrder.getOrderNumber();
             String amount = villaOrder.getVillaPrice()+"00";
             String userid =villaOrder.getUserId()+"";
-            return JdPayReq(tradeNum,amount,userid);
+            return JdPayReq(tradeNum,amount,userid,"别墅入驻费用");
         }else {
             return Status.fail(-20,"处理失败");
         }
@@ -207,38 +209,49 @@ public class PayController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/refund.action", method = RequestMethod.POST)
-    public Status DsRefund(HttpServletRequest request) throws UnsupportedEncodingException, ParseException {
+    public Status DsRefund(HttpServletRequest request, Refund refund) {
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
         }
-        String out_trade_no = new String(request.getParameter("ordernumber").getBytes("ISO-8859-1"),"UTF-8");
-        String refund_reason=new String(request.getParameter("WIDrefund_reason").getBytes("ISO-8859-1"),"UTF-8");
+//        String out_trade_no = new String(request.getParameter("ordernumber").getBytes("ISO-8859-1"),"UTF-8");
+//        String refund_reason=new String(request.getParameter("WIDrefund_reason").getBytes("ISO-8859-1"),"UTF-8");
+        String out_trade_no = refund.getOrdernumber();
+        String refund_reason = refund.getWIDrefund_reason();
         String o = out_trade_no.substring(0, 1);
-
         if (o.equals("V")){
             VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(out_trade_no).get(0);
+            //判断是否已经完成退款
+            if (villaOrder.getOrderStatus() == 5){
+                return Status.success();
+            }
             if(villaOrder.getOrderStatus() == 4||villaOrder.getOrderStatus()==7){
                 return Status.fail(-30,"订单已完成");
             }
             String refund_amount;
             long time = new Date().getTime();
-            Date d = formatter.parse(villaOrder.getDate().split(",")[0]);
+            Date d = null;
+            try {
+                d = formatter1.parse(villaOrder.getDate().split(",")[0]);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             //判断是否再五个自然日之内
             if (d.getTime()-time<432000000L){
                 //判断是否为全额付款
                 if (villaOrder.getFullAmount()==1){
-                    refund_amount =  ""+villaOrder.getOriginalPrice()/2;
+                    refund_amount =  ""+villaOrder.getOriginalPrice()*0.5;
                 }else {
                     return Status.fail(-40,"已过退款时间");
                 }
             }else {
                 if (villaOrder.getFullAmount()==1){
-                    refund_amount = ""+(int)(villaOrder.getOriginalPrice()*0.7);
+                    refund_amount = ""+villaOrder.getOriginalPrice()*0.7;
                 }else {
-                    refund_amount = ""+(int)(villaOrder.getOriginalPrice()*0.2);
+                    refund_amount = ""+villaOrder.getOriginalPrice()*0.2;
                 }
             }
+            System.out.println("refund_amount="+refund_amount);
 
             if (villaOrder.getPayType()==0){
                 if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
@@ -266,6 +279,10 @@ public class PayController extends BaseController {
 
         }else if (o.equals("D")){
             DsOrder dsOrder = dsOrderService.getDsOrderByNumber(out_trade_no).get(0);
+            //判断是否已经完成退款
+            if (dsOrder.getOrderStatus() == 5){
+                return Status.success();
+            }
             String refund_amount=""+(float)(Math.round((Float.parseFloat(""+dsOrder.getOrderPrice())*0.994)*100))/100;
             if(dsOrder.getOrderStatus() == 3||dsOrder.getOrderStatus() == 4||dsOrder.getOrderStatus() == 7){
                 return Status.fail(-30,"报名已完成");
@@ -295,18 +312,27 @@ public class PayController extends BaseController {
             }
         }else if (o.equals("A")){
             ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(out_trade_no).get(0);
+            //判断是否已经完成退款
+            if (armyOrder.getOrderStatus() == 5){
+                return Status.success();
+            }
             if(armyOrder.getOrderStatus() == 4||armyOrder.getOrderStatus() == 7){
                 return Status.fail(-30,"订单已完成");
             }
             String refund_amount;
             long time = new Date().getTime();
-            Date d = formatter.parse(armyOrder.getDate().split(",")[0]);
+            Date d = null;
+            try {
+                d = formatter1.parse(armyOrder.getDate().split(",")[0]);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             //判断是否再三个自然日之内
             if (d.getTime()-time<259200000L){
                 if (armyOrder.getFullAmount()==1){
-                    refund_amount = ""+(int)(armyOrder.getOriginalPrice()*0.85);
+                    refund_amount = ""+armyOrder.getOriginalPrice()*0.85;
                 } else {
-                    refund_amount = ""+(int)(armyOrder.getOriginalPrice()*0.35);
+                    refund_amount = ""+armyOrder.getOriginalPrice()*0.35;
                 }
             }else {
                 if (armyOrder.getFullAmount()==1){
@@ -531,9 +557,11 @@ public class PayController extends BaseController {
         AlipayTradeRefundResponse alipay_response;
         try {
             alipay_response = client.execute(alipay_request);
+            System.out.println("alipay_response="+alipay_response);
             String result = alipay_response.getBody();
             JSONObject tmp = JSONObject.fromObject(result);
             String data = tmp.getString("alipay_trade_refund_response");
+            System.out.println(data);
             JSONObject obj = JSONObject.fromObject(data);
             if(obj.getString("code").equals("10000")){
                 if(obj.getString("fund_change").equals("Y")){
@@ -585,18 +613,18 @@ public class PayController extends BaseController {
     }
 
     //京东支付请求方法
-    public Status JdPayReq(String tradeNum,String amount,String userid){
+    public Status JdPayReq(String tradeNum,String amount,String userid,String tradeName){
         JdOrderPay jdOrderPay = new JdOrderPay();
         jdOrderPay.setVersion("V2.0");
         jdOrderPay.setMerchant("110406033002");
         jdOrderPay.setTradeNum(tradeNum);
-        jdOrderPay.setTradeName("驾校报名费用");
+        jdOrderPay.setTradeName(tradeName);
         jdOrderPay.setTradeTime(formatterJ.format(new Date()));
         jdOrderPay.setAmount(amount);
         jdOrderPay.setOrderType("1");
         jdOrderPay.setCurrency("CNY");
-        jdOrderPay.setCallbackUrl("http://120.24.184.86/gzh/ds_pay.html");
-        jdOrderPay.setNotifyUrl("http://120.24.184.86/gzh/jNotify_url");//http://gzpt.bjpygh.com/jNotify_url
+        jdOrderPay.setCallbackUrl("http://gzpt.bjpygh.com/payResult.html"+"?ordernumber="+tradeNum);
+        jdOrderPay.setNotifyUrl("http://gzpt.bjpygh.com/jNotify_url");//http://gzpt.bjpygh.com/jNotify_url
         jdOrderPay.setUserId(userid);
 
         String priKey = PropertyUtils.getProperty("wepay.merchant.rsaPrivateKey");

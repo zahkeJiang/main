@@ -79,9 +79,20 @@ public class VillaOrderService {
         String orderNumber ="VPYGH" + year + month + date + hour + minute + second + villaOrder.getUserId();
 
         villaOrder.setOrderNumber(orderNumber);
+        //设置图片
+        String s = villaOrder.getVillaName().split(",")[0];
+        if (s.equals("别墅一")) {
+            villaOrder.setImageurl("http://120.24.184.86/glxt/dsimage/villa_1.jpg");
+        }else if (s.equals("别墅二")) {
+            villaOrder.setImageurl("http://120.24.184.86/glxt/dsimage/villa_2.jpg");
+        }else if (s.equals("别墅三")) {
+            villaOrder.setImageurl("http://120.24.184.86/glxt/dsimage/villa_3.jpg");
+        }else {
+            villaOrder.setImageurl("http://120.24.184.86/glxt/dsimage/villa_1.jpg");
+        }
         //设置状态
         villaOrder.setOrderStatus(0);
-        villaOrder.setNote("豪华别墅套餐");
+        villaOrder.setNote("漂洋过海小别墅");
         
         villaOrderMapper.insertSelective(villaOrder);
         return orderNumber;
@@ -168,19 +179,28 @@ public class VillaOrderService {
     }
 
     public String getVillaPay(String[] date) throws ParseException {
+//        System.out.println(date[0]+","+date[1]);
+        String name = "";
         for (int i=0;i<date.length;i++){
             List<VillaOrder> villaOrders = villaOrderMapper.getVillaOrderByDate(date[i]);
-            String name = "";
             for (VillaOrder order : villaOrders){
                 if (name!=""){
-                    name= name + ","+order.getVillaName();
+                    String[] ns = name.split(",");
+                    String[] vns = order.getVillaName().split(",");
+                    for (String n : ns){
+                        for (String vn : vns){
+                            if (!n.equals(vn)){
+                                name= name + ","+vns;
+                            }
+                        }
+                    }
+
                 }else {
                     name= order.getVillaName();
                 }
             }
-           return name;
         }
-        return "";
+        return name;
     }
 
     public boolean checkOrder(VillaOrder villaOrder) {
@@ -208,5 +228,12 @@ public class VillaOrderService {
         VillaOrderExample.Criteria criteria = example.createCriteria();
         criteria.andOrderStatusEqualTo(1);
         return villaOrderMapper.selectByExample(example);
+    }
+
+    public List<VillaOrder> getOrdersById(String userid) {
+            VillaOrderExample example = new VillaOrderExample();
+            VillaOrderExample.Criteria criteria = example.createCriteria();
+            criteria.andUserIdEqualTo(Long.parseLong(userid));
+            return villaOrderMapper.selectByExample(example);
     }
 }
