@@ -61,27 +61,30 @@ $.post("personal.action",{},function(obj){
 		var userobj = obj.data.userInfo;
 		// document.getElementById('icon').src=obj.headimageurl;
 		// $("#icon").attr('src',userobj.headimageurl);
-		if (userobj.headimageurl!=null||userobj.headimageurl!="") {
-			$("#icon").attr('src',userobj.headimageurl);
-		}else{
-			if(userobj.sex=="1"){//男
-				$("#icon").attr('src',"./images/boy.jpg");
-			}else if(userobj.sex=="2"){//女
-				$("#icon").attr('src',"./images/girl.jpg");
-			}else{//不确定
-				$("#icon").attr('src',"./images/boy.jpg");
-			}	
-		}
+		// if (userobj.headimageurl!=null||userobj.headimageurl!="") {
+		// 	$("#icon").attr('src',userobj.headimageurl);
+		// }else{
+		// 	if(userobj.sex=="1"){//男
+		// 		$("#icon").attr('src',"./images/boy.jpg");
+		// 	}else if(userobj.sex=="2"){//女
+		// 		$("#icon").attr('src',"./images/girl.jpg");
+		// 	}else{//不确定
+		// 		$("#icon").attr('src',"./images/boy.jpg");
+		// 	}	
+		// }
 		$('#nickname').html(userobj.nickname);
 		$('#mobile').html(userobj.phoneNumber);
 		if (userobj.sex!=null) {
 			if(userobj.sex=="1"){
 				$('#sex').html("男");
+				$("#icon").attr('src',"./images/boy.jpg");
 			}else{
 				$('#sex').html("女");
+				$("#icon").attr('src',"./images/girl.jpg");
 			}
 		}else{
 			$('#sex').html("保密");
+			$("#icon").attr('src',"./images/boy.jpg");
 		}
 		if (userobj.school!=null) {
 		  	$('#school').html(userobj.school);

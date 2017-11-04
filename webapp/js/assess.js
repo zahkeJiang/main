@@ -67,7 +67,7 @@ $(function(){
 				//将用户数据循环添加
 				html+='<div class="assessBox"><div class="username">'
 					+nickname+'</div><div class="assess-header"><div class="assess-header-icon"><img src="'
-					+comment.headimageurl+'" height="56px"></div><div class="assess-header-content"><div class="assess-header-star">'
+					+comment.headimageurl+'" height="56px"  width="56px"></div><div class="assess-header-content"><div class="assess-header-star">'
 					+star+'</div><div class="assess-header-time">'
 					+commentTime+'</div><p class="assess-header-text">'
 					+comment.content+'</p></div></div>'
