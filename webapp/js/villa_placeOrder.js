@@ -178,6 +178,7 @@ $(function(){
                     //移除选中的日期
                     $(this).find(".villa-choose").empty();
                     $(this).find("input[name='villa-radio']").removeAttr("checked");
+
                     return;
                 }
             }
@@ -455,6 +456,7 @@ function  getPrice(){
 
 //获取用户选择日期，请求后台，判断所选别墅是否被预定，并显示明细
 function villaDateCheck(){
+    villaDateCheck_beiyuding=[];//将已被预定的别墅名数组清空
      var currentMonth0clength = $(".currentMonth0").length;
      //如果有选中的，将其添加到数组,并发送post请求给后台
         var selectDate = [];

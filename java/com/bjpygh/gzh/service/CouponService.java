@@ -36,11 +36,11 @@ public class CouponService {
     }
 
     public Status getCouponStatus(String userid) {
-        Date date = new Date(2419200000L);
+        Date date = new Date(2592000000L);
         try{
             UserCoupon userCoupon = userCouponMapper.selectByPrimaryKey(Long.parseLong(userid));
             if(userCoupon!=null&&userCoupon.getCouponStatus()==1){
-                Date d = new Date(userCoupon.getCouponTime().getTime()+2419200000L);
+                Date d = new Date(userCoupon.getCouponTime().getTime()+2592000000L);
                 if((new Date()).getTime()-userCoupon.getCouponTime().getTime()<date.getTime()){
                     return Status.success().add("price",userCoupon.getCouponPrice())
                             .add("date",formatter1.format(userCoupon.getCouponTime())+"-"+formatter1.format(d));
@@ -50,11 +50,11 @@ public class CouponService {
                             .add("date",formatter1.format(userCoupon.getCouponTime())+"-"+formatter1.format(d));
                 }
             }else if(userCoupon.getCouponStatus()==2){
-                Date d = new Date(userCoupon.getCouponTime().getTime()+2419200000L);
+                Date d = new Date(userCoupon.getCouponTime().getTime()+2592000000L);
                 return Status.success().add("price",userCoupon.getCouponPrice())
                         .add("date",formatter1.format(userCoupon.getCouponTime())+"-"+formatter1.format(d));
             }else if(userCoupon.getCouponStatus()==3){
-                Date d = new Date(userCoupon.getCouponTime().getTime()+2419200000L);
+                Date d = new Date(userCoupon.getCouponTime().getTime()+2592000000L);
                 return Status.fail(-30,"优惠券已使用")
                         .add("price",userCoupon.getCouponPrice())
                         .add("date",formatter1.format(userCoupon.getCouponTime())+"-"+formatter1.format(d));
