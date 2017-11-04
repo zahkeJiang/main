@@ -33,7 +33,7 @@ public class PackageService {
     public Status getPackageList(DsPackage dsPackage) {
         DsPackageExample example = new DsPackageExample();
         DsPackageExample.Criteria criteria = example.createCriteria();
-        criteria.andDsNameEqualTo(dsPackage.getDsName());
+        criteria.andDsNameEqualTo("海淀驾校");
         String models = dsPackage.getModels();
         if (models!=null&&models!="")
             criteria.andModelsEqualTo(models);

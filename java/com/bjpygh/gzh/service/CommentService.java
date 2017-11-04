@@ -3,6 +3,7 @@ package com.bjpygh.gzh.service;
 import com.bjpygh.gzh.bean.Comment;
 import com.bjpygh.gzh.bean.CommentExample;
 import com.bjpygh.gzh.bean.User;
+import com.bjpygh.gzh.bean.UserOrder;
 import com.bjpygh.gzh.dao.CommentMapper;
 import com.bjpygh.gzh.dao.UserMapper;
 import com.bjpygh.gzh.entity.Status;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +47,11 @@ public class CommentService {
         CommentExample.Criteria criteria = example.createCriteria();
         criteria.andTypeEqualTo(Integer.valueOf(type));
         List<Comment> comments = commentMapper.selectByExample(example);
+        Collections.sort(comments,new Comparator<Comment>(){
+            public int compare(Comment arg1, Comment arg0) {
+                return arg0.getCommentTime().compareTo(arg1.getCommentTime());
+            }
+        });
         for (Comment c : comments){
             if (c.getStayStar()>3&&c.getSupportStar()>3&&c.getEnterStar()>3)
                 return Status.success().add("comment",c);
