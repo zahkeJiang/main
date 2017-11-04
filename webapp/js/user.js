@@ -65,11 +65,11 @@ $.post("personal.action",{},function(obj){
 			$("#icon").attr('src',userobj.headimageurl);
 		}else{
 			if(userobj.sex=="1"){//男
-				$("#icon").attr('src',"./images/pay_bg_hint.png");
+				$("#icon").attr('src',"./images/boy.jpg");
 			}else if(userobj.sex=="2"){//女
-				$("#icon").attr('src',"./images/refund_success.png");
+				$("#icon").attr('src',"./images/girl.jpg");
 			}else{//不确定
-				$("#icon").attr('src',"./images/QRcode.jpg");
+				$("#icon").attr('src',"./images/boy.jpg");
 			}	
 		}
 		$('#nickname').html(userobj.nickname);
