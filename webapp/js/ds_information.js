@@ -12,6 +12,12 @@ var models = "";
 var dsType="";
 var trainTime = "";		
 $(function(){
+    getGoodComment();
+    //查看评价
+    $(".assessBox-view").click(function(){
+        // type(1为别墅评论 2为驾校 3为军旅)
+        window.location.href="assess.html?type=2"; 
+    })
     getDs();
     //点击屏幕，如果元素不是dsp_type_div，则执行navStyle();
     $(document).click(function(){
@@ -147,4 +153,43 @@ function getDs(){
             });
         // }
     },'json');
+}
+
+function getGoodComment(){
+    $.post("getGoodComment",{"type":2},function(datas){
+        if (datas.status==0) {
+            var assessUrl = datas.data.comment;
+            //获取星星
+            var enterStar = assessUrl.enterStar;//娱乐星星
+            var stayStar = assessUrl.stayStar;//住宿星星
+            var supportStar = assessUrl.supportStar;//设备星星
+            var finishStar = Math.round((enterStar+stayStar+supportStar)/3);//星星四舍五入取整
+            console.log(finishStar);
+            if (finishStar == 1) {
+                $("#star").attr("src","./images/star1.png");
+            }else if (finishStar == 2) {
+                $("#star").attr("src","./images/star2.png");
+            }else if (finishStar == 3) {
+                $("#star").attr("src","./images/star3.png");
+            }else if (finishStar == 4) {
+                $("#star").attr("src","./images/star4.png");
+            }else if (finishStar == 5) {
+                $("#star").attr("src","./images/star5.png");
+            }else{
+                $("#star").attr("src","./images/star5.png");
+            }
+            //匿名与否,0,flase不匿名，1,true是匿名
+            var anonymous = assessUrl.anonymous;
+            var nickname = assessUrl.nickname;
+            if (anonymous==true) {
+                nickname=nickname.substring(0,1)+"**"+nickname.charAt(nickname.length - 1);
+            }
+            //获取时间年月日
+            commentTime = assessUrl.commentTime.split(' ')[0];
+            $(".assessBox-nickname").html(nickname);
+            $(".assessBox-time").html(commentTime);
+            $(".assessBox-assess").html(assessUrl.content);
+            $("#icon").attr("src",assessUrl.headimageurl);
+        }
+    },"json");
 }
