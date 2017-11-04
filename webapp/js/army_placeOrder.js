@@ -226,6 +226,29 @@ $(function(){
        getPrice();
     });
 
+    //填写保险人数，提示不大于报名人数
+    var securenumberTest=document.getElementById("army-securenumber");
+    securenumberTest.onblur=function(){
+        var peopleNumber = $("#army-peoplenumber").val();//报名人数
+        if (re.test(peopleNumber) && peopleNumber>0) {
+            if (peopleNumber<$("#army-securenumber").val()) {
+                alert("温馨提示：购买保险人数应不大于报名人数");
+            }
+        }
+    
+    }
+    //填写报名人数，若小于保险人数，提示
+    var joinPeopleTest=document.getElementById("army-peoplenumber");
+    joinPeopleTest.onblur=function(){
+        var secureNumber = $("#army-securenumber").val();//保险人数
+        if (re.test(secureNumber) && secureNumber>0) {
+            if (secureNumber>$("#army-peoplenumber").val()) {
+                alert("温馨提示：报名人数应不小于购买保险人数");
+            }
+        }
+    
+    }
+
     //是否选择烧烤
         $(".barbecue-row").click(function(){
         $(this).children(".barbecue1").html("<img src='./images/circle_choose.png' height='18px' width='18px'>");

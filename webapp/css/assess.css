@@ -1,4 +1,4 @@
-body,html{
+ body,html{
 	padding-bottom: 10px;
 }
 .assessBox{
@@ -29,9 +29,10 @@ body,html{
 .assess-header-content{
 	height: 20px;
 	flex: 1;
-	/*float: right;*/
+	float: right;
 }
 .assess-header-content > div{
+	
 	display: inline-block;
 	border: 0;
 }
@@ -47,13 +48,14 @@ body,html{
 	color: #999;
 }
 .assess-header-text{
-	height: 50px;
-	width: 100%;
+	height: 54px;
+	overflow-x:scroll;
 	color: #999;
 	font-size: 14px;
-	line-height: 16px;
-	display: flex;
-	align-items: center;
+	line-height: 18px;
+}
+.assess-header-text::-webkit-scrollbar {/*隐藏滚动条*/
+    display: none;
 }
 .assess-pic{
 	border-top: 1px solid #ddd;
@@ -62,7 +64,7 @@ body,html{
 .assess-pic img{
 	margin-top: 10px;
 	margin-right: 10px;
-}
+} 
 /*没有订单时的显示*/
 .assess_bg{
 	margin:16px;
