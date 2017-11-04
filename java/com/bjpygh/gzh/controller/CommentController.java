@@ -41,28 +41,32 @@ public class CommentController extends BaseController{
             return Status.notInWx();
         }
         String userid = userMap.get("id");
-        comment.setUserId(Long.valueOf(userid));
-        commentService.putComment(comment);
-        updateOrderStatus(comment.getType(),ordernumber);
+        updateOrderStatus(comment,ordernumber,userid);
         return Status.success();
     }
 
-    private void updateOrderStatus(Integer type, String ordernumber) {
-        if (type==1){
+    private void updateOrderStatus(Comment comment, String ordernumber,String userid) {
+        if (comment.getType()==1){
             VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(ordernumber).get(0);
             if (villaOrder.getOrderStatus()!=7){
+                comment.setUserId(Long.valueOf(userid));
+                commentService.putComment(comment);
                 villaOrder.setOrderStatus(7);
                 villaOrderService.updateOrder(villaOrder);
             }
-        }else if (type==2){
+        }else if (comment.getType()==2){
             DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
             if (dsOrder.getOrderStatus()!=7){
+                comment.setUserId(Long.valueOf(userid));
+                commentService.putComment(comment);
                 dsOrder.setOrderStatus((byte) 7);
                 dsOrderService.updateOrder(dsOrder);
             }
-        }else if (type==3){
+        }else if (comment.getType()==3){
             ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
             if (armyOrder.getOrderStatus()!=7){
+                comment.setUserId(Long.valueOf(userid));
+                commentService.putComment(comment);
                 armyOrder.setOrderStatus(7);
                 armyOrderService.updateOrder(armyOrder);
             }

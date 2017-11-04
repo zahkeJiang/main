@@ -118,7 +118,7 @@ public class PayController extends BaseController {
             userOrder.setOrderName(armyOrder.getArmyName());
             userOrder.setOrderTime(armyOrder.getCreateTime());
             userOrder.setOrderDescripe(armyOrder.getPeopleNumber()+"人 / "
-                    +armyOrder.getDate().split(",").length+"晚");
+                    +armyOrder.getDate().split(",").length+"天");
             userOrder.setOrderImage(armyOrder.getImageurl());
             userOrder.setOrderStatus(armyOrder.getOrderStatus());
             userOrder.setOrderPrice(armyOrder.getArmyPrice());
