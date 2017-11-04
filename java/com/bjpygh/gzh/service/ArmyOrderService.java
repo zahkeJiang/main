@@ -42,7 +42,7 @@ public class ArmyOrderService {
         }
         int barbecue = 0;
         if (armyOrder.getBarbecue()==1){
-            barbecue = 10*armyOrder.getPeopleNumber();
+            barbecue = 10*armyOrder.getPeopleNumber()*dates.length;
         }
 
         if (armyOrder.getFullAmount()==1)
