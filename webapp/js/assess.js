@@ -69,8 +69,8 @@ $(function(){
 					+nickname+'</div><div class="assess-header"><div class="assess-header-icon"><img src="'
 					+comment.headimageurl+'" height="56px"  width="56px"></div><div class="assess-header-content"><div class="assess-header-star">'
 					+star+'</div><div class="assess-header-time">'
-					+commentTime+'</div><p class="assess-header-text">'
-					+comment.content+'</p></div></div>'
+					+commentTime+'</div><p class="assess-header-text"><span>'
+					+comment.content+'</span></p></div></div>'
 					+pictureUrl+'</div>'
 			});
 			$(".main").html(html);
@@ -79,4 +79,12 @@ $(function(){
 			$(".main").html(html);
 		}
 	},"json");
+
+
+	var rowNum=Math.round($(".assess-header-text span").height()/parseFloat($(".assess-header-text span").css('line-height')));
+	if (rowNum<3) {
+		$(".assess-header-text").css({"display":"flex","align-items":"center"})
+	}
+	
+
 });
