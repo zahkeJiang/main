@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -31,6 +32,8 @@ public class DsOrderController extends BaseController {
 
     @Autowired
     PackageService packageService;
+
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     //改变订单状态接口
     @ResponseBody
@@ -77,7 +80,7 @@ public class DsOrderController extends BaseController {
     //创建订单接口
     @ResponseBody
     @RequestMapping(value = "/createOrder.action", method = RequestMethod.POST)
-    public Status createOrder(HttpServletRequest request,DsAliPay dsAliPay){
+    public Status createOrder(HttpServletRequest request,DsAliPay dsAliPay) throws ParseException {
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
@@ -128,8 +131,19 @@ public class DsOrderController extends BaseController {
         int minute = c.get(Calendar.MINUTE);
         int second = c.get(Calendar.SECOND);
         String out_trade_no ="DSPYGH" + year + month + date + hour + minute + second + userid;
+        int total_amount;
+        //加入500优惠券的逻辑
+        long time = new Date().getTime();
+        if (formatter.parse("2017-11-01").getTime()<time&&time<formatter.parse("2017-11-12").getTime()){
+            if (couponprice<500){
+                total_amount = dsPackage.getPackageid()-500;
+            }else {
+                total_amount = dsPackage.getPrice()-couponprice;
+            }
+        }else {
+            total_amount = dsPackage.getPrice()-couponprice;
+        }
 
-        int total_amount = dsPackage.getPrice()-couponprice;
 
         DsOrder dsOrder = new DsOrder();
         DsInformation DsInfo = dsInfoService.getDsInfoByName(dsPackage.getDsName());
