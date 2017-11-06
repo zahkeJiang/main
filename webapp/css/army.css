@@ -87,7 +87,7 @@ html, body {
     overflow-x:scroll;
 
     margin-left: 10px;
-    margin-right: 10px;
+    margin-right: 4px;
 }
 .villaStyle ul::-webkit-scrollbar {/*隐藏滚动条*/
     display: none;
