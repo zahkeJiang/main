@@ -260,6 +260,11 @@ $(function(){
         $(".army-time-row").click(function(){
         $(this).children(".army-time1").html("<img src='./images/circle_choose.png' height='18px' width='18px'>");
         $(this).parents().siblings("label").find(".army-time1").empty();
+        if ($("input[name='timeRadio']:checked").val()==0){
+            $(".period").html("时间段:8:00-11:30");
+        }else {
+            $(".period").html("时间段:13:30-17:00");
+        }
         getPrice();
     });
 

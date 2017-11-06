@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -19,7 +20,7 @@ public class CouponService {
     @Autowired
     UserCouponMapper userCouponMapper;
 
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy.MM.dd");
 
     public boolean getUserCoupon(String userid) {
@@ -35,7 +36,7 @@ public class CouponService {
         userCouponMapper.insertSelective(userCoupon);
     }
 
-    public Status getCouponStatus(String userid) {
+    public Status getCouponStatus(String userid) throws ParseException {
         Date date = new Date(2592000000L);
         try{
             UserCoupon userCoupon = userCouponMapper.selectByPrimaryKey(Long.parseLong(userid));

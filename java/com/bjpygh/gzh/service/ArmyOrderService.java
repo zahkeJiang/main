@@ -69,6 +69,7 @@ public class ArmyOrderService {
 
         armyOrder.setOrderNumber(orderNumber);
         armyOrder.setArmyName("作战之日");
+        armyOrder.setImageurl("http://120.24.184.86/glxt/dsimage/army_order.jpg");
         //设置状态
         armyOrder.setOrderStatus(0);
 

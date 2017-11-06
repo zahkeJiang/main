@@ -131,19 +131,8 @@ public class DsOrderController extends BaseController {
         int minute = c.get(Calendar.MINUTE);
         int second = c.get(Calendar.SECOND);
         String out_trade_no ="DSPYGH" + year + month + date + hour + minute + second + userid;
-        int total_amount;
-        //加入500优惠券的逻辑
-        long time = new Date().getTime();
-        if (formatter.parse("2017-11-01").getTime()<time&&time<formatter.parse("2017-11-12").getTime()){
-            if (couponprice<500){
-                total_amount = dsPackage.getPackageid()-500;
-            }else {
-                total_amount = dsPackage.getPrice()-couponprice;
-            }
-        }else {
-            total_amount = dsPackage.getPrice()-couponprice;
-        }
 
+        int total_amount = dsPackage.getPrice()-couponprice;
 
         DsOrder dsOrder = new DsOrder();
         DsInformation DsInfo = dsInfoService.getDsInfoByName(dsPackage.getDsName());

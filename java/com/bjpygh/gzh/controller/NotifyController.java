@@ -317,8 +317,14 @@ public class NotifyController extends BaseController {
             order.setOrderPrice(armyOrder.getArmyPrice());
             order.setOrderStatus(armyOrder.getOrderStatus());
             order.setOrderImage(armyOrder.getImageurl());
+            String period;
+            if (armyOrder.getPeriod()==0){
+                period = "时间段:8:00-11:30";
+            }else {
+                period = "时间段:13:30-17:00";
+            }
             order.setOrderDescripe("参与人数: "+armyOrder.getPeopleNumber()+"人 / "
-                    +"参与天数: "+armyOrder.getDate().split(",").length+"天");
+                    +"参与天数: "+armyOrder.getDate().split(",").length+"天 / "+period);
             order.setOrderTime(armyOrder.getCreateTime());
             order.setOrderName(armyOrder.getArmyName());
             order.setOrderNumber(armyOrder.getOrderNumber());
