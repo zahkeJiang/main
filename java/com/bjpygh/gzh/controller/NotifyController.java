@@ -7,6 +7,7 @@ import com.bjpygh.gzh.config.AlipayConfig;
 import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.model.AsynNotifyResponse;
 import com.bjpygh.gzh.service.*;
+import com.bjpygh.gzh.utils.OrderPush;
 import com.bjpygh.gzh.utils.PropertyUtils;
 import com.bjpygh.gzh.utils.XMLToMap;
 import com.jd.jr.pay.gate.signature.util.JdPayUtil;
@@ -16,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
@@ -132,6 +131,8 @@ public class NotifyController extends BaseController {
     //支付宝驾校支付回调接口
     @RequestMapping(value = "/notify_url", method = RequestMethod.POST)
     public void AliNotify(HttpServletRequest request, HttpServletResponse response) throws IOException, AlipayApiException {
+        Map<String, String> userMap = checkWxUser(request);
+
         PrintWriter out = response.getWriter();
 
         Map<String, String> map = getGmtRefund(request);
@@ -147,6 +148,9 @@ public class NotifyController extends BaseController {
             dsOrder.setPayType((byte) 0);
             dsOrder.setPayTime(formatter.format(new Date()));
             dsOrderService.updateOrder(dsOrder);
+
+            DsMessagePush(dsOrder,userMap);
+
             out.println("success");	//请不要修改或删除
         } else{//验证失败
             out.println("fail");
@@ -156,9 +160,24 @@ public class NotifyController extends BaseController {
         out.close();
     }
 
+    //驾校订单支付微信消息推送
+    private void DsMessagePush(DsOrder dsOrder, Map<String, String> userMap) {
+        OrderPush orderPush = new OrderPush();
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("first","我们已收到您的报名费用，报名成功后小漂会及时给您反馈，请耐心等待。");
+        map.put("keyword1",dsOrder.getOrderPrice()+"");
+        map.put("keyword2",dsOrder.getOrderNumber());
+        map.put("remark","如有问题咨询客服：010-59822296或直接在微信留言，小漂将第一时间为您服务！");
+        map.put("openid",userMap.get("openid"));
+
+        orderPush.PayJsonObj(map);
+    }
+
+
     //支付宝别墅支付回调接口
     @RequestMapping(value = "/vnotify_url", method = RequestMethod.POST)
     public void AliVillaNotify(HttpServletRequest request, HttpServletResponse response) throws IOException, AlipayApiException {
+        Map<String, String> userMap = checkWxUser(request);
         PrintWriter out = response.getWriter();
 
         Map<String, String> map = getGmtRefund(request);
@@ -170,12 +189,14 @@ public class NotifyController extends BaseController {
             villaOrder.setPayType((byte) 0);
             villaOrder.setPayTime(formatter.format(new Date()));
             villaOrderService.updateOrder(villaOrder);
+
         }else{//验证失败
             out.println("fail");
         }
         out.flush();
         out.close();
     }
+
 
     //支付宝军旅支付回调接口
     @RequestMapping(value = "/anotify_url", method = RequestMethod.POST)
@@ -202,6 +223,7 @@ public class NotifyController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/jNotify_url")
     public String execute(HttpServletRequest request) {
+        Map<String, String> userMap = checkWxUser(request);
         StringBuilder sb = new StringBuilder();
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader( request.getInputStream()));
@@ -236,6 +258,9 @@ public class NotifyController extends BaseController {
                     dsOrder.setPayType((byte) 3);
                     dsOrder.setPayTime(formatter.format(new Date()));
                     dsOrderService.updateOrder(dsOrder);
+
+                    DsMessagePush(dsOrder,userMap);
+
                 }else if (o.equals("A")){
                     ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
                     armyOrder.setOrderStatus(1);
@@ -317,8 +342,14 @@ public class NotifyController extends BaseController {
             order.setOrderPrice(armyOrder.getArmyPrice());
             order.setOrderStatus(armyOrder.getOrderStatus());
             order.setOrderImage(armyOrder.getImageurl());
+            String period;
+            if (armyOrder.getPeriod()==0){
+                period = "时间段:8:00-11:30";
+            }else {
+                period = "时间段:13:30-17:00";
+            }
             order.setOrderDescripe("参与人数: "+armyOrder.getPeopleNumber()+"人 / "
-                    +"参与天数: "+armyOrder.getDate().split(",").length+"天");
+                    +"参与天数: "+armyOrder.getDate().split(",").length+"天 / "+period);
             order.setOrderTime(armyOrder.getCreateTime());
             order.setOrderName(armyOrder.getArmyName());
             order.setOrderNumber(armyOrder.getOrderNumber());

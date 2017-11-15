@@ -8,11 +8,11 @@ window.onload=ShowMessage();
 var html = "";
 $(function(){
 	// type(1为别墅评论 2为驾校 3为军旅)
-	if (type==1) {
-		$("body").css({"background":"#B4DADA"});
-	}else if (type==3) {
-		$("body").css({"background":"#B4DADA"});
-	}
+	// if (type==1) {
+	// 	$("body").css({"background":"#B4DADA"});
+	// }else if (type==3) {
+	// 	$("body").css({"background":"#B4DADA"});
+	// }
 	
 	$.post("getComment",{"type":type},function(datas){//请求参数 ：type(1为别墅评论 2为驾校 3为军旅)
 		if (datas.status==0) {

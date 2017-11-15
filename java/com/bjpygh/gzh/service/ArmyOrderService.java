@@ -69,6 +69,7 @@ public class ArmyOrderService {
 
         armyOrder.setOrderNumber(orderNumber);
         armyOrder.setArmyName("作战之日");
+        armyOrder.setImageurl("http://120.24.184.86/glxt/dsimage/army_order.jpg");
         //设置状态
         armyOrder.setOrderStatus(0);
 
@@ -142,6 +143,20 @@ public class ArmyOrderService {
         ArmyOrderExample example = new ArmyOrderExample();
         ArmyOrderExample.Criteria criteria = example.createCriteria();
         criteria.andUserIdEqualTo(Long.parseLong(userid));
+        return armyOrderMapper.selectByExample(example);
+    }
+
+    public List<ArmyOrder> getNotPay() {
+        ArmyOrderExample example = new ArmyOrderExample();
+        ArmyOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderStatusEqualTo(0);
+        return armyOrderMapper.selectByExample(example);
+    }
+
+    public List<ArmyOrder> getPay() {
+        ArmyOrderExample example = new ArmyOrderExample();
+        ArmyOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderStatusEqualTo(1);
         return armyOrderMapper.selectByExample(example);
     }
 }

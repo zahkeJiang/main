@@ -6,7 +6,15 @@ import com.bjpygh.gzh.model.RefundResponse;
 import com.bjpygh.gzh.utils.PropertyUtils;
 import com.bjpygh.gzh.utils.ThreeDES;
 import com.jd.jr.pay.gate.signature.util.JdPayUtil;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,15 +56,15 @@ public class Main {
 //            System.out.println(u.getOrderNumber());
 //        }
 //------------------------------------------------------------------------------
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date1 = sdf.parse("2017-10-1");
-            Date date2 = sdf.parse("2017-10-30");
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            Date date1 = sdf.parse("2017-10-1");
+//            Date date2 = sdf.parse("2017-11-01");
 
-            System.out.println(date2.getTime()-date1.getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+//            System.out.println(date2);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
 //        int a = 1887;
 //        System.out.println(""+(a/2));
         //-------------------------------------------------------------------------------
@@ -65,9 +73,10 @@ public class Main {
 //        threeDES.encryptDESCBC();
 
 
-        System.out.println(1*0.5);
+//        System.out.println(1*0.5);
+
     }
-}
+
 //29 6 5
 //28 5 4
 //27 4 3
@@ -75,3 +84,5 @@ public class Main {
 //25 2 1
 //24 1 7
 //23 0 6
+
+}

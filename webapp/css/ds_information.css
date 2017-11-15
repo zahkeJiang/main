@@ -353,7 +353,7 @@ html, body {
      text-align: left;
     padding:10px;
    	border-radius: 10px;
-	margin:16px 10px;
+	margin:10px 16px;
 	background-color: #f6f1f1;
 }
 .assessBox p.assessBox-nickname{
@@ -387,4 +387,13 @@ html, body {
 #icon{
     border-radius: 50%;
     border:0;
+}
+
+.discount{
+    margin-top: 8px;
+    font-size: 20px;
+    color: #4ea0ff;
+    margin-left: 12px;
+    margin-right: 12px;
+    text-align: center;
 }

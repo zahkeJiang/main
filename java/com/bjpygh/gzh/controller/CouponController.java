@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
 
@@ -65,7 +66,7 @@ public class CouponController extends BaseController {
     //查询优惠券接口
     @ResponseBody
     @RequestMapping(value = "/queryCoupon.action", method = RequestMethod.POST)
-    public Status QueryCoupon(HttpServletRequest request){
+    public Status QueryCoupon(HttpServletRequest request) throws ParseException {
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();

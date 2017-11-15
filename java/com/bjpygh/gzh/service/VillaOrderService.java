@@ -24,7 +24,7 @@ public class VillaOrderService {
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
 
-    public String createVillaOrder(VillaOrder villaOrder) throws ParseException {
+    public VillaOrder createVillaOrder(VillaOrder villaOrder) throws ParseException {
         /**
          * 计算订单价格
          */
@@ -95,7 +95,7 @@ public class VillaOrderService {
         villaOrder.setNote("漂洋过海小别墅");
         
         villaOrderMapper.insertSelective(villaOrder);
-        return orderNumber;
+        return villaOrder;
     }
 
     public void updateOrderStatus(String ordernumber) {
@@ -235,5 +235,12 @@ public class VillaOrderService {
             VillaOrderExample.Criteria criteria = example.createCriteria();
             criteria.andUserIdEqualTo(Long.parseLong(userid));
             return villaOrderMapper.selectByExample(example);
+    }
+
+    public List<VillaOrder> getNotPay() {
+        VillaOrderExample example = new VillaOrderExample();
+        VillaOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderStatusEqualTo(0);
+        return villaOrderMapper.selectByExample(example);
     }
 }

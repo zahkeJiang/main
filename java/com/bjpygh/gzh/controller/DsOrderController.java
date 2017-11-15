@@ -7,6 +7,7 @@ import com.bjpygh.gzh.service.CouponService;
 import com.bjpygh.gzh.service.DsInfoService;
 import com.bjpygh.gzh.service.DsOrderService;
 import com.bjpygh.gzh.service.PackageService;
+import com.bjpygh.gzh.utils.OrderPush;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -31,6 +33,8 @@ public class DsOrderController extends BaseController {
 
     @Autowired
     PackageService packageService;
+
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     //改变订单状态接口
     @ResponseBody
@@ -77,7 +81,7 @@ public class DsOrderController extends BaseController {
     //创建订单接口
     @ResponseBody
     @RequestMapping(value = "/createOrder.action", method = RequestMethod.POST)
-    public Status createOrder(HttpServletRequest request,DsAliPay dsAliPay){
+    public Status createOrder(HttpServletRequest request,DsAliPay dsAliPay) throws ParseException {
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
@@ -151,6 +155,16 @@ public class DsOrderController extends BaseController {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         dsOrder.setCreateTime(formatter.format(new Date()));
         dsOrderService.insertOrder(dsOrder);
+
+        OrderPush orderPush = new OrderPush();
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("first","Hi，您已成功提交驾考订单");
+        map.put("orderID",out_trade_no);
+        map.put("orderMoneySum",total_amount+"");
+        map.put("remark","请尽快支付，如有问题咨询客服：010-59822296");
+        map.put("openid",userMap.get("openid"));
+
+        orderPush.CreateJsonObj(map);
 
         return Status.success().add("ordernumber",out_trade_no);
     }

@@ -89,9 +89,20 @@ $(function(){
 					}
 				});
 			}else if (userorder.orderStatus=="1"||userorder.orderStatus=="2") {//1代表用户已付款,驾校特有状态值2，代表材料尚未拿过来
-				$(".chedule-content").html("已付款");
+                //拿到订单编号，进行判断属于那种类型，再加载不同
+                var typeLetter = ordernumber.substr(0,1);//提取订单号首个字母，D驾校，V别墅，A军旅
+
+                if (typeLetter=="V") {
+                    $(".shedule-hint-text").html("订单已支付预约定金，请入住别墅时交付尾款，小漂为您服务。");
+                }else if (typeLetter=="A") {
+                    $(".shedule-hint-text").html("订单已支付预约定金，请到达作战基地时交付尾款，，小漂为您服务。");
+                }else if (typeLetter=="D") {
+                    $(".shedule-hint-text").html("订单已支付成功，小漂为您服务。");
+                }
+
+                $(".chedule-content").html("已付款");
 				$(".chedule-content").css({"color":"white","background":"green"});
-				$(".shedule-hint-text").html("订单已支付，小漂为您服务。");
+
 				$(".footer").show();
 				$(".cancel").show();
 				$(".price").css({"margin-bottom":"58px"});
