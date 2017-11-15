@@ -23,6 +23,8 @@ public class BaseController {
     @Autowired
     UserService userService;
 
+
+
     //判断用户信息是否存入数据库，未存入则存入数据库,并返回userMap
     public Map<String, String> checkWxUser(HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -43,13 +45,15 @@ public class BaseController {
           //将用户信息放入缓存中
             userMap.put("id",userId);
             userMap.put("openid", openid);
+            userMap.put("access_token",access_token);
 //            userMap.put("id","1");
 //            userMap.put("openid","o9C-m0gWfR9WOs8DIDElxSUfDIUU");
             session.setAttribute("user", userMap );
         }
-
+        System.out.println("access_token="+userMap);
         return  userMap;
     }
+
 
     //从微信平台获取用户信息
     private String getUserInfo(String openid,String access_token) {

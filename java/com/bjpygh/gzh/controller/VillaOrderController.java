@@ -4,6 +4,7 @@ import com.bjpygh.gzh.bean.VillaOrder;
 import com.bjpygh.gzh.bean.VillaPrice;
 import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.service.VillaOrderService;
+import com.bjpygh.gzh.utils.OrderPush;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class VillaOrderController extends BaseController{
@@ -46,8 +44,18 @@ public class VillaOrderController extends BaseController{
         }
 
         villaOrder.setUserId(Long.valueOf(userid));
-        String orderNumber = villaOrderService.createVillaOrder(villaOrder);
-        return Status.success().add("orderNumber",orderNumber);
+        VillaOrder villaOrder1 = villaOrderService.createVillaOrder(villaOrder);
+
+        OrderPush orderPush = new OrderPush();
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("first","Hi，您已成功提交“漂洋过海小别墅”订单");
+        map.put("orderID",villaOrder1.getOrderNumber());
+        map.put("orderMoneySum",villaOrder1.getVillaPrice()+"");
+        map.put("remark","请尽快支付，如有问题咨询客服：010-59822296"+"\n 详情");
+        map.put("openid",userMap.get("openid"));
+
+        orderPush.CreateJsonObj(map);
+        return Status.success().add("orderNumber",villaOrder1.getOrderNumber());
     }
 
     //关闭订单接口

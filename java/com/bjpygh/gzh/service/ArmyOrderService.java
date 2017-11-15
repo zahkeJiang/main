@@ -145,4 +145,18 @@ public class ArmyOrderService {
         criteria.andUserIdEqualTo(Long.parseLong(userid));
         return armyOrderMapper.selectByExample(example);
     }
+
+    public List<ArmyOrder> getNotPay() {
+        ArmyOrderExample example = new ArmyOrderExample();
+        ArmyOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderStatusEqualTo(0);
+        return armyOrderMapper.selectByExample(example);
+    }
+
+    public List<ArmyOrder> getPay() {
+        ArmyOrderExample example = new ArmyOrderExample();
+        ArmyOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andOrderStatusEqualTo(1);
+        return armyOrderMapper.selectByExample(example);
+    }
 }
