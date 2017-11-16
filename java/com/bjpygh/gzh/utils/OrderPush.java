@@ -81,6 +81,39 @@ public class OrderPush {
                 obj.toString());
     }
 
+    public String FinishJsonObj(Map<String, String> map){
+        JSONObject first = new JSONObject();
+        first.accumulate("value",map.get("first"));
+        first.accumulate("color","#173177");
+
+        JSONObject keyword1 = new JSONObject();
+        keyword1.accumulate("value",map.get("keyword1"));
+        keyword1.accumulate("color","#173177");
+
+        JSONObject keyword2 = new JSONObject();
+        keyword2.accumulate("value",map.get("keyword2"));
+        keyword2.accumulate("color","#173177");
+
+        JSONObject remark = new JSONObject();
+        remark.accumulate("value",map.get("remark"));
+        remark.accumulate("color","#173177");
+        JSONObject ja = new JSONObject();
+
+        ja.accumulate("first",first);
+        ja.accumulate("keyword1",keyword1);
+        ja.accumulate("keyword2",keyword2);
+        ja.accumulate("remark",remark);
+
+        JSONObject obj = new JSONObject();
+        obj.accumulate("touser",map.get("openid"));
+        obj.accumulate("template_id","doWGLX8X7dgUVFif8FHgsLl5j_aRDR2rYtTy6kEt6Dc\n");
+        obj.accumulate("url","http://gzpt.bjpygh.com/orderInformation.html?ordernumber="+map.get("keyword1"));
+        obj.accumulate("data",ja);
+
+        return sendPost("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=BjjtKkvXXzTQN44eU0Qm4nK7gmWxjYyKW3g54sJMIcL_6OcIS0NsNSK7BcZdW7rxcK3p_e-zDFRt9CoUcOJFm755ptHBB98P9UT9ZWTyz5sYDQhADALQD",
+                obj.toString());
+    }
+
     public String sendPost(String url, String param) {
 
         PrintWriter out = null;

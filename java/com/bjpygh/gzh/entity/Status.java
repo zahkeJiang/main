@@ -31,7 +31,7 @@ public class Status {
     public static Status notInWx(){
         Status result = new Status();
         result.setStatus(-10);
-        result.setMsg("请在微信端登陆");
+        result.setMsg("请在微信端登录");
         return result;
     }
 

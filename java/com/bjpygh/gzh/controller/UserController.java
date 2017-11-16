@@ -1,8 +1,10 @@
 package com.bjpygh.gzh.controller;
 
+import com.bjpygh.gzh.bean.YouCard;
 import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.bean.User;
 import com.bjpygh.gzh.service.UserService;
+import com.bjpygh.gzh.service.YouCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,9 @@ public class UserController extends BaseController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    YouCardService youCardService;
 
     //更改用户信息接口
     @ResponseBody
@@ -100,6 +105,17 @@ public class UserController extends BaseController {
         }else {
             return Status.fail(-20,"没有绑定");
         }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "applyCard",method = RequestMethod.POST)
+    public Status applyCard(HttpServletRequest request, YouCard youCard){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        String userid = userMap.get("id");
+        return youCardService.applyCard(userid,youCard);
     }
 
 }
