@@ -10,14 +10,24 @@ $(function(){
 		var school = $("#school").val();
 		var tel = $("#tel").val();
 		var sexSelect = $("#sexSelect option:selected").val();
+        var age;
+        if (sexSelect=="男"){
+            age = 1;
+        }else {
+            age = 2;
+        }
 		console.log(userName,old,school,tel,sexSelect);
 		if (userName!="" && old!="" && school!="" && tel!="" && sexSelect!="") {
 			if (telNumber.test(tel)) {
-				$.post("applyCard",{"reacName":userName,"age":old,"school":school,"mobile":tel,"gender":sexSelect},function(datas){
+				$.post("applyCard",{"realName":userName,"age":old,"school":school,"mobile":tel,"gender":age},function(datas){
 					if (datas.status==0) {
-						alert(提交成功，请等待审核);
-						window.location.href="excellent.html";
-					}
+						alert("提交成功，请等待审核");
+                        $(".layer").hide();
+                        $(".infoBox").hide();
+						// window.location.href="excellentCard.html";
+					}else {
+					    alert("您已完成提交，勿重复提交");
+                    }
 				},"json");
 			}else{
 				alert("手机号格式有误，请重新输入");
