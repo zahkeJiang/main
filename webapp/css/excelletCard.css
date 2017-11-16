@@ -1,0 +1,136 @@
+body{
+  background: #4ea0ff;
+  position: absolute;
+}
+.excellent{
+  position: relative;
+  padding: 20px  0;
+}
+.excellent img{
+  width: 90%;
+  margin:0 5%;
+
+  /*margin-left: 5%*/
+}
+.apply{
+  height: 40px;
+  background:#4ea0ff;
+  color: #fff;
+  width: 30%;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 10px;
+  position: absolute;
+  bottom:50px;
+  margin-left: 35%;
+}
+/*图层*/
+.layer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0.3;
+  height: 100%;
+  width: 100%;
+  background: #000;
+  z-index: 100;
+    display: none;
+}
+/*弹窗*/
+.infoBox-title{
+  background: #f6f1f1;
+  border-radius:10px 10px 0 0 ;
+  height: 40px;
+  color: #4ea0ff;
+  text-align: center;
+  line-height: 40px;
+}
+.infoBox{
+  position: fixed;
+  background: #4ea0ff;
+  z-index: 101;
+  border-radius:12px 12px 10px 10px;
+  position:fixed;
+  top: 20%;
+  left: 10%;
+  height: 60%;
+  width: 80%;
+  display: none;
+
+}
+.userInfoBox{
+  display: flex;
+  align-items: center;
+  background: #f6f1f1;
+  margin:10px 16px;
+  border-radius: 10px;
+  height: 40px;
+}
+ p{
+  text-align: center;
+  height: 24px;
+  line-height: 24px;
+  color: #4ea0ff;
+  width: 60px;
+  border-right: 1px solid #4ea0ff;
+}
+input{
+  flex: 1;
+  padding: 0 10px;
+  background: #f6f1f1;
+  font-size: 14px;
+  color: #555;
+}
+input::-webkit-input-placeholder { 
+  color: #999; 
+  font-size: 14px;
+} 
+.userInfoBox-row{
+  flex: 1;
+  display: flex;
+  border-radius: 10px;
+  background: #f6f1f1;
+  margin:0 4px;
+  height: 40px;
+  align-items: center;
+}
+.userInfoBox-row input{
+  width: 30px;
+}
+.userInfoBox1{
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+}
+select#sexSelect{
+  border: 0;
+  background: #f6f1f1;
+  flex: 1;
+  width: 30px;
+  margin: 0 8px;
+    color: #555;
+
+}
+select#sexSelect option{
+
+  border: 1px solid #4ea0ff;
+  padding: 0 10px;
+  /*width: 30px;*/
+  height: 30px;
+  font-size: 14px;
+  color: #999;
+
+}
+.submitAplly{
+  margin:0 16px;
+  height: 40px;
+  width: 86%;
+  margin-left: 7%;
+  text-align: center;
+  line-height: 40px;
+  background: #f6f1f1;
+  border-radius: 10px;
+  color: #4ea0ff;
+  position: absolute;
+  bottom: 20px;
+}
