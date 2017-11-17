@@ -34,7 +34,7 @@ body{
   width: 100%;
   background: #000;
   z-index: 100;
-    display: none;
+    /*display: none;*/
 }
 /*弹窗*/
 .infoBox-title{
@@ -55,7 +55,7 @@ body{
   left: 10%;
   height: 60%;
   width: 80%;
-  display: none;
+  /*display: none;*/
 
 }
 .userInfoBox{
@@ -133,4 +133,44 @@ select#sexSelect option{
   color: #4ea0ff;
   position: absolute;
   bottom: 20px;
+}
+.userInfoBox-row-box{
+  position: relative;
+  margin: 0 6px;
+  font-size: 14px;
+  flex: 1;
+  height: 24px;
+ }
+.userInfoBox-row-sex{
+  top: 0;
+  left: 0;
+  background: #f6f1f1;
+  flex: 1;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #f6f1f1;
+  position:absolute;
+
+}
+.userInfoBox-row-sex-header{
+  height: 24px;
+  margin: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #555;
+  border-bottom: 1px solid #f6f1f1;
+}
+ul.userInfoBox-row-sex-choose{
+  display: none;
+}
+ul.userInfoBox-row-sex-choose li{
+  padding: 0 4px;
+  line-height: 24px;
+  color: #999;
+
+}
+ul.userInfoBox-row-sex-choose li:last-child{
+  border-radius: 0 0 4px 4px;
+
 }
