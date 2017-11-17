@@ -19,6 +19,7 @@
   <div class="layer"></div>
   <div class="infoBox">
     <div class="infoBox-title">个人信息填写</div>
+    <img src="./images/ds_close.png" height="16px" width="16px" id="close">
     <div class="userInfoBox">
       <p>姓名</p>
       <input type="text" name="name" placeholder="请填写您的真实姓名" id="userName">
@@ -26,11 +27,25 @@
     <div class="userInfoBox1">
       <div class="userInfoBox-row">
         <p>性别</p>
-        <select id="sexSelect">
+<!--         <select id="sexSelect">
           <option value ="" disabled="disabled" selected="selected" style='display: none' ></option>
           <option >男</option>
           <option>女</option>
-        </select>
+        </select> -->
+        <div class="userInfoBox-row-box">
+          <div class="userInfoBox-row-sex">
+            <div class="userInfoBox-row-sex-header">
+              <span></span>
+              <img src="./images/bottom.png" height="12px">
+            </div>
+            <ul class="userInfoBox-row-sex-choose">
+              <li>男</li>
+              <li>女</li>
+            </ul>
+
+          </div>
+        </div>
+
       </div>
       <div class="userInfoBox-row">
         <p>年龄</p>
