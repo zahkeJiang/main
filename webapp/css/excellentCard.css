@@ -1,6 +1,7 @@
 body{
   background: #4ea0ff;
   position: absolute;
+  width: 100%;
 }
 .excellent{
   position: relative;
@@ -34,7 +35,7 @@ body{
   width: 100%;
   background: #000;
   z-index: 100;
-    /*display: none;*/
+    display: none;
 }
 /*弹窗*/
 .infoBox-title{
@@ -55,7 +56,7 @@ body{
   left: 10%;
   height: 60%;
   width: 80%;
-  /*display: none;*/
+  display: none;
 
 }
 .userInfoBox{
@@ -173,4 +174,10 @@ ul.userInfoBox-row-sex-choose li{
 ul.userInfoBox-row-sex-choose li:last-child{
   border-radius: 0 0 4px 4px;
 
+}
+
+#close{
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }

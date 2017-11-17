@@ -3,13 +3,19 @@ $(function(){
 		$(".layer").show();
 		$(".infoBox").show();
 	});
+	$("#close").click(function(){
+		$(".layer").hide();
+		$(".infoBox").hide();
+	});
+
+
 	$(".userInfoBox-row-sex-header").click(function(){
 		$(".userInfoBox-row-sex").css({"border":"1px solid #4ea0ff"});
 		$(".userInfoBox-row-sex-header").css({"border-bottom":"1px solid #ddd"});
 		$(".userInfoBox-row-sex-choose").show();
 	});
 
-	//点击屏幕，如果元素不是userInfoBox-row-sex-header，则执行navStyle();
+	//点击屏幕，如果元素不是userInfoBox-row-sex-header，则执行...
     $(document).click(function(){
     	$(".userInfoBox-row-sex").css({"border":"1px solid #f6f1f1"});
 		$(".userInfoBox-row-sex-header").css({"border-bottom":"0"});
