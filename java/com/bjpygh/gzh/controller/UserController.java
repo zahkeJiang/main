@@ -108,7 +108,7 @@ public class UserController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "applyCard",method = RequestMethod.POST)
+    @RequestMapping(value = "/applyCard",method = RequestMethod.POST)
     public Status applyCard(HttpServletRequest request, YouCard youCard){
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
@@ -116,6 +116,15 @@ public class UserController extends BaseController {
         }
         String userid = userMap.get("id");
         return youCardService.applyCard(userid,youCard);
+    }
+
+    @RequestMapping(value = "/applyCard", method = RequestMethod.GET)
+    public String applyCard(HttpServletRequest request){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return "error";
+        }
+        return "excellentCard";
     }
 
 }
