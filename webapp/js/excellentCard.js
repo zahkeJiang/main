@@ -53,7 +53,7 @@ $(function(){
                         $(".infoBox").hide();
 						// window.location.href="excellentCard.html";
 					}else {
-					    alert("您已完成提交，勿重复提交");
+					    alert("您已提交申请，请勿重复提交");
                     }
 				},"json");
 			}else{
