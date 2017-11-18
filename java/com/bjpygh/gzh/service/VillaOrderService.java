@@ -38,19 +38,19 @@ public class VillaOrderService {
 //            Date d = new Date(Integer.parseInt(ds[0]),Integer.parseInt(ds[1])-1,Integer.parseInt(ds[2]));
             System.out.println(d);
             if (d.getDay()>0&&d.getDay()<5){
-                villaPrice = 66;
-                if (villaOrder.getPeopleNumber()*66>1688){
+                villaPrice = 128;
+                if (villaOrder.getPeopleNumber()*128>3200){
                     villaPrice *= villaOrder.getPeopleNumber();
                 } else{
-                    villaPrice = 1688*villaNum;
+                    villaPrice = 3200*villaNum;
                 }
                 sum += villaPrice;
             }else {
-                villaPrice = 100;
-                if (villaOrder.getPeopleNumber()*100>2888){
+                villaPrice = 148;
+                if (villaOrder.getPeopleNumber()*148>3688){
                     villaPrice *= villaOrder.getPeopleNumber();
                 } else{
-                    villaPrice = 2888*villaNum;
+                    villaPrice = 3688*villaNum;
                 }
                 sum += villaPrice;
             }
@@ -146,9 +146,9 @@ public class VillaOrderService {
             }else{
                 //根据周几来设置价格
                 if (newDate.getDay()>0&&newDate.getDay()<5){
-                    villaPrice.setPrice("66");
+                    villaPrice.setPrice("128");
                 }else {
-                    villaPrice.setPrice("100");
+                    villaPrice.setPrice("148");
                 }
             }
             villaPrices.add(villaPrice);
