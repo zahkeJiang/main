@@ -131,7 +131,6 @@ public class NotifyController extends BaseController {
     //支付宝驾校支付回调接口
     @RequestMapping(value = "/notify_url", method = RequestMethod.POST)
     public void AliNotify(HttpServletRequest request, HttpServletResponse response) throws IOException, AlipayApiException {
-        Map<String, String> userMap = checkWxUser(request);
 
         PrintWriter out = response.getWriter();
 
@@ -149,9 +148,9 @@ public class NotifyController extends BaseController {
             dsOrder.setPayTime(formatter.format(new Date()));
             dsOrderService.updateOrder(dsOrder);
 
-            DsMessagePush(dsOrder,userMap);
-
             out.println("success");	//请不要修改或删除
+            User userById = userService.getUserById(String.valueOf(dsOrder.getUserId()));
+//            DsMessagePush(dsOrder,userById.getOpenid());
         } else{//验证失败
             out.println("fail");
         }
@@ -161,14 +160,14 @@ public class NotifyController extends BaseController {
     }
 
     //驾校订单支付微信消息推送
-    private void DsMessagePush(DsOrder dsOrder, Map<String, String> userMap) {
+    private void DsMessagePush(DsOrder dsOrder, String openid) {
         OrderPush orderPush = new OrderPush();
         Map<String, String> map = new HashMap<String, String>();
         map.put("first","我们已收到您的报名费用，报名成功后小漂会及时给您反馈，请耐心等待。");
         map.put("keyword1",dsOrder.getOrderPrice()+"");
         map.put("keyword2",dsOrder.getOrderNumber());
         map.put("remark","如有问题咨询客服：010-59822296或直接在微信留言，小漂将第一时间为您服务！");
-        map.put("openid",userMap.get("openid"));
+        map.put("openid",openid);
 
         orderPush.PayJsonObj(map);
     }
@@ -223,7 +222,6 @@ public class NotifyController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/jNotify_url")
     public String execute(HttpServletRequest request) {
-        Map<String, String> userMap = checkWxUser(request);
         StringBuilder sb = new StringBuilder();
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader( request.getInputStream()));
@@ -259,7 +257,9 @@ public class NotifyController extends BaseController {
                     dsOrder.setPayTime(formatter.format(new Date()));
                     dsOrderService.updateOrder(dsOrder);
 
-                    DsMessagePush(dsOrder,userMap);
+                    User userById = userService.getUserById(String.valueOf(dsOrder.getUserId()));
+
+//                    DsMessagePush(dsOrder,userById.getOpenid());
 
                 }else if (o.equals("A")){
                     ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);

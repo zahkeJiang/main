@@ -158,13 +158,13 @@ public class DsOrderController extends BaseController {
 
         OrderPush orderPush = new OrderPush();
         Map<String, String> map = new HashMap<String, String>();
-        map.put("first","Hi，您已成功提交驾考订单");
+        map.put("first","Hi,您已成功提交驾考订单");
         map.put("orderID",out_trade_no);
         map.put("orderMoneySum",total_amount+"");
         map.put("remark","请尽快支付，如有问题咨询客服：010-59822296");
         map.put("openid",userMap.get("openid"));
 
-        orderPush.CreateJsonObj(map);
+//        orderPush.CreateJsonObj(map);
 
         return Status.success().add("ordernumber",out_trade_no);
     }

@@ -48,13 +48,13 @@ public class VillaOrderController extends BaseController{
 
         OrderPush orderPush = new OrderPush();
         Map<String, String> map = new HashMap<String, String>();
-        map.put("first","Hi，您已成功提交“漂洋过海小别墅”订单");
+        map.put("first","Hi,您已成功提交“漂洋过海小别墅”订单");
         map.put("orderID",villaOrder1.getOrderNumber());
         map.put("orderMoneySum",villaOrder1.getVillaPrice()+"");
-        map.put("remark","请尽快支付，如有问题咨询客服：010-59822296"+"\n 详情");
+        map.put("remark","请尽快支付，如有问题咨询客服：010-59822296");
         map.put("openid",userMap.get("openid"));
 
-        orderPush.CreateJsonObj(map);
+//        orderPush.CreateJsonObj(map);
         return Status.success().add("orderNumber",villaOrder1.getOrderNumber());
     }
 

@@ -8,12 +8,15 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
 import java.util.Map;
 
 /**
  * 微信消息推送
  */
 public class OrderPush {
+
+    String access_token;
 
     public String CreateJsonObj(Map<String, String> map){
         JSONObject first = new JSONObject();
@@ -29,7 +32,7 @@ public class OrderPush {
         orderMoneySum.accumulate("color","#173177");
 
         JSONObject remark = new JSONObject();
-        remark.accumulate("value",map.get("remark")+"\n 详情");
+        remark.accumulate("value",map.get("remark"));
         remark.accumulate("color","#173177");
         JSONObject ja = new JSONObject();
 
@@ -44,8 +47,15 @@ public class OrderPush {
         obj.accumulate("url","https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx74d8d40a83387a3e&redirect_uri=http://gzpt.bjpygh.com/schedule.action&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
         obj.accumulate("data",ja);
 
-        return sendPost("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=BjjtKkvXXzTQN44eU0Qm4nK7gmWxjYyKW3g54sJMIcL_6OcIS0NsNSK7BcZdW7rxcK3p_e-zDFRt9CoUcOJFm755ptHBB98P9UT9ZWTyz5sYDQhADALQD",
+        String result = sendPost("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+access_token,
                 obj.toString());
+        JSONObject jsonObject = JSONObject.fromObject(result);
+        if (jsonObject.getInt("errcode") != 0){
+            access_token = getAccesstoken();
+            result = sendPost("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+access_token,
+                    obj.toString());
+        }
+        return result;
     }
 
     public String PayJsonObj(Map<String, String> map){
@@ -77,8 +87,15 @@ public class OrderPush {
 //        obj.accumulate("url","https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx74d8d40a83387a3e&redirect_uri=http://gzpt.bjpygh.com/schedule.action&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
         obj.accumulate("data",ja);
 
-        return sendPost("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=BjjtKkvXXzTQN44eU0Qm4nK7gmWxjYyKW3g54sJMIcL_6OcIS0NsNSK7BcZdW7rxcK3p_e-zDFRt9CoUcOJFm755ptHBB98P9UT9ZWTyz5sYDQhADALQD",
+        String result = sendPost("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+access_token,
                 obj.toString());
+        JSONObject jsonObject = JSONObject.fromObject(result);
+        if (jsonObject.getInt("errcode")!=0){
+            access_token = getAccesstoken();
+            result = sendPost("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+access_token,
+                    obj.toString());
+        }
+        return result;
     }
 
     public String FinishJsonObj(Map<String, String> map){
@@ -110,8 +127,15 @@ public class OrderPush {
         obj.accumulate("url","http://gzpt.bjpygh.com/orderInformation.html?ordernumber="+map.get("keyword1"));
         obj.accumulate("data",ja);
 
-        return sendPost("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=BjjtKkvXXzTQN44eU0Qm4nK7gmWxjYyKW3g54sJMIcL_6OcIS0NsNSK7BcZdW7rxcK3p_e-zDFRt9CoUcOJFm755ptHBB98P9UT9ZWTyz5sYDQhADALQD",
+        String result = sendPost("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+access_token,
                 obj.toString());
+        JSONObject jsonObject = JSONObject.fromObject(result);
+        if (jsonObject.getInt("errcode") != 0){
+            access_token = getAccesstoken();
+            result = sendPost("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+access_token,
+                    obj.toString());
+        }
+        return result;
     }
 
     public String sendPost(String url, String param) {
@@ -160,6 +184,56 @@ public class OrderPush {
             }
             catch(IOException ex){
                 ex.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    public String getAccesstoken(){
+        JSONObject jsonObject = JSONObject.fromObject(sendGet("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx74d8d40a83387a3e&secret=0f84386999305a8cd8464fc32efb01f3"));
+        return jsonObject.getString("access_token");
+    }
+
+    public static String sendGet(String urlNameString) {
+        String result = "";
+        BufferedReader in = null;
+        try {
+//            String urlNameString = url + "?" + param;
+            URL realUrl = new URL(urlNameString);
+            // 打开和URL之间的连接
+            URLConnection connection = realUrl.openConnection();
+            // 设置通用的请求属性
+            connection.setRequestProperty("accept", "*/*");
+            connection.setRequestProperty("connection", "Keep-Alive");
+            connection.setRequestProperty("user-agent",
+                    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            // 建立实际的连接
+            connection.connect();
+            // 获取所有响应头字段
+            Map<String, List<String>> map = connection.getHeaderFields();
+            // 遍历所有的响应头字段
+            for (String key : map.keySet()) {
+                System.out.println(key + "--->" + map.get(key));
+            }
+            // 定义 BufferedReader输入流来读取URL的响应
+            in = new BufferedReader(new InputStreamReader(
+                    connection.getInputStream()));
+            String line;
+            while ((line = in.readLine()) != null) {
+                result += line;
+            }
+        } catch (Exception e) {
+            System.out.println("发送GET请求出现异常！" + e);
+            e.printStackTrace();
+        }
+        // 使用finally块来关闭输入流
+        finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
             }
         }
         return result;

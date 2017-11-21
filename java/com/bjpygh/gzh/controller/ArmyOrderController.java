@@ -7,6 +7,7 @@ import com.bjpygh.gzh.bean.VillaPrice;
 import com.bjpygh.gzh.dao.ArmyOrderMapper;
 import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.service.ArmyOrderService;
+import com.bjpygh.gzh.utils.OrderPush;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ArmyOrderController extends BaseController {
@@ -51,8 +49,17 @@ public class ArmyOrderController extends BaseController {
         }
 
         armyOrder.setUserId(Long.valueOf(userid));
-        String orderNumber = armyOrderService.createArmyOrder(armyOrder);
-        return Status.success().add("orderNumber",orderNumber);
+        ArmyOrder armyOrder1 = armyOrderService.createArmyOrder(armyOrder);
+        OrderPush orderPush = new OrderPush();
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("first","Hi，您已成功提交“作战之日”订单");
+        map.put("orderID",armyOrder1.getOrderNumber());
+        map.put("orderMoneySum",armyOrder1.getArmyPrice()+"");
+        map.put("remark","请尽快支付，如有问题咨询客服：010-59822296");
+        map.put("openid",userMap.get("openid"));
+
+//        orderPush.CreateJsonObj(map);
+        return Status.success().add("orderNumber",armyOrder1.getOrderNumber());
     }
 
     //删除军旅订单接口

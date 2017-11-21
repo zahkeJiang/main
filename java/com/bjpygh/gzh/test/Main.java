@@ -3,6 +3,7 @@ package com.bjpygh.gzh.test;
 import com.bjpygh.gzh.bean.UserOrder;
 import com.bjpygh.gzh.model.AsynNotifyResponse;
 import com.bjpygh.gzh.model.RefundResponse;
+import com.bjpygh.gzh.utils.OrderPush;
 import com.bjpygh.gzh.utils.PropertyUtils;
 import com.bjpygh.gzh.utils.ThreeDES;
 import com.jd.jr.pay.gate.signature.util.JdPayUtil;
@@ -18,6 +19,8 @@ import java.net.URLConnection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Main {
@@ -74,6 +77,16 @@ public class Main {
 
 
 //        System.out.println(1*0.5);
+
+        OrderPush orderPush = new OrderPush();
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("first","Hi，您已成功提交驾考订单");
+        map.put("orderID","DSPYGH20178212216292");
+        map.put("orderMoneySum",1280+"");
+        map.put("remark","请尽快支付，如有问题咨询客服：010-59822296");
+        map.put("openid","o9C-m0gWfR9WOs8DIDElxSUfDIUU");
+
+        System.out.println(orderPush.CreateJsonObj(map));
 
     }
 

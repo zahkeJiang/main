@@ -20,7 +20,7 @@ public class ArmyOrderService {
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
 
-    public String createArmyOrder(ArmyOrder armyOrder) throws ParseException {
+    public ArmyOrder createArmyOrder(ArmyOrder armyOrder) throws ParseException {
         /**
          * 计算订单价格
          */
@@ -74,7 +74,8 @@ public class ArmyOrderService {
         armyOrder.setOrderStatus(0);
 
         armyOrderMapper.insertSelective(armyOrder);
-        return orderNumber;
+
+        return armyOrder;
 
     }
 
