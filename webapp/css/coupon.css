@@ -39,17 +39,8 @@ html, body {
   margin-bottom: 6px;
   width:100%;
 }
-  .couponBox p.date,.couponBox p.date_ovedue{
-    background: #ffe9e1;
-    color: #999;
-    border-radius: 5px;
-    position: absolute;
-    bottom: 15%;
-    padding:0.5% 2%;
-    left: 8%;
-    font-size:12px;
-  }
-@media only screen and (min-width: 320px){
+
+
   .couponBox p.date{
     background: #ffe9e1;
     color: #999;
@@ -70,8 +61,23 @@ html, body {
     left: 8%;
     font-size:0.625rem;
   }
+  .priceBox{
+    position: absolute;
+    bottom: 24%;
+    left: 9%
+  }
+  .couponBox span{
+    color: #00569f
+  }
+  .couponBox span.price1{
+    font-size: 18px
+  }
+    .couponBox span.price2{
+    font-size: 48px;
+    font-weight:bold;
 
-}  
+  }
+ 
 @media only screen and (min-width: 360px){
   .couponBox p.date{
     background: #ffe9e1;
@@ -92,6 +98,22 @@ html, body {
     padding:0.5% 2%;
     left: 8%;
     font-size:12px;
+  }
+    .priceBox{
+    position: absolute;
+    bottom: 25%;
+    left: 9%
+  }
+  .couponBox span{
+    color: #00569f
+  }
+  .couponBox span.price1{
+    font-size: 24px
+  }
+    .couponBox span.price2{
+    font-size: 60px;
+    font-weight:bold;
+
   }
 }  
 @media only screen and (min-width: 480px){
@@ -114,6 +136,22 @@ html, body {
     padding:0.5% 2%;
     left: 8%;
     font-size:14px;
+  }
+  .priceBox{
+    position: absolute;
+    bottom: 22%;
+    left: 8%
+  }
+  .couponBox span{
+    color: #00569f
+  }
+  .couponBox span.price1{
+    font-size: 28px
+  }
+    .couponBox span.price2{
+    font-size:80px;
+    font-weight:bold;
+
   }
 
 } 
@@ -138,6 +176,22 @@ html, body {
     left: 8%;
     font-size:16px
   }
+    .priceBox{
+    position: absolute;
+    bottom: 22%;
+    left: 8%
+  }
+  .couponBox span{
+    color: #00569f
+  }
+  .couponBox span.price1{
+    font-size: 36px
+  }
+    .couponBox span.price2{
+    font-size: 100px;
+    font-weight:bold;
+
+  }
 
 } 
 @media only screen and (min-width: 720px){
@@ -159,7 +213,23 @@ html, body {
     bottom: 15%;
     padding:0.5% 2%;
     left: 8%;
-    font-size:18pxs
+    font-size:18px
+  }
+    .priceBox{
+    position: absolute;
+    bottom: 22%;
+    left: 8%
+  }
+  .couponBox span{
+    color: #00569f
+  }
+  .couponBox span.price1{
+    font-size: 44px
+  }
+    .couponBox span.price2{
+    font-size: 120px;
+    font-weight:bold;
+
   }
 
 } 
