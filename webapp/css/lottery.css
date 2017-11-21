@@ -80,18 +80,103 @@ body{
 	position: absolute;
 	top: 25%;
 	left: 0;
-	display: none;
+	/*display: none;*/
 	width: 80%;
 	margin-left: 10%;
 	background-color: white;
-	border-radius: 15px;
+	border-radius: 20px;
+}
+.coupon_price{
+	position: relative;
+
 }
 .coupon_price img{
 	margin:10px 8%;
 
 }
+#coupon_title_img{
+	border-radius: 20px 20px 0 0 
+}
+.coupon_priceBox{
+	position: absolute;
+	bottom: 35%;
+	left: 15%;
+}
+.coupon_priceBox_span1{
+	font-size: 14px;
+}
+.coupon_priceBox_span2{
+	font-size: 28px;
+	font-weight: bold;
+}
+.coupon_priceBox span{
+	color: #00569f;
+}
+@media only screen and (min-width: 360px){
+.coupon_priceBox{
+	position: absolute;
+	bottom: 30%;
+	left: 15%;
+}
+.coupon_priceBox_span1{
+	font-size: 16px;
+}
+.coupon_priceBox_span2{
+	font-size: 38px;
+	font-weight: bold;
+}
+
+}
+@media only screen and (min-width: 480px){
+.coupon_priceBox{
+	position: absolute;
+	bottom: 30%;
+	left: 15%;
+}
+.coupon_priceBox_span1{
+	font-size: 20px;
+}
+.coupon_priceBox_span2{
+	font-size: 52px;
+	font-weight: bold;
+}
+
+}
+@media only screen and (min-width: 600px){
+.coupon_priceBox{
+	position: absolute;
+	bottom: 30%;
+	left: 15%;
+}
+.coupon_priceBox_span1{
+	font-size: 24px;
+}
+.coupon_priceBox_span2{
+	font-size: 70px;
+	font-weight: bold;
+}
+
+}
+
+@media only screen and (min-width: 720px){
+.coupon_priceBox{
+	position: absolute;
+	bottom: 30%;
+	left: 15%;
+}
+.coupon_priceBox_span1{
+	font-size: 28px;
+}
+.coupon_priceBox_span2{
+	font-size: 92px;
+	font-weight: bold;
+}
+
+}
+
+
 .use{
-	margin:10px 30% 10px 30%;
+	margin:20px 30% 20px 30%;
 	color: #00579f;
 	width: 30%;
 	margin-left:35%;

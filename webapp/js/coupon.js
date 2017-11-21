@@ -29,7 +29,7 @@ $(function() {
 function unused() {
     $.post("queryCoupon.action", {}, function(obj) {
         $(".container").html("");
-        if (obj.status == "-40") { //没有优惠券
+        if (obj.status == "-40" && obj.status == "-30") { //没有优惠券
             var coupon_hint = "<div class='coupons_hint_box'><div class='coupon_hint'><div class='nohint'><p class='nohint_no'>当前没有优惠券</p><p class='nohint_look'>去活动页面转转吧</p><p class='purl'><a href='lottery.html'>去看看</a></p></div></div></div>"
             $(".container").html(coupon_hint);
         } else {
@@ -51,7 +51,7 @@ function unused() {
                 var coupon = "<div class='coupon'><div class='couponBox'><img src='images/ds_coupon_bgImage_hudu.png'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + obj.data.price + "</span></div><p class='date'>" + obj.data.date + "，已过期</p></div><div class='coupon_hint_text'><h2>优惠提示:</h2><p>30天有效期，从领取日开始计时。</p><p>若优惠券已过期，使用会员积分激活后即可使用。</p></div><div class='use_coupon'></div></div>"
                 $(".container").html(coupon);
                 $(".couponBox span").css({
-                    "color": "#424242"
+                    "color": "#00569f"
                 });
 
                 $(".use_coupon").html("已过期，立即激活");
@@ -89,7 +89,7 @@ function used() {
                 var coupon = "<div class='coupon'><div class='couponBox'><img src='images/ds_coupon_bgImage.png'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + obj.data.price + "</span></div><p class='date_ovedue'>" + obj.data.date + "，已使用</p></div></div>"
                 $(".container").html(coupon);
                 $(".couponBox span").css({
-                    "color": "#00569f"
+                    "color": "#424242"
                 });
             }
         }
