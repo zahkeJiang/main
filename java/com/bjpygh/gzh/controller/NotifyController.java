@@ -163,9 +163,9 @@ public class NotifyController extends BaseController {
     private void DsMessagePush(DsOrder dsOrder, String openid) {
         OrderPush orderPush = new OrderPush();
         Map<String, String> map = new HashMap<String, String>();
-        map.put("first","我们已收到您的报名费用，报名成功后小漂会及时给您反馈，请耐心等待。");
-        map.put("keyword1",dsOrder.getOrderPrice()+"");
-        map.put("keyword2",dsOrder.getOrderNumber());
+        map.put("first","我们已收到您的报名费用，报名成功后小漂会及时给您反馈，请耐心等待。\n");
+        map.put("keyword1",dsOrder.getOrderPrice()+"元");
+        map.put("keyword2",dsOrder.getOrderNumber()+"\n");
         map.put("remark","如有问题咨询客服：010-59822296或直接在微信留言，小漂将第一时间为您服务！");
         map.put("openid",openid);
 
