@@ -344,9 +344,9 @@ public class NotifyController extends BaseController {
             order.setOrderImage(armyOrder.getImageurl());
             String period;
             if (armyOrder.getPeriod()==0){
-                period = "时间段:8:00-11:30";
+                period = "时间段: 8:00-11:30";
             }else {
-                period = "时间段:13:30-17:00";
+                period = "时间段: 13:30-17:00";
             }
             order.setOrderDescripe("参与人数: "+armyOrder.getPeopleNumber()+"人 / "
                     +"参与天数: "+armyOrder.getDate().split(",").length+"天 / "+period);
