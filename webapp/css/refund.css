@@ -1,13 +1,19 @@
 @charset "utf-8";
 /* CSS Document */
 body{
-	background-color: white;
+	background-color: #4ea0ff;
+}
+.container{
+	background: #f6f1f1;
+	border-radius: 10px;
+	margin: 20px 16px;
+	padding: 10px 0;
 }
 .refund_hint{
 	height: 150px;
 	margin: 16px;
 	padding: 10px;
-	background-color: #f5f5f5;
+	background-color: #fff;
 	display: flex;
 	align-items: center;
 }
