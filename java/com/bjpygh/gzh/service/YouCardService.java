@@ -34,4 +34,17 @@ public class YouCardService {
             return Status.fail(-20,"您已提交申请，勿重复提交");
         }
     }
+
+    public Status isApply(String userid) {
+        YouCardExample example = new YouCardExample();
+        YouCardExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(Long.valueOf(userid));
+        List<YouCard> youCards = youCardMapper.selectByExample(example);
+        if (youCards.size()<1){
+            return Status.success();
+        }else{
+            return Status.fail(-20,"您已提交申请");
+        }
+
+    }
 }
