@@ -23,8 +23,6 @@ public class BaseController {
     @Autowired
     UserService userService;
 
-
-
     //判断用户信息是否存入数据库，未存入则存入数据库,并返回userMap
     public Map<String, String> checkWxUser(HttpServletRequest request){
         HttpSession session = request.getSession();
