@@ -118,6 +118,17 @@ public class UserController extends BaseController {
         return youCardService.applyCard(userid,youCard);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/isApply",method = RequestMethod.POST)
+    public Status isApply(HttpServletRequest request){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        String userid = userMap.get("id");
+        return youCardService.isApply(userid);
+    }
+
     @RequestMapping(value = "/applyCard", method = RequestMethod.GET)
     public String applyCard(HttpServletRequest request){
         Map<String, String> userMap = checkWxUser(request);
