@@ -83,6 +83,7 @@ $(function() {
 							"color": "#555",
 						});
 						$(".apply").html("已申请");
+						$(".apply").unbind("click"); //移除click
 						// window.location.href="excellentCard.html";
 					} else {
 						alert("您已提交申请，请勿重复提交");
