@@ -84,7 +84,7 @@ body{
 	width: 80%;
 	margin-left: 10%;
 	background-color: white;
-	border-radius: 20px;
+	border-radius: 10px;
 }
 .coupon_price{
 	position: relative;
@@ -95,7 +95,7 @@ body{
 
 }
 #coupon_title_img{
-	border-radius: 20px 20px 0 0 
+	border-radius: 10px 10px 0 0 
 }
 .coupon_priceBox{
 	position: absolute;
