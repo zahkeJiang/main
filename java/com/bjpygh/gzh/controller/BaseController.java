@@ -23,8 +23,6 @@ public class BaseController {
     @Autowired
     UserService userService;
 
-
-
     //判断用户信息是否存入数据库，未存入则存入数据库,并返回userMap
     public Map<String, String> checkWxUser(HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -32,22 +30,22 @@ public class BaseController {
         Map<String, String> map = new HashMap<String, String>();
         if(userMap == null){
             userMap = new HashMap<String, String>();
-            map = getMap(request);
-            String openid =map.get("openid");
-            String access_token = map.get("access_token");
-            String userId = userService.getUserIdByOpenid(openid);
-            if(userId == null){		//判断用户不存在
-                //用户不存在则插入用户
-                User user = getUser(getUserInfo(openid, access_token));
-                userService.InsertUserFromWx(user);
-                userId = userService.getUserIdByOpenid(openid);
-            }
-          //将用户信息放入缓存中
-            userMap.put("id",userId);
-            userMap.put("openid", openid);
-            userMap.put("access_token",access_token);
-//            userMap.put("id","1");
-//            userMap.put("openid","o9C-m0gWfR9WOs8DIDElxSUfDIUU");
+//            map = getMap(request);
+//            String openid =map.get("openid");
+//            String access_token = map.get("access_token");
+//            String userId = userService.getUserIdByOpenid(openid);
+//            if(userId == null){		//判断用户不存在
+//                //用户不存在则插入用户
+//                User user = getUser(getUserInfo(openid, access_token));
+//                userService.InsertUserFromWx(user);
+//                userId = userService.getUserIdByOpenid(openid);
+//            }
+//          //将用户信息放入缓存中
+//            userMap.put("id",userId);
+//            userMap.put("openid", openid);
+//            userMap.put("access_token",access_token);
+            userMap.put("id","1");
+            userMap.put("openid","o9C-m0gWfR9WOs8DIDElxSUfDIUU");
             session.setAttribute("user", userMap );
         }
         System.out.println("access_token="+userMap);

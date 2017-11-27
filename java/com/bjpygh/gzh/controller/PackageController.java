@@ -46,7 +46,7 @@ public class PackageController extends BaseController {
         return packageService.getPackageList(dsPackage);
     }
 
-    //获取驾校列表
+    //获取驾校首页名称
     @ResponseBody
     @RequestMapping(value = "/sdi.action", method = RequestMethod.POST)
     public Status getDsInfoList(HttpServletRequest request){
@@ -54,9 +54,22 @@ public class PackageController extends BaseController {
         if(userMap == null){
             return Status.notInWx();
         }
-        List<DsInformation> dspInfolist = dsInfoService.selectDsInfoList();
-        return Status.success().add("dspInfolist",dspInfolist);
+        List<String> dsNames = dsInfoService.selectDsNames();
+        return Status.success().add("dsNames",dsNames);
     }
+
+    //获取驾校信息
+    @ResponseBody
+    @RequestMapping(value = "/getDsInfo", method = RequestMethod.POST)
+    public Status getDsInfo(HttpServletRequest request,String dsName){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        DsInformation dsInfo = dsInfoService.selectDsInfo(dsName);
+        return Status.success().add("dsNames",dsInfo);
+    }
+
 
     //驾考首页
     @RequestMapping(value = "/sdi.action", method = RequestMethod.GET)
