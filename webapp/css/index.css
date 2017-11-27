@@ -113,7 +113,7 @@ body{
 .images2{
 	width: 40%;
 }
-.button{
+.buttonClick{
 	border-radius: 8px;
 	background-color: #4ea0ff;
 	width: 36%;
@@ -123,7 +123,7 @@ body{
 	text-align: center;
 	line-height: 32px;
 }
-.button img{
+.buttonClick img{
 	height: 30%;
 }
 .swiper-slide-active {

@@ -50,20 +50,20 @@
         </div> -->
         <!--  幻灯片 -->
         <div class="swiper-wrapper">
-<!--             <div class="swiper-slide">
+            <div class="swiper-slide">
                 <div class="content">
 					<p>海淀驾校</p>
 					<img src="./images/index_content2.png" class="images2">
-					<div class=" button" jiaxiao="海淀驾校">
+					<div class=" buttonClick" jiaxiao="海淀驾校">
 						<img src="./images/index_content3.png" class="images3">
 					</div>
 				</div>
-            </div> -->
-            <!-- <div class="swiper-slide">
+            </div>
+            <div class="swiper-slide">
                  <div class="content">
 					<p>东方时尚</p>
 					<img src="./images/index_content2.png" class="images2">
-					<div class="button" jiaxiao="东方时尚">
+					<div class="buttonClick" jiaxiao="东方时尚">
 						<img src="./images/index_content3.png" class="images3">
 					</div>
 				</div>
@@ -73,7 +73,7 @@
 					
 					<p>公交驾校</p>
 					<img src="./images/index_content2.png" class="images2">
-					<div class="button" jiaxiao="公交驾校">
+					<div class="buttonClick" jiaxiao="公交驾校">
 						<img src="./images/index_content3.png" class="images3">
 					</div>
 				</div>
@@ -83,7 +83,7 @@
 					
 					<p>龙泉驾校</p>
 					<img src="./images/index_content2.png" class="images2">
-					<div class="button" jiaxiao="龙泉驾校">
+					<div class="buttonClick" jiaxiao="龙泉驾校">
 						<img src="./images/index_content3.png" class="images3">
 					</div>
 				</div>
@@ -93,7 +93,7 @@
 					
 					<p>远航驾校</p>
 					<img src="./images/index_content2.png" class="images2">
-					<div class="button" jiaxiao="远航驾校">
+					<div class="buttonClick" jiaxiao="远航驾校">
 						<img src="./images/index_content3.png" class="images3">
 					</div>
 				</div>
@@ -103,7 +103,7 @@
 					
 					<p>远大驾校</p>
 					<img src="./images/index_content2.png" class="images2">
-					<div class="button" jiaxiao="远大驾校">
+					<div class="buttonClick" jiaxiao="远大驾校">
 						<img src="./images/index_content3.png" class="images3">
 					</div>
 				</div>
@@ -113,11 +113,11 @@
 					
 					<p>星月驾校</p>
 					<img src="./images/index_content2.png" class="images2">
-					<div class="button" jiaxiao="星月驾校">
+					<div class="buttonClick" jiaxiao="星月驾校">
 						<img src="./images/index_content3.png" class="images3">
 					</div>
 				</div>
-			</div> -->
+			</div>
         </div>
         <!-- Add Pagination -->
         <!-- <div class="swiper-pagination swiper-pagination-white"></div> -->
@@ -133,23 +133,7 @@
 <!--<script type="text/javascript" src="js/isWeiXin.js"></script>-->
  
   <script>
-  	$.post("sdi.action",{},function(datas){
-  		if (datas.status==0) {
-  			var dsNames = datas.data.dsNames;
-  			var dsNameList="";
-  			$.each(dsNames,function(commentIndex,comment){
-				dsNameListHtml+='<div class="swiper-slide">'+
-                					'<div class="content">'+
-										'<p>'+comment.dsNameList+'</p>'+
-										'<img src="./images/index_content2.png" class="images2">'+
-										'<div class=" button" jiaxiao="'+comment.dsNameList+'">'+
-											'<img src="./images/index_content3.png" class="images3">'+
-										'</div>'+
-									'</div>'+
-            					'</div>'
-  			});
-  		}
-  	},"json");
+
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         // spaceBetween: 10,//幻灯片间隔
@@ -169,12 +153,7 @@
         //     slideShadows : true
         // }
     });
-	$(".button").click(function(){
-        var dsname = $(this).attr("jiaxiao");
-        $.cookie("dsname",dsname);//驾校名字   
-        console.log(dsname);           
-        window.location.href="ds_information.html";
-    });
+	
     
     </script>
 </html>
