@@ -23,4 +23,16 @@ public class DsInfoService {
         DsInformationExample.Criteria criteria = example.createCriteria();
         return dsInformationMapper.selectByExample(example);
     }
+
+    public List<String> selectDsNames() {
+
+        return dsInformationMapper.selectDsNames();
+    }
+
+    public DsInformation selectDsInfo(String dsName) {
+        DsInformationExample example = new DsInformationExample();
+        DsInformationExample.Criteria criteria = example.createCriteria();
+        criteria.andDsNameEqualTo(dsName);
+        return dsInformationMapper.selectByExample(example).get(0);
+    }
 }

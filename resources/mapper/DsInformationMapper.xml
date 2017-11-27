@@ -135,6 +135,9 @@
       </if>
     </trim>
   </insert>
+    <select id="selectDsNames" resultType="string">
+        SELECT ds_name FROM ds_info
+    </select>
   <select id="countByExample" parameterType="com.bjpygh.gzh.bean.DsInformationExample" resultType="java.lang.Long">
     select count(*) from ds_info
     <if test="_parameter != null">

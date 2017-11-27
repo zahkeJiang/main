@@ -148,6 +148,8 @@ public class NotifyController extends BaseController {
             dsOrder.setPayTime(formatter.format(new Date()));
             dsOrderService.updateOrder(dsOrder);
 
+            pushToWangNan(dsOrder.getOrderNumber(),dsOrder.getOrderPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
+
             out.println("success");	//请不要修改或删除
             User userById = userService.getUserById(String.valueOf(dsOrder.getUserId()));
 //            DsMessagePush(dsOrder,userById.getOpenid());
@@ -159,6 +161,18 @@ public class NotifyController extends BaseController {
         out.close();
     }
 
+    //给王男推送
+    private void pushToWangNan(String ordernumber,int price, String openid) {
+        OrderPush orderPush = new OrderPush();
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("first","有人报名了！！！\n");
+        map.put("keyword1",price+"元");
+        map.put("keyword2",ordernumber+"\n");
+        map.put("remark","赶紧去服务");
+        map.put("openid",openid);
+
+        orderPush.PayJsonObj(map);
+    }
     //驾校订单支付微信消息推送
     private void DsMessagePush(DsOrder dsOrder, String openid) {
         OrderPush orderPush = new OrderPush();
@@ -189,6 +203,7 @@ public class NotifyController extends BaseController {
             villaOrder.setPayTime(formatter.format(new Date()));
             villaOrderService.updateOrder(villaOrder);
 
+            pushToWangNan(villaOrder.getOrderNumber(),villaOrder.getVillaPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
         }else{//验证失败
             out.println("fail");
         }
@@ -210,6 +225,8 @@ public class NotifyController extends BaseController {
             armyOrder.setPayType((byte) 0);
             armyOrder.setPayTime(formatter.format(new Date()));
             armyOrderService.updateOrder(armyOrder);
+
+            pushToWangNan(armyOrder.getOrderNumber(),armyOrder.getArmyPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
         }else{//验证失败
             out.println("fail");
         }
@@ -250,12 +267,15 @@ public class NotifyController extends BaseController {
                     villaOrder.setPayType((byte) 3);
                     villaOrder.setPayTime(formatter.format(new Date()));
                     villaOrderService.updateOrder(villaOrder);
+                    pushToWangNan(villaOrder.getOrderNumber(),villaOrder.getVillaPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
                 }else if (o.equals("D")){
                     DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
                     dsOrder.setOrderStatus((byte) 1);
                     dsOrder.setPayType((byte) 3);
                     dsOrder.setPayTime(formatter.format(new Date()));
                     dsOrderService.updateOrder(dsOrder);
+                    pushToWangNan(dsOrder.getOrderNumber(),dsOrder.getOrderPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
+                    DsMessagePush(dsOrder,"o9C-m0ha_E3iP5KkgLEmsREff9d0");
 
                     User userById = userService.getUserById(String.valueOf(dsOrder.getUserId()));
 
@@ -267,6 +287,8 @@ public class NotifyController extends BaseController {
                     armyOrder.setPayType((byte) 3);
                     armyOrder.setPayTime(formatter.format(new Date()));
                     armyOrderService.updateOrder(armyOrder);
+
+                    pushToWangNan(armyOrder.getOrderNumber(),armyOrder.getArmyPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
                 }
 
             }

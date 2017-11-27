@@ -27,4 +27,6 @@ public interface DsInformationMapper {
     int updateByPrimaryKeySelective(DsInformation record);
 
     int updateByPrimaryKey(DsInformation record);
+
+    List<String> selectDsNames();
 }
