@@ -15,6 +15,10 @@ public class DsPackage {
 
     private String description;
 
+    private Byte mustProtection;
+
+    private String reservation;
+
     public Integer getPackageid() {
         return packageid;
     }
@@ -69,5 +73,21 @@ public class DsPackage {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    public Byte getMustProtection() {
+        return mustProtection;
+    }
+
+    public void setMustProtection(Byte mustProtection) {
+        this.mustProtection = mustProtection;
+    }
+
+    public String getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(String reservation) {
+        this.reservation = reservation == null ? null : reservation.trim();
     }
 }

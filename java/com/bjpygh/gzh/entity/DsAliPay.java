@@ -8,6 +8,16 @@ public class DsAliPay {
 
     private String select;
 
+    private Byte protecttion;
+
+    public Byte getProtecttion() {
+        return protecttion;
+    }
+
+    public void setProtecttion(Byte protecttion) {
+        this.protecttion = protecttion;
+    }
+
     public String getUserid() {
         return userid;
     }

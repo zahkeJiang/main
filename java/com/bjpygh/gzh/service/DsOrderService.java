@@ -67,7 +67,7 @@ public class DsOrderService {
     public List<DsOrder> getNotPay() {
         DsOrderExample example = new DsOrderExample();
         DsOrderExample.Criteria criteria = example.createCriteria();
-        criteria.andOrderStatusEqualTo("0");
+        criteria.andOrderStatusEqualTo((byte) 0);
         return dsOrderMapper.selectByExample(example);
     }
 
@@ -84,7 +84,7 @@ public class DsOrderService {
         DsOrderExample example = new DsOrderExample();
         DsOrderExample.Criteria criteria = example.createCriteria();
         criteria.andOrderNumberEqualTo(out_trade_no);
-        criteria.andOrderStatusEqualTo(String.valueOf(1));
+        criteria.andOrderStatusEqualTo((byte) 1);
         criteria.andPayTimeEqualTo(formatter.format(new Date()));
         criteria.andPayTypeEqualTo((byte) 0);
         dsOrderMapper.updateByExample(example);
@@ -102,7 +102,7 @@ public class DsOrderService {
     public List<DsOrder> getFinish() {
         DsOrderExample example = new DsOrderExample();
         DsOrderExample.Criteria criteria = example.createCriteria();
-        criteria.andOrderStatusEqualTo("3");
+        criteria.andOrderStatusEqualTo((byte) 3);
         return dsOrderMapper.selectByExample(example);
     }
 

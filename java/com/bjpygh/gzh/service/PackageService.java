@@ -10,6 +10,8 @@ import com.bjpygh.gzh.dao.DsPackageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PackageService {
 
@@ -37,14 +39,22 @@ public class PackageService {
         String models = dsPackage.getModels();
         if (models!=null&&models!="")
             criteria.andModelsEqualTo(models);
-        String dsType = dsPackage.getDsType();
-        if (dsType!=null&&dsType!="")
-            criteria.andDsTypeEqualTo(dsType);
+        String reservation = dsPackage.getReservation();
+        if (reservation!=null&&reservation!="")
+            criteria.andReservationEqualTo(reservation);
         String trainTime = dsPackage.getTrainTime();
         if (trainTime!=null&&trainTime!="")
             criteria.andTrainTimeEqualTo(trainTime);
         DsInformation dsInfo = dsInformationMapper.selectByPrimaryKey(dsPackage.getDsName());
-        dsInfo.setDspList(dsPackageMapper.selectByExample(example));
+        DsPackageExample example1 = new DsPackageExample();
+        DsPackageExample.Criteria criteria1 = example.createCriteria();
+        criteria1.andReservationEqualTo("自选练车方式");
+        List<DsPackage> dsPackages = dsPackageMapper.selectByExample(example);
+        List<DsPackage> dsPackages1 = dsPackageMapper.selectByExample(example1);
+        for (DsPackage d : dsPackages1){
+            dsPackages.add(d);
+        }
+        dsInfo.setDspList(dsPackages);
 
         return Status.success().add("dsInfos",dsInfo);
     }
@@ -52,4 +62,5 @@ public class PackageService {
     public DsPackage getPackage(String packageid) {
         return dsPackageMapper.selectByPrimaryKey(Integer.parseInt(packageid));
     }
+
 }
