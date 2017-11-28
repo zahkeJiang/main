@@ -10,6 +10,7 @@ var models = "";
 var dsType = "";
 var trainTime = "";
 var dsInfo = "";
+var reservation = "";
 $(function() {
     //获取驾校地址，轮播图，简介
     $.post("sdp.action", {
@@ -18,7 +19,10 @@ $(function() {
         if (datas.status == 0) {
             var imagesList = datas.data.dsInfos.dsImage;
             var imagesHtml = "";
-            var picture = imagesList.split(",");
+            var picture = "";
+            if (imagesList) {
+                picture = imagesList.split(",");
+            }
             dsInfo = datas.data.dsInfos;
             $(".ds_information_text").html(dsInfo.dsIntro);
             $(".dsAddress").html(dsInfo.address);
@@ -116,8 +120,8 @@ $(function() {
             "font-size": "14px",
             "color": "#555"
         });
-        dsType = $(this).attr("text");
-        console.log(dsType);
+        reservation = $(this).attr("text");
+        console.log(reservation);
         getDs();
     });
     $(".dsp_type_Div_trainTime p").click(function() {
@@ -130,9 +134,7 @@ $(function() {
             "font-size": "14px",
             "color": "#555"
         });
-        $(this).siblings(".dsp_type_div_3").css({
-            "justify-content": "center"
-        });
+
         trainTime = $(this).attr("text");
         console.log(trainTime);
         getDs();
@@ -212,7 +214,7 @@ function getDs() {
     $.post("sdp.action", {
         "dsName": dsname,
         "models": models,
-        "dsType": dsType,
+        "reservation": reservation,
         "trainTime": trainTime
     }, function(result) {
         $(".container").empty();

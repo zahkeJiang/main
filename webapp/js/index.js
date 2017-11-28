@@ -28,22 +28,47 @@ $(function(){
     },'json');
 });*/
 $(function() {
-    // $.post("sdi.action", {}, function(datas) {
-    //     if (datas.status == 0) {
-    //         var dsNames = datas.data.dsNames;
-    //         var dsNameListHtml = "";
-    //         for (var i = 0; i < dsNames.length; i++) {
-    //             dsNameListHtml += '<div class="swiper-slide"><div class="content"><p>海淀驾校</p><img src="./images/index_content2.png" class="images2"><div class="buttonClick" jiaxiao="海淀驾校"><img src="./images/index_content3.png" class="images3"></div></div></div>'
-    //         }
-    //         $(".swiper-wrapper").html(dsNameListHtml);
-    //     }
-    // }, "json");
-    $(".buttonClick").click(function() {
-        var dsname = $(this).attr("jiaxiao");
-        $.cookie("dsname", dsname); //驾校名字   
-        console.log(dsname);
-        window.location.href = "ds_information.html";
-    });
+    $.post("sdi.action", {}, function(datas) {
+        if (datas.status == 0) {
+            var dsNames = datas.data.dsNames;
+            var dsNameListHtml = "";
+            for (var i = 0; i < dsNames.length; i++) {
+                dsNameListHtml += '<div class="swiper-slide"><div class="content"><p>' + dsNames[i] + '</p><img src="./images/index_content2.png" class="images2"><div class="buttonClick" jiaxiao="' + dsNames[i] + '"><img src="./images/index_content3.png" class="images3"></div></div></div>'
+            }
+            $(".swiper-wrapper").html(dsNameListHtml);
+            doPlace();
+            $(".buttonClick").click(function() {
+                var dsname = $(this).attr("jiaxiao");
+                $.cookie("dsname", dsname); //驾校名字   
+                console.log(dsname);
+                window.location.href = "ds_information.html";
+            });
+        }
+    }, "json");
+
+
+
+    function doPlace() {
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            // spaceBetween: 10,//幻灯片间隔
+            // nextButton: '.swiper-button-next',
+            // prevButton: '.swiper-button-prev',
+            paginationClickable: true,
+            // effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            parallax: true,
+            // coverflow: {
+            //     rotate: 50,
+            //     stretch:10,
+            //     depth:-10,
+            //     modifier:1,
+            //     slideShadows : true
+            // }
+        });
+    }
 
 
 });

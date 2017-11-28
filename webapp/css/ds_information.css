@@ -190,18 +190,26 @@ html, body {
 	align-items: center;
 }
 .dsp_type_div_1 span,.dsp_type_div_3 span{
-	margin-left: 4px;
+	position: absolute;
+	right: 20px;
+	/*margin-right: 4px;*/
 	color: #555;
+	font-size: 14px;
+	
 }
 .dsp_type_div_2{
 	justify-content: center;
 	color: #555;
 }
+.dsp_type_div_1 span,.dsp_type_div_3 span,.dsp_type_div_2 span{
+	margin-right: 4px;
+	font-size: 14px;
+}
 .dsp_type_div img{
 	right: 4px;
 	position: absolute;
 	top: 50%;
-	margin-top: -8px;
+	margin-top: -7px;
 }
 .dsp_type_div_2 img{
 	right:4px;
