@@ -137,6 +137,20 @@ public class DsOrderController extends BaseController {
 
         DsOrder dsOrder = new DsOrder();
         DsInformation DsInfo = dsInfoService.getDsInfoByName(dsPackage.getDsName());
+
+        if (dsPackage.getMustProtection() == 2){
+            if (dsAliPay.getProtecttion() == 1){
+                dsOrder.setProtecttion((byte) 1);
+                total_amount += 180;
+            }else {
+                dsOrder.setProtecttion((byte) 0);
+            }
+        }else if (dsPackage.getMustProtection() == 1){
+            dsOrder.setProtecttion((byte) 1);
+        }else if (dsPackage.getMustProtection() == 0){
+            dsOrder.setProtecttion((byte) 0);
+        }
+
         dsOrder.setUserId(Long.parseLong(userid));
         dsOrder.setDsName(dsPackage.getDsName());
         dsOrder.setDsType(dsPackage.getDsType());
@@ -152,6 +166,7 @@ public class DsOrderController extends BaseController {
         dsOrder.setPhoneNumber(user.getPhoneNumber());
         dsOrder.setTrainTime(dsPackage.getTrainTime());
         dsOrder.setImageurl(DsInfo.getDsImage());
+
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         dsOrder.setCreateTime(formatter.format(new Date()));
         dsOrderService.insertOrder(dsOrder);

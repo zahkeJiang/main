@@ -305,7 +305,7 @@ public class DsOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusEqualTo(String value) {
+        public Criteria andOrderStatusEqualTo(Byte value) {
             addCriterion("order_status =", value, "orderStatus");
             return (Criteria) this;
         }
@@ -1592,6 +1592,66 @@ public class DsOrderExample {
 
         public Criteria andPayTypeNotBetween(Byte value1, Byte value2) {
             addCriterion("pay_type not between", value1, value2, "payType");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtecttionIsNull() {
+            addCriterion("protecttion is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtecttionIsNotNull() {
+            addCriterion("protecttion is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtecttionEqualTo(Byte value) {
+            addCriterion("protecttion =", value, "protecttion");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtecttionNotEqualTo(Byte value) {
+            addCriterion("protecttion <>", value, "protecttion");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtecttionGreaterThan(Byte value) {
+            addCriterion("protecttion >", value, "protecttion");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtecttionGreaterThanOrEqualTo(Byte value) {
+            addCriterion("protecttion >=", value, "protecttion");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtecttionLessThan(Byte value) {
+            addCriterion("protecttion <", value, "protecttion");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtecttionLessThanOrEqualTo(Byte value) {
+            addCriterion("protecttion <=", value, "protecttion");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtecttionIn(List<Byte> values) {
+            addCriterion("protecttion in", values, "protecttion");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtecttionNotIn(List<Byte> values) {
+            addCriterion("protecttion not in", values, "protecttion");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtecttionBetween(Byte value1, Byte value2) {
+            addCriterion("protecttion between", value1, value2, "protecttion");
+            return (Criteria) this;
+        }
+
+        public Criteria andProtecttionNotBetween(Byte value1, Byte value2) {
+            addCriterion("protecttion not between", value1, value2, "protecttion");
             return (Criteria) this;
         }
     }

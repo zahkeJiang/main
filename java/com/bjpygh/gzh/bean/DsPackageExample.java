@@ -573,6 +573,136 @@ public class DsPackageExample {
             addCriterion("description not between", value1, value2, "description");
             return (Criteria) this;
         }
+
+        public Criteria andMustProtectionIsNull() {
+            addCriterion("must_protection is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustProtectionIsNotNull() {
+            addCriterion("must_protection is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustProtectionEqualTo(Byte value) {
+            addCriterion("must_protection =", value, "mustProtection");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustProtectionNotEqualTo(Byte value) {
+            addCriterion("must_protection <>", value, "mustProtection");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustProtectionGreaterThan(Byte value) {
+            addCriterion("must_protection >", value, "mustProtection");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustProtectionGreaterThanOrEqualTo(Byte value) {
+            addCriterion("must_protection >=", value, "mustProtection");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustProtectionLessThan(Byte value) {
+            addCriterion("must_protection <", value, "mustProtection");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustProtectionLessThanOrEqualTo(Byte value) {
+            addCriterion("must_protection <=", value, "mustProtection");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustProtectionIn(List<Byte> values) {
+            addCriterion("must_protection in", values, "mustProtection");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustProtectionNotIn(List<Byte> values) {
+            addCriterion("must_protection not in", values, "mustProtection");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustProtectionBetween(Byte value1, Byte value2) {
+            addCriterion("must_protection between", value1, value2, "mustProtection");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustProtectionNotBetween(Byte value1, Byte value2) {
+            addCriterion("must_protection not between", value1, value2, "mustProtection");
+            return (Criteria) this;
+        }
+
+        public Criteria andReservationIsNull() {
+            addCriterion("reservation is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReservationIsNotNull() {
+            addCriterion("reservation is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReservationEqualTo(String value) {
+            addCriterion("reservation =", value, "reservation");
+            return (Criteria) this;
+        }
+
+        public Criteria andReservationNotEqualTo(String value) {
+            addCriterion("reservation <>", value, "reservation");
+            return (Criteria) this;
+        }
+
+        public Criteria andReservationGreaterThan(String value) {
+            addCriterion("reservation >", value, "reservation");
+            return (Criteria) this;
+        }
+
+        public Criteria andReservationGreaterThanOrEqualTo(String value) {
+            addCriterion("reservation >=", value, "reservation");
+            return (Criteria) this;
+        }
+
+        public Criteria andReservationLessThan(String value) {
+            addCriterion("reservation <", value, "reservation");
+            return (Criteria) this;
+        }
+
+        public Criteria andReservationLessThanOrEqualTo(String value) {
+            addCriterion("reservation <=", value, "reservation");
+            return (Criteria) this;
+        }
+
+        public Criteria andReservationLike(String value) {
+            addCriterion("reservation like", value, "reservation");
+            return (Criteria) this;
+        }
+
+        public Criteria andReservationNotLike(String value) {
+            addCriterion("reservation not like", value, "reservation");
+            return (Criteria) this;
+        }
+
+        public Criteria andReservationIn(List<String> values) {
+            addCriterion("reservation in", values, "reservation");
+            return (Criteria) this;
+        }
+
+        public Criteria andReservationNotIn(List<String> values) {
+            addCriterion("reservation not in", values, "reservation");
+            return (Criteria) this;
+        }
+
+        public Criteria andReservationBetween(String value1, String value2) {
+            addCriterion("reservation between", value1, value2, "reservation");
+            return (Criteria) this;
+        }
+
+        public Criteria andReservationNotBetween(String value1, String value2) {
+            addCriterion("reservation not between", value1, value2, "reservation");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

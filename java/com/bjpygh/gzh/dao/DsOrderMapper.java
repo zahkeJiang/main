@@ -4,7 +4,6 @@ import com.bjpygh.gzh.bean.DsOrder;
 import com.bjpygh.gzh.bean.DsOrderExample;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface DsOrderMapper {
@@ -33,8 +32,6 @@ public interface DsOrderMapper {
     void changeStatus(Map<String, String> map);
 
     void updateOrderByStatus(DsOrder dsOrder);
-
-    void updateOrder(DsOrder dsOrder);
 
     void updateOrderStatus(Map<String, String> map);
 }

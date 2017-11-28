@@ -49,6 +49,8 @@ public class DsOrder {
 
     private Byte payType;
 
+    private Byte protecttion;
+
     public Integer getOrderId() {
         return orderId;
     }
@@ -231,5 +233,13 @@ public class DsOrder {
 
     public void setPayType(Byte payType) {
         this.payType = payType;
+    }
+
+    public Byte getProtecttion() {
+        return protecttion;
+    }
+
+    public void setProtecttion(Byte protecttion) {
+        this.protecttion = protecttion;
     }
 }
