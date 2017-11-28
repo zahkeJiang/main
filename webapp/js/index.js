@@ -26,16 +26,24 @@ $(function(){
             }); 
         }
     },'json');
-});
-*/
-$(function(){
-    $(".button").click(function(){
-        var dsname = "海淀驾校";
-        $.cookie("dsname",dsname);//驾校名字              
-        window.location.href="ds_information.html";
+});*/
+$(function() {
+    // $.post("sdi.action", {}, function(datas) {
+    //     if (datas.status == 0) {
+    //         var dsNames = datas.data.dsNames;
+    //         var dsNameListHtml = "";
+    //         for (var i = 0; i < dsNames.length; i++) {
+    //             dsNameListHtml += '<div class="swiper-slide"><div class="content"><p>海淀驾校</p><img src="./images/index_content2.png" class="images2"><div class="buttonClick" jiaxiao="海淀驾校"><img src="./images/index_content3.png" class="images3"></div></div></div>'
+    //         }
+    //         $(".swiper-wrapper").html(dsNameListHtml);
+    //     }
+    // }, "json");
+    $(".buttonClick").click(function() {
+        var dsname = $(this).attr("jiaxiao");
+        $.cookie("dsname", dsname); //驾校名字   
+        console.log(dsname);
+        window.location.href = "ds_information.html";
     });
-    
+
+
 });
-
-
-

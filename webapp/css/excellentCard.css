@@ -72,7 +72,7 @@ body{
   height: 24px;
   line-height: 24px;
   color: #4ea0ff;
-  width: 60px;
+  min-width: 60px;
   border-right: 1px solid #4ea0ff;
 }
 input{
@@ -81,6 +81,7 @@ input{
   background: #f6f1f1;
   font-size: 14px;
   color: #555;
+  min-width: 10px;
 }
 input::-webkit-input-placeholder { 
   color: #999; 

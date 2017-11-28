@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--  <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -9,16 +9,6 @@
 </head>
 
 <body>
-<!-- 	<div class="main">
-	<div class="header">
-		<img src="images/index_bg.gif" width="100%" height="150px">
-		<div class="address">北京	&gt;</div>
-		<div class="search">请输入驾校名称</div>
-		<input type="text" name="search" id="search" placeholder="请输入驾校名称">
-	</div>
-	<div class="container"></div>
-	<div class="city"></div>
-</div> -->
 	<div class="header">
 		<img src="./images/index_bg.png">
 	</div>
@@ -32,7 +22,138 @@
 	</div>
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script src="js/jquery.cookie.js" type="text/javascript"></script>
-<!--<script type="text/javascript" src="js/isWeiXin.js"></script>-->
+
 <script type="text/javascript" src="js/index.js"></script>
 </body>
+</html>  -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>驾校详情</title>
+    <link rel="stylesheet" href="css/swiper.min.css">
+	<link href="css/main.css" rel="stylesheet" type="text/css"/>
+	<link href="css/index.css" rel="stylesheet" type="text/css"/>
+   
+</head>
+<body>
+<!-- 轮播图 -->
+<!-- Swiper -->
+    <div class="swiper-container">
+    	<img src="./images/index_bg.png"  class="img_bg">
+        <!-- 背景 -->
+<!--         <div class="parallax-bg"  data-swiper-parallax="-50%">
+            
+        </div> -->
+        <!--  幻灯片 -->
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="content">
+					<p>海淀驾校</p>
+					<img src="./images/index_content2.png" class="images2">
+					<div class=" buttonClick" jiaxiao="海淀驾校">
+						<img src="./images/index_content3.png" class="images3">
+					</div>
+				</div>
+            </div>
+            <div class="swiper-slide">
+                 <div class="content">
+					<p>东方时尚</p>
+					<img src="./images/index_content2.png" class="images2">
+					<div class="buttonClick" jiaxiao="东方时尚">
+						<img src="./images/index_content3.png" class="images3">
+					</div>
+				</div>
+			</div>
+			<div class="swiper-slide">
+                 <div class="content">
+					
+					<p>公交驾校</p>
+					<img src="./images/index_content2.png" class="images2">
+					<div class="buttonClick" jiaxiao="公交驾校">
+						<img src="./images/index_content3.png" class="images3">
+					</div>
+				</div>
+			</div>
+			<div class="swiper-slide">
+                 <div class="content">
+					
+					<p>龙泉驾校</p>
+					<img src="./images/index_content2.png" class="images2">
+					<div class="buttonClick" jiaxiao="龙泉驾校">
+						<img src="./images/index_content3.png" class="images3">
+					</div>
+				</div>
+			</div>
+			<div class="swiper-slide">
+                 <div class="content">
+					
+					<p>远航驾校</p>
+					<img src="./images/index_content2.png" class="images2">
+					<div class="buttonClick" jiaxiao="远航驾校">
+						<img src="./images/index_content3.png" class="images3">
+					</div>
+				</div>
+			</div>
+			<div class="swiper-slide">
+                 <div class="content">
+					
+					<p>远大驾校</p>
+					<img src="./images/index_content2.png" class="images2">
+					<div class="buttonClick" jiaxiao="远大驾校">
+						<img src="./images/index_content3.png" class="images3">
+					</div>
+				</div>
+			</div>
+			<div class="swiper-slide">
+                 <div class="content">
+					
+					<p>星月驾校</p>
+					<img src="./images/index_content2.png" class="images2">
+					<div class="buttonClick" jiaxiao="星月驾校">
+						<img src="./images/index_content3.png" class="images3">
+					</div>
+				</div>
+			</div>
+        </div>
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination swiper-pagination-white"></div> -->
+        <!-- Add Pagination -->
+<!--         <div class="swiper-button-next swiper-button-white"></div>
+        <div class="swiper-button-prev swiper-button-white"></div> -->
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/swiper-3.4.2.jquery.min.js"></script>
+<script src="js/jquery.cookie.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<!--<script type="text/javascript" src="js/isWeiXin.js"></script>-->
+ 
+  <script>
+
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        // spaceBetween: 10,//幻灯片间隔
+        // nextButton: '.swiper-button-next',
+        // prevButton: '.swiper-button-prev',
+         paginationClickable: true,
+        // effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        parallax: true,
+        // coverflow: {
+        //     rotate: 50,
+        //     stretch:10,
+        //     depth:-10,
+        //     modifier:1,
+        //     slideShadows : true
+        // }
+    });
+	
+    
+    </script>
 </html>
