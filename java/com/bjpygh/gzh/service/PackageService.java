@@ -47,7 +47,8 @@ public class PackageService {
             criteria.andTrainTimeEqualTo(trainTime);
         DsInformation dsInfo = dsInformationMapper.selectByPrimaryKey(dsPackage.getDsName());
         DsPackageExample example1 = new DsPackageExample();
-        DsPackageExample.Criteria criteria1 = example.createCriteria();
+        DsPackageExample.Criteria criteria1 = example1.createCriteria();
+        criteria1.andDsNameEqualTo(dsPackage.getDsName());
         criteria1.andReservationEqualTo("自选练车方式");
         List<DsPackage> dsPackages = dsPackageMapper.selectByExample(example);
         List<DsPackage> dsPackages1 = dsPackageMapper.selectByExample(example1);
