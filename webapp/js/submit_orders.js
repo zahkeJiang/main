@@ -25,14 +25,16 @@ var price = $.cookie("price"); //班型套餐价格
 var packageid = $.cookie("packageid"); //班型编号id
 var traintime = $.cookie("traintime"); //训练时间
 var coupons_sum = ""; //优惠券金额
-
+var makeProtection = $.cookie("makeProtection"); //补考保障
+console.log(makeProtection, "makeProtection")
 
 var realname = "";
 var address = "";
 var note = "";
 var select = "";
-
-
+var mustProtection = "";
+var ProtectionMoney = 180; //补考保障金额
+var payProtectionMoney = 0; //需要额外支付补考保障的钱
 //获取优惠券金额
 function get_coupons() {
     $.ajax({
@@ -48,12 +50,18 @@ function get_coupons() {
                     "color": "orange"
                 });
                 select = "1";
-                $(".price").html("¥" + (price - coupons_sum)); //需支付金额
+
             } else {
+                coupons_sum = 0;
                 $(".coupons span").html("无可用优惠券&nbsp;&gt;");
                 select = "0";
-                $(".price").html("¥" + price); //需支付金额
+
             }
+            if (makeProtection == 0 || makeProtection == 1) {
+                payMoney();
+            }
+
+
         }
     });
 }
@@ -66,39 +74,90 @@ function get_tel() {
         }
     }, "json");
 }
+
+function payMoney() {
+    var mustProtection = $("input[name='makeProtection']:checked").val();
+    if (mustProtection == 1) {
+        payProtectionMoney = ProtectionMoney;
+    } else {
+        payProtectionMoney = 0;
+    }
+    $(".price").empty();
+    $(".price").html("¥" + (price - coupons_sum + payProtectionMoney)); //需支付金额
+}
+
 $(function() {
+
+    //班型套餐是否有补考保障，0必须没有，1必须有，2可选择
+    if (makeProtection == 0) {
+
+    } else if (makeProtection == 1) {
+        $(".ProtectionDiv").empty();
+        $(".ProtectionDiv").html("套餐赠送补考保障");
+        $(".ProtectionDiv").css({
+            "text-align": "left",
+            "font-size": "14px",
+            "color": "555",
+            "margin-top": "10px"
+        })
+        $(".ProtectionDivBox").show();
+
+    } else if (makeProtection == 2) {
+        $(".ProtectionDivBox").show();
+    }
+
     //为radio法培方式设置点击样式
-    $("input[type='radio']").click(function() {
+    $("input[name='radio_training']").click(function() {
         $(this).siblings(".user-defined").children("span").addClass("active");
-        $(this).parents("div").siblings("div").find("span").removeClass("active");
+        $(this).parents(".trainDiv").siblings("div").find("span").removeClass("active");
     });
+    //为补考保障设置点击样式
+    $("input[name='makeProtection']").click(function() {
+        $(this).siblings(".user-defined").children("span").addClass("active");
+        $(this).parents(".mustProtectionDiv").siblings("div").find("span").removeClass("active");
+
+        payMoney();
+    });
+
     $(".ds_type").html(dstype);
     $(".dstype_information_content").html(dsname + "&nbsp;&frasl;&nbsp;" + models + "&nbsp;&frasl;&nbsp;" + traintime);
     $(".ds_price").html(price);
 
     get_tel(); //获取用户手机号
     get_coupons(); //获取优惠券金额
-    //点击进入优惠券页面
-    // $(".coupons").click(function(){
-    // 	window.location.href="coupon.html";
-    // });
+
+
     //提交订单支付宝支付
     $(".submit").click(function() {
         //获取用户姓名、联系方式、性别、地址
         realname = $("#real_name").val();
         address = $("#address").val();
-        note = $("input[type='radio']:checked").val();
+        note = $("input[name='radio_training']:checked").val();
+
+        //班型套餐是否有补考保障，0必须没有，1必须有，2可选择
+        if (makeProtection == 2) {
+            mustProtection = $("input[name='makeProtection']:checked").val();
+        } else if (makeProtection == 1) {
+            mustProtection = 1;
+        } else {
+            mustProtection = 0;
+        }
+
+        console.log("补考保障", mustProtection, "法培方式", note);
         if (realname == "") {
             alert("请输入您的真实姓名");
         } else if (address == "") {
             alert("请输入您的地址");
         } else if (note == null) {
             alert("请选择您的法培方式");
+        } else if (mustProtection == null) {
+            alert("请选择是否购买补考保障");
         } else {
             $.post("note.action", {
                 "realname": realname,
                 "address": address,
-                "note": note
+                "note": note,
+                "mustProtection": mustProtection
             }, function(datas) { //保存用户信息
                 if (datas.status == "0") { //代表用户目前没有驾校的完成订单
                     $(".layer").show();
