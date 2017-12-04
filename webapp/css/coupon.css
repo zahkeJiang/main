@@ -30,12 +30,14 @@ html, body {
 	padding: 10px 16px;
 }
 .coupon{
-    border-radius:10px;
-    padding:10px 10px 0 10px;
-    background: #f6f1f1;
+
 }
 .couponBox{
   position: relative;
+  border-radius:10px;
+  padding:10px 10px 0 10px;
+  background: #f6f1f1;
+  margin-top: 10px; 
 }
 .couponBox img{
   margin-bottom: 6px;
@@ -290,3 +292,11 @@ margin:20px 10px;
     border-radius: 4px;
      margin-top: 20px;
   }  
+
+
+  .footerHtml{
+    font-size: 12px;
+    color: #fff;
+    margin:20px 0 10px 0;
+    text-align: center;
+  }

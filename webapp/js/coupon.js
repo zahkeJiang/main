@@ -1,3 +1,4 @@
+var footerHtml = "<div class='footerHtml'>没有更多了</div>"
 $(function() {
     unused();
     //获取可用优惠券
@@ -37,7 +38,7 @@ function unused() {
                     coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div><p class='date'>" + comment.date + "，即日生效</p></div>"
                 });
 
-                $(".container").html("<div class='coupon'>" + coupon + "</div>");
+                $(".container").html("<div class='coupon'>" + coupon + "</div>" + footerHtml);
                 $(".couponBox span").css({
                     "color": "#00569f"
                 });
@@ -75,7 +76,7 @@ function used() {
                 $.each(couponList, function(commentIndex, comment) {
                     coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div></div>"
                 });
-                $(".container").html("<div class='coupon'>" + coupon + "</div>");
+                $(".container").html("<div class='coupon'>" + coupon + "</div>" + footerHtml);
 
                 $(".couponBox span").css({
                     "color": "#424242"
@@ -100,10 +101,10 @@ function overdue() {
                 $.each(couponList, function(commentIndex, comment) {
                     coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div><p class='date'>" + comment.date + "，已过期</p></div>"
                 });
-                $(".container").html("<div class='coupon'>" + coupon + "</div>");
+                $(".container").html("<div class='coupon'>" + coupon + "</div>" + footerHtml);
 
                 $(".couponBox span").css({
-                    "color": "#00569f"
+                    "color": "#424242"
                 });
             } else {
                 var coupon_hint = "<div class='coupons_hint_box'><div class='coupon_hint'><div class='nohint'><p class='nohint_no'>还没有过期的券呢</p></div></div></div>"

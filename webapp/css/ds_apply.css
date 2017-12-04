@@ -72,7 +72,7 @@ span{
 	display: flex;
 }
 .descriptionBox span.descriptiontitle{
-	min-width: 60px;
+	min-width: 56px;
 }
 .descriptionBox p.description{
 	color: #585858;
@@ -101,10 +101,13 @@ span{
 .service h2{
 	font-weight: normal;
 }
-.ds_details,.description{
+.description{
 	margin-left: 16px;
 }
 
+.ds_details{
+		margin-left: 12px;
+}
 
 .ds_apply{
 	margin-top: 10px;
