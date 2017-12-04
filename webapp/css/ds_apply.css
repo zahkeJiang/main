@@ -10,7 +10,7 @@ html, body {
 	margin: 10px 16px;
 	padding: 0 10px;
 	height: auto;
-	margin-bottom: 80px;
+	margin-bottom: 64px;
 }
 .details{
 	background-color: #f6f1f1;
@@ -34,7 +34,7 @@ span{
 	display: flex;
 	align-items: center;
 	font-size: 18px;	
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #ddd;
 }
 .instro_container h2{
 	padding-top: 10px;
@@ -65,7 +65,20 @@ span{
 .type h2{
 	font-weight:normal;
 }
-
+.brand{
+	margin-left: 16px;
+}
+.descriptionBox{
+	display: flex;
+}
+.descriptionBox span.descriptiontitle{
+	min-width: 60px;
+}
+.descriptionBox p.description{
+	color: #585858;
+	font-size: 14px;
+	line-height: 18px;
+}
 .price{
 	padding-top: 10px;
 	line-height: 24px;
@@ -101,9 +114,9 @@ span{
 
 
 .footer{
-	border-top: 1px solid #eee;
+
 	background-color: #f6f1f1;
-	/*box-shadow: 0 -20px 40px white;  */
+	box-shadow: 0 -1px 5px #ddd;  
 	/*height: 60px;*/
 	/*background-color: gray;*/
 	width: 100%;

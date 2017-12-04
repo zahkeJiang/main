@@ -26,13 +26,14 @@ var price = $.cookie("price"); //班型套餐价格
 var packageid = $.cookie("packageid"); //班型编号id
 var traintime = $.cookie("traintime"); //训练时间
 var description = $.cookie("description"); //套餐描述
-
+var brand = $.cookie("brand"); //套餐描述
 
 $(function() {
     $(".ds_type").html(dstype);
     $(".ds_name").html(dsname + "&nbsp;/&nbsp;" + models);
     $(".ds_price").html("¥" + price);
     $(".description").html(description);
+    $(".brand").html(brand);
     //立即报名时。判断用户是否已经绑定手机号
     $("#submit").click(function() {
         $.post("isBond.action", {}, function(datas) {

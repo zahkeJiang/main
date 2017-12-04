@@ -141,9 +141,9 @@ $(function() {
         console.log(trainTime);
         getDs();
     });
-$(".villa-map-address").click(function () {
-   getLocal(DsAddress);
-});
+    $(".villa-map-address").click(function() {
+        getLocal(DsAddress);
+    });
 
 
 });
@@ -238,7 +238,7 @@ function getDs() {
 
         // $.each循环实现添加  
         $.each(dsp_list, function(commentIndex, comment) {
-            dshtml += "<div class='dsp_list' makeProtection='" + comment.mustProtection + "' miaosu='" + comment.description + "'><h2 class='dstype'>" + comment.dsType + "</h2><div class='dsp_infor'><span class='models'>" + comment.models + "</span><span class='traintime'>" + comment.trainTime + "</span><span class='description'>" + comment.brand + "</span><span class='packageid'>" + comment.packageid + "</span></div><span class='priceDiv'><span  class='price_symbol'>¥</span><span class='price'>" + comment.price + "</span><span class='pointzero'></span></span></div>";
+            dshtml += "<div class='dsp_list' makeProtection='" + comment.mustProtection + "' miaosu='" + comment.description + "' packageid='" + comment.packageid + "'><h2 class='dstype'>" + comment.dsType + "</h2><div class='dsp_infor'><span class='models'>" + comment.models + "</span><span class='traintime'>" + comment.trainTime + "</span><span class='brand'>" + comment.brand + "</span></div><span class='priceDiv'><span  class='price_symbol'>¥</span><span class='price'>" + comment.price + "</span><span class='pointzero'></span></span></div>";
         });
         $(".container").html(dshtml);
 
@@ -248,9 +248,10 @@ function getDs() {
             var models = $(this).find(".models").html();
             var price = $(this).find(".price").html();
             var traintime = $(this).find(".traintime").html();
-            var packageid = $(this).find(".packageid").html();
+            var packageid = $(this).attr("packageid");
             var description = $(this).attr("miaosu");
             var makeProtection = $(this).attr("makeProtection");
+            var brand = $(this).find(".brand").html();
             // var myurl="ds_apply.html?dsname="+dsname+"&dstype="+dstype+"&models="+models+"&price="+price+"&packageid="+packageid+"&traintime="+traintime+"&description="+description;                                      
             // window.location.assign(encodeURI(myurl));
 
@@ -261,6 +262,7 @@ function getDs() {
             $.cookie("packageid", packageid); //班型编号id
             $.cookie("description", description); //班型秒速
             $.cookie("makeProtection", makeProtection); //补考保障
+            $.cookie("brand", brand); //车型
             window.location.href = "ds_apply.html";
         });
     }, 'json');

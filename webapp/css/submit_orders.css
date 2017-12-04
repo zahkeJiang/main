@@ -192,11 +192,9 @@ span,.dstype_information_content{
 	align-items: center;	
 }
 
-/*.footer img{
-	width:30px;
-	height:30px;
-	margin-right:5px;
-}*/
+.footer{
+	box-shadow: 0 -1px 5px #ddd;  
+}
 .submit{
 	width: 30%;
 	background-color:orange;

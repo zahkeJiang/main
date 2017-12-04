@@ -39,11 +39,14 @@ $(function() {
 });
 //获取可用优惠券
 function unused() {
-    $.post("queryCoupon.action", {}, function(obj) {
+    $.post("queryCoupon.action", {}, function(datas) {
         $(".container").html("");
         if (obj.status == "0") { //未过期，正常
-            //没过期显示正常图片
-            var coupon = "<div class='coupon'><div class='couponBox'><img src='images/ds_coupon_bgImage.png'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + obj.data.price + "</span></div><p class='date'>" + obj.data.date + "，即日生效</p></div></div>"
+            var coupon = "";
+            $.each(dsorder_list, function(commentIndex, comment) {
+                coupon += "<div class='couponBox'><img src='images/ds_coupon_bgImage.png'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + obj.data.price + "</span></div><p class='date'>" + obj.data.date + "，即日生效</p></div>"
+            });
+            coupon = "<div class='coupon'></div>"
             $(".container").html(coupon);
             $(".couponBox span").css({
                 "color": "#00569f"

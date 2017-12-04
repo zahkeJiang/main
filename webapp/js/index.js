@@ -32,9 +32,10 @@ $(function() {
         if (datas.status == 0) {
             var dsNames = datas.data.dsNames;
             var dsNameListHtml = "";
-            for (var i = 0; i < dsNames.length; i++) {
-                dsNameListHtml += '<div class="swiper-slide"><div class="content"><p>' + dsNames[i] + '</p><img src="./images/index_content2.png" class="images2"><div class="buttonClick" jiaxiao="' + dsNames[i] + '"><img src="./images/index_content3.png" class="images3"></div></div></div>'
-            }
+            $.each(dsNames, function(commentIndex, comment) {
+                dsNameListHtml += '<div class="swiper-slide"><div class="content"><p class="ds_name">' + comment.ds_name + '</p><p class="description">' + comment.description + '</p><div class="buttonClick" jiaxiao="' + comment.ds_name + '"><img src="./images/index_content3.png" class="images3"></div></div></div>'
+            });
+
             $(".swiper-wrapper").html(dsNameListHtml);
             doPlace();
             $(".buttonClick").click(function() {

@@ -236,19 +236,17 @@ html, body {
 	border-bottom: 0;
 }
 .dstype{
-	margin-top: 8px;
+	margin-top: 10px;
 	font-weight: normal;
 	color: #555;
 	font-size: 16px;
 	/*margin-left:6px;*/
 }
 .dsp_infor{
-	/*background: red;*/
-	margin-bottom:8px;
-	width: 70%;
-	/*margin-left:6px;*/
+	margin-bottom:10px;
+	margin-top: 4px;
+	width: 85%;
 	display:flex;
-	justify-content: space-between;
 }
 .dsp_list h2{
 	font-size: 14px;
@@ -257,17 +255,22 @@ html, body {
 .dsp_infor span {
 	font-size: 14px;
 	color: #999;
+	text-align: center;
 }
-.packageid{
-	width: 20%;
-	/*filter:alpha(Opacity=0);-moz-opacity:0;opacity: 0;*/
-	display: none;
+.dsp_infor span:nth-child(1){
+	text-align: left;
+	width: 30%;
+}
+.dsp_infor span:nth-child(2){
+	width: 25%;
+
+}
+.dsp_infor span:nth-child(3){
+	width: 45%;
 }
 .price_symbol{
 	color: #4ea0ff;
 	font-size: 18px;
-	/*padding-left: 16px;*/
-	/*padding-right: 2px;*/
 }
 .priceDiv{
 	position: absolute;
