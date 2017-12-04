@@ -17,13 +17,14 @@ html, body {
   text-align: center;
   border-bottom: 2px solid orange;
 }
-.header div.used{
+.header div.used,.header div.overdue{
   height: 46px;
   width: 100%;
   line-height: 46px;
   text-align: center;
   border-bottom: 2px solid #f6f1f1;
 }
+
 .container{
   position: relative;
 	padding: 10px 16px;
