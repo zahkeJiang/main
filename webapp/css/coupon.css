@@ -29,11 +29,13 @@ html, body {
   position: relative;
 	padding: 10px 16px;
 }
+.coupon{
+    border-radius:10px;
+    padding: 10px;
+    background: #f6f1f1;
+}
 .couponBox{
-  border-radius:10px;
-  padding:0 10px;
   padding-top: 10px;
-  background: #f6f1f1;
   position: relative;
 }
 .couponBox img{

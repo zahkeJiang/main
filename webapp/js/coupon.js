@@ -39,25 +39,29 @@ $(function() {
 });
 //获取可用优惠券
 function unused() {
-    $.post("queryCoupon.action", {}, function(datas) {
+    $.post("getCoupons", {}, function(datas) {
         $(".container").html("");
-        if (obj.status == "0") { //未过期，正常
-            var coupon = "";
-            $.each(dsorder_list, function(commentIndex, comment) {
-                coupon += "<div class='couponBox'><img src='images/ds_coupon_bgImage.png'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + obj.data.price + "</span></div><p class='date'>" + obj.data.date + "，即日生效</p></div>"
-            });
-            coupon = "<div class='coupon'></div>"
-            $(".container").html(coupon);
-            $(".couponBox span").css({
-                "color": "#00569f"
-            });
-            $(".use_coupon").html("立即使用");
-            $(".use_coupon").click(function() {
-                window.location.href = "index.html";
-            });
-        } else {
-            var coupon_hint = "<div class='coupons_hint_box'><div class='coupon_hint'><div class='nohint'><p class='nohint_no'>当前没有优惠券</p><p class='nohint_look'>去活动页面转转吧</p><p class='purl'><a href='lottery.html'>去看看</a></p></div></div></div>"
-            $(".container").html(coupon_hint);
+        if (datas.status == 0) { //未过期，正常
+            var couponList = datas.data.coupons;
+            if (couponList && couponList.length > 0) {
+                var coupon = "";
+                $.each(couponList, function(commentIndex, comment) {
+                    coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div><p class='date'>" + comment.date + "，即日生效</p></div>"
+                });
+
+                $(".coupon").html(coupon);
+                $(".couponBox span").css({
+                    "color": "#00569f"
+                });
+            } else {
+                var coupon_hint = "<div class='coupons_hint_box'><div class='coupon_hint'><div class='nohint'><p class='nohint_no'>当前没有优惠券</p><p class='nohint_look'>去活动页面转转吧</p><p class='purl'><a href='lottery.html'>去看看</a></p></div></div></div>"
+                $(".container").html(coupon_hint);
+            }
+
+            // $(".use_coupon").html("立即使用");
+            // $(".use_coupon").click(function() {
+            //     window.location.href = "index.html";
+            // });
         }
 
     }, 'json');
@@ -66,53 +70,64 @@ function unused() {
 
 //获取已用优惠券
 function used() {
-    $.post("queryCoupon.action", {}, function(obj) {
+    $.post("getCouponsUsed", {}, function(datas) {
         $(".container").html("");
-        if (obj.status == "-30") { //已使用优惠券
-            //已使用的图片显示
+        if (datas.status == 0) { //已使用优惠券
+            var couponList = datas.data.coupons;
+            if (couponList && couponList.length > 0) {
+                var coupon = "";
+                $.each(couponList, function(commentIndex, comment) {
+                    coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div><p class='date'>" + comment.date + "，即日生效</p></div>"
+                });
+                $(".container").html("<div class='coupon'>" + coupon + "</div>");
 
-            var coupon = "<div class='coupon'><div class='couponBox'><img src='images/ds_coupon_bgImage.png'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + obj.data.price + "</span></div><p class='date_ovedue'>" + obj.data.date + "，已使用</p></div></div>"
-            $(".container").html(coupon);
-            $(".couponBox span").css({
-                "color": "#424242"
-            });
-        } else { //没有优惠券
-            var coupon_hint = "<div class='coupons_hint_box'><div class='coupon_hint'><div class='nohint'><p class='nohint_no'>还没有已用的券呢</p></div></div></div>"
-            $(".container").html(coupon_hint);
+                $(".couponBox span").css({
+                    "color": "#424242"
+                });
+            } else {
+                var coupon_hint = "<div class='coupons_hint_box'><div class='coupon_hint'><div class='nohint'><p class='nohint_no'>还没有已用的券呢</p></div></div></div>"
+                $(".container").html(coupon_hint);
+            }
         }
     }, 'json');
 
 }
 
 function overdue() {
-    $.post("queryCoupon.action", {}, function(obj) {
-        if (obj.status == "-20") { //过期
-            //过期显示不同图片
+    $.post("getCouponsPassed", {}, function(datas) {
+        if (datas.status == 0) { //过期
+            var couponList = datas.data.coupons;
+            if (couponList && couponList.length > 0) {
+                var coupon = "";
 
-            var coupon = "<div class='coupon'><div class='couponBox'><img src='images/ds_coupon_bgImage_hudu.png'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + obj.data.price + "</span></div><p class='date'>" + obj.data.date + "，已过期</p></div><div class='coupon_hint_text'><h2>优惠提示:</h2><p>30天有效期，从领取日开始计时。</p><p>若优惠券已过期，使用会员积分激活后即可使用。</p></div><div class='use_coupon'></div></div>"
-            $(".container").html(coupon);
-            $(".couponBox span").css({
-                "color": "#00569f"
-            });
+                $.each(couponList, function(commentIndex, comment) {
+                    coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div><p class='date'>" + comment.date + "，即日生效</p></div>"
+                });
+                $(".container").html("<div class='coupon'>" + coupon + "</div>");
 
-            $(".use_coupon").html("已过期，立即激活");
-            $(".use_coupon").click(function() {
-                alert("暂不可激活");
-                //          var confirmtext = confirm("即将扣除您的会员积分(15积分)，是否确认激活？"); 
-                // if(confirmtext==true){
-                //  $.post("activation.action",{},function(obj){
-                //      if (obj.status == "0") {
-                //          alert("激活成功");
-                //          window.location.href="coupon.html";
-                //      }else{
-                //          alert("激活失败,可前往“你-会员”中查看您的会员积分。");
-                //      }
-                //  },"json");
-                // }
-            });
-        } else {
-            var coupon_hint = "<div class='coupons_hint_box'><div class='coupon_hint'><div class='nohint'><p class='nohint_no'>还没有过期的券呢</p></div></div></div>"
-            $(".container").html(coupon_hint);
+                $(".couponBox span").css({
+                    "color": "#00569f"
+                });
+            } else {
+                var coupon_hint = "<div class='coupons_hint_box'><div class='coupon_hint'><div class='nohint'><p class='nohint_no'>还没有过期的券呢</p></div></div></div>"
+                $(".container").html(coupon_hint);
+            }
+
+            // $(".use_coupon").html("已过期，立即激活");
+            // $(".use_coupon").click(function() {
+            //     alert("暂不可激活");
+            //     //          var confirmtext = confirm("即将扣除您的会员积分(15积分)，是否确认激活？"); 
+            //     // if(confirmtext==true){
+            //     //  $.post("activation.action",{},function(obj){
+            //     //      if (obj.status == "0") {
+            //     //          alert("激活成功");
+            //     //          window.location.href="coupon.html";
+            //     //      }else{
+            //     //          alert("激活失败,可前往“你-会员”中查看您的会员积分。");
+            //     //      }
+            //     //  },"json");
+            //     // }
+            // });
         }
     }, "json");
 }
