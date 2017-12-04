@@ -281,13 +281,12 @@ html, body {
 	right: 20px;
 }
 
-.description{
-    height: 20px;  
-   	overflow: hidden;/*超出隐藏*/
-    /*text-overflow: ellipsis;  省略号*/
-    white-space: nowrap;  /*单行显示*/
-  	width: 4em;
-}
+/*.description{*/
+    /*height: 20px;  */
+   	/*overflow: hidden;*/
+    /*white-space: nowrap;*/
+  	/*width: 4em;*/
+/*}*/
 
 
 /*地图*/

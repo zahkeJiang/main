@@ -11,7 +11,9 @@ public class DsInformation {
 
     private String address;
 
-    private List<DsPackage> dspList;//驾校套餐列表
+    private String description;
+
+    private List<DsPackage> dspList;
 
     public List<DsPackage> getDspList() {
         return dspList;
@@ -51,5 +53,13 @@ public class DsInformation {
 
     public void setAddress(String address) {
         this.address = address == null ? null : address.trim();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 }

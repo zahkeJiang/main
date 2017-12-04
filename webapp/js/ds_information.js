@@ -11,6 +11,7 @@ var dsType = "";
 var trainTime = "";
 var dsInfo = "";
 var reservation = "";
+var DsAddress = "";
 $(function() {
     //获取驾校地址，轮播图，简介
     $.post("sdp.action", {
@@ -27,6 +28,7 @@ $(function() {
             $(".ds_information_text").html(dsInfo.dsIntro);
             $(".dsAddress").html(dsInfo.address);
             gogo(picture); //动态加载轮播图
+            DsAddress = dsInfo.address;
             getLocal(dsInfo.address); //显示地图
         }
     }, "json");
@@ -139,7 +141,9 @@ $(function() {
         console.log(trainTime);
         getDs();
     });
-
+$(".villa-map-address").click(function () {
+   getLocal(DsAddress);
+});
 
 
 });
@@ -234,7 +238,7 @@ function getDs() {
 
         // $.each循环实现添加  
         $.each(dsp_list, function(commentIndex, comment) {
-            dshtml += "<div class='dsp_list' makeProtection='" + comment.mustProtection + "'><h2 class='dstype'>" + comment.dsType + "</h2><div class='dsp_infor'><span class='models'>" + comment.models + "</span><span class='traintime'>" + comment.trainTime + "</span><span class='description'>" + comment.description + "</span><span class='packageid'>" + comment.packageid + "</span></div><span class='priceDiv'><span  class='price_symbol'>¥</span><span class='price'>" + comment.price + "</span><span class='pointzero'></span></span></div>";
+            dshtml += "<div class='dsp_list' makeProtection='" + comment.mustProtection + "' miaosu='" + comment.description + "'><h2 class='dstype'>" + comment.dsType + "</h2><div class='dsp_infor'><span class='models'>" + comment.models + "</span><span class='traintime'>" + comment.trainTime + "</span><span class='description'>" + comment.brand + "</span><span class='packageid'>" + comment.packageid + "</span></div><span class='priceDiv'><span  class='price_symbol'>¥</span><span class='price'>" + comment.price + "</span><span class='pointzero'></span></span></div>";
         });
         $(".container").html(dshtml);
 
@@ -245,7 +249,7 @@ function getDs() {
             var price = $(this).find(".price").html();
             var traintime = $(this).find(".traintime").html();
             var packageid = $(this).find(".packageid").html();
-            var description = $(this).find(".description").html();
+            var description = $(this).attr("miaosu");
             var makeProtection = $(this).attr("makeProtection");
             // var myurl="ds_apply.html?dsname="+dsname+"&dstype="+dstype+"&models="+models+"&price="+price+"&packageid="+packageid+"&traintime="+traintime+"&description="+description;                                      
             // window.location.assign(encodeURI(myurl));

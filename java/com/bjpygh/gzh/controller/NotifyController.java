@@ -152,7 +152,7 @@ public class NotifyController extends BaseController {
 
             out.println("success");	//请不要修改或删除
             User userById = userService.getUserById(String.valueOf(dsOrder.getUserId()));
-//            DsMessagePush(dsOrder,userById.getOpenid());
+            DsMessagePush(dsOrder,userById.getOpenid());
         } else{//验证失败
             out.println("fail");
         }
@@ -186,6 +186,34 @@ public class NotifyController extends BaseController {
         orderPush.PayJsonObj(map);
     }
 
+    //别墅订单支付微信消息推送
+    private void VillaMessagePush(VillaOrder villaOrder, String openid) {
+        OrderPush orderPush = new OrderPush();
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("first","您已完成“漂洋过海小别墅”订单支付\n");
+        map.put("keyword1",villaOrder.getVillaPrice()+"元");
+        map.put("keyword2",villaOrder.getOriginalPrice()-villaOrder.getVillaPrice()+"元");
+        map.put("keyword3",villaOrder.getOrderNumber()+"\n");
+        map.put("remark","漂洋过海小别墅期待您的入住。");
+        map.put("openid",openid);
+
+        orderPush.PayJsonObj(map);
+    }
+
+    //军旅订单支付微信消息推送
+    private void ArmyMessagePush(ArmyOrder armyOrder, String openid) {
+        OrderPush orderPush = new OrderPush();
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("first","您已完成“作战之日”订单支付\n");
+        map.put("keyword1",armyOrder.getArmyPrice()+"元");
+        map.put("keyword2",armyOrder.getOriginalPrice()-armyOrder.getArmyPrice()+"元");
+        map.put("keyword3",armyOrder.getOrderNumber()+"\n");
+        map.put("remark","小漂已经迫不及待想和您一起突突突啦。");
+        map.put("openid",openid);
+
+        orderPush.PayJsonObj(map);
+    }
+
 
     //支付宝别墅支付回调接口
     @RequestMapping(value = "/vnotify_url", method = RequestMethod.POST)
@@ -204,6 +232,9 @@ public class NotifyController extends BaseController {
             villaOrderService.updateOrder(villaOrder);
 
             pushToWangNan(villaOrder.getOrderNumber(),villaOrder.getVillaPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
+
+            User userById = userService.getUserById(String.valueOf(villaOrder.getUserId()));
+            VillaMessagePush(villaOrder,userById.getOpenid());
         }else{//验证失败
             out.println("fail");
         }
@@ -227,6 +258,9 @@ public class NotifyController extends BaseController {
             armyOrderService.updateOrder(armyOrder);
 
             pushToWangNan(armyOrder.getOrderNumber(),armyOrder.getArmyPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
+
+            User userById = userService.getUserById(String.valueOf(armyOrder.getUserId()));
+            ArmyMessagePush(armyOrder,userById.getOpenid());
         }else{//验证失败
             out.println("fail");
         }
@@ -268,6 +302,9 @@ public class NotifyController extends BaseController {
                     villaOrder.setPayTime(formatter.format(new Date()));
                     villaOrderService.updateOrder(villaOrder);
                     pushToWangNan(villaOrder.getOrderNumber(),villaOrder.getVillaPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
+
+                    User userById = userService.getUserById(String.valueOf(villaOrder.getUserId()));
+                    VillaMessagePush(villaOrder,userById.getOpenid());
                 }else if (o.equals("D")){
                     DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
                     dsOrder.setOrderStatus((byte) 1);
@@ -279,7 +316,7 @@ public class NotifyController extends BaseController {
 
                     User userById = userService.getUserById(String.valueOf(dsOrder.getUserId()));
 
-//                    DsMessagePush(dsOrder,userById.getOpenid());
+                    DsMessagePush(dsOrder,userById.getOpenid());
 
                 }else if (o.equals("A")){
                     ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
@@ -289,6 +326,9 @@ public class NotifyController extends BaseController {
                     armyOrderService.updateOrder(armyOrder);
 
                     pushToWangNan(armyOrder.getOrderNumber(),armyOrder.getArmyPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
+
+                    User userById = userService.getUserById(String.valueOf(armyOrder.getUserId()));
+                    ArmyMessagePush(armyOrder,userById.getOpenid());
                 }
 
             }

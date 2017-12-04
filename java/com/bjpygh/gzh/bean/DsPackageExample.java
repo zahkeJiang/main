@@ -703,6 +703,76 @@ public class DsPackageExample {
             addCriterion("reservation not between", value1, value2, "reservation");
             return (Criteria) this;
         }
+
+        public Criteria andBrandIsNull() {
+            addCriterion("brand is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandIsNotNull() {
+            addCriterion("brand is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandEqualTo(String value) {
+            addCriterion("brand =", value, "brand");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNotEqualTo(String value) {
+            addCriterion("brand <>", value, "brand");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandGreaterThan(String value) {
+            addCriterion("brand >", value, "brand");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandGreaterThanOrEqualTo(String value) {
+            addCriterion("brand >=", value, "brand");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandLessThan(String value) {
+            addCriterion("brand <", value, "brand");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandLessThanOrEqualTo(String value) {
+            addCriterion("brand <=", value, "brand");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandLike(String value) {
+            addCriterion("brand like", value, "brand");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNotLike(String value) {
+            addCriterion("brand not like", value, "brand");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandIn(List<String> values) {
+            addCriterion("brand in", values, "brand");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNotIn(List<String> values) {
+            addCriterion("brand not in", values, "brand");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandBetween(String value1, String value2) {
+            addCriterion("brand between", value1, value2, "brand");
+            return (Criteria) this;
+        }
+
+        public Criteria andBrandNotBetween(String value1, String value2) {
+            addCriterion("brand not between", value1, value2, "brand");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
