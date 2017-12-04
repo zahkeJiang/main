@@ -54,9 +54,9 @@ public class CouponService {
                         map.put("type",userCoupon.getCouponType()+"");
                         if (userCoupon.getCouponType() == 2){//驾校
                             map.put("background","http://120.24.184.86/glxt/dsimage/ds_coupon_use.png");
-                        }else if (userCoupon.getCouponType() == 0){//别墅
+                        }else if (userCoupon.getCouponType() == 3){//军旅
                             map.put("background","http://120.24.184.86/glxt/dsimage/ds_coupon_use.png");
-                        }else if (userCoupon.getCouponType() == 1){//军旅
+                        }else if (userCoupon.getCouponType() == 1){//别墅
                             map.put("background","http://120.24.184.86/glxt/dsimage/ds_coupon_use.png");
                         }
                         map.put("date",formatter1.format(userCoupon.getCouponTime())+"-"+formatter1.format(d));
@@ -82,19 +82,17 @@ public class CouponService {
             List<Map<String, String>> coupons = new ArrayList<Map<String, String>>();
             for (UserCoupon userCoupon : userCoupons){
                 if(userCoupon!=null&&userCoupon.getCouponStatus()==3){
-                    if((new Date()).getTime()-userCoupon.getCouponTime().getTime()<date.getTime()){
-                        Map<String, String> map = new HashMap<String, String>();
-                        map.put("price",userCoupon.getCouponPrice()+"");
-                        map.put("type",userCoupon.getCouponType()+"");
-                        if (userCoupon.getCouponType() == 2){//驾校
-                            map.put("background","http://120.24.184.86/glxt/dsimage/ds_coupon_used.png");
-                        }else if (userCoupon.getCouponType() == 0){//别墅
-                            map.put("background","http://120.24.184.86/glxt/dsimage/ds_coupon_used.png");
-                        }else if (userCoupon.getCouponType() == 1){//军旅
-                            map.put("background","http://120.24.184.86/glxt/dsimage/ds_coupon_used.png");
-                        }
-                        coupons.add(map);
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("price",userCoupon.getCouponPrice()+"");
+                    map.put("type",userCoupon.getCouponType()+"");
+                    if (userCoupon.getCouponType() == 2){//驾校
+                        map.put("background","http://120.24.184.86/glxt/dsimage/ds_coupon_used.png");
+                    }else if (userCoupon.getCouponType() == 3){//军旅
+                        map.put("background","http://120.24.184.86/glxt/dsimage/ds_coupon_used.png");
+                    }else if (userCoupon.getCouponType() == 1){//别墅
+                        map.put("background","http://120.24.184.86/glxt/dsimage/ds_coupon_used.png");
                     }
+                    coupons.add(map);
                 }
             }
             return Status.success().add("coupons",coupons);
@@ -122,9 +120,9 @@ public class CouponService {
                     map.put("type",userCoupon.getCouponType()+"");
                     if (userCoupon.getCouponType() == 2){//驾校
                         map.put("background","http://120.24.184.86/glxt/dsimage/ds_coupon_used.png");
-                    }else if (userCoupon.getCouponType() == 0){//别墅
+                    }else if (userCoupon.getCouponType() == 3){//军旅
                         map.put("background","http://120.24.184.86/glxt/dsimage/ds_coupon_used.png");
-                    }else if (userCoupon.getCouponType() == 1){//军旅
+                    }else if (userCoupon.getCouponType() == 1){//别墅
                         map.put("background","http://120.24.184.86/glxt/dsimage/ds_coupon_used.png");
                     }
                     map.put("date",formatter1.format(userCoupon.getCouponTime())+"-"+formatter1.format(d));
