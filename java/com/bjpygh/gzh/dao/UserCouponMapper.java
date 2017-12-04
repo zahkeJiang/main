@@ -4,7 +4,6 @@ import com.bjpygh.gzh.bean.UserCoupon;
 import com.bjpygh.gzh.bean.UserCouponExample;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface UserCouponMapper {
@@ -12,7 +11,7 @@ public interface UserCouponMapper {
 
     int deleteByExample(UserCouponExample example);
 
-    int deleteByPrimaryKey(Long userId);
+    int deleteByPrimaryKey(Long couponId);
 
     int insert(UserCoupon record);
 
@@ -20,7 +19,7 @@ public interface UserCouponMapper {
 
     List<UserCoupon> selectByExample(UserCouponExample example);
 
-    UserCoupon selectByPrimaryKey(Long userId);
+    UserCoupon selectByPrimaryKey(Long couponId);
 
     int updateByExampleSelective(@Param("record") UserCoupon record, @Param("example") UserCouponExample example);
 
@@ -31,4 +30,5 @@ public interface UserCouponMapper {
     int updateByPrimaryKey(UserCoupon record);
 
     void updataCouponStatus(Map<String, String> statusMap);
+
 }

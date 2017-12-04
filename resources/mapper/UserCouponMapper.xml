@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bjpygh.gzh.dao.UserCouponMapper">
   <resultMap id="BaseResultMap" type="com.bjpygh.gzh.bean.UserCoupon">
-    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <id column="coupon_id" jdbcType="BIGINT" property="couponId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
     <result column="coupon_status" jdbcType="INTEGER" property="couponStatus" />
     <result column="coupon_price" jdbcType="INTEGER" property="couponPrice" />
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, phone_number, coupon_status, coupon_price, coupon_type, coupon_time
+    coupon_id, user_id, phone_number, coupon_status, coupon_price, coupon_type, coupon_time
   </sql>
   <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.UserCouponExample" resultMap="BaseResultMap">
     select
@@ -88,11 +89,11 @@
     select 
     <include refid="Base_Column_List" />
     from user_coupon
-    where user_id = #{userId,jdbcType=BIGINT}
+    where coupon_id = #{couponId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from user_coupon
-    where user_id = #{userId,jdbcType=BIGINT}
+    where coupon_id = #{couponId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.bjpygh.gzh.bean.UserCouponExample">
     delete from user_coupon
@@ -101,16 +102,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.bjpygh.gzh.bean.UserCoupon">
-    insert into user_coupon (user_id, phone_number, coupon_status, 
-      coupon_price, coupon_type, coupon_time
-      )
-    values (#{userId,jdbcType=BIGINT}, #{phoneNumber,jdbcType=VARCHAR}, #{couponStatus,jdbcType=INTEGER}, 
-      #{couponPrice,jdbcType=INTEGER}, #{couponType,jdbcType=INTEGER}, #{couponTime,jdbcType=TIMESTAMP}
-      )
+    insert into user_coupon (coupon_id, user_id, phone_number, 
+      coupon_status, coupon_price, coupon_type, 
+      coupon_time)
+    values (#{couponId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{phoneNumber,jdbcType=VARCHAR}, 
+      #{couponStatus,jdbcType=INTEGER}, #{couponPrice,jdbcType=INTEGER}, #{couponType,jdbcType=INTEGER}, 
+      #{couponTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.UserCoupon">
     insert into user_coupon
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="couponId != null">
+        coupon_id,
+      </if>
       <if test="userId != null">
         user_id,
       </if>
@@ -131,6 +135,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="couponId != null">
+        #{couponId,jdbcType=BIGINT},
+      </if>
       <if test="userId != null">
         #{userId,jdbcType=BIGINT},
       </if>
@@ -160,6 +167,9 @@
   <update id="updateByExampleSelective" parameterType="map">
     update user_coupon
     <set>
+      <if test="record.couponId != null">
+        coupon_id = #{record.couponId,jdbcType=BIGINT},
+      </if>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=BIGINT},
       </if>
@@ -185,7 +195,8 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update user_coupon
-    set user_id = #{record.userId,jdbcType=BIGINT},
+    set coupon_id = #{record.couponId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
       phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
       coupon_status = #{record.couponStatus,jdbcType=INTEGER},
       coupon_price = #{record.couponPrice,jdbcType=INTEGER},
@@ -195,9 +206,15 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+    <update id="updataCouponStatus" parameterType="map">
+        update user_coupon set coupon_status=#{couponStatus} where user_id=#{userId} AND coupon_type=2
+    </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.bjpygh.gzh.bean.UserCoupon">
     update user_coupon
     <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
       <if test="phoneNumber != null">
         phone_number = #{phoneNumber,jdbcType=VARCHAR},
       </if>
@@ -214,18 +231,17 @@
         coupon_time = #{couponTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where user_id = #{userId,jdbcType=BIGINT}
+    where coupon_id = #{couponId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bjpygh.gzh.bean.UserCoupon">
     update user_coupon
-    set phone_number = #{phoneNumber,jdbcType=VARCHAR},
+    set user_id = #{userId,jdbcType=BIGINT},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
       coupon_status = #{couponStatus,jdbcType=INTEGER},
       coupon_price = #{couponPrice,jdbcType=INTEGER},
       coupon_type = #{couponType,jdbcType=INTEGER},
       coupon_time = #{couponTime,jdbcType=TIMESTAMP}
-    where user_id = #{userId,jdbcType=BIGINT}
+    where coupon_id = #{couponId,jdbcType=BIGINT}
   </update>
-    <update id="updataCouponStatus" parameterType="map">
-        update user_coupon set coupon_status=#{couponStatus} where user_id=#{userId}
-    </update>
+
 </mapper>

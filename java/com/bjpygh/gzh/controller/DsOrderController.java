@@ -104,7 +104,7 @@ public class DsOrderController extends BaseController {
 
         System.out.println("select+"+select);
         if (select.equals("1")){
-            UserCoupon userCoupon = couponService.getCoupon(userid);
+            UserCoupon userCoupon = couponService.getDsCoupon(userid);
             Date date = new Date(2419200000L);
 
             if(userCoupon.getCouponStatus()==1&&userCoupon!=null){
