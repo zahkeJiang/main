@@ -31,11 +31,10 @@ html, body {
 }
 .coupon{
     border-radius:10px;
-    padding: 10px;
+    padding:10px 10px 0 10px;
     background: #f6f1f1;
 }
 .couponBox{
-  padding-top: 10px;
   position: relative;
 }
 .couponBox img{

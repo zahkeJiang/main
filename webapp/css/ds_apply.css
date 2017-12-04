@@ -46,7 +46,7 @@ span{
 	font-size: 14px;
 }
 .instro_container h3{
-	padding-top: 10px;
+	/*padding-top: 10px;*/
 	font-size: 16px;
 	font-weight:normal;
 }
@@ -117,8 +117,7 @@ span{
 
 	background-color: #f6f1f1;
 	box-shadow: 0 -1px 5px #ddd;  
-	/*height: 60px;*/
-	/*background-color: gray;*/
+
 	width: 100%;
 	max-width: 768px;
 	position: fixed;
@@ -127,11 +126,44 @@ span{
 #submit{
 	-webkit-appearance: none; 
 	width: 100%;
-	/*margin-left:10%;*/
 	height: 48px;
-	/*border-radius: 5px;*/
 	border: 0;
 	background-color:#f6f1f1;
 	color:#4ea0ff;
 }
+.instro_container ul{
+	margin:20px 20px 10px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	list-style: none;
 
+}
+.instro_container ul li{
+	text-align: center;
+	line-height: 14px;
+	height: 56px;
+}
+.instro_container ul li p{
+	color: #777;
+	margin: 0;
+	padding:0;
+	font-size: 12px;
+	margin-top: 4px;
+	/*line-height: 14px;*/
+	display: flex;
+	align-items: center;
+	height: 28px
+}
+.liline{
+	margin-top: 4px;
+	height: 20px;
+	width: 1px;
+	background:#4ea0ff
+}
+.textHint{
+	margin:10px;
+	font-size: 12px;
+	border-top: 1px dashed #ddd;
+	text-align: center;
+}

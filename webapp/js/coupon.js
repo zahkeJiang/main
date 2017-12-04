@@ -1,7 +1,7 @@
 $(function() {
     unused();
     //获取可用优惠券
-    $(".header div.unused").click(function() {
+    $(".header div").click(function() {
         $(this).css({
             "border-bottom": "2px solid orange",
             "color": "orange"
@@ -10,30 +10,18 @@ $(function() {
             "border-bottom": "2px solid #f6f1f1",
             "color": "black"
         });
+    })
+    $(".header div.unused").click(function() {
         unused();
     });
     //获取已用优惠券
     $(".header div.used").click(function() {
-        $(this).css({
-            "border-bottom": "2px solid orange",
-            "color": "orange"
-        });
-        $(this).siblings("div").css({
-            "border-bottom": "2px solid #f6f1f1",
-            "color": "black"
-        });
+
         used();
     });
     //获取已过期优惠券
     $(".header div.overdue").click(function() {
-        $(this).css({
-            "border-bottom": "2px solid orange",
-            "color": "orange"
-        });
-        $(this).siblings("div").css({
-            "border-bottom": "2px solid #f6f1f1",
-            "color": "black"
-        });
+
         overdue();
     });
 });
@@ -49,7 +37,7 @@ function unused() {
                     coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div><p class='date'>" + comment.date + "，即日生效</p></div>"
                 });
 
-                $(".coupon").html(coupon);
+                $(".container").html("<div class='coupon'>" + coupon + "</div>");
                 $(".couponBox span").css({
                     "color": "#00569f"
                 });
@@ -59,9 +47,17 @@ function unused() {
             }
 
             // $(".use_coupon").html("立即使用");
-            // $(".use_coupon").click(function() {
-            //     window.location.href = "index.html";
-            // });
+            $(".couponBox").click(function() {
+                var type = $(this).attr("type"); // type(1为别墅 2为驾校 3为军旅)
+                if (type == "1") {
+                    window.location.href = "villa.html";
+                } else if (type == "2") {
+                    window.location.href = "index.html";
+                } else if (type == "3") {
+                    window.location.href = "army.html";
+                }
+
+            });
         }
 
     }, 'json');
@@ -77,7 +73,7 @@ function used() {
             if (couponList && couponList.length > 0) {
                 var coupon = "";
                 $.each(couponList, function(commentIndex, comment) {
-                    coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div><p class='date'>" + comment.date + "，即日生效</p></div>"
+                    coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div></div>"
                 });
                 $(".container").html("<div class='coupon'>" + coupon + "</div>");
 
@@ -95,13 +91,14 @@ function used() {
 
 function overdue() {
     $.post("getCouponsPassed", {}, function(datas) {
+        $(".container").html("");
         if (datas.status == 0) { //过期
             var couponList = datas.data.coupons;
             if (couponList && couponList.length > 0) {
                 var coupon = "";
 
                 $.each(couponList, function(commentIndex, comment) {
-                    coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div><p class='date'>" + comment.date + "，即日生效</p></div>"
+                    coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div><p class='date'>" + comment.date + "，已过期</p></div>"
                 });
                 $(".container").html("<div class='coupon'>" + coupon + "</div>");
 
