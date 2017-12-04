@@ -3,6 +3,8 @@ package com.bjpygh.gzh.bean;
 import java.util.Date;
 
 public class UserCoupon {
+    private Long couponId;
+
     private Long userId;
 
     private String phoneNumber;
@@ -14,6 +16,14 @@ public class UserCoupon {
     private Integer couponType;
 
     private Date couponTime;
+
+    public Long getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(Long couponId) {
+        this.couponId = couponId;
+    }
 
     public Long getUserId() {
         return userId;

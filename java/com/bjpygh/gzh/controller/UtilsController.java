@@ -128,7 +128,7 @@ public class UtilsController extends BaseController {
         record.setTime(formatter.format(new Date()));
         recordService.insertRecord(record);
 
-        UserCoupon userCoupon = couponService.getCoupon(userid);
+        UserCoupon userCoupon = couponService.getDsCoupon(userid);
         Map<String, String> statusMap = new HashMap<String, String>();
         statusMap.put("userId",""+userCoupon.getUserId());
         statusMap.put("couponStatus", "2");
