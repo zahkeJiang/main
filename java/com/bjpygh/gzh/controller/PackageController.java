@@ -54,7 +54,7 @@ public class PackageController extends BaseController {
         if(userMap == null){
             return Status.notInWx();
         }
-        List<String> dsNames = dsInfoService.selectDsNames();
+        List<Map<String, String>> dsNames = dsInfoService.selectDsNames();
         return Status.success().add("dsNames",dsNames);
     }
 

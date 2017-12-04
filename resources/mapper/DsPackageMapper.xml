@@ -11,6 +11,7 @@
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="must_protection" jdbcType="TINYINT" property="mustProtection" />
     <result column="reservation" jdbcType="VARCHAR" property="reservation" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List">
     packageid, ds_name, ds_type, models, train_time, price, description, must_protection, 
-    reservation
+    reservation, brand
   </sql>
   <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.DsPackageExample" resultMap="BaseResultMap">
     select
@@ -107,12 +108,12 @@
   <insert id="insert" parameterType="com.bjpygh.gzh.bean.DsPackage">
     insert into ds_package (packageid, ds_name, ds_type, 
       models, train_time, price, 
-      description, must_protection, reservation
-      )
+      description, must_protection, reservation, 
+      brand)
     values (#{packageid,jdbcType=INTEGER}, #{dsName,jdbcType=VARCHAR}, #{dsType,jdbcType=VARCHAR}, 
       #{models,jdbcType=VARCHAR}, #{trainTime,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, 
-      #{description,jdbcType=VARCHAR}, #{mustProtection,jdbcType=TINYINT}, #{reservation,jdbcType=VARCHAR}
-      )
+      #{description,jdbcType=VARCHAR}, #{mustProtection,jdbcType=TINYINT}, #{reservation,jdbcType=VARCHAR}, 
+      #{brand,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.DsPackage">
     insert into ds_package
@@ -144,6 +145,9 @@
       <if test="reservation != null">
         reservation,
       </if>
+      <if test="brand != null">
+        brand,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="packageid != null">
@@ -172,6 +176,9 @@
       </if>
       <if test="reservation != null">
         #{reservation,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -211,6 +218,9 @@
       <if test="record.reservation != null">
         reservation = #{record.reservation,jdbcType=VARCHAR},
       </if>
+      <if test="record.brand != null">
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -226,7 +236,8 @@
       price = #{record.price,jdbcType=INTEGER},
       description = #{record.description,jdbcType=VARCHAR},
       must_protection = #{record.mustProtection,jdbcType=TINYINT},
-      reservation = #{record.reservation,jdbcType=VARCHAR}
+      reservation = #{record.reservation,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -258,6 +269,9 @@
       <if test="reservation != null">
         reservation = #{reservation,jdbcType=VARCHAR},
       </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
     </set>
     where packageid = #{packageid,jdbcType=INTEGER}
   </update>
@@ -270,7 +284,8 @@
       price = #{price,jdbcType=INTEGER},
       description = #{description,jdbcType=VARCHAR},
       must_protection = #{mustProtection,jdbcType=TINYINT},
-      reservation = #{reservation,jdbcType=VARCHAR}
+      reservation = #{reservation,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR}
     where packageid = #{packageid,jdbcType=INTEGER}
   </update>
 </mapper>

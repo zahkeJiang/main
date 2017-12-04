@@ -165,7 +165,8 @@ public class DsOrderController extends BaseController {
         dsOrder.setOrderStatus((byte) 0);
         dsOrder.setPhoneNumber(user.getPhoneNumber());
         dsOrder.setTrainTime(dsPackage.getTrainTime());
-        dsOrder.setImageurl(DsInfo.getDsImage());
+        String imageUrl = "http://120.24.184.86/glxt/dsimage/"+DsInfo.getDsImage().split(",")[0];
+        dsOrder.setImageurl(imageUrl);
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         dsOrder.setCreateTime(formatter.format(new Date()));

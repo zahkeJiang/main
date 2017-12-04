@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DsInfoService {
@@ -24,7 +25,7 @@ public class DsInfoService {
         return dsInformationMapper.selectByExample(example);
     }
 
-    public List<String> selectDsNames() {
+    public List<Map<String, String>> selectDsNames() {
 
         return dsInformationMapper.selectDsNames();
     }

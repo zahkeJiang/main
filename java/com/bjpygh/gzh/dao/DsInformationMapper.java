@@ -3,6 +3,8 @@ package com.bjpygh.gzh.dao;
 import com.bjpygh.gzh.bean.DsInformation;
 import com.bjpygh.gzh.bean.DsInformationExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface DsInformationMapper {
@@ -28,5 +30,5 @@ public interface DsInformationMapper {
 
     int updateByPrimaryKey(DsInformation record);
 
-    List<String> selectDsNames();
+    List<Map<String,String>> selectDsNames();
 }

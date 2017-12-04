@@ -19,6 +19,8 @@ public class DsPackage {
 
     private String reservation;
 
+    private String brand;
+
     public Integer getPackageid() {
         return packageid;
     }
@@ -89,5 +91,13 @@ public class DsPackage {
 
     public void setReservation(String reservation) {
         this.reservation = reservation == null ? null : reservation.trim();
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand == null ? null : brand.trim();
     }
 }
