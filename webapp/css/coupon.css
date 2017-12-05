@@ -43,8 +43,53 @@ html, body {
   margin-bottom: 6px;
   width:100%;
 }
-
-
+.layer{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #000;
+  opacity: 0.3;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  z-index: 100;
+  display:none;
+}
+.layerBox{
+  z-index: 101;
+  height: 48px;
+  width: 40%;
+  position: absolute;
+  left: 25%;
+  top: 50%;
+  margin-top: -24px;
+  display: flex;
+  justify-content: space-between;
+}
+.detail{
+  line-height: 48px;
+  text-align: center;
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  color: #555;
+  background: #f6f1f1;
+  opacity: 1;
+  font-size: 14px;
+  display: none;
+}
+.toUse{
+  line-height: 48px;
+  text-align: center;
+  height: 48px;
+  width: 48px;
+  background: #4ea0ff;
+  color: #fff;
+  border-radius: 50%;
+  opacity: 1;
+  font-size: 14px;
+  display: none;
+}
   .couponBox p.date{
     background: #ffe9e1;
     color: #999;

@@ -17,15 +17,16 @@ $(function() {
     });
     //获取已用优惠券
     $(".header div.used").click(function() {
-
         used();
     });
     //获取已过期优惠券
     $(".header div.overdue").click(function() {
-
         overdue();
     });
+
+
 });
+
 //获取可用优惠券
 function unused() {
     $.post("getCoupons", {}, function(datas) {
@@ -35,7 +36,7 @@ function unused() {
             if (couponList && couponList.length > 0) {
                 var coupon = "";
                 $.each(couponList, function(commentIndex, comment) {
-                    coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div><p class='date'>" + comment.date + "，即日生效</p></div>"
+                    coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div><p class='date'>" + comment.date + "，即日生效</p><div class='layer'></div><div class='layerBox'><div class='detail layerBoxChildren'>详情</div><div class='toUse layerBoxChildren'>去使用</div></div></div>"
                 });
 
                 $(".container").html("<div class='coupon'>" + coupon + "</div>" + footerHtml);
@@ -47,9 +48,39 @@ function unused() {
                 $(".container").html(coupon_hint);
             }
 
-            // $(".use_coupon").html("立即使用");
-            $(".couponBox").click(function() {
-                var type = $(this).attr("type"); // type(1为别墅 2为驾校 3为军旅)
+            //点击屏幕，如果元素不是couponBox，则执行以下隐藏程序;
+            $(document).click(function() {
+                $(".layer").hide();
+                $(".detail").hide();
+                $(".toUse").hide();
+            });
+            $(".couponBox").click(function(event) {
+                event.stopPropagation();
+                $(this).siblings(".couponBox").find(".layer").hide();
+                $(this).siblings(".couponBox").find(".detail").hide();
+                $(this).siblings(".couponBox").find(".toUse").hide();
+                $(this).find(".layer").show(100);
+                $(this).find(".detail").show(200);
+                $(this).find(".toUse").show(200);
+            });
+            $(window).scroll(function() {
+                $(".layer").hide(300);
+                $(".detail").hide(300);
+                $(".toUse").hide(300);
+            });
+            $(".detail").click(function() {
+                alert("暂未开放");
+                // var type = $(this).attr("type"); // type(1为别墅 2为驾校 3为军旅)
+                // if (type == "1") {
+                //     window.location.href = "villa.html";
+                // } else if (type == "2") {
+                //     window.location.href = "index.html";
+                // } else if (type == "3") {
+                //     window.location.href = "army.html";
+                // }
+            })
+            $(".toUse").click(function() {
+                var type = $(this).parents(".couponBox").attr("type"); // type(1为别墅 2为驾校 3为军旅)
                 if (type == "1") {
                     window.location.href = "villa.html";
                 } else if (type == "2") {
@@ -57,8 +88,7 @@ function unused() {
                 } else if (type == "3") {
                     window.location.href = "army.html";
                 }
-
-            });
+            })
         }
 
     }, 'json');
@@ -87,7 +117,6 @@ function used() {
             }
         }
     }, 'json');
-
 }
 
 function overdue() {
