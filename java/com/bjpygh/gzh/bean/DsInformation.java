@@ -5,6 +5,8 @@ import java.util.List;
 public class DsInformation {
     private String dsName;
 
+    private Integer sort;
+
     private String dsImage;
 
     private String dsIntro;
@@ -29,6 +31,14 @@ public class DsInformation {
 
     public void setDsName(String dsName) {
         this.dsName = dsName == null ? null : dsName.trim();
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public String getDsImage() {

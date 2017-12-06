@@ -46,7 +46,7 @@ public class CouponService {
             List<UserCoupon> userCoupons = userCouponMapper.selectByExample(example);
             List<Map<String, String>> coupons = new ArrayList<Map<String, String>>();
             for (UserCoupon userCoupon : userCoupons){
-                if(userCoupon!=null&&userCoupon.getCouponStatus()==1){
+                if(userCoupon!=null&&(userCoupon.getCouponStatus()==1||userCoupon.getCouponStatus() == 2)){
                     Date d = new Date(userCoupon.getCouponTime().getTime()+2592000000L);
                     if((new Date()).getTime()-userCoupon.getCouponTime().getTime()<date.getTime()){
                         Map<String, String> map = new HashMap<String, String>();
@@ -149,4 +149,28 @@ public class CouponService {
         userCouponMapper.updataCouponStatus(statusMap);
     }
 
+    public Status getCoupon(String userid) {
+        Date date = new Date(2592000000L);
+
+        try{
+            UserCouponExample example = new UserCouponExample();
+            UserCouponExample.Criteria criteria = example.createCriteria();
+            criteria.andUserIdEqualTo(Long.valueOf(userid));
+            criteria.andCouponTypeEqualTo(2);
+            UserCoupon userCoupon = userCouponMapper.selectByExample(example).get(0);
+            if(userCoupon!=null){
+                if (userCoupon.getCouponStatus() == 1&&(new Date()).getTime()-userCoupon.getCouponTime().getTime()<date.getTime()){
+                    return Status.success().add("price",userCoupon.getCouponPrice());
+                }else {
+                    return Status.fail(-20,"优惠券过期");
+                }
+
+            }else {
+                return Status.fail(-40,"没有优惠券");
+            }
+
+        }catch (NullPointerException ne){
+            return Status.fail(-40,"无优惠券");
+        }
+    }
 }

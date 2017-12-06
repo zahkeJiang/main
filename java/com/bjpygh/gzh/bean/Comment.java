@@ -1,5 +1,6 @@
 package com.bjpygh.gzh.bean;
 
+import java.util.Date;
 
 public class Comment {
     private Integer commentId;
@@ -9,8 +10,6 @@ public class Comment {
     private String nickname;
 
     private String headimageurl;
-
-    private String content;
 
     private String picture;
 
@@ -25,6 +24,10 @@ public class Comment {
     private Integer supportStar;
 
     private Boolean anonymous;
+
+    private String projectName;
+
+    private String content;
 
     public Integer getCommentId() {
         return commentId;
@@ -56,14 +59,6 @@ public class Comment {
 
     public void setHeadimageurl(String headimageurl) {
         this.headimageurl = headimageurl == null ? null : headimageurl.trim();
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
     }
 
     public String getPicture() {
@@ -120,5 +115,21 @@ public class Comment {
 
     public void setAnonymous(Boolean anonymous) {
         this.anonymous = anonymous;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName == null ? null : projectName.trim();
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 }

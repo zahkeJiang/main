@@ -50,6 +50,7 @@ public class CommentController extends BaseController{
             VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(ordernumber).get(0);
             if (villaOrder.getOrderStatus()!=7){
                 comment.setUserId(Long.valueOf(userid));
+                comment.setProjectName(villaOrder.getVillaName());
                 commentService.putComment(comment);
                 villaOrder.setOrderStatus(7);
                 villaOrderService.updateOrder(villaOrder);
@@ -58,6 +59,7 @@ public class CommentController extends BaseController{
             DsOrder dsOrder = dsOrderService.getDsOrderByNumber(ordernumber).get(0);
             if (dsOrder.getOrderStatus()!=7){
                 comment.setUserId(Long.valueOf(userid));
+                comment.setProjectName(dsOrder.getDsName());
                 commentService.putComment(comment);
                 dsOrder.setOrderStatus((byte) 7);
                 dsOrderService.updateOrder(dsOrder);
@@ -66,6 +68,7 @@ public class CommentController extends BaseController{
             ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
             if (armyOrder.getOrderStatus()!=7){
                 comment.setUserId(Long.valueOf(userid));
+                comment.setProjectName(armyOrder.getArmyName());
                 commentService.putComment(comment);
                 armyOrder.setOrderStatus(7);
                 armyOrderService.updateOrder(armyOrder);
