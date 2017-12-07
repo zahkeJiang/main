@@ -1,4 +1,10 @@
 $(function() {
+    document.getElementById("fangxiangpang").addEventListener('touchstart', function() {}); //空函数即可
+    $(".question1").show();
+    $(".content").show();
+    $(".bg").show();
+    $(".right").show();
+    $(".fangxiangpang").show();
     $.post("getRecommend", {}, function(datas) {
         if (datas.status == 0) {
             $(".content").css({
