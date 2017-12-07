@@ -83,7 +83,7 @@ public class PackageService {
 
             } else if (dsPackageInfos.get(i).getDsName().equals("公交驾校")) {
                 dsPackageInfos.get(i).
-                        setImageUrl("http://120.24.184.86/glxt/dsimage/gj_1.jpg");
+                        setImageUrl("http://120.24.184.86/glxt/dsimage/gj_1.png");
 
             } else if (dsPackageInfos.get(i).getDsName().equals("北方驾校")) {
                 dsPackageInfos.get(i).
@@ -91,7 +91,7 @@ public class PackageService {
 
             } else if (dsPackageInfos.get(i).getDsName().equals("海淀驾校")) {
                 dsPackageInfos.get(i).
-                        setImageUrl("http://120.24.184.86/glxt/dsimage/hd_1.jpg");
+                        setImageUrl("http://120.24.184.86/glxt/dsimage/ds_bg1.jpg");
 
             } else if (dsPackageInfos.get(i).getDsName().equals("远大驾校")) {
                 dsPackageInfos.get(i).
@@ -99,7 +99,7 @@ public class PackageService {
 
             } else if (dsPackageInfos.get(i).getDsName().equals("远航驾校")) {
                 dsPackageInfos.get(i).
-                        setImageUrl("http://120.24.184.86/glxt/dsimage/yh_1.jpg");
+                        setImageUrl("http://120.24.184.86/glxt/dsimage/yh_1.png");
 
             } else if (dsPackageInfos.get(i).getDsName().equals("龙泉驾校")) {
                 dsPackageInfos.get(i).
