@@ -6,6 +6,8 @@ public class DsPackageInfo extends DsPackage{
 
     private int count;
 
+    private String imageUrl;
+
     public DsPackageInfo(){
 
     }
@@ -22,6 +24,14 @@ public class DsPackageInfo extends DsPackage{
         this.setDescription(dsPackage.getDescription());
         this.setBrand(dsPackage.getBrand());
         this.setCount(0);
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public int getCount() {
