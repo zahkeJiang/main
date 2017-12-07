@@ -89,53 +89,53 @@ public class PackageController extends BaseController {
 
     //提交推荐数据接口
     @ResponseBody
-    @RequestMapping(value = "/Recommend", method = RequestMethod.POST)
-    public Status setRecommend(HttpServletRequest request,@RequestBody(required = false)Recommend recommend){
+    @RequestMapping(value = "/setRecommend", method = RequestMethod.POST)
+    public Status setRecommend(HttpServletRequest request,Recommend recommend){
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
         }
 
-        if (recommend != null){
+//        if (recommend != null){
             recommend.setRecommend(Long.valueOf(userMap.get("id")));
             recommendService.setRecommend(recommend);
 
             List<DsPackage> packageByRecommend = packageService.getPackageByRecommend(recommend);
             return  Status.success().add("packages",packageByRecommend);
-        }else {
-            recommend = recommendService.getRecommend(userMap.get("id"));
-            if (recommend != null){
-                List<DsPackage> packageByRecommend = packageService.getPackageByRecommend(recommend);
-                return  Status.success().add("packages",packageByRecommend);
-            }else {
-                return Status.fail(-20,"没有推荐记录");
-            }
-        }
+//        }else {
+//            recommend = recommendService.getRecommend(userMap.get("id"));
+//            if (recommend != null){
+//                List<DsPackage> packageByRecommend = packageService.getPackageByRecommend(recommend);
+//                return  Status.success().add("packages",packageByRecommend);
+//            }else {
+//                return Status.fail(-20,"没有推荐记录");
+//            }
+//        }
 
     }
 
-//    //获取推荐记录接口
-//    @ResponseBody
-//    @RequestMapping(value = "/getRecommend", method = RequestMethod.POST)
-//    public Status getRecommend(HttpServletRequest request){
-//        Map<String, String> userMap = checkWxUser(request);
-//        if(userMap == null){
-//            return Status.notInWx();
-//        }
-//
-//        Recommend recommend = recommendService.getRecommend(userMap.get("id"));
-//        if (recommend != null){
-//            List<DsPackage> packageByRecommend = packageService.getPackageByRecommend(recommend);
-//            if (packageByRecommend.size()>0){
-//                return  Status.success().add("packages",packageByRecommend);
-//            }else {
-//                return  Status.fail(-30,"根据您的选择，没有匹配到推荐");
-//            }
-//
-//        }else {
-//            return Status.fail(-20,"没有推荐记录");
-//        }
-//    }
+    //获取推荐记录接口
+    @ResponseBody
+    @RequestMapping(value = "/getRecommend", method = RequestMethod.POST)
+    public Status getRecommend(HttpServletRequest request){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+
+        Recommend recommend = recommendService.getRecommend(userMap.get("id"));
+        if (recommend != null){
+            List<DsPackage> packageByRecommend = packageService.getPackageByRecommend(recommend);
+            if (packageByRecommend.size()>0){
+                return  Status.success().add("packages",packageByRecommend);
+            }else {
+                return  Status.fail(-30,"根据您的选择，没有匹配到推荐");
+            }
+
+        }else {
+            return Status.fail(-20,"没有推荐记录");
+        }
+    }
 
 
 }
