@@ -72,6 +72,40 @@ public class PackageService {
         for (DsPackage dsPackage : dsPackages){
             dsPackageInfos.add(new DsPackageInfo(dsPackage));
         }
+        for (int i=0;i<dsPackageInfos.size();i++){
+            if (dsPackageInfos.get(i).getDsName().equals("东方时尚驾校")) {
+                dsPackageInfos.get(i).
+                        setImageUrl("http://120.24.184.86/glxt/dsimage/dfss_1.jpg");
+
+            } else if (dsPackageInfos.get(i).getDsName().equals("京都府驾校")) {
+                dsPackageInfos.get(i).
+                        setImageUrl("http://120.24.184.86/glxt/dsimage/jdf_1.jpg");
+
+            } else if (dsPackageInfos.get(i).getDsName().equals("公交驾校")) {
+                dsPackageInfos.get(i).
+                        setImageUrl("http://120.24.184.86/glxt/dsimage/gj_1.jpg");
+
+            } else if (dsPackageInfos.get(i).getDsName().equals("北方驾校")) {
+                dsPackageInfos.get(i).
+                        setImageUrl("http://120.24.184.86/glxt/dsimage/bf_1.jpg");
+
+            } else if (dsPackageInfos.get(i).getDsName().equals("海淀驾校")) {
+                dsPackageInfos.get(i).
+                        setImageUrl("http://120.24.184.86/glxt/dsimage/hd_1.jpg");
+
+            } else if (dsPackageInfos.get(i).getDsName().equals("远大驾校")) {
+                dsPackageInfos.get(i).
+                        setImageUrl("http://120.24.184.86/glxt/dsimage/yd_1.jpg");
+
+            } else if (dsPackageInfos.get(i).getDsName().equals("远航驾校")) {
+                dsPackageInfos.get(i).
+                        setImageUrl("http://120.24.184.86/glxt/dsimage/yh_1.jpg");
+
+            } else if (dsPackageInfos.get(i).getDsName().equals("龙泉驾校")) {
+                dsPackageInfos.get(i).
+                        setImageUrl("http://120.24.184.86/glxt/dsimage/lq_1.jpg");
+            }
+        }
         /**
          * 驾校区域判断
          */
