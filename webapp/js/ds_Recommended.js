@@ -61,27 +61,44 @@ $(function() {
 
                 console.log("最终的答案是", $.cookie("question"));
                 var questionDatas = {
-                    shortTerm: questions[0],
-                    workDay: questions[1],
-                    customize: questions[2],
-                    scale: questions[3],
-                    price: questions[4]
-                }
-                $.post("setRecommend", questionDatas, function(datas) {
-                    $(".content").css({
-                        "padding-bottom": "20px"
-                    });
-                    $(".content").fadeIn(500);
-                    $(".dsListBox").fadeIn(500);
-                    if (datas.status == 0) {
-                        var dsListHtml = "";
-                        var dsListDatas = datas.data.packages;
-                        $.each(dsListDatas, function(commentIndex, comment) {
-                            dsListHtml += '<div class="dsList"><img src="./images/armyImages/1.png"><div class="dsContent"><h2>' + comment.dsName + '</h2><p>¥' + comment.price + '</p><div><span>' + comment.dsType + '</span><span>' + comment.models + '</span><span>' + comment.trainTime + '</span></div></div></div>';
-                        });
-                        // dsListHtml = '<div class="dsList"><img src="./images/armyImages/1.png"><div class="dsContent"><h2>海淀驾校</h2><p>¥6000</p><div><span>预约计时班</span><span>C1 手动挡</span><span>全周</span></div></div></div><div class="dsList"><img src="./images/armyImages/1.png"><div class="dsContent"><h2>海淀驾校</h2><p>¥6000</p><div><span>预约计时班</span><span>C1 手动挡</span><span>全周</span></div></div></div><div class="dsList"><img src="./images/armyImages/1.png"><div class="dsContent"><h2>海淀驾校</h2><p>¥6000</p><div><span>预约计时班</span><span>C1 手动挡</span><span>全周</span></div></div></div><div class="dsList"><img src="./images/armyImages/1.png"><div class="dsContent"><h2>海淀驾校</h2><p>¥6000</p><div><span>预约计时班</span><span>C1 手动挡</span><span>全周</span></div></div></div><div class="dsList"><img src="./images/armyImages/1.png"><div class="dsContent"><h2>海淀驾校</h2><p>¥6000</p><div><span>预约计时班</span><span>C1 手动挡</span><span>全周</span></div></div></div>';
+                        "shortTerm": questions[0],
+                        "workDay": questions[1],
+                        "customize": questions[2],
+                        "scale": questions[3],
+                        "price": questions[4]
+                    }
+                    // $.post("Recommend", {
+                    //     "shortTerm": '4',
+                    //     "workDay": '4',
+                    //     "customize": '2',
+                    //     "scale": ' 2',
+                    //     "price": '4'
+                    // }, function(datas) {
+                    //     $(".content").css({
+                    //         "padding-bottom": "20px"
+                    //     });
+                    //     $(".content").fadeIn(500);
+                    //     $(".dsListBox").fadeIn(500);
+                    //     if (datas.status == 0) {
+                    //         var dsListHtml = "";
+                    //         var dsListDatas = datas.data.packages;
+                    //         $.each(dsListDatas, function(commentIndex, comment) {
+                    //             dsListHtml += '<div class="dsList"><img src="./images/armyImages/1.png"><div class="dsContent"><h2>' + comment.dsName + '</h2><p>¥' + comment.price + '</p><div><span>' + comment.dsType + '</span><span>' + comment.models + '</span><span>' + comment.trainTime + '</span></div></div></div>';
+                    //         });
+                    //         // dsListHtml = '<div class="dsList"><img src="./images/armyImages/1.png"><div class="dsContent"><h2>海淀驾校</h2><p>¥6000</p><div><span>预约计时班</span><span>C1 手动挡</span><span>全周</span></div></div></div><div class="dsList"><img src="./images/armyImages/1.png"><div class="dsContent"><h2>海淀驾校</h2><p>¥6000</p><div><span>预约计时班</span><span>C1 手动挡</span><span>全周</span></div></div></div><div class="dsList"><img src="./images/armyImages/1.png"><div class="dsContent"><h2>海淀驾校</h2><p>¥6000</p><div><span>预约计时班</span><span>C1 手动挡</span><span>全周</span></div></div></div><div class="dsList"><img src="./images/armyImages/1.png"><div class="dsContent"><h2>海淀驾校</h2><p>¥6000</p><div><span>预约计时班</span><span>C1 手动挡</span><span>全周</span></div></div></div><div class="dsList"><img src="./images/armyImages/1.png"><div class="dsContent"><h2>海淀驾校</h2><p>¥6000</p><div><span>预约计时班</span><span>C1 手动挡</span><span>全周</span></div></div></div>';
 
-                        $(".dsListContent").html(dsListHtml);
+                //         $(".dsListContent").html(dsListHtml);
+                //     }
+                // }, "json");
+                $.post("Recommend", {
+                    "shortTerm": "4",
+                    "workDay": '4',
+                    "customize": '2',
+                    "scale": ' 2',
+                    "price": '4'
+                }, function(datas) {
+                    if (datas.status == 0) {
+                        console.log(123456)
                     }
                 }, "json");
 
