@@ -12,6 +12,7 @@ body,html{
     margin-top: 40px;
     position: relative;
     display: none;
+    z-index: 99;
 }
 .contentBox img.cloud{
     position: absolute;
@@ -41,6 +42,7 @@ body,html{
     left: 40%;
     top: 62%;
     display: none;
+    z-index: 100;
 }
 .content img.car2{
     position: absolute;
@@ -48,6 +50,7 @@ body,html{
     left: 34%;
     top: 62%;
     display: none;
+    z-index: 100;
 }
 .content img.car3{
     position: absolute;
@@ -55,6 +58,7 @@ body,html{
     left: 24%;
     top: 64%;
     display: none;
+    z-index: 100;
 }
 .content img.car4{
     position: absolute;
@@ -62,6 +66,7 @@ body,html{
     left: 10%;
     top: 66%;
     display: none;
+    z-index: 100;
 }
 .content img.car5{
     position: absolute;
@@ -69,6 +74,7 @@ body,html{
     left: -5%;
     top: 68%;
     display: none;
+    z-index: 100;
 }
 
 
@@ -88,6 +94,34 @@ body,html{
     -o-transition: all .5s ease-out;
     transition: all .5s ease-out;
 }
+/*.content img.fangxiangpang:link{
+    transform :rotate(90deg);
+    -moz-transition: all .5s ease-out;
+    -webkit-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    transition: all .5s ease-out;
+}
+.content img.fangxiangpang:visited{
+    transform :rotate(90deg);
+    -moz-transition: all .5s ease-out;
+    -webkit-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    transition: all .5s ease-out;
+}
+.content img.fangxiangpang:hover{
+    transform :rotate(90deg);
+    -moz-transition: all .5s ease-out;
+    -webkit-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    transition: all .5s ease-out;
+}
+.content img.fangxiangpang:active {
+    transform :rotate(90deg);
+    -moz-transition: all .5s ease-out;
+    -webkit-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    transition: all .5s ease-out;
+}*/
 .content img.right{
     position: absolute;
     width: 6%;
@@ -223,5 +257,6 @@ body,html{
 position: absolute;
 bottom: 0;
 left: 0;
+z-index: 98;
 width: 100%;
 }
