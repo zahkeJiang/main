@@ -1,0 +1,215 @@
+body,html{
+    background: #f6f1f1;
+}
+.contentBox{
+}
+.content{
+    padding: 40px 0px 0px 0px;
+    background: #6ebaff;
+    border-radius: 20px;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 40px;
+    position: relative;
+}
+.contentBox img.cloud{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60%;
+    margin-left: -8%;
+    margin-top: -8%;
+    z-index: 100;
+}
+.content img.bg{
+    width: 100%;
+}
+.textBox{
+    position: absolute;
+    width: 80%;
+    top: 40px;
+    height: 140px;
+    margin-left: 10%;
+    color: #fff;
+}
+
+.content img.car1{
+    position: absolute;
+    width: 24%;
+    left: 40%;
+    top: 60%;
+    display: none;
+}
+.content img.car2{
+    position: absolute;
+    width: 36%;
+    left: 34%;
+    top: 62%;
+    display: none;
+}
+.content img.car3{
+    position: absolute;
+    width: 52%;
+    left: 24%;
+    top: 64%;
+    display: none;
+}
+.content img.car4{
+    position: absolute;
+    width: 80%;
+    left: 10%;
+    top: 66%;
+    display: none;
+}
+.content img.car5{
+    position: absolute;
+    width: 110%;
+    left: -5%;
+    top: 68%;
+    display: none;
+}
+
+
+.content img.fangxiangpang{
+    position: absolute;
+    width: 12%;
+    right: 15%;
+    top: 50%;
+    transform :rotate(0deg);
+    transition: all 0.5s ease-out;
+}
+.content img.fangxiangpang:active {
+    transform :rotate(90deg);
+    -moz-transition: all .5s ease-out;
+    -webkit-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    transition: all .5s ease-out;
+}
+.content img.right{
+    position: absolute;
+    width: 6%;
+    right: 6%;
+    top: 53%;
+}
+.content h2{
+    font-size: 18px;
+    line-height: 24px;
+}
+.textBox{
+    display: none;
+}
+.textBox ul{
+    padding: 10px 20px;
+}
+.textBox ul li{
+    line-height: 28px;
+}
+.textBox ul li label{
+    display: flex;
+    align-items: center;
+}
+.radioDiv{
+    height: 16px;
+    width: 16px;
+    border:1px solid #fff;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.radioDivChild{
+    height: 12px;
+    width: 12px;
+    margin-top: 2px;
+    margin-left: 2px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+/*驾校列表*/
+.dsListBox{
+    display: none;
+}
+.dsListContent{
+
+    overflow-x:scroll;
+    min-height: 200px;
+    max-height: 300px;
+    padding:40px 8px 0px 8px;
+}
+.dsListContent::-webkit-scrollbar {/*隐藏滚动条*/
+    display: none;
+}
+
+.dsListBox h2.dsListBox-title{
+    text-align: center;
+    width: 98%;
+    margin-left: 1%;
+    z-index:99;
+    color: #fff;
+    font-size: 18px;
+    height: 30px;
+    line-height: 30px;
+    box-shadow: 0px 5px 10px #6ebaff;  
+    position: absolute;
+    background: #6ebaff;
+}
+.dsContent{
+    flex: 1;
+    padding: 0 10px;
+
+}
+.dsList{
+    margin-bottom:10px;
+    text-align: left;
+    background: #f6f1f1;
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+}
+.dsList:last-child{
+     margin-bottom:0;
+}
+.dsList img{
+    height: 60px;
+    width: 80px;
+    border-radius: 2px;
+}
+@media only screen and (min-width: 360px){
+    .dsList img{
+        height: 80px;
+        width: 106px;
+        border-radius: 2px;
+    }
+    .dsListContent{
+        overflow-x:scroll;
+        min-height: 200px;
+        max-height: 360px;
+        padding:40px 8px 0px 8px;
+    }
+}
+.dsList h2{
+    text-align: left;
+    height: 28px;
+    line-height: 28px;
+    color: #6ebaff;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+}
+.dsList span{
+    font-size: 12px;
+    color: #999;
+    line-height: 28px;
+}
+.dsList p{
+    font-size: 16px;
+    margin-top:7px; 
+    color: #555
+}
+
+
+/*底部*/
+.footer img{
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+}

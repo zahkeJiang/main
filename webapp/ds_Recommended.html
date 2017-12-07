@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>驾校推荐</title>
+	<link href="css/base.css" rel="stylesheet" type="text/css"/>
+    <link href="css/ds_Recommended.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div class="contentBox">
+        <div class="content">
+            <img src="./images/DSRecommended/bg.png" class="bg">
+            <img src="./images/DSRecommended/cloud.png" class="cloud">
+            <div class="textBox question1">
+                <h2>1.你有短期内考取驾照的需要吗？</h2>
+                <ul>
+                    <li>
+                        <label for="need">
+                            <div class="radioDiv"></div>
+                            <span>需要</span>
+                            <input type="radio" name="question1" id="need" value="需要">
+                        </label>
+                    </li>
+                    <li>
+                        <label for="noneed">
+                            <div class="radioDiv"></div>
+                            <span>不需要</span>
+                            <input type="radio" name="question1" id="noneed" value="不需要">
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="textBox question2">
+                <h2>2.你愿意占用工作日的时间去驾校训练吗？</h2>
+                <ul>
+                    <li>
+                        <label for="yuanyi">
+                            <div class="radioDiv"></div>
+                            <span>愿意</span>
+                            <input type="radio" name="question2" id="yuanyi" value="愿意">
+                        </label>
+                    </li>
+                    <li>
+                        <label for="buyuanyi">
+                            <div class="radioDiv"></div>
+                            <span>不愿意</span>
+                            <input type="radio" name="question2" id="buyuanyi" value="不愿意">
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="textBox question3">
+                <h2>3.你是否更偏向于根据自己的时间提前和驾校定制科目二、三的训练计划？</h2>
+                <ul>
+                    <li>
+                        <label for="yes">
+                            <div class="radioDiv"></div>
+                            <span>是</span>
+                            <input type="radio" name="question3" id="yes" value="是">
+                        </label>
+                    </li>
+                    <li>
+                        <label for="no">
+                            <div class="radioDiv"></div>
+                            <span>否</span>
+                            <input type="radio" name="question3" id="no" value="否">
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="textBox question4">
+                <h2>4.你希望报考的驾校位于以下哪个区域？</h2>
+                <ul>
+                    <li>
+                        <label for="jiaoda">
+                            <div class="radioDiv"></div>
+                            <span>海淀区</span>
+                            <input type="radio" name="question4" id="jiaoda" value="海淀区">
+                        </label>
+                    </li>
+                    <li>
+                        <label for="yiban">
+                            <div class="radioDiv"></div>
+                            <span>昌平区</span>
+                            <input type="radio" name="question4" id="yiban" value="昌平区">
+                        </label>
+                    </li>
+                    <li>
+                        <label for="jiaoxiao">
+                            <div class="radioDiv"></div>
+                            <span>大兴区</span>
+                            <input type="radio" name="question4" id="jiaoxiao" value="大兴区">
+                        </label>
+                    </li>
+                    <li>
+                        <label for="meiyou">
+                            <div class="radioDiv"></div>
+                            <span>都可以</span>
+                            <input type="radio" name="question4" id="meiyou" value=" 都可以">
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="textBox question5">
+                <h2>5.你心中可接受的学车费用为以下哪个区间？</h2>
+                <ul>
+                    <li>
+                        <label for="sanqian">
+                            <div class="radioDiv"></div>
+                            <span>低于4000元</span>
+                            <input type="radio" name="question5" id="sanqian" value="3000元-4000元">
+                        </label>
+                    </li>
+                    <li>
+                        <label for="siqian">
+                            <div class="radioDiv"></div>
+                            <span>4000元-6000元</span>
+                            <input type="radio" name="question5" id="siqian" value="4000元-5000元">
+                        </label>
+                    </li>
+                    <li>
+                        <label for="liuqian">
+                            <div class="radioDiv"></div>
+                            <span>高于6000元</span>
+                            <input type="radio" name="question5" id="liuqian" value="高于6000元">
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <img src="./images/DSRecommended/car.png" class="car car1 question1">
+            <img src="./images/DSRecommended/car.png" class="car car2 question2">
+            <img src="./images/DSRecommended/car.png" class="car car3 question3">
+            <img src="./images/DSRecommended/car.png" class="car car4 question4">
+            <img src="./images/DSRecommended/car.png" class="car car5 question5">
+            <img src="./images/DSRecommended/fangxiangpang.png" class="fangxiangpang" id="fangxiangpang">
+            <img src="./images/DSRecommended/right.png" class="right">
+            <div class="dsListBox">
+                <h2 class="dsListBox-title">主人~小漂为您推荐以下内容</h2>
+                <div class="dsListContent">
+                    <!-- <div class="dsList">
+                        <img src="./images/armyImages/1.png">
+                        <div class="dsContent">
+                            <h2>海淀驾校</h2>
+                            <p>¥6000</p>
+                            <div>
+                                <span>预约计时班</span>
+                                <span>C1 手动挡</span>
+                                <span>全周</span>
+                            </div>
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+    <div class="footer">
+        <img src="./images/DSRecommended/city.png">
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script src="js/jquery.cookie.js" type="text/javascript"></script>
+<!--<script type="text/javascript" src="js/isWeiXin.js"></script>-->
+<script src="js/ds_Recommended.js"></script>
+</html>

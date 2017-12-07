@@ -49,6 +49,7 @@ html, body {
   width: 100%;
   background: #000;
   opacity: 0.3;
+  filter:alpha(Opacity=30);
   top: 0;
   left: 0;
   border-radius: 10px;
@@ -75,6 +76,7 @@ html, body {
   color: #555;
   background: #f6f1f1;
   opacity: 1;
+  filter:alpha(Opacity=100);
   font-size: 14px;
   display: none;
 }
@@ -87,6 +89,7 @@ html, body {
   color: #fff;
   border-radius: 50%;
   opacity: 1;
+  filter:alpha(Opacity=100);
   font-size: 14px;
   display: none;
 }

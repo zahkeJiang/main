@@ -48,7 +48,6 @@ body{
 }
 .swiper-container-android .swiper-slide-next,.swiper-container-android .swiper-slide-prev{
     transform: scale(0.9,0.9);
-
     -moz-transition: all .5s ease-out;
     -webkit-transition: all .5s ease-out;
     -o-transition: all .5s ease-out;
