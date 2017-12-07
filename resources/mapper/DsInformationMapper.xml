@@ -3,6 +3,7 @@
 <mapper namespace="com.bjpygh.gzh.dao.DsInformationMapper">
   <resultMap id="BaseResultMap" type="com.bjpygh.gzh.bean.DsInformation">
     <id column="ds_name" jdbcType="VARCHAR" property="dsName" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="ds_image" jdbcType="VARCHAR" property="dsImage" />
     <result column="ds_intro" jdbcType="VARCHAR" property="dsIntro" />
     <result column="address" jdbcType="VARCHAR" property="address" />
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ds_name, ds_image, ds_intro, address, description
+    ds_name, sort, ds_image, ds_intro, address, description
   </sql>
   <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.DsInformationExample" resultMap="BaseResultMap">
     select
@@ -100,16 +101,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.bjpygh.gzh.bean.DsInformation">
-    insert into ds_info (ds_name, ds_image, ds_intro, 
-      address, description)
-    values (#{dsName,jdbcType=VARCHAR}, #{dsImage,jdbcType=VARCHAR}, #{dsIntro,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
+    insert into ds_info (ds_name, sort, ds_image, 
+      ds_intro, address, description
+      )
+    values (#{dsName,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{dsImage,jdbcType=VARCHAR}, 
+      #{dsIntro,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.DsInformation">
     insert into ds_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="dsName != null">
         ds_name,
+      </if>
+      <if test="sort != null">
+        sort,
       </if>
       <if test="dsImage != null">
         ds_image,
@@ -127,6 +133,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="dsName != null">
         #{dsName,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
       </if>
       <if test="dsImage != null">
         #{dsImage,jdbcType=VARCHAR},
@@ -154,6 +163,9 @@
       <if test="record.dsName != null">
         ds_name = #{record.dsName,jdbcType=VARCHAR},
       </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
       <if test="record.dsImage != null">
         ds_image = #{record.dsImage,jdbcType=VARCHAR},
       </if>
@@ -174,6 +186,7 @@
   <update id="updateByExample" parameterType="map">
     update ds_info
     set ds_name = #{record.dsName,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
       ds_image = #{record.dsImage,jdbcType=VARCHAR},
       ds_intro = #{record.dsIntro,jdbcType=VARCHAR},
       address = #{record.address,jdbcType=VARCHAR},
@@ -183,11 +196,17 @@
     </if>
   </update>
     <select id="selectDsNames" resultType="map">
-        SELECT ds_name,description FROM ds_info
+        SELECT ds_name,description FROM ds_info ORDER BY sort
+    </select>
+    <select id="selectDsNamesByAddress" parameterType="string" resultType="string">
+        SELECT ds_name FROM ds_info WHERE address LIKE '%' #{address} '%'
     </select>
   <update id="updateByPrimaryKeySelective" parameterType="com.bjpygh.gzh.bean.DsInformation">
     update ds_info
     <set>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
       <if test="dsImage != null">
         ds_image = #{dsImage,jdbcType=VARCHAR},
       </if>
@@ -205,10 +224,12 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bjpygh.gzh.bean.DsInformation">
     update ds_info
-    set ds_image = #{dsImage,jdbcType=VARCHAR},
+    set sort = #{sort,jdbcType=INTEGER},
+      ds_image = #{dsImage,jdbcType=VARCHAR},
       ds_intro = #{dsIntro,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR}
     where ds_name = #{dsName,jdbcType=VARCHAR}
   </update>
+
 </mapper>

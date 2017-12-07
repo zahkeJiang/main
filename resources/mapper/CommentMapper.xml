@@ -6,7 +6,6 @@
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="headimageurl" jdbcType="VARCHAR" property="headimageurl" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="picture" jdbcType="VARCHAR" property="picture" />
     <result column="enter_star" jdbcType="INTEGER" property="enterStar" />
     <result column="type" jdbcType="INTEGER" property="type" />
@@ -14,6 +13,10 @@
     <result column="stay_star" jdbcType="INTEGER" property="stayStar" />
     <result column="support_star" jdbcType="INTEGER" property="supportStar" />
     <result column="anonymous" jdbcType="BIT" property="anonymous" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bjpygh.gzh.bean.Comment">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,9 +77,28 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    comment_id, user_id, nickname, headimageurl, content, picture, enter_star, type, 
-    comment_time, stay_star, support_star, anonymous
+    comment_id, user_id, nickname, headimageurl, picture, enter_star, type, comment_time, 
+    stay_star, support_star, anonymous, project_name
   </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.bjpygh.gzh.bean.CommentExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.CommentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -91,9 +113,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from comment
     where comment_id = #{commentId,jdbcType=INTEGER}
   </select>
@@ -109,15 +133,15 @@
   </delete>
   <insert id="insert" parameterType="com.bjpygh.gzh.bean.Comment">
     insert into comment (comment_id, user_id, nickname, 
-      headimageurl, content, picture, 
-      enter_star, type, comment_time, 
-      stay_star, support_star, anonymous
-      )
+      headimageurl, picture, enter_star, 
+      type, comment_time, stay_star, 
+      support_star, anonymous, project_name, 
+      content)
     values (#{commentId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR}, 
-      #{headimageurl,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
-      #{enterStar,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{commentTime,jdbcType=TIMESTAMP}, 
-      #{stayStar,jdbcType=INTEGER}, #{supportStar,jdbcType=INTEGER}, #{anonymous,jdbcType=BIT}
-      )
+      #{headimageurl,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{enterStar,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{commentTime,jdbcType=TIMESTAMP}, #{stayStar,jdbcType=INTEGER}, 
+      #{supportStar,jdbcType=INTEGER}, #{anonymous,jdbcType=BIT}, #{projectName,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.Comment">
     insert into comment
@@ -133,9 +157,6 @@
       </if>
       <if test="headimageurl != null">
         headimageurl,
-      </if>
-      <if test="content != null">
-        content,
       </if>
       <if test="picture != null">
         picture,
@@ -158,6 +179,12 @@
       <if test="anonymous != null">
         anonymous,
       </if>
+      <if test="projectName != null">
+        project_name,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="commentId != null">
@@ -171,9 +198,6 @@
       </if>
       <if test="headimageurl != null">
         #{headimageurl,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
       </if>
       <if test="picture != null">
         #{picture,jdbcType=VARCHAR},
@@ -195,6 +219,12 @@
       </if>
       <if test="anonymous != null">
         #{anonymous,jdbcType=BIT},
+      </if>
+      <if test="projectName != null">
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -219,9 +249,6 @@
       <if test="record.headimageurl != null">
         headimageurl = #{record.headimageurl,jdbcType=VARCHAR},
       </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=VARCHAR},
-      </if>
       <if test="record.picture != null">
         picture = #{record.picture,jdbcType=VARCHAR},
       </if>
@@ -243,7 +270,32 @@
       <if test="record.anonymous != null">
         anonymous = #{record.anonymous,jdbcType=BIT},
       </if>
+      <if test="record.projectName != null">
+        project_name = #{record.projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update comment
+    set comment_id = #{record.commentId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      headimageurl = #{record.headimageurl,jdbcType=VARCHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      enter_star = #{record.enterStar,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      comment_time = #{record.commentTime,jdbcType=TIMESTAMP},
+      stay_star = #{record.stayStar,jdbcType=INTEGER},
+      support_star = #{record.supportStar,jdbcType=INTEGER},
+      anonymous = #{record.anonymous,jdbcType=BIT},
+      project_name = #{record.projectName,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -254,14 +306,14 @@
       user_id = #{record.userId,jdbcType=BIGINT},
       nickname = #{record.nickname,jdbcType=VARCHAR},
       headimageurl = #{record.headimageurl,jdbcType=VARCHAR},
-      content = #{record.content,jdbcType=VARCHAR},
       picture = #{record.picture,jdbcType=VARCHAR},
       enter_star = #{record.enterStar,jdbcType=INTEGER},
       type = #{record.type,jdbcType=INTEGER},
       comment_time = #{record.commentTime,jdbcType=TIMESTAMP},
       stay_star = #{record.stayStar,jdbcType=INTEGER},
       support_star = #{record.supportStar,jdbcType=INTEGER},
-      anonymous = #{record.anonymous,jdbcType=BIT}
+      anonymous = #{record.anonymous,jdbcType=BIT},
+      project_name = #{record.projectName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -277,9 +329,6 @@
       </if>
       <if test="headimageurl != null">
         headimageurl = #{headimageurl,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
       </if>
       <if test="picture != null">
         picture = #{picture,jdbcType=VARCHAR},
@@ -302,7 +351,29 @@
       <if test="anonymous != null">
         anonymous = #{anonymous,jdbcType=BIT},
       </if>
+      <if test="projectName != null">
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bjpygh.gzh.bean.Comment">
+    update comment
+    set user_id = #{userId,jdbcType=BIGINT},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      headimageurl = #{headimageurl,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      enter_star = #{enterStar,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      comment_time = #{commentTime,jdbcType=TIMESTAMP},
+      stay_star = #{stayStar,jdbcType=INTEGER},
+      support_star = #{supportStar,jdbcType=INTEGER},
+      anonymous = #{anonymous,jdbcType=BIT},
+      project_name = #{projectName,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bjpygh.gzh.bean.Comment">
@@ -310,14 +381,15 @@
     set user_id = #{userId,jdbcType=BIGINT},
       nickname = #{nickname,jdbcType=VARCHAR},
       headimageurl = #{headimageurl,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR},
       picture = #{picture,jdbcType=VARCHAR},
       enter_star = #{enterStar,jdbcType=INTEGER},
       type = #{type,jdbcType=INTEGER},
       comment_time = #{commentTime,jdbcType=TIMESTAMP},
       stay_star = #{stayStar,jdbcType=INTEGER},
       support_star = #{supportStar,jdbcType=INTEGER},
-      anonymous = #{anonymous,jdbcType=BIT}
+      anonymous = #{anonymous,jdbcType=BIT},
+      project_name = #{projectName,jdbcType=VARCHAR}
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
+
 </mapper>

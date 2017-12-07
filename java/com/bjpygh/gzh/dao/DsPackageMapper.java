@@ -3,6 +3,9 @@ package com.bjpygh.gzh.dao;
 import com.bjpygh.gzh.bean.DsPackage;
 import com.bjpygh.gzh.bean.DsPackageExample;
 import java.util.List;
+import java.util.Map;
+
+import com.bjpygh.gzh.bean.Recommend;
 import org.apache.ibatis.annotations.Param;
 
 public interface DsPackageMapper {
@@ -27,4 +30,6 @@ public interface DsPackageMapper {
     int updateByPrimaryKeySelective(DsPackage record);
 
     int updateByPrimaryKey(DsPackage record);
+
+    List<DsPackage> selectByRecommend(Map<String, Object> map);
 }

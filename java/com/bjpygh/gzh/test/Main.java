@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 
 public class Main {
@@ -78,16 +79,18 @@ public class Main {
 
 //        System.out.println(1*0.5);
 
-        OrderPush orderPush = new OrderPush();
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("first","Hi，您已成功提交驾考订单");
-        map.put("orderID","DSPYGH20178212216292");
-        map.put("orderMoneySum",1280+"");
-        map.put("remark","请尽快支付，如有问题咨询客服：010-59822296");
-        map.put("openid","o9C-m0gWfR9WOs8DIDElxSUfDIUU");
+//        OrderPush orderPush = new OrderPush();
+//        Map<String, String> map = new HashMap<String, String>();
+//        map.put("first","Hi，您已成功提交驾考订单");
+//        map.put("orderID","DSPYGH20178212216292");
+//        map.put("orderMoneySum",1280+"");
+//        map.put("remark","请尽快支付，如有问题咨询客服：010-59822296");
+//        map.put("openid","o9C-m0gWfR9WOs8DIDElxSUfDIUU");
+//
+//        System.out.println(orderPush.CreateJsonObj(map));
 
-        System.out.println(orderPush.CreateJsonObj(map));
 
+        System.out.println(Pattern.matches(".*速*.","速成快板"));
     }
 
 //29 6 5

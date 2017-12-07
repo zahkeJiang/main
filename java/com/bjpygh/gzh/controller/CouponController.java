@@ -66,7 +66,7 @@ public class CouponController extends BaseController {
     //查询可用优惠券接口
     @ResponseBody
     @RequestMapping(value = "/getCoupons", method = RequestMethod.POST)
-    public Status QueryCoupon(HttpServletRequest request) throws ParseException {
+    public Status getCoupons(HttpServletRequest request) throws ParseException {
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
@@ -98,6 +98,18 @@ public class CouponController extends BaseController {
 
         return couponService.getCouponsPassed(userMap.get("id"));
     }
+
+    //查询可用优惠券接口
+    @ResponseBody
+    @RequestMapping(value = "/queryCoupon.action", method = RequestMethod.POST)
+    public Status QueryCoupon(HttpServletRequest request) throws ParseException {
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        return couponService.getCoupon(userMap.get("id"));
+    }
+
 
     //跳转页面
     @RequestMapping(value = "/queryCoupon.action", method = RequestMethod.GET)
