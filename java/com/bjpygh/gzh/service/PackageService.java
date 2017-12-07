@@ -121,6 +121,7 @@ public class PackageService {
             dsNames = dsInformationMapper.selectDsNamesByAddress("大兴区");
         }else {
             List<Map<String, String>> maps = dsInformationMapper.selectDsNames();
+            dsNames = new String[maps.size()];
             for (int i=0;i<maps.size();i++){
                 dsNames[i] = maps.get(i).get("ds_name");
             }
