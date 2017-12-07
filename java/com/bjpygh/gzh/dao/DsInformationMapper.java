@@ -4,6 +4,7 @@ import com.bjpygh.gzh.bean.DsInformation;
 import com.bjpygh.gzh.bean.DsInformationExample;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -31,4 +32,6 @@ public interface DsInformationMapper {
     int updateByPrimaryKey(DsInformation record);
 
     List<Map<String,String>> selectDsNames();
+
+    String[] selectDsNamesByAddress(String address);
 }

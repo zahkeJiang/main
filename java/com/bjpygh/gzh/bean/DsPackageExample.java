@@ -415,7 +415,7 @@ public class DsPackageExample {
         }
 
         public Criteria andTrainTimeLike(String value) {
-            addCriterion("train_time like", value, "trainTime");
+            addCriterion("train_time like", value, "'trainTime");
             return (Criteria) this;
         }
 

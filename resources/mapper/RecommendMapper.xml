@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpygh.gzh.dao.RecommendMapper">
+  <resultMap id="BaseResultMap" type="com.bjpygh.gzh.bean.Recommend">
+    <id column="recommend" jdbcType="BIGINT" property="recommend" />
+    <result column="short_term" jdbcType="VARCHAR" property="shortTerm" />
+    <result column="work_day" jdbcType="VARCHAR" property="workDay" />
+    <result column="customize" jdbcType="VARCHAR" property="customize" />
+    <result column="scale" jdbcType="VARCHAR" property="scale" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    recommend, short_term, work_day, customize, scale, price
+  </sql>
+  <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.RecommendExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from recommend
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from recommend
+    where recommend = #{recommend,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from recommend
+    where recommend = #{recommend,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bjpygh.gzh.bean.RecommendExample">
+    delete from recommend
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bjpygh.gzh.bean.Recommend">
+    insert into recommend (recommend, short_term, work_day, 
+      customize, scale, price
+      )
+    values (#{recommend,jdbcType=BIGINT}, #{shortTerm,jdbcType=VARCHAR}, #{workDay,jdbcType=VARCHAR}, 
+      #{customize,jdbcType=VARCHAR}, #{scale,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.Recommend">
+    insert into recommend
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="recommend != null">
+        recommend,
+      </if>
+      <if test="shortTerm != null">
+        short_term,
+      </if>
+      <if test="workDay != null">
+        work_day,
+      </if>
+      <if test="customize != null">
+        customize,
+      </if>
+      <if test="scale != null">
+        scale,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="recommend != null">
+        #{recommend,jdbcType=BIGINT},
+      </if>
+      <if test="shortTerm != null">
+        #{shortTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="workDay != null">
+        #{workDay,jdbcType=VARCHAR},
+      </if>
+      <if test="customize != null">
+        #{customize,jdbcType=VARCHAR},
+      </if>
+      <if test="scale != null">
+        #{scale,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bjpygh.gzh.bean.RecommendExample" resultType="java.lang.Long">
+    select count(*) from recommend
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update recommend
+    <set>
+      <if test="record.recommend != null">
+        recommend = #{record.recommend,jdbcType=BIGINT},
+      </if>
+      <if test="record.shortTerm != null">
+        short_term = #{record.shortTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workDay != null">
+        work_day = #{record.workDay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customize != null">
+        customize = #{record.customize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scale != null">
+        scale = #{record.scale,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update recommend
+    set recommend = #{record.recommend,jdbcType=BIGINT},
+      short_term = #{record.shortTerm,jdbcType=VARCHAR},
+      work_day = #{record.workDay,jdbcType=VARCHAR},
+      customize = #{record.customize,jdbcType=VARCHAR},
+      scale = #{record.scale,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjpygh.gzh.bean.Recommend">
+    update recommend
+    <set>
+      <if test="shortTerm != null">
+        short_term = #{shortTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="workDay != null">
+        work_day = #{workDay,jdbcType=VARCHAR},
+      </if>
+      <if test="customize != null">
+        customize = #{customize,jdbcType=VARCHAR},
+      </if>
+      <if test="scale != null">
+        scale = #{scale,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where recommend = #{recommend,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bjpygh.gzh.bean.Recommend">
+    update recommend
+    set short_term = #{shortTerm,jdbcType=VARCHAR},
+      work_day = #{workDay,jdbcType=VARCHAR},
+      customize = #{customize,jdbcType=VARCHAR},
+      scale = #{scale,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR}
+    where recommend = #{recommend,jdbcType=BIGINT}
+  </update>
+</mapper>

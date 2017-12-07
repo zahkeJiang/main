@@ -198,6 +198,9 @@
     <select id="selectDsNames" resultType="map">
         SELECT ds_name,description FROM ds_info ORDER BY sort
     </select>
+    <select id="selectDsNamesByAddress" parameterType="string" resultType="string">
+        SELECT ds_name FROM ds_info WHERE address LIKE '%' #{address} '%'
+    </select>
   <update id="updateByPrimaryKeySelective" parameterType="com.bjpygh.gzh.bean.DsInformation">
     update ds_info
     <set>

@@ -2,9 +2,11 @@ package com.bjpygh.gzh.controller;
 
 import com.bjpygh.gzh.bean.DsInformation;
 import com.bjpygh.gzh.bean.DsPackage;
+import com.bjpygh.gzh.bean.Recommend;
 import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.service.DsInfoService;
 import com.bjpygh.gzh.service.PackageService;
+import com.bjpygh.gzh.service.RecommendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,9 @@ public class PackageController extends BaseController {
 
     @Autowired
     DsInfoService dsInfoService;
+
+    @Autowired
+    RecommendService recommendService;
 
     //根据套餐id获取套餐信息
     @ResponseBody
@@ -80,5 +85,41 @@ public class PackageController extends BaseController {
         }
         return "index";
     }
+
+    //提交推荐数据接口
+    @ResponseBody
+    @RequestMapping(value = "/setRecommend", method = RequestMethod.POST)
+    public Status setRecommend(HttpServletRequest request, Recommend recommend){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        recommend.setRecommend(Long.valueOf(userMap.get("id")));
+        return recommendService.setRecommend(recommend);
+    }
+
+    //获取推荐记录接口
+    @ResponseBody
+    @RequestMapping(value = "/getRecommend", method = RequestMethod.POST)
+    public Status getRecommend(HttpServletRequest request){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+
+        Recommend recommend = recommendService.getRecommend(userMap.get("id"));
+        if (recommend != null){
+            List<DsPackage> packageByRecommend = packageService.getPackageByRecommend(recommend);
+            if (packageByRecommend.size()>0){
+                return  Status.success().add("packages",packageByRecommend);
+            }else {
+                return  Status.fail(-30,"根据您的选择，没有匹配到推荐");
+            }
+
+        }else {
+            return Status.fail(-20,"没有推荐记录");
+        }
+    }
+
 
 }
