@@ -24,8 +24,11 @@ public class CouponService {
     SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy.MM.dd");
 
     public boolean getUserCoupon(String userid) {
-        UserCoupon userCoupon = userCouponMapper.selectByPrimaryKey(Long.parseLong(userid));
-        if (userCoupon!=null){
+        UserCouponExample example = new UserCouponExample();
+        UserCouponExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(Long.valueOf(userid));
+        List<UserCoupon> userCoupons = userCouponMapper.selectByExample(example);
+        if (userCoupons.size()>0){
             return true;
         }else{
             return false;

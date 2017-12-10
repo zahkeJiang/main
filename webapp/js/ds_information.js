@@ -40,7 +40,14 @@ $(function() {
         // type(1为别墅评论 2为驾校 3为军旅)
         window.location.href = "assess.html?type=2";
     })
-    getDs();
+
+    //如果dsname不是东方时尚和海淀驾校， 那么执行getDs（） 请求， 加载列表
+    if (dsname == "东方时尚驾校" || dsname == "公交驾校") {
+        return;
+    } else {
+        $(".ds_type").show();
+        getDs();
+    }
     //点击屏幕，如果元素不是dsp_type_div，则执行navStyle();
     $(document).click(function() {
         navStyle();

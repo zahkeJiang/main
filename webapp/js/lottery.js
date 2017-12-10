@@ -112,14 +112,14 @@ function roll(num) {
 }
 $(function() {
     $.post("queryCoupon.action", {}, function(obj) {
-        if (obj.status == "-40") {
+        if (obj.status == "-40") {//没有优惠券
             //点击抽奖按钮，开始抽奖
             $(".lottery_begin").click(function() {
                 $.post("coupon.action", {}, function(obj) {
-                    if (obj.status == "-20") {
+                    if (obj.status == "-30") {//需要激活码
                         $(".layer").fadeIn("slow");
                         $(".coupon_code").show();
-                    } else if (obj.status == "0") {
+                    } else if (obj.status == "0") {//正常抽取
                         if (obj.price == 0) {
                             lottery.num = 0;
                         } else if (obj.price == 1) {
@@ -140,7 +140,7 @@ $(function() {
                         $(this).prop("disabled", true); //抽奖按钮设为不可点击状态
                         roll(); //开始执行动画
                     } else {
-                        $(this).hin("disabled", true); //抽奖按钮设为不可用状态
+                        $(this).prop("disabled", true); //抽奖按钮设为不可用状态
                         // $(this).unbind("click");
                     }
                 }, 'json');

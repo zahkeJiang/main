@@ -10,7 +10,7 @@ $(function() {
             var dsListHtml = "";
             var dsListDatas = datas.data.packages;
             $.each(dsListDatas, function(commentIndex, comment) {
-                dsListHtml += '<div class="dsList" makeProtection="' + comment.makeProtection + '" packageid="' + comment.packageid + '" description="' + comment.description + '" brand="' + comment.brand + '"><img src="'+comment.imageUrl+'"><div class="dsContent"><h2 class="dsName">' + comment.dsName + '</h2><p>¥<span class="price">' + comment.price + '</span></p><div class="spanBox"><span class="dsType">' + comment.dsType + '</span><span class="models">' + comment.models + '</span><span class="trainTime">' + comment.trainTime + '</span></div></div></div>';
+                dsListHtml += '<div class="dsList" makeProtection="' + comment.makeProtection + '" packageid="' + comment.packageid + '" description="' + comment.description + '" brand="' + comment.brand + '"><div class="dsImageBox"><img src="' + comment.imageUrl + '"><h2 class="dsName">' + comment.dsName + '</h2></div><div class="dsContent"><p class="dsType">' + comment.dsType + '</p><p class="priceBox">¥<span class="price">' + comment.price + '</span></p><div class="spanBox"><span class="models">' + comment.models + '</span><span class="trainTime">' + comment.trainTime + '</span></div></div></div>';
             });
             $(".dsListContent").html(dsListHtml);
             $(".dsList").click(function() {
@@ -113,7 +113,7 @@ function gogo() {
                         var dsListHtml = "";
                         var dsListDatas = datas.data.packages;
                         $.each(dsListDatas, function(commentIndex, comment) {
-                            dsListHtml += '<div class="dsList" makeProtection="' + comment.makeProtection + '" packageid="' + comment.packageid + '" description="' + comment.description + '" brand="' + comment.brand + '"><img src="'+comment.imageUrl+'"><div class="dsContent"><h2 class="dsName">' + comment.dsName + '</h2><p>¥<span class="price">' + comment.price + '</span></p><div class="spanBox"><span class="dsType">' + comment.dsType + '</span><span class="models">' + comment.models + '</span><span class="trainTime">' + comment.trainTime + '</span></div></div></div>';
+                            dsListHtml += '<div class="dsList" makeProtection="' + comment.makeProtection + '" packageid="' + comment.packageid + '" description="' + comment.description + '" brand="' + comment.brand + '"><div class="dsImageBox"><img src="' + comment.imageUrl + '"><h2 class="dsName">' + comment.dsName + '</h2></div><div class="dsContent"><p class="dsType">' + comment.dsType + '</p><p class="priceBox">¥<span class="price">' + comment.price + '</span></p><div class="spanBox"><span class="models">' + comment.models + '</span><span class="trainTime">' + comment.trainTime + '</span></div></div></div>';
                         });
                         $(".dsListContent").html(dsListHtml);
                         $(".dsList").click(function() {
