@@ -9,7 +9,7 @@ body{
 	margin-top:60px;
 }
     .swiper-slide {
-    	margin-top: 80px;
+    	margin-top: 60px;
         background-position: center;
         background-size: cover;
         width: 80%;
@@ -70,7 +70,7 @@ p.ds_name{
 p.description{
 	color: #888;
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 16px;
 	margin: 20px 0 30px 0;
 	line-height: 24px;
 }
