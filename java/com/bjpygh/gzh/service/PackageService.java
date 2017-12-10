@@ -81,7 +81,7 @@ public class PackageService {
                         "http://120.24.184.86/glxt/dsimage/gj_1.png"));
             } else if (dsPackage.getDsName().equals("北方驾校")) {
                 dsPackageInfos.add(new DsPackageInfo(dsPackage,
-                        "http://120.24.184.86/glxt/dsimage/bf_1.jpg"));
+                        "http://120.24.184.86/glxt/dsimage/bf_1.png"));
             } else if (dsPackage.getDsName().equals("海淀驾校")) {
                 dsPackageInfos.add(new DsPackageInfo(dsPackage,
                         "http://120.24.184.86/glxt/dsimage/ds_bg1.jpg"));

@@ -172,8 +172,8 @@ body,html{
 .dsListContent{
 
     overflow-x:scroll;
-    min-height: 200px;
-    max-height: 300px;
+    min-height: 160px;
+    max-height: 260px;
     padding:40px 8px 0px 8px;
 }
 .dsListContent::-webkit-scrollbar {/*隐藏滚动条*/
@@ -195,7 +195,7 @@ body,html{
 }
 .dsContent{
     flex: 1;
-    padding: 0 10px;
+    padding: 0 4px;
 
 }
 .dsList{
@@ -210,21 +210,43 @@ body,html{
      margin-bottom:0;
 }
 .dsList img{
-    height: 60px;
-    width: 80px;
-    border-radius: 2px;
+    height: 54px;
+    width: 72px;
+    border-radius: 6px;
+    margin-left: 4px;
 }
 @media only screen and (min-width: 360px){
     .dsList img{
-        height: 80px;
-        width: 106px;
-        border-radius: 2px;
+        height: 68px;
+        width: 90px;
+        /*margin-left: 4px;*/
+        border-radius: 6px;
     }
     .dsListContent{
         overflow-x:scroll;
-        min-height: 200px;
+        min-height: 160px;
+        max-height: 320px;
+        padding:40px 8px 0px 8px;
+    }
+    .dsListContent::-webkit-scrollbar {/*隐藏滚动条*/
+        display: none;
+    }
+}
+@media only screen and (min-width: 400px){
+    .dsList img{
+        height: 68px;
+        width: 90px;
+        /*margin-left: 4px;*/
+        border-radius: 6px;
+    }
+    .dsListContent{
+        overflow-x:scroll;
+        min-height: 160px;
         max-height: 360px;
         padding:40px 8px 0px 8px;
+    }
+    .dsListContent::-webkit-scrollbar {/*隐藏滚动条*/
+        display: none;
     }
 }
 .dsList h2{
@@ -235,20 +257,56 @@ body,html{
     font-size: 16px;
     border-bottom: 1px solid #ddd;
 }
-.dsList span{
+.spanBox span{
     font-size: 12px;
     color: #999;
     line-height: 28px;
+}
+.spanBox span:nth-child(1){
+    width: 60px;
+    text-align: left;
+}
+.spanBox span:nth-child(2){
+ width: 60px;
+ text-align: center;
+}
+.spanBox span:nth-child(3){
+ width: 36px;
+ text-align: center;
 }
 .dsList p{
     font-size: 12px;
     margin-top:7px; 
     color: #555;
+    color: orange;
+}
+.spanBox{
+    display: flex;
+    justify-content: space-between;
 }
 .dsList span.price{
     font-size: 16px;
     margin-top:7px; 
-    color: #555
+    color: #555;
+    color: orange;
+}
+.again{
+    position: absolute;
+    bottom: -30px;
+    width: 64px;
+    left: 50%;
+    margin-left: -32px;
+    text-align: center;
+    color: #6ebaff;
+    font-size: 16px;
+    font-family: "兰亭黑"
+}
+.close1{
+    position: absolute;
+    bottom: -20px;
+    height: 14px;
+    left: 50%;
+    margin-left: 40px;
 }
 
 

@@ -157,8 +157,9 @@ public class CouponService {
             UserCouponExample.Criteria criteria = example.createCriteria();
             criteria.andUserIdEqualTo(Long.valueOf(userid));
             criteria.andCouponTypeEqualTo(2);
-            UserCoupon userCoupon = userCouponMapper.selectByExample(example).get(0);
-            if(userCoupon!=null){
+            List<UserCoupon> userCoupons = userCouponMapper.selectByExample(example);
+            if(userCoupons.size() > 0){
+                UserCoupon userCoupon = userCoupons.get(0);
                 if (userCoupon.getCouponStatus() == 1&&(new Date()).getTime()-userCoupon.getCouponTime().getTime()<date.getTime()){
                     return Status.success().add("price",userCoupon.getCouponPrice());
                 }else {

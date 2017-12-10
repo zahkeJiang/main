@@ -31,9 +31,9 @@ public class CouponController extends BaseController {
         }
         String userid = userMap.get("id");
         String isActive = userMap.get("active");
-        if (couponService.getUserCoupon(userid)){
-            return Status.fail(-20,"优惠券已存在");
-        }else{
+//        if (couponService.getUserCoupon(userid)){
+//            return Status.fail(-20,"优惠券已存在");
+//        }else{
             if (true/*isActive!=null&&isActive.equals("true")*/){
                 Lottery lottery = new Lottery();
                 Map<String, Integer> map = lottery.getPrice();
@@ -50,7 +50,7 @@ public class CouponController extends BaseController {
             }else{
                 return Status.fail(-30,"请先激活");
             }
-        }
+//        }
     }
 
     //跳转页面
