@@ -50,23 +50,23 @@ function unused() {
 
             //点击屏幕，如果元素不是couponBox，则执行以下隐藏程序;
             $(document).click(function() {
-                $(".layer").hide();
-                $(".detail").hide();
-                $(".toUse").hide();
+                $(".layer").fadeOut();
+                $(".detail").fadeOut();
+                $(".toUse").fadeOut();
             });
             $(".couponBox").click(function(event) {
                 event.stopPropagation();
-                $(this).siblings(".couponBox").find(".layer").hide();
-                $(this).siblings(".couponBox").find(".detail").hide();
-                $(this).siblings(".couponBox").find(".toUse").hide();
-                $(this).find(".layer").show(100);
-                $(this).find(".detail").show(200);
-                $(this).find(".toUse").show(200);
+                $(this).siblings(".couponBox").find(".layer").fadeOut();
+                $(this).siblings(".couponBox").find(".detail").fadeOut();
+                $(this).siblings(".couponBox").find(".toUse").fadeOut();
+                $(this).find(".layer").fadeIn(100);
+                $(this).find(".detail").fadeIn(200);
+                $(this).find(".toUse").fadeIn(200);
             });
             $(window).scroll(function() {
-                $(".layer").hide(300);
-                $(".detail").hide(300);
-                $(".toUse").hide(300);
+                $(".layer").fadeIn(300);
+                $(".detail").fadeIn(300);
+                $(".toUse").fadeIn(300);
             });
             $(".detail").click(function() {
                 alert("暂未开放");
