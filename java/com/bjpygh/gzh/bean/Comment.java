@@ -11,6 +11,8 @@ public class Comment {
 
     private String headimageurl;
 
+    private String content;
+
     private String picture;
 
     private Integer enterStar;
@@ -26,8 +28,6 @@ public class Comment {
     private Boolean anonymous;
 
     private String projectName;
-
-    private String content;
 
     public Integer getCommentId() {
         return commentId;
@@ -59,6 +59,14 @@ public class Comment {
 
     public void setHeadimageurl(String headimageurl) {
         this.headimageurl = headimageurl == null ? null : headimageurl.trim();
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 
     public String getPicture() {
@@ -123,13 +131,5 @@ public class Comment {
 
     public void setProjectName(String projectName) {
         this.projectName = projectName == null ? null : projectName.trim();
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
     }
 }
