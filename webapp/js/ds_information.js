@@ -37,12 +37,13 @@ $(function() {
     getGoodComment(); //查看评价
 
     $(".assessBox-view").click(function() {
+        $.cookie("projectName", dsname);
         // type(1为别墅评论 2为驾校 3为军旅)
-        window.location.href = "assess.html?type=" + dsname;
+        window.location.href = "assess.html";
     })
 
     //如果dsname不是东方时尚和海淀驾校， 那么执行getDs（） 请求， 加载列表
-    if (dsname == "东方时尚驾校" || dsname == "公交驾校") {
+    if (dsname == "东方时尚驾校" || dsname == "海淀驾校") {
         return;
     } else {
         $(".ds_type").show();
