@@ -43,7 +43,7 @@ $(function() {
     })
 
     //如果dsname不是东方时尚和海淀驾校， 那么执行getDs（） 请求， 加载列表
-    if (dsname == "东方时尚驾校" || dsname == "海淀驾校") {
+    if (dsname == "东方时尚驾校" || dsname == "公交驾校") {
         return;
     } else {
         $(".ds_type").show();
@@ -281,6 +281,7 @@ function getGoodComment() {
         "projectName": dsname
     }, function(datas) {
         if (datas.status == 0) {
+
             var assessUrl = datas.data.comment;
             //获取星星
             var enterStar = assessUrl.enterStar; //娱乐星星
@@ -312,6 +313,12 @@ function getGoodComment() {
             $(".assessBox-time").html(commentTime);
             $(".assessBox-assess").html(assessUrl.content);
             $("#icon").attr("src", assessUrl.headimageurl);
+        } else {
+            $(".assessBox-title").hide();
+            $(".assessBox-assess").css({
+                "text-align": "center"
+            });
+            $(".assessBox-assess").html("暂无评论");
         }
     }, "json");
 }

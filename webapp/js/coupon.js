@@ -37,7 +37,7 @@ function unused() {
                 var coupon = "";
                 $.each(couponList, function(commentIndex, comment) {
                     coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div><p class='date'>" + comment.date + "，即日生效</p><div class='layer'></div><div class='layerBox'><div class='detail layerBoxChildren'>详情</div><div class='toUse layerBoxChildren'>去使用</div></div></div>"
-                    // coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div><p class='date'>" + comment.date + "，即日生效</p><div class='layer'></div><div class='layerBox'><div class='toUse layerBoxChildren'>去使用</div></div></div>"
+                        // coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div><p class='date'>" + comment.date + "，即日生效</p><div class='layer'></div><div class='layerBox'><div class='toUse layerBoxChildren'>去使用</div></div></div>"
                 });
 
                 $(".container").html("<div class='coupon'>" + coupon + "</div>" + footerHtml);
@@ -70,7 +70,7 @@ function unused() {
                 $(".toUse").fadeOut(100);
             });
             $(".detail").click(function() {
-                alert("暂未开放");
+                window.location.href = "coupon_detail.html";
                 // var type = $(this).attr("type"); // type(1为别墅 2为驾校 3为军旅)
                 // if (type == "1") {
                 //     window.location.href = "villa.html";

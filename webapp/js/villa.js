@@ -36,6 +36,12 @@ $(function() {
             $(".assessBox-time").html(commentTime);
             $(".assessBox-assess").html(assessUrl.content);
             $("#icon").attr("src", assessUrl.headimageurl);
+        } else {
+            $(".assessBox-title").hide();
+            $(".assessBox-assess").css({
+                "text-align": "center"
+            });
+            $(".assessBox-assess").html("暂无评论");
         }
     }, "json");
     //日历渲染--------------------------------------------------------
