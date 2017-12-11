@@ -38,7 +38,7 @@ $(function() {
 
     $(".assessBox-view").click(function() {
         // type(1为别墅评论 2为驾校 3为军旅)
-        window.location.href = "assess.html?type=2";
+        window.location.href = "assess.html?type=" + dsname;
     })
 
     //如果dsname不是东方时尚和海淀驾校， 那么执行getDs（） 请求， 加载列表
@@ -277,7 +277,7 @@ function getDs() {
 
 function getGoodComment() {
     $.post("getGoodComment", {
-        "type": 2
+        "projectName": dsname
     }, function(datas) {
         if (datas.status == 0) {
             var assessUrl = datas.data.comment;
