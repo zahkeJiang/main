@@ -48,6 +48,7 @@ public class ArmyOrderController extends BaseController {
             return Status.fail(-40,"您已创建三个订单，无法创建更多订单");
         }
 
+
         armyOrder.setUserId(Long.valueOf(userid));
         ArmyOrder armyOrder1 = armyOrderService.createArmyOrder(armyOrder);
         OrderPush orderPush = new OrderPush();

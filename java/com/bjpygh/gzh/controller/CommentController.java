@@ -100,11 +100,11 @@ public class CommentController extends BaseController{
 
     @ResponseBody
     @RequestMapping(value = "/getGoodComment", method = RequestMethod.POST)
-    public Status getGoodComment(HttpServletRequest request,String type){
+    public Status getGoodComment(HttpServletRequest request,String projectName){
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
         }
-        return commentService.getGoodComment(type);
+        return commentService.getGoodComment(projectName);
     }
 }

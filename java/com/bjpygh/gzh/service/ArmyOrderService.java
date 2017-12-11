@@ -67,6 +67,7 @@ public class ArmyOrderService {
         int second = c.get(Calendar.SECOND);
         String orderNumber ="APYGH" + year + month + date + hour + minute + second + armyOrder.getUserId();
 
+
         armyOrder.setOrderNumber(orderNumber);
         armyOrder.setArmyName("作战之日");
         armyOrder.setImageurl("http://120.24.184.86/glxt/dsimage/army_order.jpg");
