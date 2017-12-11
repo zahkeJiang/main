@@ -70,40 +70,30 @@ public class PackageService {
         List<DsPackage> dsPackages = dsPackageMapper.selectByExample(example);
         List<DsPackageInfo> dsPackageInfos = new ArrayList<DsPackageInfo>();
         for (DsPackage dsPackage : dsPackages){
-            dsPackageInfos.add(new DsPackageInfo(dsPackage));
-        }
-        for (int i=0;i<dsPackageInfos.size();i++){
-            if (dsPackageInfos.get(i).getDsName().equals("东方时尚驾校")) {
-                dsPackageInfos.get(i).
-                        setImageUrl("http://120.24.184.86/glxt/dsimage/dfss_1.jpg");
-
-            } else if (dsPackageInfos.get(i).getDsName().equals("京都府驾校")) {
-                dsPackageInfos.get(i).
-                        setImageUrl("http://120.24.184.86/glxt/dsimage/jdf_1.jpg");
-
-            } else if (dsPackageInfos.get(i).getDsName().equals("公交驾校")) {
-                dsPackageInfos.get(i).
-                        setImageUrl("http://120.24.184.86/glxt/dsimage/gj_1.png");
-
-            } else if (dsPackageInfos.get(i).getDsName().equals("北方驾校")) {
-                dsPackageInfos.get(i).
-                        setImageUrl("http://120.24.184.86/glxt/dsimage/bf_1.jpg");
-
-            } else if (dsPackageInfos.get(i).getDsName().equals("海淀驾校")) {
-                dsPackageInfos.get(i).
-                        setImageUrl("http://120.24.184.86/glxt/dsimage/ds_bg1.jpg");
-
-            } else if (dsPackageInfos.get(i).getDsName().equals("远大驾校")) {
-                dsPackageInfos.get(i).
-                        setImageUrl("http://120.24.184.86/glxt/dsimage/yd_1.jpg");
-
-            } else if (dsPackageInfos.get(i).getDsName().equals("远航驾校")) {
-                dsPackageInfos.get(i).
-                        setImageUrl("http://120.24.184.86/glxt/dsimage/yh_1.png");
-
-            } else if (dsPackageInfos.get(i).getDsName().equals("龙泉驾校")) {
-                dsPackageInfos.get(i).
-                        setImageUrl("http://120.24.184.86/glxt/dsimage/lq_1.jpg");
+            if (dsPackage.getDsName().equals("东方时尚驾校")) {
+                dsPackageInfos.add(new DsPackageInfo(dsPackage,
+                        "http://120.24.184.86/glxt/dsimage/dfss_1.jpg"));
+            } else if (dsPackage.getDsName().equals("京都府驾校")) {
+                dsPackageInfos.add(new DsPackageInfo(dsPackage,
+                        "http://120.24.184.86/glxt/dsimage/jdf_1.jpg"));
+            } else if (dsPackage.getDsName().equals("公交驾校")) {
+                dsPackageInfos.add(new DsPackageInfo(dsPackage,
+                        "http://120.24.184.86/glxt/dsimage/gj_1.png"));
+            } else if (dsPackage.getDsName().equals("北方驾校")) {
+                dsPackageInfos.add(new DsPackageInfo(dsPackage,
+                        "http://120.24.184.86/glxt/dsimage/bf_1.png"));
+            } else if (dsPackage.getDsName().equals("海淀驾校")) {
+                dsPackageInfos.add(new DsPackageInfo(dsPackage,
+                        "http://120.24.184.86/glxt/dsimage/ds_bg1.jpg"));
+            } else if (dsPackage.getDsName().equals("远大驾校")) {
+                dsPackageInfos.add(new DsPackageInfo(dsPackage,
+                        "http://120.24.184.86/glxt/dsimage/yd_1.jpg"));
+            } else if (dsPackage.getDsName().equals("远航驾校")) {
+                dsPackageInfos.add(new DsPackageInfo(dsPackage,
+                        "http://120.24.184.86/glxt/dsimage/yh_1.png"));
+            } else if (dsPackage.getDsName().equals("龙泉驾校")) {
+                dsPackageInfos.add(new DsPackageInfo(dsPackage,
+                        "http://120.24.184.86/glxt/dsimage/lq_1.jpg"));
             }
         }
         /**
@@ -111,13 +101,13 @@ public class PackageService {
          */
         String[] dsNames = null;
         if (recommend.getScale().equals("海淀区")) {
-            System.out.println("Scale = 海淀区");
+//            System.out.println("Scale = 海淀区");
             dsNames = dsInformationMapper.selectDsNamesByAddress("海淀区");
         } else if (recommend.getScale().equals("昌平区")) {
-            System.out.println("Scale = 昌平区");
+//            System.out.println("Scale = 昌平区");
             dsNames = dsInformationMapper.selectDsNamesByAddress("昌平区");
         } else if (recommend.getScale().equals("大兴区")) {
-            System.out.println("Scale = 大兴区");
+//            System.out.println("Scale = 大兴区");
             dsNames = dsInformationMapper.selectDsNamesByAddress("大兴区");
         }else {
             List<Map<String, String>> maps = dsInformationMapper.selectDsNames();
@@ -168,23 +158,18 @@ public class PackageService {
                     dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+1);
                 }
             }
-//            map.put("highPrice", 4000);
-//            map.put("lowPrice", 0);
         } else if (recommend.getPrice().equals("4000元-6000元")) {
             for (int i=0;i<dsPackageInfos.size();i++){
                 if (4000 < dsPackageInfos.get(i).getPrice() && dsPackageInfos.get(i).getPrice() < 6000){
                     dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+1);
                 }
             }
-//            map.put("highPrice", 6000);
-//            map.put("lowPrice", 4000);
         } else if (recommend.getPrice().equals("高于6000元")) {
             for (int i=0;i<dsPackageInfos.size();i++){
                 if (dsPackageInfos.get(i).getPrice() > 6000){
                     dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+1);
                 }
             }
-//            map.put("price", 6000);
         }
         /**
          * 班型判断
@@ -195,12 +180,10 @@ public class PackageService {
                     dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+1);
                 }
             }
-//            map.put("dsType", "速");
         } else {
             for (int i=0;i<dsPackageInfos.size();i++){
                 dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+1);
             }
-//            map.put("dsType", "");
         }
 
         /**
@@ -212,7 +195,6 @@ public class PackageService {
                     dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+1);
                 }
             }
-//            map.put("reservation", "私人定制");
         } else {
             for (int i=0;i<dsPackageInfos.size();i++){
                 if (!dsPackageInfos.get(i).getReservation().equals("私人定制")){

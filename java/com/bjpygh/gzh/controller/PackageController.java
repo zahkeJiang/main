@@ -137,5 +137,14 @@ public class PackageController extends BaseController {
         }
     }
 
+    //驾校推荐页面
+    @RequestMapping(value = "/getRecommend", method = RequestMethod.GET)
+    public String Recommend(HttpServletRequest request){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return "error";
+        }
+        return "ds_Recommended";
+    }
 
 }

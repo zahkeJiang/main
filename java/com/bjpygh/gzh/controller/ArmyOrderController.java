@@ -48,11 +48,12 @@ public class ArmyOrderController extends BaseController {
             return Status.fail(-40,"您已创建三个订单，无法创建更多订单");
         }
 
+
         armyOrder.setUserId(Long.valueOf(userid));
         ArmyOrder armyOrder1 = armyOrderService.createArmyOrder(armyOrder);
         OrderPush orderPush = new OrderPush();
         Map<String, String> map = new HashMap<String, String>();
-        map.put("first","Hi，您已成功提交“作战之日”订单");
+        map.put("first","Hi,您已成功提交“作战之日”订单");
         map.put("orderID",armyOrder1.getOrderNumber());
         map.put("orderMoneySum",armyOrder1.getArmyPrice()+"元");
         map.put("remark","请尽快支付，如有问题咨询客服：010-59822296");

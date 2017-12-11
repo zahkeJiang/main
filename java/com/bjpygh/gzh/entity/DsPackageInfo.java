@@ -12,7 +12,7 @@ public class DsPackageInfo extends DsPackage{
 
     }
 
-    public DsPackageInfo(DsPackage dsPackage){
+    public DsPackageInfo(DsPackage dsPackage,String imageUrl){
         this.setTrainTime(dsPackage.getTrainTime());
         this.setReservation(dsPackage.getReservation());
         this.setPrice(dsPackage.getPrice());
@@ -24,6 +24,7 @@ public class DsPackageInfo extends DsPackage{
         this.setDescription(dsPackage.getDescription());
         this.setBrand(dsPackage.getBrand());
         this.setCount(0);
+        this.setImageUrl(imageUrl);
     }
 
     public String getImageUrl() {

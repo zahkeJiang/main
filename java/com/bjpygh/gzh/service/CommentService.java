@@ -34,18 +34,18 @@ public class CommentService {
         commentMapper.insertSelective(comment);
     }
 
-    public List<Comment> getComment(String type) {
+    public List<Comment> getComment(String projectName) {
         CommentExample example = new CommentExample();
         CommentExample.Criteria criteria = example.createCriteria();
-        criteria.andTypeEqualTo(Integer.valueOf(type));
+        criteria.andProjectNameEqualTo(projectName);
 
         return commentMapper.selectByExample(example);
     }
 
-    public Status getGoodComment(String type) {
+    public Status getGoodComment(String projectName) {
         CommentExample example = new CommentExample();
         CommentExample.Criteria criteria = example.createCriteria();
-        criteria.andTypeEqualTo(Integer.valueOf(type));
+        criteria.andProjectNameEqualTo(projectName);
         List<Comment> comments = commentMapper.selectByExample(example);
         Collections.sort(comments,new Comparator<Comment>(){
             public int compare(Comment arg1, Comment arg0) {

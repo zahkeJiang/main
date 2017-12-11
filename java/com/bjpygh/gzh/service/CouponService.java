@@ -24,8 +24,11 @@ public class CouponService {
     SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy.MM.dd");
 
     public boolean getUserCoupon(String userid) {
-        UserCoupon userCoupon = userCouponMapper.selectByPrimaryKey(Long.parseLong(userid));
-        if (userCoupon!=null){
+        UserCouponExample example = new UserCouponExample();
+        UserCouponExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(Long.valueOf(userid));
+        List<UserCoupon> userCoupons = userCouponMapper.selectByExample(example);
+        if (userCoupons.size()>0){
             return true;
         }else{
             return false;
@@ -157,8 +160,9 @@ public class CouponService {
             UserCouponExample.Criteria criteria = example.createCriteria();
             criteria.andUserIdEqualTo(Long.valueOf(userid));
             criteria.andCouponTypeEqualTo(2);
-            UserCoupon userCoupon = userCouponMapper.selectByExample(example).get(0);
-            if(userCoupon!=null){
+            List<UserCoupon> userCoupons = userCouponMapper.selectByExample(example);
+            if(userCoupons.size() > 0){
+                UserCoupon userCoupon = userCoupons.get(0);
                 if (userCoupon.getCouponStatus() == 1&&(new Date()).getTime()-userCoupon.getCouponTime().getTime()<date.getTime()){
                     return Status.success().add("price",userCoupon.getCouponPrice());
                 }else {

@@ -37,6 +37,7 @@ function unused() {
                 var coupon = "";
                 $.each(couponList, function(commentIndex, comment) {
                     coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div><p class='date'>" + comment.date + "，即日生效</p><div class='layer'></div><div class='layerBox'><div class='detail layerBoxChildren'>详情</div><div class='toUse layerBoxChildren'>去使用</div></div></div>"
+                    // coupon += "<div class='couponBox' type='" + comment.type + "'><img src='" + comment.background + "'><div class='priceBox'><span class='price1'>¥</span><span class='price2'>" + comment.price + "</span></div><p class='date'>" + comment.date + "，即日生效</p><div class='layer'></div><div class='layerBox'><div class='toUse layerBoxChildren'>去使用</div></div></div>"
                 });
 
                 $(".container").html("<div class='coupon'>" + coupon + "</div>" + footerHtml);
@@ -64,9 +65,9 @@ function unused() {
                 $(this).find(".toUse").fadeIn(200);
             });
             $(window).scroll(function() {
-                $(".layer").fadeIn(300);
-                $(".detail").fadeIn(300);
-                $(".toUse").fadeIn(300);
+                $(".layer").fadeOut(100);
+                $(".detail").fadeOut(100);
+                $(".toUse").fadeOut(100);
             });
             $(".detail").click(function() {
                 alert("暂未开放");
