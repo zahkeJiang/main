@@ -93,6 +93,8 @@ $(function() {
                 }, function(datas) {
                     if (datas.status == 0) {
                         window.location.href = "assessFinish.html";
+                    } else if (datas.status == "-20") {
+                        alert(datas.msg);
                     } else {
                         alert("上传失败,请稍后再试。");
                     }
