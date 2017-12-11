@@ -78,12 +78,12 @@ public class CommentController extends BaseController{
 
     @ResponseBody
     @RequestMapping(value = "/getComment", method = RequestMethod.POST)
-    public Status getComment(HttpServletRequest request,String type){
+    public Status getComment(HttpServletRequest request,String projectName){
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
         }
-        List<Comment> comments = commentService.getComment(type);
+        List<Comment> comments = commentService.getComment(projectName);
         if (comments.size()>0){
             Collections.sort(comments,new Comparator<Comment>(){
                 public int compare(Comment arg1, Comment arg0) {
