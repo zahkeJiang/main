@@ -70,7 +70,6 @@ $(function() {
                 if (content == "" || content == null) {
                     content = "用户没有输入评价内容";
                 }
-                $("")
                 var enterStar = $(".satisfaction01 span").attr("star"); //娱乐满意度
                 var supportStar = $(".satisfaction02 span").attr("star"); //配套满意度
                 var stayStar = $(".satisfaction03 span").attr("star"); //住宿满意度
@@ -93,7 +92,7 @@ $(function() {
                     "ordernumber": ordernumber
                 }, function(datas) {
                     if (datas.status == 0) {
-                        window.location.href = "assessFinish.html?type=" + type;
+                        window.location.href = "assessFinish.html";
                     } else {
                         alert("上传失败,请稍后再试。");
                     }
