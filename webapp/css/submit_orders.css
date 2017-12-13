@@ -156,10 +156,12 @@ span,.dstype_information_content{
 
 .ds_radio .user-defined { z-index: 2; position: absolute; top: 0; bottom: 0; margin: auto; width: 14px; height: 14px; border: 1px solid #000; border-radius: 50%; }
 
-.ds_radio .user-defined span.circle  { display: block; width: 10px; height: 10px; margin-top: 2px;margin-left: 2px; background-color: transparent; border-radius: 50%; }
+/*.ds_radio .user-defined span.circle  { display: block; width: 10px; height: 10px; margin-top: 2px;margin-left: 2px; background-color: transparent; border-radius: 50%; }
 
-.ds_radio .user-defined span.active  { background-color: #67c0ee; }
-
+.ds_radio .user-defined span.active  { background-color: #67c0ee; }*/
+.chooseActive{
+	display: block; width: 10px; height: 10px; margin-top: 2px;margin-left: 2px; background-color: #67c0ee; border-radius: 50%;
+}
 
 .coupons{
 	border-radius: 10px;
@@ -207,9 +209,10 @@ span,.dstype_information_content{
 	width: 70%;
 	height: 48px;
 	line-height: 48px;
+	text-align: center;
 }
-.last_price span{
-	margin-left: 26px;
+
+.last_price span{	
 	/*color: orange;*/
 	padding: 0;
 }

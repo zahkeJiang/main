@@ -1,23 +1,3 @@
-// var dsname = "";
-// var dstype = "";
-// var models = "";
-// var price = "";
-// var packageid = "";
-// var traintime = "";
-// var coupons_sum = "";//优惠券金额
-
-// function ShowMessage() { 
-//     var thisURL = decodeURI(location.href);    
-//     var getval = thisURL.split('?')[1];
-//     dsname = getval.split("=")[1].split('&')[0];
-//     dstype = getval.split("=")[2].split('&')[0];
-//     models = getval.split("=")[3].split('&')[0];
-//     price = getval.split("=")[4].split('&')[0];
-//     packageid = getval.split("=")[5].split('&')[0];
-//     traintime = getval.split("=")[6];
-// } 
-// window.onload=ShowMessage(); 
-// 
 var dsname = $.cookie("dsname"); //驾校名字
 var dstype = $.cookie("dstype"); //班型套餐
 var models = $.cookie("models"); //班型类别，如C1，C2
@@ -57,11 +37,9 @@ function get_coupons() {
                 select = "0";
 
             }
-            if (makeProtection == 0 || makeProtection == 1) {
-                payMoney();
-            }
-
-
+            // if (makeProtection == 0 || makeProtection == 1) {
+            //     payMoney();
+            // }
         }
     });
 }
@@ -90,6 +68,15 @@ $(function() {
 
     //班型套餐是否有补考保障，0必须没有，1必须有，2可选择
     if (makeProtection == 0) {
+        $(".ProtectionDiv").empty();
+        $(".ProtectionDiv").html("套餐不提供补考保障");
+        $(".ProtectionDiv").css({
+            "text-align": "left",
+            "font-size": "14px",
+            "color": "555",
+            "margin-top": "10px"
+        })
+        $(".ProtectionDivBox").show();
 
     } else if (makeProtection == 1) {
         $(".ProtectionDiv").empty();
@@ -108,15 +95,15 @@ $(function() {
 
     //为radio法培方式设置点击样式
     $("input[name='radio_training']").click(function() {
-        $(this).siblings(".user-defined").children("span").addClass("active");
-        $(this).parents(".trainDiv").siblings("div").find("span").removeClass("active");
+        $(this).siblings(".user-defined").html('<span class="chooseActive"></span>');
+        $(this).parents(".trainDiv").siblings("div").find(".user-defined").empty();
     });
     //为补考保障设置点击样式
     $("input[name='makeProtection']").click(function() {
-        $(this).siblings(".user-defined").children("span").addClass("active");
-        $(this).parents(".mustProtectionDiv").siblings("div").find("span").removeClass("active");
+        $(this).siblings(".user-defined").html('<span class="chooseActive"></span>');
+        $(this).parents(".mustProtectionDiv").siblings("div").find(".user-defined").empty();
 
-        payMoney();
+        // payMoney();
     });
 
     $(".ds_type").html(dstype);

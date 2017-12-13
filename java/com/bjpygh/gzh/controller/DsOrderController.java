@@ -180,7 +180,7 @@ public class DsOrderController extends BaseController {
         map.put("remark","请尽快支付，如有问题咨询客服：010-59822296");
         map.put("openid",userMap.get("openid"));
 
-        orderPush.CreateJsonObj(map);
+//        orderPush.CreateJsonObj(map);
 
         return Status.success().add("ordernumber",out_trade_no);
     }
