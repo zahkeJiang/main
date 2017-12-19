@@ -28,12 +28,16 @@ $(function(){
     },'json');
 });*/
 $(function() {
+    $(".ds_Recommended").click(function() {
+        window.location.href = "ds_Recommended.html";
+    });
+
     $.post("sdi.action", {}, function(datas) {
         if (datas.status == 0) {
             var dsNames = datas.data.dsNames;
             var dsNameListHtml = "";
             $.each(dsNames, function(commentIndex, comment) {
-                dsNameListHtml += '<div class="swiper-slide"><div class="content"><p class="ds_name">' + comment.ds_name + '</p><p class="description">' + comment.description + '</p><div class="buttonClick" jiaxiao="' + comment.ds_name + '"><img src="./images/index_content3.png" class="images3"></div></div></div>'
+                dsNameListHtml += '<div class="swiper-slide"><div class="content"><p class="ds_name">' + comment.ds_name + '</p><p class="description">' + comment.description + '</p><div class="buttonClick" jiaxiao="' + comment.ds_name + '"><img src="./images/index_content3.png" class="images3" /></div></div></div>'
             });
 
             $(".swiper-wrapper").html(dsNameListHtml);
