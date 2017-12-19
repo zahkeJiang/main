@@ -112,14 +112,16 @@ function roll(num) {
 }
 $(function() {
     $.post("queryCoupon.action", {}, function(obj) {
-        if (obj.status == "-40") {//没有优惠券
+        if (obj.status == "-10") { //-10未关注公众号
+            window.location.href = "openWchat.html";
+        } else if (obj.status == "-40") { //没有优惠券
             //点击抽奖按钮，开始抽奖
             $(".lottery_begin").click(function() {
                 $.post("coupon.action", {}, function(obj) {
-                    if (obj.status == "-30") {//需要激活码
+                    if (obj.status == "-30") { //需要激活码
                         $(".layer").fadeIn("slow");
                         $(".coupon_code").show();
-                    } else if (obj.status == "0") {//正常抽取
+                    } else if (obj.status == "0") { //正常抽取
                         if (obj.price == 0) {
                             lottery.num = 0;
                         } else if (obj.price == 1) {
@@ -149,6 +151,7 @@ $(function() {
             change_lottery_begin(); //改变抽奖按钮，并显示优惠信息
             // $(".footer").html("<p>您已抽过奖了，<a href='index.html'>立即使用</a></p>");
         }
+
     }, 'json');
 
     //关闭弹窗
