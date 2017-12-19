@@ -6,7 +6,6 @@ var packageid = $.cookie("packageid"); //班型编号id
 var traintime = $.cookie("traintime"); //训练时间
 var coupons_sum = ""; //优惠券金额
 var makeProtection = $.cookie("makeProtection"); //补考保障
-console.log(makeProtection, "makeProtection")
 
 var realname = "";
 var address = "";
@@ -37,9 +36,9 @@ function get_coupons() {
                 select = "0";
 
             }
-            // if (makeProtection == 0 || makeProtection == 1) {
-            //     payMoney();
-            // }
+            if (makeProtection == 0 || makeProtection == 1) {
+                payMoney();
+            }
         }
     });
 }
@@ -74,7 +73,8 @@ $(function() {
             "text-align": "left",
             "font-size": "14px",
             "color": "555",
-            "margin-top": "10px"
+            "height": "40px",
+            "line-height": "40px"
         })
         $(".ProtectionDivBox").show();
 
@@ -85,7 +85,8 @@ $(function() {
             "text-align": "left",
             "font-size": "14px",
             "color": "555",
-            "margin-top": "10px"
+            "height": "40px",
+            "line-height": "40px"
         })
         $(".ProtectionDivBox").show();
 
@@ -103,7 +104,20 @@ $(function() {
         $(this).siblings(".user-defined").html('<span class="chooseActive"></span>');
         $(this).parents(".mustProtectionDiv").siblings("div").find(".user-defined").empty();
 
-        // payMoney();
+        payMoney();
+    });
+
+    var look = false;
+    //为补考保障说明
+    $(".look").click(function() {
+        // $(this).parent(".ds_training_mode").siblings(".ProtectionDivBox-hint").toggle();
+        if (look == true) {
+            $(this).attr("src", "./images/look.png");
+            look = false;
+        } else {
+            $(this).attr("src", "./images/looked.png");
+            look = true;
+        }
     });
 
     $(".ds_type").html(dstype);
