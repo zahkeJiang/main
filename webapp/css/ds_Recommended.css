@@ -46,21 +46,29 @@ body,html{
 }
 .content img.car2{
     position: absolute;
-    width: 36%;
-    left: 34%;
+    width: 30%;
+    left: 37%;
     top: 62%;
     display: none;
     z-index: 100;
 }
 .content img.car3{
     position: absolute;
-    width: 52%;
-    left: 24%;
+    width: 42%;
+    left: 30%;
     top: 64%;
     display: none;
     z-index: 100;
 }
 .content img.car4{
+    position: absolute;
+    width: 60%;
+    left: 21%;
+    top: 66%;
+    display: none;
+    z-index: 100;
+}
+.content img.car5{
     position: absolute;
     width: 80%;
     left: 10%;
@@ -68,7 +76,7 @@ body,html{
     display: none;
     z-index: 100;
 }
-.content img.car5{
+.content img.car6{
     position: absolute;
     width: 110%;
     left: -5%;
@@ -76,7 +84,6 @@ body,html{
     display: none;
     z-index: 100;
 }
-
 
 .content img.fangxiangpang{
     position: absolute;
@@ -242,9 +249,66 @@ body,html{
     font-size: 14px;
     background: #000;
     text-align: center;
-    opacity: 0.5;
+    opacity: 0.6;
     border-radius:0 0 6px 6px;
 }
+
+.spanBox span{
+    font-size: 14px;
+    color: #999;
+    line-height: 20px;
+}
+.spanBox span:nth-child(1){
+    width: 100%;
+    text-align: center;
+}
+.spanBox span:nth-child(2){
+    width: 100%;
+    text-align: center;
+}
+.dsList p.priceBox{
+    font-size: 12px;
+    color: orange;
+    height: 20px;
+    line-height: 20px;
+    margin-top: 4px;
+    padding-left: 8px;
+}
+.dsList p.dsType{
+    padding-left: 8px;
+    font-size: 12px;
+    color: #555;
+    height: 23px;
+    line-height: 22px;
+    border-bottom: 1px solid #ddd;
+}
+
+.spanBox{
+    display: flex;
+    justify-content: space-around;
+}
+.dsList span.price{
+    font-size: 14px;
+    color: orange;
+}
+.again{
+    position: absolute;
+    bottom: -30px;
+    width: 64px;
+    left: 50%;
+    margin-left: -32px;
+    text-align: center;
+    color: #777;
+    font-size: 16px;
+}
+.close1{
+    position: absolute;
+    bottom: -20px;
+    height: 14px;
+    left: 50%;
+    margin-left: 40px;
+}
+
 @media only screen and (min-width: 360px){
     .dsImageBox{
         position: relative;
@@ -263,9 +327,17 @@ body,html{
     font-size: 16px;
     background: #000;
     text-align: center;
-    opacity: 0.5;
+    opacity: 0.6;
     border-radius:0 0 6px 6px;
     }
+    .dsList p.dsType{
+    padding-left: 8px;
+    font-size: 14px;
+    color: #555;
+    height: 23px;
+    line-height: 22px;
+    border-bottom: 1px solid #ddd;
+}
     .dsList img{
         height: 80px;
         width: 106px;
@@ -304,62 +376,6 @@ body,html{
     }
 }
 
-.spanBox span{
-    font-size: 14px;
-    color: #999;
-    line-height: 20px;
-}
-.spanBox span:nth-child(1){
-    width: 100%;
-    text-align: center;
-}
-.spanBox span:nth-child(2){
-    width: 100%;
-    text-align: center;
-}
-.dsList p.priceBox{
-    font-size: 12px;
-    color: orange;
-    height: 20px;
-    line-height: 20px;
-    margin-top: 4px;
-    padding-left: 8px;
-}
-.dsList p.dsType{
-    padding-left: 8px;
-    font-size: 14px;
-    color: #555;
-    height: 23px;
-    line-height: 22px;
-    border-bottom: 1px solid #ddd;
-}
-
-.spanBox{
-    display: flex;
-    justify-content: space-around;
-}
-.dsList span.price{
-    font-size: 14px;
-    color: orange;
-}
-.again{
-    position: absolute;
-    bottom: -30px;
-    width: 64px;
-    left: 50%;
-    margin-left: -32px;
-    text-align: center;
-    color: #777;
-    font-size: 16px;
-    font-family: "兰亭黑"
-}
-.close1{
-    position: absolute;
-    bottom: -20px;
-    height: 14px;
-    left: 50%;
-    margin-left: 40px;
-}
 
 
 /*底部*/

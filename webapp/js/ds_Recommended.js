@@ -1,5 +1,13 @@
 $(function() {
-    document.getElementById("fangxiangpang").addEventListener('touchstart', function() {}); //空函数即可
+    document.getElementById("fangxiangpang").addEventListener('touchstart', function() {}); //忘记了做什么用的，按钮动画触发？
+
+
+    if ($(document).height() > 800) {
+        $(".dsListContent").css({
+            "max-height": "420px"
+        });
+    }
+
     $.post("getRecommend", {}, function(datas) {
         if (datas.status == 0) {
             $(".content").css({
@@ -86,7 +94,7 @@ function gogo() {
             $.cookie("question", questions);
             console.log(questions);
             i++;
-            if (i > 5) {
+            if (i > 6) {
                 console.log("显示结果，i=" + i);
                 $(".car").hide();
                 $(".right").hide();
@@ -97,11 +105,12 @@ function gogo() {
 
                 console.log("最终的答案是", $.cookie("question"));
                 var questionDatas = {
-                    "shortTerm": questions[0],
-                    "workDay": questions[1],
-                    "customize": questions[2],
-                    "scale": questions[3],
-                    "price": questions[4]
+                    "models": questions[0],
+                    "shortTerm": questions[1],
+                    "workDay": questions[2],
+                    "customize": questions[3],
+                    "scale": questions[4],
+                    "price": questions[5]
                 }
                 $.post("setRecommend", questionDatas, function(datas) {
                     if (datas.status == 0) {
