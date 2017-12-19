@@ -97,7 +97,12 @@ html, body {
 	align-items: center;
 }
 .ds_address span{
-	font-size: 14px;
+		font-size: 12px;
+	}
+@media only screen and (min-width: 340px){
+	.ds_address span{
+		font-size: 14px;
+	}
 }
 .line{
 	height: 1px;

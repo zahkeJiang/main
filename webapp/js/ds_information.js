@@ -160,7 +160,7 @@ $(function() {
 function getLocal(address) {
     var map = new AMap.Map('villa-map-view', {
         resizeEnable: true,
-        zoom: 13,
+        zoom: 12,
         center: [116.39, 39.9]
     });
     AMap.plugin('AMap.Geocoder', function() {
