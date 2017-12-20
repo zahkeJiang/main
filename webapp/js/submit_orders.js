@@ -158,7 +158,6 @@ $(function() {
                 "realname": realname,
                 "address": address,
                 "note": note,
-                "mustProtection": mustProtection
             }, function(datas) { //保存用户信息
                 if (datas.status == "0") { //代表用户目前没有驾校的完成订单
                     $(".layer").show();
@@ -177,7 +176,8 @@ $(function() {
         if (payMode == "JD") { //京东支付
             $.post("createOrder.action", {
                 "packageid": packageid,
-                "select": select
+                "select": select,
+                "protecttion": mustProtection
             }, function(datas) { //创建驾校报名订单
                 if (datas.status == 0) {
                     var ordernumber = datas.data.ordernumber;
@@ -212,7 +212,8 @@ $(function() {
         } else if (payMode == "aliPay") { //支付宝支付
             $.post("createOrder.action", {
                 "packageid": packageid,
-                "select": select
+                "select": select,
+                "mustProtection": mustProtection
             }, function(datas) { //创建驾校报名订单
                 if (datas.status == 0) {
                     var ordernumber = datas.data.ordernumber;
