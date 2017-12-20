@@ -13,6 +13,8 @@ public class Recommend {
 
     private String price;
 
+    private String models;
+
     public Long getRecommend() {
         return recommend;
     }
@@ -59,5 +61,13 @@ public class Recommend {
 
     public void setPrice(String price) {
         this.price = price == null ? null : price.trim();
+    }
+
+    public String getModels() {
+        return models;
+    }
+
+    public void setModels(String models) {
+        this.models = models == null ? null : models.trim();
     }
 }

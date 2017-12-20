@@ -8,6 +8,7 @@
     <result column="customize" jdbcType="VARCHAR" property="customize" />
     <result column="scale" jdbcType="VARCHAR" property="scale" />
     <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="models" jdbcType="VARCHAR" property="models" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    recommend, short_term, work_day, customize, scale, price
+    recommend, short_term, work_day, customize, scale, price, models
   </sql>
   <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.RecommendExample" resultMap="BaseResultMap">
     select
@@ -102,11 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.bjpygh.gzh.bean.Recommend">
     insert into recommend (recommend, short_term, work_day, 
-      customize, scale, price
-      )
+      customize, scale, price, 
+      models)
     values (#{recommend,jdbcType=BIGINT}, #{shortTerm,jdbcType=VARCHAR}, #{workDay,jdbcType=VARCHAR}, 
-      #{customize,jdbcType=VARCHAR}, #{scale,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}
-      )
+      #{customize,jdbcType=VARCHAR}, #{scale,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
+      #{models,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.Recommend">
     insert into recommend
@@ -129,6 +130,9 @@
       <if test="price != null">
         price,
       </if>
+      <if test="models != null">
+        models,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="recommend != null">
@@ -148,6 +152,9 @@
       </if>
       <if test="price != null">
         #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="models != null">
+        #{models,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -178,6 +185,9 @@
       <if test="record.price != null">
         price = #{record.price,jdbcType=VARCHAR},
       </if>
+      <if test="record.models != null">
+        models = #{record.models,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +200,8 @@
       work_day = #{record.workDay,jdbcType=VARCHAR},
       customize = #{record.customize,jdbcType=VARCHAR},
       scale = #{record.scale,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=VARCHAR}
+      price = #{record.price,jdbcType=VARCHAR},
+      models = #{record.models,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +224,9 @@
       <if test="price != null">
         price = #{price,jdbcType=VARCHAR},
       </if>
+      <if test="models != null">
+        models = #{models,jdbcType=VARCHAR},
+      </if>
     </set>
     where recommend = #{recommend,jdbcType=BIGINT}
   </update>
@@ -222,7 +236,8 @@
       work_day = #{workDay,jdbcType=VARCHAR},
       customize = #{customize,jdbcType=VARCHAR},
       scale = #{scale,jdbcType=VARCHAR},
-      price = #{price,jdbcType=VARCHAR}
+      price = #{price,jdbcType=VARCHAR},
+      models = #{models,jdbcType=VARCHAR}
     where recommend = #{recommend,jdbcType=BIGINT}
   </update>
 </mapper>

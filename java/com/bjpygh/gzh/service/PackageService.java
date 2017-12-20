@@ -192,12 +192,29 @@ public class PackageService {
         if (recommend.getCustomize().equals("是")) {
             for (int i=0;i<dsPackageInfos.size();i++){
                 if (dsPackageInfos.get(i).getReservation().equals("私人定制")){
-                    dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+1);
+                    dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+2);
                 }
             }
         } else {
             for (int i=0;i<dsPackageInfos.size();i++){
                 if (!dsPackageInfos.get(i).getReservation().equals("私人定制")){
+                    dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+2);
+                }
+            }
+        }
+
+        /**
+         * 判断是否自动挡
+         */
+        if (recommend.getModels().equals("C1 手动挡")){
+            for (int i=0;i<dsPackageInfos.size();i++){
+                if (dsPackageInfos.get(i).getModels().equals("C1 手动挡")){
+                    dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+1);
+                }
+            }
+        }else {
+            for (int i=0;i<dsPackageInfos.size();i++){
+                if (!dsPackageInfos.get(i).getReservation().equals("C2 自动挡")){
                     dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+1);
                 }
             }
