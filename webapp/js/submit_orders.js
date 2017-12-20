@@ -173,12 +173,15 @@ $(function() {
     $(".toPay").click(function() {
         var payMode = $("input[name='payMode-radio']:checked").val();
         console.log(payMode);
+        //请求参数
+        var objData = {
+            "packageid": packageid,
+            "select": select,
+            "protecttion": mustProtection
+        }
+        var objUrl = "createOrder.action"; //请求接口
         if (payMode == "JD") { //京东支付
-            $.post("createOrder.action", {
-                "packageid": packageid,
-                "select": select,
-                "protecttion": mustProtection
-            }, function(datas) { //创建驾校报名订单
+            $.post(objUrl, objData, function(datas) { //创建驾校报名订单
                 if (datas.status == 0) {
                     var ordernumber = datas.data.ordernumber;
                     console.log(ordernumber);
@@ -210,11 +213,7 @@ $(function() {
                 }
             }, "json");
         } else if (payMode == "aliPay") { //支付宝支付
-            $.post("createOrder.action", {
-                "packageid": packageid,
-                "select": select,
-                "mustProtection": mustProtection
-            }, function(datas) { //创建驾校报名订单
+            $.post(objUrl, objData, function(datas) { //创建驾校报名订单
                 if (datas.status == 0) {
                     var ordernumber = datas.data.ordernumber;
                     console.log(ordernumber);
