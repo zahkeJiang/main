@@ -2,7 +2,6 @@ body{
 	background: #4ea0ff;
     position: relative;
     color: #999;
-    font-family: "微软雅黑"
 }
 .assessBox{
 	padding:0 10px;
@@ -49,12 +48,10 @@ body{
 	border:0px;
 	display: flex;
 	width: 100%;
-	font-family: "微软雅黑"
 }
 .assessBox-input textarea[name="assess"]:-ms-input-placeholder{
     color: #999;
     font-size: 14px;
-    font-family: "微软雅黑"
 }
 
 .assessBox-input textarea[name="assess"]::-webkit-input-placeholder{
