@@ -16,10 +16,7 @@ import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.model.HttpsClientUtil;
 import com.bjpygh.gzh.model.TradeRefundReqDto;
 import com.bjpygh.gzh.service.*;
-import com.bjpygh.gzh.utils.MD5;
-import com.bjpygh.gzh.utils.PropertyUtils;
-import com.bjpygh.gzh.utils.ThreeDES;
-import com.bjpygh.gzh.utils.XMLToMap;
+import com.bjpygh.gzh.utils.*;
 import com.github.wxpay.sdk.WXPay;
 import com.jd.jr.pay.gate.signature.util.BASE64;
 import com.jd.jr.pay.gate.signature.util.JdPayUtil;
@@ -489,6 +486,33 @@ public class PayController extends BaseController {
             e.printStackTrace();
             return Status.fail(-20,"处理失败");
         }
+    }
+
+    //
+    @ResponseBody
+    @RequestMapping(value = "/getWxConfig", method = RequestMethod.POST)
+    public Status getWxConfig(HttpServletRequest request,String passed,String url) {
+        Map<String, String> userMap = checkWxUser(request);
+        if (userMap == null) {
+            return Status.notInWx();
+        }
+
+        OrderPush orderPush = new OrderPush();
+        String jsapi_ticket = orderPush.getJsapiTicket(passed);
+        String noncestr = getRandomString(32);
+        String timestamp = new Date().getTime()+"";
+//        String url = "http://gzpt.bjpygh.com/coupon.action";
+
+        String string1 = "jsapi_ticket="+jsapi_ticket+
+                "&noncestr="+noncestr+"&timestamp="+timestamp+
+                "&url="+url;
+        String signature = SHA1.encode(string1);
+
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("noncestr",noncestr);
+        map.put("timestamp",timestamp);
+        map.put("signature",signature);
+        return Status.success().add("config",map);
     }
 
     //获取指定位数的随机字符串(包含小写字母、大写字母、数字,0<length)

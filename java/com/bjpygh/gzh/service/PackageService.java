@@ -155,19 +155,19 @@ public class PackageService {
         if (recommend.getPrice().equals("低于4000元")) {
             for (int i=0;i<dsPackageInfos.size();i++){
                 if (dsPackageInfos.get(i).getPrice() < 4000){
-                    dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+1);
+                    dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+2);
                 }
             }
         } else if (recommend.getPrice().equals("4000元-6000元")) {
             for (int i=0;i<dsPackageInfos.size();i++){
                 if (4000 < dsPackageInfos.get(i).getPrice() && dsPackageInfos.get(i).getPrice() < 6000){
-                    dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+1);
+                    dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+2);
                 }
             }
         } else if (recommend.getPrice().equals("高于6000元")) {
             for (int i=0;i<dsPackageInfos.size();i++){
                 if (dsPackageInfos.get(i).getPrice() > 6000){
-                    dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+1);
+                    dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+2);
                 }
             }
         }
