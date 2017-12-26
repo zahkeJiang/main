@@ -165,7 +165,7 @@ public class NotifyController extends BaseController {
     private void pushToWangNan(String ordernumber,int price, String openid) {
         OrderPush orderPush = new OrderPush();
         Map<String, String> map = new HashMap<String, String>();
-        map.put("first","有人报名了！！！\n");
+        map.put("first","有人报名了！！！ \n");
         map.put("keyword1",price+"元");
         map.put("keyword2",ordernumber+"\n");
         map.put("remark","赶紧去服务");
@@ -208,7 +208,7 @@ public class NotifyController extends BaseController {
         map.put("keyword1",armyOrder.getArmyPrice()+"元");
         map.put("keyword2",armyOrder.getOriginalPrice()-armyOrder.getArmyPrice()+"元");
         map.put("keyword3",armyOrder.getOrderNumber()+"\n");
-        map.put("remark","小漂已经迫不及待想和您一起突突突啦。");
+        map.put("remark","小漂已经迫不及待想和你一起突突突啦。");
         map.put("openid",openid);
 
         orderPush.PayJsonObj(map);
@@ -362,7 +362,7 @@ public class NotifyController extends BaseController {
             for (int i=0;i<vs.length;i++){
                 vn += vs[i]+" ";
             }
-            order.setOrderDescripe("别墅: "+vn+" / "+
+            order.setOrderDescripe("别墅： "+vn+" / "+
                     "入住人数: "+villaOrder.getPeopleNumber()+"人 / "+"入住天数: "
                     +villaOrder.getDate().split(",").length+"晚");
             order.setOrderTime(villaOrder.getCreateTime());
@@ -386,7 +386,7 @@ public class NotifyController extends BaseController {
             order.setOrderImage(dsOrder.getImageurl());
             order.setOrderDescripe("班型: "+dsOrder.getDsType()+" / "
                     +"驾照类型: "+dsOrder.getModels()+" / "
-                    +"学习时间: "+dsOrder.getTrainTime()+" / "
+                    +"学习类型: "+dsOrder.getTrainTime()+" / "
                     +"法培方式: "+dsOrder.getNote());
             order.setOrderTime(dsOrder.getCreateTime());
             order.setOrderName(dsOrder.getDsName());
@@ -408,7 +408,7 @@ public class NotifyController extends BaseController {
             if (armyOrder.getPeriod()==0){
                 period ="时间段: 8:00-11:30";
             }else {
-                period = "时间段: 13:30-17:00";
+                period = "时间段： 13:30-17:00";
             }
             order.setOrderDescripe("参与人数: "+armyOrder.getPeopleNumber()+"人 / "
                     +"参与天数: "+armyOrder.getDate().split(",").length+"天 / "+period);
