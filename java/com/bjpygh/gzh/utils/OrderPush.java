@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class OrderPush {
 
-    String access_token;
+    static String access_token = null;
 
     String jsapi_ticket;
 
@@ -187,7 +187,7 @@ public class OrderPush {
 
 
 
-    public String getAccesstoken(){
+    public static String getAccesstoken(){
         JSONObject jsonObject = JSONObject.fromObject(Http.sendGet("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx74d8d40a83387a3e&secret=0f84386999305a8cd8464fc32efb01f3"));
         return jsonObject.getString("access_token");
     }
@@ -207,5 +207,11 @@ public class OrderPush {
         }
     }
 
-
+    public static String getAccess_token() {
+        if (access_token != null){
+            return access_token;
+        }else {
+            return getAccesstoken();
+        }
+    }
 }
