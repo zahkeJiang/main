@@ -37,7 +37,7 @@ function get_coupons() {
 
             }
             if (makeProtection == 0 || makeProtection == 1) {
-                payMoney();
+                // payMoney();
             }
         }
     });
@@ -52,16 +52,16 @@ function get_tel() {
     }, "json");
 }
 
-function payMoney() {
-    var mustProtection = $("input[name='makeProtection']:checked").val();
-    if (mustProtection == 1) {
-        payProtectionMoney = ProtectionMoney;
-    } else {
-        payProtectionMoney = 0;
-    }
-    $(".price").empty();
-    $(".price").html("¥" + (price - coupons_sum + payProtectionMoney)); //需支付金额
-}
+// function payMoney() {
+//     var mustProtection = $("input[name='makeProtection']:checked").val();
+//     if (mustProtection == 1) {
+//         payProtectionMoney = ProtectionMoney;
+//     } else {
+//         payProtectionMoney = 0;
+//     }
+//     $(".price").empty();
+//     $(".price").html("¥" + (price - coupons_sum + payProtectionMoney)); //需支付金额
+// }
 
 $(function() {
 
@@ -104,7 +104,7 @@ $(function() {
         $(this).siblings(".user-defined").html('<span class="chooseActive"></span>');
         $(this).parents(".mustProtectionDiv").siblings("div").find(".user-defined").empty();
 
-        payMoney();
+        // payMoney();
     });
 
     var look = false;
@@ -127,9 +127,8 @@ $(function() {
     get_tel(); //获取用户手机号
     get_coupons(); //获取优惠券金额
 
-
     //提交订单支付宝支付
-    $(".submit").click(function() {
+    $(".footer").click(function() {
         //获取用户姓名、联系方式、性别、地址
         realname = $("#real_name").val();
         address = $("#address").val();
@@ -146,13 +145,28 @@ $(function() {
 
         console.log("补考保障", mustProtection, "法培方式", note);
         if (realname == "") {
-            alert("请输入您的真实姓名");
+            $(".modal-body").html("请输入您的真实姓名");
+            $('#myModal').modal({
+                keyboard: true
+            });
+            setTimeout(function() {
+                $('#myModal').modal('toggle')
+            }, 2000);
         } else if (address == "") {
-            alert("请输入您的地址");
+            $(".modal-body").html("请输入您的地址");
+            $('#myModal').modal({
+                keyboard: true
+            });
         } else if (note == null) {
-            alert("请选择您的法培方式");
+            $(".modal-body").html("请选择您的法培方式");
+            $('#myModal').modal({
+                keyboard: true
+            });
         } else if (mustProtection == null) {
-            alert("请选择是否购买补考保障");
+            $(".modal-body").html("请选择是否购买补考保障");
+            $('#myModal').modal({
+                keyboard: true
+            });
         } else {
             $.post("note.action", {
                 "realname": realname,
@@ -160,74 +174,93 @@ $(function() {
                 "note": note,
             }, function(datas) { //保存用户信息
                 if (datas.status == "0") { //代表用户目前没有驾校的完成订单
-                    $(".layer").show();
-                    $(".payBox").show();
-                } else if (datas.status == "-20") {
-                    alert("每位用户仅能一次报名学车，为避免重复报名，请勿下单。");
-                }
-            }, "json");
-        }
-    });
-
-    //选择支付方式后点击确认
-    $(".toPay").click(function() {
-        var payMode = $("input[name='payMode-radio']:checked").val();
-        console.log(payMode);
-        //请求参数
-        var objData = {
-            "packageid": packageid,
-            "select": select,
-            "protecttion": mustProtection
-        }
-        var objUrl = "createOrder.action"; //请求接口
-        if (payMode == "JD") { //京东支付
-            $.post(objUrl, objData, function(datas) { //创建驾校报名订单
-                if (datas.status == 0) {
-                    var ordernumber = datas.data.ordernumber;
-                    console.log(ordernumber);
-                    $(".layer").hide();
-                    $(".payBox").hide();
-                    //京东支付请求
-                    $.post("JDPay", {
-                        "ordernumber": ordernumber
-                    }, function(data) {
-                        if (data.status == 0) {
-                            var jdOrderPay = data.data.jdOrderPay;
-                            $("#version").val(jdOrderPay.version);
-                            $("#merchant").val(jdOrderPay.merchant);
-                            $("#sign").val(jdOrderPay.sign);
-                            $("#tradeNum").val(jdOrderPay.tradeNum);
-                            $("#tradeName").val(jdOrderPay.tradeName);
-                            $("#tradeTime").val(jdOrderPay.tradeTime);
-                            $("#amount").val(jdOrderPay.amount);
-                            $("#currency").val(jdOrderPay.currency);
-                            $("#callbackUrl").val(jdOrderPay.callbackUrl);
-                            $("#notifyUrl").val(jdOrderPay.notifyUrl);
-                            $("#userId").val(jdOrderPay.userId);
-                            $("#orderType").val(jdOrderPay.orderType);
-                            document.getElementById("batchForm").submit();
+                    var objData = {
+                        "packageid": packageid,
+                        "select": select,
+                        "protecttion": mustProtection
+                    }
+                    $.post("createOrder.action", objData, function(datass) {
+                        if (datass.status == 0) { //预约成功
+                            $(".modal-body").html("您已成功预约" + dsname + "驾考报名，工作人员将在24小时之内与您取得联系，请保持电话畅通。");
+                            $('#myModal').modal({
+                                keyboard: true
+                            });
+                        } else {
+                            $(".modal-body").html("您已成功预约" + dsname + "驾考报名,请勿重复预约。如有问题，请联系小漂哦");
+                            $('#myModal').modal({
+                                keyboard: true
+                            });
                         }
-                    }, 'json');
-                } else if (datas.status == "-40") {
-                    alert("您当前存在多个未支付订单，请勿重复下单。")
+                    }, "json");
+                } else if (datas.status == "-20") {
+                    $(".modal-body").html("您已成功预约" + dsname + "驾考报名,请勿重复预约。如有问题，请联系小漂哦");
+                    $('#myModal').modal({
+                        keyboard: true
+                    });
                 }
-            }, "json");
-        } else if (payMode == "aliPay") { //支付宝支付
-            $.post(objUrl, objData, function(datas) { //创建驾校报名订单
-                if (datas.status == 0) {
-                    var ordernumber = datas.data.ordernumber;
-                    console.log(ordernumber);
-                    $(".layer").hide();
-                    $(".payBox").hide();
-                    window.location.href = "payHint.html?ordernumber=" + ordernumber;
-
-                } else if (datas.status == "-40") {
-                    alert("您当前存在多个未支付订单，请勿重复下单。")
-                }
-
             }, "json");
         }
     });
+
+    // //选择支付方式后点击确认
+    // $(".toPay").click(function() {
+    //     var payMode = $("input[name='payMode-radio']:checked").val();
+    //     console.log(payMode);
+    //     //请求参数
+    //     var objData = {
+    //         "packageid": packageid,
+    //         "select": select,
+    //         "protecttion": mustProtection
+    //     }
+    //     var objUrl = "createOrder.action"; //请求接口
+    //     if (payMode == "JD") { //京东支付
+    //         $.post(objUrl, objData, function(datas) { //创建驾校报名订单
+    //             if (datas.status == 0) {
+    //                 var ordernumber = datas.data.ordernumber;
+    //                 console.log(ordernumber);
+    //                 $(".layer").hide();
+    //                 $(".payBox").hide();
+    //                 //京东支付请求
+    //                 $.post("JDPay", {
+    //                     "ordernumber": ordernumber
+    //                 }, function(data) {
+    //                     if (data.status == 0) {
+    //                         var jdOrderPay = data.data.jdOrderPay;
+    //                         $("#version").val(jdOrderPay.version);
+    //                         $("#merchant").val(jdOrderPay.merchant);
+    //                         $("#sign").val(jdOrderPay.sign);
+    //                         $("#tradeNum").val(jdOrderPay.tradeNum);
+    //                         $("#tradeName").val(jdOrderPay.tradeName);
+    //                         $("#tradeTime").val(jdOrderPay.tradeTime);
+    //                         $("#amount").val(jdOrderPay.amount);
+    //                         $("#currency").val(jdOrderPay.currency);
+    //                         $("#callbackUrl").val(jdOrderPay.callbackUrl);
+    //                         $("#notifyUrl").val(jdOrderPay.notifyUrl);
+    //                         $("#userId").val(jdOrderPay.userId);
+    //                         $("#orderType").val(jdOrderPay.orderType);
+    //                         document.getElementById("batchForm").submit();
+    //                     }
+    //                 }, 'json');
+    //             } else if (datas.status == "-40") {
+    //                 alert("您当前存在多个未支付订单，请勿重复下单。")
+    //             }
+    //         }, "json");
+    //     } else if (payMode == "aliPay") { //支付宝支付
+    //         $.post(objUrl, objData, function(datas) { //创建驾校报名订单
+    //             if (datas.status == 0) {
+    //                 var ordernumber = datas.data.ordernumber;
+    //                 console.log(ordernumber);
+    //                 $(".layer").hide();
+    //                 $(".payBox").hide();
+    //                 window.location.href = "payHint.html?ordernumber=" + ordernumber;
+
+    //             } else if (datas.status == "-40") {
+    //                 alert("您当前存在多个未支付订单，请勿重复下单。")
+    //             }
+
+    //         }, "json");
+    //     }
+    // });
 
     //为支付方式的radio设置自定义点击样式
     $(".payMode").click(function() {
