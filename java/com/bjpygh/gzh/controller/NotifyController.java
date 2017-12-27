@@ -362,7 +362,7 @@ public class NotifyController extends BaseController {
             for (int i=0;i<vs.length;i++){
                 vn += vs[i]+" ";
             }
-            order.setOrderDescripe("别墅： "+vn+" / "+
+            order.setOrderDescripe("别墅: "+vn+" / "+
                     "入住人数: "+villaOrder.getPeopleNumber()+"人 / "+"入住天数: "
                     +villaOrder.getDate().split(",").length+"晚");
             order.setOrderTime(villaOrder.getCreateTime());
