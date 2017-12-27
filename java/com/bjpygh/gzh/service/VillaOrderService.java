@@ -90,6 +90,7 @@ public class VillaOrderService {
         }else {
             villaOrder.setImageurl("http://120.24.184.86/glxt/dsimage/villa_1.jpg");
         }
+
         //设置状态
         villaOrder.setOrderStatus(0);
         villaOrder.setNote("漂洋过海小别墅");

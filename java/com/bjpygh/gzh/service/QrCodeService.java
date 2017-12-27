@@ -15,9 +15,9 @@ public class QrCodeService {
     @Autowired
     QrCodeMapper qrCodeMapper;
 
-    public String getTicket(int userid) {
+    public String checkTicket(int userid) {
         QrCode qrCode = qrCodeMapper.selectByPrimaryKey((long) userid);
-        if (qrCode.getTicket() != null){
+        if (qrCode != null){
             return qrCode.getTicket();
         }else {
             String access_token = OrderPush.getAccess_token();
