@@ -42,6 +42,7 @@ public class ArmyOrderController extends BaseController {
         for (ArmyOrder dso : list){
             if (dso.getOrderStatus() == 0){
                 dsos.add(dso);
+
             }
         }
         if (dsos.size()>2){

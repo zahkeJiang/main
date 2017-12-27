@@ -30,26 +30,35 @@ public class BaseController {
         Map<String, String> map = new HashMap<String, String>();
         if(userMap == null){
             userMap = new HashMap<String, String>();
-//            map = getMap(request);
-//            String openid =map.get("openid");
-//            String access_token = map.get("access_token");
-//            String userId = userService.getUserIdByOpenid(openid);
-//            if(userId == null){		//判断用户不存在
-//                //用户不存在则插入用户
-//                User user = getUser(getUserInfo(openid, access_token));
-//                userService.InsertUserFromWx(user);
-//                userId = userService.getUserIdByOpenid(openid);
-//            }
-//          //将用户信息放入缓存中
-//            userMap.put("id",userId);
-//            userMap.put("openid", openid);
-//            userMap.put("access_token",access_token);
-            userMap.put("id","1");
-            userMap.put("openid","o9C-m0gWfR9WOs8DIDElxSUfDIUU");
-            session.setAttribute("user", userMap );
+            String openid = null;
+            String access_token = null;
+            String userId = null;
+            try{
+                map = getMap(request);
+                openid =map.get("openid");
+                access_token = map.get("access_token");
+                userId = userService.getUserIdByOpenid(openid);
+                if(userId == null){		//判断用户不存在
+                    //用户不存在则插入用户
+                    User user = getUser(getUserInfo(openid, access_token));
+                    userService.InsertUserFromWx(user);
+                    userId = userService.getUserIdByOpenid(openid);
+                }
+                //将用户信息放入缓存中
+                userMap.put("id",userId);
+                userMap.put("openid", openid);
+                userMap.put("access_token",access_token);
+//            userMap.put("id","1");
+//            userMap.put("openid","o9C-m0gWfR9WOs8DIDElxSUfDIUU");
+                session.setAttribute("user", userMap );
+                System.out.println("access_token="+userMap);
+                return  userMap;
+            }catch (Exception e){
+                return null;
+            }
+        }else {
+            return userMap;
         }
-        System.out.println("access_token="+userMap);
-        return  userMap;
     }
 
 
@@ -84,10 +93,15 @@ public class BaseController {
 
         String sb1 = getInfo(Global.WXURL+Global.WXURLAT+"?appid=wx74d8d40a83387a3e&secret=0f84386999305a8cd8464fc32efb01f3&code="+code+"&grant_type=authorization_code");
         JSONObject tmp = JSONObject.fromObject(sb1);
-        String access_token = tmp.getString("access_token");
-        String openid = tmp.getString("openid");
-
+        String access_token = null;
+        String openid = null;
         Map<String, String> map = new HashMap<String, String>();
+        try{
+            access_token = tmp.getString("access_token");
+            openid = tmp.getString("openid");
+        }catch (Exception e){
+            return map;
+        }
         map.put("access_token", access_token);
         map.put("openid", openid);
         return map;

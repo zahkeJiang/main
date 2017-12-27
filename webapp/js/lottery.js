@@ -113,7 +113,7 @@ function roll(num) {
 $(function() {
     $.post("queryCoupon.action", {}, function(obj) {
         if (obj.status == "-10") { //-10未关注公众号
-            window.location.href = "openWchat.html";
+            window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx74d8d40a83387a3e&redirect_uri=http://gzpt.bjpygh.com/coupon.action&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
         } else if (obj.status == "-40") { //没有优惠券
             //点击抽奖按钮，开始抽奖
             $(".lottery_begin").click(function() {

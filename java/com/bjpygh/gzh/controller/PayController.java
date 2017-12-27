@@ -16,10 +16,7 @@ import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.model.HttpsClientUtil;
 import com.bjpygh.gzh.model.TradeRefundReqDto;
 import com.bjpygh.gzh.service.*;
-import com.bjpygh.gzh.utils.MD5;
-import com.bjpygh.gzh.utils.PropertyUtils;
-import com.bjpygh.gzh.utils.ThreeDES;
-import com.bjpygh.gzh.utils.XMLToMap;
+import com.bjpygh.gzh.utils.*;
 import com.github.wxpay.sdk.WXPay;
 import com.jd.jr.pay.gate.signature.util.BASE64;
 import com.jd.jr.pay.gate.signature.util.JdPayUtil;
@@ -279,37 +276,43 @@ public class PayController extends BaseController {
 
         }else if (o.equals("D")){
             DsOrder dsOrder = dsOrderService.getDsOrderByNumber(out_trade_no).get(0);
-            //判断是否已经完成退款
-            if (dsOrder.getOrderStatus() == 5){
-                return Status.success();
-            }
-            String refund_amount=""+(float)(Math.round((Float.parseFloat(""+dsOrder.getOrderPrice())*0.994)*100))/100;
-            if(dsOrder.getOrderStatus() == 3||dsOrder.getOrderStatus() == 4||dsOrder.getOrderStatus() == 7){
-                return Status.fail(-30,"报名已完成");
-            }
-            //判断订单由什么支付方式支付
-            if (dsOrder.getPayType()==0){
-                if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
-                    //改变订单状态
-                    System.out.println("dsOrderService.refundOrder(out_trade_no)");
-                    dsOrderService.refundOrder(out_trade_no);
-                    return Status.success();
-                }else{
-                    return Status.fail(-20,"处理失败");
-                }
-            }else if (dsOrder.getPayType()==3){
-                if (getJdRefundResult(out_trade_no,refund_amount)){
-                    //改变订单状态
-                    dsOrder.setOrderStatus((byte) 5);
-                    dsOrder.setRefundTime(formatter.format(new Date()));
-                    dsOrderService.updateOrder(dsOrder);
-                    return Status.success();
-                }else{
-                    return Status.fail(-20,"处理失败");
-                }
-            }else{
-                return Status.fail(-30,"未知的错误发生了");
-            }
+            //改变订单状态
+            dsOrder.setOrderStatus((byte) 6);
+            dsOrder.setRefundTime(formatter.format(new Date()));
+            dsOrderService.updateOrder(dsOrder);
+            return Status.success();
+//            DsOrder dsOrder = dsOrderService.getDsOrderByNumber(out_trade_no).get(0);
+//            //判断是否已经完成退款
+//            if (dsOrder.getOrderStatus() == 5){
+//                return Status.success();
+//            }
+//            String refund_amount=""+(float)(Math.round((Float.parseFloat(""+dsOrder.getOrderPrice())*0.994)*100))/100;
+//            if(dsOrder.getOrderStatus() == 3||dsOrder.getOrderStatus() == 4||dsOrder.getOrderStatus() == 7){
+//                return Status.fail(-30,"报名已完成");
+//            }
+//            //判断订单由什么支付方式支付
+//            if (dsOrder.getPayType()==0){
+//                if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
+//                    //改变订单状态
+//                    System.out.println("dsOrderService.refundOrder(out_trade_no)");
+//                    dsOrderService.refundOrder(out_trade_no);
+//                    return Status.success();
+//                }else{
+//                    return Status.fail(-20,"处理失败");
+//                }
+//            }else if (dsOrder.getPayType()==3){
+//                if (getJdRefundResult(out_trade_no,refund_amount)){
+//                    //改变订单状态
+//                    dsOrder.setOrderStatus((byte) 5);
+//                    dsOrder.setRefundTime(formatter.format(new Date()));
+//                    dsOrderService.updateOrder(dsOrder);
+//                    return Status.success();
+//                }else{
+//                    return Status.fail(-20,"处理失败");
+//                }
+//            }else{
+//                return Status.fail(-30,"未知的错误发生了");
+//            }
         }else if (o.equals("A")){
             ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(out_trade_no).get(0);
             //判断是否已经完成退款
@@ -489,6 +492,33 @@ public class PayController extends BaseController {
             e.printStackTrace();
             return Status.fail(-20,"处理失败");
         }
+    }
+
+    //
+    @ResponseBody
+    @RequestMapping(value = "/getWxConfig", method = RequestMethod.POST)
+    public Status getWxConfig(HttpServletRequest request,String passed,String url) {
+        Map<String, String> userMap = checkWxUser(request);
+        if (userMap == null) {
+            return Status.notInWx();
+        }
+
+        OrderPush orderPush = new OrderPush();
+        String jsapi_ticket = orderPush.getJsapiTicket(passed);
+        String noncestr = getRandomString(32);
+        String timestamp = new Date().getTime()+"";
+//        String url = "http://gzpt.bjpygh.com/coupon.action";
+
+        String string1 = "jsapi_ticket="+jsapi_ticket+
+                "&noncestr="+noncestr+"&timestamp="+timestamp+
+                "&url="+url;
+        String signature = SHA1.encode(string1);
+
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("noncestr",noncestr);
+        map.put("timestamp",timestamp);
+        map.put("signature",signature);
+        return Status.success().add("config",map);
     }
 
     //获取指定位数的随机字符串(包含小写字母、大写字母、数字,0<length)
