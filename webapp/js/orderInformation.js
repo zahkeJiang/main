@@ -7,7 +7,7 @@ function ShowMessage() {
 }
 window.onload = ShowMessage();
 $(function() {
-
+	var typeLetter = ordernumber.substr(0, 1); //提取订单号收个字母，D驾校，V别墅，A军旅
 	$.post("schedule.action", {
 		"ordernumber": ordernumber
 	}, function(datas) {
@@ -33,15 +33,23 @@ $(function() {
 			$(".order-time").html("下单时间：&nbsp;" + userorder.orderTime); //创建订单时间
 			$(".order-price").html("¥" + userorder.originalPrice); //套餐原价
 			$(".price-pay").html("¥" + userorder.orderPrice); //实际付款
-			$(".price-coupon").html("¥" + (datas.data.price)); //优惠价格
-			// 订单状态值，0用户未支付；1已付款；2驾校特有，未上交材料；3驾校特有，驾校已报名，正在返还材料；4交易完成，未评价；5未付款取消订单；6已付款取消订单；7交易完成，已评价
+			$(".price-coupon").html("- ¥" + (datas.data.price)); //优惠价格
+			$(".price-weikuan").html("¥" + (userorder.originalPrice - datas.data.price - userorder.orderPrice)); //尾款
+			// 订单状态值，0用户未支付，驾校已预约；1已付款，4交易完成，未评价；5未付款取消订单；6已付款取消订单；7交易完成，已评价
 			if (userorder.orderStatus == "0") { //用户提交订单未支付
-				$(".chedule-content").html("未付款");
+				if (typeLetter == "D") {
+					$(".shedule-hint-text").html("您已成功预约驾考报名，工作人员将在24小时之内与您取得联系，请保持电话畅通。");
+					$(".chedule-content").html("已预约");
+					$(".cancel").html("取消预约");
+				} else {
+					$(".shedule-hint-text").html("您已提交订单,请尽快完成支付！");
+					$(".chedule-content").html("未付款");
+				}
 				$(".chedule-content").css({
 					"color": "white",
 					"background": "orange"
 				});
-				$(".shedule-hint-text").html("您已提交订单,请尽快完成支付！");
+
 				$(".footer").show();
 				$(".toPay").show();
 				$(".cancel").show();
@@ -53,7 +61,6 @@ $(function() {
 				//未支付，去付款
 				$(".toPay").click(function() {
 					//拿到订单编号，进行判断属于那种类型，再加载不同
-					var typeLetter = ordernumber.substr(0, 1); //提取订单号收个字母，D驾校，V别墅，A军旅
 					var cancelUrl = ""; // type(1为别墅评论 2为驾校 3为军旅)
 					if (typeLetter == "V") {
 						//是别墅，需要先判断当前选择的别墅是否已经被预定
@@ -76,7 +83,7 @@ $(function() {
 				//未支付，取消订单
 				$(".cancel").click(function() {
 					//拿到订单编号，进行判断属于那种类型，再加载不同
-					var typeLetter = ordernumber.substr(0, 1); //提取订单号收个字母，D驾校，V别墅，A军旅
+
 					var cancelUrl = ""; // type(1为别墅评论 2为驾校 3为军旅)
 					if (typeLetter == "V") {
 						cancelUrl = "cancelVillaOrder";
@@ -94,24 +101,26 @@ $(function() {
 							if (status == 0) {
 								window.location.href = "orderInformation.html?ordernumber=" + ordernumber;
 							} else {
-								// alert("系统繁忙，请稍后再试");
+								alert("网络异常，请稍后再试");
 							}
 						}, "json");
 					}
 				});
 			} else if (userorder.orderStatus == "1" || userorder.orderStatus == "2") { //1代表用户已付款,驾校特有状态值2，代表材料尚未拿过来
 				//拿到订单编号，进行判断属于那种类型，再加载不同
-				var typeLetter = ordernumber.substr(0, 1); //提取订单号首个字母，D驾校，V别墅，A军旅
 
 				if (typeLetter == "V") {
 					$(".shedule-hint-text").html("订单已支付预约定金，请入住别墅时交付尾款，小漂为您服务。");
+					$(".chedule-content").html("已付款");
 				} else if (typeLetter == "A") {
 					$(".shedule-hint-text").html("订单已支付预约定金，请到达作战基地时交付尾款，小漂为您服务。");
+					$(".chedule-content").html("已付款");
 				} else if (typeLetter == "D") {
-					$(".shedule-hint-text").html("订单已支付成功，小漂为您服务。");
+					$(".shedule-hint-text").html("您已成功预约驾考报名，工作人员将在24小时之内与您取得联系，请保持电话畅通。");
+					$(".chedule-content").html("已预约");
+					$(".cancel").html("取消预约");
 				}
 
-				$(".chedule-content").html("已付款");
 				$(".chedule-content").css({
 					"color": "white",
 					"background": "green"
@@ -123,7 +132,7 @@ $(function() {
 					"margin-bottom": "58px"
 				});
 
-				//已支付，取消订单，此时是退款
+				//已支付，取消订单，此时是退款，驾校是取消预约
 				$(".cancel").click(function() {
 					window.location.href = "refund.html?ordernumber=" + ordernumber;
 				});
@@ -158,7 +167,6 @@ $(function() {
 				});
 				//评价,获取当前订单号，进行判断是属于哪个类型
 				$(".assess").click(function() {
-					var typeLetter = ordernumber.substr(0, 1); //提取订单号收个字母，D驾校，V别墅，A军旅
 					var type = ""; // type(1为别墅评论 2为驾校 3为军旅)
 					if (typeLetter == "V") {
 						type = 1;

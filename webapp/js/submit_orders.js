@@ -64,7 +64,6 @@ function get_tel() {
 // }
 
 $(function() {
-
     //班型套餐是否有补考保障，0必须没有，1必须有，2可选择
     if (makeProtection == 0) {
         $(".ProtectionDiv").empty();
@@ -149,9 +148,6 @@ $(function() {
             $('#myModal').modal({
                 keyboard: true
             });
-            setTimeout(function() {
-                $('#myModal').modal('toggle')
-            }, 2000);
         } else if (address == "") {
             $(".modal-body").html("请输入您的地址");
             $('#myModal').modal({
@@ -186,14 +182,21 @@ $(function() {
                                 keyboard: true
                             });
                         } else {
-                            $(".modal-body").html("您已成功预约" + dsname + "驾考报名,请勿重复预约。如有问题，请联系小漂哦");
+                            $(".modal-body").html("您已成功预约" + dsname + "驾考报名,请勿重复预约。如有问题，请联系小漂哦。");
                             $('#myModal').modal({
                                 keyboard: true
                             });
                         }
                     }, "json");
                 } else if (datas.status == "-20") {
-                    $(".modal-body").html("您已成功预约" + dsname + "驾考报名,请勿重复预约。如有问题，请联系小漂哦");
+                    // $(".modal-dialog").css({
+                    //     "margin": "20px",
+                    //     "margin-top": "200px",
+                    // });
+                    // $(".modal-content").css({
+                    //     "padding": "10px"
+                    // })
+                    $(".modal-body").html("您已成功预约" + dsname + "驾考报名,请勿重复预约。如有问题，请联系小漂哦。");
                     $('#myModal').modal({
                         keyboard: true
                     });
