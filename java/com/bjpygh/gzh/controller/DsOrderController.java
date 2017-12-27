@@ -162,7 +162,7 @@ public class DsOrderController extends BaseController {
         dsOrder.setOrderNumber(out_trade_no);
         dsOrder.setOrderPrice(total_amount);
         dsOrder.setOriginalPrice(dsPackage.getPrice());
-        dsOrder.setOrderStatus((byte) 0);
+        dsOrder.setOrderStatus((byte) 1);
         dsOrder.setPhoneNumber(user.getPhoneNumber());
         dsOrder.setTrainTime(dsPackage.getTrainTime());
         String imageUrl = "http://120.24.184.86/glxt/dsimage/"+DsInfo.getDsImage().split(",")[0];
@@ -172,6 +172,7 @@ public class DsOrderController extends BaseController {
         dsOrder.setCreateTime(formatter.format(new Date()));
         dsOrderService.insertOrder(dsOrder);
 
+//        pushToWangNan(dsOrder.getOrderNumber(),dsOrder.getOrderPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
         OrderPush orderPush = new OrderPush();
         Map<String, String> map = new HashMap<String, String>();
         map.put("first","Hi,您已成功提交驾考订单");
@@ -183,6 +184,18 @@ public class DsOrderController extends BaseController {
         orderPush.CreateJsonObj(map);
 
         return Status.success().add("ordernumber",out_trade_no);
+    }
+    //给王男推送
+    private void pushToWangNan(String ordernumber,int price, String openid) {
+        OrderPush orderPush = new OrderPush();
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("first","有人预约了！！！ \n");
+        map.put("keyword1",price+"元");
+        map.put("keyword2",ordernumber+"\n");
+        map.put("remark","赶紧去服务");
+        map.put("openid",openid);
+
+        orderPush.PayJsonObj(map);
     }
 
     //关闭订单接口

@@ -276,37 +276,43 @@ public class PayController extends BaseController {
 
         }else if (o.equals("D")){
             DsOrder dsOrder = dsOrderService.getDsOrderByNumber(out_trade_no).get(0);
-            //判断是否已经完成退款
-            if (dsOrder.getOrderStatus() == 5){
-                return Status.success();
-            }
-            String refund_amount=""+(float)(Math.round((Float.parseFloat(""+dsOrder.getOrderPrice())*0.994)*100))/100;
-            if(dsOrder.getOrderStatus() == 3||dsOrder.getOrderStatus() == 4||dsOrder.getOrderStatus() == 7){
-                return Status.fail(-30,"报名已完成");
-            }
-            //判断订单由什么支付方式支付
-            if (dsOrder.getPayType()==0){
-                if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
-                    //改变订单状态
-                    System.out.println("dsOrderService.refundOrder(out_trade_no)");
-                    dsOrderService.refundOrder(out_trade_no);
-                    return Status.success();
-                }else{
-                    return Status.fail(-20,"处理失败");
-                }
-            }else if (dsOrder.getPayType()==3){
-                if (getJdRefundResult(out_trade_no,refund_amount)){
-                    //改变订单状态
-                    dsOrder.setOrderStatus((byte) 5);
-                    dsOrder.setRefundTime(formatter.format(new Date()));
-                    dsOrderService.updateOrder(dsOrder);
-                    return Status.success();
-                }else{
-                    return Status.fail(-20,"处理失败");
-                }
-            }else{
-                return Status.fail(-30,"未知的错误发生了");
-            }
+            //改变订单状态
+            dsOrder.setOrderStatus((byte) 6);
+            dsOrder.setRefundTime(formatter.format(new Date()));
+            dsOrderService.updateOrder(dsOrder);
+            return Status.success();
+//            DsOrder dsOrder = dsOrderService.getDsOrderByNumber(out_trade_no).get(0);
+//            //判断是否已经完成退款
+//            if (dsOrder.getOrderStatus() == 5){
+//                return Status.success();
+//            }
+//            String refund_amount=""+(float)(Math.round((Float.parseFloat(""+dsOrder.getOrderPrice())*0.994)*100))/100;
+//            if(dsOrder.getOrderStatus() == 3||dsOrder.getOrderStatus() == 4||dsOrder.getOrderStatus() == 7){
+//                return Status.fail(-30,"报名已完成");
+//            }
+//            //判断订单由什么支付方式支付
+//            if (dsOrder.getPayType()==0){
+//                if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
+//                    //改变订单状态
+//                    System.out.println("dsOrderService.refundOrder(out_trade_no)");
+//                    dsOrderService.refundOrder(out_trade_no);
+//                    return Status.success();
+//                }else{
+//                    return Status.fail(-20,"处理失败");
+//                }
+//            }else if (dsOrder.getPayType()==3){
+//                if (getJdRefundResult(out_trade_no,refund_amount)){
+//                    //改变订单状态
+//                    dsOrder.setOrderStatus((byte) 5);
+//                    dsOrder.setRefundTime(formatter.format(new Date()));
+//                    dsOrderService.updateOrder(dsOrder);
+//                    return Status.success();
+//                }else{
+//                    return Status.fail(-20,"处理失败");
+//                }
+//            }else{
+//                return Status.fail(-30,"未知的错误发生了");
+//            }
         }else if (o.equals("A")){
             ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(out_trade_no).get(0);
             //判断是否已经完成退款
