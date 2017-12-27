@@ -95,8 +95,8 @@ public class DsOrderController extends BaseController {
                 dsos.add(dso);
             }
         }
-        if (dsos.size()>2){
-            return Status.fail(-40,"您已创建三个订单，无法创建更多订单");
+        if (dsos.size()>0){
+            return Status.fail(-40,"您已预定订单，无法预定更多订单");
         }
         String packageid = dsAliPay.getPackageid();
         String select = dsAliPay.getSelect();
@@ -160,9 +160,9 @@ public class DsOrderController extends BaseController {
         dsOrder.setNote(user.getReamark());
         dsOrder.setRealName(user.getRealName());
         dsOrder.setOrderNumber(out_trade_no);
-        dsOrder.setOrderPrice(total_amount);
+        dsOrder.setOrderPrice(0);
         dsOrder.setOriginalPrice(dsPackage.getPrice());
-        dsOrder.setOrderStatus((byte) 1);
+        dsOrder.setOrderStatus((byte) 0);
         dsOrder.setPhoneNumber(user.getPhoneNumber());
         dsOrder.setTrainTime(dsPackage.getTrainTime());
         String imageUrl = "http://120.24.184.86/glxt/dsimage/"+DsInfo.getDsImage().split(",")[0];

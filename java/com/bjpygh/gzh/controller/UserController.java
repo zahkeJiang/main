@@ -107,6 +107,18 @@ public class UserController extends BaseController {
         }
     }
 
+    //绑定接口
+    @ResponseBody
+    @RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
+    public Status checkLogin(HttpServletRequest request){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }else {
+            return Status.success();
+        }
+    }
+
     @ResponseBody
     @RequestMapping(value = "/applyCard",method = RequestMethod.POST)
     public Status applyCard(HttpServletRequest request, YouCard youCard){
