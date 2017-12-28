@@ -69,7 +69,13 @@ function all_orders() {
             $.each(dsorder_list, function(commentIndex, comment) {
                 var order_assess = "";
                 if (comment.orderStatus == "0") { //用户未支付订单
-                    var result = "<p class='topay' odnumber='" + comment.orderNumber + "'>待付款</p>";
+                    var result = "";
+                    var typeLetter = comment.orderNumber.substr(0, 1); //提取订单号收个字母，D驾校，V别墅，A军旅
+                    if (typeLetter == "D") {
+                        result = "<p class='topay' odnumber='" + comment.orderNumber + "'>已预约</p>";
+                    } else {
+                        result = "<p class='topay' odnumber='" + comment.orderNumber + "'>待付款</p>";
+                    }
                     var yinggaipay = "应付款：";
                 } else if (comment.orderStatus == "1" || comment.orderStatus == "2") { //用户已付款，审核过程
                     var result = "<p class='refund' odnumber='" + comment.orderNumber + "'>已付款</p>";
@@ -139,7 +145,13 @@ function orders_pay() {
             // $.each循环实现添加订单列表  
             $.each(dsorder_list, function(commentIndex, comment) {
                 if (comment.orderStatus == "0") {
-                    var result = "<p class='topay' odnumber='" + comment.orderNumber + "'>待付款</p>";
+                    var result = "";
+                    var typeLetter = comment.orderNumber.substr(0, 1); //提取订单号收个字母，D驾校，V别墅，A军旅
+                    if (typeLetter == "D") {
+                        result = "<p class='topay' odnumber='" + comment.orderNumber + "'>已预约</p>";
+                    } else {
+                        result = "<p class='topay' odnumber='" + comment.orderNumber + "'>待付款</p>";
+                    }
                     dsorderh_tml += "<div class='dsorder_list'  onumber='" + comment.orderNumber + "'><div class='dsorder_titie'><p class='ds_name'>" + comment.orderName + "</p>" + result + "</div><div class='dsoder_container'><img src='" + comment.orderImage + "' height='48px' width='64px'><p class='dsorder_information'>" + comment.orderDescripe + "</p></div><div class='dsorder_footer'><span class='dsorder_pay'>应付款：</span><span class='order_price'>¥" + comment.orderPrice + "</span></div></div>";
                 }
             });

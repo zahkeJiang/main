@@ -57,6 +57,9 @@ body{
 	align-items: center;
 	justify-content: space-between;
 }
+.shedule-hint-text{
+	line-height: 16px;
+}
 .shedule-hint-delivery{
 	font-size: 12px;
 	width: 68px;

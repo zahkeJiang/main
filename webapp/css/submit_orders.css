@@ -150,11 +150,11 @@ span,.dstype_information_content{
 }
 .ds_radio > div { position: relative; float: left;  height: 40px; line-height: 40px; width: 100%; padding-left: 10px;}
 
-.ds_radio label { display: block;  height: 40px; line-height: 40px;padding-left:20px;}
+.ds_radio label { display: block;  height: 40px; line-height: 40px;padding-left:20px; font-weight: normal;}
 
 .ds_radio input { z-index: 3; display: block; filter:alpha(opacity=0); opacity: 0; position: absolute; top: 0; bottom: 0; margin: auto; width: 16px;height: 16px;}
 
-.ds_radio .user-defined { z-index: 2; position: absolute; top: 0; bottom: 0; margin: auto; width: 14px; height: 14px; border: 1px solid #000; border-radius: 50%; }
+.ds_radio .user-defined { z-index: 2; position: absolute; top: 0; bottom: 0; margin: auto; width: 16px; height: 16px; border: 1px solid #000; border-radius: 50%; }
 
 /*.ds_radio .user-defined span.circle  { display: block; width: 10px; height: 10px; margin-top: 2px;margin-left: 2px; background-color: transparent; border-radius: 50%; }
 
@@ -192,12 +192,13 @@ span,.dstype_information_content{
     background: #f6f1f1;
 	height: 48px;
 	align-items: center;	
+	justify-content: center;
 }
 
 .footer{
 	box-shadow: 0 -1px 5px #ddd;  
 }
-.submit{
+/*.submit{
 	width: 30%;
 	background-color:orange;
 	height: 48px;
@@ -213,12 +214,11 @@ span,.dstype_information_content{
 }
 
 .last_price span{	
-	/*color: orange;*/
 	padding: 0;
 }
 .price{
 	font-size: 18px;
-}
+}*/
 /*支付选择弹窗*/
 .payBox{
 	display: none;
