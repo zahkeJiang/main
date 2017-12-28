@@ -23,6 +23,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -342,7 +343,7 @@ public class NotifyController extends BaseController {
     //查询订单进度接口
     @ResponseBody
     @RequestMapping(value = "/schedule.action", method = RequestMethod.POST)
-    public Status schedule(HttpServletRequest request, String ordernumber){
+    public Status schedule(HttpServletRequest request, String ordernumber) throws ParseException {
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();
@@ -380,6 +381,13 @@ public class NotifyController extends BaseController {
             }else{
                 dsOrder = dsOrders.get(0);
             }
+            UserCoupon dsCoupon = couponService.getDsCoupon(userid);
+            Date couponTime = dsCoupon.getCouponTime();
+            Date createTime = formatter.parse(dsOrder.getCreateTime());
+            Integer couponPrice = 0;
+            if (createTime.getTime()-couponTime.getTime()<2678400000L){
+                couponPrice = dsCoupon.getCouponPrice();
+            }
             UserOrder order = new UserOrder();
             order.setOrderPrice(dsOrder.getOrderPrice());
             order.setOrderStatus(dsOrder.getOrderStatus());
@@ -396,7 +404,8 @@ public class NotifyController extends BaseController {
             order.setOriginalPrice(dsOrder.getOriginalPrice());
             order.setDescription(dsOrder.getDescription());
             order.setDsNote("法培方式"+dsOrder.getNote());
-            return Status.success().add("order",order).add("price",order.getOriginalPrice()-order.getOrderPrice());
+            return Status.success().add("order",order)
+                    .add("price",couponPrice);
         }else if (o.equals("A")){
             ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(ordernumber).get(0);
             User user = userService.getUserById(userid);

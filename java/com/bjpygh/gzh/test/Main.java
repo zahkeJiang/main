@@ -60,15 +60,15 @@ public class Main {
 //            System.out.println(u.getOrderNumber());
 //        }
 //------------------------------------------------------------------------------
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        try {
-//            Date date1 = sdf.parse("2017-10-1");
-//            Date date2 = sdf.parse("2017-11-01");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date1 = sdf.parse("2017-10-1");
+            Date date2 = sdf.parse("2017-11-01");
 
-//            System.out.println(date2);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
+            System.out.println(date2.getTime()-date1.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 //        int a = 1887;
 //        System.out.println(""+(a/2));
         //-------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ public class Main {
 //        System.out.println(orderPush.CreateJsonObj(map));
 
 
-        System.out.println(Pattern.matches(".*速*.","速成快板"));
+//        System.out.println(Pattern.matches(".*速*.","速成快板"));
     }
 
 //29 6 5

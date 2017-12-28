@@ -1,6 +1,7 @@
 package com.bjpygh.gzh.controller;
 
 import com.bjpygh.gzh.entity.Status;
+import com.bjpygh.gzh.service.AttentionService;
 import com.bjpygh.gzh.service.QrCodeService;
 import com.bjpygh.gzh.utils.Http;
 import com.bjpygh.gzh.utils.OrderPush;
@@ -22,6 +23,9 @@ public class MessageController extends BaseController {
 
     @Autowired
     QrCodeService qrCodeService;
+
+    @Autowired
+    AttentionService attentionService;
     //改变订单状态接口
     @ResponseBody
     @RequestMapping(value = "/getWxMessage", method = RequestMethod.GET)
@@ -71,6 +75,9 @@ public class MessageController extends BaseController {
                         "另外，【留言】还是要有的，万一被小漂Ꙭ撩了呢哈哈~\n" +
                         "                ᴀʟʟ ғᴏʀ ʏᴏᴜ";
                 sendToUser(map,text);
+                if (map.get("EventKey") != null){
+                    attentionService.insertAtentionService(map);
+                }
             }else if (map.get("Event").equals("unsubscribe")){
 
             }
