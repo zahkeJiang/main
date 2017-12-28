@@ -44,6 +44,7 @@ $(function() {
 				} else {
 					$(".shedule-hint-text").html("您已提交订单,请尽快完成支付！");
 					$(".chedule-content").html("未付款");
+					$(".toPay").show();
 				}
 				$(".chedule-content").css({
 					"color": "white",
@@ -51,7 +52,6 @@ $(function() {
 				});
 
 				$(".footer").show();
-				$(".toPay").show();
 				$(".cancel").show();
 				$(".price").css({
 					"margin-bottom": "58px"
