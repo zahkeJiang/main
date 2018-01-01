@@ -56,7 +56,7 @@ $(function() {
 				$(".price").css({
 					"margin-bottom": "58px"
 				});
-				$(".pay_text").html("应付款");
+				$(".pay_text").html("线上应付款:");
 
 				//未支付，去付款
 				$(".toPay").click(function() {
@@ -71,7 +71,7 @@ $(function() {
 								$(".layer").show();
 								$(".payBox").show();
 							} else {
-								alert(dats.msg); //您的套餐中别墅或日期已被预约
+								modalHintText(dats.msg); //您的套餐中别墅或日期已被预约
 							}
 						}, "json");
 					} else {
@@ -101,7 +101,7 @@ $(function() {
 							if (status == 0) {
 								window.location.href = "orderInformation.html?ordernumber=" + ordernumber;
 							} else {
-								alert("网络异常，请稍后再试");
+								modalHintText("网络异常，请稍后再试");
 							}
 						}, "json");
 					}
