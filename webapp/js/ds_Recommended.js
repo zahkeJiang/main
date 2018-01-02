@@ -42,10 +42,6 @@ $(function() {
                 $.cookie("brand", brand); //套餐描述
                 window.location.href = "ds_apply.html";
             })
-            $(".close1").click(function() {
-                $(this).hide();
-                $(".again").hide();
-            })
             $(".again").click(function() {
                 $(".again").unbind("click");
                 console.log("我点击了重新筛选1");
@@ -146,10 +142,6 @@ function gogo() {
                             $.cookie("brand", brand); //套餐描述
                             window.location.href = "ds_apply.html";
                         })
-                        $(".close1").click(function() {
-                            $(this).hide();
-                            $(".again").hide();
-                        });
                         $(".again").click(function() {
                             $(".again").unbind("click");
                             console.log("我点击了重新筛选2");

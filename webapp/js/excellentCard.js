@@ -75,7 +75,7 @@ $(function() {
 					"gender": age
 				}, function(datas) {
 					if (datas.status == 0) {
-						alert("提交成功，请等待审核");
+						modalHintText("提交成功，请等待审核");
 						$(".layer").hide();
 						$(".infoBox").hide();
 						$(".apply").css({
@@ -86,14 +86,14 @@ $(function() {
 						$(".apply").unbind("click"); //移除click
 						// window.location.href="excellentCard.html";
 					} else {
-						alert("您已提交申请，请勿重复提交");
+						modalHintText("您已提交申请，请勿重复提交");
 					}
 				}, "json");
 			} else {
-				alert("手机号格式有误，请重新输入");
+				modalHintText("手机号格式有误，请重新输入");
 			}
 		} else {
-			alert("请完善您的信息");
+			modalHintText("请完善您的信息");
 		}
 	});
 });

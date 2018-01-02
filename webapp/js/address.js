@@ -16,7 +16,7 @@ function getLocation() {
   if (navigator.geolocation) { //浏览器支持geolocation
     navigator.geolocation.getCurrentPosition(showPosition, showError);
   } else {
-    alert("未知错误");
+    modalHintText("未知错误");
   }
 }
 
@@ -47,16 +47,16 @@ function showPosition(position) {
 function showError(error) {
   switch (error.code) {
     case error.PERMISSION_DENIED: //Permission denied - 用户不允许地理定位
-      alert("您未授权地理定位");
+      modalHintText("您未授权地理定位");
       break;
     case error.POSITION_UNAVAILABLE: //Position unavailable - 无法获取当前位置
-      alert("当前位置信息不可用");
+      modalHintText("当前位置信息不可用");
       break;
     case error.TIMEOUT: //Timeout - 操作超时
-      alert("请求超时");
+      modalHintText("请求超时");
       break;
     case error.UNKNOWN_ERROR:
-      alert("未知错误");
+      modalHintText("未知错误");
       break;
   }
 }

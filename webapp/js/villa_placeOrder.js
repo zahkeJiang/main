@@ -178,7 +178,7 @@ $(function() {
         if (villaDateCheck_beiyuding.length > 0) {
             for (var i = 0; i < villaDateCheck_beiyuding.length; i++) {
                 if ($(this).children("input").val() == villaDateCheck_beiyuding[i]) {
-                    alert('所选日期中"' + $(this).children("input").val() + '"已被预订，请重新选择');
+                    modalHintText('所选日期中"' + $(this).children("input").val() + '"已被预订，请重新选择');
                     //移除选中的日期
                     $(this).find(".villa-choose").empty();
                     $(this).find("input[name='villa-radio']").removeAttr("checked");
@@ -305,25 +305,25 @@ $(function() {
                                 $(".layer").show();
                                 $(".payBox").show();
                             } else {
-                                alert("请遵守北京漂洋过海《房屋守则》");
+                                modalHintText("请遵守北京漂洋过海《房屋守则》");
                             }
 
                         } else {
-                            alert("身份证格式不对");
+                            modalHintText("身份证格式不对");
                         }
                     } else {
-                        alert("输入您的真实姓名");
+                        modalHintText("输入您的真实姓名");
                     }
                 } else {
-                    alert("请选择报名日期");
+                    modalHintText("请选择报名日期");
                 }
 
             } else {
-                alert("请选择别墅");
+                modalHintText("请选择别墅");
             }
 
         } else {
-            alert("请填写正确的报名人数");
+            modalHintText("请填写正确的报名人数");
         }
     });
 
@@ -373,11 +373,11 @@ $(function() {
                                 }
                             }, 'json');
                         } else {
-                            alert(datas.msg); //您的套餐中别墅或日期已被预约
+                            modalHintText(datas.msg); //您的套餐中别墅或日期已被预约
                         }
                     }, "json");
                 } else {
-                    alert("您当前存在多个未支付订单，请勿重复下单。")
+                    modalHintText("您当前存在多个未支付订单，请勿重复下单。")
                 }
             }, "json");
 
@@ -402,11 +402,11 @@ $(function() {
                         if (datas.status == 0) {
                             window.location.href = "payHint.html?ordernumber=" + orderNumber;
                         } else {
-                            alert(datas.msg); //您的套餐中别墅或日期已被预约
+                            modalHintText(datas.msg); //您的套餐中别墅或日期已被预约
                         }
                     }, "json");
                 } else {
-                    alert("您当前存在多个未支付订单，请勿重复下单。")
+                    modalHintText("您当前存在多个未支付订单，请勿重复下单。")
                 }
             }, "json");
         }
@@ -531,7 +531,7 @@ function villaDateCheck() {
                 var villaCheckName_xiangtongzifuchuang = villaCheckName_xiangtong.join();
 
                 if (villaCheckName_xiangtongzifuchuang != "") {
-                    alert('所选日期中，"' + villaCheckName_xiangtong + '"已被预定,请重新选择');
+                    modalHintText('所选日期中，"' + villaCheckName_xiangtong + '"已被预定,请重新选择');
                     //移除别墅选中状态
                     // $("input[name='villa-radio']").removeAttr("checked");
                     // $(".villa-radioBox").find(".villa-choose").empty();

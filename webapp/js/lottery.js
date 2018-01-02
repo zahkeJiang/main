@@ -51,7 +51,7 @@ function lotteryStop(index) {
             $(".coupon").show();
             break;
         default:
-            alert("当前抽奖人数过多，请稍后尝试！");
+            modalHintText("当前抽奖人数过多，请稍后尝试！");
     }
 }
 var lottery = {
@@ -173,12 +173,12 @@ $(function() {
             "code": ds_coupon_code
         }, function(obj) {
             if (obj.status == "1") {
-                alert("领取成功");
+                modalHintText("领取成功");
                 $(".coupon_code").fadeOut("fast");
                 $(".layer").fadeOut("fast");
 
             } else {
-                alert("抽奖码错误，请重新输入");
+                modalHintText("抽奖码错误，请重新输入");
             }
         }, "json");
 

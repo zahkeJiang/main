@@ -106,17 +106,16 @@ $(function() {
         // payMoney();
     });
 
-    var look = false;
     //为补考保障说明
     $(".look").click(function() {
         // $(this).parent(".ds_training_mode").siblings(".ProtectionDivBox-hint").toggle();
-        if (look == true) {
-            $(this).attr("src", "./images/look.png");
-            look = false;
-        } else {
-            $(this).attr("src", "./images/looked.png");
-            look = true;
-        }
+        $(".layer").fadeIn(100);
+        $(".secureHintPopup").fadeIn(100);
+
+    });
+    $(".secureHintPopupDiv img").click(function() {
+        $(".layer").fadeOut(100);
+        $(".secureHintPopup").fadeOut(100);
     });
 
     $(".ds_type").html(dstype);
@@ -144,25 +143,13 @@ $(function() {
 
         console.log("补考保障", mustProtection, "法培方式", note);
         if (realname == "") {
-            $(".modal-body").html("请输入您的真实姓名");
-            $('#myModal').modal({
-                keyboard: true
-            });
+            modalHintText("请输入您的手机号");
         } else if (address == "") {
-            $(".modal-body").html("请输入您的地址");
-            $('#myModal').modal({
-                keyboard: true
-            });
+            modalHintText("请输入您的地址");
         } else if (note == null) {
-            $(".modal-body").html("请选择您的法培方式");
-            $('#myModal').modal({
-                keyboard: true
-            });
+            modalHintText("请选择您的法培方式");
         } else if (mustProtection == null) {
-            $(".modal-body").html("请选择是否购买补考保障");
-            $('#myModal').modal({
-                keyboard: true
-            });
+            modalHintText("请选择是否购买补考保障");
         } else {
             $.post("note.action", {
                 "realname": realname,
@@ -245,7 +232,7 @@ $(function() {
     //                     }
     //                 }, 'json');
     //             } else if (datas.status == "-40") {
-    //                 alert("您当前存在多个未支付订单，请勿重复下单。")
+    //                 modalHintText("您当前存在多个未支付订单，请勿重复下单。")
     //             }
     //         }, "json");
     //     } else if (payMode == "aliPay") { //支付宝支付
@@ -258,7 +245,7 @@ $(function() {
     //                 window.location.href = "payHint.html?ordernumber=" + ordernumber;
 
     //             } else if (datas.status == "-40") {
-    //                 alert("您当前存在多个未支付订单，请勿重复下单。")
+    //                 modalHintText("您当前存在多个未支付订单，请勿重复下单。")
     //             }
 
     //         }, "json");

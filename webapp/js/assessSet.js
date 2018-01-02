@@ -61,10 +61,7 @@ $(function() {
             satisfaction02 = $(".satisfaction02").html();
             satisfaction03 = $(".satisfaction03").html();
             if (satisfaction01 == "" || satisfaction02 == "" || satisfaction03 == "") {
-                $(".hint").show();
-                setTimeout(function() {
-                    $(".hint").hide(1000);
-                }, 1000); //显示1,秒后进行隐藏
+                modalHintText("请对服务进行评价");
             } else {
                 var content = $("textarea[name='assess']").val(); //评论内容
                 if (content == "" || content == null) {
@@ -94,9 +91,9 @@ $(function() {
                     if (datas.status == 0) {
                         window.location.href = "assessFinish.html";
                     } else if (datas.status == "-20") {
-                        alert(datas.msg);
+                        modalHintText(datas.msg);
                     } else {
-                        alert("上传失败,请稍后再试。");
+                        modalHintText("上传失败,请稍后再试。");
                     }
                 }, "json");
             }

@@ -12,7 +12,7 @@ $(function() {
     //获取用户手机号码
     $.post("personal.action", {}, function(datas) {
         if (datas.status == 0) {
-            var userobj = obj.data.userInfo;
+            var userobj = datas.data.userInfo;
             $('.villa-user p.tel').html(userobj.phoneNumber);
         }
     }, "json");
@@ -231,7 +231,7 @@ $(function() {
             var peopleNumber = $("#army-peoplenumber").val(); //报名人数
             if (re.test(peopleNumber) && peopleNumber > 0) {
                 if (peopleNumber < $("#army-securenumber").val()) {
-                    alert("温馨提示：购买保险人数应不大于报名人数");
+                    modalHintText("温馨提示：购买保险人数应不大于报名人数");
                 }
             }
 
@@ -242,7 +242,7 @@ $(function() {
         var secureNumber = $("#army-securenumber").val(); //保险人数
         if (re.test(secureNumber) && secureNumber > 0) {
             if (secureNumber > $("#army-peoplenumber").val()) {
-                alert("温馨提示：报名人数应不小于购买保险人数");
+                modalHintText("温馨提示：报名人数应不小于购买保险人数");
             }
         }
 
@@ -316,7 +316,7 @@ $(function() {
             $(".nosleep").html(nosleep);
 
         } else {
-            alert("请输入报名人数");
+            modalHintText("请输入报名人数");
         }
 
         //当报名人数改动时，修改金额
@@ -345,7 +345,7 @@ $(function() {
             $(".nosleep").html(nosleep);
 
         } else {
-            alert("请输入报名人数");
+            modalHintText("请输入报名人数");
         }
         getPrice();
 
@@ -374,7 +374,7 @@ $(function() {
             $(".nosleep").html(nosleep);
 
         } else {
-            alert("请输入报名人数");
+            modalHintText("请输入报名人数");
         }
 
         getPrice();
@@ -402,7 +402,7 @@ $(function() {
             $(".nosleep").html(nosleep);
 
         } else {
-            alert("请输入报名人数");
+            modalHintText("请输入报名人数");
         }
 
 
@@ -472,27 +472,27 @@ $(function() {
                                 $(".layer").show();
                                 $(".payBox").show();
                             } else {
-                                alert("请遵守北京漂洋过海《参战守则》");
+                                modalHintText("请遵守北京漂洋过海《参战守则》");
                             }
 
                         } else {
-                            alert("身份证格式不对");
+                            modalHintText("身份证格式不对");
                         }
                     } else {
-                        alert("输入您的真实姓名");
+                        modalHintText("输入您的真实姓名");
                     }
                 } else {
-                    alert("请选择报名日期");
+                    modalHintText("请选择报名日期");
                 }
             } else {
 
-                alert("您尚未选择参战时刻");
+                modalHintText("您尚未选择参战时刻");
             }
 
 
 
         } else {
-            alert("请填写正确的报名人数");
+            modalHintText("请填写正确的报名人数");
         }
     });
 
@@ -555,7 +555,7 @@ $(function() {
 
 
                 } else {
-                    alert("您当前存在多个未支付订单，请勿重复下单。")
+                    modalHintText("您当前存在多个未支付订单，请勿重复下单。")
                 }
             }, "json");
         } else if (payMode == "aliPay") { //支付宝支付
@@ -580,7 +580,7 @@ $(function() {
                     window.location.href = "payHint.html?ordernumber=" + orderNumber;
 
                 } else {
-                    alert("您当前存在多个未支付订单，请勿重复下单。")
+                    modalHintText("您当前存在多个未支付订单，请勿重复下单。")
                 }
             }, "json");
         }
