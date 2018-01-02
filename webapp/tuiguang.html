@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>我的推广</title>
+
+	<link href="css/base.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<style type="text/css">
+body{
+  background-color: #4ea0ff;
+  color: #999;
+}
+.divBox{
+  border-radius: 10px;
+  padding: 0 10px;
+  margin: 10px 16px;
+  background-color: #f6f1f1;
+}
+.divBox h2{
+  color: #777;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+.divBox p{
+  line-height: 18px;
+  font-size: 14px;
+  text-indent: 2em;
+  padding: 8px 4px;
+}
+.tuiguang>div{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 14px;
+  align-items: center;
+}
+.tuiguang div:last-child{
+  padding-bottom: 10px;
+}
+.tuiguang>div span:last-child{
+  background-color: orange;
+  padding:4px 10px;
+  border-radius: 50px;
+  color: #fff;
+
+}
+
+.code img.codeImg{
+  width: 50%;
+  margin:10px 25%;
+  border-radius: 6px;
+  border:8px solid #4ea0ff;
+}
+.code a{
+  color: #4ea0ff;
+  float: right;
+}
+.code{
+  /*clear: both;*/
+  padding-bottom: 8px;
+  overflow: hidden;
+}
+.icon {
+   width: 1em; height: 1em;
+   vertical-align: -0.15em;
+   fill: currentColor;
+   overflow: hidden;
+   color: #4ea0ff;
+}
+</style>
+<body>
+  <div class="info divBox">
+    <h2>活动介绍</h2>
+    <P>说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明</P>
+  </div>
+  <div class="tuiguang divBox">
+    <h2>推广信息</h2>
+    <div>
+      <span>总关注数</span>
+      <span>0人</span>
+    </div>
+    <div>
+      <span>取消关注数</span>
+      <span>0人</span>
+    </div>
+    <div>
+      <span>净关注数</span>
+      <span>0人</span>
+    </div>
+  </div>
+  <div class="code divBox">
+    <h2>专属二维码</h2>
+    <img src="./images/QRcode.jpg" class="codeImg">
+    <a href="">
+      <span>奖品中心</span>
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-icon32"></use>
+      </svg>
+    </a>
+  </div>
+</body>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script src="js/jquery.cookie.js" type="text/javascript"></script>
+<script src="js/isWeiXin.js"></script>
+<script src="js/modal.js"></script>
+<script src="./iconjs/iconfont.js"></script>
+<!-- <script src="./js/excellentCard.js"></script> -->
+
+
+</html>
