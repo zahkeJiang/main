@@ -5,6 +5,9 @@
     <id column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="ticket" jdbcType="VARCHAR" property="ticket" />
     <result column="concern" jdbcType="INTEGER" property="concern" />
+    <result column="unconcern" jdbcType="INTEGER" property="unconcern" />
+    <result column="onconcern" jdbcType="INTEGER" property="onconcern" />
+    <result column="concerned" jdbcType="INTEGER" property="concerned" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, ticket, concern
+    user_id, ticket, concern, unconcern, onconcern, concerned
   </sql>
   <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.QrCodeExample" resultMap="BaseResultMap">
     select
@@ -98,9 +101,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.bjpygh.gzh.bean.QrCode">
-    insert into qr_code (user_id, ticket, concern
+    insert into qr_code (user_id, ticket, concern, 
+      unconcern, onconcern, concerned
       )
-    values (#{userId,jdbcType=BIGINT}, #{ticket,jdbcType=VARCHAR}, #{concern,jdbcType=INTEGER}
+    values (#{userId,jdbcType=BIGINT}, #{ticket,jdbcType=VARCHAR}, #{concern,jdbcType=INTEGER}, 
+      #{unconcern,jdbcType=INTEGER}, #{onconcern,jdbcType=INTEGER}, #{concerned,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.QrCode">
@@ -115,6 +120,15 @@
       <if test="concern != null">
         concern,
       </if>
+      <if test="unconcern != null">
+        unconcern,
+      </if>
+      <if test="onconcern != null">
+        onconcern,
+      </if>
+      <if test="concerned != null">
+        concerned,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -125,6 +139,15 @@
       </if>
       <if test="concern != null">
         #{concern,jdbcType=INTEGER},
+      </if>
+      <if test="unconcern != null">
+        #{unconcern,jdbcType=INTEGER},
+      </if>
+      <if test="onconcern != null">
+        #{onconcern,jdbcType=INTEGER},
+      </if>
+      <if test="concerned != null">
+        #{concerned,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -146,6 +169,15 @@
       <if test="record.concern != null">
         concern = #{record.concern,jdbcType=INTEGER},
       </if>
+      <if test="record.unconcern != null">
+        unconcern = #{record.unconcern,jdbcType=INTEGER},
+      </if>
+      <if test="record.onconcern != null">
+        onconcern = #{record.onconcern,jdbcType=INTEGER},
+      </if>
+      <if test="record.concerned != null">
+        concerned = #{record.concerned,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -155,7 +187,10 @@
     update qr_code
     set user_id = #{record.userId,jdbcType=BIGINT},
       ticket = #{record.ticket,jdbcType=VARCHAR},
-      concern = #{record.concern,jdbcType=INTEGER}
+      concern = #{record.concern,jdbcType=INTEGER},
+      unconcern = #{record.unconcern,jdbcType=INTEGER},
+      onconcern = #{record.onconcern,jdbcType=INTEGER},
+      concerned = #{record.concerned,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -169,13 +204,25 @@
       <if test="concern != null">
         concern = #{concern,jdbcType=INTEGER},
       </if>
+      <if test="unconcern != null">
+        unconcern = #{unconcern,jdbcType=INTEGER},
+      </if>
+      <if test="onconcern != null">
+        onconcern = #{onconcern,jdbcType=INTEGER},
+      </if>
+      <if test="concerned != null">
+        concerned = #{concerned,jdbcType=INTEGER},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bjpygh.gzh.bean.QrCode">
     update qr_code
     set ticket = #{ticket,jdbcType=VARCHAR},
-      concern = #{concern,jdbcType=INTEGER}
+      concern = #{concern,jdbcType=INTEGER},
+      unconcern = #{unconcern,jdbcType=INTEGER},
+      onconcern = #{onconcern,jdbcType=INTEGER},
+      concerned = #{concerned,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
 </mapper>

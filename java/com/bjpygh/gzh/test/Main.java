@@ -62,8 +62,8 @@ public class Main {
 //------------------------------------------------------------------------------
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            Date date1 = sdf.parse("2017-10-1");
-            Date date2 = sdf.parse("2017-11-01");
+            Date date1 = sdf.parse("2017-09-01");
+            Date date2 = sdf.parse("2017-10-01");
 
             System.out.println(date2.getTime()-date1.getTime());
         } catch (ParseException e) {

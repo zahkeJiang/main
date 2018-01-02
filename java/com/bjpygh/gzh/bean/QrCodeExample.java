@@ -293,6 +293,186 @@ public class QrCodeExample {
             addCriterion("concern not between", value1, value2, "concern");
             return (Criteria) this;
         }
+
+        public Criteria andUnconcernIsNull() {
+            addCriterion("unconcern is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnconcernIsNotNull() {
+            addCriterion("unconcern is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnconcernEqualTo(Integer value) {
+            addCriterion("unconcern =", value, "unconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnconcernNotEqualTo(Integer value) {
+            addCriterion("unconcern <>", value, "unconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnconcernGreaterThan(Integer value) {
+            addCriterion("unconcern >", value, "unconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnconcernGreaterThanOrEqualTo(Integer value) {
+            addCriterion("unconcern >=", value, "unconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnconcernLessThan(Integer value) {
+            addCriterion("unconcern <", value, "unconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnconcernLessThanOrEqualTo(Integer value) {
+            addCriterion("unconcern <=", value, "unconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnconcernIn(List<Integer> values) {
+            addCriterion("unconcern in", values, "unconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnconcernNotIn(List<Integer> values) {
+            addCriterion("unconcern not in", values, "unconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnconcernBetween(Integer value1, Integer value2) {
+            addCriterion("unconcern between", value1, value2, "unconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnconcernNotBetween(Integer value1, Integer value2) {
+            addCriterion("unconcern not between", value1, value2, "unconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnconcernIsNull() {
+            addCriterion("onconcern is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnconcernIsNotNull() {
+            addCriterion("onconcern is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnconcernEqualTo(Integer value) {
+            addCriterion("onconcern =", value, "onconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnconcernNotEqualTo(Integer value) {
+            addCriterion("onconcern <>", value, "onconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnconcernGreaterThan(Integer value) {
+            addCriterion("onconcern >", value, "onconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnconcernGreaterThanOrEqualTo(Integer value) {
+            addCriterion("onconcern >=", value, "onconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnconcernLessThan(Integer value) {
+            addCriterion("onconcern <", value, "onconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnconcernLessThanOrEqualTo(Integer value) {
+            addCriterion("onconcern <=", value, "onconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnconcernIn(List<Integer> values) {
+            addCriterion("onconcern in", values, "onconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnconcernNotIn(List<Integer> values) {
+            addCriterion("onconcern not in", values, "onconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnconcernBetween(Integer value1, Integer value2) {
+            addCriterion("onconcern between", value1, value2, "onconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andOnconcernNotBetween(Integer value1, Integer value2) {
+            addCriterion("onconcern not between", value1, value2, "onconcern");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernedIsNull() {
+            addCriterion("concerned is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernedIsNotNull() {
+            addCriterion("concerned is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernedEqualTo(Integer value) {
+            addCriterion("concerned =", value, "concerned");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernedNotEqualTo(Integer value) {
+            addCriterion("concerned <>", value, "concerned");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernedGreaterThan(Integer value) {
+            addCriterion("concerned >", value, "concerned");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernedGreaterThanOrEqualTo(Integer value) {
+            addCriterion("concerned >=", value, "concerned");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernedLessThan(Integer value) {
+            addCriterion("concerned <", value, "concerned");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernedLessThanOrEqualTo(Integer value) {
+            addCriterion("concerned <=", value, "concerned");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernedIn(List<Integer> values) {
+            addCriterion("concerned in", values, "concerned");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernedNotIn(List<Integer> values) {
+            addCriterion("concerned not in", values, "concerned");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernedBetween(Integer value1, Integer value2) {
+            addCriterion("concerned between", value1, value2, "concerned");
+            return (Criteria) this;
+        }
+
+        public Criteria andConcernedNotBetween(Integer value1, Integer value2) {
+            addCriterion("concerned not between", value1, value2, "concerned");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

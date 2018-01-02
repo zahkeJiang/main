@@ -1,12 +1,11 @@
 package com.bjpygh.gzh.controller;
 
 import com.bjpygh.gzh.entity.Status;
-import com.bjpygh.gzh.service.AttentionService;
+import com.bjpygh.gzh.service.ConcernService;
 import com.bjpygh.gzh.service.QrCodeService;
 import com.bjpygh.gzh.utils.Http;
 import com.bjpygh.gzh.utils.OrderPush;
 import com.bjpygh.gzh.utils.XMLToMap;
-import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +24,7 @@ public class MessageController extends BaseController {
     QrCodeService qrCodeService;
 
     @Autowired
-    AttentionService attentionService;
+    ConcernService concernService;
     //改变订单状态接口
     @ResponseBody
     @RequestMapping(value = "/getWxMessage", method = RequestMethod.GET)
@@ -64,10 +63,10 @@ public class MessageController extends BaseController {
                 if (map.get("EventKey").equals("support_hotline")){//咨询电话
                     String text = "座机：010-59822296 \n" +
                             "小漂：18813069524 \n" +
-                            "18811758773";
+                            "      18811758773";
                     sendToUser(map,text);
                 }
-            }else if (map.get("Event").equals("subscribe")){
+            }else if (map.get("Event").equals("subscribe")){//关注
                 String text = "ʜɪ!我是小漂Ꙭ，既然关注了我那就是我的人啦\n"+
                         "为了纪念这一天相遇，我特意为你准备了爱心大礼包，快看看吧\n" +
                         "①<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx74d8d40a83387a3e&redirect_uri=http://gzpt.bjpygh.com/coupon.action&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect\">点击抽奖</a> \n"+
@@ -75,14 +74,18 @@ public class MessageController extends BaseController {
                         "另外，【留言】还是要有的，万一被小漂Ꙭ撩了呢哈哈~\n" +
                         "                ᴀʟʟ ғᴏʀ ʏᴏᴜ";
                 sendToUser(map,text);
-                if (map.get("EventKey") != null){
-                    attentionService.insertAtentionService(map);
+                if (map.get("EventKey") != null){//扫码关注
+//                    attentionService.insertAtentionService(map);
+                    concernService.insertConcern(map);
+                    qrCodeService.updateCode(map);
                 }
-            }else if (map.get("Event").equals("unsubscribe")){
-
+            }else if (map.get("Event").equals("unsubscribe")){//取关
+                if (concernService.selectOpenid(map).size() > 0){
+                    concernService.deleteConcern(map);
+                }
+                qrCodeService.changeCode(map);
             }
         }
-
         return "success";
     }
 
@@ -95,6 +98,12 @@ public class MessageController extends BaseController {
         obj.element("text",content);
         String result = Http.sendPost("https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=" + OrderPush.getAccess_token(),
                 obj.toString());
+        JSONObject jsonObject = JSONObject.fromObject(result);
+        if (jsonObject.getInt("errcode") != 0){
+            OrderPush.getAccesstoken();
+            result = Http.sendPost("https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=" + OrderPush.getAccess_token(),
+                    obj.toString());
+        }
         System.out.println("resultFromHttps="+result);
     }
 
@@ -109,5 +118,18 @@ public class MessageController extends BaseController {
         int userid = Integer.parseInt(userMap.get("id"));
 
         return Status.success().add("ticket",qrCodeService.checkTicket(userid));
+    }
+
+    //获取关注信息
+    @ResponseBody
+    @RequestMapping(value = "/getConcern", method = RequestMethod.GET)
+    public Status getConcern(HttpServletRequest request){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        Long userid = Long.valueOf(userMap.get("id"));
+
+        return Status.success().add("ticket",qrCodeService.getConcern(userid));
     }
 }

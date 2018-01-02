@@ -1,13 +1,8 @@
 package com.bjpygh.gzh.service.quartz;
 
-import com.bjpygh.gzh.bean.ArmyOrder;
-import com.bjpygh.gzh.bean.DsOrder;
-import com.bjpygh.gzh.bean.User;
-import com.bjpygh.gzh.bean.VillaOrder;
-import com.bjpygh.gzh.service.ArmyOrderService;
-import com.bjpygh.gzh.service.DsOrderService;
-import com.bjpygh.gzh.service.UserService;
-import com.bjpygh.gzh.service.VillaOrderService;
+import com.bjpygh.gzh.bean.*;
+import com.bjpygh.gzh.dao.QrCodeMapper;
+import com.bjpygh.gzh.service.*;
 import com.bjpygh.gzh.utils.OrderPush;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,6 +25,12 @@ public class TestJob {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    QrCodeService qrCodeService;
+
+    @Autowired
+    ConcernService concernService;
 
     OrderPush orderPush = new OrderPush();
 
@@ -119,6 +120,17 @@ public class TestJob {
                         map.put("openid",userById.getOpenid());
                         orderPush.FinishJsonObj(map);
                     }
+                }
+            }
+
+            List<Concern> concerned = concernService.getConcerned();
+            if (concerned.size()>0){
+                for (Concern c : concerned){
+                    QrCode concern = qrCodeService.getConcern(c.getUserId());
+                    concern.setOnconcern(concern.getOnconcern()+1);
+                    qrCodeService.updateOnconcern(concern);
+                    c.setConcerned(true);
+                    concernService.updateConcerned(c);
                 }
             }
 
