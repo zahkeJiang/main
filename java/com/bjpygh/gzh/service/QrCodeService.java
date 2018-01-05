@@ -53,8 +53,8 @@ public class QrCodeService {
     public void updateCode(Map<String, String> map) {
         QrCodeExample example = new QrCodeExample();
         QrCodeExample.Criteria criteria = example.createCriteria();
-        criteria.andUserIdEqualTo(Long.valueOf(map.get("EventKey")));
-        QrCode code = qrCodeMapper.selectByPrimaryKey(Long.valueOf(map.get("EventKey")));
+        criteria.andUserIdEqualTo(Long.valueOf(map.get("EventKey").split("_")[1]));
+        QrCode code = qrCodeMapper.selectByPrimaryKey(Long.valueOf(map.get("EventKey").split("_")[1]));
         code.setConcern(code.getConcern()+1);//净关注量+1
         code.setConcerned(code.getConcerned()+1);//总关注量+1
         qrCodeMapper.updateByPrimaryKey(code);
@@ -65,7 +65,7 @@ public class QrCodeService {
         QrCodeExample example = new QrCodeExample();
         QrCodeExample.Criteria criteria = example.createCriteria();
         criteria.andUserIdEqualTo(Long.valueOf(map.get("EventKey")));
-        QrCode code = qrCodeMapper.selectByPrimaryKey(Long.valueOf(map.get("EventKey")));
+        QrCode code = qrCodeMapper.selectByPrimaryKey(Long.valueOf(map.get("EventKey").split("_")[1]));
         code.setConcern(code.getConcern()-1);//净关注量-1
         code.setUnconcern(code.getUnconcern()+1);
         qrCodeMapper.updateByPrimaryKey(code);

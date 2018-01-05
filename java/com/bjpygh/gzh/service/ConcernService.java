@@ -22,7 +22,7 @@ public class ConcernService {
     public void insertConcern(Map<String, String> map) {
         ConcernExample example = new ConcernExample();
         ConcernExample.Criteria criteria = example.createCriteria();
-        criteria.andUserIdEqualTo(Long.valueOf(map.get("EventKey")));
+        criteria.andUserIdEqualTo(Long.valueOf(map.get("EventKey").split("_")[1]));
         criteria.andOpenidEqualTo(map.get("FromUserName"));
         criteria.andCreateTimeEqualTo(formatter.format(new Date()));
         concernMapper.insert(example);

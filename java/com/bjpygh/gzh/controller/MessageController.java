@@ -75,8 +75,8 @@ public class MessageController extends BaseController {
                         "                ᴀʟʟ ғᴏʀ ʏᴏᴜ";
                 sendToUser(map,text);
                 if (map.get("EventKey") != null){//扫码关注
-                    concernService.insertConcern(map);
                     qrCodeService.updateCode(map);
+                    concernService.insertConcern(map);
                 }
             }else if (map.get("Event").equals("unsubscribe")){//取关
                 if (concernService.selectOpenid(map).size() > 0){
