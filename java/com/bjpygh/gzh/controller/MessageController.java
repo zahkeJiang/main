@@ -80,9 +80,9 @@ public class MessageController extends BaseController {
                 }
             }else if (map.get("Event").equals("unsubscribe")){//取关
                 if (concernService.selectOpenid(map).size() > 0){
+                    qrCodeService.changeCode(map);
                     concernService.deleteConcern(map);
                 }
-                qrCodeService.changeCode(map);
             }
         }
         return "success";

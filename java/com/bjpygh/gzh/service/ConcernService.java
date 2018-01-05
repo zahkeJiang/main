@@ -20,12 +20,11 @@ public class ConcernService {
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public void insertConcern(Map<String, String> map) {
-        ConcernExample example = new ConcernExample();
-        ConcernExample.Criteria criteria = example.createCriteria();
-        criteria.andUserIdEqualTo(Long.valueOf(map.get("EventKey").split("_")[1]));
-        criteria.andOpenidEqualTo(map.get("FromUserName"));
-        criteria.andCreateTimeEqualTo(formatter.format(new Date()));
-        concernMapper.insert(example);
+        Concern concern = new Concern();
+        concern.setUserId(Long.valueOf(map.get("EventKey").split("_")[1]));
+        concern.setOpenid(map.get("FromUserName"));
+        concern.setCreateTime(formatter.format(new Date()));
+        concernMapper.insertSelective(concern);
     }
 
     public void deleteConcern(Map<String, String> map) {
