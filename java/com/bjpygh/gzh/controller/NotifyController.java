@@ -382,11 +382,13 @@ public class NotifyController extends BaseController {
                 dsOrder = dsOrders.get(0);
             }
             UserCoupon dsCoupon = couponService.getDsCoupon(userid);
-            Date couponTime = dsCoupon.getCouponTime();
-            Date createTime = formatter.parse(dsOrder.getCreateTime());
             Integer couponPrice = 0;
-            if (createTime.getTime()-couponTime.getTime()<2678400000L){
-                couponPrice = dsCoupon.getCouponPrice();
+            if (dsCoupon != null ){
+                Date couponTime = dsCoupon.getCouponTime();
+                Date createTime = formatter.parse(dsOrder.getCreateTime());
+                if (createTime.getTime()-couponTime.getTime()<2678400000L){
+                    couponPrice = dsCoupon.getCouponPrice();
+                }
             }
             UserOrder order = new UserOrder();
             order.setOrderPrice(dsOrder.getOrderPrice());

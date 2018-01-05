@@ -145,7 +145,11 @@ public class CouponService {
         UserCouponExample.Criteria criteria = example.createCriteria();
         criteria.andUserIdEqualTo(Long.valueOf(userid));
         criteria.andCouponTypeEqualTo(2);
-        return userCouponMapper.selectByExample(example).get(0);
+        if (userCouponMapper.selectByExample(example).size()>0){
+            return userCouponMapper.selectByExample(example).get(0);
+        }else {
+            return null;
+        }
     }
 
     public void updataCouponStatus(Map<String, String> statusMap) {
