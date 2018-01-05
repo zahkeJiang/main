@@ -168,6 +168,9 @@ $(function() {
                             $('#myModal').modal({
                                 keyboard: true
                             });
+                            window.opener = null;
+                            window.open('', '_self');
+                            window.close();
                         } else {
                             $(".modal-body").html("您已成功预约" + dsname + "驾考报名,请勿重复预约。如有问题，请联系小漂哦。");
                             $('#myModal').modal({

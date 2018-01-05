@@ -93,7 +93,7 @@ span{
 	font-size:14px;
 	color: #8e8e8e;
 }
-.orders,.service{
+.orders,.service,.spread{
 	height: 48px;
 	display:flex;
 	align-items: center;
