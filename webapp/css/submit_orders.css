@@ -162,7 +162,7 @@ span,.dstype_information_content{
 
 .ds_radio .user-defined span.active  { background-color: #67c0ee; }*/
 .chooseActive{
-	display: block; width: 10px; height: 10px; margin-top: 2px;margin-left: 2px; background-color: #67c0ee; border-radius: 50%;
+	display: block; width: 10px; height: 10px; margin-top: 2px;margin-left: 2px; background-color: #4ea0ff; border-radius: 50%;
 }
 
 .coupons{
