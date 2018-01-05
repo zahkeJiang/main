@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bjpygh.gzh.dao.QrCodeMapper">
-  <resultMap id="BaseResultMap" type="com.bjpygh.gzh.bean.QrCode">
-    <id column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="ticket" jdbcType="VARCHAR" property="ticket" />
-    <result column="concern" jdbcType="INTEGER" property="concern" />
-    <result column="unconcern" jdbcType="INTEGER" property="unconcern" />
-    <result column="onconcern" jdbcType="INTEGER" property="onconcern" />
-    <result column="concerned" jdbcType="INTEGER" property="concerned" />
+<mapper namespace="com.bjpygh.gzh.dao.ConcernMapper">
+  <resultMap id="BaseResultMap" type="com.bjpygh.gzh.bean.Concern">
+    <id column="concern_id" jdbcType="BIGINT" property="concernId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+    <result column="concerned" jdbcType="BIT" property="concerned" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, ticket, concern, unconcern, onconcern, concerned
+    concern_id, user_id, openid, is_delete, concerned, create_time
   </sql>
-  <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.QrCodeExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.ConcernExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from qr_code
+    from concern
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,96 +87,96 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from qr_code
-    where user_id = #{userId,jdbcType=BIGINT}
+    from concern
+    where concern_id = #{concernId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from qr_code
-    where user_id = #{userId,jdbcType=BIGINT}
+    delete from concern
+    where concern_id = #{concernId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.bjpygh.gzh.bean.QrCodeExample">
-    delete from qr_code
+  <delete id="deleteByExample" parameterType="com.bjpygh.gzh.bean.ConcernExample">
+    delete from concern
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.bjpygh.gzh.bean.QrCode">
-    insert into qr_code (user_id, ticket, concern, 
-      unconcern, onconcern, concerned
+  <insert id="insert" parameterType="com.bjpygh.gzh.bean.Concern">
+    insert into concern (concern_id, user_id, openid, 
+      is_delete, concerned, create_time
       )
-    values (#{userId,jdbcType=BIGINT}, #{ticket,jdbcType=VARCHAR}, #{concern,jdbcType=INTEGER}, 
-      #{unconcern,jdbcType=INTEGER}, #{onconcern,jdbcType=INTEGER}, #{concerned,jdbcType=INTEGER}
+    values (#{concernId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{openid,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=BIT}, #{concerned,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.QrCode">
-    insert into qr_code
+  <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.Concern">
+    insert into concern
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="concernId != null">
+        concern_id,
+      </if>
       <if test="userId != null">
         user_id,
       </if>
-      <if test="ticket != null">
-        ticket,
+      <if test="openid != null">
+        openid,
       </if>
-      <if test="concern != null">
-        concern,
-      </if>
-      <if test="unconcern != null">
-        unconcern,
-      </if>
-      <if test="onconcern != null">
-        onconcern,
+      <if test="isDelete != null">
+        is_delete,
       </if>
       <if test="concerned != null">
         concerned,
       </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="concernId != null">
+        #{concernId,jdbcType=BIGINT},
+      </if>
       <if test="userId != null">
         #{userId,jdbcType=BIGINT},
       </if>
-      <if test="ticket != null">
-        #{ticket,jdbcType=VARCHAR},
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
       </if>
-      <if test="concern != null">
-        #{concern,jdbcType=INTEGER},
-      </if>
-      <if test="unconcern != null">
-        #{unconcern,jdbcType=INTEGER},
-      </if>
-      <if test="onconcern != null">
-        #{onconcern,jdbcType=INTEGER},
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=BIT},
       </if>
       <if test="concerned != null">
-        #{concerned,jdbcType=INTEGER},
+        #{concerned,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.bjpygh.gzh.bean.QrCodeExample" resultType="java.lang.Long">
-    select count(*) from qr_code
+  <select id="countByExample" parameterType="com.bjpygh.gzh.bean.ConcernExample" resultType="java.lang.Long">
+    select count(*) from concern
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update qr_code
+    update concern
     <set>
+      <if test="record.concernId != null">
+        concern_id = #{record.concernId,jdbcType=BIGINT},
+      </if>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=BIGINT},
       </if>
-      <if test="record.ticket != null">
-        ticket = #{record.ticket,jdbcType=VARCHAR},
+      <if test="record.openid != null">
+        openid = #{record.openid,jdbcType=VARCHAR},
       </if>
-      <if test="record.concern != null">
-        concern = #{record.concern,jdbcType=INTEGER},
-      </if>
-      <if test="record.unconcern != null">
-        unconcern = #{record.unconcern,jdbcType=INTEGER},
-      </if>
-      <if test="record.onconcern != null">
-        onconcern = #{record.onconcern,jdbcType=INTEGER},
+      <if test="record.isDelete != null">
+        is_delete = #{record.isDelete,jdbcType=BIT},
       </if>
       <if test="record.concerned != null">
-        concerned = #{record.concerned,jdbcType=INTEGER},
+        concerned = #{record.concerned,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -184,45 +184,48 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update qr_code
-    set user_id = #{record.userId,jdbcType=BIGINT},
-      ticket = #{record.ticket,jdbcType=VARCHAR},
-      concern = #{record.concern,jdbcType=INTEGER},
-      unconcern = #{record.unconcern,jdbcType=INTEGER},
-      onconcern = #{record.onconcern,jdbcType=INTEGER},
-      concerned = #{record.concerned,jdbcType=INTEGER}
+    update concern
+    set concern_id = #{record.concernId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      openid = #{record.openid,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=BIT},
+      concerned = #{record.concerned,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bjpygh.gzh.bean.QrCode">
-    update qr_code
+    <select id="selectConcerned" resultType="com.bjpygh.gzh.bean.Concern">
+        SELECT * FROM concern WHERE now()-TIMESTAMP(create_time) > 2592000000 AND concerned = 0
+    </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bjpygh.gzh.bean.Concern">
+    update concern
     <set>
-      <if test="ticket != null">
-        ticket = #{ticket,jdbcType=VARCHAR},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
-      <if test="concern != null">
-        concern = #{concern,jdbcType=INTEGER},
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
       </if>
-      <if test="unconcern != null">
-        unconcern = #{unconcern,jdbcType=INTEGER},
-      </if>
-      <if test="onconcern != null">
-        onconcern = #{onconcern,jdbcType=INTEGER},
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=BIT},
       </if>
       <if test="concerned != null">
-        concerned = #{concerned,jdbcType=INTEGER},
+        concerned = #{concerned,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where user_id = #{userId,jdbcType=BIGINT}
+    where concern_id = #{concernId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.bjpygh.gzh.bean.QrCode">
-    update qr_code
-    set ticket = #{ticket,jdbcType=VARCHAR},
-      concern = #{concern,jdbcType=INTEGER},
-      unconcern = #{unconcern,jdbcType=INTEGER},
-      onconcern = #{onconcern,jdbcType=INTEGER},
-      concerned = #{concerned,jdbcType=INTEGER}
-    where user_id = #{userId,jdbcType=BIGINT}
+  <update id="updateByPrimaryKey" parameterType="com.bjpygh.gzh.bean.Concern">
+    update concern
+    set user_id = #{userId,jdbcType=BIGINT},
+      openid = #{openid,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=BIT},
+      concerned = #{concerned,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where concern_id = #{concernId,jdbcType=BIGINT}
   </update>
 </mapper>
