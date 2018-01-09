@@ -1,6 +1,7 @@
 $(function() {
 	//获取用户信息
 	userload();
+	getUserCoin();
 	//跳转到用户昵称页面
 	// $(".nickname").click(function(){
 	// 	var nickname = $("#nickname").html();
@@ -36,6 +37,8 @@ $(function() {
 		var city = $("#city").html();
 		window.location.href = "address.html";
 	});
+
+
 	//跳转到性别页面
 	// $(".sex").click(function(){
 	// 	var usersex = $("#sex").html();
@@ -106,4 +109,53 @@ function userload() {
 			}
 		}
 	}, 'json');
+}
+
+
+//获取用户金币，是否签过到
+function getUserCoin() {
+	$.post("getUserCoin", {}, function(datas) {
+		if (datas.status == 0) {
+			var coinData = datas.data.userCoin;
+			$(".spread-gold").html(coinData.coin); //推广币
+			$(".normal-gold").html(coinData.generalCoin); //普通币
+			if (coinData.isSign == 1) {
+				$(".qiandao").css({
+					"background": "#f6f1f1",
+					"box-shadow": "-1px -2px 1px #ddd inset"
+				});
+				$(".qiandao").html("已签到");
+				$("#qiandao").prop("disabled", true);
+			} else {
+				//签到
+				$(".qiandao").click(function() {
+					updateUserSign();
+				});
+			}
+		}
+	}, "json");
+}
+
+//签到
+function updateUserSign() {
+	$.post("updateUserSign", {}, function(datas) {
+		if (datas.status == 0) {
+			//执行签到动画
+			jiayi();
+		}
+	}, "json");
+}
+//签到动画
+function jiayi() {
+	$(".jiayi").fadeIn(200);
+	setTimeout(function() {
+		$(".jiayi").fadeOut(500);
+	}, 1000); //显示1,秒后进行隐藏
+	$(".qiandao").css({
+		"background": "#f6f1f1",
+		"box-shadow": "-1px -2px 1px #ddd inset",
+		"color": "#4ea0ff"
+	});
+	$(".qiandao").html("已签到");
+	$("#qiandao").prop("disabled", true);
 }
