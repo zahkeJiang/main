@@ -1243,6 +1243,186 @@ public class UserExample {
             addCriterion("integral not between", value1, value2, "integral");
             return (Criteria) this;
         }
+
+        public Criteria andGeneralCoinIsNull() {
+            addCriterion("general_coin is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralCoinIsNotNull() {
+            addCriterion("general_coin is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralCoinEqualTo(Double value) {
+            addCriterion("general_coin =", value, "generalCoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralCoinNotEqualTo(Double value) {
+            addCriterion("general_coin <>", value, "generalCoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralCoinGreaterThan(Double value) {
+            addCriterion("general_coin >", value, "generalCoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralCoinGreaterThanOrEqualTo(Double value) {
+            addCriterion("general_coin >=", value, "generalCoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralCoinLessThan(Double value) {
+            addCriterion("general_coin <", value, "generalCoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralCoinLessThanOrEqualTo(Double value) {
+            addCriterion("general_coin <=", value, "generalCoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralCoinIn(List<Double> values) {
+            addCriterion("general_coin in", values, "generalCoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralCoinNotIn(List<Double> values) {
+            addCriterion("general_coin not in", values, "generalCoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralCoinBetween(Double value1, Double value2) {
+            addCriterion("general_coin between", value1, value2, "generalCoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andGeneralCoinNotBetween(Double value1, Double value2) {
+            addCriterion("general_coin not between", value1, value2, "generalCoin");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoinIsNull() {
+            addCriterion("coin is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoinIsNotNull() {
+            addCriterion("coin is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoinEqualTo(Double value) {
+            addCriterion("coin =", value, "coin");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoinNotEqualTo(Double value) {
+            addCriterion("coin <>", value, "coin");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoinGreaterThan(Double value) {
+            addCriterion("coin >", value, "coin");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoinGreaterThanOrEqualTo(Double value) {
+            addCriterion("coin >=", value, "coin");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoinLessThan(Double value) {
+            addCriterion("coin <", value, "coin");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoinLessThanOrEqualTo(Double value) {
+            addCriterion("coin <=", value, "coin");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoinIn(List<Double> values) {
+            addCriterion("coin in", values, "coin");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoinNotIn(List<Double> values) {
+            addCriterion("coin not in", values, "coin");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoinBetween(Double value1, Double value2) {
+            addCriterion("coin between", value1, value2, "coin");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoinNotBetween(Double value1, Double value2) {
+            addCriterion("coin not between", value1, value2, "coin");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSignIsNull() {
+            addCriterion("is_sign is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSignIsNotNull() {
+            addCriterion("is_sign is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSignEqualTo(Boolean value) {
+            addCriterion("is_sign =", value, "isSign");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSignNotEqualTo(Boolean value) {
+            addCriterion("is_sign <>", value, "isSign");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSignGreaterThan(Boolean value) {
+            addCriterion("is_sign >", value, "isSign");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSignGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_sign >=", value, "isSign");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSignLessThan(Boolean value) {
+            addCriterion("is_sign <", value, "isSign");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSignLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_sign <=", value, "isSign");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSignIn(List<Boolean> values) {
+            addCriterion("is_sign in", values, "isSign");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSignNotIn(List<Boolean> values) {
+            addCriterion("is_sign not in", values, "isSign");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSignBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_sign between", value1, value2, "isSign");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSignNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_sign not between", value1, value2, "isSign");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

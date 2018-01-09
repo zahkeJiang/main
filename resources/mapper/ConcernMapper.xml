@@ -196,7 +196,7 @@
     </if>
   </update>
     <select id="selectConcerned" resultType="com.bjpygh.gzh.bean.Concern">
-        SELECT * FROM concern WHERE now()-TIMESTAMP(create_time) > 2592000000 AND concerned = 0
+        SELECT * FROM concern WHERE now()-TIMESTAMP(create_time) > 2592000000 AND concerned = 0 AND is_delete=0
     </select>
   <update id="updateByPrimaryKeySelective" parameterType="com.bjpygh.gzh.bean.Concern">
     update concern

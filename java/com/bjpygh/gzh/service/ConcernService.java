@@ -31,16 +31,18 @@ public class ConcernService {
         ConcernExample example = new ConcernExample();
         ConcernExample.Criteria criteria = example.createCriteria();
         criteria.andOpenidEqualTo(map.get("FromUserName"));
-        int i = concernMapper.deleteByExample(example);
+        criteria.andIsDeleteEqualTo(true);
+        int i = concernMapper.updateByExample(example);
     }
 
     public List<Concern> selectOpenid(Map<String, String> map) {
         ConcernExample example = new ConcernExample();
         ConcernExample.Criteria criteria = example.createCriteria();
         criteria.andOpenidEqualTo(map.get("FromUserName"));
-        criteria.andConcernedEqualTo(false);
+//        criteria.andConcernedEqualTo(false);
         return concernMapper.selectByExample(example);
     }
+
 
     public List<Concern> getConcerned() {
         return concernMapper.selectConcerned();
@@ -48,5 +50,14 @@ public class ConcernService {
 
     public void updateConcerned(Concern c) {
         concernMapper.updateByPrimaryKey(c);
+    }
+
+    public void updateExist(Map<String, String> map) {
+        ConcernExample example = new ConcernExample();
+        ConcernExample.Criteria criteria = example.createCriteria();
+        criteria.andOpenidEqualTo(map.get("FromUserName"));
+        criteria.andUserIdEqualTo(Long.valueOf(map.get("EventKey").split("_")[1]));
+        criteria.andIsDeleteEqualTo(false);
+        int i = concernMapper.updateByExample(example);
     }
 }

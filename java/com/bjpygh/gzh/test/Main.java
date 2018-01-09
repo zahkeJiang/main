@@ -60,15 +60,15 @@ public class Main {
 //            System.out.println(u.getOrderNumber());
 //        }
 //------------------------------------------------------------------------------
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date1 = sdf.parse("2017-09-01");
-            Date date2 = sdf.parse("2017-10-01");
-
-            System.out.println(date2.getTime()-date1.getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            Date date1 = sdf.parse("2017-09-01");
+//            Date date2 = sdf.parse("2017-10-01");
+//
+//            System.out.println(date2.getTime()-date1.getTime());
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
 //        int a = 1887;
 //        System.out.println(""+(a/2));
         //-------------------------------------------------------------------------------
@@ -91,6 +91,12 @@ public class Main {
 
 
 //        System.out.println(Pattern.matches(".*速*.","速成快板"));
+        int a=12;
+        double b =12.19999999999999999;
+
+        double c = a*b;
+        double d = a;
+        System.out.println(c);
     }
 
 //29 6 5

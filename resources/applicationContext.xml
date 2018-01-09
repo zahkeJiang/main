@@ -78,6 +78,7 @@
         <property name="triggers">
             <list>
                 <ref bean="testTrigger"/>
+                <ref bean="testTrigger1"/>
             </list>
         </property>
         <property name="autoStartup" value="true"/>
@@ -85,7 +86,7 @@
 
     <bean id="testTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="testJobDetail"/>
-        <property name="cronExpression" value="*/20 * * * * ?"/><!-- 每隔1秒钟触发一次 -->
+        <property name="cronExpression" value="*/20 * * * * ?"/><!-- 每隔20秒钟触发一次 -->
     </bean>
 
 
@@ -97,6 +98,20 @@
     </bean>
 
     <bean id="testJob" class="com.bjpygh.gzh.service.quartz.TestJob"/>
+    <bean id="testTrigger1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="testJobDetail"/>
+        <property name="cronExpression" value="0 0 12 * * ?"/><!-- 每隔20秒钟触发一次 -->
+    </bean>
+
+
+    <bean id="testJobDetail1" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="testJob"/>
+        <property name="targetMethod" value="execute"/>
+        <property name="concurrent" value="false"/>
+        <!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+    </bean>
+
+    <bean id="testJob1" class="com.bjpygh.gzh.service.quartz.TestJob1"/>
 
 
 </beans>

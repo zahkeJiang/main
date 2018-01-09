@@ -3,6 +3,7 @@ package com.bjpygh.gzh.service;
 import com.bjpygh.gzh.bean.User;
 import com.bjpygh.gzh.bean.UserExample;
 import com.bjpygh.gzh.dao.UserMapper;
+import com.bjpygh.gzh.entity.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,5 +73,19 @@ public class UserService {
         }else {
             return false;
         }
+    }
+
+    public Status getUserCoin(String userid) {
+        return Status.success()
+                .add("userCoin",userMapper.getUserCoin(Integer.valueOf(userid)));
+    }
+
+    public Status updateUserSign(String userid) {
+        userMapper.updateUserSign(Long.valueOf(userid));
+        return Status.success();
+    }
+
+    public void updateAllSign() {
+        userMapper.updateAllSign();
     }
 }

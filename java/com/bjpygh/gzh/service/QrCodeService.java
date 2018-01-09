@@ -82,7 +82,7 @@ public class QrCodeService {
         Concern concern = concernMapper.selectByExample(example).get(0);
         QrCode code = qrCodeMapper.selectByPrimaryKey(concern.getUserId());
         code.setConcern(code.getConcern()-1);//净关注量-1
-        code.setUnconcern(code.getUnconcern()+1);
+        code.setUnconcern(code.getUnconcern()+1);//取关量+1
         qrCodeMapper.updateByPrimaryKey(code);
     }
 
@@ -92,5 +92,11 @@ public class QrCodeService {
 
     public void updateOnconcern(QrCode concern) {
         qrCodeMapper.updateByPrimaryKey(concern);
+    }
+
+    public void updatePerUser(Long userId) {
+        QrCode code = qrCodeMapper.selectByPrimaryKey(userId);
+        code.setConcerned(code.getConcerned()-1);
+        qrCodeMapper.updateByPrimaryKey(code);
     }
 }

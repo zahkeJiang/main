@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpygh.gzh.dao.AddressMapper">
+    <insert id="insertAddress" parameterType="address">
+        INSERT INTO address(user_id, user_name, detail, mobile, create_time)
+        VALUES (#{userId}, #{userName}, #{detail}, #{mobile}, now())
+    </insert>
+
+    <select id="selectAddress" parameterType="java.lang.Long" resultType="address">
+        SELECT address_id AS addressId, user_id AS userId, user_name AS userName, detail, mobile
+        FROM address WHERE address_id = #{addressId} AND is_delete=0
+    </select>
+
+    <select id="selectAddresses" parameterType="java.lang.Long" resultType="address">
+        SELECT address_id AS addressId, user_id AS userId, user_name AS userName, detail, mobile
+        FROM address WHERE user_id = #{userId} AND is_delete=0
+    </select>
+    <update id="updateAddress" parameterType="address">
+        UPDATE address SET detail=#{detail}, mobile=#{mobile}, update_time
+        WHERE address_id=#{addressId} AND is_delete=0
+    </update>
+    <update id="deleteAddress" parameterType="java.lang.Long">
+        UPDATE address SET is_delete=1
+        WHERE address_id=#{addressId}
+    </update>
+
+</mapper>

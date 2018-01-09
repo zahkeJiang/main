@@ -1,5 +1,6 @@
 package com.bjpygh.gzh.controller;
 
+import com.bjpygh.gzh.bean.Concern;
 import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.service.ConcernService;
 import com.bjpygh.gzh.service.QrCodeService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -75,13 +77,27 @@ public class MessageController extends BaseController {
                         "                ᴀʟʟ ғᴏʀ ʏᴏᴜ";
                 sendToUser(map,text);
                 if (map.get("EventKey") != null){//扫码关注
-                    qrCodeService.updateCode(map);
-                    concernService.insertConcern(map);
+                    List<Concern> concerns = concernService.selectOpenid(map);
+                    if (concerns.size() > 0){//是否关注过
+                        Concern concern = concerns.get(0);
+                        if (!concern.getConcerned()){//不是有效推广用户
+                            qrCodeService.updatePerUser(concern.getUserId());//前一任总关注量-1
+                            qrCodeService.updateCode(map);//新推广者的关注量变化
+                            concernService.updateExist(map);//对已存在的关注记录进行更新
+                        }
+                    }else {
+                        concernService.insertConcern(map);
+                        qrCodeService.updateCode(map);//新推广者的关注量变化
+                        //此处做推送
+                    }
                 }
             }else if (map.get("Event").equals("unsubscribe")){//取关
                 if (concernService.selectOpenid(map).size() > 0){
-                    qrCodeService.changeCode(map);
-                    concernService.deleteConcern(map);
+                    Concern concern = concernService.selectOpenid(map).get(0);
+                    if (!concern.getConcerned()){//不是有效关注用户
+                        qrCodeService.changeCode(map);
+                        concernService.deleteConcern(map);
+                    }
                 }
             }
         }

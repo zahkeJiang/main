@@ -22,7 +22,7 @@ public interface ConcernMapper {
 
     int updateByExampleSelective(@Param("record") Concern record, @Param("example") ConcernExample example);
 
-    int updateByExample(@Param("record") Concern record, @Param("example") ConcernExample example);
+    int updateByExample(@Param("example") ConcernExample example);
 
     int updateByPrimaryKeySelective(Concern record);
 
