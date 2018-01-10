@@ -8,7 +8,9 @@ import com.bjpygh.gzh.entity.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AwardService {
@@ -38,9 +40,19 @@ public class AwardService {
         return Status.success();
     }
 
-    public List<Address> selectAddresses(String userid) {
+    public Status selectAddresses(String userid) {
         List<Address> addresses = addressMapper.selectAddresses(Long.valueOf(userid));
-        return addresses;
+        Long addressId = addressMapper.selectDefaultAddressId(Long.valueOf(userid));
+        List<Address> addresses1 = new ArrayList<Address>();
+        for (Address a : addresses){
+            if (addressId == a.getAddressId()){
+                a.setDefaultId(1);
+            }else {
+                a.setDefaultId(0);
+            }
+            addresses1.add(a);
+        }
+        return Status.success().add("addresses",addresses1);
     }
 
     public Address selectAddress(String addressId) {

@@ -63,7 +63,7 @@ public class AwardController extends BaseController{
             return Status.notInWx();
         }
         String userid = userMap.get("id");
-        return Status.success().add("addresses",awardService.selectAddresses(userid));
+        return awardService.selectAddresses(userid);
     }
 
     //添加地址

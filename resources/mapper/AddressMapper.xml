@@ -23,5 +23,8 @@
         UPDATE address SET is_delete=1
         WHERE address_id=#{addressId}
     </update>
+    <select id="selectDefaultAddressId" resultType="java.lang.Long" parameterType="java.lang.Long">
+        SELECT address_id AS addressId FROM user_info WHERE user_id=#{userid}
+    </select>
 
 </mapper>
