@@ -1,5 +1,6 @@
 package com.bjpygh.gzh.service;
 
+import com.bjpygh.gzh.bean.Address;
 import com.bjpygh.gzh.bean.User;
 import com.bjpygh.gzh.bean.UserExample;
 import com.bjpygh.gzh.dao.UserMapper;
@@ -87,5 +88,18 @@ public class UserService {
 
     public void updateAllSign() {
         userMapper.updateAllSign();
+    }
+
+    public Status setDefaultAddress(String userid, String addressId) {
+        User user = new User();
+        user.setUserId(Long.valueOf(userid));
+        user.setAddressId(Long.valueOf(addressId));
+        userMapper.setDefaultAddress(user);
+        return Status.success();
+    }
+
+    public Status selectDefaultAddress(String userid) {
+        Address address = userMapper.selectDefaultAddress(Long.valueOf(userid));
+        return Status.success().add("address",address);
     }
 }

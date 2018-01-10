@@ -181,4 +181,36 @@ public class UserController extends BaseController {
         String userid = userMap.get("id");
         return userService.updateUserSign(userid);
     }
+
+    /**
+     * 设置默认地址
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateDefaultAddress",method = RequestMethod.POST)
+    public Status updateDefaultAddress(String addressId, HttpServletRequest request){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        String userid = userMap.get("id");
+        return userService.setDefaultAddress(userid, addressId);
+    }
+
+    /**
+     * 获取默认地址
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/selectDefaultAddress",method = RequestMethod.POST)
+    public Status selectDefaultAddress(HttpServletRequest request){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        String userid = userMap.get("id");
+        return userService.selectDefaultAddress(userid);
+    }
 }

@@ -41,6 +41,8 @@ public class User {
 
     private Boolean isSign;
 
+    private Long addressId;
+
     public Long getUserId() {
         return userId;
     }
@@ -199,5 +201,13 @@ public class User {
 
     public void setIsSign(Boolean isSign) {
         this.isSign = isSign;
+    }
+
+    public Long getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
     }
 }

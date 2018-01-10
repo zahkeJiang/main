@@ -1,7 +1,7 @@
 package com.bjpygh.gzh.dao;
 
+import com.bjpygh.gzh.bean.Address;
 import com.bjpygh.gzh.bean.User;
-import com.bjpygh.gzh.bean.UserCoin;
 import com.bjpygh.gzh.bean.UserExample;
 import java.util.List;
 import java.util.Map;
@@ -30,17 +30,21 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    void bondRealName(Map<String, String> map);
+    String getUserId(String openid);
 
     void changeUserPoints(Map<String, String> uMap);
 
-    UserCoin getUserCoin(Integer integer);
+    void bondRealName(Map<String, String> map);
 
-    void updateUserSign(Long userid);
+    Object getUserCoin(Integer integer);
+
+    void updateUserSign(Long aLong);
 
     void updateAllSign();
 
-    String getUserId(String openid);
+    void setDefaultAddress(User user);
+
+    Address selectDefaultAddress(Long userid);
 
     void updateUserCoin(User user);
 }
