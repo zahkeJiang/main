@@ -12,6 +12,16 @@ public class Address {
 
     private String mobile;//联系方式
 
+    private Integer defaultId;
+
+    public Integer getDefaultId() {
+        return defaultId;
+    }
+
+    public void setDefaultId(Integer defaultId) {
+        this.defaultId = defaultId;
+    }
+
     public Long getAddressId() {
         return addressId;
     }
