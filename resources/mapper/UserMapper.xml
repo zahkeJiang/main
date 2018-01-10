@@ -464,4 +464,8 @@
     <update id="updateAllSign">
         UPDATE user_info SET is_sign=0
     </update>
+    <update id="updateUserCoin" parameterType="user">
+        UPDATE user SET general_coin=#{generalCoin}
+        WHERE user_id=#{userId}
+    </update>
 </mapper>

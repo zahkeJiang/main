@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpygh.gzh.dao.ExchangeMapper">
+    <select id="selectExchanges" parameterType="java.lang.Long" resultType="exchangeInfo">
+        SELECT address.user_name AS uaerName, address.detail AS detail, address.mobile AS mobile,
+        award.award_name AS awardName, award.general_coin AS generalCoin, award.coin AS coin,
+        award.image AS image, award.award_intro AS awardIntro FROM address, award, exchange
+        WHERE address.address_id = exchange.address_id AND award.award_id=exchange.award_id
+        AND exchange.is_delete=0
+    </select>
+
+    <insert id="insertExchange" parameterType="exchange">
+        INSERT INTO exchange(address_id, award_id, status, create_time)
+        VALUES (#{addressId}, #{awardId}, #{status}, now())
+    </insert>
+</mapper>

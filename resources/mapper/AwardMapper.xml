@@ -12,4 +12,9 @@
          FROM award WHERE award_id=#{awardId} AND is_delete=0
     </select>
 
+    <update id="updateAwardAmount" parameterType="award">
+        UPDATE award SET amount=#{amount}
+        WHERE award_id=#{awardId}
+    </update>
+
 </mapper>

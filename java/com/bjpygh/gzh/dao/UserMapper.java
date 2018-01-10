@@ -41,4 +41,6 @@ public interface UserMapper {
     void updateAllSign();
 
     String getUserId(String openid);
+
+    void updateUserCoin(User user);
 }
