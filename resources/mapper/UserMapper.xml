@@ -22,6 +22,7 @@
     <result column="general_coin" jdbcType="DOUBLE" property="generalCoin" />
     <result column="coin" jdbcType="DOUBLE" property="coin" />
     <result column="is_sign" jdbcType="BIT" property="isSign" />
+    <result column="address_id" jdbcType="BIGINT" property="addressId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -84,7 +85,7 @@
   <sql id="Base_Column_List">
     user_id, real_name, phone_number, school, college, openid, nickname, sex, city, country, 
     province, headimageurl, reamark, address, age, member_points, integral, general_coin, 
-    coin, is_sign
+    coin, is_sign, address_id
   </sql>
   <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.UserExample" resultMap="BaseResultMap">
     select
@@ -123,14 +124,14 @@
       country, province, headimageurl, 
       reamark, address, age, 
       member_points, integral, general_coin, 
-      coin, is_sign)
+      coin, is_sign, address_id)
     values (#{userId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
       #{school,jdbcType=VARCHAR}, #{college,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
       #{nickname,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, 
       #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{headimageurl,jdbcType=VARCHAR}, 
       #{reamark,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
       #{memberPoints,jdbcType=INTEGER}, #{integral,jdbcType=INTEGER}, #{generalCoin,jdbcType=DOUBLE}, 
-      #{coin,jdbcType=DOUBLE}, #{isSign,jdbcType=BIT})
+      #{coin,jdbcType=DOUBLE}, #{isSign,jdbcType=BIT}, #{addressId,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.User">
     insert into user_info
@@ -195,6 +196,9 @@
       <if test="isSign != null">
         is_sign,
       </if>
+      <if test="addressId != null">
+        address_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -256,6 +260,9 @@
       </if>
       <if test="isSign != null">
         #{isSign,jdbcType=BIT},
+      </if>
+      <if test="addressId != null">
+        #{addressId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -328,6 +335,9 @@
       <if test="record.isSign != null">
         is_sign = #{record.isSign,jdbcType=BIT},
       </if>
+      <if test="record.addressId != null">
+        address_id = #{record.addressId,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -354,7 +364,8 @@
       integral = #{record.integral,jdbcType=INTEGER},
       general_coin = #{record.generalCoin,jdbcType=DOUBLE},
       coin = #{record.coin,jdbcType=DOUBLE},
-      is_sign = #{record.isSign,jdbcType=BIT}
+      is_sign = #{record.isSign,jdbcType=BIT},
+      address_id = #{record.addressId,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -419,6 +430,9 @@
       <if test="isSign != null">
         is_sign = #{isSign,jdbcType=BIT},
       </if>
+      <if test="addressId != null">
+        address_id = #{addressId,jdbcType=BIGINT},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
@@ -442,7 +456,8 @@
       integral = #{integral,jdbcType=INTEGER},
       general_coin = #{generalCoin,jdbcType=DOUBLE},
       coin = #{coin,jdbcType=DOUBLE},
-      is_sign = #{isSign,jdbcType=BIT}
+      is_sign = #{isSign,jdbcType=BIT},
+      address_id = #{addressId,jdbcType=BIGINT}
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
     <update id="changeUserPoints" parameterType="map">
@@ -468,4 +483,11 @@
         UPDATE user SET general_coin=#{generalCoin}
         WHERE user_id=#{userId}
     </update>
+    <update id="setDefaultAddress" parameterType="user">
+        UPDATE user_info SET address_id=#{addressId} WHERE user_id=#{userId}
+    </update>
+    <select id="selectDefaultAddress" parameterType="java.lang.Long" resultType="address">
+        SELECT a.address_id AS addressId, a.detail FROM address a JOIN user_info u
+        ON a.user_id=u.user_id WHERE u.user_id=#{userid}
+    </select>
 </mapper>

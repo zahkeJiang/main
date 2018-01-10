@@ -1423,6 +1423,66 @@ public class UserExample {
             addCriterion("is_sign not between", value1, value2, "isSign");
             return (Criteria) this;
         }
+
+        public Criteria andAddressIdIsNull() {
+            addCriterion("address_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressIdIsNotNull() {
+            addCriterion("address_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressIdEqualTo(Long value) {
+            addCriterion("address_id =", value, "addressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressIdNotEqualTo(Long value) {
+            addCriterion("address_id <>", value, "addressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressIdGreaterThan(Long value) {
+            addCriterion("address_id >", value, "addressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("address_id >=", value, "addressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressIdLessThan(Long value) {
+            addCriterion("address_id <", value, "addressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressIdLessThanOrEqualTo(Long value) {
+            addCriterion("address_id <=", value, "addressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressIdIn(List<Long> values) {
+            addCriterion("address_id in", values, "addressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressIdNotIn(List<Long> values) {
+            addCriterion("address_id not in", values, "addressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressIdBetween(Long value1, Long value2) {
+            addCriterion("address_id between", value1, value2, "addressId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressIdNotBetween(Long value1, Long value2) {
+            addCriterion("address_id not between", value1, value2, "addressId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
