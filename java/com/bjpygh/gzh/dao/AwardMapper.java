@@ -8,4 +8,6 @@ public interface AwardMapper {
     List<Award> getAwards();
 
     Award getAward(Long awardId);
+
+    void updateAwardAmount(Award award);
 }
