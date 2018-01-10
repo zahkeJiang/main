@@ -138,6 +138,7 @@ span{
   padding: 0 10px;
   margin: 10px 16px;
   background-color: #f6f1f1;
+  text-align: center;
 
 }
 .divBox h2{
@@ -152,8 +153,11 @@ span{
 .goldDiv{
   padding: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;  
+}
+.suline{
+	height: 32px; width: 1px;background: #4ea0ff
 }
 .info-bottom{
 	position: relative;
@@ -180,7 +184,7 @@ span{
 }
 .goldDiv>div{
   text-align: center;
-  width: 76px;
+  /*width: 76px;*/
 }
 .gold img{
   height: 32px;
@@ -202,6 +206,7 @@ span{
   font-size: 14px;
   background-color: #4ea0ff;
   color: #fff;
+  font-style: normal;
 }
 .jiayiBox{
 	position: relative;

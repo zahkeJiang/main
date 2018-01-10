@@ -1,0 +1,60 @@
+body{
+  background-color: #4ea0ff;
+  color: #999;
+  margin:10px 0;
+}
+.divBox{
+  border-radius: 10px;
+  padding: 0 10px;
+  margin: 10px 16px;
+  background-color: #f6f1f1;
+}
+.awardImgDiv{
+  text-align: center;
+  padding: 10px;
+}
+.awardImg{
+  height: 160px;
+}
+.floatRight{
+  float: right;
+  font-size: 14px;
+}
+.rightImage {
+   width: 1em; height: 1em;
+   vertical-align: -0.15em;
+   fill: currentColor;
+   overflow: hidden;
+   color: #777;
+}
+.awardName{
+  color: #4ea0ff;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 10px 0; 
+}
+.awardCoin{
+  line-height: 20px;
+  margin: 10px 0;
+}
+.userAddress{
+  line-height: 20px;
+  padding: 10px 0;
+  border-top:1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.userAddress span.address_title{
+  color: #555
+}
+.userAddress span.floatRight{
+  color: #999;
+}
+.divBox h2.awardDetail{
+  color: #555;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+.awardIntro{
+  padding: 10px 0 ;
+}

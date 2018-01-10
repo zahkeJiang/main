@@ -375,72 +375,72 @@ public class DsInformationExample {
         }
 
         public Criteria andAddressIsNull() {
-            addCriterion("address is null");
+            addCriterion("Address is null");
             return (Criteria) this;
         }
 
         public Criteria andAddressIsNotNull() {
-            addCriterion("address is not null");
+            addCriterion("Address is not null");
             return (Criteria) this;
         }
 
         public Criteria andAddressEqualTo(String value) {
-            addCriterion("address =", value, "address");
+            addCriterion("Address =", value, "Address");
             return (Criteria) this;
         }
 
         public Criteria andAddressNotEqualTo(String value) {
-            addCriterion("address <>", value, "address");
+            addCriterion("Address <>", value, "Address");
             return (Criteria) this;
         }
 
         public Criteria andAddressGreaterThan(String value) {
-            addCriterion("address >", value, "address");
+            addCriterion("Address >", value, "Address");
             return (Criteria) this;
         }
 
         public Criteria andAddressGreaterThanOrEqualTo(String value) {
-            addCriterion("address >=", value, "address");
+            addCriterion("Address >=", value, "Address");
             return (Criteria) this;
         }
 
         public Criteria andAddressLessThan(String value) {
-            addCriterion("address <", value, "address");
+            addCriterion("Address <", value, "Address");
             return (Criteria) this;
         }
 
         public Criteria andAddressLessThanOrEqualTo(String value) {
-            addCriterion("address <=", value, "address");
+            addCriterion("Address <=", value, "Address");
             return (Criteria) this;
         }
 
         public Criteria andAddressLike(String value) {
-            addCriterion("address like", value, "address");
+            addCriterion("Address like", value, "Address");
             return (Criteria) this;
         }
 
         public Criteria andAddressNotLike(String value) {
-            addCriterion("address not like", value, "address");
+            addCriterion("Address not like", value, "Address");
             return (Criteria) this;
         }
 
         public Criteria andAddressIn(List<String> values) {
-            addCriterion("address in", values, "address");
+            addCriterion("Address in", values, "Address");
             return (Criteria) this;
         }
 
         public Criteria andAddressNotIn(List<String> values) {
-            addCriterion("address not in", values, "address");
+            addCriterion("Address not in", values, "Address");
             return (Criteria) this;
         }
 
         public Criteria andAddressBetween(String value1, String value2) {
-            addCriterion("address between", value1, value2, "address");
+            addCriterion("Address between", value1, value2, "Address");
             return (Criteria) this;
         }
 
         public Criteria andAddressNotBetween(String value1, String value2) {
-            addCriterion("address not between", value1, value2, "address");
+            addCriterion("Address not between", value1, value2, "Address");
             return (Criteria) this;
         }
 

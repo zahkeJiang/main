@@ -150,4 +150,35 @@ public class UserController extends BaseController {
         return "excellentCard";
     }
 
+    /**
+     * 获取积分
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getUserCoin",method = RequestMethod.POST)
+    public Status getUserCoin(HttpServletRequest request){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        String userid = userMap.get("id");
+        return userService.getUserCoin(userid);
+    }
+
+    /**
+     * 签到
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateUserSign",method = RequestMethod.POST)
+    public Status updateUserSign(HttpServletRequest request){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+        String userid = userMap.get("id");
+        return userService.updateUserSign(userid);
+    }
 }

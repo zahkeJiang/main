@@ -35,6 +35,12 @@ public class User {
 
     private Integer integral;
 
+    private Double generalCoin;
+
+    private Double coin;
+
+    private Boolean isSign;
+
     public Long getUserId() {
         return userId;
     }
@@ -169,5 +175,29 @@ public class User {
 
     public void setIntegral(Integer integral) {
         this.integral = integral;
+    }
+
+    public Double getGeneralCoin() {
+        return generalCoin;
+    }
+
+    public void setGeneralCoin(Double generalCoin) {
+        this.generalCoin = generalCoin;
+    }
+
+    public Double getCoin() {
+        return coin;
+    }
+
+    public void setCoin(Double coin) {
+        this.coin = coin;
+    }
+
+    public Boolean getIsSign() {
+        return isSign;
+    }
+
+    public void setIsSign(Boolean isSign) {
+        this.isSign = isSign;
     }
 }

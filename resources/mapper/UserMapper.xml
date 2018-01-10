@@ -19,6 +19,9 @@
     <result column="age" jdbcType="INTEGER" property="age" />
     <result column="member_points" jdbcType="INTEGER" property="memberPoints" />
     <result column="integral" jdbcType="INTEGER" property="integral" />
+    <result column="general_coin" jdbcType="DOUBLE" property="generalCoin" />
+    <result column="coin" jdbcType="DOUBLE" property="coin" />
+    <result column="is_sign" jdbcType="BIT" property="isSign" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -80,11 +83,9 @@
   </sql>
   <sql id="Base_Column_List">
     user_id, real_name, phone_number, school, college, openid, nickname, sex, city, country, 
-    province, headimageurl, reamark, address, age, member_points, integral
+    province, headimageurl, reamark, address, age, member_points, integral, general_coin, 
+    coin, is_sign
   </sql>
-  <select id="getUserId" parameterType="string" resultType="string">
-        select user_id from user_info where openid = #{openid}
-    </select>
   <select id="selectByExample" parameterType="com.bjpygh.gzh.bean.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -121,13 +122,15 @@
       nickname, sex, city, 
       country, province, headimageurl, 
       reamark, address, age, 
-      member_points, integral)
+      member_points, integral, general_coin, 
+      coin, is_sign)
     values (#{userId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
       #{school,jdbcType=VARCHAR}, #{college,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
       #{nickname,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, 
       #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{headimageurl,jdbcType=VARCHAR}, 
       #{reamark,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
-      #{memberPoints,jdbcType=INTEGER}, #{integral,jdbcType=INTEGER})
+      #{memberPoints,jdbcType=INTEGER}, #{integral,jdbcType=INTEGER}, #{generalCoin,jdbcType=DOUBLE}, 
+      #{coin,jdbcType=DOUBLE}, #{isSign,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.bjpygh.gzh.bean.User">
     insert into user_info
@@ -183,6 +186,15 @@
       <if test="integral != null">
         integral,
       </if>
+      <if test="generalCoin != null">
+        general_coin,
+      </if>
+      <if test="coin != null">
+        coin,
+      </if>
+      <if test="isSign != null">
+        is_sign,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -235,6 +247,15 @@
       </if>
       <if test="integral != null">
         #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="generalCoin != null">
+        #{generalCoin,jdbcType=DOUBLE},
+      </if>
+      <if test="coin != null">
+        #{coin,jdbcType=DOUBLE},
+      </if>
+      <if test="isSign != null">
+        #{isSign,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -298,6 +319,15 @@
       <if test="record.integral != null">
         integral = #{record.integral,jdbcType=INTEGER},
       </if>
+      <if test="record.generalCoin != null">
+        general_coin = #{record.generalCoin,jdbcType=DOUBLE},
+      </if>
+      <if test="record.coin != null">
+        coin = #{record.coin,jdbcType=DOUBLE},
+      </if>
+      <if test="record.isSign != null">
+        is_sign = #{record.isSign,jdbcType=BIT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -321,7 +351,10 @@
       address = #{record.address,jdbcType=VARCHAR},
       age = #{record.age,jdbcType=INTEGER},
       member_points = #{record.memberPoints,jdbcType=INTEGER},
-      integral = #{record.integral,jdbcType=INTEGER}
+      integral = #{record.integral,jdbcType=INTEGER},
+      general_coin = #{record.generalCoin,jdbcType=DOUBLE},
+      coin = #{record.coin,jdbcType=DOUBLE},
+      is_sign = #{record.isSign,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -377,6 +410,15 @@
       <if test="integral != null">
         integral = #{integral,jdbcType=INTEGER},
       </if>
+      <if test="generalCoin != null">
+        general_coin = #{generalCoin,jdbcType=DOUBLE},
+      </if>
+      <if test="coin != null">
+        coin = #{coin,jdbcType=DOUBLE},
+      </if>
+      <if test="isSign != null">
+        is_sign = #{isSign,jdbcType=BIT},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
@@ -397,7 +439,10 @@
       address = #{address,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
       member_points = #{memberPoints,jdbcType=INTEGER},
-      integral = #{integral,jdbcType=INTEGER}
+      integral = #{integral,jdbcType=INTEGER},
+      general_coin = #{generalCoin,jdbcType=DOUBLE},
+      coin = #{coin,jdbcType=DOUBLE},
+      is_sign = #{isSign,jdbcType=BIT}
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
     <update id="changeUserPoints" parameterType="map">
@@ -406,5 +451,17 @@
     <update id="bondRealName" parameterType="map">
         update user_info set real_name=#{realName}, address=#{address}, reamark=#{reamark}
         where user_id=#{userId}
+    </update>
+    <select id="getUserCoin" parameterType="Integer" resultType="userCoin">
+        SELECT general_coin AS generalCoin,is_sign AS isSign, coin FROM user_info
+        WHERE user_id = #{userid}
+    </select>
+    <update id="updateUserSign" parameterType="java.lang.Long">
+        UPDATE user_info SET general_coin=( SELECT ui.gc FROM
+        (SELECT (u.general_coin)+1 AS gc FROM user_info u WHERE u.user_id=#{userid}) ui),
+        is_sign=1 WHERE user_id=#{userid} AND is_sign=0
+    </update>
+    <update id="updateAllSign">
+        UPDATE user_info SET is_sign=0
     </update>
 </mapper>

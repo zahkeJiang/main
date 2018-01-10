@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpygh.gzh.dao.AwardMapper">
+    <select id="getAwards" resultType="award">
+        SELECT award_id AS awardId, award_name AS awardName,
+        general_coin AS generalCoin, coin, amount, image, status
+        FROM award WHERE is_delete=0
+    </select>
+    <select id="getAward" parameterType="java.lang.Long" resultType="award">
+        SELECT award_id AS awardId, award_name AS awardName, general_coin AS generalCoin,
+         award_intro AS awardIntro, coin, amount, image, status, expire_time AS expireTime
+         FROM award WHERE award_id=#{awardId} AND is_delete=0
+    </select>
+
+</mapper>

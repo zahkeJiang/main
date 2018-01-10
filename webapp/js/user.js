@@ -122,40 +122,46 @@ function getUserCoin() {
 			if (coinData.isSign == 1) {
 				$(".qiandao").css({
 					"background": "#f6f1f1",
-					"box-shadow": "-1px -2px 1px #ddd inset"
+					"box-shadow": "-1px -2px 1px #ddd inset",
+					"color": "#4ea0ff"
 				});
 				$(".qiandao").html("已签到");
 				$("#qiandao").prop("disabled", true);
 			} else {
 				//签到
 				$(".qiandao").click(function() {
-					updateUserSign();
+					updateUserSign(coinData.generalCoin);
+					$(this).unbind("click");
 				});
+
 			}
 		}
 	}, "json");
 }
 
 //签到
-function updateUserSign() {
+function updateUserSign(generalCoin) {
 	$.post("updateUserSign", {}, function(datas) {
 		if (datas.status == 0) {
 			//执行签到动画
-			jiayi();
+			jiayi(generalCoin);
 		}
 	}, "json");
 }
 //签到动画
-function jiayi() {
+function jiayi(generalCoin) {
 	$(".jiayi").fadeIn(200);
+	$(".qiandao").html("签到中..");
 	setTimeout(function() {
 		$(".jiayi").fadeOut(500);
+		$(".normal-gold").html((generalCoin + 1));
+		$(".qiandao").css({
+			"background": "#f6f1f1",
+			"box-shadow": "-1px -2px 1px #ddd inset",
+			"color": "#4ea0ff"
+		});
+		$(".qiandao").html("已签到");
 	}, 1000); //显示1,秒后进行隐藏
-	$(".qiandao").css({
-		"background": "#f6f1f1",
-		"box-shadow": "-1px -2px 1px #ddd inset",
-		"color": "#4ea0ff"
-	});
-	$(".qiandao").html("已签到");
-	$("#qiandao").prop("disabled", true);
+
+
 }
