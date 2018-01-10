@@ -13,6 +13,16 @@ body,html{
   padding: 0 10px;
   overflow: scroll;
 }
+.imgBg{
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 100px;
+}
+.address-hint{
+  font-size: 14px;
+  text-align: center;
+  margin-top: 20px;
+}
 .address-list::-webkit-scrollbar {/*隐藏滚动条*/
     display: none;
 }
@@ -24,6 +34,19 @@ body,html{
   color: #555;
   border-bottom: 1px solid #ddd;
   box-shadow: 0 2px 5px #f6f1f1;  
+}
+.guanli{
+  position: absolute;
+  right: 16px;
+  top: 0;
+  color: #4ea0ff;
+}
+.guanli:hover{
+  position: absolute;
+  right: 16px;
+  top: 0;
+  color: #4ea0ff;
+  text-decoration: none;
 }
 .address-content{
   display: flex;
@@ -45,12 +68,18 @@ body,html{
   margin: 10px;
   font-size: 14px;
 }
+.address-content-info-header span.moren{
+  color: red;
+  margin-left: 4px;
+  font-size: 12px
+}
 .address-content-info-content span.moren{
   color: red;
   margin-right: 4px;
+  font-size: 12px
 }
 .deleteImg{
-  padding-top: 9px;
+  margin-top: 9px;
 
 }
 .editImg{
@@ -106,4 +135,9 @@ body,html{
 .modal-row input::-webkit-input-placeholder { 
   color: #999; 
   font-size: 14px;
+}
+.btn-primary{
+  display: none;
+  background: #4ea0ff;
+  border: 0;
 }
