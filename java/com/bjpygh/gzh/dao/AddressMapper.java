@@ -15,4 +15,6 @@ public interface AddressMapper {
     void updateAddress(Address address);
 
     void deleteAddress(Long addressId);
+
+    String selectDefaultAddressId(Long userid);
 }

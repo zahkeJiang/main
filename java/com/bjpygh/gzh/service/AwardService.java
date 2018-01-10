@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AwardService {
@@ -38,9 +39,10 @@ public class AwardService {
         return Status.success();
     }
 
-    public List<Address> selectAddresses(String userid) {
+    public Status selectAddresses(String userid) {
         List<Address> addresses = addressMapper.selectAddresses(Long.valueOf(userid));
-        return addresses;
+        String addressId = addressMapper.selectDefaultAddressId(Long.valueOf(userid));
+        return Status.success().add("addresses",addresses).add("default",addressId);
     }
 
     public Address selectAddress(String addressId) {
