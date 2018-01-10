@@ -16,7 +16,7 @@
         FROM address WHERE user_id = #{userId} AND is_delete=0
     </select>
     <update id="updateAddress" parameterType="address">
-        UPDATE address SET detail=#{detail}, mobile=#{mobile}, update_time=now()
+        UPDATE address SET user_name = #{userName}, detail=#{detail}, mobile=#{mobile}, update_time=now()
         WHERE address_id=#{addressId} AND is_delete=0
     </update>
     <update id="deleteAddress" parameterType="java.lang.Long">

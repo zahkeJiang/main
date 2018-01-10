@@ -488,6 +488,6 @@
     </update>
     <select id="selectDefaultAddress" parameterType="java.lang.Long" resultType="address">
         SELECT a.address_id AS addressId, a.detail FROM address a JOIN user_info u
-        ON a.user_id=u.user_id WHERE u.user_id=#{userid}
+        ON a.address_id=u.address_id WHERE u.user_id=#{userid}
     </select>
 </mapper>
