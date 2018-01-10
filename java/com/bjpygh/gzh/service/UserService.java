@@ -99,7 +99,12 @@ public class UserService {
     }
 
     public Status selectDefaultAddress(String userid) {
-        Address address = userMapper.selectDefaultAddress(Long.valueOf(userid));
-        return Status.success().add("address",address);
+        List<Address> addresses = userMapper.selectDefaultAddress(Long.valueOf(userid));
+        if (addresses.size()>0){
+            return Status.success().add("address",addresses.get(0));
+        }else {
+            return Status.fail(-10,"没有默认地址");
+        }
+
     }
 }

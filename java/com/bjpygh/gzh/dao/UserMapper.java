@@ -44,7 +44,7 @@ public interface UserMapper {
 
     void setDefaultAddress(User user);
 
-    Address selectDefaultAddress(Long userid);
+    List<Address> selectDefaultAddress(Long userid);
 
     void updateUserCoin(User user);
 }
