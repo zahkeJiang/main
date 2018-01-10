@@ -200,9 +200,12 @@ span{
   color: #ff7800;
   font-size: 12px;
 }
+.prizesdiv{
+	margin-top: 10px;
+}
 .prizes{
   border-radius: 50px;
-  padding: 4px;
+  padding: 4px 10px;
   font-size: 14px;
   background-color: #4ea0ff;
   color: #fff;

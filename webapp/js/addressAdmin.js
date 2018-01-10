@@ -92,11 +92,11 @@ function selectAddresses() {
       if (addressData.length > 0) {
         $.each(addressData, function(item, comment) {
           var moren = '<span class="moren"></span>';
-          if (comment.default == 1) {
+          if (comment.defaultId == 1) {
             moren = '<span class="moren">[默认]</span>';
           }
           addressDataHtml += '<div class="address-content address-content-' + comment.addressId + '" addressId="' + comment.addressId + '">' +
-            '<div class="choose choose' + comment.default+'"></div>' +
+            '<div class="choose choose' + comment.defaultId + '"></div>' +
             '<div class="address-content-info">' +
             '<div class="address-content-info-header"><span class="address-content-info-name">' + comment.userName + '</span><span class="address-content-info-tel">' + comment.mobile + '</span></div>' +
             '<div class="address-content-info-content">' + moren + '<span>' + comment.detail + '</span></div>' +

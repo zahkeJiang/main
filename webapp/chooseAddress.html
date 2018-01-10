@@ -16,8 +16,8 @@
 
     </div>
     <div class="address-list">
-      <img src="./images/no_content.png" class="imgBg">
-      <p class="address-hint">主人，您还没有添加地址呢~</p>
+<!--       <img src="./images/no_content.png" class="imgBg">
+      <p class="address-hint">主人，您还没有添加地址呢~</p> -->
 <!--       <div class="address-content">
         <div class="choose"></div>
         <div class="address-content-info">
@@ -163,7 +163,7 @@ function selectAddresses() {
       if (addressData.length>0) {
         $.each(addressData, function(item, comment) {
           var moren = '<span class="moren"></span>';
-          if (comment.default == 1) {
+          if (comment.defaultId == 1) {
             moren = '<span class="moren">[默认]</span>';
           }
         addressDataHtml += '<div class="address-content address-content-' + comment.addressId + '" detail="'+ comment.detail +'" addressId="' + comment.addressId + '">' +
