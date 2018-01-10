@@ -1,4 +1,8 @@
 $(function() {
+  $(".choose").click(function() {
+    $(this).html('<img src="./images/circle_choose.png" height="18px" width="18px">');
+    $(this).parent(".address-content").siblings("div").find(".choose").html('<img src="./images/circle.png" height="18px" width="18px">');
+  })
   var height = $(window).height() - 20;
   var height2 = $(window).height() - 121;
   $(".addressBox").css({
@@ -85,20 +89,28 @@ function selectAddresses() {
     if (datas.status == 0) {
       var addressData = datas.data.addresses;
       var addressDataHtml = "";
-      $.each(addressData, function(item, comment) {
-        addressDataHtml += '<div class="address-content address-content-' + comment.addressId + '" addressId="' + comment.addressId + '">' +
-          '<div class="choose"></div>' +
-          '<div class="address-content-info">' +
-          '<div class="address-content-info-header"><span class="address-content-info-name">' + comment.userName + '</span><span class="address-content-info-tel">' + comment.mobile + '</span></div>' +
-          '<div class="address-content-info-content"><span class="moren">[默认]</span><span>' + comment.detail + '</span></div>' +
-          '</div>' +
-          '<div>' +
-          '<div><img src="./images/delete.png" height="18px" class="deleteImg"></div>' +
-          '<div><img src="./images/edit.png" height="18px" class="editImg"></div>' +
-          '</div>' +
-          '</div>';
+      if (addressData.length > 0) {
+        $.each(addressData, function(item, comment) {
+          var moren = '<span class="moren"></span>';
+          if (comment.default == 1) {
+            moren = '<span class="moren">[默认]</span>';
+          }
+          addressDataHtml += '<div class="address-content address-content-' + comment.addressId + '" addressId="' + comment.addressId + '">' +
+            '<div class="choose choose' + comment.default+'"></div>' +
+            '<div class="address-content-info">' +
+            '<div class="address-content-info-header"><span class="address-content-info-name">' + comment.userName + '</span><span class="address-content-info-tel">' + comment.mobile + '</span></div>' +
+            '<div class="address-content-info-content">' + moren + '<span>' + comment.detail + '</span></div>' +
+            '</div>' +
+            '<div>' +
+            '<div><img src="./images/delete.png" height="18px" class="deleteImg"></div>' +
+            '<div><img src="./images/edit.png" height="18px" class="editImg"></div>' +
+            '</div>' +
+            '</div>';
 
-      });
+        });
+      } else {
+        addressDataHtml = '<img src="./images/no_content.png" class="imgBg"><p class="address-hint">主人，您还没有添加地址呢~</p>';
+      }
       $(".address-list").html(addressDataHtml);
 
       //删除
@@ -111,6 +123,34 @@ function selectAddresses() {
             modalHintText("删除成功");
             var hideaddress = ".address-content-" + addressId;
             $(hideaddress).hide();
+          }
+        }, "json");
+      });
+
+      //设置默认地址
+      $(".choose").click(function() {
+        var addressId = $(this).parents(".address-content").attr("addressId");
+        $(this).css({
+          "height": "18px",
+          "width": "18px",
+          "margin-top": "36px",
+          "background": "url(../images/circle_choose.png)",
+          "background-size": "100% 100%"
+        });
+        $(this).parent(".address-content").siblings("div").find(".choose").css({
+          "height": "18px",
+          "width": "18px",
+          "margin-top": "36px",
+          "background": "url(../images/circle.png)",
+          "background-size": "100% 100%"
+        });
+        $(this).parent(".address-content").find(".moren").html("[默认]");
+        $(this).parent(".address-content").siblings("div").find(".moren").empty();
+        $.post("updateDefaultAddress", {
+          "addressId": addressId
+        }, function(datas) {
+          if (datas.status == 0) {
+            modalHintText("默认地址设置成功");
           }
         }, "json");
       });

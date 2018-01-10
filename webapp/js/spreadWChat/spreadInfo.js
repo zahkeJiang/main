@@ -10,9 +10,7 @@ $(function() {
     window.location.href = "../chooseAddress.html"
   })
   ShowMessage();
-  if ($.cookie("addressData") != null && $.cookie("addressData") != "") {
-    $(".addressDetail").html($.cookie("addressData"));
-  };
+  getadAddress();
 
   $.post("../getAward", {
     "awardId": awardId
@@ -24,12 +22,20 @@ $(function() {
       $(".coin").html(awardData.coin);
       $(".generalCoin").html(awardData.generalCoin);
       $(".awardIntro").html(awardData.awardIntro);
-      if ($.cookie("addressData") == null || $.cookie("addressData") == "") {
-        if (awardData.detail != "") {
-          $(".addressDetail").html(awardData.detail);
-        }
-      }
     }
   }, "json");
 
 });
+
+//获取地址
+function getadAddress() {
+  if ($.cookie("addressData") != null && $.cookie("addressData") != "") {
+    $(".addressDetail").html($.cookie("addressData"));
+  } else {
+    $.post("../selectDefaultAddress", {}, function(datas) {
+      if (datas.status == 0) {
+        $(".addressDetail").html(datas.data.address.detail);
+      }
+    }, "json");
+  }
+}

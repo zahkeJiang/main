@@ -160,23 +160,28 @@ function selectAddresses() {
     if (datas.status == 0) {
       var addressData = datas.data.addresses;
       var addressDataHtml = "";
-      $.each(addressData, function(item, comment) {
+      if (addressData.length>0) {
+        $.each(addressData, function(item, comment) {
+          var moren = '<span class="moren"></span>';
+          if (comment.default == 1) {
+            moren = '<span class="moren">[默认]</span>';
+          }
         addressDataHtml += '<div class="address-content address-content-' + comment.addressId + '" detail="'+ comment.detail +'" addressId="' + comment.addressId + '">' +
           '<div class="address-content-info">' +
-          '<div class="address-content-info-header"><span class="address-content-info-name">' + comment.userName + '</span><span class="moren">[默认]</span><span class="address-content-info-tel">' + comment.mobile + '</span></div>' +
+          '<div class="address-content-info-header"><span class="address-content-info-name">' + comment.userName + '</span>'+moren+'<span class="address-content-info-tel">' + comment.mobile + '</span></div>' +
           '<div class="address-content-info-content"><span>' + comment.detail + '</span></div>' +
           '</div>' +
           '</div>';
-      });
+        });
+      }else{
+        addressDataHtml = '<img src="./images/no_content.png" class="imgBg"><p class="address-hint">主人，您还没有添加地址呢~</p>';
+      }
       $(".address-list").html(addressDataHtml);
 
       $(".address-content").click(function(){
         $.cookie("addressData",$(this).attr("detail"));
         window.history.go(-1);//返回前一页
       });
-    }else if (datas.status=="-10") {
-      var addressDataHtml='<img src="./images/no_content.png" class="imgBg"><p class="address-hint">主人，您还没有添加地址呢~</p>';
-      $(".address-list").html(addressDataHtml);
     }
   }, "json");
 }
