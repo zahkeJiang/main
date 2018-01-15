@@ -150,3 +150,69 @@ table,td,th {
 .mg20{
 	margin: 20px;
 }
+
+
+
+
+/*自定义弹窗*/
+.modalHint{
+	display: none;
+	z-index: 100000;
+	text-align: center;
+}
+.modalHint-layer{
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	opacity: 0.4;
+}
+
+.modalHint-box{
+	position: fixed;
+	width: 80%;
+	margin-left: 10%;
+	top: 30%;
+	z-index: 100001;
+}
+.modalHint-header{
+	background-color: #4ea0ff;
+	color: #fff;
+	line-height: 40px;
+	border-radius: 4px 4px 0 0;
+	height: 40px;
+	text-align: center;
+}
+.modalHint-body{
+	background-color: #fff;
+	padding: 20px;
+	line-height: 20px;
+	/*text-align: left;*/
+}
+.modalHint-footer{
+	background-color: #fff;
+	padding: 10px 0;
+	text-align: center;
+	border-radius:0 0 4px 4px;
+}
+.modalHint-footer-sure{
+	display: inline-block;
+	border-radius: 4px;
+	text-align: center;
+	padding: 6px 10px;
+	margin: 0 6px;
+	background-color: #4ea0ff;
+	color: #fff;
+}
+.modalHint-footer-cancel{
+	display: inline-block;
+	border-radius: 4px;
+	text-align: center;
+	padding: 6px 10px;
+	margin: 0 6px;
+	background-color: #eee;
+	color: #999;
+}

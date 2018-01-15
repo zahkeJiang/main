@@ -7,7 +7,7 @@ function ShowMessage() {
 }
 $(function() {
   $(".chooseAdress").click(function() {
-    window.location.href = "../chooseAddress.html"
+    window.location.href = "chooseAddress.html"
   })
   ShowMessage();
   getadAddress();

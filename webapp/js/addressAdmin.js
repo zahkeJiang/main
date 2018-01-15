@@ -37,17 +37,17 @@ function updatAddress(addressId) {
   if (userName == "" || !userName) {
     modalHintText("请输入收货人");
     $(".modal-hintText").css({
-      "top": "12%"
-    });
-  } else if (detail == "" || !detail) {
-    modalHintText("请输入收货地址");
-    $(".modal-hintText").css({
-      "top": "12%"
+      "top": "15%"
     });
   } else if (mobile == "" || !mobile) {
     modalHintText("请输入手机号码");
     $(".modal-hintText").css({
-      "top": "12%"
+      "top": "15%"
+    });
+  } else if (detail == "" || !detail) {
+    modalHintText("请输入收货地址");
+    $(".modal-hintText").css({
+      "top": "15%"
     });
   } else {
     var addressData = {};
@@ -115,16 +115,23 @@ function selectAddresses() {
 
       //删除
       $(".deleteImg").click(function() {
-        var addressId = $(this).parents(".address-content").attr("addressId");
-        $.post("deleteAddress", {
-          "addressId": addressId
-        }, function(datas) {
-          if (datas.status == 0) {
-            modalHintText("删除成功");
-            var hideaddress = ".address-content-" + addressId;
-            $(hideaddress).hide();
-          }
-        }, "json");
+        openModalHint(); //打开确认弹窗
+        var that = this;
+        $(".modalHint-footer-sure").click(function() {
+          var addressId = $(that).parents(".address-content").attr("addressId");
+          $.post("deleteAddress", {
+            "addressId": addressId
+          }, function(datas) {
+            if (datas.status == 0) {
+              closeModalHint(); //关闭弹窗
+              modalHintText("删除成功");
+              var hideaddress = ".address-content-" + addressId;
+              $(hideaddress).hide();
+              $('.modalHint-footer-sure').unbind("click"); //移除click
+            }
+          }, "json");
+
+        })
       });
 
       //设置默认地址
@@ -134,14 +141,14 @@ function selectAddresses() {
           "height": "18px",
           "width": "18px",
           "margin-top": "36px",
-          "background": "url(../images/circle_choose.png)",
+          "background": "url(./images/circle_choose.png)",
           "background-size": "100% 100%"
         });
         $(this).parent(".address-content").siblings("div").find(".choose").css({
           "height": "18px",
           "width": "18px",
           "margin-top": "36px",
-          "background": "url(../images/circle.png)",
+          "background": "url(./images/circle.png)",
           "background-size": "100% 100%"
         });
         $(this).parent(".address-content").find(".moren").html("[默认]");

@@ -24,7 +24,7 @@ $(function() {
 	});
 	//跳转到我的推广页面
 	$(".spread").click(function() {
-			window.location.href = "spread/spreadIndex.html";
+			window.location.href = "spreadIndex.html";
 		})
 		//跳转到更换学校页面
 	$(".school").click(function() {
