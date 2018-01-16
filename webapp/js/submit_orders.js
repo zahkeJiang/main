@@ -171,8 +171,26 @@ $(function() {
                             openModalHint(); //打开确认弹窗
                             $(".modalHint-footer-sure").click(function() {
                                 closeModalHint(); //关闭确认弹窗
+                                WeixinJSBridge.call('closeWindow'); //关闭微信浏览器窗口
+                                //     if(typeof(WeixinJSBridge)!="undefined"){  
+                                // WeixinJSBridge.call('closeWindow');  
+                                // }else{  
+                                //   if (navigator.userAgent.indexOf("MSIE") > 0) {    
+                                //     if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {    
+                                //       window.opener = null; window.close();    
+                                //     } else {    
+                                //       window.open('', '_top'); window.top.close();    
+                                //     }    
+                                //   } else if (navigator.userAgent.indexOf("Firefox") > 0) {    
+                                //     window.location.href = 'about:blank ';    
+                                //     //window.history.go(-2);    
+                                //   } else {    
+                                //     window.opener = null;     
+                                //     window.open('', '_self', '');    
+                                //     window.close();    
+                                //   }  
+                                // }
                             });
-                            // window.location.href = "myorder.html";
                         } else {
                             $(".modalHint-body").html("您已成功预约" + dsname + "驾考报名,请勿重复预约。如有问题，请联系小漂哦。");
                             $(".modalHint-body").css({

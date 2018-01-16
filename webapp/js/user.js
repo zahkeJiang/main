@@ -125,8 +125,8 @@ function getUserCoin() {
 					"box-shadow": "-1px -2px 1px #ddd inset",
 					"color": "#4ea0ff"
 				});
-				$(".qiandao").html("已签到");
-				$("#qiandao").prop("disabled", true);
+				$(".qiandao").html('<a href="integral.html"><span>已签到</span><span class="glyphicon glyphicon-menu-right qiandaoRight"></span></a>');
+
 			} else {
 				//签到
 				$(".qiandao").click(function() {
@@ -143,24 +143,25 @@ function getUserCoin() {
 function updateUserSign(generalCoin) {
 	$.post("updateUserSign", {}, function(datas) {
 		if (datas.status == 0) {
+			var generalCoinCount = generalCoin + datas.coinTimeCount;
 			//执行签到动画
-			jiayi(generalCoin);
+			jiayi(generalCoinCount);
 		}
 	}, "json");
 }
 //签到动画
-function jiayi(generalCoin) {
+function jiayi(generalCoinCount) {
 	$(".jiayi").fadeIn(200);
 	$(".qiandao").html("签到中..");
 	setTimeout(function() {
 		$(".jiayi").fadeOut(500);
-		$(".normal-gold").html((generalCoin + 1));
+		$(".normal-gold").html(generalCoinCount);
 		$(".qiandao").css({
 			"background": "#f6f1f1",
 			"box-shadow": "-1px -2px 1px #ddd inset",
 			"color": "#4ea0ff"
 		});
-		$(".qiandao").html("已签到");
+		$(".qiandao").html('<a href="integral.html"><span>已签到</span><span class="glyphicon glyphicon-menu-right qiandaoRight"></span></a>');
 	}, 1000); //显示1,秒后进行隐藏
 
 

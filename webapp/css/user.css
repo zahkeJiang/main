@@ -182,6 +182,13 @@ span{
 	text-align: center;
 	line-height: 40px;
 }
+.qiandao a:hover{
+	color: #4ea0ff;
+	text-decoration: none;
+}
+.qiandaoRight{
+	color: #4ea0ff;
+}
 .goldDiv>div{
   text-align: center;
   /*width: 76px;*/

@@ -1,31 +1,74 @@
-$(function(){
-	var phone_height = $(window).height();//获取屏幕高度
-    $('.integral_record_container').height(($(window).height())-140-16-4-49);//设置元素高度	
-   	$.post("selectRecord.action",{},function(data){
-   		if (data.status=="0") {
-   			var record = "";
-            var record_list = data.data.records;
-            // $.each循环实现添加订单列表  
-            $.each(record_list,function(commentIndex,comment){
-                record += '<div class="list"><div class="integral_record_list"><span class="integral_record_type">'+comment.note+'</span><span class="integral_record_count">'+comment.value+'</span><p class="integral_record_time">'+comment.time+'</p></div></div>';
-            });
-            $('.integral_record_container').empty();
-   			$('.integral_record_container').html(record);
-   		}else{
-   			var record = "<div class='no_record'><img src='images/no_record.png' width='120px'><p>暂无积分记录</p></div>";
-   			$('.integral_record_container').html(record);
-   		}
-   	},"json");
-	$.post("personal.action",{},function(obj){
-		if (obj.status=="0") {
-			var integral = obj.data.userInfo;
-			$(".my_integral").html(integral.memberPoints);
-		}
-	},"json");
-	$(".recharge").click(function(){
-		window.location.href="recharge.html";
-	});
-	
+$(function() {
+  var phone_height = $(window).height(); //获取屏幕高度
+  $('.integral_record_container').height(($(window).height()) - 48 - 20 - 20); //设置元素高度
+  $('.list').height(($(window).height()) - 48 - 20 - 20); //设置元素高度
+
+  $(".inCold").click(function() {
+    $(this).css({
+      "border-bottom": "2px solid #ff7800"
+    })
+    $(this).siblings("p").css({
+      "border-bottom": "2px solid #f6f1f1"
+    });
+    inCoinRecord();
+  })
+  $(".outCold").click(function() {
+    $(this).css({
+      "border-bottom": "2px solid #ff7800"
+    })
+    $(this).siblings("p").css({
+      "border-bottom": "2px solid #f6f1f1"
+    });
+    outCoinRecord();
+  })
 });
 
-   
+
+//获取收入列表
+function outCoinRecord() {
+  $.post("outCoinRecord", {}, function(datas) {
+    if (datas.status == "0") {
+      var record = "";
+      var record_list = datas.data;
+      // $.each循环实现添加订单列表  
+      $.each(record_list, function(commentIndex, comment) {
+        var goldImg = "";
+        if (comment.recordType == 0) {
+          goldImg = '<img src="./images/spreadWChat/spreadGold.png" class="goldImg">';
+        } else {
+          goldImg = '<img src="./images/spreadWChat/normalGold.png" class="goldImg">';
+        }
+        record += '<div class="list"><div class="integral_record_list"><span class="integral_record_type">' + comment.recordNote + '</span><span class="integral_record_count">' + comment.recordValue + '</span>' + goldImg + '<p class="integral_record_time">' + comment.recordTime + '</p></div></div>';
+      });
+      $('.integral_record_container').empty();
+      $('.integral_record_container').html(record);
+    } else {
+      var record = "<div class='no_record'><img src='images/no_record.png' width='120px'><p>暂无记录</p></div>";
+      $('.integral_record_container').html(record);
+    }
+  }, "json");
+}
+//获取收入列表
+function inCoinRecord() {
+  $.post("inCoinRecord", {}, function(datas) {
+    if (datas.status == "0") {
+      var record = "";
+      var record_list = datas.data.records;
+      // $.each循环实现添加订单列表  
+      $.each(record_list, function(commentIndex, comment) {
+        var goldImg = "";
+        if (comment.recordType == 0) {
+          goldImg = '<img src="./images/spreadWChat/spreadGold.png" class="goldImg">';
+        } else {
+          goldImg = '<img src="./images/spreadWChat/normalGold.png" class="goldImg">';
+        }
+        record += '<div class="list"><div class="integral_record_list"><span class="integral_record_type">' + comment.recordNote + '</span><span class="integral_record_count">' + comment.recordValue + '</span>' + goldImg + '<p class="integral_record_time">' + comment.recordTime + '</p></div></div>';
+      });
+      $('.integral_record_container').empty();
+      $('.integral_record_container').html(record);
+    } else {
+      var record = "<div class='no_record'><img src='images/no_record.png' width='120px'><p>暂无记录</p></div>";
+      $('.integral_record_container').html(record);
+    }
+  }, "json");
+}
