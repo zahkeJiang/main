@@ -28,6 +28,7 @@ public class IntegralService {
             integralMapper.insertUserCoin(Long.valueOf(userid));
             userCoin = integralMapper.selectUserCoin(Long.valueOf(userid));
         }
+        userCoin.setGeneralCoin(userCoin.getGeneralCoin());
         return Status.success().add("userCoin",
                 userCoin);
     }

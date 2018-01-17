@@ -114,7 +114,7 @@ function userload() {
 
 //获取用户金币，是否签过到
 function getUserCoin() {
-	$.post("getUserCoin", {}, function(datas) {
+	$.post("selectUserCoin", {}, function(datas) {
 		if (datas.status == 0) {
 			var coinData = datas.data.userCoin;
 			$(".spread-gold").html(coinData.coin); //推广币
