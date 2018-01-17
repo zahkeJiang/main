@@ -2,7 +2,7 @@ $(function() {
   var phone_height = $(window).height(); //获取屏幕高度
   $('.integral_record_container').height(($(window).height()) - 48 - 20 - 20); //设置元素高度
   $('.list').height(($(window).height()) - 48 - 20 - 20); //设置元素高度
-
+  inCoinRecord();
   $(".inCold").click(function() {
     $(this).css({
       "border-bottom": "2px solid #ff7800"
