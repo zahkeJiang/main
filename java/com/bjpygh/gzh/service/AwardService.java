@@ -68,4 +68,5 @@ public class AwardService {
         addressMapper.deleteAddress(Long.valueOf(addressId));
         return Status.success();
     }
+
 }

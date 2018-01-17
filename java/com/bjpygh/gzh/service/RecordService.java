@@ -1,28 +1,43 @@
 package com.bjpygh.gzh.service;
 
+import com.bjpygh.gzh.bean.CoinRecord;
 import com.bjpygh.gzh.bean.IntegralRecord;
 import com.bjpygh.gzh.bean.IntegralRecordExample;
+import com.bjpygh.gzh.dao.CoinRecordMapper;
+import com.bjpygh.gzh.dao.IntegralMapper;
 import com.bjpygh.gzh.dao.IntegralRecordMapper;
+import com.bjpygh.gzh.entity.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
 
 @Service
 public class RecordService {
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     @Autowired
-    IntegralRecordMapper integralRecordMapper;
+    CoinRecordMapper coinRecordMapper;
 
+    public Status inCoinRecord(String userid) {
+        CoinRecord coinRecord = coinRecordMapper.inCoinRecord(Long.valueOf(userid));
+        if (coinRecord != null){
+            coinRecord.setCreateTime(coinRecord.getCreateTime().split(" ")[0]);
+            return Status.success().add("coinRecord", coinRecord);
+        }else {
+            return Status.fail(-10,"没有记录");
+        }
 
-    public void insertRecord(IntegralRecord record) {
-        integralRecordMapper.insertSelective(record);
     }
 
-    public List<IntegralRecord> getRecordById(String userid) {
-        IntegralRecordExample example = new IntegralRecordExample();
-        IntegralRecordExample.Criteria criteria = example.createCriteria();
-        criteria.andUserIdEqualTo(Long.parseLong(userid));
-        return integralRecordMapper.selectByExample(example);
+    public Status outCoinRecord(String userid) {
+        CoinRecord coinRecord = coinRecordMapper.outCoinRecord(Long.valueOf(userid));
+        if (coinRecord != null){
+            coinRecord.setCreateTime(coinRecord.getCreateTime().split(" ")[0]);
+            return Status.success().add("coinRecord",coinRecord);
+        }else {
+            return Status.fail(-10,"没有记录");
+        }
+
     }
 }

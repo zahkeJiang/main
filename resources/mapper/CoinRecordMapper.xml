@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpygh.gzh.dao.CoinRecordMapper">
+    <insert id="insertCoinRecord" parameterType="coinRecord">
+        INSERT INTO coin_record(user_id, value, note, create_time)
+        VALUES (#{userId}, #{value}, #{note}, now())
+    </insert>
+
+    <select id="inCoinRecord" resultType="coinRecord">
+        SELECT general_value AS generalValue, coin_value AS coinValue, note,
+        create_time AS createTime FROM coin_record
+        WHERE user_id = #{userId} AND general_value>=0 AND coin_value>=0
+    </select>
+
+    <select id="outCoinRecord" resultType="coinRecord">
+        SELECT general_value AS generalValue, coin_value AS coinValue, note,
+        create_time AS createTime FROM coin_record
+        WHERE user_id = #{userId} AND general_value&lt;=0 AND coin_value&lt;=0
+    </select>
+
+</mapper>
