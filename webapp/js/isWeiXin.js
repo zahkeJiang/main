@@ -16,7 +16,7 @@
 // }
 // 
 $(function() {
-	$.post("../checkLogin", {}, function(datas) {
+	$.post("checkLogin", {}, function(datas) {
 		if (datas.status == "-10") {
 			window.location.href = "openWchat.html"; //提示用客户端打开页面
 		}

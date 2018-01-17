@@ -21,11 +21,11 @@ body{
   font-size: 14px;
 }
 .rightImage {
-   width: 1em; height: 1em;
-   vertical-align: -0.15em;
+   width: 1em; height: 20px;
    fill: currentColor;
    overflow: hidden;
    color: #777;
+   float: right;
 }
 .awardName{
   color: #4ea0ff;
@@ -38,16 +38,32 @@ body{
   margin: 10px 0;
 }
 .userAddress{
-  line-height: 20px;
+  height: 20px;
   padding: 10px 0;
   border-top:1px solid #ddd;
   border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .userAddress span.address_title{
-  color: #555
+  color: #555;
+  min-width: 80px;
 }
 .userAddress span.floatRight{
+  text-align: right;
   color: #999;
+}
+
+.addressDetail{
+  font-size: 14px;
+  line-height: 20px;
+  display: inline-block;
+  max-width: 80%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  float: right;
 }
 .divBox h2.awardDetail{
   color: #555;

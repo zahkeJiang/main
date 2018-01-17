@@ -1,33 +1,27 @@
-.header{
-	text-align: center;
-	height: 140px;
-	background-color: #e8e8d0;
+body{
+	background-color: #4ea0ff;
 }
-.my_integral{
-	padding-top: 40px;
-	font-size: 20px;
-}
-.recharge{
-	margin-top: 30px;
-	height: 30px;
-	width: 20%;
-	margin-left: 40%;
-	border: 1px solid black;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 5px;
-}
-.container_header{
-	display: flex;
-	justify-content: space-around;
-	background-color: white;
+.headerCold{
 	height: 48px;
-	align-items: center;
+	display: flex;
+	background-color: #f6f1f1;
+	justify-content: space-between;
+}
+.headerCold p{
+	width: 100%;
+	height: 46px;
+	border-bottom: 2px solid #f6f1f1;
+	line-height: 48px;
+	text-align: center;
+}
+.headerCold p.inCold{
+	border-bottom: 2px solid #ff7800;
 }
 .integral_record_container{
+	padding: 10px 0;
 	position: relative;
 }
+
 .no_record{
 	position: absolute;
 	top: 50%;
@@ -51,25 +45,30 @@
 	justify-content: center;
 }
 .integral_record{
-	background-color: white;
+	background-color: #f6f1f1;
 	margin:10px 16px;
+	border-radius: 10px;
 }
 .integral_record_header{
 	height: 48px;
 	line-height: 48px;
 	padding-left: 10px;
 	padding-right: 10px;
-	border-bottom: 1px solid #efefef;
+	border-bottom: 1px solid #eee;
 }
 .list{
+	overflow: auto;
 	padding: 0 10px;
-	background-color: white;
+	background-color: #f6f1f1;
 }
+.list::-webkit-scrollbar {display:none}
 .integral_record_list{
-	padding: 8px 0;
+	padding: 10px 0;
 	line-height: 20px;
-	border-bottom: 1px solid #efefef;
-
+	border-bottom: 1px solid #ddd;
+}
+.integral_record_list:first-child{
+	padding-top:0;
 }
 .integral_record_count{
 	float: right;
@@ -77,4 +76,10 @@
 .integral_record_time{
 	color: #999;
 	font-size: 14px;
+	margin-top: 4px;
+}
+.goldImg{
+	float: right;
+	margin-right: 6px;
+	height: 18px
 }

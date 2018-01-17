@@ -182,13 +182,20 @@ span{
 	text-align: center;
 	line-height: 40px;
 }
+.qiandao a:hover{
+	color: #4ea0ff;
+	text-decoration: none;
+}
+.qiandaoRight{
+	color: #4ea0ff;
+}
 .goldDiv>div{
   text-align: center;
   /*width: 76px;*/
 }
 .gold img{
-  height: 32px;
-  width: 32px;
+  height: 28px;
+  width: 28px;
 
 }
 .goldDiv p.spread-gold,.goldDiv p.normal-gold{
@@ -211,13 +218,21 @@ span{
   color: #fff;
   font-style: normal;
 }
+.prizes:hover{
+	text-decoration: none;
+	color: #fff;
+}
+.gold p:last-child{
+	margin: 0;
+}
 .jiayiBox{
 	position: relative;
 }
 .jiayi{
 	position: absolute;
-	right: 0;
-	top: 0;
-	line-height: 32px;
+	right: -10px;
+	top: -10px;
+	color: #4ea0ff;
+	font-size: 14px;
 	display: none;
 }

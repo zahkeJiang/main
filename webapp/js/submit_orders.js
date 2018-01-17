@@ -164,29 +164,52 @@ $(function() {
                     }
                     $.post("createOrder.action", objData, function(datass) {
                         if (datass.status == 0) { //预约成功
-                            $(".modal-body").html("您已成功预约" + dsname + "驾考报名，工作人员将在24小时之内与您取得联系，请保持电话畅通。");
-                            $('#myModal').modal({
-                                keyboard: true
+                            $(".modalHint-body").html("您已成功预约" + dsname + "驾考报名，工作人员将在24小时之内与您取得联系，请保持电话畅通。");
+                            $(".modalHint-body").css({
+                                "text-align": "left"
+                            })
+                            openModalHint(); //打开确认弹窗
+                            $(".modalHint-footer-sure").click(function() {
+                                closeModalHint(); //关闭确认弹窗
+                                WeixinJSBridge.call('closeWindow'); //关闭微信浏览器窗口
+                                //     if(typeof(WeixinJSBridge)!="undefined"){  
+                                // WeixinJSBridge.call('closeWindow');  
+                                // }else{  
+                                //   if (navigator.userAgent.indexOf("MSIE") > 0) {    
+                                //     if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {    
+                                //       window.opener = null; window.close();    
+                                //     } else {    
+                                //       window.open('', '_top'); window.top.close();    
+                                //     }    
+                                //   } else if (navigator.userAgent.indexOf("Firefox") > 0) {    
+                                //     window.location.href = 'about:blank ';    
+                                //     //window.history.go(-2);    
+                                //   } else {    
+                                //     window.opener = null;     
+                                //     window.open('', '_self', '');    
+                                //     window.close();    
+                                //   }  
+                                // }
                             });
-                            // window.location.href = "myorder.html";
                         } else {
-                            $(".modal-body").html("您已成功预约" + dsname + "驾考报名,请勿重复预约。如有问题，请联系小漂哦。");
-                            $('#myModal').modal({
-                                keyboard: true
+                            $(".modalHint-body").html("您已成功预约" + dsname + "驾考报名,请勿重复预约。如有问题，请联系小漂哦。");
+                            $(".modalHint-body").css({
+                                "text-align": "left"
+                            })
+                            openModalHint(); //打开确认弹窗
+                            $(".modalHint-footer-sure").click(function() {
+                                closeModalHint(); //关闭确认弹窗
                             });
                         }
                     }, "json");
                 } else if (datas.status == "-20") {
-                    // $(".modal-dialog").css({
-                    //     "margin": "20px",
-                    //     "margin-top": "200px",
-                    // });
-                    // $(".modal-content").css({
-                    //     "padding": "10px"
-                    // })
-                    $(".modal-body").html("您已成功预约" + dsname + "驾考报名,请勿重复预约。如有问题，请联系小漂哦。");
-                    $('#myModal').modal({
-                        keyboard: true
+                    $(".modalHint-body").html("您已成功预约" + dsname + "驾考报名,请勿重复预约。如有问题，请联系小漂哦。");
+                    $(".modalHint-body").css({
+                        "text-align": "left"
+                    })
+                    openModalHint(); //打开确认弹窗
+                    $(".modalHint-footer-sure").click(function() {
+                        closeModalHint(); //关闭确认弹窗
                     });
                 }
             }, "json");
