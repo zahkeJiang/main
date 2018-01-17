@@ -143,8 +143,12 @@ function getUserCoin() {
 function updateUserSign(generalCoin) {
 	$.post("updateUserSign", {}, function(datas) {
 		if (datas.status == 0) {
-			var generalCoinCount = generalCoin + datas.coinTimeCount;
-			//执行签到动画
+			var generalCoinCount = generalCoin;
+			if (datas.generalValue != null) {
+				generalCoinCount = generalCoin + datas.generalValue;
+				$(".jiayi").html("+" + datas.generalValue);
+				//执行签到动画
+			}
 			jiayi(generalCoinCount);
 		}
 	}, "json");
@@ -163,6 +167,4 @@ function jiayi(generalCoinCount) {
 		});
 		$(".qiandao").html('<a href="integral.html"><span>已签到</span><span class="glyphicon glyphicon-menu-right qiandaoRight"></span></a>');
 	}, 1000); //显示1,秒后进行隐藏
-
-
 }

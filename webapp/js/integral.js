@@ -29,16 +29,10 @@ function outCoinRecord() {
   $.post("outCoinRecord", {}, function(datas) {
     if (datas.status == "0") {
       var record = "";
-      var record_list = datas.data;
+      var record_list = datas.data.coinRecord;
       // $.each循环实现添加订单列表  
       $.each(record_list, function(commentIndex, comment) {
-        var goldImg = "";
-        if (comment.recordType == 0) {
-          goldImg = '<img src="./images/spreadWChat/spreadGold.png" class="goldImg">';
-        } else {
-          goldImg = '<img src="./images/spreadWChat/normalGold.png" class="goldImg">';
-        }
-        record += '<div class="list"><div class="integral_record_list"><span class="integral_record_type">' + comment.recordNote + '</span><span class="integral_record_count">' + comment.recordValue + '</span>' + goldImg + '<p class="integral_record_time">' + comment.recordTime + '</p></div></div>';
+        record += '<div class="list"><div class="integral_record_list"><span class="integral_record_type">' + comment.note + '</span><span class="integral_record_count goldhide' + comment.coindValue + '"><img src="./images/spreadWChat/normalGold.png" class="goldImg"><span class="normalGold">' + comment.coindValue + '</span></span><span class="integral_record_count goldhide' + comment.generalValue + '"><img src="./images/spreadWChat/spreadGold.png" class="goldImg" /><span class="spreadGold">' + comment.generalValue + '</span></span><p class="integral_record_time">' + comment.createTime + '</p></div></div>';
       });
       $('.integral_record_container').empty();
       $('.integral_record_container').html(record);
@@ -53,16 +47,10 @@ function inCoinRecord() {
   $.post("inCoinRecord", {}, function(datas) {
     if (datas.status == "0") {
       var record = "";
-      var record_list = datas.data.records;
+      var record_list = datas.data.coinRecord;
       // $.each循环实现添加订单列表  
       $.each(record_list, function(commentIndex, comment) {
-        var goldImg = "";
-        if (comment.recordType == 0) {
-          goldImg = '<img src="./images/spreadWChat/spreadGold.png" class="goldImg">';
-        } else {
-          goldImg = '<img src="./images/spreadWChat/normalGold.png" class="goldImg">';
-        }
-        record += '<div class="list"><div class="integral_record_list"><span class="integral_record_type">' + comment.recordNote + '</span><span class="integral_record_count">' + comment.recordValue + '</span>' + goldImg + '<p class="integral_record_time">' + comment.recordTime + '</p></div></div>';
+        record += '<div class="list"><div class="integral_record_list"><span class="integral_record_type">' + comment.note + '</span><span class="integral_record_count goldhide' + comment.coindValue + '"><img src="./images/spreadWChat/normalGold.png" class="goldImg"><span class="normalGold">' + comment.coindValue + '</span></span><span class="integral_record_count goldhide' + comment.generalValue + '"><img src="./images/spreadWChat/spreadGold.png" class="goldImg" /><span class="spreadGold">' + comment.generalValue + '</span></span><p class="integral_record_time">' + comment.createTime + '</p></div></div>';
       });
       $('.integral_record_container').empty();
       $('.integral_record_container').html(record);

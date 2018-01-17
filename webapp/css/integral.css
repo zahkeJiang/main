@@ -79,7 +79,10 @@ body{
 	margin-top: 4px;
 }
 .goldImg{
-	float: right;
 	margin-right: 6px;
+	margin-left: 10px;
 	height: 18px
+}
+.goldhide0{
+	display: none;
 }
