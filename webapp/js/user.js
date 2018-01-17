@@ -144,9 +144,9 @@ function updateUserSign(generalCoin) {
 	$.post("updateUserSign", {}, function(datas) {
 		if (datas.status == 0) {
 			var generalCoinCount = generalCoin;
-			if (datas.generalValue != null) {
-				generalCoinCount = generalCoin + datas.generalValue;
-				$(".jiayi").html("+" + datas.generalValue);
+			if (datas.generalCoin != null) {
+				generalCoinCount = generalCoin + datas.generalCoin;
+				$(".jiayi").html("+" + datas.generalCoin);
 				//执行签到动画
 			}
 			jiayi(generalCoinCount);
