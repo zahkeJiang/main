@@ -120,7 +120,7 @@ public class NotifyController extends BaseController {
             record.setUserId(user.getUserId());
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             record.setTime(formatter.format(new Date()));
-            recordService.insertRecord(record);
+//            recordService.insertRecord(record);
 
         }else{
             System.out.println("result_code:fail");

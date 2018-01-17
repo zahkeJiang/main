@@ -1,6 +1,7 @@
 package com.bjpygh.gzh.service.quartz;
 
 import com.bjpygh.gzh.bean.*;
+import com.bjpygh.gzh.dao.IntegralMapper;
 import com.bjpygh.gzh.service.*;
 import com.bjpygh.gzh.utils.OrderPush;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.util.Map;
 public class TestJob1 {
 
     @Autowired
-    UserService userService;
+    IntegralService integralService;
 
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -22,7 +23,8 @@ public class TestJob1 {
     public void execute(){
         try{
 
-            userService.updateAllSign();
+            integralService.updateAllSigned();
+            integralService.updateAllUnSigned();
 
         }catch(Exception ex){
 //            ex.printStackTrace();

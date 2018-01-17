@@ -126,7 +126,7 @@ public class UtilsController extends BaseController {
         record.setUserId(user.getUserId());
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         record.setTime(formatter.format(new Date()));
-        recordService.insertRecord(record);
+//        recordService.insertRecord(record);
 
         UserCoupon userCoupon = couponService.getDsCoupon(userid);
         Map<String, String> statusMap = new HashMap<String, String>();
@@ -137,20 +137,20 @@ public class UtilsController extends BaseController {
         return Status.success();
     }
 
-    //查询积分消费记录接口
-    @ResponseBody
-    @RequestMapping(value = "/selectRecord.action", method = RequestMethod.POST)
-    public Status selectRecord(HttpServletRequest request){
-        Map<String, String> userMap = checkWxUser(request);
-        if(userMap == null){
-            return Status.notInWx();
-        }
-        String userid = userMap.get("id");
-        List<IntegralRecord> records = recordService.getRecordById(userid);
-        if(records.size()>0){
-            return Status.success().add("records",records);
-        }else{
-            return Status.fail(-30,"没有记录");
-        }
-    }
+//    //查询积分消费记录接口
+//    @ResponseBody
+//    @RequestMapping(value = "/selectRecord.action", method = RequestMethod.POST)
+//    public Status selectRecord(HttpServletRequest request){
+//        Map<String, String> userMap = checkWxUser(request);
+//        if(userMap == null){
+//            return Status.notInWx();
+//        }
+//        String userid = userMap.get("id");
+//        List<IntegralRecord> records = recordService.getRecordById(userid);
+//        if(records.size()>0){
+//            return Status.success().add("records",records);
+//        }else{
+//            return Status.fail(-30,"没有记录");
+//        }
+//    }
 }

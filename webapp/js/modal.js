@@ -17,6 +17,7 @@ $(function() {
 		"border-radius": "10px",
 		"margin-left": "-100px",
 		"background": "#999",
+		"z-index": "10000"
 	})
 });
 

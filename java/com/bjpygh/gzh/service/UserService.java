@@ -76,20 +76,6 @@ public class UserService {
         }
     }
 
-    public Status getUserCoin(String userid) {
-        return Status.success()
-                .add("userCoin",userMapper.getUserCoin(Integer.valueOf(userid)));
-    }
-
-    public Status updateUserSign(String userid) {
-        userMapper.updateUserSign(Long.valueOf(userid));
-        return Status.success();
-    }
-
-    public void updateAllSign() {
-        userMapper.updateAllSign();
-    }
-
     public Status setDefaultAddress(String userid, String addressId) {
         User user = new User();
         user.setUserId(Long.valueOf(userid));
@@ -107,4 +93,5 @@ public class UserService {
         }
 
     }
+
 }

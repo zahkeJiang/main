@@ -1,0 +1,157 @@
+body,html{
+  background: #4ea0ff;
+  color: #999;
+}
+.addressBox{
+  background: #f6f1f1;
+  border-radius: 10px;
+  width: 92%;
+  margin: 10px 4%;
+  position: relative;
+}
+.address-list{
+  padding: 0 10px;
+  overflow: scroll;
+}
+.imgBg{
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 100px;
+}
+.address-hint{
+  font-size: 14px;
+  text-align: center;
+  margin-top: 20px;
+}
+.address-list::-webkit-scrollbar {/*隐藏滚动条*/
+    display: none;
+}
+.addressBox h2.header{
+  margin: 0 10px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #555;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 2px 5px #f6f1f1;  
+}
+.guanli{
+  position: absolute;
+  right: 16px;
+  top: 0;
+  color: #4ea0ff;
+}
+.guanli:hover{
+  position: absolute;
+  right: 16px;
+  top: 0;
+  color: #4ea0ff;
+  text-decoration: none;
+}
+.address-content{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+}
+.address-content-info{
+  flex: 1;
+}
+.address-content-info-header{
+  color: #555;
+  margin: 10px 10px;
+}
+.address-content-info-tel{
+  float: right;
+}
+.address-content-info-content{
+  line-height: 20px;
+  margin: 10px;
+  font-size: 14px;
+}
+.address-content-info-header span.moren{
+  color: red;
+  margin-left: 4px;
+  font-size: 12px
+}
+.address-content-info-content span.moren{
+  color: red;
+  margin-right: 4px;
+  font-size: 12px
+}
+.deleteImg{
+  margin-top: 9px;
+
+}
+.editImg{
+  margin-top: 10px;
+}
+.choose{
+  height: 18px;
+  width: 18px;
+  margin-top: 36px;
+  background: url(../images/circle.png);
+    background-size: 100% 100%
+}
+.choose0{
+  height: 18px;
+  width: 18px;
+  margin-top: 36px;
+  background: url(../images/circle.png);
+  background-size: 100% 100%
+}
+.choose1{
+  height: 18px;
+  width: 18px;
+  margin-top: 36px;
+  background: url(../images/circle_choose.png);
+  background-size: 100% 100%
+}
+.newAddress{
+  padding: 10px 0;
+  position: fixed;
+  bottom:10px;
+  width: 90%;
+  background: #f6f1f1;
+  border-radius: 0 0 10px 10px;
+  text-align: center;
+  left: 5%;
+  box-shadow: 0 -2px 5px #f6f1f1;  
+}
+.newAddress p{
+  color: #fff;
+  background: #4ea0ff;
+  width: 80%;
+  margin-left: 10%;
+  border-radius: 10px;
+  height:40px;
+  line-height: 40px;
+}
+
+.modal-content{
+  width: 80%;
+  left: 10%;
+  margin-top: 20%;
+}
+.modal-row{
+  line-height: 40px;
+  display: flex;
+  color: #777;
+}
+.modal-row span{
+  width: 84px;
+}
+.modal-row input{
+  flex: 1;
+  font-size: 14px;
+  color: #999;
+  min-width: 100px;
+}
+.modal-row input::-webkit-input-placeholder { 
+  color: #999; 
+  font-size: 14px;
+}
+.btn-primary{
+  display: none;
+  background: #4ea0ff;
+  border: 0;
+}

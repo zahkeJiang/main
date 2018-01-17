@@ -467,15 +467,6 @@
         update user_info set real_name=#{realName}, address=#{address}, reamark=#{reamark}
         where user_id=#{userId}
     </update>
-    <select id="getUserCoin" parameterType="Integer" resultType="userCoin">
-        SELECT general_coin AS generalCoin,is_sign AS isSign, coin FROM user_info
-        WHERE user_id = #{userid}
-    </select>
-    <update id="updateUserSign" parameterType="java.lang.Long">
-        UPDATE user_info SET general_coin=( SELECT ui.gc FROM
-        (SELECT (u.general_coin)+1 AS gc FROM user_info u WHERE u.user_id=#{userid}) ui),
-        is_sign=1 WHERE user_id=#{userid} AND is_sign=0
-    </update>
     <update id="updateAllSign">
         UPDATE user_info SET is_sign=0
     </update>

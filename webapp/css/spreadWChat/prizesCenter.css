@@ -1,0 +1,163 @@
+body{
+  background-color: #4ea0ff;
+  color: #999;
+}
+.divBox{
+  border-radius: 10px;
+  padding: 0 10px;
+  margin: 10px 16px;
+  background-color: #f6f1f1;
+}
+.divBox h2{
+  color: #777;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+.goldDiv{
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.goldDiv>div{
+  text-align: center;
+  width: 76px;
+}
+.gold img{
+  height: 32px;
+  width: 32px;
+
+}
+.goldDiv p.spread-gold,.goldDiv p.normal-gold{
+  color: #999;
+  margin: 4px 0;
+  font-weight: bold;
+}
+.goldDiv>div p:last-child{
+  color: #ff7800;
+  font-size: 12px;
+}
+.prizes{
+  border-radius: 50px;
+  padding: 4px;
+  font-size: 14px;
+  background-color: #4ea0ff;
+  color: #fff;
+}
+/*兑换中心*/
+.duihuan-header{
+  padding:10px 0;
+  display: flex;
+  align-items: center;
+}
+.duihuan-content{
+  display: flex;
+  padding: 10px;
+  position: relative;
+  border-bottom: 1px solid #ddd;
+}
+.duihuan-content:last-child{
+  border-bottom: 0;
+}
+
+.duihuan-content-hint-xianshi{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #37c910;
+  color: #fff;
+  font-size: 12px;
+  line-height: 22px;
+  text-align: center;
+  height: 24px;
+  width: 56px;
+
+  /*锯齿*/
+  background-image:-webkit-gradient(linear,50% 0,0 100%,from(transparent), color-stop(.5,transparent),color-stop(.5,#f6f1f1),to(#f6f1f1)),
+                    -webkit-gradient(linear,50% 0,100% 100%,from(transparent), color-stop(.5,transparent),color-stop(.5,#f6f1f1),to(#f6f1f1));
+  background-image:-moz-linear-gradient(50% 0 -45deg,transparent,transparent 50%,#f6f1f1 50%,#f6f1f1),
+                    -moz-linear-gradient(50% 0 -135deg,transparent,transparent 50%,#f6f1f1 50%,#f6f1f1);                                
+  background-size:6px 3px;
+  background-repeat:repeat-x;
+  background-position:0 100%;              
+}
+.duihuan-content-hint-xinpin{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ff9000;
+  color: #fff;
+  font-size: 12px;
+  line-height: 22px;
+  text-align: center;
+  height: 24px;
+  width: 56px;
+
+  /*锯齿*/
+  background-image:-webkit-gradient(linear,50% 0,0 100%,from(transparent), color-stop(.5,transparent),color-stop(.5,#f6f1f1),to(#f6f1f1)),
+                    -webkit-gradient(linear,50% 0,100% 100%,from(transparent), color-stop(.5,transparent),color-stop(.5,#f6f1f1),to(#f6f1f1));
+  background-image:-moz-linear-gradient(50% 0 -45deg,transparent,transparent 50%,#f6f1f1 50%,#f6f1f1),
+                    -moz-linear-gradient(50% 0 -135deg,transparent,transparent 50%,#f6f1f1 50%,#f6f1f1);                                
+  background-size:6px 3px;
+  background-repeat:repeat-x;
+  background-position:0 100%;              
+}
+.duihuan-content-hint-youhui{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ff564e;
+  color: #fff;
+  font-size: 12px;
+  line-height: 22px;
+  text-align: center;
+  height: 24px;
+  width: 56px;
+
+  /*锯齿*/
+  background-image:-webkit-gradient(linear,50% 0,0 100%,from(transparent), color-stop(.5,transparent),color-stop(.5,#e5e5e5),to(#e5e5e5)),
+                    -webkit-gradient(linear,50% 0,100% 100%,from(transparent), color-stop(.5,transparent),color-stop(.5,#e5e5e5),to(#e5e5e5));
+  background-image:-moz-linear-gradient(50% 0 -45deg,transparent,transparent 50%,#e5e5e5 50%,#e5e5e5),
+                    -moz-linear-gradient(50% 0 -135deg,transparent,transparent 50%,#e5e5e5 50%,#e5e5e5);                                
+  background-size:6px 3px;
+  background-repeat:repeat-x;
+  background-position:0 100%;              
+}
+.duihuan-content-hint-yiduiwan{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #b4b4b4;
+  color: #fff;
+  font-size: 12px;
+  line-height: 22px;
+  text-align: center;
+  height: 24px;
+  width: 56px;
+
+  /*锯齿*/
+  background-image:-webkit-gradient(linear,50% 0,0 100%,from(transparent), color-stop(.5,transparent),color-stop(.5,#e5e5e5),to(#e5e5e5)),
+                    -webkit-gradient(linear,50% 0,100% 100%,from(transparent), color-stop(.5,transparent),color-stop(.5,#e5e5e5),to(#e5e5e5));
+  background-image:-moz-linear-gradient(50% 0 -45deg,transparent,transparent 50%,#e5e5e5 50%,#e5e5e5),
+                    -moz-linear-gradient(50% 0 -135deg,transparent,transparent 50%,#e5e5e5 50%,#e5e5e5);                                
+  background-size:6px 3px;
+  background-repeat:repeat-x;
+  background-position:0 100%;              
+}
+.duihuan-content-text{
+  margin-left: 20px;
+  flex: 1
+}
+.duihuan-content-text p.name{
+  line-height: 40px;
+  color: #777
+}
+.duihuan-money{
+  line-height: 20px;
+}
+.duihuan-content-text p.shengyu{
+  line-height: 20px;
+  float: right;
+}
