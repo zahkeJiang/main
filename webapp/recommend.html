@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>推荐办卡</title>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link href="./css/jquery.area.css" rel="stylesheet" type="text/css"/>
+    <link href="./css/base.css" rel="stylesheet" type="text/css"/>
+    <link href="./css/recommend.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="info divBox">
+    <h2>活动介绍</h2>
+    <div>
+      <P class="info-text">说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明</P>
+      <div class="xiala">
+        <p>点我下拉</p>
+        <svg class="bottomImage" aria-hidden="true">
+          <use xlink:href="#icon-moreunfold"></use>
+        </svg>
+      </div>
+    </div>
+</div>
+<div class="userInfo divBox">
+    <div class="row">
+        <span class="userInfo-name">您的名字：</span>
+        <input type="text" name="userInfo-name" >
+    </div>
+    <div class="row">
+        <span class="userInfo-name">亲友名字：</span>
+        <input type="text" name="userInfo-name" >
+    </div>
+    <div class="row">
+        <span class="userInfo-name">亲友手机：</span>
+        <input type="text" name="userInfo-name" >
+    </div>
+    <div class="row">
+        <span class="userInfo-name">亲友性别：</span>
+        <input type="text" name="userInfo-name" >
+    </div>
+    <div class="row">
+        <span class="userInfo-name">亲友所在的学校：</span>
+        <input type="text" name="userInfo-name" >
+    </div>
+    <div class="address-box">
+        <div class="browser">
+            <!--选择地区-->
+            <section class="express-area">
+                <a id="expressArea" href="javascript:void(0)">
+                    <dl>
+                        <dt>亲友所在的城市：</dt>
+                        <dd>省 - 市 - 区/县</dd>
+                    </dl>
+                    <span class="glyphicon glyphicon-menu-right"></span>
+                </a>
+            </section>
+            <!--选择地区弹层-->
+            <section id="areaLayer" class="express-area-box">
+                <header>
+                    <h3>选择地区</h3>
+                    <a id="backUp" class="back" href="javascript:void(0)" title="返回"></a>
+                    <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
+                </header>
+                <article id="areaBox">
+                    <ul id="areaList" class="area-list"></ul>
+                </article>
+            </section>
+            <!--遮罩层-->
+            <div id="areaMask" class="mask"></div>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/jquery.area.js"></script>
+<script src="./iconjs/iconfont.js"></script>
+</body>
+</html>

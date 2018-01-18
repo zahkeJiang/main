@@ -510,7 +510,7 @@ $(function() {
         } else {
             var barbecueChoose = 0; //没有选中烧烤
         }
-        if (payMode == "JD") { //京东支付
+        if (payMode != "" && payMode != null && payMode != "undefined") { //京东支付
             $.post("createArmyOrder", {
                 "date": date,
                 "peopleNumber": peopleNumber,
@@ -529,60 +529,40 @@ $(function() {
                     $(".layer").hide();
                     $(".payBox").hide();
 
-
-                    //京东支付请求
-                    $.post("JDPay", {
-                        "ordernumber": orderNumber
-                    }, function(data) {
-                        if (data.status == 0) {
-                            var jdOrderPay = data.data.jdOrderPay;
-                            $("#version").val(jdOrderPay.version);
-                            $("#merchant").val(jdOrderPay.merchant);
-                            $("#sign").val(jdOrderPay.sign);
-                            $("#tradeNum").val(jdOrderPay.tradeNum);
-                            $("#tradeName").val(jdOrderPay.tradeName);
-                            $("#tradeTime").val(jdOrderPay.tradeTime);
-                            $("#amount").val(jdOrderPay.amount);
-                            $("#currency").val(jdOrderPay.currency);
-                            $("#callbackUrl").val(jdOrderPay.callbackUrl);
-                            $("#notifyUrl").val(jdOrderPay.notifyUrl);
-                            $("#userId").val(jdOrderPay.userId);
-                            $("#orderType").val(jdOrderPay.orderType);
-                            document.getElementById("batchForm").submit();
-                        }
-                    }, 'json');
-
-
-
-                } else {
-                    modalHintText("您当前存在多个未支付订单，请勿重复下单。")
-                }
-            }, "json");
-        } else if (payMode == "aliPay") { //支付宝支付
-            $.post("createArmyOrder", {
-                "date": date,
-                "peopleNumber": peopleNumber,
-                "realName": realName,
-                "idNumber": realNumber,
-                "insurance": secureNumber,
-                "noroomNumber": nosleep,
-                "roomNumber": indoor,
-                "fullAmount": reserve,
-                "barbecue": barbecueChoose,
-                "period": armyTime
-            }, function(datas) {
-                if (datas.status == 0) {
-                    var orderNumber = datas.data.orderNumber;
-                    console.log(orderNumber);
-                    $(".layer").hide();
-                    $(".payBox").hide();
-
-                    window.location.href = "payHint.html?ordernumber=" + orderNumber;
+                    if (payMode == "JD") {
+                        //京东支付请求
+                        $.post("JDPay", {
+                            "ordernumber": orderNumber
+                        }, function(data) {
+                            if (data.status == 0) {
+                                var jdOrderPay = data.data.jdOrderPay;
+                                $("#version").val(jdOrderPay.version);
+                                $("#merchant").val(jdOrderPay.merchant);
+                                $("#sign").val(jdOrderPay.sign);
+                                $("#tradeNum").val(jdOrderPay.tradeNum);
+                                $("#tradeName").val(jdOrderPay.tradeName);
+                                $("#tradeTime").val(jdOrderPay.tradeTime);
+                                $("#amount").val(jdOrderPay.amount);
+                                $("#currency").val(jdOrderPay.currency);
+                                $("#callbackUrl").val(jdOrderPay.callbackUrl);
+                                $("#notifyUrl").val(jdOrderPay.notifyUrl);
+                                $("#userId").val(jdOrderPay.userId);
+                                $("#orderType").val(jdOrderPay.orderType);
+                                document.getElementById("batchForm").submit();
+                            }
+                        }, 'json');
+                    } else if (payMode == "aliPay") { //支付宝支付
+                        window.location.href = "payHint.html?ordernumber=" + orderNumber;
+                    } else if (payMode == "wxpay") { //支付宝支付
+                        recharge(orderNumber); //微信支付
+                    }
 
                 } else {
                     modalHintText("您当前存在多个未支付订单，请勿重复下单。")
                 }
             }, "json");
+        } else {
+            modalHintText("请选择支付方式");
         }
     });
 
@@ -637,4 +617,59 @@ function getPrice() {
         $(".liSecure").html("") //室内费用
 
     }
+}
+
+
+//付款
+function recharge(orderNumber) {
+    $.post("wxpay.action", {
+        "orderNumber": orderNumber
+    }, function(obj) {
+        if (obj.status == "0") {
+            determine(obj);
+        } else {
+            modalHintText("系统繁忙，请稍后再试。");
+        }
+
+    }, "json");
+}
+//付款判断
+function determine(obj) {
+    if (typeof WeixinJSBridge == "undefined") {
+        if (document.addEventListener) {
+            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+        } else if (document.attachEvent) {
+            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        }
+    } else {
+        onBridgeReady(obj);
+    }
+}
+
+//微信支付
+function onBridgeReady(obj) {
+    var payurl = obj.data;
+    WeixinJSBridge.invoke(
+        'getBrandWCPayRequest', {
+            "appId": payurl.appid, //公众号名称，由商户传入     
+            "timeStamp": obj.timeStamp, //时间戳，自1970年以来的秒数     
+            "nonceStr": payurl.nonce_str, //随机串     
+            "package": "prepay_id=" + payurl.prepay_id,
+            "signType": "MD5", //微信签名方式：     
+            "paySign": obj.paySign //微信签名 
+        },
+        function(res) {
+            if (res.err_msg == "get_brand_wcpay_request:ok") {
+                $(".modalHint-body").html("支付成功");
+                openModalHint(); //打开确认弹窗
+            } // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。              
+            else {
+                $(".modalHint-body").html("未支付");
+                openModalHint(); //打开确认弹窗
+
+            }
+        }
+
+    );
 }

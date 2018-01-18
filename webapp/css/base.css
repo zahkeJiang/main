@@ -207,6 +207,15 @@ table,td,th {
 	background-color: #4ea0ff;
 	color: #fff;
 }
+.modalHint-footer-ok{
+	display: inline-block;
+	border-radius: 4px;
+	text-align: center;
+	padding: 6px 10px;
+	margin: 0 6px;
+	background-color: #4ea0ff;
+	color: #fff;
+}
 .modalHint-footer-cancel{
 	display: inline-block;
 	border-radius: 4px;

@@ -44,10 +44,10 @@ function closeModalHint() {
 	console.log("关闭")
 }
 
-// $(".modalHint-footer-sure").click(function() {
-// 	$(".modalHint-layer").fadeOut(500);
-// 	$(".modalHint").fadeOut(200);
-// });
+$(".modalHint-footer-ok").click(function() {
+	$(".modalHint-layer").fadeOut(500);
+	$(".modalHint").fadeOut(200);
+});
 //关闭弹窗
 $(".modalHint-footer-cancel").click(function() {
 	$(".modalHint-layer").fadeOut(200);
