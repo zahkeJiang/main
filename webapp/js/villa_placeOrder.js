@@ -333,7 +333,7 @@ $(function() {
         var payMode = $("input[name='payMode-radio']:checked").val();
         var reserve = $("input[name='Reserve1Radio']:checked").val(); //是否全额,0预约定金，1全款
         console.log(payMode);
-        if (payMode == "JD") { //京东支付
+        if (payMode != "" && payMode != null && payMode != "undefined") { //判断是否选中
             $.post("createVillaOrder", {
                 "villaName": villaName,
                 "date": date,
@@ -352,26 +352,32 @@ $(function() {
                         "ordernumber": orderNumber
                     }, function(datas) {
                         if (datas.status == 0) {
-                            $.post("JDPay", {
-                                "ordernumber": orderNumber
-                            }, function(data) {
-                                if (data.status == 0) {
-                                    var jdOrderPay = data.data.jdOrderPay;
-                                    $("#version").val(jdOrderPay.version);
-                                    $("#merchant").val(jdOrderPay.merchant);
-                                    $("#sign").val(jdOrderPay.sign);
-                                    $("#tradeNum").val(jdOrderPay.tradeNum);
-                                    $("#tradeName").val(jdOrderPay.tradeName);
-                                    $("#tradeTime").val(jdOrderPay.tradeTime);
-                                    $("#amount").val(jdOrderPay.amount);
-                                    $("#currency").val(jdOrderPay.currency);
-                                    $("#callbackUrl").val(jdOrderPay.callbackUrl);
-                                    $("#notifyUrl").val(jdOrderPay.notifyUrl);
-                                    $("#userId").val(jdOrderPay.userId);
-                                    $("#orderType").val(jdOrderPay.orderType);
-                                    document.getElementById("batchForm").submit();
-                                }
-                            }, 'json');
+                            if (payMode == "JD") { //京东支付
+                                $.post("JDPay", {
+                                    "ordernumber": orderNumber
+                                }, function(data) {
+                                    if (data.status == 0) {
+                                        var jdOrderPay = data.data.jdOrderPay;
+                                        $("#version").val(jdOrderPay.version);
+                                        $("#merchant").val(jdOrderPay.merchant);
+                                        $("#sign").val(jdOrderPay.sign);
+                                        $("#tradeNum").val(jdOrderPay.tradeNum);
+                                        $("#tradeName").val(jdOrderPay.tradeName);
+                                        $("#tradeTime").val(jdOrderPay.tradeTime);
+                                        $("#amount").val(jdOrderPay.amount);
+                                        $("#currency").val(jdOrderPay.currency);
+                                        $("#callbackUrl").val(jdOrderPay.callbackUrl);
+                                        $("#notifyUrl").val(jdOrderPay.notifyUrl);
+                                        $("#userId").val(jdOrderPay.userId);
+                                        $("#orderType").val(jdOrderPay.orderType);
+                                        document.getElementById("batchForm").submit();
+                                    }
+                                }, 'json');
+                            } else if (payMode == "aliPay") { //支付宝支付
+                                window.location.href = "payHint.html?ordernumber=" + orderNumber;
+                            } else if (payMode == "wxpay") { //支付宝支付
+                                recharge(orderNumber); //请求接口获取应该支付金额
+                            }
                         } else {
                             modalHintText(datas.msg); //您的套餐中别墅或日期已被预约
                         }
@@ -381,34 +387,8 @@ $(function() {
                 }
             }, "json");
 
-        } else if (payMode == "aliPay") { //支付宝支付
-            $.post("createVillaOrder", {
-                "villaName": villaName,
-                "date": date,
-                "peopleNumber": peopleNumber,
-                "realName": realName,
-                "idNumber": realNumber,
-                "fullAmount": reserve
-            }, function(datas) {
-                if (datas.status == 0) {
-                    var orderNumber = datas.data.orderNumber;
-                    console.log(orderNumber);
-                    $(".layer").hide();
-                    $(".payBox").hide();
-                    //是别墅，需要先判断当前选择的别墅是否已经被预定
-                    $.post("villaCheck", {
-                        "ordernumber": orderNumber
-                    }, function(datas) {
-                        if (datas.status == 0) {
-                            window.location.href = "payHint.html?ordernumber=" + orderNumber;
-                        } else {
-                            modalHintText(datas.msg); //您的套餐中别墅或日期已被预约
-                        }
-                    }, "json");
-                } else {
-                    modalHintText("您当前存在多个未支付订单，请勿重复下单。")
-                }
-            }, "json");
+        } else {
+            modalHintText("请选择支付方式");
         }
     });
 
@@ -584,4 +564,58 @@ function villaDateCheck() {
             }
         }
     }, "json");
+}
+
+//付款
+function recharge(orderNumber) {
+    $.post("wxpay.action", {
+        "orderNumber": orderNumber
+    }, function(obj) {
+        if (obj.status == "0") {
+            determine(obj);
+        } else {
+            modalHintText("系统繁忙，请稍后再试。");
+        }
+
+    }, "json");
+}
+//付款判断
+function determine(obj) {
+    if (typeof WeixinJSBridge == "undefined") {
+        if (document.addEventListener) {
+            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+        } else if (document.attachEvent) {
+            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        }
+    } else {
+        onBridgeReady(obj);
+    }
+}
+
+//微信支付
+function onBridgeReady(obj) {
+    var payurl = obj.data;
+    WeixinJSBridge.invoke(
+        'getBrandWCPayRequest', {
+            "appId": payurl.appid, //公众号名称，由商户传入     
+            "timeStamp": obj.timeStamp, //时间戳，自1970年以来的秒数     
+            "nonceStr": payurl.nonce_str, //随机串     
+            "package": "prepay_id=" + payurl.prepay_id,
+            "signType": "MD5", //微信签名方式：     
+            "paySign": obj.paySign //微信签名 
+        },
+        function(res) {
+            if (res.err_msg == "get_brand_wcpay_request:ok") {
+                $(".modalHint-body").html("支付成功");
+                openModalHint(); //打开确认弹窗
+            } // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。              
+            else {
+                $(".modalHint-body").html("未支付");
+                openModalHint(); //打开确认弹窗
+
+            }
+        }
+
+    );
 }
