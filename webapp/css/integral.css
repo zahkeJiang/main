@@ -67,7 +67,7 @@ body{
 	line-height: 20px;
 	border-bottom: 1px solid #ddd;
 }
-.integral_record_list:first-child{
+.list:first-child{
 	padding-top:0;
 }
 .integral_record_count{
