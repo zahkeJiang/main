@@ -2,11 +2,13 @@ package com.bjpygh.gzh.dao;
 
 import com.bjpygh.gzh.bean.CoinRecord;
 
+import java.util.List;
+
 public interface CoinRecordMapper {
 
     void insertCoinRecord(CoinRecord coinRecord);
 
-    CoinRecord inCoinRecord(Long userid);
+    List<CoinRecord> inCoinRecord(Long userId);
 
-    CoinRecord outCoinRecord(Long userid);
+    List<CoinRecord> outCoinRecord(Long userId);
 }

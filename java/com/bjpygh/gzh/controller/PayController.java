@@ -253,21 +253,24 @@ public class PayController extends BaseController {
             if (villaOrder.getPayType()==0){
                 if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
                     //改变订单状态
-                    villaOrder.setOrderStatus(5);
-                    villaOrder.setRefundTime(formatter.format(new Date()));
-                    villaOrderService.updateOrder(villaOrder);
-                    return Status.success();
+                    return changeVillaOrder(villaOrder);
                 }else{
                     return Status.fail(-20,"处理失败");
                 }
             }else if (villaOrder.getPayType()==3){
                 if (getJdRefundResult(out_trade_no,refund_amount)){
                     //改变订单状态
-                    villaOrder.setOrderStatus(5);
-                    villaOrder.setRefundTime(formatter.format(new Date()));
-                    villaOrderService.updateOrder(villaOrder);
-                    return Status.success();
+                    return changeVillaOrder(villaOrder);
                 }else{
+                    return Status.fail(-20,"处理失败");
+                }
+            }else if (villaOrder.getPayType()==1){//微信支付退款
+                String refund_fee = refund_amount;
+                String total_fee = villaOrder.getVillaPrice()+"";
+                if (getWxRefund(villaOrder.getOrderNumber(),refund_fee,total_fee)){
+                    //改变订单状态
+                    return changeVillaOrder(villaOrder);
+                }else {
                     return Status.fail(-20,"处理失败");
                 }
             }else {
@@ -348,21 +351,24 @@ public class PayController extends BaseController {
             if (armyOrder.getPayType()==0){
                 if (getRefundResult(out_trade_no,refund_reason,refund_amount)){
                     //改变订单状态
-                    armyOrder.setOrderStatus(5);
-                    armyOrder.setRefundTime(formatter.format(new Date()));
-                    armyOrderService.updateOrder(armyOrder);
-                    return Status.success();
+                    return changeArmyOrder(armyOrder);
                 }else{
                     return Status.fail(-20,"处理失败");
                 }
             }else if (armyOrder.getPayType()==3){
                 if (getJdRefundResult(out_trade_no,refund_amount)){
                     //改变订单状态
-                    armyOrder.setOrderStatus(5);
-                    armyOrder.setRefundTime(formatter.format(new Date()));
-                    armyOrderService.updateOrder(armyOrder);
-                    return Status.success();
+                    return changeArmyOrder(armyOrder);
                 }else{
+                    return Status.fail(-20,"处理失败");
+                }
+            }else if (armyOrder.getPayType()==1){//微信支付退款
+                String refund_fee = refund_amount;
+                String total_fee = armyOrder.getArmyPrice()+"";
+                if (getWxRefund(armyOrder.getOrderNumber(),refund_fee,total_fee)){
+                    //改变订单状态
+                    return changeArmyOrder(armyOrder);
+                }else {
                     return Status.fail(-20,"处理失败");
                 }
             }else{
@@ -371,6 +377,66 @@ public class PayController extends BaseController {
 
         }else {
             return Status.fail(-50,"订单号错误");
+        }
+    }
+
+    Status changeArmyOrder(ArmyOrder armyOrder){
+        //改变订单状态
+        armyOrder.setOrderStatus(5);
+        armyOrder.setRefundTime(formatter.format(new Date()));
+        armyOrderService.updateOrder(armyOrder);
+        return Status.success();
+    }
+
+    Status changeVillaOrder(VillaOrder villaOrder){
+        villaOrder.setOrderStatus(5);
+        villaOrder.setRefundTime(formatter.format(new Date()));
+        villaOrderService.updateOrder(villaOrder);
+        return Status.success();
+    }
+
+    boolean getWxRefund(String out_trade_no,String refund_fee,String total_fee){
+
+        MyConfig config = null;
+        try {
+            config = new MyConfig();
+        } catch (Exception e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+        String key = config.getKey();
+        String appid=config.getAppID();
+        String mch_id = config.getMchID();
+        String nonce_str = getRandomString(32);
+        String stringA="appid="+appid+"&body="+"&mch_id="+mch_id+"&nonce_str="+nonce_str+
+                "&out_refund_no="+out_trade_no+"&out_trade_no="+out_trade_no+
+                "&refund_fee="+refund_fee+"&total_fee="+total_fee;
+        String stringSignTemp=stringA+"&key="+key; //注：key为商户平台设置的密钥key
+        String sign= MD5.string2MD5(stringSignTemp); //注：MD5签名方式
+//        sign=hash_hmac("sha256",stringSignTemp,key); //注：HMAC-SHA256签名方式
+
+        String data = "<xml>\n" +
+                "   <appid>"+appid+"</appid>\n" +
+                "   <mch_id>"+mch_id+"</mch_id>\n" +
+                "   <nonce_str>"+nonce_str+"</nonce_str> \n" +
+                "   <out_refund_no>"+out_trade_no+"</out_refund_no>\n" +
+                "   <out_trade_no>"+out_trade_no+"</out_trade_no>\n" +
+                "   <refund_fee>"+refund_fee+"</refund_fee>\n" +
+                "   <total_fee>"+total_fee+"</total_fee>\n" +
+                "   <sign>"+sign+"</sign>\n" +
+                "</xml>";
+
+        Http http = new Http();
+        String result = http.sendPost("https://api.mch.weixin.qq.com/secapi/pay/refund", data);
+        XMLToMap x= new XMLToMap();
+        Map<String, String> map = x.getXML(result);
+        System.out.println("map"+map);
+
+        if (map.get("return_code").equals("SUCCESS")){
+            return true;
+        }else {
+            return false;
         }
     }
 
@@ -415,10 +481,91 @@ public class PayController extends BaseController {
         }
     }
 
+
     //微信会员充值接口
     @ResponseBody
     @RequestMapping(value = "/wxpay.action", method = RequestMethod.POST)
-    public Status WxPay(HttpServletRequest request){
+    public Status WxPay(HttpServletRequest request, String orderNumber){
+        String o = orderNumber.substring(0, 1);
+        if (o.equals("A")){
+            ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(orderNumber).get(0);
+            String body = "作战之日";
+            return WxPayReq(request, orderNumber, armyOrder.getArmyPrice()+"", body);
+        }if (o.equals("V")){
+            VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(orderNumber).get(0);
+            String body = "漂洋过海小别墅";
+            return WxPayReq(request, orderNumber, villaOrder.getVillaPrice()+"", body);
+        }else {
+            return Status.fail(-20,"处理失败");
+        }
+    }
+
+    public Status WxPayReq(HttpServletRequest request,String orderNumber,String total_fee,String body){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return Status.notInWx();
+        }
+
+        MyConfig config = null;
+        try {
+            config = new MyConfig();
+        } catch (Exception e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        String userid = userMap.get("id");
+        String openid = userMap.get("openid");
+
+        WXPay wxpay = new WXPay(config);
+
+        String key = config.getKey();
+        String appid=config.getAppID();
+        String mch_id = config.getMchID();
+        String device_info = "WEB";
+        String nonce_str = getRandomString(32);
+        String stringA="appid="+appid+"&body="+body+"&device_info="+device_info+"&mch_id="+mch_id+"&nonce_str="+nonce_str;
+        String stringSignTemp=stringA+"&key="+key; //注：key为商户平台设置的密钥key
+        String sign= MD5.string2MD5(stringSignTemp); //注：MD5签名方式
+//        sign=hash_hmac("sha256",stringSignTemp,key); //注：HMAC-SHA256签名方式
+
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("appid", appid);
+        data.put("mch_id", mch_id);
+        data.put("body", body);
+        data.put("out_trade_no", orderNumber);
+        data.put("device_info", device_info);
+        data.put("fee_type", "CNY");
+        data.put("total_fee", total_fee);
+        data.put("nonce_str", nonce_str);
+        data.put("notify_url", "http://gzpt.bjpygh.com/notify.action");
+        data.put("trade_type", "JSAPI");  // 此处指定为微信公众号支付
+        data.put("openid", openid);
+        data.put("sign", sign);
+
+        try {
+            Map<String, String> resp = wxpay.unifiedOrder(data);
+            String timeStamp="";
+            String paySign="";
+            if(resp.get("return_code").equals("SUCCESS")){
+                timeStamp = ""+(new Date().getTime())/1000;
+                String prepay_id = "prepay_id="+resp.get("prepay_id");
+                String sA="appId="+appid+"&nonceStr="+resp.get("nonce_str")+"&package="+prepay_id+"&signType=MD5"+"&timeStamp="+timeStamp;
+                String sSignTemp=sA+"&key="+key; //注：key为商户平台设置的密钥key
+                paySign=MD5.string2MD5(sSignTemp); //注：MD5签名方式
+
+            }
+            return Status.success().add("timeStamp",timeStamp)
+                    .add("paySign",paySign)
+                    .add("data",resp);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Status.fail(-20,"处理失败");
+        }
+    }
+    //微信会员充值接口
+    @ResponseBody
+    @RequestMapping(value = "/WxPayForMember.action", method = RequestMethod.POST)
+    public Status WxPayForMember(HttpServletRequest request){
         Map<String, String> userMap = checkWxUser(request);
         if(userMap == null){
             return Status.notInWx();

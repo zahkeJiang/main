@@ -28,7 +28,7 @@ $(function() {
 
 //获取用户推广币和普通币
 function getUserCoin() {
-  $.post("getUserCoin", {}, function(datas) {
+  $.post("selectUserCoin", {}, function(datas) {
     if (datas.status == 0) {
       $(".spread-gold").html(datas.data.userCoin.coin);
       $(".normal-gold").html(datas.data.userCoin.generalCoin);

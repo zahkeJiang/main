@@ -114,7 +114,7 @@ function userload() {
 
 //获取用户金币，是否签过到
 function getUserCoin() {
-	$.post("getUserCoin", {}, function(datas) {
+	$.post("selectUserCoin", {}, function(datas) {
 		if (datas.status == 0) {
 			var coinData = datas.data.userCoin;
 			$(".spread-gold").html(coinData.coin); //推广币
@@ -144,9 +144,9 @@ function updateUserSign(generalCoin) {
 	$.post("updateUserSign", {}, function(datas) {
 		if (datas.status == 0) {
 			var generalCoinCount = generalCoin;
-			if (datas.generalCoin != null) {
-				generalCoinCount = generalCoin + datas.generalCoin;
-				$(".jiayi").html("+" + datas.generalCoin);
+			if (datas.data.map.generalCoin != null) {
+				generalCoinCount = generalCoin + datas.data.map.generalCoin;
+				$(".jiayi").html("+" + datas.data.map.generalCoin);
 				//执行签到动画
 			}
 			jiayi(generalCoinCount);

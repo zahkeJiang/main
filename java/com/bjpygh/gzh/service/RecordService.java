@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RecordService {
@@ -20,10 +22,14 @@ public class RecordService {
     CoinRecordMapper coinRecordMapper;
 
     public Status inCoinRecord(String userid) {
-        CoinRecord coinRecord = coinRecordMapper.inCoinRecord(Long.valueOf(userid));
-        if (coinRecord != null){
-            coinRecord.setCreateTime(coinRecord.getCreateTime().split(" ")[0]);
-            return Status.success().add("coinRecord", coinRecord);
+        List<CoinRecord> coinRecords = coinRecordMapper.inCoinRecord(Long.valueOf(userid));
+        List<CoinRecord> coinRecords1 = new ArrayList<CoinRecord>();
+        if (coinRecords.size()>0){
+            for (CoinRecord c : coinRecords){
+                c.setCreateTime(c.getCreateTime().split(" ")[0]);
+                coinRecords1.add(c);
+            }
+            return Status.success().add("coinRecord", coinRecords1);
         }else {
             return Status.fail(-10,"没有记录");
         }
@@ -31,13 +37,16 @@ public class RecordService {
     }
 
     public Status outCoinRecord(String userid) {
-        CoinRecord coinRecord = coinRecordMapper.outCoinRecord(Long.valueOf(userid));
-        if (coinRecord != null){
-            coinRecord.setCreateTime(coinRecord.getCreateTime().split(" ")[0]);
-            return Status.success().add("coinRecord",coinRecord);
+        List<CoinRecord> coinRecords = coinRecordMapper.outCoinRecord(Long.valueOf(userid));
+        List<CoinRecord> coinRecords1 = new ArrayList<CoinRecord>();
+        if (coinRecords.size()>0){
+            for (CoinRecord c : coinRecords){
+                c.setCreateTime(c.getCreateTime().split(" ")[0]);
+                coinRecords1.add(c);
+            }
+            return Status.success().add("coinRecord", coinRecords1);
         }else {
             return Status.fail(-10,"没有记录");
         }
-
     }
 }

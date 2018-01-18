@@ -13,6 +13,10 @@
         SELECT user_id, general_coin, coin, is_sign, continuous, update_time FROM integral
         WHERE user_id=#{userId}
     </select>
+    <update id="updateInegral" parameterType="integral">
+        UPDATE integral SET general_coin=#{generalCoin}, coin=#{coin}
+        WHERE user_id=#{userId} AND is_delete=0
+    </update>
     <update id="updateUserSign" parameterType="integral">
         UPDATE integral SET general_coin=#{generalCoin}, is_sign=#{isSign},
         continuous=#{continuous}, update_time=now() WHERE user_id=#{userId} AND is_sign=0
