@@ -71,8 +71,8 @@ body{
    color: #4ea0ff;
 }
 .bottomImage {
-   width: 1.2em; height: 1.2em;
-   vertical-align: -0.3em;
+   width: 14px; height:14px;
+   vertical-align: -3px;
    fill: currentColor;
    overflow: hidden;
    color: #4ea0ff;
