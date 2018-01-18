@@ -1,10 +1,10 @@
 $(function() {
-  $.get("../getQrcode", function(datas) {
+  $.get("getQrcode", function(datas) {
     if (datas.status == 0) {
       $(".codeImg").attr("src", "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=" + datas.data.ticket);
     }
   }, "json");
-  $.get("../getConcern", function(datas) {
+  $.get("getConcern", function(datas) {
     if (datas.status == 0) {
       var concernData = datas.data.ticket;
       $(".concerned").html(concernData.concerned + "人");

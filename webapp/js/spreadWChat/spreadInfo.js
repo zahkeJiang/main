@@ -12,7 +12,7 @@ $(function() {
   ShowMessage();
   getadAddress();
 
-  $.post("../getAward", {
+  $.post("getAward", {
     "awardId": awardId
   }, function(datas) {
     if (datas.status == 0) {
@@ -32,7 +32,7 @@ function getadAddress() {
   if ($.cookie("addressData") != null && $.cookie("addressData") != "") {
     $(".addressDetail").html($.cookie("addressData"));
   } else {
-    $.post("../selectDefaultAddress", {}, function(datas) {
+    $.post("selectDefaultAddress", {}, function(datas) {
       if (datas.status == 0) {
         $(".addressDetail").html(datas.data.address.detail);
       }
