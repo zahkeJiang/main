@@ -56,7 +56,6 @@ public class NotifyController extends BaseController {
     public void WxNotify(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String inputLine;
         String notityXml = "";
-
         try {
             while ((inputLine = request.getReader().readLine()) != null) {
                 notityXml += inputLine;
@@ -69,59 +68,33 @@ public class NotifyController extends BaseController {
         Map<String, String> map = x.getXML(notityXml);
         System.out.println(map);
         if(map.get("result_code").equals("SUCCESS")){
-            String total_fee = map.get("total_fee");
-            User user = userService.getUserByOpenid(map.get("openid")).get(0);
-            Map<String, String> uMap = new HashMap<String, String>();
+            String orderNumber = map.get("out_trade_no");
+            String o = orderNumber.substring(0, 1);
+            if (o.equals("A")){
+                ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(map.get("ordernumber")).get(0);
+                armyOrder.setOrderStatus(1);
+                armyOrder.setPayType((byte) 1);
+                armyOrder.setPayTime(formatter.format(new Date()));
+                armyOrderService.updateOrder(armyOrder);
 
-            //插入充值记录
-            IntegralRecord record = new IntegralRecord();
+                pushToWangNan(armyOrder.getOrderNumber(),armyOrder.getArmyPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
 
-            uMap.put("userid", ""+user.getUserId());
-            if (total_fee.equals("500")) {
-                uMap.put("memberPoints", (user.getMemberPoints() + 5) + "");
-                uMap.put("integral", (user.getIntegral() + 5) + "");
-                userService.changeUserPoints(uMap);
-                record.setValue("+5");
+                User userById = userService.getUserById(String.valueOf(armyOrder.getUserId()));
+                ArmyMessagePush(armyOrder,userById.getOpenid());
+            }if (o.equals("V")){
+                VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(map.get("ordernumber")).get(0);
+                villaOrder.setOrderStatus(1);
+                villaOrder.setPayType((byte) 1);
+                villaOrder.setPayTime(formatter.format(new Date()));
+                villaOrderService.updateOrder(villaOrder);
 
-            } else if (total_fee.equals("1000")) {
-                uMap.put("memberPoints", (user.getMemberPoints() + 10) + "");
-                uMap.put("integral", (user.getIntegral() + 10) + "");
-                userService.changeUserPoints(uMap);
-                record.setValue("+10");
+                pushToWangNan(villaOrder.getOrderNumber(),villaOrder.getVillaPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
 
-            } else if (total_fee.equals("1980")) {
-                uMap.put("memberPoints", (user.getMemberPoints() + 20) + "");
-                uMap.put("integral", (user.getIntegral() + 20) + "");
-                userService.changeUserPoints(uMap);
-                record.setValue("+20");
-
-            } else if (total_fee.equals("4900")) {
-                uMap.put("memberPoints", (user.getMemberPoints() + 50) + "");
-                uMap.put("integral", (user.getIntegral() + 50) + "");
-                userService.changeUserPoints(uMap);
-                record.setValue("+50");
-
-            } else if (total_fee.equals("9750")) {
-                uMap.put("memberPoints", (user.getMemberPoints() + 100) + "");
-                uMap.put("integral", (user.getIntegral() + 100) + "");
-                userService.changeUserPoints(uMap);
-                record.setValue("+100");
-
-            } else if (total_fee.equals("19500")) {
-                uMap.put("memberPoints", (user.getMemberPoints() + 200) + "");
-                uMap.put("integral", (user.getIntegral() + 200) + "");
-                userService.changeUserPoints(uMap);
-                record.setValue("+200");
-
-            } else {
+                User userById = userService.getUserById(String.valueOf(villaOrder.getUserId()));
+                VillaMessagePush(villaOrder,userById.getOpenid());
+            }else {
+                System.out.println("result_code:fail");
             }
-
-            record.setNote("微信支付充值");
-            record.setUserId(user.getUserId());
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            record.setTime(formatter.format(new Date()));
-//            recordService.insertRecord(record);
-
         }else{
             System.out.println("result_code:fail");
         }
