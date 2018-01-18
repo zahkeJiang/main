@@ -72,7 +72,7 @@ body{
 }
 .integral_record_count{
 	float: right;
-	color: #999;
+	color: #4ea0ff;
 }
 .integral_record_time{
 	color: #999;
@@ -85,5 +85,5 @@ body{
 	height: 16px;
 }
 .goldhide0{
-	display: none;
+	/*display: none;*/
 }

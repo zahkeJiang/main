@@ -76,5 +76,26 @@
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/jquery.area.js"></script>
 <script src="./iconjs/iconfont.js"></script>
+<script type="text/javascript">
+$(".xiala").click(function() {
+    if ($(".info-text").height() == 54) {
+      $(".info-text").css({
+        "height": "auto"
+      });
+      $(this).find("span").html("点我上拉");
+      $(this).find(".bottomImage").css({
+        "transform": "rotate(180deg)"
+      });
+    } else {
+      $(".info-text").css({
+        "height": "54px"
+      });
+      $(this).find("span").html("点我下拉");
+      $(this).find(".bottomImage").css({
+        "transform": "rotate(0deg)"
+      });
+    }
+  });
+</script>
 </body>
 </html>

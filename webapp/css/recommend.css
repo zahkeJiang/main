@@ -49,8 +49,9 @@ body,html{
   background-color: #09bb07;
 }
 .bottomImage {
-   width: 1em; height: 1em;
-   vertical-align: -0.15em;
+   width: 1.5em; height: 1.5em;
+   font-weight: bold;
+   vertical-align: -0.5em;
    fill: currentColor;
    overflow: hidden;
    color: #4ea0ff;
