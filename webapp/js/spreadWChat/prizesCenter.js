@@ -28,7 +28,7 @@ $(function() {
 
 //获取用户推广币和普通币
 function getUserCoin() {
-  $.post("../getUserCoin", {}, function(datas) {
+  $.post("getUserCoin", {}, function(datas) {
     if (datas.status == 0) {
       $(".spread-gold").html(datas.data.userCoin.coin);
       $(".normal-gold").html(datas.data.userCoin.generalCoin);
@@ -37,7 +37,7 @@ function getUserCoin() {
 }
 //获取奖品兑换列表
 function getAwards(filter) {
-  $.post("../getAwards", {
+  $.post("getAwards", {
     "filter": filter
   }, function(datas) {
     if (datas.status == 0) {
