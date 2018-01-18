@@ -58,7 +58,7 @@ function getAwards(filter) {
         if (comment.status == 4) {
           var duihuanStatus = '<div class="duihuan-content-hint-xinpin">新品</div>';
         }
-        awardsListHtml += '<div class="duihuan-content" awardId="' + comment.awardId + '">' + '<img src="' + comment.image + '" height="80px" width="80px">' + duihuanStatus + '<div class="duihuan-content-text">' + '<p class="name">' + comment.awardName + '</p>' + '<div class="duihuan-money">' + '<span>' + comment.coin + '</span>' + '<img src="../images/spreadWChat/spreadGold.png" height="20px">' + '<span>' + comment.generalCoin + '</span>' + '<img src="../images/spreadWChat/normalGold.png" height="20px">' + '</div>' + '<p class="shengyu">剩余：' + comment.amount + '</p>' + '</div>' + '</div>'
+        awardsListHtml += '<div class="duihuan-content" awardId="' + comment.awardId + '">' + '<img src="' + comment.image + '" height="80px" width="80px">' + duihuanStatus + '<div class="duihuan-content-text">' + '<p class="name">' + comment.awardName + '</p>' + '<div class="duihuan-money">' + '<span>' + comment.coin + '</span>' + '<img src="./images/spreadWChat/spreadGold.png" height="20px">' + '<span>' + comment.generalCoin + '</span>' + '<img src="./images/spreadWChat/normalGold.png" height="20px">' + '</div>' + '<p class="shengyu">剩余：' + comment.amount + '</p>' + '</div>' + '</div>'
       });
     }
     $(".duihuan-list").html(awardsListHtml);
