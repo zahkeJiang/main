@@ -128,7 +128,8 @@ function getUserCoin() {
 				$(".qiandao").html('<a href="integral.html"><span>已签到</span><span class="glyphicon glyphicon-menu-right qiandaoRight"></span></a>');
 
 			} else {
-				//签到
+                $(".qiandao").html('签到');
+                //签到
 				$(".qiandao").click(function() {
 					updateUserSign(coinData.generalCoin);
 					$(this).unbind("click");
