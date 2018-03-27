@@ -3,10 +3,12 @@ package com.bjpygh.gzh.test;
 import com.bjpygh.gzh.bean.UserOrder;
 import com.bjpygh.gzh.model.AsynNotifyResponse;
 import com.bjpygh.gzh.model.RefundResponse;
+import com.bjpygh.gzh.utils.Http;
 import com.bjpygh.gzh.utils.OrderPush;
 import com.bjpygh.gzh.utils.PropertyUtils;
 import com.bjpygh.gzh.utils.ThreeDES;
 import com.jd.jr.pay.gate.signature.util.JdPayUtil;
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -60,17 +62,17 @@ public class Main {
 //            System.out.println(u.getOrderNumber());
 //        }
 //------------------------------------------------------------------------------
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date1 = sdf.parse("2017-09-30");
-            Date date2 = sdf.parse("2017-10-01");
-
-            System.out.println(date1.getDate());
-            System.out.println(date2.getDate());
-            System.out.println(date2.getTime()-date1.getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            Date date1 = sdf.parse("2017-09-30");
+//            Date date2 = sdf.parse("2017-10-01");
+//
+//            System.out.println(date1.getDate());
+//            System.out.println(date2.getDate());
+//            System.out.println(date2.getTime()-date1.getTime());
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
         //-------------------------------------------------------------------------------
 
 //        ThreeDES threeDES = new ThreeDES();
@@ -91,6 +93,11 @@ public class Main {
 
 
 //        System.out.println(Pattern.matches(".*速*.","速成快板"));
+
+        JSONObject j = new JSONObject();
+        j.accumulate("bId","B0053UHO2E");
+        String s = Http.sendPost("http://47.94.227.99/Amazon/getBook", "bId=B0053UHO2E");
+        System.out.println("result=" + s);
     }
 
 //29 6 5

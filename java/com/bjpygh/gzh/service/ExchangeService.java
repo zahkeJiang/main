@@ -6,6 +6,7 @@ import com.bjpygh.gzh.entity.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -58,5 +59,13 @@ public class ExchangeService {
         }else {
             return Status.fail(-10,"商品已经被抢光啦");
         }
+    }
+
+    public Status selectExchange(Exchange exchange, String userid) {
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("exchangeId", String.valueOf(exchange.getExchangeId()));
+        map.put("userId", userid);
+        ExchangeInfo exchangeInfo = exchangeMapper.selectExchange(map);
+        return Status.success().add("exchange",exchangeInfo);
     }
 }
