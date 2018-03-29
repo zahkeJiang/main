@@ -12,4 +12,6 @@ public interface ExchangeMapper {
     void insertExchange(Exchange exchange);
 
     ExchangeInfo selectExchange(HashMap<String, String> map);
+
+    Long selectExchangeId(Exchange exchange);
 }

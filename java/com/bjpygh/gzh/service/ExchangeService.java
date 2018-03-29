@@ -52,7 +52,9 @@ public class ExchangeService {
                 coinRecord.setCoinValue((int) (0-award.getCoin()));
                 coinRecord.setUserId(Long.valueOf(userid));
                 coinRecordMapper.insertCoinRecord(coinRecord);
-                return Status.success();
+
+                Long aLong = exchangeMapper.selectExchangeId(exchange);
+                return Status.success().add("exchangeId",aLong);
             }else{
                 return Status.fail(-20,"余额不足");
             }

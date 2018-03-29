@@ -7,7 +7,6 @@ import com.bjpygh.gzh.utils.Http;
 import com.bjpygh.gzh.utils.OrderPush;
 import com.bjpygh.gzh.utils.PropertyUtils;
 import com.bjpygh.gzh.utils.ThreeDES;
-import com.jd.jr.pay.gate.signature.util.JdPayUtil;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
