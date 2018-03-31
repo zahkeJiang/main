@@ -1,6 +1,9 @@
 package com.bjpygh.gzh.bean;
 
 public class ExchangeInfo {
+
+    private Long exchangeId;
+
     private String userName;//用户姓名
 
     private String detail;//地址详细信息
@@ -24,6 +27,14 @@ public class ExchangeInfo {
     private String logistics; //物流
 
     private String crateTime;  //兑换时间
+
+    public Long getExchangeId() {
+        return exchangeId;
+    }
+
+    public void setExchangeId(Long exchangeId) {
+        this.exchangeId = exchangeId;
+    }
 
     public String getUserName() {
         return userName;
