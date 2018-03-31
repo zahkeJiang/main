@@ -33,24 +33,24 @@ function modalHintText(data) {
 
 //打开弹窗弹窗
 function openModalHint() {
-	$(".modalHint-layer").fadeIn(200);
-	$(".modalHint").fadeIn(400);
+	$(".modalHint-layer").fadeIn(100);
+	$(".modalHint").fadeIn(200);
 	console.log("开启")
 }
 //关闭弹窗弹窗
 function closeModalHint() {
-	$(".modalHint-layer").fadeOut(200);
-	$(".modalHint").fadeOut(400);
+	$(".modalHint-layer").fadeOut(100);
+	$(".modalHint").fadeOut(200);
 	console.log("关闭")
 }
 
 $(".modalHint-footer-ok").click(function() {
-	$(".modalHint-layer").fadeOut(400);
-	$(".modalHint").fadeOut(200);
+	$(".modalHint-layer").fadeOut(200);
+	$(".modalHint").fadeOut(100);
 });
 //关闭弹窗
 $(".modalHint-footer-cancel").click(function() {
-	$(".modalHint-layer").fadeOut(200);
-	$(".modalHint").fadeOut(400);
+	$(".modalHint-layer").fadeOut(100);
+	$(".modalHint").fadeOut(200);
 	console.log("关闭");
 });

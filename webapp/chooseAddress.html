@@ -180,6 +180,7 @@ function selectAddresses() {
 
       $(".address-content").click(function(){
         $.cookie("addressData",$(this).attr("detail"));
+        $.cookie("addressId",$(this).attr("addressId"));
         window.history.go(-1);//返回前一页
       });
     }

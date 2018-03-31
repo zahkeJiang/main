@@ -1,13 +1,18 @@
 body{
   background-color: #4ea0ff;
   color: #999;
-  margin:10px 0;
+  position: relative;
+  height: 100%;
 }
 .divBox{
   border-radius: 10px;
-  padding: 0 10px;
-  margin: 10px 16px;
+  padding: 0 4%;
+  top: 2%;
+  left: 4%;
   background-color: #f6f1f1;
+  position: fixed;
+  height: 96%;
+  width: 84%;
 }
 .awardImgDiv{
   text-align: center;
@@ -73,4 +78,22 @@ body{
 }
 .awardIntro{
   padding: 10px 0 ;
+}
+
+.duihuanBox{
+  position: absolute;
+  background-color: red;
+  bottom: 0;
+  width: 92%;
+background-color: #f6f1f1;
+}
+.duihuan{
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background-color: #4ea0ff;
+  color: #fff;
+  width: 82%;
+  margin: 10px 8%;
+  border-radius: 10px;
 }
