@@ -6,7 +6,7 @@
     award.award_name AS awardName, award.general_coin AS generalCoin, award.coin AS coin,
     award.image AS image, award.award_intro AS awardIntro FROM address, award, exchange
     WHERE address.address_id = exchange.address_id AND award.award_id=exchange.award_id
-    AND exchange.is_delete=0
+    AND exchange.is_delete=0 AND address.user_id = #{userid}
 </select>
 
 <select id="selectExchange" parameterType="map" resultType="exchangeInfo">
