@@ -10,11 +10,13 @@ public class Exchange {
 
     private Long awardId;//兑换奖品ID
 
-    private Integer status;//兑换状态
+    private Integer status;//兑换状态 0：兑换成功，未发货 1：已发货，物流中 2：已收货
 
-    private String number;  //兑换状态 0：兑换成功，未发货 1：已发货，物流中 2：已收货
+    private String number;  //物流单号
 
     private String logistics; //物流
+
+    private String exchangeNumber;  //兑换编号
 
     private String crateTime;
 
@@ -72,6 +74,14 @@ public class Exchange {
 
     public void setCrateTime(String crateTime) {
         this.crateTime = crateTime;
+    }
+
+    public String getExchangeNumber() {
+        return exchangeNumber;
+    }
+
+    public void setExchangeNumber(String exchangeNumber) {
+        this.exchangeNumber = exchangeNumber;
     }
 
     @Override
