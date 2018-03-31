@@ -1,6 +1,9 @@
 package com.bjpygh.gzh.bean;
 
 public class ExchangeInfo {
+
+    private Long exchangeId;
+
     private String userName;//用户姓名
 
     private String detail;//地址详细信息
@@ -16,6 +19,22 @@ public class ExchangeInfo {
     private String image;//奖品图片地址
 
     private String awardIntro;//奖品介绍
+
+    private String status;  //兑换状态 0：兑换成功，未发货 1：已发货，物流中 2：已收货
+
+    private String number;  //快递单号
+
+    private String logistics; //物流
+
+    private String crateTime;  //兑换时间
+
+    public Long getExchangeId() {
+        return exchangeId;
+    }
+
+    public void setExchangeId(Long exchangeId) {
+        this.exchangeId = exchangeId;
+    }
 
     public String getUserName() {
         return userName;
@@ -79,5 +98,37 @@ public class ExchangeInfo {
 
     public void setAwardIntro(String awardIntro) {
         this.awardIntro = awardIntro;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getLogistics() {
+        return logistics;
+    }
+
+    public void setLogistics(String logistics) {
+        this.logistics = logistics;
+    }
+
+    public String getCrateTime() {
+        return crateTime;
+    }
+
+    public void setCrateTime(String crateTime) {
+        this.crateTime = crateTime;
     }
 }

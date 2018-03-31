@@ -1,13 +1,18 @@
 package com.bjpygh.gzh.utils;
 
+import com.bjpygh.gzh.bean.User;
+import com.bjpygh.gzh.entity.Global;
 import net.sf.json.JSONObject;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -189,7 +194,8 @@ public class OrderPush {
 
     public static String getAccesstoken(){
         JSONObject jsonObject = JSONObject.fromObject(Http.sendGet("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx74d8d40a83387a3e&secret=0f84386999305a8cd8464fc32efb01f3"));
-        return jsonObject.getString("access_token");
+        access_token = jsonObject.getString("access_token");
+        return access_token;
     }
 
     public String getJsapiTicket(String passed){
@@ -213,5 +219,74 @@ public class OrderPush {
         }else {
             return getAccesstoken();
         }
+    }
+
+
+    //从微信平台获取用户信息
+    public static String getUserInfo(String openid, String access_token) {
+        String userInfo = getInfo(Global.WXURL+Global.WXURLUF+"?access_token="+access_token+"&openid="+openid+"&lang=zh_CN");
+        return userInfo;
+    }
+
+    //get请求方式访问数据
+    public static String getInfo(String url){
+        URL httpUrl;
+        String s = null;
+        try {
+            httpUrl = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) httpUrl.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setReadTimeout(5000);
+            conn.setDoOutput(true);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuffer sb = new StringBuffer();
+            String str;
+            while((str = reader.readLine())!=null){
+                sb.append(str);
+            }
+            s = sb.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
+
+    //将返回的用户信息解析成User对象
+    public static User getUser(String userInfo) {
+        User user = new User();
+        JSONObject user1 = JSONObject.fromObject(userInfo);
+        user.setCity(user1.getString("city"));
+        user.setOpenid(user1.getString("openid"));
+        user.setCountry(user1.getString("country"));
+        user.setNickname(user1.getString("nickname"));
+        user.setProvince(user1.getString("province"));
+        user.setSex(Integer.parseInt(user1.getString("sex")));
+        if (Integer.parseInt(user1.getString("sex"))==2){
+            user.setHeadimageurl("http://120.24.184.86/glxt/dsimage/girl.jpg");
+        }else {
+            user.setHeadimageurl("http://120.24.184.86/glxt/dsimage/boy.jpg");
+        }
+
+        return user;
+    }
+
+    //获取用户的openID，以及access_token。
+    public static Map<String, String> getMap(HttpServletRequest request) {
+        String code = request.getParameter("code");
+
+        String sb1 = OrderPush.getInfo(Global.WXURL+Global.WXURLAT+"?appid=wx74d8d40a83387a3e&secret=0f84386999305a8cd8464fc32efb01f3&code="+code+"&grant_type=authorization_code");
+        JSONObject tmp = JSONObject.fromObject(sb1);
+        String access_token = null;
+        String openid = null;
+        Map<String, String> map = new HashMap<String, String>();
+        try{
+            access_token = tmp.getString("access_token");
+            openid = tmp.getString("openid");
+        }catch (Exception e){
+            return map;
+        }
+        map.put("access_token", access_token);
+        map.put("openid", openid);
+        return map;
     }
 }
