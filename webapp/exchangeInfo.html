@@ -88,21 +88,54 @@ p{
 		$.post("selectExchange",{"exchangeId":exchangeId},function(datas){
 			if (datas.status==0) {
 				var exchangeData = datas.data.exchange;
-				var html = '<div class="duihuan-content">'
-        					+ '<img src="./images/moren.png" height="80px" width="80px">'
-        					+ '<div class="duihuan-content-text">'
-          					+ '<p>物流状态：'+ exchangeData.status +'</p>'
-          					+ '<p>承运来源：'+ exchangeData.logistics +'</p>'
-          					+ '<p>运单编号：'+ exchangeData.number +'</p>'
-        					+ '</div>'
-    					+ '</div>'
-						+ '<div class="userInfo">'
-							+ '<p>收件人：'+ exchangeData.userName +'</p>'
-        					+ '<p>联系电话：'+ exchangeData.mobile +'</p>'
-    						+ '<p>收货地址：'+ exchangeData.detail +'</p>'
-						+ '</div>'
+        var html = "";
+				if (exchangeData.status==0){
+          html = '<div class="duihuan-content">'
+                  + '<img src="'+ exchangeData.image +'" height="80px" width="80px">'
+                  + '<div class="duihuan-content-text">'
+                    + '<p>物流状态：订单处理中</p>'
+                  + '</div>'
+              + '</div>'
+            + '<div class="userInfo">'
+              + '<p>收件人：'+ exchangeData.userName +'</p>'
+                  + '<p>联系电话：'+ exchangeData.mobile +'</p>'
+                + '<p>收货地址：'+ exchangeData.detail +'</p>'
+            + '</div>'
+        }else if(exchangeData.status==1){
+          html = '<div class="duihuan-content">'
+                  + '<img src="'+ exchangeData.image +'" height="80px" width="80px">'
+                  + '<div class="duihuan-content-text">'
+                    + '<p>物流状态：已发货</p>'
+                    + '<p>承运来源：'+ exchangeData.logistics +'</p>'
+                    + '<p>运单编号：'+ exchangeData.number +'</p>'
+                  + '</div>'
+              + '</div>'
+            + '<div class="userInfo">'
+              + '<p>收件人：'+ exchangeData.userName +'</p>'
+                  + '<p>联系电话：'+ exchangeData.mobile +'</p>'
+                + '<p>收货地址：'+ exchangeData.detail +'</p>'
+            + '</div>'
+        }else{
+          html = '<div class="duihuan-content">'
+                  + '<img src="'+ exchangeData.image +'" height="80px" width="80px">'
+                  + '<div class="duihuan-content-text">'
+                    + '<p>物流状态：已签收</p>'
+                    + '<p>承运来源：'+ exchangeData.logistics +'</p>'
+                    + '<p>运单编号：'+ exchangeData.number +'</p>'
+                  + '</div>'
+              + '</div>'
+            + '<div class="userInfo">'
+              + '<p>收件人：'+ exchangeData.userName +'</p>'
+                  + '<p>联系电话：'+ exchangeData.mobile +'</p>'
+                + '<p>收货地址：'+ exchangeData.detail +'</p>'
+            + '</div>'
+        }
+				
+
+        $(".cardDiv").html(html);
 			}
 		},"json");
+
 	});
 </script>
 

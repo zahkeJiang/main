@@ -26,6 +26,8 @@ public class ExchangeInfo {
 
     private String logistics; //物流
 
+    private String exchangeNumber; //兑换编号
+
     private String crateTime;  //兑换时间
 
     public Long getExchangeId() {
@@ -130,5 +132,13 @@ public class ExchangeInfo {
 
     public void setCrateTime(String crateTime) {
         this.crateTime = crateTime;
+    }
+
+    public String getExchangeNumber() {
+        return exchangeNumber;
+    }
+
+    public void setExchangeNumber(String exchangeNumber) {
+        this.exchangeNumber = exchangeNumber;
     }
 }

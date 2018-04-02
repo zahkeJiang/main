@@ -13,5 +13,5 @@ public interface ExchangeMapper {
 
     ExchangeInfo selectExchange(HashMap<String, String> map);
 
-    Long selectExchangeId(Exchange exchange);
+    Long selectExchangeId(String exchangeNumber);
 }

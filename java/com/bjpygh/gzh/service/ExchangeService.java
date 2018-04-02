@@ -3,6 +3,8 @@ package com.bjpygh.gzh.service;
 import com.bjpygh.gzh.bean.*;
 import com.bjpygh.gzh.dao.*;
 import com.bjpygh.gzh.entity.Status;
+import com.bjpygh.gzh.utils.CodeUtil;
+import com.bjpygh.gzh.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,9 @@ public class ExchangeService {
         if (award.getAmount()>0){
             Integral integral = integralMapper.selectIntegral(Long.valueOf(userid));
             if (integral.getGeneralCoin()>award.getGeneralCoin()&&integral.getCoin()>award.getCoin()){
+                //生成兑换编号
+                String exchangeNumber = DateUtils.getSystemTimeInMM()+ CodeUtil.getRandom(4);
+                exchange.setExchangeNumber(exchangeNumber);
                 //创建商品消费记录
                 exchange.setStatus(0);
                 exchangeMapper.insertExchange(exchange);
@@ -53,7 +58,7 @@ public class ExchangeService {
                 coinRecord.setUserId(Long.valueOf(userid));
                 coinRecordMapper.insertCoinRecord(coinRecord);
 
-                Long aLong = exchangeMapper.selectExchangeId(exchange);
+                Long aLong = exchangeMapper.selectExchangeId(exchangeNumber);
                 return Status.success().add("exchangeId",aLong);
             }else{
                 return Status.fail(-20,"余额不足");

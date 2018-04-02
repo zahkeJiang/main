@@ -2,7 +2,8 @@
         <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bjpygh.gzh.dao.ExchangeMapper">
 <select id="selectExchanges" parameterType="java.lang.Long" resultType="exchangeInfo">
-    SELECT exchange.exchange_id AS exchangeId, address.user_name AS userName, address.detail AS detail, address.mobile AS mobile,
+    SELECT exchange.exchange_id AS exchangeId, exchange.exchange_number AS exchangeNumber,
+    address.user_name AS userName, address.detail AS detail, address.mobile AS mobile,
     award.award_name AS awardName, award.general_coin AS generalCoin, award.coin AS coin,
     award.image AS image, award.award_intro AS awardIntro FROM address, award, exchange
     WHERE address.address_id = exchange.address_id AND award.award_id=exchange.award_id
@@ -12,7 +13,7 @@
 <select id="selectExchange" parameterType="map" resultType="exchangeInfo">
     SELECT address.user_name AS userName, address.detail AS detail, address.mobile AS
     mobile,award.award_name AS awardName, award.general_coin AS generalCoin, award.coin
-    AS coin,award.image AS image, award.award_intro AS awardIntro, exchange.status,
+    AS coin,award.image AS image, award.award_intro AS awardIntro, exchange.status, exchange.exchange_number AS exchangeNumber,
     exchange.create_time AS createTime,exchange.number, exchange.logistics FROM address,
     award, exchange WHERE address.address_id = exchange.address_id AND
     award.award_id=exchange.award_id AND exchange.is_delete=0
@@ -20,12 +21,12 @@
 </select>
 
 <insert id="insertExchange" parameterType="exchange">
-    INSERT INTO exchange(address_id, award_id, status, create_time)
-    VALUES (#{addressId}, #{awardId}, #{status}, now())
+    INSERT INTO exchange(address_id, award_id, status, create_time, exchange_number)
+    VALUES (#{addressId}, #{awardId}, #{status}, now(), #{exchangeNumber})
 </insert>
 
-    <select id="selectExchangeId" parameterType="exchange" resultType="java.lang.Long">
+    <select id="selectExchangeId" parameterType="java.lang.String" resultType="java.lang.Long">
         SELECT exchange_id FROM exchange
-        WHERE address_id = #{addressId} AND award_id = #{awardId} AND status = 0
+        WHERE exchange_number = #{exchangeNumber}
     </select>
 </mapper>
