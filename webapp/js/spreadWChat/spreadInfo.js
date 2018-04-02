@@ -40,8 +40,11 @@ $(function() {
         "awardId": awardId
       }, function(datas) {
         if (datas.status == 0) {
-          $(".modalHint-body").html("兑换成功")
-          $(".modalHint-footer").html('<a href="exchangeInfo.html?exchangeId=' + datas.data.exchangeId + '"><i class="modalHint-footer-ok">立即查看</i></a><i class="modalHint-footer-cancel">我知道了</i>')
+          $(".modalHint-body").html("兑换成功");
+          $(".modalHint-footer").html('<a href="exchangeInfo.html?exchangeId=' + datas.data.exchangeId + '"><i class="modalHint-footer-ok">立即查看</i></a><i class="modalHint-footer-canceling">我知道了</i>');
+          $(".modalHint-footer-canceling").click(function () {
+                closeModalHint(); //关闭弹窗
+            })
 
         } else {
           closeModalHint(); //关闭弹窗
@@ -52,6 +55,7 @@ $(function() {
     });
 
   });
+
 });
 
 //获取地址
