@@ -35,13 +35,13 @@ function outCoinRecord() {
         record += '<div class="list">' +
                       '<div class="integral_record_list">' +
                           '<span class="integral_record_type">' + comment.note + '</span>' +
-                          '<span class="integral_record_count goldhide' + comment.coinValue + '">' +
-                              '<img src="./images/spreadWChat/normalGold.png" class="goldImg">' +
-                              '<span class="normalGold">' + comment.coinValue + '</span>' +
-                          '</span>' +
                           '<span class="integral_record_count goldhide' + comment.generalValue + '">' +
-                              '<img src="./images/spreadWChat/spreadGold.png" class="goldImg" />' +
+                            '<img src="./images/spreadWChat/normalGold.png" class="goldImg" />' +
                               '<span class="spreadGold">' + comment.generalValue + '</span>' +
+                          '</span>' +
+                          '<span class="integral_record_count goldhide' + comment.coinValue + '">' +
+                            '<img src="./images/spreadWChat/spreadGold.png" class="goldImg">' +
+                            '<span class="normalGold">' + comment.coinValue + '</span>' +
                           '</span>' +
                           '<span class="integral_record_count">-</span>' +
                           '<p class="integral_record_time">' + comment.createTime + '</p>' +

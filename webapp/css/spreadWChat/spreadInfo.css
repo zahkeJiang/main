@@ -13,6 +13,10 @@ body{
   position: fixed;
   height: 96%;
   width: 84%;
+  overflow:auto
+}
+.divBox::-webkit-scrollbar{
+  display:none;
 }
 .awardImgDiv{
   text-align: center;
@@ -41,6 +45,10 @@ body{
 .awardCoin{
   line-height: 20px;
   margin: 10px 0;
+}
+.awardCoin img {
+  margin-right: 4px;
+  margin-left: 8px;
 }
 .userAddress{
   height: 20px;
@@ -77,15 +85,17 @@ body{
   text-align: center;
 }
 .awardIntro{
-  padding: 10px 0 ;
+  margin-top: 10px;
+  line-height: 20px;
+  text-indent: 2em;
 }
 
 .duihuanBox{
-  position: absolute;
-  background-color: red;
-  bottom: 0;
+  position: fixed;
+  bottom: 2%;
   width: 92%;
-background-color: #f6f1f1;
+  left:4%;
+  background-color: #f6f1f1;
 }
 .duihuan{
   height: 40px;
@@ -96,4 +106,18 @@ background-color: #f6f1f1;
   width: 82%;
   margin: 10px 8%;
   border-radius: 10px;
+}
+.awardDetail-hint{
+  padding-bottom: 60px;
+}
+.awardDetail-hint h2{
+  font-size: 16px;
+  line-height: 20px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+.awardDetail-hint p{
+  line-height: 20px;
+  margin-top: 10px;
+
 }

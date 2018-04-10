@@ -146,6 +146,10 @@ body{
   background-repeat:repeat-x;
   background-position:0 100%;              
 }
+.duihuan-money img{
+  margin-left: 10px;
+  margin-right: 4px;
+}
 .duihuan-content-text{
   margin-left: 20px;
   flex: 1
@@ -155,7 +159,7 @@ body{
   color: #777
 }
 .duihuan-money{
-  line-height: 20px;
+  line-height: 16px;
 }
 .duihuan-content-text p.shengyu{
   line-height: 20px;

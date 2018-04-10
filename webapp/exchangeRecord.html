@@ -30,7 +30,8 @@ a{
   text-align: center;
 }
 .duihuan-content img{
-  margin-right: 10px;
+  margin-right: 4px;
+    margin-left: 10px;
 }
 .duihuan-content-text p{
   line-height: 20px;
@@ -89,10 +90,11 @@ $(function(){
                                       + '<div class="duihuan-content-text">'
                                         + '<p class="name">'+ comment.awardName +'</p>'
                                         + '<div class="duihuan-money">'
-                                          + comment.coin
                                           + '<img src="./images/spreadWChat/spreadGold.png" height="18px">'
-                                          + comment.generalCoin
+                                            + comment.coin
+
                                           + '<img src="./images/spreadWChat/normalGold.png" height="18px">'
+                                            + comment.generalCoin
                                         + '</div>'
                                         + '<p class="miaoshu">'+ comment.awardIntro +'</p>'
                                       + '</div>'
