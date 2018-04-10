@@ -13,7 +13,6 @@
   <div class="addressBox">
     <div>
       <h2 class="header">我的收货地址<a href="addressAdmin.html" class="guanli">管理</a></h2>
-
     </div>
     <div class="address-list">
 <!--       <img src="./images/no_content.png" class="imgBg">
@@ -25,7 +24,7 @@
           <div class="address-content-info-content"><span class="moren">[默认]</span><span>北京市海北京市海淀区北京市海淀区淀区</span></div>
         </div>
         <div>
-          <div><img src="./images/delete.png" height="18px" class="deleteImg"></div>        
+          <div><img src="./images/delete.png" height="18px" class="deleteImg"></div>
           <div><img src="./images/edit.png" height="18px" class="editImg"></div>
         </div>
       </div> -->
@@ -181,7 +180,8 @@ function selectAddresses() {
       $(".address-content").click(function(){
         $.cookie("addressData",$(this).attr("detail"));
         $.cookie("addressId",$(this).attr("addressId"));
-        window.history.go(-1);//返回前一页
+        window.location.href="prizesInfo.html?awardId="+$.cookie("awardId")
+//        window.history.go(-1);//返回前一页
       });
     }
   }, "json");

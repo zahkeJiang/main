@@ -7,7 +7,8 @@ function ShowMessage() {
   awardId = getval.split("=")[1];
 }
 $(function() {
-  $(".chooseAdress").click(function() {
+  $(".userAddress").click(function() {
+    $.cookie("awardId",awardId);
     window.location.href = "chooseAddress.html"
   })
   ShowMessage();
