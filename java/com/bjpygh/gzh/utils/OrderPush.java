@@ -51,7 +51,7 @@ public class OrderPush {
         JSONObject obj = new JSONObject();
         obj.accumulate("touser",map.get("openid"));
         obj.accumulate("template_id","Oxsy4JnPMy3F2KvuEjKrS5awVXMK8zFir3pblGAaqow");
-        obj.accumulate("url","https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx74d8d40a83387a3e&redirect_uri=http://gzpt.bjpygh.com/schedule.action&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
+        obj.accumulate("url","https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Global.appID+"&redirect_uri=http://gzpt.bjpygh.com/schedule.action&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
         obj.accumulate("data",ja);
 
         String result = Http.sendPost("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+access_token,
@@ -193,7 +193,7 @@ public class OrderPush {
 
 
     public static String getAccesstoken(){
-        JSONObject jsonObject = JSONObject.fromObject(Http.sendGet("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx74d8d40a83387a3e&secret=0f84386999305a8cd8464fc32efb01f3"));
+        JSONObject jsonObject = JSONObject.fromObject(Http.sendGet("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+Global.appID+"&secret="+Global.appsecret));
         access_token = jsonObject.getString("access_token");
         return access_token;
     }
@@ -224,6 +224,7 @@ public class OrderPush {
 
     //从微信平台获取用户信息
     public static String getUserInfo(String openid, String access_token) {
+        System.out.println("1111111111111111111111111111");
         String userInfo = getInfo(Global.WXURL+Global.WXURLUF+"?access_token="+access_token+"&openid="+openid+"&lang=zh_CN");
         return userInfo;
     }
@@ -273,8 +274,9 @@ public class OrderPush {
     //获取用户的openID，以及access_token。
     public static Map<String, String> getMap(HttpServletRequest request) {
         String code = request.getParameter("code");
-
-        String sb1 = OrderPush.getInfo(Global.WXURL+Global.WXURLAT+"?appid=wx74d8d40a83387a3e&secret=0f84386999305a8cd8464fc32efb01f3&code="+code+"&grant_type=authorization_code");
+        System.out.println("code:" + code);
+        String sb1 = OrderPush.getInfo(Global.WXURL+Global.WXURLAT+"?appid="+Global.appID+"&secret="+Global.appsecret+"&code="+code+"&grant_type=authorization_code");
+        System.out.println("sb1:" + sb1);
         JSONObject tmp = JSONObject.fromObject(sb1);
         String access_token = null;
         String openid = null;

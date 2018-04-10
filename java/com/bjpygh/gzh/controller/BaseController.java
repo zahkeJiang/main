@@ -29,28 +29,33 @@ public class BaseController {
         HttpSession session = request.getSession();
         Map<String, String> userMap = (Map<String, String>) session.getAttribute("user");
         Map<String, String> map = new HashMap<String, String>();
+        System.out.println("121212121212");
         if(userMap == null){
             userMap = new HashMap<String, String>();
             String openid = null;
             String access_token = null;
             String userId = null;
+            System.out.println("2323232323232323232");
             try{
-//                map = OrderPush.getMap(request);
-//                openid =map.get("openid");
-//                access_token = map.get("access_token");
-//                userId = userService.getUserIdByOpenid(openid);
-//                if(userId == null){		//判断用户不存在
-//                    //用户不存在则插入用户
-//                    User user = OrderPush.getUser(OrderPush.getUserInfo(openid, access_token));
-//                    userService.InsertUserFromWx(user);
-//                    userId = userService.getUserIdByOpenid(openid);
-//                }
-//                //将用户信息放入缓存中
-//                userMap.put("id",userId);
-//                userMap.put("openid", openid);
-//                userMap.put("access_token",access_token);
-            userMap.put("id","1");
-            userMap.put("openid","o9C-m0gWfR9WOs8DIDElxSUfDIUU");
+                map = OrderPush.getMap(request);
+                System.out.println("the map :" + map);
+                openid =map.get("openid");
+                access_token = map.get("access_token");
+                userId = userService.getUserIdByOpenid(openid);
+                System.out.println("43434343434343434343");
+                if(userId == null){		//判断用户不存在
+                    //用户不存在则插入用户
+                    User user = OrderPush.getUser(OrderPush.getUserInfo(openid, access_token));
+                    System.out.println("54545454545454545454545");
+                    userService.InsertUserFromWx(user);
+                    userId = userService.getUserIdByOpenid(openid);
+                }
+                //将用户信息放入缓存中
+                userMap.put("id",userId);
+                userMap.put("openid", openid);
+                userMap.put("access_token",access_token);
+//            userMap.put("id","1");
+//            userMap.put("openid","o9C-m0gWfR9WOs8DIDElxSUfDIUU");
                 session.setAttribute("user", userMap );
                 System.out.println("access_token="+userMap);
                 return  userMap;

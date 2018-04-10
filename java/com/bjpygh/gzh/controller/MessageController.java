@@ -28,7 +28,7 @@ public class MessageController extends BaseController {
     @Autowired
     ConcernService concernService;
 
-    //改变订单状态接口
+    //
     @ResponseBody
     @RequestMapping(value = "/getWxMessage", method = RequestMethod.GET)
     public String ChangeOrder(HttpServletRequest request){

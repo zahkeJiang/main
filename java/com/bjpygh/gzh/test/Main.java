@@ -93,11 +93,10 @@ public class Main {
 
 //        System.out.println(Pattern.matches(".*速*.","速成快板"));
 
-        JSONObject j = new JSONObject();
-        j.accumulate("bId","B0053UHO2E");
-        String s = Http.sendPost("http://47.94.227.99/Amazon/getBook", "bId=B0053UHO2E");
-        System.out.println("result=" + s);
+        System.out.println(Math.abs(-1));
+
     }
+
 
 //29 6 5
 //28 5 4

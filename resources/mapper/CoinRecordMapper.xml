@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bjpygh.gzh.dao.CoinRecordMapper">
     <insert id="insertCoinRecord" parameterType="coinRecord">
-        INSERT INTO coin_record(user_id, general_value, note, create_time)
-        VALUES (#{userId}, #{generalValue}, #{note}, now())
+        INSERT INTO coin_record(user_id, general_value, note, create_time, coin_value)
+        VALUES (#{userId}, #{generalValue}, #{note}, now(), #{coinValue})
     </insert>
 
     <select id="inCoinRecord" resultType="coinRecord" parameterType="java.lang.Long">

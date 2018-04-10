@@ -42,6 +42,8 @@ public class RecordService {
         if (coinRecords.size()>0){
             for (CoinRecord c : coinRecords){
                 c.setCreateTime(c.getCreateTime().split(" ")[0]);
+                c.setGeneralValue(Math.abs(c.getGeneralValue()));
+                c.setCoinValue(Math.abs(c.getCoinValue()));
                 coinRecords1.add(c);
             }
             return Status.success().add("coinRecord", coinRecords1);
