@@ -129,6 +129,7 @@ function getUserCoin() {
 
 			} else {
                 $(".qiandao").html('签到');
+                $(".qiandao-hint").html("已经连续签到"+coinData.continuousTimes+"天，累加签到"+coinData.signTimes);
                 //签到
 				$(".qiandao").click(function() {
 					updateUserSign(coinData.generalCoin);
@@ -167,5 +168,6 @@ function jiayi(generalCoinCount) {
 			"color": "#4ea0ff"
 		});
 		$(".qiandao").html('<a href="integral.html"><span>已签到</span><span class="glyphicon glyphicon-menu-right qiandaoRight"></span></a>');
-	}, 1000); //显示1,秒后进行隐藏
+        $(".qiandao-hint").remove();
+    }, 1000); //显示1,秒后进行隐藏
 }

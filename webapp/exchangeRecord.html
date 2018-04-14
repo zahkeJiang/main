@@ -29,8 +29,11 @@ a{
   font-size: 14px;
   text-align: center;
 }
-.duihuan-content img{
-  margin-right: 4px;
+.imgIcon {
+    margin-right: 10px;
+}
+.duihuan-money img{
+    margin-right: 4px;
     margin-left: 10px;
 }
 .duihuan-content-text p{
@@ -43,7 +46,7 @@ a{
 }
 .duihuan-money{
   line-height: 18px;
-
+    margin:4px auto;
 }
 </style>
 <body>
@@ -86,7 +89,7 @@ $(function(){
         var exchangeDataHtml = ""
         $.each(exchangeData, function(commentIndex, comment) {
           exchangeDataHtml += '     <a href="exchangeInfo.html?exchangeId='+comment.exchangeId+'"><div class="duihuan-content">'
-                                      + '<img src="'+ comment.image +'" height="80px" width="80px">'
+                                      + '<img src="'+ comment.image +'" height="80px" width="80px" class="imgIcon">'
                                       + '<div class="duihuan-content-text">'
                                         + '<p class="name">'+ comment.awardName +'</p>'
                                         + '<div class="duihuan-money">'

@@ -15,6 +15,10 @@ body{
   text-align: center;
   border-bottom: 1px solid #ddd;
 }
+.img-detail{
+    width: 100%;
+    margin-bottom: 10px;
+}
 .xiala{
   color: #4ea0ff;
   font-size: 12px;

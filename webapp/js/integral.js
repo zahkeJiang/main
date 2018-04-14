@@ -37,13 +37,12 @@ function outCoinRecord() {
                           '<span class="integral_record_type">' + comment.note + '</span>' +
                           '<span class="integral_record_count goldhide' + comment.generalValue + '">' +
                             '<img src="./images/spreadWChat/normalGold.png" class="goldImg" />' +
-                              '<span class="spreadGold">' + comment.generalValue + '</span>' +
+                              '-&nbsp;<span class="spreadGold">' + Math.abs(comment.generalValue) + '</span>' +
                           '</span>' +
                           '<span class="integral_record_count goldhide' + comment.coinValue + '">' +
                             '<img src="./images/spreadWChat/spreadGold.png" class="goldImg">' +
-                            '<span class="normalGold">' + comment.coinValue + '</span>' +
+                            '-&nbsp;<span class="normalGold">' + Math.abs(comment.coinValue) + '</span>' +
                           '</span>' +
-                          '<span class="integral_record_count">-</span>' +
                           '<p class="integral_record_time">' + comment.createTime + '</p>' +
                       '</div>' +
                     '</div>';
@@ -69,14 +68,12 @@ function inCoinRecord() {
                 '<span class="integral_record_type">' + comment.note + '</span>' +
                 '<span class="integral_record_count goldhide' + comment.generalValue + '">' +
                     '<img src="./images/spreadWChat/normalGold.png" class="goldImg" />' +
-                    '<span class="spreadGold">' + comment.generalValue + '</span>' +
+                    '+&nbsp;<span class="spreadGold">' + comment.generalValue + '</span>' +
                 '</span>' +
                 '<span class="integral_record_count goldhide' + comment.coinValue + '">' +
                     '<img src="./images/spreadWChat/spreadGold.png" class="goldImg">' +
-                    '<span class="normalGold">' + comment.coinValue + '</span>' +
+                    '+&nbsp;<span class="normalGold">' + comment.coinValue + '</span>' +
                 '</span>' +
-
-                '<span class="integral_record_count">+</span>' +
                 '<p class="integral_record_time">' + comment.createTime + '</p>' +
             '</div>' +
             '</div>';
