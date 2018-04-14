@@ -63,8 +63,8 @@ public class Main {
 //------------------------------------------------------------------------------
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //        try {
-//            Date date1 = sdf.parse("2017-09-30");
-//            Date date2 = sdf.parse("2017-10-01");
+//            Date date1 = sdf.parse("2017-09-01");
+//            Date date2 = sdf.parse("2017-09-16");
 //
 //            System.out.println(date1.getDate());
 //            System.out.println(date2.getDate());
@@ -93,7 +93,10 @@ public class Main {
 
 //        System.out.println(Pattern.matches(".*速*.","速成快板"));
 
-        System.out.println(Math.abs(-1));
+//        System.out.println(Math.abs(-1));
+
+        System.out.println(new Date().getDay());
+        System.out.println(new Date().getDate());
 
     }
 

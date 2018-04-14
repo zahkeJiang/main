@@ -22,9 +22,19 @@ public class TestJob1 {
 
     public void execute(){
         try{
+            //自然月一号：清除连续签到标识
+            if (new Date().getDay() == 1){
+                integralService.updateDateOne();
+            }
 
-            integralService.updateAllSigned();
+            //所有昨日没签到的用户，将连续签到标识清零
             integralService.updateAllUnSigned();
+
+            //刷新所有签到用户
+            integralService.updateAllSigned();
+
+            //将连续签到30天的标识清零
+            integralService.updateContinuous();
 
         }catch(Exception ex){
 //            ex.printStackTrace();

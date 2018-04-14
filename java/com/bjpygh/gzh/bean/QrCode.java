@@ -1,17 +1,17 @@
 package com.bjpygh.gzh.bean;
 
-public class QrCode {
+public class    QrCode {
     private Long userId;
 
     private String ticket;
 
-    private Integer concern;
+    private Integer concern;                //净关注量
 
-    private Integer unconcern;
+    private Integer unconcern;             //取关量
 
-    private Integer onconcern;
+    private Integer onconcern;             //有效关注量
 
-    private Integer concerned;
+    private Integer concerned;             //总关注量
 
     public Long getUserId() {
         return userId;

@@ -15,10 +15,10 @@
 //     }
 // }
 // 
-$(function() {
-	$.post("checkLogin", {}, function(datas) {
-		if (datas.status == "-10") {
-			window.location.href = "openWchat.html"; //提示用客户端打开页面
-		}
-	}, "json");
-});
+// $(function() {
+// 	$.post("checkLogin", {}, function(datas) {
+// 		if (datas.status == "-10") {
+// 			window.location.href = "openWchat.html"; //提示用客户端打开页面
+// 		}
+// 	}, "json");
+// });

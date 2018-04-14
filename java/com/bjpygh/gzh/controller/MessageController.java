@@ -1,8 +1,12 @@
 package com.bjpygh.gzh.controller;
 
 import com.bjpygh.gzh.bean.Concern;
+import com.bjpygh.gzh.bean.Integral;
+import com.bjpygh.gzh.bean.User;
+import com.bjpygh.gzh.entity.Global;
 import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.service.ConcernService;
+import com.bjpygh.gzh.service.IntegralService;
 import com.bjpygh.gzh.service.QrCodeService;
 import com.bjpygh.gzh.utils.Http;
 import com.bjpygh.gzh.utils.OrderPush;
@@ -15,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -27,6 +31,9 @@ public class MessageController extends BaseController {
 
     @Autowired
     ConcernService concernService;
+
+    @Autowired
+    IntegralService integralService;
 
     //
     @ResponseBody
@@ -73,34 +80,46 @@ public class MessageController extends BaseController {
             }else if (map.get("Event").equals("subscribe")){//关注
                 String text = "ʜɪ!我是小漂Ꙭ，既然关注了我那就是我的人啦\n"+
                         "为了纪念这一天相遇，我特意为你准备了爱心大礼包，快看看吧\n" +
-                        "①<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx74d8d40a83387a3e&redirect_uri=http://gzpt.bjpygh.com/coupon.action&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect\">点击抽奖</a> \n"+
-                        "②<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx74d8d40a83387a3e&redirect_uri=http://gzpt.bjpygh.com/tuanjian.action&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect\">团建白菜价</a> \n" +
+                        "①<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+ Global.appID+"&redirect_uri="+Global.URL+"/coupon.action&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect\">点击抽奖</a> \n"+
+                        "②<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid="+ Global.appID+"&redirect_uri="+Global.URL+"/tuanjian.action&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect\">团建白菜价</a> \n" +
                         "另外，【留言】还是要有的，万一被小漂Ꙭ撩了呢哈哈~\n" +
                         "                ᴀʟʟ ғᴏʀ ʏᴏᴜ";
                 sendToUser(map,text);
                 if (map.get("EventKey") != null){//扫码关注
-                    List<Concern> concerns = concernService.selectOpenid(map);
-                    if (concerns.size() > 0){//是否关注过
-                        Concern concern = concerns.get(0);
-                        if (!concern.getConcerned()){//不是有效推广用户
-                            qrCodeService.updatePerUser(concern.getUserId());//前一任总关注量-1
-                            qrCodeService.updateCode(map);//新推广者的关注量变化
-                            concernService.updateExist(map);//对已存在的关注记录进行更新
-                        }
+                    //获取关注者的openid
+                    String openid = map.get("FromUserName");
+                    //判断是否关注过
+                    Concern concern1 = concernService.selectConcernByOpenId(openid);
+                    if (concern1 != null){ //关注过
+                        //更新关注时间
+                        concernService.updateTimeAndCancel(openid);
+                        //前一个推广用户净关注数量加一,取关量减一
+                        qrCodeService.updateQrConcern(concern1.getUserId());
                     }else {
+                        //添加新关注用户
                         concernService.insertConcern(map);
-                        qrCodeService.updateCode(map);//新推广者的关注量变化
+                        qrCodeService.updateNewConcern(map);//新推广者的关注量变化
+                        //奖励一金币
+                        String userId = map.get("EventKey").split("_")[1];
+                        integralService.addOneCoin(userId);
                         //此处做推送
+                        User user = userService.getUserById(userId);
+                        String pushInfo = "温馨提示： \n" +
+                                "成功推荐一名用户关注 \n";
+                        Map<String, String> openId = new HashMap<String, String>();
+                        openId.put("FromUserName", user.getOpenid());
+                        sendToUser(openId,pushInfo);
                     }
+
+                }else {
+                    concernService.insertConcern(map);
                 }
             }else if (map.get("Event").equals("unsubscribe")){//取关
-                if (concernService.selectOpenid(map).size() > 0){
-                    Concern concern = concernService.selectOpenid(map).get(0);
-                    if (!concern.getConcerned()){//不是有效关注用户
-                        qrCodeService.changeCode(map);
-                        concernService.deleteConcern(map);
-                    }
-                }
+                String openid = map.get("FromUserName");
+                concernService.cancelConcern(openid);  //更新关注状态为取关
+                //更新推荐人的关注量
+                String userId = map.get("EventKey").split("_")[1];
+                qrCodeService.updateNewQrCode(userId);
             }
         }
         return "success";

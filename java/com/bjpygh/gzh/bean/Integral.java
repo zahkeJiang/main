@@ -14,6 +14,12 @@ public class Integral {
 
     private int continuous;  //签到次数
 
+    private Integer signContinuous; //自然月每日签到
+
+    private Integer signTimes;
+
+    private Integer continuousTimes;
+
     private Date createTime;
 
     private Date updateTime;
@@ -58,6 +64,30 @@ public class Integral {
         this.continuous = continuous;
     }
 
+    public Integer getSignContinuous() {
+        return signContinuous;
+    }
+
+    public void setSignContinuous(Integer signContinuous) {
+        this.signContinuous = signContinuous;
+    }
+
+    public Integer getSignTimes() {
+        return signTimes;
+    }
+
+    public void setSignTimes(Integer signTimes) {
+        this.signTimes = signTimes;
+    }
+
+    public Integer getContinuousTimes() {
+        return continuousTimes;
+    }
+
+    public void setContinuousTimes(Integer continuousTimes) {
+        this.continuousTimes = continuousTimes;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -82,6 +112,9 @@ public class Integral {
                 ", coin=" + coin +
                 ", isSign=" + isSign +
                 ", continuous=" + continuous +
+                ", signContinuous=" + signContinuous +
+                ", signTimes=" + signTimes +
+                ", continuousTimes=" + continuousTimes +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';

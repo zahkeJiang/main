@@ -29,20 +29,18 @@ public class BaseController {
         HttpSession session = request.getSession();
         Map<String, String> userMap = (Map<String, String>) session.getAttribute("user");
         Map<String, String> map = new HashMap<String, String>();
-        System.out.println("121212121212");
         if(userMap == null){
             userMap = new HashMap<String, String>();
             String openid = null;
             String access_token = null;
             String userId = null;
-            System.out.println("2323232323232323232");
             try{
                 map = OrderPush.getMap(request);
                 System.out.println("the map :" + map);
                 openid =map.get("openid");
                 access_token = map.get("access_token");
                 userId = userService.getUserIdByOpenid(openid);
-                System.out.println("43434343434343434343");
+                System.out.println("userID:" + userId);
                 if(userId == null){		//判断用户不存在
                     //用户不存在则插入用户
                     User user = OrderPush.getUser(OrderPush.getUserInfo(openid, access_token));
@@ -57,7 +55,6 @@ public class BaseController {
 //            userMap.put("id","1");
 //            userMap.put("openid","o9C-m0gWfR9WOs8DIDElxSUfDIUU");
                 session.setAttribute("user", userMap );
-                System.out.println("access_token="+userMap);
                 return  userMap;
             }catch (Exception e){
                 return null;

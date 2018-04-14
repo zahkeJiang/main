@@ -19,4 +19,8 @@ public interface IntegralMapper {
     void inCoinRecord(String userid);
 
     void updateInegral(Integral integral);
+
+    void updateContinuous();
+
+    void updateAllSignContinuous();
 }
