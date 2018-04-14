@@ -500,6 +500,7 @@ $(function() {
     //选择支付方式后点击确认
     $(".toPay").click(function() {
         var payMode = $("input[name='villa-radio']:checked").val(); //支付方式
+        console.log(payMode,"付款方式");
         var tend = $(".tend").html(); //帐篷人数
         var indoor = $(".indoor").html(); //室内人数
         var nosleep = $(".nosleep").html(); //不住宿人数

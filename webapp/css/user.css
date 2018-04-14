@@ -237,3 +237,9 @@ span{
 	font-size: 14px;
 	display: none;
 }
+
+.qiandao-hint{
+	text-align: center;
+	line-height: 12px;
+	color: #fff;
+}
