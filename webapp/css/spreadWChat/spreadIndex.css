@@ -28,7 +28,7 @@ body{
 .divBox p{
   line-height: 18px;
   font-size: 14px;
-  text-indent: 2em;
+  /*text-indent: 2em;*/
   margin:4px 8px 0 8px;
   height: 54px;
   overflow:hidden;

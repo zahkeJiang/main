@@ -581,14 +581,18 @@ function recharge(orderNumber) {
 }
 //付款判断
 function determine(obj) {
+    console.log(1);
     if (typeof WeixinJSBridge == "undefined") {
         if (document.addEventListener) {
+            console.log(2);
             document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
         } else if (document.attachEvent) {
+            console.log(3);
             document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
             document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
         }
     } else {
+        console.log(4);
         onBridgeReady(obj);
     }
 }
@@ -596,6 +600,7 @@ function determine(obj) {
 //微信支付
 function onBridgeReady(obj) {
     var payurl = obj.data;
+    console.log(payurl);
     WeixinJSBridge.invoke(
         'getBrandWCPayRequest', {
             "appId": payurl.appid, //公众号名称，由商户传入     
