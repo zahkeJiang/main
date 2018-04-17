@@ -74,7 +74,7 @@ public class MessageController extends BaseController {
                 if (map.get("EventKey").equals("support_hotline")){//咨询电话
                     String text = "座机：010-59822296 \n" +
                             "小漂：18813069524 \n" +
-                            "      18811758773";
+                            "           18811758773";
                     sendToUser(map,text);
                 }
             }else if (map.get("Event").equals("subscribe")){//关注

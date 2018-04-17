@@ -9,7 +9,7 @@ public class Global {
 	//测试服
 	public static final String appID = "wx3a99dcdeeee5dad6";
 	public static final String appsecret = "49e3c2938ffca3c71ccc4c56d10b9785";
-	public static final String URL = "http://devg.bjpygh.com";
+	public static final String URL = "http://devg.bjpygh.com/bjpygh";
 
 
 	//正式服

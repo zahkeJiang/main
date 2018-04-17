@@ -51,7 +51,7 @@ public class OrderPush {
         JSONObject obj = new JSONObject();
         obj.accumulate("touser",map.get("openid"));
         obj.accumulate("template_id","Oxsy4JnPMy3F2KvuEjKrS5awVXMK8zFir3pblGAaqow");
-        obj.accumulate("url","https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Global.appID+"&redirect_uri=http://gzpt.bjpygh.com/schedule.action&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
+        obj.accumulate("url","https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Global.appID+"&redirect_uri="+Global.URL+"/schedule.action&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect");
         obj.accumulate("data",ja);
 
         String result = Http.sendPost("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+access_token,
