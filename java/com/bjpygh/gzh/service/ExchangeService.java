@@ -36,7 +36,7 @@ public class ExchangeService {
         Award award = awardMapper.getAward(Long.valueOf(exchange.getAwardId()));
         if (award.getAmount()>0){
             Integral integral = integralMapper.selectIntegral(Long.valueOf(userid));
-            if (integral.getGeneralCoin()>award.getGeneralCoin()&&integral.getCoin()>award.getCoin()){
+            if (integral.getGeneralCoin()>=award.getGeneralCoin()&&integral.getCoin()>=award.getCoin()){
                 //生成兑换编号
                 String exchangeNumber = DateUtils.getSystemTimeInMM()+ CodeUtil.getRandom(4);
                 exchange.setExchangeNumber(exchangeNumber);

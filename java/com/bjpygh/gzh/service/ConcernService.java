@@ -24,7 +24,7 @@ public class ConcernService {
         concern.setUserId(Long.valueOf(map.get("EventKey").split("_")[1]));
         concern.setOpenid(map.get("FromUserName"));
         concern.setCreateTime(formatter.format(new Date()));
-        concernMapper.insertSelective(concern);
+        concernMapper.insertConcern(concern);
     }
 
     public void deleteConcern(Map<String, String> map) {
@@ -44,8 +44,8 @@ public class ConcernService {
     }
 
 
-    public List<Concern> getConcerned() {
-        return concernMapper.selectConcerned();
+    public List<Concern> getConcernedThirty() {
+        return concernMapper.getConcernedThirty();
     }
 
     public void updateConcerned(Concern c) {
@@ -59,5 +59,26 @@ public class ConcernService {
         criteria.andUserIdEqualTo(Long.valueOf(map.get("EventKey").split("_")[1]));
         criteria.andIsDeleteEqualTo(false);
         int i = concernMapper.updateByExample(example);
+    }
+
+    public Concern selectConcernByOpenId(String openid) {
+        Concern concern = concernMapper.selectConcernByOpenId(openid);
+        return concern;
+    }
+
+    public void updateTimeAndCancel(String openid) {
+        concernMapper.updateTimeAndCancel(openid);
+    }
+
+    public void cancelConcern(String openid) {
+        concernMapper.cancelConcern(openid);
+    }
+
+    public List<Concern> getConcernedSeven() {
+        return concernMapper.getConcernedSeven();
+    }
+
+    public List<Concern> getConcernedFifteen() {
+        return concernMapper.getConcernedFifteen();
     }
 }

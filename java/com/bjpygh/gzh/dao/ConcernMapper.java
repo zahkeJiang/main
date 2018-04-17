@@ -28,5 +28,17 @@ public interface ConcernMapper {
 
     int updateByPrimaryKey(Concern record);
 
-    List<Concern> selectConcerned();
+    List<Concern> getConcernedThirty();
+
+    Concern selectConcernByOpenId(String openid);
+
+    void updateTimeAndCancel(String openid);
+
+    void insertConcern(Concern concern);
+
+    void cancelConcern(String openid);
+
+    List<Concern> getConcernedSeven();
+
+    List<Concern> getConcernedFifteen();
 }

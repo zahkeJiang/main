@@ -23,6 +23,9 @@
         <property name="driverClass" value="${jdbc.driverClass}"></property>
         <property name="user" value="${jdbc.user}"></property>
         <property name="password" value="${jdbc.password}"></property>
+        <property name="minPoolSize" value="5"></property>
+        <property name="maxPoolSize" value="40"></property>
+        <property name="maxIdleTime" value="60"></property>
     </bean>
 
 
@@ -68,7 +71,7 @@
             <!--所有方法都是事物方法-->
             <tx:method name="*"/>
             <!--以get开头的所有方法-->
-            <tx:method name="get*" read-only="true"/>
+            <tx:method name="get*" read-only="false"/>
         </tx:attributes>
     </tx:advice>
 

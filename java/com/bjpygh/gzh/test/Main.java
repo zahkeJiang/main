@@ -63,8 +63,8 @@ public class Main {
 //------------------------------------------------------------------------------
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //        try {
-//            Date date1 = sdf.parse("2017-09-30");
-//            Date date2 = sdf.parse("2017-10-01");
+//            Date date1 = sdf.parse("2017-09-01");
+//            Date date2 = sdf.parse("2017-09-16");
 //
 //            System.out.println(date1.getDate());
 //            System.out.println(date2.getDate());
@@ -93,11 +93,13 @@ public class Main {
 
 //        System.out.println(Pattern.matches(".*速*.","速成快板"));
 
-        JSONObject j = new JSONObject();
-        j.accumulate("bId","B0053UHO2E");
-        String s = Http.sendPost("http://47.94.227.99/Amazon/getBook", "bId=B0053UHO2E");
-        System.out.println("result=" + s);
+//        System.out.println(Math.abs(-1));
+
+        System.out.println(new Date().getDay());
+        System.out.println(new Date().getDate());
+
     }
+
 
 //29 6 5
 //28 5 4

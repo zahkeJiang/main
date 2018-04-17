@@ -1,12 +1,14 @@
 package com.bjpygh.gzh.config;
 
+import com.bjpygh.gzh.entity.Global;
+
 public class AlipayConfig {
 	public static String APPID = "2017070407638901";
 	public static String RSA_PRIVATE_KEY = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCar0mVo0REzGIKTKFNAeGj4dGfur7maOuhJhjOsfpFWzxlKtLph7tmQtP0GIhKcDDTUHgxCktfgd+jBaQ5AYrtoRa3+ADgfX0BFnx36abIEU3/6T+SncSzFhHSSAE7yq6/VJ3HGToQSueqLgptfa7Ix2nh+35GICWaI9TUnmkXVSQv9JdPKeKytfGMTQimJs2zStQxm0mMcURHkkJEiH6ea7k76Sk4FQE0fEcQhj+orEktQJJfS2WvH2/NuzI9L9fHRHAiw2GZgL0GpIvRmF8ydRAakU1g+dznNaL9312SGLnkjihVKVyikNRB+YWquKqv7oXuxyCzLNoluKaIZgqBAgMBAAECggEAVYAoW1b4iFK0ql67FfbBQzWyCelOVcuO2u9U7QNBhA6vLnhiRoUpF5g+0gCxbPvgcR1coja/fNYryE94+62XnkvZY+zohy215+EHAb0b3CB8jcTex+r+68J6LVJxpBwfRVC/OWr/RjwxG0cBqo27C+3139yEarygLDg8Dx5Ulnk0Qc1QM3m4bHPKrk8VbwzIasQkKo+iyTWCWRETpo7Nni6tCbM90Y/rUsgw5eKhkp3RwPzqr2SNpzGPXX62ONE+isH4QzSiQV0OwQEPmEPjoSBKP7818gfhNvYs9SmPff5lENqO7hLBYluvwyPiDmOEimXV0UPNPbHruCfCpj1zwQKBgQDNhQm4xl8yqO8HyYS6yeNT6BUfs0cEFWLuZZdIV2NV99uvDhuy9dMxx7Oh3qL111yO2WeyeFTn9OxQv8X7SJ7xnJ00OuUBquvixpu0us668tGE8hAsJfFTSSpO1MhiwebBS7mupkjuf4Er98a6vFLVoIfraaFJHYwUxfKdwVqSWQKBgQDArcaJwPQLStrehhJuXg2zORNaZiz/dgWq327rJRdHL98L75juAKKin2TBnhmmrry3+4/q9bPrkhRDWZZ2jdg+kSYJOGscEXDCxffyKs/ceuq7uqNy9UUM0PdEKmaKtNjQaaAeLQYZ0gnFD4KMf/ykLcArIyc5QqApCeZWspekaQKBgD/E6upRaxJ+BoUFC1El+Yp8dal7aCqlNChCj3lb3C+9k4Wyu/eAfUJx85PjT+82HrsYTCu9WKMMhRLdHmJE+0R+0ux05b/pt/2KoJ+oYyLw2wAEV+5K66FrD1yce3zhK2eIxpmhcPnHyF3LKPeiHZW5lNL/2JKmP2Pms8wtRZwpAoGBAK7D8HU6YyFrACMekNEy1lJdzsQMMXx1XKaki0MWHYsgTLvS02/te5bt5MIJ2VJq5BotP1jrDAr8MQz10ZgvCJmXplxupBiNaS4ByugJFQjzJL6qh17aQYtibyWRH/loF9DSPb2hMQtyjBIGA2/VFx8DsG5wMD+rwwH2TMsOqqUhAoGAHX5aXHBrDoixZRuxF0T4zVyT23bNJ1Jy9w5+nrRI/gxJjQbX3sJGi9AGq9FKHiOphJVuVwQpSqDBTWHBv3g30f916YQiZvcVq3FtNZSbsy6+ZBZ97nqU4k4sD/a58BeusghsaYaqOSY4UPR+klyTigzUlWYO2Ewzaw6zQptZ1Lc=";
-	public static String notify_url = "http://gzpt.bjpygh.com/notify_url";
-	public static String vnotify_url = "http://gzpt.bjpygh.com/vnotify_url";
-	public static String anotify_url = "http://gzpt.bjpygh.com/anotify_url";
-	public static String return_url = "http://gzpt.bjpygh.com/return_url.jsp";
+	public static String notify_url = Global.URL + "/notify_url";
+	public static String vnotify_url = Global.URL + "/vnotify_url";
+	public static String anotify_url = Global.URL + "/anotify_url";
+	public static String return_url = Global.URL + "/return_url.jsp";
 	public static String URL = "https://openapi.alipay.com/gateway.do";
 	public static String CHARSET = "UTF-8";
 	public static String FORMAT = "json";

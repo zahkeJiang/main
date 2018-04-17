@@ -7,6 +7,10 @@ public class UserCoin {
 
     private Integer isSign;
 
+    private Integer signTimes;
+
+    private Integer continuousTimes;
+
     public Double getGeneralCoin() {
         return generalCoin;
     }
@@ -29,5 +33,21 @@ public class UserCoin {
 
     public void setIsSign(Integer isSign) {
         this.isSign = isSign;
+    }
+
+    public Integer getSignTimes() {
+        return signTimes;
+    }
+
+    public void setSignTimes(Integer signTimes) {
+        this.signTimes = signTimes;
+    }
+
+    public Integer getContinuousTimes() {
+        return continuousTimes;
+    }
+
+    public void setContinuousTimes(Integer continuousTimes) {
+        this.continuousTimes = continuousTimes;
     }
 }
