@@ -79,8 +79,11 @@ function bt() {
 					"phonenumber": mobile
 				}, function(obj) {
 					if (obj.status == 0) {
-						location.href = "user.html";
-					} else {
+						// location.href = "user.html";
+						window.history.back();
+						window.location.reload();
+                        // window.location.go(-1);
+                    } else {
 						modalHintText("该手机号已被注册。");
 					}
 				}, "json");
