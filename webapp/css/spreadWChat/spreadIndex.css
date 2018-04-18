@@ -54,9 +54,12 @@ body{
 }
 .code img.codeImg{
   width: 50%;
-  margin:10px 25%;
+    background: url("../../images/spreadWChat/cordbg.png")no-repeat center;
+    background-size: 100% 100%;
+  padding:100px 25% 40px 25%;
   border-radius: 6px;
-  border:8px solid #4ea0ff;
+    margin: 10px 0;
+  /*border:8px solid #4ea0ff;*/
 }
 .code a{
   color: #4ea0ff;
