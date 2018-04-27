@@ -581,7 +581,9 @@ function recharge(orderNumber) {
 }
 //付款判断
 function determine(obj) {
+    console.log("执行determine方法",obj)
     if (typeof WeixinJSBridge == "undefined") {
+        console.log(123)
         if (document.addEventListener) {
             document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
         } else if (document.attachEvent) {
@@ -596,6 +598,7 @@ function determine(obj) {
 //微信支付
 function onBridgeReady(obj) {
     var payurl = obj.data;
+    console.log("微信支付返回",obj);
     WeixinJSBridge.invoke(
         'getBrandWCPayRequest', {
             "appId": payurl.appid, //公众号名称，由商户传入     

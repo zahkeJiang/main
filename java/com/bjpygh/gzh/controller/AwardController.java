@@ -101,4 +101,13 @@ public class AwardController extends BaseController{
         String userid = userMap.get("id");
         return awardService.deleteAddress(addressId);
     }
+
+    @RequestMapping(value = "/jiangpin.action", method = RequestMethod.GET)
+    public String applyCard(HttpServletRequest request){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return "error";
+        }
+        return "prizesCenter";
+    }
 }

@@ -479,9 +479,12 @@
     </update>
     <select id="selectDefaultAddress" parameterType="java.lang.Long" resultType="address">
         SELECT a.address_id AS addressId, a.detail FROM address a JOIN user_info u
-        ON a.address_id=u.address_id WHERE u.user_id=#{userid}
+        ON a.address_id=u.address_id WHERE u.user_id=#{userid} AND a.is_delete=0
     </select>
   <select id="getUserId" parameterType="java.lang.String" resultType="java.lang.String">
     SELECT user_id FROM user_info WHERE openid = #{openid}
+  </select>
+  <select id="selectAllOpenid" resultType="String">
+    SELECT openid FROM user_info
   </select>
 </mapper>

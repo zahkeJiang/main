@@ -94,4 +94,8 @@ public class UserService {
 
     }
 
+    public List<String> selectAllOpenid() {
+
+        return userMapper.selectAllOpenid();
+    }
 }

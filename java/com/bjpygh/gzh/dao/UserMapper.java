@@ -47,4 +47,6 @@ public interface UserMapper {
     List<Address> selectDefaultAddress(Long userid);
 
     void updateUserCoin(User user);
+
+    List<String> selectAllOpenid();
 }

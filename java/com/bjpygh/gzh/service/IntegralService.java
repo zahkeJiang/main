@@ -31,6 +31,15 @@ public class IntegralService {
                 userCoin);
     }
 
+    public UserCoin selectUserCoinByUserId(String userid) {
+        UserCoin userCoin = integralMapper.selectUserCoin(Long.valueOf(userid));
+        if (userCoin == null){
+            integralMapper.insertUserCoin(Long.valueOf(userid));
+            userCoin = integralMapper.selectUserCoin(Long.valueOf(userid));
+        }
+        return userCoin;
+    }
+
     public Status updateUserSign(String userid) {
         Integral integral = integralMapper.selectIntegral(Long.valueOf(userid));
             if (integral.getIsSign() == 0){

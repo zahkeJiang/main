@@ -523,7 +523,7 @@ public class PayController extends BaseController {
         String mch_id = config.getMchID();
         String device_info = "WEB";
         String nonce_str = getRandomString(32);
-        String stringA="appid="+appid+"&body="+body+"&device_info="+device_info+"&mch_id="+mch_id+"&nonce_str="+nonce_str;
+        String stringA="appid=" + appid+"&body=" + body+"&device_info="+device_info+"&mch_id="+mch_id+"&nonce_str="+nonce_str;
         String stringSignTemp=stringA+"&key="+key; //注：key为商户平台设置的密钥key
         String sign= MD5.string2MD5(stringSignTemp); //注：MD5签名方式
 //        sign=hash_hmac("sha256",stringSignTemp,key); //注：HMAC-SHA256签名方式

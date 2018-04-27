@@ -21,7 +21,11 @@ public class ConcernService {
 
     public void insertConcern(Map<String, String> map) {
         Concern concern = new Concern();
-        concern.setUserId(Long.valueOf(map.get("EventKey").split("_")[1]));
+        if (map.get("EventKey") == null){
+            concern.setUserId(0L);
+        }else {
+            concern.setUserId(Long.valueOf(map.get("EventKey").split("_")[1]));
+        }
         concern.setOpenid(map.get("FromUserName"));
         concern.setCreateTime(formatter.format(new Date()));
         concernMapper.insertConcern(concern);
