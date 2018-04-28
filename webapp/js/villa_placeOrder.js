@@ -18,6 +18,7 @@ var weekend = 148; //周五到周日的价格
 var man_day_total_money = 3200; //周一到周四的单套别墅价格
 var weekend_total_money = 3688; //周五到周日的单套别墅价格
 $(function() {
+
     //获取用户手机号码
     $.post("personal.action", {}, function(datas) {
         if (datas.status == 0) {
@@ -583,7 +584,6 @@ function recharge(orderNumber) {
 function determine(obj) {
     console.log("执行determine方法",obj)
     if (typeof WeixinJSBridge == "undefined") {
-        console.log(123)
         if (document.addEventListener) {
             document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
         } else if (document.attachEvent) {
@@ -597,16 +597,17 @@ function determine(obj) {
 
 //微信支付
 function onBridgeReady(obj) {
-    var payurl = obj.data;
+    var payData = obj.data;
+    var payDataChild = payData.data;
     console.log("微信支付返回",obj);
     WeixinJSBridge.invoke(
         'getBrandWCPayRequest', {
-            "appId": payurl.appid, //公众号名称，由商户传入     
-            "timeStamp": obj.timeStamp, //时间戳，自1970年以来的秒数     
-            "nonceStr": payurl.nonce_str, //随机串     
-            "package": "prepay_id=" + payurl.prepay_id,
+            "appId": payDataChild.appid, //公众号名称，由商户传入
+            "timeStamp": payData.timeStamp, //时间戳，自1970年以来的秒数
+            "nonceStr": payDataChild.nonce_str, //随机串
+            "package": "prepay_id=" + payDataChild.prepay_id,
             "signType": "MD5", //微信签名方式：     
-            "paySign": obj.paySign //微信签名 
+            "paySign": payData.paySign //微信签名
         },
         function(res) {
             if (res.err_msg == "get_brand_wcpay_request:ok") {

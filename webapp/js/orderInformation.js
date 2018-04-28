@@ -279,27 +279,29 @@ function determine(obj) {
 
 //微信支付
 function onBridgeReady(obj) {
-	var payurl = obj.data;
-	WeixinJSBridge.invoke(
-		'getBrandWCPayRequest', {
-			"appId": payurl.appid, //公众号名称，由商户传入     
-			"timeStamp": obj.timeStamp, //时间戳，自1970年以来的秒数     
-			"nonceStr": payurl.nonce_str, //随机串     
-			"package": "prepay_id=" + payurl.prepay_id,
-			"signType": "MD5", //微信签名方式：     
-			"paySign": obj.paySign //微信签名 
-		},
-		function(res) {
-			if (res.err_msg == "get_brand_wcpay_request:ok") {
-				$(".modalHint-body").html("支付成功");
-				openModalHint(); //打开确认弹窗
-			} // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。              
-			else {
-				$(".modalHint-body").html("未支付");
-				openModalHint(); //打开确认弹窗
+    var payData = obj.data;
+    var payDataChild = payData.data;
+    console.log("微信支付返回",obj);
+    WeixinJSBridge.invoke(
+        'getBrandWCPayRequest', {
+            "appId": payDataChild.appid, //公众号名称，由商户传入
+            "timeStamp": payData.timeStamp, //时间戳，自1970年以来的秒数
+            "nonceStr": payDataChild.nonce_str, //随机串
+            "package": "prepay_id=" + payDataChild.prepay_id,
+            "signType": "MD5", //微信签名方式：
+            "paySign": payData.paySign //微信签名
+        },
+        function(res) {
+            if (res.err_msg == "get_brand_wcpay_request:ok") {
+                $(".modalHint-body").html("支付成功");
+                openModalHint(); //打开确认弹窗
+            } // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+            else {
+                $(".modalHint-body").html("未支付");
+                openModalHint(); //打开确认弹窗
 
-			}
-		}
+            }
+        }
 
-	);
+    );
 }

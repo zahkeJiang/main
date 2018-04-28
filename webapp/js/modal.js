@@ -45,8 +45,8 @@ function closeModalHint() {
 }
 
 $(".modalHint-footer-ok").click(function() {
-	$(".modalHint-layer").fadeOut(200);
-	$(".modalHint").fadeOut(100);
+	$(".modalHint-layer").fadeOut(100);
+	$(".modalHint").fadeOut(200);
 });
 //关闭弹窗
 $(".modalHint-footer-cancel").click(function() {
