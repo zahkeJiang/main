@@ -19,6 +19,12 @@ var man_day_total_money = 3200; //周一到周四的单套别墅价格
 var weekend_total_money = 3688; //周五到周日的单套别墅价格
 $(function() {
 
+    //关闭弹窗
+    $(".modalHint-footer-ok").click(function() {
+        $(".modalHint-layer").fadeOut(100);
+        $(".modalHint").hide();
+        console.log("关闭");
+    });
     //获取用户手机号码
     $.post("personal.action", {}, function(datas) {
         if (datas.status == 0) {
@@ -613,7 +619,7 @@ function onBridgeReady(obj) {
             if (res.err_msg == "get_brand_wcpay_request:ok") {
                 $(".modalHint-body").html("支付成功");
                 openModalHint(); //打开确认弹窗
-            } // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。              
+            } // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
             else {
                 $(".modalHint-body").html("未支付");
                 openModalHint(); //打开确认弹窗

@@ -46,7 +46,9 @@ function closeModalHint() {
 
 $(".modalHint-footer-ok").click(function() {
 	$(".modalHint-layer").fadeOut(100);
-	$(".modalHint").fadeOut(200);
+
+	$(".modalHint").fadeOut(100);
+    console.log("关闭1");
 });
 //关闭弹窗
 $(".modalHint-footer-cancel").click(function() {

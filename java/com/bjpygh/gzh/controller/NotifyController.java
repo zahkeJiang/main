@@ -71,7 +71,7 @@ public class NotifyController extends BaseController {
             String orderNumber = map.get("out_trade_no");
             String o = orderNumber.substring(0, 1);
             if (o.equals("A")){
-                ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(map.get("ordernumber")).get(0);
+                ArmyOrder armyOrder = armyOrderService.getArmyOrderByNumber(map.get("out_trade_no")).get(0);
                 armyOrder.setOrderStatus(1);
                 armyOrder.setPayType((byte) 1);
                 armyOrder.setPayTime(formatter.format(new Date()));
@@ -82,7 +82,7 @@ public class NotifyController extends BaseController {
                 User userById = userService.getUserById(String.valueOf(armyOrder.getUserId()));
                 ArmyMessagePush(armyOrder,userById.getOpenid());
             }if (o.equals("V")){
-                VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(map.get("ordernumber")).get(0);
+                VillaOrder villaOrder = villaOrderService.getVillaOrderByNumber(map.get("out_trade_no")).get(0);
                 villaOrder.setOrderStatus(1);
                 villaOrder.setPayType((byte) 1);
                 villaOrder.setPayTime(formatter.format(new Date()));

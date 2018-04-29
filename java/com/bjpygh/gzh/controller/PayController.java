@@ -535,7 +535,7 @@ public class PayController extends BaseController {
         data.put("out_trade_no", orderNumber);
         data.put("device_info", device_info);
         data.put("fee_type", "CNY");
-        data.put("total_fee", total_fee);
+        data.put("total_fee", total_fee+"00");
         data.put("nonce_str", nonce_str);
         data.put("notify_url", "http://gzpt.bjpygh.com/notify.action");
         data.put("trade_type", "JSAPI");  // 此处指定为微信公众号支付

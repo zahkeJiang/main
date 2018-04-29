@@ -7,6 +7,12 @@ function ShowMessage() {
 }
 window.onload = ShowMessage();
 $(function() {
+    //关闭弹窗
+    $(".modalHint-footer-ok").click(function() {
+        $(".modalHint-layer").fadeOut(100);
+        $(".modalHint").hide();
+        console.log("关闭");
+    });
 	var typeLetter = ordernumber.substr(0, 1); //提取订单号收个字母，D驾校，V别墅，A军旅
 	$.post("schedule.action", {
 		"ordernumber": ordernumber

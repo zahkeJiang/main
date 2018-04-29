@@ -52,7 +52,8 @@ public class BaseController {
                 userMap.put("id",userId);
                 userMap.put("openid", openid);
                 userMap.put("access_token",access_token);
-//            userMap.put("id","1");
+//            userMap.put("id","308");
+//            userMap.put("openid","orr-_0ujJ5sgXFvMwGclnsSxZIp8");
 //            userMap.put("openid","o9C-m0gWfR9WOs8DIDElxSUfDIUU");
                 session.setAttribute("user", userMap );
                 return  userMap;

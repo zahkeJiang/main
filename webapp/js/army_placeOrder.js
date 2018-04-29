@@ -8,7 +8,12 @@ var date = "";
 var reg = /(^\d{15}$)|(^\d{17}(\d|X)$)/; //身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X 
 
 $(function() {
-
+//关闭弹窗
+    $(".modalHint-footer-ok").click(function() {
+        $(".modalHint-layer").fadeOut(100);
+        $(".modalHint").hide();
+        console.log("关闭");
+    });
     //获取用户手机号码
     $.post("personal.action", {}, function(datas) {
         if (datas.status == 0) {
