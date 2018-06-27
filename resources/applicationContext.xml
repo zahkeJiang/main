@@ -77,13 +77,15 @@
 
     <!--Spring配置文件的核心点（数据源、与mybatis的整合，事务控制）-->
 
-    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <bean name="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers">
             <list>
                 <ref bean="testTrigger"/>
                 <ref bean="testTrigger1"/>
+                <ref bean="testTrigger2"/>
             </list>
         </property>
+        <property name="waitForJobsToCompleteOnShutdown" value="true"/>
         <property name="autoStartup" value="true"/>
     </bean>
 
@@ -118,5 +120,18 @@
 
     <bean id="testJob1" class="com.bjpygh.gzh.service.quartz.TestJob1"/>
 
+    <bean id="testTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="testJobDetail2"/>
+        <property name="cronExpression" value="0 1 0 * * ?"/>
+    </bean>
+
+    <bean id="testJobDetail2" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="testJob2"/>
+        <property name="targetMethod" value="execute"/>
+        <property name="concurrent" value="false"/>
+        <!-- 是否允许任务并发执行。当值为false时，表示必须等到前一个线程处理完毕后才再启一个新的线程 -->
+    </bean>
+
+    <bean id="testJob2" class="com.bjpygh.gzh.service.quartz.TestJob2"/>
 
 </beans>

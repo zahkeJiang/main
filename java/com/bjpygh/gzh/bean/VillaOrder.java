@@ -1,7 +1,5 @@
 package com.bjpygh.gzh.bean;
 
-import java.util.Date;
-
 public class VillaOrder {
     private Integer villaId;
 

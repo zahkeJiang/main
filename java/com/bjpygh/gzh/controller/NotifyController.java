@@ -88,7 +88,10 @@ public class NotifyController extends BaseController {
                 villaOrder.setPayTime(formatter.format(new Date()));
                 villaOrderService.updateOrder(villaOrder);
 
-                pushToWangNan(villaOrder.getOrderNumber(),villaOrder.getVillaPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
+                //推送给张智良
+                pushToWangNan(villaOrder.getOrderNumber(),villaOrder.getVillaPrice(),"o9C-m0m1ywvetapVQsq_fpoPPJOQ");
+                //推送给蒋圆
+                pushToWangNan(villaOrder.getOrderNumber(),villaOrder.getVillaPrice(),"o9C-m0gWfR9WOs8DIDElxSUfDIUU");
 
                 User userById = userService.getUserById(String.valueOf(villaOrder.getUserId()));
                 VillaMessagePush(villaOrder,userById.getOpenid());
@@ -122,7 +125,10 @@ public class NotifyController extends BaseController {
             dsOrder.setPayTime(formatter.format(new Date()));
             dsOrderService.updateOrder(dsOrder);
 
-            pushToWangNan(dsOrder.getOrderNumber(),dsOrder.getOrderPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
+            //推送给张智良
+            pushToWangNan(dsOrder.getOrderNumber(),dsOrder.getOrderPrice(),"o9C-m0m1ywvetapVQsq_fpoPPJOQ");
+            //推送给蒋圆
+            pushToWangNan(dsOrder.getOrderNumber(),dsOrder.getOrderPrice(),"o9C-m0gWfR9WOs8DIDElxSUfDIUU");
 
             out.println("success");	//请不要修改或删除
             User userById = userService.getUserById(String.valueOf(dsOrder.getUserId()));
@@ -205,7 +211,10 @@ public class NotifyController extends BaseController {
             villaOrder.setPayTime(formatter.format(new Date()));
             villaOrderService.updateOrder(villaOrder);
 
-            pushToWangNan(villaOrder.getOrderNumber(),villaOrder.getVillaPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
+            //推送给张智良
+            pushToWangNan(villaOrder.getOrderNumber(),villaOrder.getVillaPrice(),"o9C-m0m1ywvetapVQsq_fpoPPJOQ");
+            //推送给蒋圆
+            pushToWangNan(villaOrder.getOrderNumber(),villaOrder.getVillaPrice(),"o9C-m0gWfR9WOs8DIDElxSUfDIUU");
 
             User userById = userService.getUserById(String.valueOf(villaOrder.getUserId()));
             VillaMessagePush(villaOrder,userById.getOpenid());
@@ -231,7 +240,10 @@ public class NotifyController extends BaseController {
             armyOrder.setPayTime(formatter.format(new Date()));
             armyOrderService.updateOrder(armyOrder);
 
-            pushToWangNan(armyOrder.getOrderNumber(),armyOrder.getArmyPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
+            //推送给张智良
+            pushToWangNan(armyOrder.getOrderNumber(),armyOrder.getArmyPrice(),"o9C-m0m1ywvetapVQsq_fpoPPJOQ");
+            //推送给蒋圆
+            pushToWangNan(armyOrder.getOrderNumber(),armyOrder.getArmyPrice(),"o9C-m0gWfR9WOs8DIDElxSUfDIUU");
 
             User userById = userService.getUserById(String.valueOf(armyOrder.getUserId()));
             ArmyMessagePush(armyOrder,userById.getOpenid());
@@ -275,7 +287,10 @@ public class NotifyController extends BaseController {
                     villaOrder.setPayType((byte) 3);
                     villaOrder.setPayTime(formatter.format(new Date()));
                     villaOrderService.updateOrder(villaOrder);
-                    pushToWangNan(villaOrder.getOrderNumber(),villaOrder.getVillaPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
+                    //推送给张智良
+                    pushToWangNan(villaOrder.getOrderNumber(),villaOrder.getVillaPrice(),"o9C-m0m1ywvetapVQsq_fpoPPJOQ");
+                    //推送给蒋圆
+                    pushToWangNan(villaOrder.getOrderNumber(),villaOrder.getVillaPrice(),"o9C-m0gWfR9WOs8DIDElxSUfDIUU");
 
                     User userById = userService.getUserById(String.valueOf(villaOrder.getUserId()));
                     VillaMessagePush(villaOrder,userById.getOpenid());
@@ -285,7 +300,11 @@ public class NotifyController extends BaseController {
                     dsOrder.setPayType((byte) 3);
                     dsOrder.setPayTime(formatter.format(new Date()));
                     dsOrderService.updateOrder(dsOrder);
-                    pushToWangNan(dsOrder.getOrderNumber(),dsOrder.getOrderPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
+                    //推送给张智良
+                    pushToWangNan(dsOrder.getOrderNumber(),dsOrder.getOrderPrice(),"o9C-m0m1ywvetapVQsq_fpoPPJOQ");
+                    //推送给蒋圆
+                    pushToWangNan(dsOrder.getOrderNumber(),dsOrder.getOrderPrice(),"o9C-m0gWfR9WOs8DIDElxSUfDIUU");
+
                     DsMessagePush(dsOrder,"o9C-m0ha_E3iP5KkgLEmsREff9d0");
 
                     User userById = userService.getUserById(String.valueOf(dsOrder.getUserId()));
@@ -299,7 +318,10 @@ public class NotifyController extends BaseController {
                     armyOrder.setPayTime(formatter.format(new Date()));
                     armyOrderService.updateOrder(armyOrder);
 
-                    pushToWangNan(armyOrder.getOrderNumber(),armyOrder.getArmyPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
+                    //推送给张智良
+                    pushToWangNan(armyOrder.getOrderNumber(),armyOrder.getArmyPrice(),"o9C-m0m1ywvetapVQsq_fpoPPJOQ");
+                    //推送给蒋圆
+                    pushToWangNan(armyOrder.getOrderNumber(),armyOrder.getArmyPrice(),"o9C-m0gWfR9WOs8DIDElxSUfDIUU");
 
                     User userById = userService.getUserById(String.valueOf(armyOrder.getUserId()));
                     ArmyMessagePush(armyOrder,userById.getOpenid());

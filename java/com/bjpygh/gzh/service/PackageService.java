@@ -127,7 +127,6 @@ public class PackageService {
                 }
             }
         }
-
         /**
          * 训练时间判断
          */
@@ -138,7 +137,7 @@ public class PackageService {
                     dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+1);
                 }
             }
-//            map.put("trainTime", "工作日");
+
         } else {
             for (int i=0;i<dsPackageInfos.size();i++){
                 if (!dsPackageInfos.get(i).getTrainTime().equals("工作日")){
@@ -146,7 +145,6 @@ public class PackageService {
                     dsPackageInfos.get(i).setCount(dsPackageInfos.get(i).getCount()+1);
                 }
             }
-//            map.put("trainTime", "周");
         }
 
         /**

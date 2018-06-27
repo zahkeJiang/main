@@ -219,6 +219,8 @@ $(function() {
 	$(".surePay").click(function() {
 		var payMode = $("input[name='payMode-radio']:checked").val();
 		console.log(payMode);
+        $(".layer").hide();
+        $(".payBox").hide();
 		if (payMode == "JD") { //京东支付
 			$.post("JDPay", {
 				"ordernumber": ordernumber

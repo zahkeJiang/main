@@ -11,6 +11,7 @@ import com.alipay.api.response.AlipayTradeRefundResponse;
 import com.bjpygh.gzh.bean.*;
 import com.bjpygh.gzh.config.AlipayConfig;
 import com.bjpygh.gzh.config.MyConfig;
+import com.bjpygh.gzh.entity.Global;
 import com.bjpygh.gzh.entity.Refund;
 import com.bjpygh.gzh.entity.Status;
 import com.bjpygh.gzh.model.HttpsClientUtil;
@@ -243,9 +244,9 @@ public class PayController extends BaseController {
                 }
             }else {
                 if (villaOrder.getFullAmount()==1){
-                    refund_amount = ""+villaOrder.getOriginalPrice()*0.7;
+                    refund_amount = ""+ villaOrder.getOriginalPrice()*0.7*0.5;
                 }else {
-                    refund_amount = ""+villaOrder.getOriginalPrice()*0.2;
+                    refund_amount = ""+ villaOrder.getOriginalPrice()*0.2;
                 }
             }
             System.out.println("refund_amount="+refund_amount);
@@ -427,6 +428,16 @@ public class PayController extends BaseController {
                 "   <sign>"+sign+"</sign>\n" +
                 "</xml>";
 
+        JSONObject json = new JSONObject();
+        json.accumulate("appid", appid);
+        json.accumulate("mch_id", mch_id);
+        json.accumulate("nonce_str", nonce_str);
+        json.accumulate("out_refund_no", out_trade_no);
+        json.accumulate("out_trade_no",out_trade_no);
+        json.accumulate("refund_fee", refund_fee);
+        json.accumulate("total_fee", total_fee);
+        json.accumulate("sign", sign);
+
         Http http = new Http();
         String result = http.sendPost("https://api.mch.weixin.qq.com/secapi/pay/refund", data);
         XMLToMap x= new XMLToMap();
@@ -537,7 +548,7 @@ public class PayController extends BaseController {
         data.put("fee_type", "CNY");
         data.put("total_fee", total_fee+"00");
         data.put("nonce_str", nonce_str);
-        data.put("notify_url", "http://gzpt.bjpygh.com/notify.action");
+        data.put("notify_url", Global.URL + "/notify.action");
         data.put("trade_type", "JSAPI");  // 此处指定为微信公众号支付
         data.put("openid", openid);
         data.put("sign", sign);
@@ -600,7 +611,7 @@ public class PayController extends BaseController {
         String device_info = "WEB";
         String nonce_str = getRandomString(32);
         String stringA="appid="+appid+"&body="+body+"&device_info="+device_info+"&mch_id="+mch_id+"&nonce_str="+nonce_str;
-        String stringSignTemp=stringA+"&key="+key; //注：key为商户平台设置的密钥key
+        String stringSignTemp = stringA+"&key="+key; //注：key为商户平台设置的密钥key
         String sign= MD5.string2MD5(stringSignTemp); //注：MD5签名方式
 //        sign=hash_hmac("sha256",stringSignTemp,key); //注：HMAC-SHA256签名方式
 
@@ -800,8 +811,8 @@ public class PayController extends BaseController {
         jdOrderPay.setAmount(amount);
         jdOrderPay.setOrderType("1");
         jdOrderPay.setCurrency("CNY");
-        jdOrderPay.setCallbackUrl("http://gzpt.bjpygh.com/payResult.html"+"?ordernumber="+tradeNum);
-        jdOrderPay.setNotifyUrl("http://gzpt.bjpygh.com/jNotify_url");//http://gzpt.bjpygh.com/jNotify_url
+        jdOrderPay.setCallbackUrl(Global.URL + "/payResult.html"+"?ordernumber="+tradeNum);
+        jdOrderPay.setNotifyUrl(Global.URL + "/jNotify_url");//http://gzpt.bjpygh.com/jNotify_url
         jdOrderPay.setUserId(userid);
 
         String priKey = PropertyUtils.getProperty("wepay.merchant.rsaPrivateKey");

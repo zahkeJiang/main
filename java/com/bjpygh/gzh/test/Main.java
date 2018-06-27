@@ -95,8 +95,19 @@ public class Main {
 
 //        System.out.println(Math.abs(-1));
 
-        System.out.println(new Date().getDay());
-        System.out.println(new Date().getDate());
+        JSONObject a = new JSONObject();
+        a.element("title", "欢乐谷端午门票只需99元另外赠送大礼！！！");
+        a.element("description", "欢乐谷第四期甜品王国全面上线，13大项目酷爽嗨萌！家庭过山车、蛋糕秋千、尖峰时刻、甜心飞饼、飞跃牛奶河、皇宫影院......");
+        a.element("url","https://mp.weixin.qq.com/s/QcEkwJ9tef-FmxdCT-ZSHQ");
+        a.element("picurl", "https://mmbiz.qlogo.cn/mmbiz_jpg/G9kiclPrCRqJBtjReDEXpMEYSteh61oEo0oLQ9DAPibcicRxpWtIiapNYkRm1WicDxib1anicshlL9ODWAiaLfUMoZkJ0w/0?wx_fmt=jpeg");
+        JSONArray articles = new JSONArray();
+        articles.element(a);
+        JSONObject obj = new JSONObject();
+        obj.accumulate("touser","qrehwahadfhadhasfhasdfh");
+        obj.accumulate("msgtype","news");
+        obj.accumulate("news",articles);
+
+        System.out.println(obj);
 
     }
 

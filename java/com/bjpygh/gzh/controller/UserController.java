@@ -150,6 +150,15 @@ public class UserController extends BaseController {
         return "excellentCard";
     }
 
+    @RequestMapping(value = "/myShare", method = RequestMethod.GET)
+    public String myShare(HttpServletRequest request){
+        Map<String, String> userMap = checkWxUser(request);
+        if(userMap == null){
+            return "error";
+        }
+        return "spreadIndex";
+    }
+
 //    /**
 //     * 获取积分
 //     * @param request

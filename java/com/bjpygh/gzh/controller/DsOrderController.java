@@ -172,7 +172,11 @@ public class DsOrderController extends BaseController {
         dsOrder.setCreateTime(formatter.format(new Date()));
         dsOrderService.insertOrder(dsOrder);
 
-//        pushToWangNan(dsOrder.getOrderNumber(),dsOrder.getOrderPrice(),"o9C-m0ha_E3iP5KkgLEmsREff9d0");
+        //推送给张智良
+        pushToWangNan(dsOrder.getOrderNumber(),dsOrder.getOrderPrice(),"o9C-m0m1ywvetapVQsq_fpoPPJOQ");
+        //推送给蒋圆
+        pushToWangNan(dsOrder.getOrderNumber(),dsOrder.getOrderPrice(),"o9C-m0gWfR9WOs8DIDElxSUfDIUU");
+
         OrderPush orderPush = new OrderPush();
         Map<String, String> map = new HashMap<String, String>();
         map.put("first","Hi,您已成功提交驾考订单");

@@ -41,13 +41,6 @@ public class QrCodeService {
             String result = Http.sendPost("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=" + access_token,
                     obj.toString());
             JSONObject jsonObject = JSONObject.fromObject(result);
-            System.out.println(jsonObject);
-//            if (jsonObject.getString("errcode") != null){
-//                OrderPush.getAccesstoken();
-//                result = Http.sendPost("https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=" + access_token,
-//                        obj.toString());
-//                jsonObject = JSONObject.fromObject(result);
-//            }
             String ticket = jsonObject.getString("ticket");
             QrCode code1 = new QrCode();
             code1.setUserId((long) userid);

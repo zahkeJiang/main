@@ -104,7 +104,7 @@ body{
     </div>
   </div>
   <div class="tuiguang divBox">
-    <h2>推广信息</h2>
+    <h2>分享信息</h2>
     <div>
       <span>总关注数</span>
       <span class="concerned">0人</span>
@@ -118,7 +118,7 @@ body{
       <span class="concern">0人</span>
     </div>
     <div>
-      <span>有效推广</span>
+      <span>有效分享数</span>
       <span class="onconcern">0人</span>
     </div>
   </div>
@@ -140,12 +140,12 @@ body{
 <script src="./iconjs/iconfont.js"></script>
 <script>
   $(function(){
-    $.get("getConcern",function(datas){
+    $.get("getQrcode",function(datas){
       if (datas.status == 0) {
         $(".codeImg").attr("src",datas.data.ticket);
       }
     },"json");
-    $.get("getQrcode",function(datas){
+    $.get("getConcern",function(datas){
       if (datas.status == 0) {
         var concernData = datas.data.ticket;
         $(".concerned").html(concernData.concerned+"人");

@@ -38,16 +38,16 @@ public class VillaOrderService {
 //            Date d = new Date(Integer.parseInt(ds[0]),Integer.parseInt(ds[1])-1,Integer.parseInt(ds[2]));
             System.out.println(d);
             if (d.getDay()>0&&d.getDay()<5){
-                villaPrice = 128;
-                if (villaOrder.getPeopleNumber()*128>3200){
+                villaPrice = 108;
+                if (villaOrder.getPeopleNumber()*108>3200){
                     villaPrice *= villaOrder.getPeopleNumber();
                 } else{
                     villaPrice = 3200*villaNum;
                 }
                 sum += villaPrice;
             }else {
-                villaPrice = 148;
-                if (villaOrder.getPeopleNumber()*148>3688){
+                villaPrice = 128;
+                if (villaOrder.getPeopleNumber()*128>3688){
                     villaPrice *= villaOrder.getPeopleNumber();
                 } else{
                     villaPrice = 3688*villaNum;
@@ -94,7 +94,12 @@ public class VillaOrderService {
         //设置状态
         villaOrder.setOrderStatus(0);
         villaOrder.setNote("漂洋过海小别墅");
-        
+
+        //测试用，记得删除
+//        villaOrder.setOriginalPrice(2);
+//        villaOrder.setVillaPrice(1);
+
+
         villaOrderMapper.insertSelective(villaOrder);
         return villaOrder;
     }
@@ -148,9 +153,9 @@ public class VillaOrderService {
             }else{
                 //根据周几来设置价格
                 if (newDate.getDay()>0&&newDate.getDay()<5){
-                    villaPrice.setPrice("128");
+                    villaPrice.setPrice("108");
                 }else {
-                    villaPrice.setPrice("148");
+                    villaPrice.setPrice("128");
                 }
             }
             villaPrices.add(villaPrice);
@@ -196,7 +201,6 @@ public class VillaOrderService {
                             }
                         }
                     }
-
                 }else {
                     name= order.getVillaName();
                 }
@@ -221,7 +225,6 @@ public class VillaOrderService {
                 }
             }
         }
-
         return true;
     }
 
